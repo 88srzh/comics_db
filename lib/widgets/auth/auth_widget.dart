@@ -1,3 +1,4 @@
+import 'package:comics_db_app/constants.dart';
 import 'package:flutter/material.dart';
 
 class AuthWidget extends StatefulWidget {
@@ -25,8 +26,31 @@ class _AuthWidgetState extends State<AuthWidget> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            FormWidget(),
+          children: [
+            const FormWidget(),
+            const SizedBox(height: 5.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: const [
+                Text(
+                  'Забыли пароль?',
+                  style: TextStyle(color: kPrimaryColor),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Войти', style: TextStyle(fontSize: 24)),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+                foregroundColor: MaterialStateProperty.all(kPrimaryColor),
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
+                ),
+                // TODO: add border to button
+              ),
+            ),
           ],
         ),
       ),
@@ -87,7 +111,7 @@ class _FormWidgetState extends State<FormWidget> {
           ),
           border: const OutlineInputBorder(),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
+            borderSide: BorderSide(color: kPrimaryColor),
           ),
           filled: true,
           labelText: labelText,
