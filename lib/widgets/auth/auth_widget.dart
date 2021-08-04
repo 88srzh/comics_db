@@ -68,16 +68,20 @@ class _FormWidgetState extends State<FormWidget> {
   }
 
   TextFormField buildEmailFormField() {
-    return customTextFormField(labelText: 'Почта');
+    return customTextFormField('Почта', false, true);
   }
 
   TextFormField buildPasswordFormField() {
-    return customTextFormField(labelText: 'Пароль');
+    return customTextFormField('Пароль', true, false);
   }
 
-  TextFormField customTextFormField({String? labelText}) {
+  TextFormField customTextFormField(
+      String labelText, bool obskureText, bool autofocus) {
     return TextFormField(
+      autofocus: autofocus,
+      obscureText: obskureText,
       decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
           labelStyle: const TextStyle(
             color: Colors.black54,
           ),
