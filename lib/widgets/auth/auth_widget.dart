@@ -42,7 +42,7 @@ class HeaderWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
-        children: [],
+        children: const [],
       ),
     );
   }
@@ -68,24 +68,25 @@ class _FormWidgetState extends State<FormWidget> {
   }
 
   TextFormField buildEmailFormField() {
-    return TextFormField(
-      autofocus: true,
-      decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          filled: true,
-          labelText: 'Почта',
-          fillColor: Colors.white),
-    );
+    return customTextFormField(labelText: 'Почта');
   }
 
   TextFormField buildPasswordFormField() {
+    return customTextFormField(labelText: 'Пароль');
+  }
+
+  TextFormField customTextFormField({String? labelText}) {
     return TextFormField(
-      decoration: const InputDecoration(
-          border: OutlineInputBorder(
+      decoration: InputDecoration(
+          labelStyle: const TextStyle(
+            color: Colors.black54,
+          ),
+          border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.purple),
           ),
           filled: true,
-          labelText: 'Пароль',
+          labelText: labelText,
           fillColor: Colors.white),
     );
   }
