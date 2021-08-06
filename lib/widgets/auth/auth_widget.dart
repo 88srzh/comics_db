@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:comics_db_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +17,8 @@ class _AuthWidgetState extends State<AuthWidget> {
     void _resetPassword() {}
 
     void _auth() {
-      final login = _loginTextController.text;
-      final password = _passwordTextController;
+      // final login = _loginTextController.text;
+      // final password = _passwordTextController;
     }
 
   @override
@@ -37,26 +39,19 @@ class _AuthWidgetState extends State<AuthWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // const FormWidget(),
             Column(
-      children: [
-        buildEmailFormField(),
-        const SizedBox(height: 10),
-        buildPasswordFormField(),
-      ],
-    ),
+              children: [
+              buildEmailFormField(),
+              const SizedBox(height: 10),
+              buildPasswordFormField(),
+              ],
+            ),
             const SizedBox(height: 5.0),
-            resetPassword(),
+            resetPasswordRow(),
             const SizedBox(height: 20.0),
             loginButton(),
             const SizedBox(height: 15.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text('Нет аккаунта? '),
-                Text('Зарегистрируйтесь'),
-              ],
-            )
+            registerRow()
           ],
         ),
       ),
@@ -110,7 +105,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   );
 }
 
-  Row resetPassword() {
+  Row resetPasswordRow() {
     return Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -124,19 +119,21 @@ class _AuthWidgetState extends State<AuthWidget> {
             ],
           );
   }
-}
 
-class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: const [],
-      ),
-    );
+  Row registerRow() {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Нет аккаунта? '),
+              InkWell(
+                onTap: () {},
+                child: const Text(
+                  'Зарегистрируйтесь',
+                  style: TextStyle(color: kPrimaryColor),
+                ),
+              ),
+            ],
+          );
   }
 }
 
