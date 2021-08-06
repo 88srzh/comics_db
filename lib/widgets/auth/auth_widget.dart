@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:comics_db_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +15,15 @@ class _AuthWidgetState extends State<AuthWidget> {
     void _resetPassword() {}
 
     void _auth() {
-      // final login = _loginTextController.text;
-      // final password = _passwordTextController;
+      final login = _loginTextController.text;
+      final password = _passwordTextController.text;
+
+      if (login == 'admin' && password == 'password') {
+        
+        Navigator.of(context).pushReplacementNamed('/main_screen');
+        
+      } else {}
+      setState(() {});
     }
 
   @override

@@ -1,4 +1,6 @@
+import 'package:comics_db_app/constants.dart';
 import 'package:comics_db_app/widgets/auth/auth_widget.dart';
+import 'package:comics_db_app/widgets/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,9 +17,19 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
         ),
-        primarySwatch: Colors.blue,
+        primarySwatch: kPrimaryColor,
       ),
-      home: const AuthWidget(),
+      routes: {
+        '/auth': (context) => const AuthWidget(),
+        '/main_screen': (context) => const MainScreenWidget(),
+      },
+      initialRoute: '/auth',
+      onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute(builder: (context) {
+          return const Scaffold(
+            body: Center(child: Text('Произошла ошибка навигации')));
+        });
+      },
     );
   }
 }
