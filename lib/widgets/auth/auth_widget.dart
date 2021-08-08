@@ -81,7 +81,7 @@ class _AuthWidgetState extends State<AuthWidget> {
     return InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
         labelStyle: const TextStyle(
-          color: Colors.black54,
+          color: AppColors.kPrimaryColor,
         ),
         border: const OutlineInputBorder(),
         focusedBorder: const OutlineInputBorder(
