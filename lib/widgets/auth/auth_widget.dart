@@ -1,4 +1,4 @@
-import 'package:comics_db_app/constants.dart';
+import 'package:comics_db_app/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AuthWidget extends StatefulWidget {
@@ -9,22 +9,20 @@ class AuthWidget extends StatefulWidget {
 }
 
 class _AuthWidgetState extends State<AuthWidget> {
-  final _loginTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  final _loginTextController = TextEditingController(text: 'admin');
+  final _passwordTextController = TextEditingController(text: 'password');
 
-    void _resetPassword() {}
+  void _resetPassword() {}
 
-    void _auth() {
-      final login = _loginTextController.text;
-      final password = _passwordTextController.text;
+  void _auth() {
+    final login = _loginTextController.text;
+    final password = _passwordTextController.text;
 
-      if (login == 'admin' && password == 'password') {
-        
-        Navigator.of(context).pushReplacementNamed('/main_screen');
-        
-      } else {}
-      setState(() {});
-    }
+    if (login == 'admin' && password == 'password') {
+      Navigator.of(context).pushReplacementNamed('/main_screen');
+    } else {}
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +44,9 @@ class _AuthWidgetState extends State<AuthWidget> {
           children: [
             Column(
               children: [
-              buildEmailFormField(),
-              const SizedBox(height: 10),
-              buildPasswordFormField(),
+                buildEmailFormField(),
+                const SizedBox(height: 10),
+                buildPasswordFormField(),
               ],
             ),
             const SizedBox(height: 5.0),
@@ -64,7 +62,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   }
 
   TextFormField buildEmailFormField() {
-    return  TextFormField(
+    return TextFormField(
       controller: _loginTextController,
       autofocus: true,
       decoration: formFieldInputDecoration('Почта'),
@@ -79,7 +77,7 @@ class _AuthWidgetState extends State<AuthWidget> {
     );
   }
 
-    InputDecoration formFieldInputDecoration(String labelText) {
+  InputDecoration formFieldInputDecoration(String labelText) {
     return InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
         labelStyle: const TextStyle(
@@ -87,7 +85,7 @@ class _AuthWidgetState extends State<AuthWidget> {
         ),
         border: const OutlineInputBorder(),
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: kPrimaryColor),
+          borderSide: BorderSide(color: AppColors.kPrimaryColor),
         ),
         filled: true,
         labelText: labelText,
@@ -96,49 +94,50 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   ElevatedButton loginButton() {
     return ElevatedButton(
-    onPressed: () => _auth(),
-    child: const Text('Войти', style: TextStyle(fontSize: 24)),
-    style: ButtonStyle(
-      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-      side: MaterialStateProperty.all(const BorderSide(color: kPrimaryColor)),
-      backgroundColor: MaterialStateProperty.all(Colors.white),
-      foregroundColor: MaterialStateProperty.all(kPrimaryColor),
-      padding: MaterialStateProperty.all(
-        const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
+      onPressed: () => _auth(),
+      child: const Text('Войти', style: TextStyle(fontSize: 24)),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+        side: MaterialStateProperty.all(
+            const BorderSide(color: AppColors.kPrimaryColor)),
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+        padding: MaterialStateProperty.all(
+          const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Row resetPasswordRow() {
     return Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                onTap: () => _resetPassword(),
-                child: const Text(
-                  'Забыли пароль?',
-                  style: TextStyle(color: kPrimaryColor),
-                ),
-              ),
-            ],
-          );
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        InkWell(
+          onTap: () => _resetPassword(),
+          child: const Text(
+            'Забыли пароль?',
+            style: TextStyle(color: AppColors.kPrimaryColor),
+          ),
+        ),
+      ],
+    );
   }
 
   Row registerRow() {
     return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Нет аккаунта? '),
-              InkWell(
-                onTap: () {},
-                child: const Text(
-                  'Зарегистрируйтесь',
-                  style: TextStyle(color: kPrimaryColor),
-                ),
-              ),
-            ],
-          );
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('Нет аккаунта? '),
+        InkWell(
+          onTap: () {},
+          child: const Text(
+            'Зарегистрируйтесь',
+            style: TextStyle(color: AppColors.kPrimaryColor),
+          ),
+        ),
+      ],
+    );
   }
 }
-
