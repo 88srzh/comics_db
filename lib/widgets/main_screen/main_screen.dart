@@ -1,3 +1,4 @@
+import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -18,11 +19,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   }
 
   static const List<Widget> _widgetOptions = <Widget>[
+    MovieListWidget(),
     Text(
-      'Фильмы',
-    ),
-    Text(
-      '',
+      'Сериалы',
     ),
   ];
 
