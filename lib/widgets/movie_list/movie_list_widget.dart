@@ -75,6 +75,10 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     _searchController.addListener(() {_searchMovies();});
   }
 
+  void _onMovieTap(int index) {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -146,7 +150,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20.0),
-                        onTap: () {},
+                        onTap: () => _onMovieTap(index),
                       ),
                     ),
                   ],
