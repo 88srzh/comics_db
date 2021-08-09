@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.black54,
+          ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             selectedItemColor: AppColors.kPrimaryColor,
@@ -25,7 +28,14 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth': (context) => const AuthWidget(),
         '/main_screen': (context) => const MainScreenWidget(),
-        'main_screen/movie_details': (context) => const MovieDetailsWidget(),
+        'main_screen/movie_details': (context) {
+          final arguments = ModalRoute.of(context)?.settings.arguments;
+          if (arguments is int) {
+            return MovieDetailsWidget(movieId: arguments);
+          } else {
+            return const MovieDetailsWidget(movieId: 0);
+          }
+        },
       },
       initialRoute: '/auth',
       onGenerateRoute: (RouteSettings settings) {

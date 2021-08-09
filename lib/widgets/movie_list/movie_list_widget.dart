@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:comics_db_app/components/movie.dart';
 
 class MovieListWidget extends StatefulWidget {
-
   const MovieListWidget({Key? key}) : super(key: key);
 
   @override
@@ -14,36 +13,42 @@ class MovieListWidget extends StatefulWidget {
 class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
     Movie(
+        id: 1,
         imageName: AppImages.waifu,
         title: 'Бродяга Кэнсин',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
     Movie(
+        id: 2,
         imageName: AppImages.waifu,
         title: 'Ковбой Бибоп',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
     Movie(
+        id: 3,
         imageName: AppImages.waifu,
         title: 'Шаман-Кинг',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
     Movie(
+        id: 4,
         imageName: AppImages.waifu,
         title: 'Мое превращение в слизь',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
     Movie(
+        id: 5,
         imageName: AppImages.waifu,
         title: 'Токийская гуль',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
     Movie(
+        id: 6,
         imageName: AppImages.waifu,
         title: 'Мифический дух - Хроники',
         time: 'Август 8, 2021',
@@ -72,11 +77,14 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     super.initState();
 
     _filteredMovies = _movies;
-    _searchController.addListener(() {_searchMovies();});
+    _searchController.addListener(() {
+      _searchMovies();
+    });
   }
 
   void _onMovieTap(int index) {
-
+    final id = _movies[index].id;
+    Navigator.of(context).pushNamed('main_screen/movie_details', arguments: id);
   }
 
   @override
@@ -84,8 +92,8 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     return Stack(
       children: [
         ListView.builder(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: const EdgeInsets.only(top: 70.0),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            padding: const EdgeInsets.only(top: 70.0),
             itemCount: _filteredMovies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
@@ -158,27 +166,28 @@ class _MovieListWidgetState extends State<MovieListWidget> {
               );
             }),
         Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Поиск',
-                labelStyle: const TextStyle(
-                  color: AppColors.kPrimaryColor,
-                ),
-                filled: true,
-                fillColor: Colors.white.withAlpha(235),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor),
-                ),
-                enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kPrimaryColor),
-                ),
+          padding: const EdgeInsets.all(10.0),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              labelText: 'Поиск',
+              labelStyle: const TextStyle(
+                color: AppColors.kPrimaryColor,
               ),
-            )),
+              filled: true,
+              fillColor: Colors.white.withAlpha(235),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.kPrimaryColor),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.kPrimaryColor),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
