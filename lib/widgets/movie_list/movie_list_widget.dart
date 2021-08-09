@@ -3,7 +3,15 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:flutter/material.dart';
 import 'package:comics_db_app/components/movie.dart';
 
-class MovieListWidget extends StatelessWidget {
+class MovieListWidget extends StatefulWidget {
+
+  const MovieListWidget({Key? key}) : super(key: key);
+
+  @override
+  _MovieListWidgetState createState() => _MovieListWidgetState();
+}
+
+class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
     Movie(
         imageName: AppImages.waifu,
@@ -43,17 +51,41 @@ class MovieListWidget extends StatelessWidget {
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
   ];
 
-  MovieListWidget({Key? key}) : super(key: key);
+  var _filteredMovies = <Movie>[];
+
+  final _searchController = TextEditingController();
+
+  void _searchMovies() {
+    final query = _searchController.text;
+    if (query.isNotEmpty) {
+      _filteredMovies = _movies.where((Movie movie) {
+        return movie.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else {
+      _filteredMovies = _movies;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _filteredMovies = _movies;
+    _searchController.addListener(() {_searchMovies();});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         ListView.builder(
-            itemCount: _movies.length,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: const EdgeInsets.only(top: 70.0),
+            itemCount: _filteredMovies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              final movie = _movies[index];
+              final movie = _filteredMovies[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 10.0),
@@ -124,13 +156,14 @@ class MovieListWidget extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
+              controller: _searchController,
               decoration: InputDecoration(
                 labelText: 'Поиск',
                 labelStyle: const TextStyle(
                   color: AppColors.kPrimaryColor,
                 ),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.white.withAlpha(235),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
