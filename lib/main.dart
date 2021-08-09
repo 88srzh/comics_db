@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            selectedItemColor: AppColors.kPrimaryColor,
             unselectedItemColor: Colors.grey),
-        primarySwatch: AppColors.kPrimaryColor,
       ),
       routes: {
         '/auth': (context) => const AuthWidget(),

@@ -18,21 +18,20 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     });
   }
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    MovieListWidget(),
-    Text(
-      'Сериалы',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Обзор'),
       ),
-      body: Center(
-        child: _widgetOptions[_selectedTab],
+      body: IndexedStack(
+        index: _selectedTab,
+        children: const [
+           MovieListWidget(),
+           Text(
+            'Сериалы',
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
