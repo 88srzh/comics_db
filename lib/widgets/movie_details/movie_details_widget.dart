@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:flutter/material.dart';
 
@@ -20,52 +23,144 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       body: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
-          Column(
-            children: [
-              SizedBox(
-                height: 100,
-                child: Container(
-                  color: Colors.grey[100],
+          Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 180,
+                  child: Container(
+                    color: Colors.grey[100],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 150,
-                child: Container(
-                  color: Colors.white,
+                SizedBox(
+                  height: 150,
+                  child: Container(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              Container(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                  child: Column(
                     children: [
-                      const Text(
-                        'Ковбой бибоп',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
                       Row(
-                        children: const [
-                          Icon(Icons.star),
-                          Text('Рейтинг'),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Ковбой бибоп',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            children: const [
+                              Icon(Icons.star_border_outlined, size: 20),
+                              SizedBox(width: 5.0,),
+                              Text('4.9', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+                            ],
+                          ),
                         ],
                       ),
+                      const SizedBox(height: 5.0,),
+                    Row(
+                      children: const [
+                        Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
+                        Text('Хайме Ятате'),
+                      ],
+                     ),
+                     const SizedBox(height: 25.0),
+                     Row(
+                       children: [
+                         Container(
+                           decoration: BoxDecoration(
+                             color: const Color.fromRGBO(246,246,246, 1.0),
+                             borderRadius: BorderRadius.circular(4.0),
+                           ),
+                           child: const Padding(
+                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+                             child: Text('Экшен', style: TextStyle(color: Colors.grey),),
+                           ),
+                         ),
+                         const SizedBox(width: 5.0,),
+                         Container(
+                           decoration: BoxDecoration(
+                             color: const Color.fromRGBO(246,246,246, 1.0),
+                             borderRadius: BorderRadius.circular(4.0),
+                           ),
+                           child: const Padding(
+                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+                             child: Text('Приключения', style: TextStyle(color: Colors.grey),),
+                           ),
+                         ),
+                         const SizedBox(width: 5.0,),
+                         Container(
+                           decoration: BoxDecoration(
+                             color: const Color.fromRGBO(246,246,246, 1.0),
+                             borderRadius: BorderRadius.circular(4.0),
+                           ),
+                           child: const Padding(
+                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+                             child: Text('Комедия', style: TextStyle(color: Colors.grey),),
+                           ),
+                         ),
+                         const SizedBox(width: 5.0,),
+                         Container(
+                           decoration: BoxDecoration(
+                             color: Colors.white,
+                             borderRadius: BorderRadius.circular(4.0),
+                             border: Border.all(color: Colors.grey),
+                           ),
+                           child: const Padding(
+                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+                             child: Text('+3', style: TextStyle(color: Colors.grey),),
+                           ),
+                         ),
+                       ],
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                       child: Row(
+                         children: const [
+                           Expanded(
+                             child: Text('2071 год. Человечество колонизировало всю Солнечную Систему, основав колонии от Венеры до Юпитера. Но десятилетия тому назад из-за техногенной катастрофы была уничтожена Луна. Последствия оказались катастрофическими: непрерывные метеоритные дожди сделали жизнь на поверхности Земли невозможной, а в первые недели после катастрофы погибло 4,7 миллиарда человек. Большая часть выживших перебралась в колонии на другие планеты.',
+                               overflow: TextOverflow.ellipsis,
+                               maxLines: 6,
+                               style: TextStyle(
+                             color: Colors.grey,
+                             fontSize: 16,
+                               ),
+                               ),
+                           ),
+                         ],
+                       ),
+                     ),
+                     ElevatedButton(
+                       onPressed: () {},
+                       child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+                       style: ButtonStyle(
+                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                         backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+                         padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
+                       ),
+                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               SizedBox(
-                height: 300,
-                width: 150,
-                child: Image(
+                height: 350.0,
+                width: 150.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: Image(
                   image: AssetImage(AppImages.waifu),
+                ),
                 ),
               ),
             ],
