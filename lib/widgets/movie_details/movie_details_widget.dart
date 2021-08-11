@@ -151,16 +151,17 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 350.0,
-                width: 150.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                  ),
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: const SizedBox(
+                  height: 295.0,
+                  width: 210.0,
                   child: Image(
                   image: AssetImage(AppImages.waifu),
-                ),
+                  ),
                 ),
               ),
             ],
