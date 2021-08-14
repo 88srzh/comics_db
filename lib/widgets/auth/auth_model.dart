@@ -12,7 +12,23 @@ class AuthModel extends ChangeNotifier {
   bool _isAuthProgress = false;
   bool get canStartAuth => !_isAuthProgress;
 
-  Future<void> auth(BuildContext context) async {}
+  Future<void> auth(BuildContext context) async {
+    final login = loginTextController.text;
+    final password = passwordTextController.text;
+    if (login.isEmpty || password.isEmpty) {
+      _errorMessage = 'Заполните логин или пароль';
+      notifyListeners();
+      return;
+    }
+    _errorMessage = null;
+    _isAuthProgress = true;
+    notifyListeners();
+    final sessionId =
+        await _apiClient.auth(username: login, password: password);
+    _isAuthProgress = false;
+    notifyListeners();
+    // Navigator.of(context).popUntil((route) => false);
+  }
 }
 
 class AuthProvider extends InheritedNotifier {

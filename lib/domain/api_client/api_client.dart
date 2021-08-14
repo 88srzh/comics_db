@@ -15,10 +15,14 @@ class ApiClient {
     final validToken = await _validateUser(
         username: username, password: password, requestToken: token);
     final sessionId = await _makeSession(requestToken: token);
+    return sessionId;
   }
 
   Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
-    final uri = Uri.parse('$_host$path?api_key=$_apiKey');
+    // final uri = Uri.parse('$_host$path?api_key=$_apiKey');
+    final uri = Uri.parse('$_host$path');
+    // final url = Uri.parse(
+    //     'https://api.themoviedb.org/3/authentication/token/new?api_key=$_apiKey');
     if (parameters != null) {
       return uri.replace(queryParameters: parameters);
     } else {
@@ -28,7 +32,9 @@ class ApiClient {
 
   Future<String> _makeToken() async {
     final url = _makeUri(
-        '/authentication/token/new', <String, dynamic>{'api_key': _apiKey});
+      '/authentication/token/new',
+      <String, dynamic>{'api_key=': _apiKey},
+    );
     final request = await _client.getUrl(url);
     final response = await request.close();
     final json = (await response.jsonDecode()) as Map<String, dynamic>;

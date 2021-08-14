@@ -27,7 +27,6 @@ class AuthWidget extends StatelessWidget {
             Column(
               children: [
                 const ErrorMessageWidget(),
-                // buildEmailFormField(),
                 TextFormField(
                   controller: model?.loginTextController,
                   autofocus: true,
@@ -108,15 +107,16 @@ class AuthButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = AuthProvider.watch(context)?.model;
-    final onPressed = model?.canStartAuth ==true ? () => model?.auth(context) : null;
+    final onPressed =
+        model?.canStartAuth == true ? () => model?.auth(context) : null;
     return ElevatedButton(
       onPressed: onPressed,
       child: const Text('Войти', style: TextStyle(fontSize: 24)),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
-    RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
         side: MaterialStateProperty.all(
-    const BorderSide(color: AppColors.kPrimaryColor)),
+            const BorderSide(color: AppColors.kPrimaryColor)),
         backgroundColor: MaterialStateProperty.all(Colors.white),
         foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
         padding: MaterialStateProperty.all(
@@ -132,14 +132,15 @@ class ErrorMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String errorText = 'Неверный логин или пароль';
     final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
     if (errorMessage == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Text(
-        errorText, style: const TextStyle(
-          fontSize: 17, color: Colors.red,
+        errorMessage,
+        style: const TextStyle(
+          fontSize: 17,
+          color: Colors.red,
         ),
       ),
     );
