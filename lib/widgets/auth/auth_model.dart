@@ -1,6 +1,8 @@
+import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthModel extends ChangeNotifier {
+  final _apiClient = ApiClient();
   final loginTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
@@ -10,29 +12,22 @@ class AuthModel extends ChangeNotifier {
   bool _isAuthProgress = false;
   bool get canStartAuth => !_isAuthProgress;
 
-  Future<void> auth(BuildContext context) async {
-
-  }
+  Future<void> auth(BuildContext context) async {}
 }
 
 class AuthProvider extends InheritedNotifier {
   final AuthModel model;
 
- const AuthProvider({
-   Key? key,
-   required this.model,
-   required  Widget child
-   }) : super(
-     key: key,
-     notifier: model,
-     child: child);
+  const AuthProvider({Key? key, required this.model, required Widget child})
+      : super(key: key, notifier: model, child: child);
 
   static AuthProvider? watch(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType <AuthProvider>();
+    return context.dependOnInheritedWidgetOfExactType<AuthProvider>();
   }
 
   static AuthProvider? read(BuildContext context) {
-    final widget = context.getElementForInheritedWidgetOfExactType<AuthProvider>()?.widget;
+    final widget =
+        context.getElementForInheritedWidgetOfExactType<AuthProvider>()?.widget;
     return widget is AuthProvider ? widget : null;
   }
 }
