@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:comics_db_app/components/movie.dart';
 
@@ -84,7 +85,8 @@ class _MovieListWidgetState extends State<MovieListWidget> {
 
   void _onMovieTap(int index) {
     final id = _movies[index].id;
-    Navigator.of(context).pushNamed('main_screen/movie_details', arguments: id);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
   @override

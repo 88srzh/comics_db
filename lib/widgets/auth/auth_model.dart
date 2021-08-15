@@ -1,5 +1,6 @@
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthModel extends ChangeNotifier {
@@ -45,7 +46,7 @@ class AuthModel extends ChangeNotifier {
       return;
     }
     await _sessionDataProvider.setSessionId(sessionId);
-    Navigator.of(context).pushNamed('/main_screen');
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.mainScreen);
   }
 }
 
