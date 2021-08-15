@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_widget.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
             unselectedItemColor: Colors.grey),
       ),
       routes: {
-        '/auth': (context) => const AuthWidget(),
+        '/auth': (context) => AuthProvider(model: AuthModel(), child: const AuthWidget()),
         '/main_screen': (context) => const MainScreenWidget(),
         'main_screen/movie_details': (context) {
           final arguments = ModalRoute.of(context)?.settings.arguments;

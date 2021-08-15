@@ -1,31 +1,13 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/widgets/auth/auth_model.dart';
 import 'package:flutter/material.dart';
 
-class AuthWidget extends StatefulWidget {
+class AuthWidget extends StatelessWidget {
   const AuthWidget({Key? key}) : super(key: key);
 
   @override
-  _AuthWidgetState createState() => _AuthWidgetState();
-}
-
-class _AuthWidgetState extends State<AuthWidget> {
-  final _loginTextController = TextEditingController(text: 'admin');
-  final _passwordTextController = TextEditingController(text: 'password');
-
-  void _resetPassword() {}
-
-  void _auth() {
-    final login = _loginTextController.text;
-    final password = _passwordTextController.text;
-
-    if (login == 'admin' && password == 'password') {
-      Navigator.of(context).pushReplacementNamed('/main_screen');
-    } else {}
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final model = AuthProvider.read(context)?.model;
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -44,36 +26,31 @@ class _AuthWidgetState extends State<AuthWidget> {
           children: [
             Column(
               children: [
-                buildEmailFormField(),
+                const ErrorMessageWidget(),
+                TextFormField(
+                  controller: model?.loginTextController,
+                  autofocus: true,
+                  decoration: formFieldInputDecoration('Почта'),
+                ),
                 const SizedBox(height: 10),
-                buildPasswordFormField(),
+                // buildPasswordFormField(),
+                TextFormField(
+                  controller: model?.passwordTextController,
+                  obscureText: true,
+                  decoration: formFieldInputDecoration('Пароль'),
+                ),
               ],
             ),
             const SizedBox(height: 5.0),
             resetPasswordRow(),
             const SizedBox(height: 20.0),
-            loginButton(),
+            // loginButton(),
+            const AuthButtonWidget(),
             const SizedBox(height: 15.0),
             registerRow()
           ],
         ),
       ),
-    );
-  }
-
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      controller: _loginTextController,
-      autofocus: true,
-      decoration: formFieldInputDecoration('Почта'),
-    );
-  }
-
-  TextFormField buildPasswordFormField() {
-    return TextFormField(
-      controller: _passwordTextController,
-      obscureText: true,
-      decoration: formFieldInputDecoration('Пароль'),
     );
   }
 
@@ -92,30 +69,12 @@ class _AuthWidgetState extends State<AuthWidget> {
         fillColor: Colors.white);
   }
 
-  ElevatedButton loginButton() {
-    return ElevatedButton(
-      onPressed: () => _auth(),
-      child: const Text('Войти', style: TextStyle(fontSize: 24)),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-        side: MaterialStateProperty.all(
-            const BorderSide(color: AppColors.kPrimaryColor)),
-        backgroundColor: MaterialStateProperty.all(Colors.white),
-        foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
-        ),
-      ),
-    );
-  }
-
   Row resetPasswordRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          onTap: () => _resetPassword(),
+          onTap: () {},
           child: const Text(
             'Забыли пароль?',
             style: TextStyle(color: AppColors.kPrimaryColor),
@@ -138,6 +97,61 @@ class _AuthWidgetState extends State<AuthWidget> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class AuthButtonWidget extends StatelessWidget {
+  const AuthButtonWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = AuthProvider.watch(context)?.model;
+    final onPressed =
+        model?.canStartAuth == true ? () => model?.auth(context) : null;
+    final child = model?.isAuthProgress == true
+        ? const CircularProgressIndicator(strokeWidth: 8.0)
+        : const Text(
+            'Войти',
+            style: TextStyle(fontSize: 24),
+          );
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: child,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0))),
+          side: MaterialStateProperty.all(
+              const BorderSide(color: AppColors.kPrimaryColor)),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ErrorMessageWidget extends StatelessWidget {
+  const ErrorMessageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
+    if (errorMessage == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: Text(
+        errorMessage,
+        style: const TextStyle(
+          fontSize: 17,
+          color: Colors.red,
+        ),
+      ),
     );
   }
 }
