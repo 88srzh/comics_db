@@ -11,6 +11,7 @@ class AuthModel extends ChangeNotifier {
 
   bool _isAuthProgress = false;
   bool get canStartAuth => !_isAuthProgress;
+  bool get isAuthProgress => _isAuthProgress;
 
   Future<void> auth(BuildContext context) async {
     final login = loginTextController.text;
@@ -23,10 +24,16 @@ class AuthModel extends ChangeNotifier {
     _errorMessage = null;
     _isAuthProgress = true;
     notifyListeners();
-    final sessionId =
-        await _apiClient.auth(username: login, password: password);
+    String? sessionId;
+    try {
+      sessionId = await _apiClient.auth(username: login, password: password);
+    } catch (e) {
+      _errorMessage = 'Неправильный логин или пароль';
+    }
     _isAuthProgress = false;
-    notifyListeners();
+    if (_errorMessage != null || sessionId == null) {
+      notifyListeners();
+    }
     // Navigator.of(context).popUntil((route) => false);
   }
 }

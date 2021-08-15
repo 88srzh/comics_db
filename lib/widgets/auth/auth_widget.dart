@@ -109,18 +109,27 @@ class AuthButtonWidget extends StatelessWidget {
     final model = AuthProvider.watch(context)?.model;
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: const Text('Войти', style: TextStyle(fontSize: 24)),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-        side: MaterialStateProperty.all(
-            const BorderSide(color: AppColors.kPrimaryColor)),
-        backgroundColor: MaterialStateProperty.all(Colors.white),
-        foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
+    final child = model?.isAuthProgress == true
+        ? const CircularProgressIndicator(strokeWidth: 8.0)
+        : const Text(
+            'Войти',
+            style: TextStyle(fontSize: 24),
+          );
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: child,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0))),
+          side: MaterialStateProperty.all(
+              const BorderSide(color: AppColors.kPrimaryColor)),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
+          ),
         ),
       ),
     );

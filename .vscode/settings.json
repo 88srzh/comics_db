@@ -1,4 +1,5 @@
 {
     "editor.formatOnSave": true,
-    "editor.fontFamily": "'DejaVu Sans'"
+    "editor.fontFamily": "'DejaVu Sans', 'bold'",
+    "editor.fontSize": 16
 }
