@@ -5,9 +5,9 @@ import 'package:comics_db_app/widgets/movie_details/movie_details_widget.dart';
 import 'package:flutter/material.dart';
 
 abstract class MainNavigationRouteNames {
-  static const auth = '/auth';
-  static const mainScreen = '/main_screen';
-  static const movieDetails = '/main_screen/movie_details';
+  static const auth = 'auth';
+  static const mainScreen = '/';
+  static const movieDetails = '/movie_details';
 }
 
 class MainNavigation {
@@ -15,9 +15,9 @@ class MainNavigation {
       ? MainNavigationRouteNames.mainScreen
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
-    '/auth': (context) =>
+    'auth': (context) =>
         AuthProvider(model: AuthModel(), child: const AuthWidget()),
-    '/main_screen': (context) => const MainScreenWidget(),
+    '/': (context) => const MainScreenWidget(),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
