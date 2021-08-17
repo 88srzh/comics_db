@@ -110,13 +110,14 @@ class AuthButtonWidget extends StatelessWidget {
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
     final child = model?.isAuthProgress == true
-        ? const CircularProgressIndicator(strokeWidth: 8.0)
+        ? const CircularProgressIndicator(strokeWidth: 5.0)
         : const Text(
             'Войти',
             style: TextStyle(fontSize: 24),
           );
-    return Container(
+    return SizedBox(
       width: double.infinity,
+      height: 65,
       child: ElevatedButton(
         onPressed: onPressed,
         child: child,
