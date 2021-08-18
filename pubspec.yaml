@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,7 +26,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_lints: ^1.0.4
   flutter_secure_storage: ^4.2.1
-  json_annotation: ^4.1.0
+  json_annotation: ^4.0.0
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
@@ -34,7 +34,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  json_serializable: ^5.0.0
+  json_serializable: ^4.1.4
   build_runner: ^2.0.6
 
 # For information on the generic Dart part of this file, see the
