@@ -105,6 +105,24 @@ Future<T> _post<T>(
     return result;
 }
 
+  Future<dynamic> popularMovie(int page, String locale) async {
+    final parser = (dynamic json) {
+      // final jsonMap = json as Map<String, dynamic>;
+      // final token = jsonMap['request_token'] as String;
+      // return token;
+      return json;
+    };
+    final result = _get<dynamic>(
+      '/movie/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+        },);
+    return result;
+}
+
   Future<String> _validateUser({
       required String username,
       required String password,
