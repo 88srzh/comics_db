@@ -13,42 +13,42 @@ class MovieListWidget extends StatefulWidget {
 
 class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
-    Movie(
+    MovieOld(
         id: 1,
         imageName: AppImages.waifu,
         title: 'Бродяга Кэнсин',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    Movie(
+    MovieOld(
         id: 2,
         imageName: AppImages.waifu,
         title: 'Ковбой Бибоп',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    Movie(
+    MovieOld(
         id: 3,
         imageName: AppImages.waifu,
         title: 'Шаман-Кинг',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    Movie(
+    MovieOld(
         id: 4,
         imageName: AppImages.waifu,
         title: 'Мое превращение в слизь',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    Movie(
+    MovieOld(
         id: 5,
         imageName: AppImages.waifu,
         title: 'Токийская гуль',
         time: 'Август 8, 2021',
         description:
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    Movie(
+    MovieOld(
         id: 6,
         imageName: AppImages.waifu,
         title: 'Мифический дух - Хроники',
@@ -57,14 +57,14 @@ class _MovieListWidgetState extends State<MovieListWidget> {
             'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
   ];
 
-  var _filteredMovies = <Movie>[];
+  var _filteredMovies = <MovieOld>[];
 
   final _searchController = TextEditingController();
 
   void _searchMovies() {
     final query = _searchController.text;
     if (query.isNotEmpty) {
-      _filteredMovies = _movies.where((Movie movie) {
+      _filteredMovies = _movies.where((MovieOld movie) {
         return movie.title.toLowerCase().contains(query.toLowerCase());
       }).toList();
     } else {

@@ -1,11 +1,11 @@
-class Movie {
+class MovieOld {
   final int id;
   final String imageName;
   final String title;
   final String time;
   final String description;
 
-  Movie(
+  MovieOld(
       {required this.id,
       required this.imageName,
       required this.title,

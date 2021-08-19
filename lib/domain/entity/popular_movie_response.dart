@@ -1,14 +1,16 @@
-import 'package:comics_db_app/components/movie.dart';
+
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'popular_movie_response.g.dart';
 
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class PopularMovieResponse {
   final int page;
   @JsonKey(
     name: 'results',
   )
-  final List<Movie> movies;
+  List<Movie> movies;
   final int totalResults;
   final int totalPages;
 
