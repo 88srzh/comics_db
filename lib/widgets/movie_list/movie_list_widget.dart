@@ -1,105 +1,23 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
-import 'package:comics_db_app/components/movie.dart';
 
-class MovieListWidget extends StatefulWidget {
+class MovieListWidget extends StatelessWidget {
   const MovieListWidget({Key? key}) : super(key: key);
-
-  @override
-  _MovieListWidgetState createState() => _MovieListWidgetState();
-}
-
-class _MovieListWidgetState extends State<MovieListWidget> {
-  final _movies = [
-    MovieOld(
-        id: 1,
-        imageName: AppImages.waifu,
-        title: 'Бродяга Кэнсин',
-        time: 'Август 8, 2021',
-        description:
-            'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    MovieOld(
-        id: 2,
-        imageName: AppImages.waifu,
-        title: 'Ковбой Бибоп',
-        time: 'Август 8, 2021',
-        description:
-            'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    MovieOld(
-        id: 3,
-        imageName: AppImages.waifu,
-        title: 'Шаман-Кинг',
-        time: 'Август 8, 2021',
-        description:
-            'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    MovieOld(
-        id: 4,
-        imageName: AppImages.waifu,
-        title: 'Мое превращение в слизь',
-        time: 'Август 8, 2021',
-        description:
-            'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    MovieOld(
-        id: 5,
-        imageName: AppImages.waifu,
-        title: 'Токийская гуль',
-        time: 'Август 8, 2021',
-        description:
-            'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-    MovieOld(
-        id: 6,
-        imageName: AppImages.waifu,
-        title: 'Мифический дух - Хроники',
-        time: 'Август 8, 2021',
-        description:
-            'Сложно исправить ошибки прошлого. Некоторые — невозможно. Когда жизнь начинает идти под откос ещё со средней школы, стоило бы бороться, но прогнуться и плыть по течению проще и безопаснее.'),
-  ];
-
-  var _filteredMovies = <MovieOld>[];
-
-  final _searchController = TextEditingController();
-
-  void _searchMovies() {
-    final query = _searchController.text;
-    if (query.isNotEmpty) {
-      _filteredMovies = _movies.where((MovieOld movie) {
-        return movie.title.toLowerCase().contains(query.toLowerCase());
-      }).toList();
-    } else {
-      _filteredMovies = _movies;
-    }
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _filteredMovies = _movies;
-    _searchController.addListener(() {
-      _searchMovies();
-    });
-  }
-
-  void _onMovieTap(int index) {
-    final id = _movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
-  }
-
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.read<MovieListModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [
         ListView.builder(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.only(top: 70.0),
-            itemCount: _filteredMovies.length,
+            itemCount: model.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              final movie = _filteredMovies[index];
+              final movie = model.movies[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 10.0),
@@ -122,7 +40,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                       clipBehavior: Clip.hardEdge,
                       child: Row(
                         children: [
-                          Image(image: AssetImage(movie.imageName)),
+                          // Image(image: AssetImage(movie.imageName)),
                           const SizedBox(width: 15.0),
                           Expanded(
                             child: Column(
@@ -138,14 +56,14 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                                 ),
                                 const SizedBox(height: 5.0),
                                 Text(
-                                  movie.time,
+                                  movie.releaseDate?.toString() ?? '123123',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(color: Colors.grey),
                                 ),
                                 const SizedBox(height: 20.0),
                                 Text(
-                                  movie.description,
+                                  movie.overview,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -160,7 +78,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20.0),
-                        onTap: () => _onMovieTap(index),
+                        onTap: () => model.onMovieTap(context, index),
                       ),
                     ),
                   ],
@@ -170,7 +88,6 @@ class _MovieListWidgetState extends State<MovieListWidget> {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: TextField(
-            controller: _searchController,
             decoration: InputDecoration(
               labelText: 'Поиск',
               labelStyle: const TextStyle(

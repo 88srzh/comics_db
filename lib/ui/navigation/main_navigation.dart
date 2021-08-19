@@ -1,6 +1,8 @@
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen.dart';
+import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,8 @@ class MainNavigation {
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
     'auth': (context) =>
-        AuthProvider(model: AuthModel(), child: const AuthWidget()),
-    '/': (context) => const MainScreenWidget(),
+        NotifierProvider(model: AuthModel(), child: const AuthWidget()),
+    '/': (context) => NotifierProvider(model: MainScreenModel(), child: const MainScreenWidget()),
     '/news': (context) => const NewsListWidget(),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {

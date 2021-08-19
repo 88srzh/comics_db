@@ -1,3 +1,5 @@
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
+  final movieListModel = MovieListModel();
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -27,10 +30,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       ),
       body: IndexedStack(
         index: _selectedTab,
-        children: const [
-           NewsListWidget(),
-           MovieListWidget(),
-           Text(
+        children: [
+           const NewsListWidget(),
+           NotifierProvider(model: movieListModel, child: const MovieListWidget()),
+           const Text(
             'Сериалы',
           ),
         ],

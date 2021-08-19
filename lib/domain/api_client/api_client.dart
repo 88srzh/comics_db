@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
+
 /*
 1. нет сети
 2. нет ответа, таймаут соединения
@@ -105,14 +107,13 @@ Future<T> _post<T>(
     return result;
 }
 
-  Future<dynamic> popularMovie(int page, String locale) async {
+  Future<PopularMovieResponse> popularMovie(int page, String locale) async {
     final parser = (dynamic json) {
-      // final jsonMap = json as Map<String, dynamic>;
-      // final token = jsonMap['request_token'] as String;
-      // return token;
-      return json;
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularMovieResponse.fromJson(jsonMap);
+      return response;
     };
-    final result = _get<dynamic>(
+    final result = _get(
       '/movie/popular',
       parser,
       <String, dynamic>{
