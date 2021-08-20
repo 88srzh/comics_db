@@ -1,4 +1,6 @@
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/widgets/auth/auth_model.dart';
+import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
@@ -24,6 +26,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // просто получение модели без смысла
+    final model = NotifierProvider.read<MainScreenModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Обзор'),
