@@ -1,7 +1,9 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MovieListWidget extends StatelessWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class MovieListWidget extends StatelessWidget {
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
               final movie = model.movies[index];
+              final posterPath = movie.posterPath;
               return Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 10.0),
@@ -40,7 +43,7 @@ class MovieListWidget extends StatelessWidget {
                       clipBehavior: Clip.hardEdge,
                       child: Row(
                         children: [
-                          // Image(image: AssetImage(movie.imageName)),
+                          posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
                           const SizedBox(width: 15.0),
                           Expanded(
                             child: Column(
@@ -56,7 +59,7 @@ class MovieListWidget extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5.0),
                                 Text(
-                                  movie.releaseDate?.toString() ?? '123123',
+                                  model.stringFromDate(movie.releaseDate),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(color: Colors.grey),

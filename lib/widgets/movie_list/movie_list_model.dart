@@ -2,11 +2,21 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 class MovieListModel extends ChangeNotifier {
   final _apiClient = ApiClient();
   final _movies = <Movie>[];
   List<Movie> get movies => List.unmodifiable(_movies);
+  final _dateFormat = DateFormat.yMMMd();
+  late final String _locale;
+
+  String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
+
+  void setupLocale(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+
+  }
 
   Future<void> loadMovies() async {
     final moviesResponse = await _apiClient.popularMovie(1, 'ru-RU');

@@ -25,9 +25,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   }
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
+    movieListModel.setupLocale(context);
     movieListModel.loadMovies();
   }
 
