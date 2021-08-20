@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/auth/auth_model.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,8 @@ class AuthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.read(context)?.model;
+    // final model = AuthProvider.read(context)?.model;
+    final model = NotifierProvider.read<AuthModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -106,7 +108,7 @@ class AuthButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.watch(context)?.model;
+    final model = NotifierProvider.watch<AuthModel>(context);
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
     final child = model?.isAuthProgress == true
@@ -142,7 +144,7 @@ class ErrorMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
+    final errorMessage = NotifierProvider.watch<AuthModel>(context)?.errorMessage;
     if (errorMessage == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),

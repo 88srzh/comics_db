@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
+
 /*
 1. нет сети
 2. нет ответа, таймаут соединения
@@ -25,8 +27,10 @@ class ApiClientException implements Exception {
 class ApiClient {
   final _client = HttpClient();
   static const _host = 'https://api.themoviedb.org/3';
-  static const _imageUrl = 'http://image.tmbd.org/t/p/w500';
+  static const _imageUrl = 'https://image.tmdb.org/t/p/w500';
   static const _apiKey = '16257858b79d98176712e6d572638798';
+
+  static String imageUrl(String path) => _imageUrl + path;
 
   Future<String> auth({
     required String username,
@@ -102,6 +106,23 @@ Future<T> _post<T>(
       return token;
     };
     final result = _get('/authentication/token/new', parser, <String, dynamic>{'api_key': _apiKey},);
+    return result;
+}
+
+  Future<PopularMovieResponse> popularMovie(int page, String locale) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularMovieResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/movie/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+        },);
     return result;
 }
 
