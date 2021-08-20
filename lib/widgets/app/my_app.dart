@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       GlobalCupertinoLocalizations.delegate,
   ],
   supportedLocales: const [
-    Locale('ru',''),
+    Locale('ru','RU'),
     Locale('en',''),
   ],
       routes: mainNavigation.routes,
