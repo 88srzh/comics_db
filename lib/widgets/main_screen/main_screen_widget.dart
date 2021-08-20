@@ -25,8 +25,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    movieListModel.loadMovies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // просто получение модели без смысла
+    // просто получение модели без цели
     final model = NotifierProvider.read<MainScreenModel>(context);
     return Scaffold(
       appBar: AppBar(
