@@ -4,8 +4,8 @@ import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 
-class MovieListWidget extends StatelessWidget {
-  const MovieListWidget({Key? key}) : super(key: key);
+class TVListWidget extends StatelessWidget {
+  const TVListWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieListModel>(context);
