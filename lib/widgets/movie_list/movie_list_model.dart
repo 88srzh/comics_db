@@ -14,6 +14,7 @@ class MovieListModel extends ChangeNotifier {
   String stringFromDate(DateTime? date) =>
       date != null ? _dateFormat.format(date) : '';
 
+// ! - TODO: вынести в отдельный файл
   void setupLocale(BuildContext context) {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;

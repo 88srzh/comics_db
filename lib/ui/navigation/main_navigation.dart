@@ -12,6 +12,7 @@ abstract class MainNavigationRouteNames {
   static const mainScreen = '/';
   static const movieDetails = '/movie_details';
   static const news = '/news';
+  static const tvDetails = '/tv_details';
 }
 
 class MainNavigation {
@@ -21,7 +22,8 @@ class MainNavigation {
   final routes = <String, Widget Function(BuildContext)>{
     'auth': (context) =>
         NotifierProvider(model: AuthModel(), child: const AuthWidget()),
-    '/': (context) => NotifierProvider(model: MainScreenModel(), child: const MainScreenWidget()),
+    '/': (context) => NotifierProvider(
+        model: MainScreenModel(), child: const MainScreenWidget()),
     '/news': (context) => const NewsListWidget(),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
