@@ -19,7 +19,7 @@ class MovieListModel extends ChangeNotifier {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
-    _dateFormat = DateFormat.yMMMEd(locale);
+    _dateFormat = DateFormat.yMMMd(locale);
     _movies.clear();
     _loadMovies();
   }

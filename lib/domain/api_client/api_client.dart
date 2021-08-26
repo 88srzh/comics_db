@@ -136,16 +136,16 @@ class ApiClient {
       final response = PopularTVResponse.fromJson(jsonMap);
       return response;
     };
-    final result = _get(
-      '/tv/popular',
+    final tvResult = _get(
+      '/movie/top_rated',
       parser,
-      <String, dynamic> {
+      <String, dynamic>{
         'api_key': _apiKey,
         'page': page.toString(),
         'language': locale,
       },
     );
-    return result;
+    return tvResult;
   }
 
   Future<String> _validateUser(

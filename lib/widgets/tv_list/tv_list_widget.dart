@@ -1,25 +1,25 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:flutter/material.dart';
 
 class TVListWidget extends StatelessWidget {
   const TVListWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieListModel>(context);
+    final model = NotifierProvider.watch<TVListModel>(context);
     if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [
         ListView.builder(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.only(top: 70.0),
-            itemCount: model.movies.length,
+            itemCount: model.tvs.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              final movie = model.movies[index];
-              final posterPath = movie.posterPath;
+              final tv = model.tvs[index];
+              final posterPath = tv.posterPath;
               return Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 10.0),
@@ -50,7 +50,7 @@ class TVListWidget extends StatelessWidget {
                               children: [
                                 const SizedBox(height: 20.0),
                                 Text(
-                                  movie.title,
+                                  tv.originalName,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
@@ -58,14 +58,14 @@ class TVListWidget extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5.0),
                                 Text(
-                                  model.stringFromDate(movie.releaseDate),
+                                  model.stringFromDate(tv.firstAirDate),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(color: Colors.grey),
                                 ),
                                 const SizedBox(height: 20.0),
                                 Text(
-                                  movie.overview,
+                                  tv.overview,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -80,7 +80,7 @@ class TVListWidget extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20.0),
-                        onTap: () => model.onMovieTap(context, index),
+                        onTap: () => model.onTVTap(context, index),
                       ),
                     ),
                   ],
