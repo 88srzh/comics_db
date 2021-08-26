@@ -10,6 +10,7 @@ class MovieListModel extends ChangeNotifier {
   late int _currentPage;
   late int _totalPage;
   var _isLoadingInProgress = false;
+
   List<Movie> get movies => List.unmodifiable(_movies);
   late DateFormat _dateFormat;
   String _locale = '';
@@ -39,9 +40,11 @@ class MovieListModel extends ChangeNotifier {
     _movies.addAll(moviesResponse.movies);
     _currentPage = moviesResponse.page;
     _totalPage = moviesResponse.totalPages;
+    _isLoadingInProgress = false;
     notifyListeners();
     } catch (e) {
       _isLoadingInProgress = false;
+      print('какая-то хуйня');
     }
   }
 
@@ -53,6 +56,7 @@ class MovieListModel extends ChangeNotifier {
 
   void showedMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
+    print(index);
     _loadMovies();
   }
 }
