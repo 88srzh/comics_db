@@ -5,5 +5,8 @@
     "editor.fontWeight": "400",
     "editor.fontSize": 16,
     "editor.fontLigatures": true,
-    "editor.defaultFormatter": "remimarsal.prettier-now"
+    "editor.defaultFormatter": "remimarsal.prettier-now",
+    "cSpell.words": [
+        "serializable"
+    ]
 }
