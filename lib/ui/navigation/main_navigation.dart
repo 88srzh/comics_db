@@ -5,13 +5,15 @@ import 'package:comics_db_app/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
+import 'package:comics_db_app/widgets/tv_list/tv_list.model.dart';
+import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
 import 'package:flutter/material.dart';
 
 abstract class MainNavigationRouteNames {
   static const auth = 'auth';
   static const mainScreen = '/';
   static const movieDetails = '/movie_details';
-  static const news = '/news';
+  static const tv = '/tv';
   static const tvDetails = '/tv_details';
 }
 
@@ -25,6 +27,7 @@ class MainNavigation {
     '/': (context) => NotifierProvider(
         model: MainScreenModel(), child: const MainScreenWidget()),
     '/news': (context) => const NewsListWidget(),
+    '/tv': (context) => NotifierProvider(model: TVListModel(), child: const TVListWidget())
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
