@@ -26,7 +26,7 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
               ),
               DropdownButton<String>(
                 value: _category,
-                onChanged: (catrgory) {},
+                onChanged: (category) {},
                 items: const [
                   DropdownMenuItem(value: 'today', child: Text('Today')),
                   DropdownMenuItem(
