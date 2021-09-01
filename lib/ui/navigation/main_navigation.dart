@@ -27,7 +27,8 @@ class MainNavigation {
     '/': (context) => NotifierProvider(
         model: MainScreenModel(), child: const MainScreenWidget()),
     '/news': (context) => const NewsListWidget(),
-    '/tv': (context) => NotifierProvider(model: TVListModel(), child: const TVListWidget())
+    '/tv': (context) => NotifierProvider(
+      model: TVListModel(), child: const TVListWidget())
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {

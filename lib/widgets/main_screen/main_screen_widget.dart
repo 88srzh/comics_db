@@ -31,6 +31,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     super.didChangeDependencies();
 
     movieListModel.setupLocale(context);
+    tvListModel.setupLocale(context);
   }
 
   @override
@@ -46,7 +47,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         children: [
            const NewsListWidget(),
            NotifierProvider(model: movieListModel, child: const MovieListWidget()),
-          NotifierProvider(model: tvListModel, child: const TVListWidget()),
+           NotifierProvider(model: tvListModel, child: const TVListWidget()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

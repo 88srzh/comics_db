@@ -7,6 +7,10 @@ import 'package:intl/intl.dart';
 class TVListModel extends ChangeNotifier {
   final _apiClient = ApiClient();
   final _tvs = <TV>[];
+  late int _currentPage;
+  late int _totalPage;
+  var _isLoadingInProgress = false;
+
   List<TV> get tvs => List.unmodifiable(_tvs);
   late DateFormat _dateFormat;
   String _locale = '';
@@ -20,19 +24,39 @@ class TVListModel extends ChangeNotifier {
     if (_locale == locale) return;
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
+    _currentPage = 0;
+    _totalPage = 1;
     _tvs.clear();
     _loadTVs();
   }
 
   Future<void> _loadTVs() async {
-    final tvsResponse = await _apiClient.popularTV(1, _locale);
+    if (_isLoadingInProgress || _currentPage >= _totalPage) return;
+    _isLoadingInProgress = true;
+    final nextPage = _currentPage + 1;
+
+    try {
+      final tvsResponse = await _apiClient.popularTV(nextPage, _locale);
     _tvs.addAll(tvsResponse.tvs);
+    _currentPage = tvsResponse.page;
+    _totalPage = tvsResponse.totalPages;
+    _isLoadingInProgress = false;
     notifyListeners();
+    } catch (e) {
+      _isLoadingInProgress = false;
+      print('какая-то хуйня');
+    }
   }
 
     void onTVTap(BuildContext context, int index) {
     final id = _tvs[index].id;
     Navigator.of(context)
         .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+  }
+
+    void showedTVAtIndex(int index) {
+    if (index < _tvs.length - 1) return;
+    print(index);
+    _loadTVs();
   }
 }

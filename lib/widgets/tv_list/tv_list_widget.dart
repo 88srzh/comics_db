@@ -18,6 +18,7 @@ class TVListWidget extends StatelessWidget {
             itemCount: model.tvs.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
+              model.showedTVAtIndex(index);
               final tv = model.tvs[index];
               final posterPath = tv.posterPath;
               return Padding(
