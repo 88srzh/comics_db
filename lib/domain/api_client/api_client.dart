@@ -137,7 +137,7 @@ class ApiClient {
       return response;
     };
     final tvResult = _get(
-      '/movie/top_rated',
+      '/tv/popular',
       parser,
       <String, dynamic>{
         'api_key': _apiKey,

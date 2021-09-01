@@ -10,16 +10,15 @@ class TVListModel extends ChangeNotifier {
   late int _currentPage;
   late int _totalPage;
   var _isLoadingInProgress = false;
-
+  
   List<TV> get tvs => List.unmodifiable(_tvs);
   late DateFormat _dateFormat;
   String _locale = '';
 
-// ! - TODO: вынести в отдельный файл
-    String stringFromDate(DateTime? date) =>
+  String stringFromDate(DateTime? date) =>
       date != null ? _dateFormat.format(date) : '';
 
-    void setupLocale(BuildContext context) {
+  void setupLocale(BuildContext context) {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
@@ -48,13 +47,13 @@ class TVListModel extends ChangeNotifier {
     }
   }
 
-    void onTVTap(BuildContext context, int index) {
+  void onTVTap(BuildContext context, int index) {
     final id = _tvs[index].id;
     Navigator.of(context)
         .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 
-    void showedTVAtIndex(int index) {
+    void showedMovieAtIndex(int index) {
     if (index < _tvs.length - 1) return;
     print(index);
     _loadTVs();
