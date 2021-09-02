@@ -29,11 +29,11 @@ class MovieListModel extends ChangeNotifier {
     if (_locale == locale) return;
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
-    await _resetList();
+    await _resetMovieList();
 
   }
 
-  Future<void> _resetList() async {
+  Future<void> _resetMovieList() async {
     _currentPage = 0;
     _totalPage = 1;
     _movies.clear();
@@ -79,7 +79,7 @@ class MovieListModel extends ChangeNotifier {
     final searchQuery = text.isNotEmpty ? text : null;
     if(_searchQuery == searchQuery) return;
     _searchQuery = searchQuery;
-    await _resetList();
+    await _resetMovieList();
     });
   }
 

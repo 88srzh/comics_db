@@ -168,10 +168,10 @@ class ApiClient {
     return tvResult;
   }
 
-      Future<PopularMovieResponse> searchTV(int page, String locale, String query) async {
+  Future<PopularTVResponse> searchTV(int page, String locale, String query) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularMovieResponse.fromJson(jsonMap);
+      final response = PopularTVResponse.fromJson(jsonMap);
       return response;
     };
     final result = _get(

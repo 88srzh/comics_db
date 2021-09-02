@@ -37,7 +37,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     // просто получение модели без цели
-    final model = NotifierProvider.read<MainScreenModel>(context);
+    // final model = NotifierProvider.read<MainScreenModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Обзор'),
