@@ -130,7 +130,7 @@ class ApiClient {
     return result;
   }
 
-    Future<PopularMovieResponse> searchMovie(int page, String locale, query) async {
+    Future<PopularMovieResponse> searchMovie(int page, String locale, String query) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularMovieResponse.fromJson(jsonMap);
@@ -168,6 +168,26 @@ class ApiClient {
     return tvResult;
   }
 
+      Future<PopularMovieResponse> searchTV(int page, String locale, String query) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularMovieResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/search/tv',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'query': query,
+        'include_adult': true.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<String> _validateUser(
       {required String username,
       required String password,
@@ -194,7 +214,7 @@ class ApiClient {
   Future<String> _makeSession({required String requestToken}) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final sessionId = json['session_id'] as String;
+      final sessionId = jsonMap['session_id'] as String;
       return sessionId;
     };
     final parameters = <String, dynamic>{'request_token': requestToken};
@@ -209,7 +229,7 @@ class ApiClient {
 
   void _validateResponse(HttpClientResponse response, dynamic json) {
     if (response.statusCode == 401) {
-      final status = json['status_code'];
+      final dynamic status = json['status_code'];
       final code = status is int ? status : 0;
       if (code == 30) {
         throw ApiClientException(ApiClientExceptionType.auth);
