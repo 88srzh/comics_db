@@ -91,6 +91,7 @@ class TVListWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: TextField(
+            onChanged: model.searchTV,
             decoration: InputDecoration(
               labelText: 'Поиск',
               labelStyle: const TextStyle(
