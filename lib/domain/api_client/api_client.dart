@@ -189,7 +189,7 @@ class ApiClient {
     return result;
   }
 
-    Future<LatestAllResponse> latestAll(int page, String mediaType, String timeWindow) async {
+    Future<LatestAllResponse> latestAll(int page, String? mediaType, String? timeWindow) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = LatestAllResponse.fromJson(jsonMap);

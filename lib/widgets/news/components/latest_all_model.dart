@@ -9,14 +9,14 @@ class LatestAllModel extends ChangeNotifier {
   final _latestAll = <LatestAll>[];
   late int _currentPage;
   late int _totalPage;
-  String mediaType = 'all';
-  String timeWindow = 'week';
+  String? mediaType;
+  String? timeWindow;
   var _isLoadingInProgress = false;
 
   List<LatestAll> get latestAll => List.unmodifiable(_latestAll);
   late DateFormat _dateFormat;
   String stringFromDate(DateTime? date) =>
-    date != null ? _dateFormat.format(date) : '';
+      date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupPage(BuildContext context) async {
     _dateFormat = DateFormat.yMMMd();
@@ -26,10 +26,12 @@ class LatestAllModel extends ChangeNotifier {
   Future<void> _resetLatestAllList() async {
     _currentPage = 0;
     _totalPage = 1;
+    _latestAll.clear();
     await _loadNextLatestAllPage();
   }
 
-  Future<LatestAllResponse> _loadLatestAll(int nextPage, String mediaType, String timeWindow) async {
+  Future<LatestAllResponse> _loadLatestAll(
+      int nextPage, String? mediaType, String? timeWindow) async {
     return await _apiClient.latestAll(nextPage, mediaType, timeWindow);
   }
 
@@ -38,19 +40,20 @@ class LatestAllModel extends ChangeNotifier {
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
     try {
-      final latestAllResponse = await _loadLatestAll(nextPage, mediaType, timeWindow);
-    _latestAll.addAll(latestAllResponse.latestAll);
-    _currentPage = latestAllResponse.page;
-    _totalPage = latestAllResponse.totalPages;
-    _isLoadingInProgress = false;
-    notifyListeners();
+      final latestAllResponse =
+          await _loadLatestAll(nextPage, mediaType, timeWindow);
+      _latestAll.addAll(latestAllResponse.latestAll);
+      _currentPage = latestAllResponse.page;
+      _totalPage = latestAllResponse.totalPages;
+      _isLoadingInProgress = false;
+      notifyListeners();
     } catch (e) {
       _isLoadingInProgress = false;
     }
   }
 
   void showedLatestAllAtIndex(int index) {
-    if (index < _latestAll.length -1) return;
+    if (index < _latestAll.length - 1) return;
     _loadNextLatestAllPage();
   }
 }
