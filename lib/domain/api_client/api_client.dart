@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:comics_db_app/domain/entity/latest_all_response.dart';
 import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 
@@ -183,6 +184,26 @@ class ApiClient {
         'language': locale,
         'query': query,
         'include_adult': true.toString(),
+      },
+    );
+    return result;
+  }
+
+    Future<LatestAllResponse> latestAll(int page, String mediaType, String timeWindow) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = LatestAllResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      // сюда входят фильмы, сериалы и люди(person)
+      '/trending/all/week',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'media_type': mediaType,
+        'time_window': timeWindow,
       },
     );
     return result;
