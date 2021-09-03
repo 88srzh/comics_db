@@ -1,4 +1,7 @@
+import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/widgets/news/components/latest_all_model.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidgetLatest extends StatefulWidget {
@@ -12,6 +15,8 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
   final _category = 'movies';
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<LatestAllModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,11 +33,9 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(
-                      value: 'movies', child: Text('Фильмы')),
+                  DropdownMenuItem(value: 'movies', child: Text('Фильмы')),
                   DropdownMenuItem(value: 'tv', child: Text('Сериалы')),
-                  DropdownMenuItem(
-                      value: 'tvShows', child: Text('TVShows')),
+                  DropdownMenuItem(value: 'tvShows', child: Text('TVShows')),
                 ],
               ),
             ],
@@ -46,6 +49,9 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
             itemCount: 10,
             itemExtent: 150,
             itemBuilder: (BuildContext context, int index) {
+              model.showedLatestAllAtIndex(index);
+              final latestAll = model.latestAll[index];
+              final posterPath = latestAll.posterPath;
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -55,12 +61,8 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: const Image(
-                              image: AssetImage(AppImages.waifu),
-                            ),
-                          ),
+                          child:
+                          posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
                         ),
                         Positioned(
                           top: 15,
@@ -98,19 +100,21 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                         // ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                       child: Text(
-                        'Willy`s Wonderland',
-                        maxLines: 2,
-                        style: TextStyle(
+                        latestAll.title,
+                        maxLines: 1,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      child: Text('Feb 12, 2021'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                      child: Text(
+                        model.stringFromDate(latestAll.releaseDate),
+                      ),
                     ),
                   ],
                 ),
