@@ -61,7 +61,7 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
+                          child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
                         ),
                         Positioned(
                           top: 15,
