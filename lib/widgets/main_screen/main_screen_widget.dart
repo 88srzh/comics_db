@@ -2,6 +2,7 @@ import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/widgets/news/components/latest_all_model.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
@@ -18,6 +19,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
   final movieListModel = MovieListModel();
   final tvListModel = TVListModel();
+  final latestAllModel = LatestAllModel();
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -45,9 +47,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-           const NewsListWidget(),
-           NotifierProvider(model: movieListModel, child: const MovieListWidget()),
-           NotifierProvider(model: tvListModel, child: const TVListWidget()),
+          NotifierProvider(model: latestAllModel, child: const NewsListWidget()),
+          NotifierProvider(
+              model: movieListModel, child: const MovieListWidget()),
+          NotifierProvider(model: tvListModel, child: const TVListWidget()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

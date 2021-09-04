@@ -61,7 +61,7 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
+child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
                         ),
                         Positioned(
                           top: 15,
@@ -99,19 +99,21 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                         // ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                       child: Text(
-                        'Willy`s Wonderland',
-                        maxLines: 2,
-                        style: TextStyle(
+                        latestAll.title,
+                        maxLines: 1,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      child: Text('Feb 12, 2021'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                      child: Text(
+                        model.stringFromDate(latestAll.releaseDate),
+                      ),
                     ),
                   ],
                 ),
