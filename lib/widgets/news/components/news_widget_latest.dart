@@ -49,7 +49,7 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
             itemCount: 10,
             itemExtent: 150,
             itemBuilder: (BuildContext context, int index) {
-              model.showedLatestAllAtIndex(index);
+              // model.showedLatestAllAtIndex(index);
               final latestAll = model.latestAll[index];
               final posterPath = latestAll.posterPath;
               return Padding(

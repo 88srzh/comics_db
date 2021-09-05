@@ -21,7 +21,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Free To Watch',
+                'Популярное',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
               DropdownButton<String>(
