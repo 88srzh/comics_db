@@ -9,5 +9,3 @@ void main() async {
   final app = MyApp(model: model);
   runApp(app);
 }
-
-
