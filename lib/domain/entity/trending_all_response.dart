@@ -7,13 +7,13 @@ part 'trending_all_response.g.dart';
 class TrendingAllResponse {
   final int page;
   @JsonKey(name: 'results')
-  List<TrendingAll> latestAll;
+  List<TrendingAll> trendingAll;
   final int totalResults;
   final int totalPages;
 
   TrendingAllResponse({
     required this.page,
-    required this.latestAll,
+    required this.trendingAll,
     required this.totalResults,
     required this.totalPages
     });
@@ -21,5 +21,5 @@ class TrendingAllResponse {
   factory TrendingAllResponse.fromJson(Map<String, dynamic> json) =>
       _$TrendingAllResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TrendingtAllResponseToJson(this);
+  Map<String, dynamic> toJson() => _$TrendingAllResponseToJson(this);
 }

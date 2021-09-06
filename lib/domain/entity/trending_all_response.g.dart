@@ -9,7 +9,7 @@ part of 'trending_all_response.dart';
 TrendingAllResponse _$TrendingAllResponseFromJson(Map<String, dynamic> json) {
   return TrendingAllResponse(
     page: json['page'] as int,
-    latestAll: (json['results'] as List<dynamic>)
+    trendingAll: (json['results'] as List<dynamic>)
         .map((e) => TrendingAll.fromJson(e as Map<String, dynamic>))
         .toList(),
     totalResults: json['total_results'] as int,
@@ -21,7 +21,7 @@ Map<String, dynamic> _$TrendingAllResponseToJson(
         TrendingAllResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
-      'results': instance.latestAll.map((e) => e.toJson()).toList(),
+      'results': instance.trendingAll.map((e) => e.toJson()).toList(),
       'total_results': instance.totalResults,
       'total_pages': instance.totalPages,
     };
