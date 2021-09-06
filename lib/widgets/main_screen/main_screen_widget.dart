@@ -3,6 +3,8 @@ import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/widgets/news/components/latest_all_model.dart';
+import 'package:comics_db_app/widgets/news/components/news_widget_latest.dart';
+import 'package:comics_db_app/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
@@ -47,10 +49,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          NotifierProvider(model: latestAllModel, child: const NewsListWidget()),
+          NotifierProvider(
+            model: movieListModel, child: const NewsWidgetPopular()),
+          NotifierProvider(
+            model: latestAllModel, child: const NewsWidgetLatest()),
           NotifierProvider(
               model: movieListModel, child: const MovieListWidget()),
-          NotifierProvider(model: tvListModel, child: const TVListWidget()),
+          NotifierProvider
+          (model: tvListModel, child: const TVListWidget()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

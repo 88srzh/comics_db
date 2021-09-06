@@ -1,17 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'latest_all.dart';
+part of 'trending_all.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LatestAll _$LatestAllFromJson(Map<String, dynamic> json) {
-  return LatestAll(
+TrendingAll _$TrendingAllFromJson(Map<String, dynamic> json) {
+  return TrendingAll(
     posterPath: json['poster_path'] as String?,
     adult: json['adult'] as bool,
     overview: json['overview'] as String,
-    releaseDate: LatestAll.parseDateFromString(json['release_date'] as String?),
+    releaseDate:
+        TrendingAll.parseDateFromString(json['release_date'] as String?),
     genreIds:
         (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
     id: json['id'] as int,
@@ -26,7 +27,8 @@ LatestAll _$LatestAllFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$LatestAllToJson(LatestAll instance) => <String, dynamic>{
+Map<String, dynamic> _$TrendingAllToJson(TrendingAll instance) =>
+    <String, dynamic>{
       'poster_path': instance.posterPath,
       'adult': instance.adult,
       'overview': instance.overview,

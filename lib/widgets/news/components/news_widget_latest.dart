@@ -33,9 +33,11 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(value: 'movies', child: Text('Фильмы')),
+                  DropdownMenuItem(
+                      value: 'movies', child: Text('Фильмы')),
                   DropdownMenuItem(value: 'tv', child: Text('Сериалы')),
-                  DropdownMenuItem(value: 'tvShows', child: Text('TVShows')),
+                  DropdownMenuItem(
+                      value: 'tvShows', child: Text('TVShows')),
                 ],
               ),
             ],
@@ -46,10 +48,10 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
           height: 306,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: model.latestAll.length,
             itemExtent: 150,
             itemBuilder: (BuildContext context, int index) {
-              // model.showedLatestAllAtIndex(index);
+              model.showedLatestAllAtIndex(index);
               final latestAll = model.latestAll[index];
               final posterPath = latestAll.posterPath;
               return Padding(
@@ -61,7 +63,15 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
+                          child: posterPath != null ? Image.network(
+                            ApiClient.imageUrl(posterPath)
+                          ) : const SizedBox.shrink()
+                          // child: ClipRRect(
+                          //   borderRadius: BorderRadius.circular(8),
+                          //   child: const Image(
+                          //     image: AssetImage(AppImages.waifu),
+                          //   ),
+                          // ),
                         ),
                         Positioned(
                           top: 15,
@@ -99,21 +109,19 @@ class _NewsWidgetLatestState extends State<NewsWidgetLatest> {
                         // ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
                       child: Text(
-                        latestAll.title,
-                        maxLines: 1,
-                        style: const TextStyle(
+                        'Willy`s Wonderland',
+                        maxLines: 2,
+                        style: TextStyle(
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-                      child: Text(
-                        model.stringFromDate(latestAll.releaseDate),
-                      ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      child: Text('Feb 12, 2021'),
                     ),
                   ],
                 ),

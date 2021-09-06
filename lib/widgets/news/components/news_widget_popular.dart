@@ -1,4 +1,7 @@
+import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidgetPopular extends StatefulWidget {
@@ -9,9 +12,11 @@ class NewsWidgetPopular extends StatefulWidget {
 }
 
 class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
-  final _category = 'movies';
   @override
   Widget build(BuildContext context) {
+    const _category = 'movies';
+    final model = NotifierProvider.watch<MovieListModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,7 +31,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
               ),
               DropdownButton<String>(
                 value: _category,
-                onChanged: (catrgory) {},
+                onChanged: (category) {},
                 items: const [
                   DropdownMenuItem(
                       value: 'movies', child: Text('Movies')),
@@ -41,9 +46,12 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
           height: 306,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: model.movies.length,
             itemExtent: 150,
             itemBuilder: (BuildContext context, int index) {
+              model.showedMovieAtIndex(index);
+              final movie = model.movies[index];
+              final posterPath = movie.posterPath;
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -53,12 +61,15 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: const Image(
-                              image: AssetImage(AppImages.waifu),
-                            ),
-                          ),
+                          child: posterPath != null ? Image.network(
+                            ApiClient.imageUrl(posterPath), width: 140)
+                            : const SizedBox.shrink(),
+                          // child: ClipRRect(
+                          //   borderRadius: BorderRadius.circular(8),
+                          //   child: const Image(
+                          //     image: AssetImage(AppImages.waifu),
+                          //   ),
+                          // ),
                         ),
                         Positioned(
                           top: 15,
@@ -97,7 +108,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                       ],
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       child: Text(
                         'Willy`s Wonderland',
                         maxLines: 2,
@@ -107,7 +118,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      padding: EdgeInsets.only(left: 10, top: 5, right: 10),
                       child: Text('Feb 12, 2021'),
                     ),
                   ],

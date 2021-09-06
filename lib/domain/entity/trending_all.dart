@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'latest_all.g.dart';
+part 'trending_all.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 
-class LatestAll {
+class TrendingAll {
   final String? posterPath;
   final bool adult;
   final String overview;
@@ -21,7 +21,7 @@ class LatestAll {
   final bool video;
   final double voteAverage;
 
-  LatestAll(
+  TrendingAll(
     {required this.posterPath,
     required this.adult,
     required this.overview,
@@ -38,9 +38,9 @@ class LatestAll {
     required this.voteAverage
     });
 
-  factory LatestAll.fromJson(Map<String, dynamic> json) => _$LatestAllFromJson(json);
+  factory TrendingAll.fromJson(Map<String, dynamic> json) => _$TrendingAllFromJson(json);
 
-  Map<String, dynamic> toJson() => _$LatestAllToJson(this);
+  Map<String, dynamic> toJson() => _$TrendingAllToJson(this);
 
   static DateTime? parseDateFromString(String? rawDate) {
     if (rawDate == null || rawDate.isEmpty) return null;

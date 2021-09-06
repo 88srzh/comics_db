@@ -15,6 +15,7 @@ class _NewsListWidgetState extends State<NewsListWidget> {
   Widget build(BuildContext context) {
     return ListView(
       children: const [
+        //  mediaType null
         // NewsWidgetLatest(),
         NewsWidgetPopular(),
         NewsWidgetTrending(),

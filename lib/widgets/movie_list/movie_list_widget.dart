@@ -54,7 +54,9 @@ class MovieListWidget extends StatelessWidget {
                         clipBehavior: Clip.hardEdge,
                         child: Row(
                           children: [
-                            posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
+                            posterPath != null ? Image.network(
+                              ApiClient.imageUrl(posterPath), width: 95)
+                              : const SizedBox.shrink(),
                             const SizedBox(width: 15.0),
                             Expanded(
                               child: Column(
