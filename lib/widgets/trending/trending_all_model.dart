@@ -1,38 +1,38 @@
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/domain/entity/latest_all.dart';
-import 'package:comics_db_app/domain/entity/latest_all_response.dart';
+import 'package:comics_db_app/domain/entity/trending_all.dart';
+import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class TrendModel extends ChangeNotifier {
+class TrendingAllModel extends ChangeNotifier {
   final _apiClient = ApiClient();
-  final _trendAll = <TrendAll>[];
+  final _trendingAll = <TrendingAll>[];
   late int _currentPage;
   late int _totalPage;
   String? mediaType;
   String? timeWindow;
   var _isLoadingInProgress = false;
 
-  List<TrendAll> get trendAll => List.unmodifiable(_trendAll);
+  List<TrendingAll> get trendingAll => List.unmodifiable(_trendingAll);
   late DateFormat _dateFormat;
   String stringFromDate(DateTime? date) =>
       date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupPage(BuildContext context) async {
     _dateFormat = DateFormat.yMMMd();
-    await _resetTrendAllList();
+    await _resetTrendingAllList();
   }
 
-  Future<void> _resetTrendAllList() async {
+  Future<void> _resetTrendingAllList() async {
     _currentPage = 0;
     _totalPage = 1;
-    _trendAll.clear();
+    _trendingAll.clear();
     await _loadNextTrendAllPage();
   }
 
-  Future<LatestAllResponse> _loadTrendAll(
+  Future<TrendingAllResponse> _loadTrendAll(
       int nextPage, String? mediaType, String? timeWindow) async {
-    return await _apiClient.trendAll(nextPage, mediaType, timeWindow);
+    return await _apiClient.trendingAll(nextPage, mediaType, timeWindow);
   }
 
   Future<void> _loadNextTrendAllPage() async {
@@ -40,11 +40,11 @@ class TrendModel extends ChangeNotifier {
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
     try {
-      final trendAllResponse =
+      final trendingAllResponse =
           await _loadTrendAll(nextPage, mediaType, timeWindow);
-      _trendAll.addAll(trendAllResponse.latestAll);
-      _currentPage = trendAllResponse.page;
-      _totalPage = trendAllResponse.totalPages;
+      _trendingAll.addAll(trendingAllResponse.trendingAll);
+      _currentPage = trendingAllResponse.page;
+      _totalPage = trendingAllResponse.totalPages;
       _isLoadingInProgress = false;
       notifyListeners();
     } catch (e) {
@@ -52,8 +52,8 @@ class TrendModel extends ChangeNotifier {
     }
   }
 
-  void showedTrendAllAtIndex(int index) {
-    if (index < _trendAll.length - 1) return;
+  void showedTrendingAllAtIndex(int index) {
+    if (index < _trendingAll.length - 1) return;
     _loadNextTrendAllPage();
   }
 }

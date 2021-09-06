@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:comics_db_app/domain/entity/latest_all_response.dart';
 import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
+import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 
 /*
 1. нет сети
@@ -189,7 +188,7 @@ class ApiClient {
     return result;
   }
 
-    Future<TrendingAllResponse> latestAll(int page, String? mediaType, String? timeWindow) async {
+    Future<TrendingAllResponse> trendingAll(int page, String? mediaType, String? timeWindow) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrendingAllResponse.fromJson(jsonMap);

@@ -5,7 +5,7 @@ import 'package:comics_db_app/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
-import 'package:comics_db_app/widgets/tv_list/tv_list.model.dart';
+import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
 import 'package:flutter/material.dart';
 

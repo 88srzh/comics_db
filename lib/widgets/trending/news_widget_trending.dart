@@ -1,4 +1,7 @@
+import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidgetTrending extends StatefulWidget {
@@ -9,9 +12,11 @@ class NewsWidgetTrending extends StatefulWidget {
 }
 
 class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
-  final _category = 'today';
+  final _category = 'movies';
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TrendingAllModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,16 +26,18 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'В Тренде',
+                'Новое',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
               DropdownButton<String>(
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(value: 'today', child: Text('Today')),
                   DropdownMenuItem(
-                      value: 'week', child: Text('This Week')),
+                      value: 'movies', child: Text('Фильмы')),
+                  DropdownMenuItem(value: 'tv', child: Text('Сериалы')),
+                  DropdownMenuItem(
+                      value: 'tvShows', child: Text('TVShows')),
                 ],
               ),
             ],
@@ -41,9 +48,12 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
           height: 306,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: model.trendingAll.length,
             itemExtent: 150,
             itemBuilder: (BuildContext context, int index) {
+              model.showedTrendingAllAtIndex(index);
+              final trendingAll = model.trendingAll[index];
+              final posterPath = trendingAll.posterPath;
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -52,13 +62,10 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
                     Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: const Image(
-                              image: AssetImage(AppImages.waifu),
-                            ),
-                          ),
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: posterPath != null ? Image.network(
+                            ApiClient.imageUrl(posterPath)
+                          ) : const SizedBox.shrink()
                         ),
                         Positioned(
                           top: 15,
