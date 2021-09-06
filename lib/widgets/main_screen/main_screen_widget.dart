@@ -35,6 +35,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     super.didChangeDependencies();
 
     movieListModel.setupLocale(context);
+    trendingAllModel.setupPage(context);
     tvListModel.setupLocale(context);
   }
 
