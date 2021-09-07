@@ -17,6 +17,8 @@ abstract class MainNavigationRouteNames {
   static const movieDetails = '/movie_details';
   static const tv = '/tv';
   static const tvDetails = '/tv_details';
+  static const news = '/news';
+  static const trending = 'trending';
 }
 
 class MainNavigation {
@@ -28,7 +30,7 @@ class MainNavigation {
         NotifierProvider(model: AuthModel(), child: const AuthWidget()),
     '/': (context) => NotifierProvider(
         model: MainScreenModel(), child: const MainScreenWidget()),
-    '/news': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
+    '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
     '/tv': (context) => NotifierProvider(
       model: TVListModel(), child: const TVListWidget())
   };

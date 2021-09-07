@@ -107,19 +107,21 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                         // ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      child: Text(
-                        'Willy`s Wonderland',
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Text(
+                          movie.title,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 5, right: 10),
-                      child: Text('Feb 12, 2021'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
+                      child: Text(model.stringFromDate(movie.releaseDate)),
                     ),
                   ],
                 ),
