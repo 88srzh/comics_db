@@ -9,8 +9,8 @@ class TrendingAllModel extends ChangeNotifier {
   final _trendingAll = <TrendingAll>[];
   late int _currentPage;
   late int _totalPage;
-  String? mediaType;
-  String? timeWindow;
+  late String mediaType;
+  late String timeWindow;
   var _isLoadingInProgress = false;
 
   List<TrendingAll> get trendingAll => List.unmodifiable(_trendingAll);
@@ -27,21 +27,21 @@ class TrendingAllModel extends ChangeNotifier {
     _currentPage = 0;
     _totalPage = 1;
     _trendingAll.clear();
-    await _loadNextTrendAllPage();
+    await _loadNextTrendingAllPage();
   }
 
-  Future<TrendingAllResponse> _loadTrendAll(
-      int nextPage, String? mediaType, String? timeWindow) async {
+  Future<TrendingAllResponse> _loadTrendingAll(
+      int nextPage, String mediaType, String timeWindow) async {
     return await _apiClient.trendingAll(nextPage, mediaType, timeWindow);
   }
 
-  Future<void> _loadNextTrendAllPage() async {
+  Future<void> _loadNextTrendingAllPage() async {
     if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
     try {
       final trendingAllResponse =
-          await _loadTrendAll(nextPage, mediaType, timeWindow);
+          await _loadTrendingAll(nextPage, mediaType, timeWindow);
       _trendingAll.addAll(trendingAllResponse.trendingAll);
       _currentPage = trendingAllResponse.page;
       _totalPage = trendingAllResponse.totalPages;
@@ -54,6 +54,6 @@ class TrendingAllModel extends ChangeNotifier {
 
   void showedTrendingAllAtIndex(int index) {
     if (index < _trendingAll.length - 1) return;
-    _loadNextTrendAllPage();
+    _loadNextTrendingAllPage();
   }
 }

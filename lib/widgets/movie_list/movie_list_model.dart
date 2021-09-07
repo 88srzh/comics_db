@@ -30,7 +30,6 @@ class MovieListModel extends ChangeNotifier {
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
     await _resetMovieList();
-
   }
 
   Future<void> _resetMovieList() async {

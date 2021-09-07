@@ -196,7 +196,7 @@ class ApiClient {
     };
     final result = _get(
       // сюда входят фильмы, сериалы и люди(person)
-      '/trending/all/week',
+      '/trending/$mediaType/$timeWindow',
       parser,
       <String, dynamic>{
         'api_key': _apiKey,
