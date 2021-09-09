@@ -3,7 +3,10 @@ import 'package:comics_db_app/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
+import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_widget.dart';
+import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/trending/news_widget_trending.dart';
 import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
@@ -19,6 +22,7 @@ abstract class MainNavigationRouteNames {
   static const tvDetails = '/tv_details';
   static const news = '/news';
   static const trending = 'trending';
+  static const popularMovie = '/popularMovie';
 }
 
 class MainNavigation {
@@ -26,11 +30,12 @@ class MainNavigation {
       ? MainNavigationRouteNames.mainScreen
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
-    'auth': (context) =>
-        NotifierProvider(model: AuthModel(), child: const AuthWidget()),
-    '/': (context) => NotifierProvider(
-        model: MainScreenModel(), child: const MainScreenWidget()),
-    '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
+    'auth': (context) => NotifierProvider(model: AuthModel(), child: const AuthWidget()),
+    MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(model: MainScreenModel(), child: const MainScreenWidget()),
+    MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(model: MovieListModel(), child: const NewsWidgetPopular()),
+    // '/': (context) => NotifierProvider(
+    //     model: MainScreenModel(), child: const MainScreenWidget()),
+    // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
     '/tv': (context) => NotifierProvider(
       model: TVListModel(), child: const TVListWidget())
   };
@@ -40,7 +45,11 @@ class MainNavigation {
         final arguments = settings.arguments;
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
-            builder: (context) => MovieDetailsWidget(movieId: movieId));
+            builder: (context) => NotifierProvider(
+                model: AuthModel(),
+                child: MovieDetailsWidget(movieId: movieId),
+            ),
+        );
       default:
         const widget = Text('Ошибка навигации');
         return MaterialPageRoute(builder: (context) => widget);
