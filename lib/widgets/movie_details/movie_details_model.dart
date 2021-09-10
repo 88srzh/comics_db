@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class MovieDetailsModel extends ChangeNotifier {
   final _apiClient = ApiClient();
   final int movieId;
-  late final String _locale;
+  String _locale = '';
   late DateFormat _dateFormat;
   MovieDetails? _movieDetails;
 
