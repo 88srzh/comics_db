@@ -30,14 +30,15 @@ class MainNavigation {
       ? MainNavigationRouteNames.mainScreen
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
-    'auth': (context) => NotifierProvider(model: AuthModel(), child: const AuthWidget()),
-    MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(model: MainScreenModel(), child: const MainScreenWidget()),
-    MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(model: MovieListModel(), child: const NewsWidgetPopular()),
+    'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
+    MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
+    MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const NewsWidgetPopular()),
+    MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     // '/': (context) => NotifierProvider(
     //     model: MainScreenModel(), child: const MainScreenWidget()),
     // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
-    '/tv': (context) => NotifierProvider(
-      model: TVListModel(), child: const TVListWidget())
+    // '/tv': (context) => NotifierProvider(
+    //   model: TVListModel(), child: const TVListWidget())
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -46,8 +47,8 @@ class MainNavigation {
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
             builder: (context) => NotifierProvider(
-                model: AuthModel(),
-                child: MovieDetailsWidget(movieId: movieId),
+                create: () => MovieDetailsModel(movieId),
+                child: const MovieDetailsWidget(),
             ),
         );
       default:

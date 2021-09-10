@@ -51,9 +51,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         index: _selectedTab,
         children: [
           // TODO: need to add newsListWidget model may be
-          NotifierProvider(model: movieListModel, child: const NewsListWidget()),
-          NotifierProvider(model: movieListModel, child: const MovieListWidget()),
-          NotifierProvider(model: tvListModel, child: const TVListWidget()),
+          NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
+          NotifierProvider(create: () => movieListModel, child: const MovieListWidget()),
+          NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

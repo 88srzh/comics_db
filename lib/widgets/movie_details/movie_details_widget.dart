@@ -5,8 +5,7 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
-  final int movieId;
-  const MovieDetailsWidget({Key? key, required this.movieId}) : super(key: key);
+  const MovieDetailsWidget({Key? key}) : super(key: key);
 
   @override
   _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
