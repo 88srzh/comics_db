@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'tv_details.g.dart';
+
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TVDetails {
   final String backdropPath;
@@ -150,356 +152,100 @@ class NextEpisodeToAir {
   Map<String, dynamic> toJson() => _$NextEpisodeToAirToJson(this);
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Network {
   final String name;
   final int id;
-  final String logo_path;
-  final String origin_country;
+  final String logoPath;
+  final String originCountry;
+
   Network({
     required this.name,
     required this.id,
-    required this.logo_path,
-    required this.origin_country,
+    required this.logoPath,
+    required this.originCountry,
   });
 
-  Network copyWith({
-    String? name,
-    int? id,
-    String? logo_path,
-    String? origin_country,
-  }) {
-    return Network(
-      name: name ?? this.name,
-      id: id ?? this.id,
-      logo_path: logo_path ?? this.logo_path,
-      origin_country: origin_country ?? this.origin_country,
-    );
-  }
+  factory Network.fromJson(Map<String, dynamic> json) => _$NetworkFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'id': id,
-      'logo_path': logo_path,
-      'origin_country': origin_country,
-    };
-  }
-
-  factory Network.fromMap(Map<String, dynamic> map) {
-    return Network(
-      name: map['name'],
-      id: map['id']?.toInt(),
-      logo_path: map['logo_path'],
-      origin_country: map['origin_country'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Network.fromJson(String source) => Network.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Network(name: $name, id: $id, logo_path: $logo_path, origin_country: $origin_country)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is Network &&
-      other.name == name &&
-      other.id == id &&
-      other.logo_path == logo_path &&
-      other.origin_country == origin_country;
-  }
-
-  @override
-  int get hashCode {
-    return name.hashCode ^
-      id.hashCode ^
-      logo_path.hashCode ^
-      origin_country.hashCode;
-  }
+  Map<String, dynamic> toJson() => _$NetworkToJson(this);
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ProductionCompany {
   final int id;
-  final String logo_path;
+  final String logoPath;
   final String name;
-  final String origin_country;
+  final String originCountry;
+
   ProductionCompany({
     required this.id,
-    required this.logo_path,
+    required this.logoPath,
     required this.name,
-    required this.origin_country,
+    required this.originCountry,
   });
 
-  ProductionCompany copyWith({
-    int? id,
-    String? logo_path,
-    String? name,
-    String? origin_country,
-  }) {
-    return ProductionCompany(
-      id: id ?? this.id,
-      logo_path: logo_path ?? this.logo_path,
-      name: name ?? this.name,
-      origin_country: origin_country ?? this.origin_country,
-    );
-  }
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) => _$ProductionCompanyFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'logo_path': logo_path,
-      'name': name,
-      'origin_country': origin_country,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProductionCompanyToJson(this);
 
-  factory ProductionCompany.fromMap(Map<String, dynamic> map) {
-    return ProductionCompany(
-      id: map['id']?.toInt(),
-      logo_path: map['logo_path'],
-      name: map['name'],
-      origin_country: map['origin_country'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductionCompany.fromJson(String source) => ProductionCompany.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Production_companie(id: $id, logo_path: $logo_path, name: $name, origin_country: $origin_country)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is ProductionCompany &&
-      other.id == id &&
-      other.logo_path == logo_path &&
-      other.name == name &&
-      other.origin_country == origin_country;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-      logo_path.hashCode ^
-      name.hashCode ^
-      origin_country.hashCode;
-  }
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ProductionCountry {
-  final String iso_3166_1;
+  @JsonKey(name: 'iso_3166_1')
+  final String iso;
   final String name;
+
   ProductionCountry({
-    required this.iso_3166_1,
+    required this.iso,
     required this.name,
   });
 
-  ProductionCountry copyWith({
-    String? iso_3166_1,
-    String? name,
-  }) {
-    return ProductionCountry(
-      iso_3166_1: iso_3166_1 ?? this.iso_3166_1,
-      name: name ?? this.name,
-    );
-  }
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) => _$ProductionCountryFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'iso_3166_1': iso_3166_1,
-      'name': name,
-    };
-  }
-
-  factory ProductionCountry.fromMap(Map<String, dynamic> map) {
-    return ProductionCountry(
-      iso_3166_1: map['iso_3166_1'],
-      name: map['name'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductionCountry.fromJson(String source) => ProductionCountry.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'Production_countrie(iso_3166_1: $iso_3166_1, name: $name)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is ProductionCountry &&
-      other.iso_3166_1 == iso_3166_1 &&
-      other.name == name;
-  }
-
-  @override
-  int get hashCode => iso_3166_1.hashCode ^ name.hashCode;
+  Map<String, dynamic> toJson() => _$ProductionCountryToJson(this);
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Season {
-  final String air_date;
-  final int episode_count;
+  final String airDate;
+  final int episodeCount;
   final int id;
   final String name;
   final String overview;
-  final String poster_path;
-  final int season_number;
+  final String posterPath;
+  final int seasonNumber;
+
   Season({
-    required this.air_date,
-    required this.episode_count,
+    required this.airDate,
+    required this.episodeCount,
     required this.id,
     required this.name,
     required this.overview,
-    required this.poster_path,
-    required this.season_number,
+    required this.posterPath,
+    required this.seasonNumber,
   });
 
-  Season copyWith({
-    String? air_date,
-    int? episode_count,
-    int? id,
-    String? name,
-    String? overview,
-    String? poster_path,
-    int? season_number,
-  }) {
-    return Season(
-      air_date: air_date ?? this.air_date,
-      episode_count: episode_count ?? this.episode_count,
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      poster_path: poster_path ?? this.poster_path,
-      season_number: season_number ?? this.season_number,
-    );
-  }
+  factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'air_date': air_date,
-      'episode_count': episode_count,
-      'id': id,
-      'name': name,
-      'overview': overview,
-      'poster_path': poster_path,
-      'season_number': season_number,
-    };
-  }
-
-  factory Season.fromMap(Map<String, dynamic> map) {
-    return Season(
-      air_date: map['air_date'],
-      episode_count: map['episode_count']?.toInt(),
-      id: map['id']?.toInt(),
-      name: map['name'],
-      overview: map['overview'],
-      poster_path: map['poster_path'],
-      season_number: map['season_number']?.toInt(),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Season.fromJson(String source) => Season.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Season(air_date: $air_date, episode_count: $episode_count, id: $id, name: $name, overview: $overview, poster_path: $poster_path, season_number: $season_number)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is Season &&
-      other.air_date == air_date &&
-      other.episode_count == episode_count &&
-      other.id == id &&
-      other.name == name &&
-      other.overview == overview &&
-      other.poster_path == poster_path &&
-      other.season_number == season_number;
-  }
-
-  @override
-  int get hashCode {
-    return air_date.hashCode ^
-      episode_count.hashCode ^
-      id.hashCode ^
-      name.hashCode ^
-      overview.hashCode ^
-      poster_path.hashCode ^
-      season_number.hashCode;
-  }
+  Map<String, dynamic> toJson() => _$SeasonToJson(this);
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake)
 class SpokenLanguage {
-  final String english_name;
-  final String iso_639_1;
+  final String englishName;
+  @JsonKey(name: 'iso_639_1')
+  final String iso;
   final String name;
+
   SpokenLanguage({
-    required this.english_name,
-    required this.iso_639_1,
+    required this.englishName,
+    required this.iso,
     required this.name,
   });
 
-  SpokenLanguage copyWith({
-    String? english_name,
-    String? iso_639_1,
-    String? name,
-  }) {
-    return SpokenLanguage(
-      english_name: english_name ?? this.english_name,
-      iso_639_1: iso_639_1 ?? this.iso_639_1,
-      name: name ?? this.name,
-    );
-  }
+  factory SpokenLanguage.fromJson(Map<String, dynamic> json) => _$SpokenLanguageFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'english_name': english_name,
-      'iso_639_1': iso_639_1,
-      'name': name,
-    };
-  }
-
-  factory SpokenLanguage.fromMap(Map<String, dynamic> map) {
-    return SpokenLanguage(
-      english_name: map['english_name'],
-      iso_639_1: map['iso_639_1'],
-      name: map['name'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SpokenLanguage.fromJson(String source) => SpokenLanguage.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'Spoken_language(english_name: $english_name, iso_639_1: $iso_639_1, name: $name)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is SpokenLanguage &&
-      other.english_name == english_name &&
-      other.iso_639_1 == iso_639_1 &&
-      other.name == name;
-  }
-
-  @override
-  int get hashCode => english_name.hashCode ^ iso_639_1.hashCode ^ name.hashCode;
+  Map<String, dynamic> toJson() => _$SpokenLanguageToJson(this);
 }
