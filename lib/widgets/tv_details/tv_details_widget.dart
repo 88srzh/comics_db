@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +34,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
     }
     return Scaffold(
       appBar: AppBar(
+        title: const _TitleWidget(),
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
       ),
@@ -57,131 +61,214 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
                   padding: const EdgeInsets.symmetric(horizontal: 26.0),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Ковбой бибоп',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: const [
-                              Icon(Icons.star_border_outlined, size: 20),
-                              SizedBox(width: 5.0,),
-                              Text('4.9', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
-                            ],
-                          ),
-                        ],
-                      ),
+                      const _TitleAndRatingWidget(),
                       const SizedBox(height: 5.0,),
-                    Row(
-                      children: const [
-                        Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
-                        Text('Хайме Ятате'),
-                      ],
-                     ),
-                     const SizedBox(height: 25.0),
-                     Row(
-                       children: [
-                         Container(
-                           decoration: BoxDecoration(
-                             color: const Color.fromRGBO(246,246,246, 1.0),
-                             borderRadius: BorderRadius.circular(4.0),
-                           ),
-                           child: const Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-                             child: Text('Экшен', style: TextStyle(color: Colors.grey),),
-                           ),
-                         ),
-                         const SizedBox(width: 5.0,),
-                         Container(
-                           decoration: BoxDecoration(
-                             color: const Color.fromRGBO(246,246,246, 1.0),
-                             borderRadius: BorderRadius.circular(4.0),
-                           ),
-                           child: const Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-                             child: Text('Приключения', style: TextStyle(color: Colors.grey),),
-                           ),
-                         ),
-                         const SizedBox(width: 5.0,),
-                         Container(
-                           decoration: BoxDecoration(
-                             color: const Color.fromRGBO(246,246,246, 1.0),
-                             borderRadius: BorderRadius.circular(4.0),
-                           ),
-                           child: const Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-                             child: Text('Комедия', style: TextStyle(color: Colors.grey),),
-                           ),
-                         ),
-                         const SizedBox(width: 5.0,),
-                         Container(
-                           decoration: BoxDecoration(
-                             color: Colors.white,
-                             borderRadius: BorderRadius.circular(4.0),
-                             border: Border.all(color: Colors.grey),
-                           ),
-                           child: const Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-                             child: Text('+3', style: TextStyle(color: Colors.grey),),
-                           ),
-                         ),
-                       ],
-                     ),
-                     Padding(
-                       padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
-                       child: Row(
-                         children: const [
-                           Expanded(
-                             child: Text('2071 год. Человечество колонизировало всю Солнечную Систему, основав колонии от Венеры до Юпитера. Но десятилетия тому назад из-за техногенной катастрофы была уничтожена Луна. Последствия оказались катастрофическими: непрерывные метеоритные дожди сделали жизнь на поверхности Земли невозможной, а в первые недели после катастрофы погибло 4,7 миллиарда человек. Большая часть выживших перебралась в колонии на другие планеты.',
-                               overflow: TextOverflow.ellipsis,
-                               maxLines: 6,
-                               style: TextStyle(
-                             color: Colors.grey,
-                             fontSize: 16,
-                               ),
-                               ),
-                           ),
-                         ],
-                       ),
-                     ),
-                     ElevatedButton(
-                       onPressed: () {},
-                       child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-                       style: ButtonStyle(
-                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                         backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-                         padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
-                       ),
-                       ),
+                      const _DirectorWidget(),
+                      const SizedBox(height: 35.0),
+                      const _GenresWidget(),
+                      const _DescriptionWidget(),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                          backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+                          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: const SizedBox(
-                  height: 295.0,
-                  width: 210.0,
-                  child: Image(
-                  image: AssetImage(AppImages.waifu),
-                  ),
-                ),
+          const _TopPosterWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class _DescriptionWidget extends StatelessWidget {
+  const _DescriptionWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(model?.tvDetails?.overview ?? 'Загрузка описания...',
+              overflow: TextOverflow.ellipsis,
+              maxLines: 6,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
               ),
-            ],
+            ),
           ),
         ],
       ),
     );
   }
 }
+
+class _GenresWidget extends StatelessWidget {
+  const _GenresWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(246,246,246, 1.0),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+            child: Text('Экшен', style: TextStyle(color: Colors.grey),),
+          ),
+        ),
+        const SizedBox(width: 5.0,),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(246,246,246, 1.0),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+            child: Text('Приключения', style: TextStyle(color: Colors.grey),),
+          ),
+        ),
+        const SizedBox(width: 5.0,),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(246,246,246, 1.0),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+            child: Text('Комедия', style: TextStyle(color: Colors.grey),),
+          ),
+        ),
+        const SizedBox(width: 5.0,),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(4.0),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+            child: Text('+3', style: TextStyle(color: Colors.grey),),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DirectorWidget extends StatelessWidget {
+  const _DirectorWidget({
+    Key? key,
+  }) : super(key: key);
+
+    @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    if (model == null) return const SizedBox.shrink();
+    var names = <String>[];
+    final createdBy = model.tvDetails?.createdBy;
+    if (createdBy != null && createdBy.isNotEmpty) {
+      var createdByNames = <String>[];
+      for (var create in createdBy) {
+        createdByNames.add(create.name);
+      }
+      names.add(createdByNames.join(', '));
+    }
+
+
+    return Row(
+      children: [
+        const Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
+        Text(names.join(' ')),
+      ],
+    );
+  }
+}
+
+class _TitleAndRatingWidget extends StatelessWidget {
+  const _TitleAndRatingWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    var rating = model?.tvDetails?.voteAverage.toString();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text(
+          'Название',
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        Row(
+          children: [
+            const Icon(Icons.star_border_outlined, size: 20),
+            const SizedBox(width: 5.0,),
+            Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _TopPosterWidget extends StatelessWidget {
+  const _TopPosterWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    var posterPath = model?.movieDetails?.posterPath;
+    var backdropPath = model?.movieDetails?.backdropPath;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+          ),
+          child: SizedBox(
+            height: 295.0,
+            width: 210.0,
+            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TitleWidget extends StatelessWidget {
+  const _TitleWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    return Center(child: Text(model?.movieDetails?.title ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+  }
+}
+
