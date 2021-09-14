@@ -64,7 +64,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
                       const _TitleAndRatingWidget(),
                       const SizedBox(height: 5.0,),
                       const _DirectorWidget(),
-                      const SizedBox(height: 35.0),
+                      const SizedBox(height: 25.0),
                       const _GenresWidget(),
                       const _DescriptionWidget(),
                       ElevatedButton(
@@ -124,6 +124,17 @@ class _GenresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    if (model == null) return const SizedBox.shrink();
+    var texts = <String>[];
+    final genres = model.tvDetails?.genres;
+    if (genres != null && genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genre in genres) {
+        genresNames.add(genre.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
     return Row(
       children: [
         Container(
@@ -131,45 +142,52 @@ class _GenresWidget extends StatelessWidget {
             color: const Color.fromRGBO(246,246,246, 1.0),
             borderRadius: BorderRadius.circular(4.0),
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('Экшен', style: TextStyle(color: Colors.grey),),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+            child: Expanded(
+              child: Text(
+                texts.join(' '),
+                style: const TextStyle(color: Colors.grey),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         ),
-        const SizedBox(width: 5.0,),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('Приключения', style: TextStyle(color: Colors.grey),),
-          ),
-        ),
-        const SizedBox(width: 5.0,),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('Комедия', style: TextStyle(color: Colors.grey),),
-          ),
-        ),
-        const SizedBox(width: 5.0,),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(4.0),
-            border: Border.all(color: Colors.grey),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('+3', style: TextStyle(color: Colors.grey),),
-          ),
-        ),
+        // const SizedBox(width: 5.0,),
+        // Container(
+        //   decoration: BoxDecoration(
+        //     color: const Color.fromRGBO(246,246,246, 1.0),
+        //     borderRadius: BorderRadius.circular(4.0),
+        //   ),
+        //   child: const Padding(
+        //     padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+        //     child: Text('Приключения', style: TextStyle(color: Colors.grey),),
+        //   ),
+        // ),
+        // const SizedBox(width: 5.0,),
+        // Container(
+        //   decoration: BoxDecoration(
+        //     color: const Color.fromRGBO(246,246,246, 1.0),
+        //     borderRadius: BorderRadius.circular(4.0),
+        //   ),
+        //   child: const Padding(
+        //     padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+        //     child: Text('Комедия', style: TextStyle(color: Colors.grey),),
+        //   ),
+        // ),
+        // const SizedBox(width: 5.0,),
+        // Container(
+        //   decoration: BoxDecoration(
+        //     color: Colors.white,
+        //     borderRadius: BorderRadius.circular(4.0),
+        //     border: Border.all(color: Colors.grey),
+        //   ),
+        //   child: const Padding(
+        //     padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+        //     child: Text('+3', style: TextStyle(color: Colors.grey),),
+        //   ),
+        // ),
       ],
     );
   }
@@ -216,9 +234,9 @@ class _TitleAndRatingWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Название',
-          style: TextStyle(
+        Text(
+          model?.tvDetails?.originalName ?? 'Название',
+          style: const TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold),
         ),
         Row(
@@ -240,9 +258,9 @@ class _TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    var posterPath = model?.movieDetails?.posterPath;
-    var backdropPath = model?.movieDetails?.backdropPath;
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    var posterPath = model?.tvDetails?.posterPath;
+    var backdropPath = model?.tvDetails?.backdropPath;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -267,8 +285,8 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    return Center(child: Text(model?.movieDetails?.title ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    return Center(child: Text(model?.tvDetails?.originalName ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
 
