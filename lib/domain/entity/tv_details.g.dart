@@ -172,7 +172,7 @@ Network _$NetworkFromJson(Map<String, dynamic> json) {
   return Network(
     name: json['name'] as String,
     id: json['id'] as int,
-    logoPath: json['logo_path'] as String,
+    logoPath: json['logo_path'] as String?,
     originCountry: json['origin_country'] as String,
   );
 }
@@ -187,7 +187,7 @@ Map<String, dynamic> _$NetworkToJson(Network instance) => <String, dynamic>{
 ProductionCompany _$ProductionCompanyFromJson(Map<String, dynamic> json) {
   return ProductionCompany(
     id: json['id'] as int,
-    logoPath: json['logo_path'] as String,
+    logoPath: json['logo_path'] as String?,
     name: json['name'] as String,
     originCountry: json['origin_country'] as String,
   );

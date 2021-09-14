@@ -1,4 +1,5 @@
 import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
@@ -15,7 +16,7 @@ class TVDetailsModel extends ChangeNotifier {
 
   Future<void> setupLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();
-    if (_locale = locale) return;
+    if (_locale == locale) return;
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
     await loadTVDetails();
@@ -23,6 +24,7 @@ class TVDetailsModel extends ChangeNotifier {
 
   Future<void> loadTVDetails() async {
     _tvDetails = await _apiClient.tvDetails(tvId, _locale);
+    notifyListeners();
   }
 
 }

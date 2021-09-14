@@ -1,20 +1,34 @@
 import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 
-class MovieDetailsWidget extends StatefulWidget {
-  final int movieId;
-  const MovieDetailsWidget({Key? key, required this.movieId}) : super(key: key);
+class TVDetailsWidget extends StatefulWidget {
+  const TVDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
+  _TVDetailsWidgetState createState() => _TVDetailsWidgetState();
 }
 
-class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
+class _TVDetailsWidgetState extends State<TVDetailsWidget> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    NotifierProvider.read<TVDetailsModel>(context)?.setupLocale(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final tvDetails = model?.tvDetails;
+    if (tvDetails == null) {
+      return const Center(child: CircularProgressIndicator(),);
+    }
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,

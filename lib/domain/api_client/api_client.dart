@@ -4,6 +4,7 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
+import 'package:comics_db_app/domain/entity/tv_details.dart';
 
 /*
 1. нет сети
@@ -159,6 +160,24 @@ class ApiClient {
     };
     final result = _get(
       '/movie/$movieId',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'language': locale,
+        // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<TVDetails> tvDetails(int tvId, String locale) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVDetails.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/tv/$tvId',
       parser,
       <String, dynamic>{
         'api_key': _apiKey,
