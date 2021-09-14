@@ -21,7 +21,7 @@ class MovieDetails {
   final List<ProductionCompany> productionCompanies;
   final List<ProductionCountry> productionCountries;
   @JsonKey(fromJson: parseDateFromString)
-  final String? releaseDate;
+  final DateTime? releaseDate;
   final int revenue;
   final int? runtime;
   final List<SpokenLanguage> spokenLanguages;

@@ -93,9 +93,9 @@ class CreatedBy {
     required this.profilePath,
   });
 
-  factory CreatedBy.fromJson(Map<String, dynamic> json) => _$CreateByFromJson(json);
+  factory CreatedBy.fromJson(Map<String, dynamic> json) => _$CreatedByFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CreateByToJson(this);
+  Map<String, dynamic> toJson() => _$CreatedByToJson(this);
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
