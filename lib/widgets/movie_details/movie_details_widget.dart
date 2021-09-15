@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 
@@ -61,10 +60,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                     children: [
                       const _TitleAndRatingWidget(),
                       const SizedBox(height: 5.0,),
-                    // const _DirectorWidget(),
-                     const SizedBox(height: 35.0),
-                     const _GenresWidget(),
-                     const _DescriptionWidget(),
+                      const _DirectorAndTrailerWidget(),
+                      const SizedBox(height: 35.0),
+                      const _GenresWidget(),
+                      const _DescriptionWidget(),
                      ElevatedButton(
                        onPressed: () {},
                        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
@@ -173,20 +172,26 @@ class _GenresWidget extends StatelessWidget {
   }
 }
 
-class _DirectorWidget extends StatelessWidget {
-  const _DirectorWidget({
+class _DirectorAndTrailerWidget extends StatelessWidget {
+  const _DirectorAndTrailerWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    return Row(
-      children: const [
-        Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
-        Text('Хайме Ятате'),
+    final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: const [
+            Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
+            Text('Хайме Ятате'),
+          ],
+         ),
+        const Text('Трейлер'),
       ],
-     );
+    );
   }
 }
 
@@ -199,18 +204,28 @@ class _TitleAndRatingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var rating = model?.movieDetails?.voteAverage.toString();
+    var year = model?.movieDetails?.releaseDate?.year.toString();
+    year = year != null ? ' ($year)' : 'нету года';
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          model?.movieDetails?.title ?? 'Загрузка названия...',
-          style: const TextStyle(
-              fontSize: 24, fontWeight: FontWeight.bold),
+        Row(
+          children: [
+            Text(
+              // TODO не влезает название фильма
+              model?.movieDetails?.title ?? 'Загрузка названия...',
+              style: const TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Text(year, style: const TextStyle(
+              fontSize: 18),
+            ),
+          ],
         ),
         Row(
           children: [
             const Icon(Icons.star_border_outlined, size: 20),
-            const SizedBox(width: 5.0,),
+            const SizedBox(width: 5.0),
             Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
           ],
         ),
