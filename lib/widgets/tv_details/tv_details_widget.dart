@@ -103,7 +103,7 @@ class _DescriptionWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(model?.tvDetails?.overview ?? 'Загрузка описания...',
+            child: Text(model.tvDetails?.overview ?? 'Загрузка описания...',
               overflow: TextOverflow.ellipsis,
               maxLines: 6,
               style: const TextStyle(
@@ -129,7 +129,7 @@ class _GenresWidget extends StatelessWidget {
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
     // возможно нужно поменять на нул модел
-    final genres = model?.tvDetails?.genres;
+    final genres = model.tvDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
       var genresNames = <String>[];
       for (var genre in genres) {

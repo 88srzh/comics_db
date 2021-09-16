@@ -31,7 +31,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const _TitleWidget(),
+        title: const _TitleAppBarWidget(),
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
       ),
@@ -58,9 +58,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                   padding: const EdgeInsets.symmetric(horizontal: 26.0),
                   child: Column(
                     children: [
-                      const _TitleAndRatingWidget(),
+                      const _TitleAndYearWidget(),
                       const SizedBox(height: 5.0,),
-                      const _DirectorAndTrailerWidget(),
+                      const _TrailerAndRatingWidget(),
                       const SizedBox(height: 35.0),
                       const _GenresWidget(),
                       const _DescriptionWidget(),
@@ -124,7 +124,7 @@ class _GenresWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
-    final genres = model?.movieDetails?.genres;
+    final genres = model.movieDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
       var genresNames = <String>[];
       for (var genre in genres) {
@@ -151,8 +151,8 @@ class _GenresWidget extends StatelessWidget {
   }
 }
 
-class _DirectorAndTrailerWidget extends StatelessWidget {
-  const _DirectorAndTrailerWidget({
+class _TrailerAndRatingWidget extends StatelessWidget {
+  const _TrailerAndRatingWidget({
     Key? key,
   }) : super(key: key);
 
@@ -160,22 +160,30 @@ class _DirectorAndTrailerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    var rating = model.movieDetails?.voteAverage.toString();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: const [
-            const Icon(Icons.play_arrow),
-            const Text('Трейлер'),
+            Icon(Icons.play_arrow),
+            Text('Трейлер'),
           ],
-         ),
+        ),
+        Row(
+          children: [
+            const Icon(Icons.star_border_outlined, size: 20),
+            const SizedBox(width: 5.0),
+            Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+          ],
+        ),
       ],
     );
   }
 }
 
-class _TitleAndRatingWidget extends StatelessWidget {
-  const _TitleAndRatingWidget({
+class _TitleAndYearWidget extends StatelessWidget {
+  const _TitleAndYearWidget({
     Key? key,
   }) : super(key: key);
 
@@ -243,8 +251,8 @@ class _TopPosterWidget extends StatelessWidget {
   }
 }
 
-class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({Key? key}) : super(key: key);
+class _TitleAppBarWidget extends StatelessWidget {
+  const _TitleAppBarWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
