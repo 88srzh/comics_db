@@ -10,6 +10,8 @@ import 'package:comics_db_app/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/trending/news_widget_trending.dart';
 import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
+import 'package:comics_db_app/widgets/tv_details/tv_details_model.dart';
+import 'package:comics_db_app/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +51,15 @@ class MainNavigation {
             builder: (context) => NotifierProvider(
                 create: () => MovieDetailsModel(movieId),
                 child: const MovieDetailsWidget(),
+            ),
+        );
+      case MainNavigationRouteNames.tvDetails:
+        final arguments = settings.arguments;
+        final tvId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+            builder: (context) => NotifierProvider(
+                create: () => TVDetailsModel(tvId),
+                child: const TVDetailsWidget(),
             ),
         );
       default:
