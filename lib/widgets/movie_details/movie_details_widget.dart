@@ -31,6 +31,8 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     }
     return Scaffold(
       appBar: AppBar(
+        // пропадает стрелочка
+        // automaticallyImplyLeading: false,
         title: const _TitleAppBarWidget(),
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
