@@ -101,12 +101,12 @@ class _DescriptionWidget extends StatelessWidget {
           Expanded(
             child: Text(model?.movieDetails?.overview ?? 'Загрузка описания...',
               overflow: TextOverflow.ellipsis,
-              maxLines: 6,
+              maxLines: 4,
               style: const TextStyle(
             color: Colors.grey,
             fontSize: 16,
               ),
-              ),
+            ),
           ),
         ],
       ),
@@ -121,6 +121,17 @@ class _GenresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    if (model == null) return const SizedBox.shrink();
+    var texts = <String>[];
+    final genres = model?.movieDetails?.genres;
+    if (genres != null && genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genre in genres) {
+        genresNames.add(genre.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
     return Row(
       children: [
         Container(
@@ -128,43 +139,11 @@ class _GenresWidget extends StatelessWidget {
             color: const Color.fromRGBO(246,246,246, 1.0),
             borderRadius: BorderRadius.circular(4.0),
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('Экшен', style: TextStyle(color: Colors.grey),),
-          ),
-        ),
-        const SizedBox(width: 5.0,),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('Приключения', style: TextStyle(color: Colors.grey),),
-          ),
-        ),
-        const SizedBox(width: 5.0,),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('Комедия', style: TextStyle(color: Colors.grey),),
-          ),
-        ),
-        const SizedBox(width: 5.0,),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(4.0),
-            border: Border.all(color: Colors.grey),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text('+3', style: TextStyle(color: Colors.grey),),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+            child: Text(
+              texts.join(' '), style: TextStyle(color: Colors.grey),
+            ),
           ),
         ),
       ],
@@ -179,17 +158,17 @@ class _DirectorAndTrailerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
           children: const [
-            Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
-            Text('Хайме Ятате'),
+            const Icon(Icons.play_arrow),
+            const Text('Трейлер'),
           ],
          ),
-        const Text('Трейлер'),
       ],
     );
   }
@@ -214,6 +193,7 @@ class _TitleAndRatingWidget extends StatelessWidget {
             Text(
               // TODO не влезает название фильма
               model?.movieDetails?.title ?? 'Загрузка названия...',
+              maxLines: 2,
               style: const TextStyle(
                   fontSize: 24, fontWeight: FontWeight.bold),
             ),
@@ -269,6 +249,7 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // TODO не по центру название
     return Center(child: Text(model?.movieDetails?.title ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }

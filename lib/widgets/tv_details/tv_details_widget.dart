@@ -97,6 +97,7 @@ class _DescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
       child: Row(
@@ -127,7 +128,8 @@ class _GenresWidget extends StatelessWidget {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
-    final genres = model.tvDetails?.genres;
+    // возможно нужно поменять на нул модел
+    final genres = model?.tvDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
       var genresNames = <String>[];
       for (var genre in genres) {
@@ -144,50 +146,14 @@ class _GenresWidget extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Expanded(
-              child: Text(
-                texts.join(' '),
-                style: const TextStyle(color: Colors.grey),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
+            child: Text(
+              texts.join(' '),
+              style: const TextStyle(color: Colors.grey),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
-        // const SizedBox(width: 5.0,),
-        // Container(
-        //   decoration: BoxDecoration(
-        //     color: const Color.fromRGBO(246,246,246, 1.0),
-        //     borderRadius: BorderRadius.circular(4.0),
-        //   ),
-        //   child: const Padding(
-        //     padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-        //     child: Text('Приключения', style: TextStyle(color: Colors.grey),),
-        //   ),
-        // ),
-        // const SizedBox(width: 5.0,),
-        // Container(
-        //   decoration: BoxDecoration(
-        //     color: const Color.fromRGBO(246,246,246, 1.0),
-        //     borderRadius: BorderRadius.circular(4.0),
-        //   ),
-        //   child: const Padding(
-        //     padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-        //     child: Text('Комедия', style: TextStyle(color: Colors.grey),),
-        //   ),
-        // ),
-        // const SizedBox(width: 5.0,),
-        // Container(
-        //   decoration: BoxDecoration(
-        //     color: Colors.white,
-        //     borderRadius: BorderRadius.circular(4.0),
-        //     border: Border.all(color: Colors.grey),
-        //   ),
-        //   child: const Padding(
-        //     padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-        //     child: Text('+3', style: TextStyle(color: Colors.grey),),
-        //   ),
-        // ),
       ],
     );
   }
