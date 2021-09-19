@@ -2,10 +2,7 @@ import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +29,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
     if (tvDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
+
     return Scaffold(
       appBar: AppBar(
         title: const _TitleWidget(),
@@ -60,22 +58,13 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 26.0),
                   child: Column(
-                    children: [
-                      const _TitleAndRatingWidget(),
-                      const SizedBox(height: 5.0,),
-                      const _DirectorWidget(),
-                      const SizedBox(height: 25.0),
-                      const _GenresWidget(),
-                      const _DescriptionWidget(),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                          backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-                          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
-                        ),
-                      ),
+                    children: const [
+                      _TitleAndRatingWidget(),
+                      SizedBox(height: 5.0,),
+                      _DirectorWidget(),
+                      SizedBox(height: 25.0),
+                      _GenresWidget(),
+                      _DescriptionWidget(),
                     ],
                   ),
                 ),
@@ -84,6 +73,29 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           ),
           const _TopPosterWidget(),
         ],
+      ),
+      bottomNavigationBar: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
+        child: _FavoritesButton(),
+      ),
+    );
+  }
+}
+
+class _FavoritesButton extends StatelessWidget {
+  const _FavoritesButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+        backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
       ),
     );
   }
@@ -238,7 +250,7 @@ class _TopPosterWidget extends StatelessWidget {
           child: SizedBox(
             height: 295.0,
             width: 210.0,
-            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
           ),
         ),
       ],

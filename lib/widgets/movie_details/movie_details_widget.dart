@@ -59,22 +59,13 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 26.0),
                   child: Column(
-                    children: [
-                      const _TitleAndYearWidget(),
-                      const SizedBox(height: 5.0,),
-                      const _TrailerAndRatingWidget(),
-                      const SizedBox(height: 35.0),
-                      const _GenresWidget(),
-                      const _DescriptionWidget(),
-                     ElevatedButton(
-                       onPressed: () {},
-                       child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-                       style: ButtonStyle(
-                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                         backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-                         padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
-                       ),
-                       ),
+                    children: const [
+                      _TitleAndYearWidget(),
+                      SizedBox(height: 5.0,),
+                      _TrailerAndRatingWidget(),
+                      SizedBox(height: 35.0),
+                     _GenresWidget(),
+                     _DescriptionWidget(),
                     ],
                   ),
                 ),
@@ -84,6 +75,29 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           const _TopPosterWidget(),
         ],
       ),
+      bottomNavigationBar: const _FavoritesButton(),
+    );
+  }
+}
+
+class _FavoritesButton extends StatelessWidget {
+  const _FavoritesButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+          backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
+        ),
+        ),
     );
   }
 }
@@ -144,7 +158,7 @@ class _GenresWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
             child: Text(
-              texts.join(' '), style: TextStyle(color: Colors.grey),
+              texts.join(' '), style: const TextStyle(color: Colors.grey),
             ),
           ),
         ),
@@ -170,13 +184,6 @@ class _TrailerAndRatingWidget extends StatelessWidget {
           children: const [
             Icon(Icons.play_arrow),
             Text('Трейлер'),
-          ],
-        ),
-        Row(
-          children: [
-            const Icon(Icons.star_border_outlined, size: 20),
-            const SizedBox(width: 5.0),
-            Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
           ],
         ),
       ],
