@@ -213,7 +213,7 @@ class _TitleAndRatingWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          model?.tvDetails?.originalName ?? 'Название',
+          model?.tvDetails?.name ?? 'Название',
           style: const TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -264,7 +264,7 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
-    return Center(child: Text(model?.tvDetails?.originalName ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+    return Center(child: Text(model?.tvDetails?.name ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
 

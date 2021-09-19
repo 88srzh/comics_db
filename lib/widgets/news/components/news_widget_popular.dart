@@ -33,8 +33,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(
-                      value: 'movies', child: Text('Movies')),
+                  DropdownMenuItem(value: 'movies', child: Text('Movies')),
                   DropdownMenuItem(value: 'tv', child: Text('TV')),
                 ],
               ),
