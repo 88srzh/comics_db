@@ -8,6 +8,7 @@ import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
+import 'package:flashy_tab_bar/flashy_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -56,14 +57,21 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTab,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Новости'),
-          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Фильмы'),
-          BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'Сериалы')
+      bottomNavigationBar: FlashyTabBar(
+        height: 80,
+        iconSize: 30,
+        animationCurve: Curves.linear,
+        selectedIndex: _selectedTab,
+        showElevation: true,
+        onItemSelected: (index) => setState(() {
+          _selectedTab = index;
+        }),
+        items: [
+          FlashyTabBarItem(icon: const Icon(Icons.home), title: const Text('Новости')),
+          FlashyTabBarItem(icon: const Icon(Icons.movie), title: const Text('Фильмы')),
+          FlashyTabBarItem(icon: const Icon(Icons.tv), title: const Text('Сериалы')),
         ],
-        onTap: onSelectTab,
+        // onTap: onSelectTab,
       ),
     );
   }
