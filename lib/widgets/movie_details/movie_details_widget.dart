@@ -205,19 +205,24 @@ class _TitleAndYearWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
+        Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              // TODO не влезает название фильма
-              model?.movieDetails?.title ?? 'Загрузка названия...',
-              maxLines: 2,
-              style: const TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.bold),
+            Expanded(
+              child: Text(
+                model?.movieDetails?.title ?? 'Загрузка названия...',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: const TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
             Text(year, style: const TextStyle(
-              fontSize: 18),
+              fontSize: 16),
             ),
           ],
+        ),
         ),
         Row(
           children: [

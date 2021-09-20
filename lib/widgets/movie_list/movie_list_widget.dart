@@ -1,6 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
@@ -58,34 +59,7 @@ class MovieListWidget extends StatelessWidget {
                               ApiClient.imageUrl(posterPath), width: 95)
                               : const SizedBox.shrink(),
                             const SizedBox(width: 15.0),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 20.0),
-                                  Text(
-                                    movie.title,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 5.0),
-                                  Text(
-                                    model.stringFromDate(movie.releaseDate),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Text(
-                                    movie.overview,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            MovieCard(movie: movie, model: model),
                             const SizedBox(width: 10.0),
                           ],
                         ),
@@ -123,6 +97,51 @@ class MovieListWidget extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MovieCard extends StatelessWidget {
+  const MovieCard({
+    Key? key,
+    required this.movie,
+    required this.model,
+  }) : super(key: key);
+
+  final Movie movie;
+  final MovieListModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieListModel>(context);
+    if (model == null) return const SizedBox.shrink();
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 20.0),
+          Text(
+            movie.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 5.0),
+          Text(
+            model.stringFromDate(movie.releaseDate),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(color: Colors.grey),
+          ),
+          const SizedBox(height: 20.0),
+          Text(
+            movie.overview,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

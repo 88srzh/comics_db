@@ -117,7 +117,7 @@ class _DescriptionWidget extends StatelessWidget {
           Expanded(
             child: Text(model.tvDetails?.overview ?? 'Загрузка описания...',
               overflow: TextOverflow.ellipsis,
-              maxLines: 6,
+              maxLines: 4,
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 16,
@@ -153,17 +153,14 @@ class _GenresWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
+            color: const Color.fromRGBO(246, 246, 246, 1.0),
             borderRadius: BorderRadius.circular(4.0),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text(
-              texts.join(' '),
-              style: const TextStyle(color: Colors.grey),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
+          child: Text(
+            texts.join(' '),
+            style: const TextStyle(color: Colors.grey),
+            maxLines: 3,
+            // overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
@@ -212,10 +209,20 @@ class _TitleAndRatingWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          model?.tvDetails?.name ?? 'Название',
-          style: const TextStyle(
-              fontSize: 24, fontWeight: FontWeight.bold),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  model?.tvDetails?.name ?? 'Название',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
         ),
         Row(
           children: [
