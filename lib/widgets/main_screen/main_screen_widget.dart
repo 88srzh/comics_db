@@ -1,14 +1,12 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
-import 'package:comics_db_app/widgets/trending/news_widget_trending.dart';
-import 'package:comics_db_app/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
-import 'package:flashy_tab_bar/flashy_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -19,7 +17,7 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
-  int _selectedTab = 0;
+  int _selectedTab = 1;
   final movieListModel = MovieListModel();
   final tvListModel = TVListModel();
   final trendingAllModel = TrendingAllModel();
@@ -57,19 +55,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
         ],
       ),
-      bottomNavigationBar: FlashyTabBar(
-        height: 80,
-        iconSize: 30,
-        animationCurve: Curves.linear,
+      bottomNavigationBar: BottomNavyBar(
         selectedIndex: _selectedTab,
         showElevation: true,
         onItemSelected: (index) => setState(() {
           _selectedTab = index;
         }),
         items: [
-          FlashyTabBarItem(icon: const Icon(Icons.home), title: const Text('Новости')),
-          FlashyTabBarItem(icon: const Icon(Icons.movie), title: const Text('Фильмы')),
-          FlashyTabBarItem(icon: const Icon(Icons.tv), title: const Text('Сериалы')),
+          BottomNavyBarItem(icon: const Icon(Icons.home), title: const Text('Новости'), activeColor: AppColors.kPrimaryColor),
+          BottomNavyBarItem(icon: const Icon(Icons.movie), title: const Text('Фильмы'), activeColor: AppColors.kPrimaryColor),
+          BottomNavyBarItem(icon: const Icon(Icons.tv), title: const Text('Сериалы'), activeColor: AppColors.kPrimaryColor),
         ],
         // onTap: onSelectTab,
       ),

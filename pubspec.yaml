@@ -30,7 +30,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
-  flashy_tab_bar: ^0.0.3
+  bottom_navy_bar: ^5.6.0
 
 dev_dependencies:
   flutter_test:
