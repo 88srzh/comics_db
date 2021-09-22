@@ -1,3 +1,4 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
@@ -55,6 +56,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
+        backgroundColor: AppColors.kPrimaryColor,
         initialActiveIndex: 1,
         items: const [
           TabItem<dynamic>(icon: Icons.home, title: 'Новости'),
