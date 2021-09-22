@@ -1,5 +1,3 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
@@ -7,6 +5,7 @@ import 'package:comics_db_app/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -55,18 +54,17 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
         ],
       ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _selectedTab,
-        showElevation: true,
-        onItemSelected: (index) => setState(() {
-          _selectedTab = index;
-        }),
-        items: [
-          BottomNavyBarItem(icon: const Icon(Icons.home), title: const Text('Новости'), activeColor: AppColors.kPrimaryColor),
-          BottomNavyBarItem(icon: const Icon(Icons.movie), title: const Text('Фильмы'), activeColor: AppColors.kPrimaryColor),
-          BottomNavyBarItem(icon: const Icon(Icons.tv), title: const Text('Сериалы'), activeColor: AppColors.kPrimaryColor),
+      bottomNavigationBar: ConvexAppBar(
+        initialActiveIndex: 1,
+        items: const [
+          TabItem<dynamic>(icon: Icons.home, title: 'Новости'),
+          TabItem<dynamic>(icon: Icons.movie, title: 'Фильмы'),
+          TabItem<dynamic>(icon: Icons.tv, title: 'Сериалы'),
         ],
-        // onTap: onSelectTab,
+        onTap: (int index) => setState(() {
+    _selectedTab = index;
+    }),
+   // onTap: onSelectTab,
       ),
     );
   }

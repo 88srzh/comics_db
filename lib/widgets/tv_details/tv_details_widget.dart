@@ -170,7 +170,7 @@ class _GenresWidget extends StatelessWidget {
 
 class _DirectorWidget extends StatelessWidget {
   const _DirectorWidget({
-    Key? key,
+    Key? key
   }) : super(key: key);
 
     @override
