@@ -63,9 +63,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                       _TitleAndYearWidget(),
                       SizedBox(height: 5.0,),
                       _TrailerAndRatingWidget(),
-                      SizedBox(height: 35.0),
+                      SizedBox(height: 15.0),
                      _GenresWidget(),
                      _DescriptionWidget(),
+                     _PeoplesWidget(),
                     ],
                   ),
                 ),
@@ -75,7 +76,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           const _TopPosterWidget(),
         ],
       ),
-      bottomNavigationBar: const _FavoritesButton(),
+      // bottomNavigationBar: const _FavoritesButton(),
     );
   }
 }
@@ -111,7 +112,7 @@ class _DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
       child: Row(
         children: [
           Expanded(
@@ -273,6 +274,15 @@ class _TitleAppBarWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     // TODO не по центру название
     return Center(child: Text(model?.movieDetails?.title ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+  }
+}
+
+class _PeoplesWidget extends StatelessWidget {
+  const _PeoplesWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
