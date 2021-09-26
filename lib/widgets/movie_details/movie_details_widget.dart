@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +64,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                       _TitleAndYearWidget(),
                       SizedBox(height: 5.0,),
                       _TrailerAndRatingWidget(),
-                      SizedBox(height: 35.0),
+                      SizedBox(height: 15.0),
                      _GenresWidget(),
                      _DescriptionWidget(),
+                     _PeoplesWidget(),
                     ],
                   ),
                 ),
@@ -75,7 +77,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           const _TopPosterWidget(),
         ],
       ),
-      bottomNavigationBar: const _FavoritesButton(),
+      // bottomNavigationBar: const _FavoritesButton(),
     );
   }
 }
@@ -111,7 +113,7 @@ class _DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
       child: Row(
         children: [
           Expanded(
@@ -275,4 +277,76 @@ class _TitleAppBarWidget extends StatelessWidget {
     return Center(child: Text(model?.movieDetails?.title ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
+
+class _PeoplesWidget extends StatelessWidget {
+  const _PeoplesWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // if (model == null) return const SizedBox.shrink();
+    var crew = model?.movieDetails?.credits.crew;
+    if (crew == null || crew.isEmpty) return const SizedBox.shrink();
+    crew = crew.length > 4 ?  crew.sublist(0, 4) : crew;
+    var crewChunks = <List<Employee>>[];
+    for (var i = 0; i< crew.length; i += 2) {
+      crewChunks.add(
+        crew.sublist(i, i + 2 > crew.length ? crew.length : i +2)
+      );
+    }
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: const [
+            _PeoplesWidgetRow(),
+          ],
+        ),
+        const SizedBox(height: 20,),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: const [
+            _PeoplesWidgetRow(),
+          ],
+        ),
+      ],
+
+    );
+  }
+}
+
+class _PeoplesWidgetRow extends StatelessWidget {
+  const _PeoplesWidgetRow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('Имя Фамилия'),
+                Text('Должность'),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('Имя Фамилия'),
+                Text('Должность'),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
 
