@@ -35,6 +35,7 @@ class AuthModel extends ChangeNotifier {
       switch (e.type) {
         case ApiClientExceptionType.network:
           _errorMessage = 'Сервер недоступен. Проверьте подключение к интернету';
+          Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.networkConnectionError);
           break;
         case ApiClientExceptionType.auth:
           _errorMessage = 'Неправильный логин или пароль';

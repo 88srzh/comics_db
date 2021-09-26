@@ -25,6 +25,7 @@ abstract class MainNavigationRouteNames {
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/popularMovie';
+  static const networkConnectionError = '/errors/network_connection';
 }
 
 class MainNavigation {
