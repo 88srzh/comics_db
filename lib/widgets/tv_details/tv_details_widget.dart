@@ -2,10 +2,7 @@ import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +29,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
     if (tvDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
+
     return Scaffold(
       appBar: AppBar(
         title: const _TitleWidget(),
@@ -60,22 +58,13 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 26.0),
                   child: Column(
-                    children: [
-                      const _TitleAndRatingWidget(),
-                      const SizedBox(height: 5.0,),
-                      const _DirectorWidget(),
-                      const SizedBox(height: 25.0),
-                      const _GenresWidget(),
-                      const _DescriptionWidget(),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                          backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-                          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
-                        ),
-                      ),
+                    children: const [
+                      _TitleAndRatingWidget(),
+                      SizedBox(height: 5.0,),
+                      _DirectorWidget(),
+                      SizedBox(height: 25.0),
+                      _GenresWidget(),
+                      _DescriptionWidget(),
                     ],
                   ),
                 ),
@@ -84,6 +73,29 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           ),
           const _TopPosterWidget(),
         ],
+      ),
+      bottomNavigationBar: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
+        child: _FavoritesButton(),
+      ),
+    );
+  }
+}
+
+class _FavoritesButton extends StatelessWidget {
+  const _FavoritesButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+        backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
       ),
     );
   }
@@ -103,9 +115,9 @@ class _DescriptionWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(model?.tvDetails?.overview ?? 'Загрузка описания...',
+            child: Text(model.tvDetails?.overview ?? 'Загрузка описания...',
               overflow: TextOverflow.ellipsis,
-              maxLines: 6,
+              maxLines: 4,
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 16,
@@ -129,7 +141,7 @@ class _GenresWidget extends StatelessWidget {
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
     // возможно нужно поменять на нул модел
-    final genres = model?.tvDetails?.genres;
+    final genres = model.tvDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
       var genresNames = <String>[];
       for (var genre in genres) {
@@ -141,17 +153,14 @@ class _GenresWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
+            color: const Color.fromRGBO(246, 246, 246, 1.0),
             borderRadius: BorderRadius.circular(4.0),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text(
-              texts.join(' '),
-              style: const TextStyle(color: Colors.grey),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
+          child: Text(
+            texts.join(' '),
+            style: const TextStyle(color: Colors.grey),
+            maxLines: 3,
+            // overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
@@ -161,7 +170,7 @@ class _GenresWidget extends StatelessWidget {
 
 class _DirectorWidget extends StatelessWidget {
   const _DirectorWidget({
-    Key? key,
+    Key? key
   }) : super(key: key);
 
     @override
@@ -200,10 +209,20 @@ class _TitleAndRatingWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          model?.tvDetails?.originalName ?? 'Название',
-          style: const TextStyle(
-              fontSize: 24, fontWeight: FontWeight.bold),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  model?.tvDetails?.name ?? 'Название',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
         ),
         Row(
           children: [
@@ -238,7 +257,7 @@ class _TopPosterWidget extends StatelessWidget {
           child: SizedBox(
             height: 295.0,
             width: 210.0,
-            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
           ),
         ),
       ],
@@ -252,7 +271,7 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
-    return Center(child: Text(model?.tvDetails?.originalName ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+    return Center(child: Text(model?.tvDetails?.name ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
 

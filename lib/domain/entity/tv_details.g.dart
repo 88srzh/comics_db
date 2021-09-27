@@ -44,7 +44,7 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) {
     originalName: json['original_name'] as String,
     overview: json['overview'] as String,
     popularity: (json['popularity'] as num).toDouble(),
-    posterPath: json['poster_path'] as String,
+    posterPath: json['poster_path'] as String?,
     productionCompanies: (json['production_companies'] as List<dynamic>)
         .map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
         .toList(),
@@ -108,7 +108,7 @@ CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) {
     creditId: json['credit_id'] as String,
     name: json['name'] as String,
     gender: json['gender'] as int,
-    profilePath: json['profile_path'] as String,
+    profilePath: json['profile_path'] as String?,
   );
 }
 
@@ -141,7 +141,7 @@ LastEpisodeToAir _$LastEpisodeToAirFromJson(Map<String, dynamic> json) {
     overview: json['overview'] as String,
     productionCode: json['production_code'] as String,
     seasonNumber: json['season_number'] as int,
-    stillPath: json['still_path'] as String,
+    stillPath: json['still_path'] as String?,
     voteAverage: (json['vote_average'] as num).toDouble(),
     voteCount: json['vote_count'] as int,
   );

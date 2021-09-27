@@ -26,7 +26,7 @@ class TVDetails {
   final String originalName;
   final String overview;
   final double popularity;
-  final String posterPath;
+  final String? posterPath;
   final List<ProductionCompany> productionCompanies;
   final List<ProductionCountry> productionCountries;
   final List<Season> seasons;
@@ -82,7 +82,7 @@ class CreatedBy {
   final String creditId;
   final String name;
   final int gender;
-  final String profilePath;
+  final String? profilePath;
 
   CreatedBy({
     required this.id,
@@ -121,7 +121,7 @@ class LastEpisodeToAir {
   final String overview;
   final String productionCode;
   final int seasonNumber;
-  final String stillPath;
+  final String? stillPath;
   final double voteAverage;
   final int voteCount;
   LastEpisodeToAir({

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const _TitleWidget(),
+        // пропадает стрелочка
+        // automaticallyImplyLeading: false,
+        title: const _TitleAppBarWidget(),
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
       ),
@@ -57,22 +60,14 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 26.0),
                   child: Column(
-                    children: [
-                      const _TitleAndRatingWidget(),
-                      const SizedBox(height: 5.0,),
-                      const _DirectorAndTrailerWidget(),
-                      const SizedBox(height: 35.0),
-                      const _GenresWidget(),
-                      const _DescriptionWidget(),
-                     ElevatedButton(
-                       onPressed: () {},
-                       child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-                       style: ButtonStyle(
-                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                         backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-                         padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 85.0, vertical: 15.0),),
-                       ),
-                       ),
+                    children: const [
+                      _TitleAndYearWidget(),
+                      SizedBox(height: 5.0,),
+                      _TrailerAndRatingWidget(),
+                      SizedBox(height: 15.0),
+                     _GenresWidget(),
+                     _DescriptionWidget(),
+                     _PeoplesWidget(),
                     ],
                   ),
                 ),
@@ -82,6 +77,29 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           const _TopPosterWidget(),
         ],
       ),
+      // bottomNavigationBar: const _FavoritesButton(),
+    );
+  }
+}
+
+class _FavoritesButton extends StatelessWidget {
+  const _FavoritesButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+          backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
+        ),
+        ),
     );
   }
 }
@@ -95,7 +113,7 @@ class _DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
       child: Row(
         children: [
           Expanded(
@@ -124,7 +142,7 @@ class _GenresWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
-    final genres = model?.movieDetails?.genres;
+    final genres = model.movieDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
       var genresNames = <String>[];
       for (var genre in genres) {
@@ -142,7 +160,7 @@ class _GenresWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
             child: Text(
-              texts.join(' '), style: TextStyle(color: Colors.grey),
+              texts.join(' '), style: const TextStyle(color: Colors.grey),
             ),
           ),
         ),
@@ -151,8 +169,8 @@ class _GenresWidget extends StatelessWidget {
   }
 }
 
-class _DirectorAndTrailerWidget extends StatelessWidget {
-  const _DirectorAndTrailerWidget({
+class _TrailerAndRatingWidget extends StatelessWidget {
+  const _TrailerAndRatingWidget({
     Key? key,
   }) : super(key: key);
 
@@ -160,22 +178,23 @@ class _DirectorAndTrailerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    var rating = model.movieDetails?.voteAverage.toString();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: const [
-            const Icon(Icons.play_arrow),
-            const Text('Трейлер'),
+            Icon(Icons.play_arrow),
+            Text('Трейлер'),
           ],
-         ),
+        ),
       ],
     );
   }
 }
 
-class _TitleAndRatingWidget extends StatelessWidget {
-  const _TitleAndRatingWidget({
+class _TitleAndYearWidget extends StatelessWidget {
+  const _TitleAndYearWidget({
     Key? key,
   }) : super(key: key);
 
@@ -188,19 +207,24 @@ class _TitleAndRatingWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
+        Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              // TODO не влезает название фильма
-              model?.movieDetails?.title ?? 'Загрузка названия...',
-              maxLines: 2,
-              style: const TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.bold),
+            Expanded(
+              child: Text(
+                model?.movieDetails?.title ?? 'Загрузка названия...',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: const TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
             Text(year, style: const TextStyle(
-              fontSize: 18),
+              fontSize: 16),
             ),
           ],
+        ),
         ),
         Row(
           children: [
@@ -243,8 +267,8 @@ class _TopPosterWidget extends StatelessWidget {
   }
 }
 
-class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({Key? key}) : super(key: key);
+class _TitleAppBarWidget extends StatelessWidget {
+  const _TitleAppBarWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -253,4 +277,70 @@ class _TitleWidget extends StatelessWidget {
     return Center(child: Text(model?.movieDetails?.title ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
+
+class _PeoplesWidget extends StatelessWidget {
+  const _PeoplesWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // .................
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    var crew = model?.movieDetails?.credits.crew;
+    if (crew == null || crew.isEmpty) return const SizedBox.shrink();
+    // ...................
+    crew = crew.length > 4 ?  crew.sublist(0, 4) : crew;
+    var crewChunks = <List<Employee>>[];
+    for (var i = 0; i< crew.length; i += 2) {
+      crewChunks.add(
+        crew.sublist(i, i + 2 > crew.length ? crew.length : i +2)
+      );
+    }
+    return Column(
+      children: crewChunks.map((chunk) => Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: _PeoplesWidgetRow(employes: chunk),
+      ),).toList(),
+      // children: [
+      //   _PeoplesWidgetRow(employes: [],),
+      //   const SizedBox(height: 20),
+      //   _PeoplesWidgetRow(employes: [],),
+      // ],
+
+    );
+  }
+}
+
+class _PeoplesWidgetRow extends StatelessWidget {
+  final List<Employee> employes;
+
+  const _PeoplesWidgetRow({Key? key, required this.employes}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: employes.map((employee) => _PeopleWidgetRowItem(employee: employee)).toList(),
+    );
+  }
+}
+
+class _PeopleWidgetRowItem extends StatelessWidget {
+  final Employee employee;
+  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(employee.name),
+          Text(employee.job),
+        ],
+      ),
+    );
+  }
+}
+
 

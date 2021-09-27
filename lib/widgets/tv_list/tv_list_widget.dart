@@ -51,7 +51,7 @@ class TVListWidget extends StatelessWidget {
                               children: [
                                 const SizedBox(height: 20.0),
                                 Text(
-                                  tv.originalName,
+                                  tv.name,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(

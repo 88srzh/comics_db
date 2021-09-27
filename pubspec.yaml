@@ -30,6 +30,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  convex_bottom_bar: ^3.0.0
+  flutter_staggered_animations: ^1.0.0
 
 dev_dependencies:
   flutter_test:

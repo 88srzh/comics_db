@@ -1,6 +1,5 @@
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 
@@ -33,8 +32,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(
-                      value: 'movies', child: Text('Movies')),
+                  DropdownMenuItem(value: 'movies', child: Text('Movies')),
                   DropdownMenuItem(value: 'tv', child: Text('TV')),
                 ],
               ),
