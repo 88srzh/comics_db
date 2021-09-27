@@ -436,7 +436,7 @@ class _ActorListItemWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(actor!.name, maxLines: 1,),
+                      Text(actor!.name, maxLines: 1),
                       const SizedBox(height: 7),
                       Text(actor.character, maxLines: 2),
                       // SizedBox(height: 7),
