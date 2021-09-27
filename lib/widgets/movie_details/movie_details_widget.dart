@@ -283,10 +283,11 @@ class _PeoplesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // .................
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    // if (model == null) return const SizedBox.shrink();
     var crew = model?.movieDetails?.credits.crew;
     if (crew == null || crew.isEmpty) return const SizedBox.shrink();
+    // ...................
     crew = crew.length > 4 ?  crew.sublist(0, 4) : crew;
     var crewChunks = <List<Employee>>[];
     for (var i = 0; i< crew.length; i += 2) {
@@ -295,56 +296,49 @@ class _PeoplesWidget extends StatelessWidget {
       );
     }
     return Column(
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            _PeoplesWidgetRow(),
-          ],
-        ),
-        const SizedBox(height: 20,),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            _PeoplesWidgetRow(),
-          ],
-        ),
-      ],
+      children: crewChunks.map((chunk) => Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: _PeoplesWidgetRow(employes: chunk),
+      ),).toList(),
+      // children: [
+      //   _PeoplesWidgetRow(employes: [],),
+      //   const SizedBox(height: 20),
+      //   _PeoplesWidgetRow(employes: [],),
+      // ],
 
     );
   }
 }
 
 class _PeoplesWidgetRow extends StatelessWidget {
-  const _PeoplesWidgetRow({Key? key}) : super(key: key);
+  final List<Employee> employes;
+
+  const _PeoplesWidgetRow({Key? key, required this.employes}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Имя Фамилия'),
-                Text('Должность'),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Имя Фамилия'),
-                Text('Должность'),
-              ],
-            ),
-          ],
-        )
-      ],
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: employes.map((employee) => _PeopleWidgetRowItem(employee: employee)).toList(),
+    );
+  }
+}
+
+class _PeopleWidgetRowItem extends StatelessWidget {
+  final Employee employee;
+  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(employee.name),
+          Text(employee.job),
+        ],
+      ),
     );
   }
 }
