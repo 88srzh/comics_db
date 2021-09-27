@@ -4,6 +4,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 
@@ -38,49 +39,57 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
       ),
-      body: Stack(
-        clipBehavior: Clip.hardEdge,
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         children: [
-          Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: Container(
-                    color: Colors.grey[100],
+          Stack(
+          clipBehavior: Clip.hardEdge,
+          children: [
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 180,
+                    child: Container(
+                      color: Colors.grey[100],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 150,
-                  child: Container(
-                    color: Colors.white,
+                  SizedBox(
+                    height: 150,
+                    child: Container(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                  child: Column(
-                    children: const [
-                      _TitleAndYearWidget(),
-                      SizedBox(height: 5.0,),
-                      _TrailerAndRatingWidget(),
-                      SizedBox(height: 15.0),
-                     _GenresWidget(),
-                     _DescriptionWidget(),
-                     _PeoplesWidget(),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                    child: Column(
+                      children: const [
+                        _TitleAndYearWidget(),
+                        SizedBox(height: 5.0,),
+                        _TrailerAndRatingWidget(),
+                        SizedBox(height: 15.0),
+                       _GenresWidget(),
+                       _DescriptionWidget(),
+                       _PeoplesWidget(),
+                       _CastWidget(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const _TopPosterWidget(),
-        ],
+            const _TopPosterWidget(),
+          ],
+        ),
+      ],
       ),
       // bottomNavigationBar: const _FavoritesButton(),
     );
   }
 }
+
 
 class _FavoritesButton extends StatelessWidget {
   const _FavoritesButton({
@@ -278,16 +287,15 @@ class _TitleAppBarWidget extends StatelessWidget {
   }
 }
 
+// TODO change font color to grey, may be do coloredbox
 class _PeoplesWidget extends StatelessWidget {
   const _PeoplesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // .................
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var crew = model?.movieDetails?.credits.crew;
     if (crew == null || crew.isEmpty) return const SizedBox.shrink();
-    // ...................
     crew = crew.length > 4 ?  crew.sublist(0, 4) : crew;
     var crewChunks = <List<Employee>>[];
     for (var i = 0; i< crew.length; i += 2) {
@@ -342,5 +350,111 @@ class _PeopleWidgetRowItem extends StatelessWidget {
     );
   }
 }
+
+class _CastWidget extends StatelessWidget {
+  const _CastWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+        color: Colors.transparent,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Series Cast'),
+            ),
+            const SizedBox(
+              height: 250.0,
+              child: Scrollbar(
+                child: _ActorListWidget(),),
+            ),
+            TextButton(
+                onPressed: () {},
+                child: const Text('Full cast & crew')),
+          ],
+        ),
+    );
+  }
+}
+
+class _ActorListWidget extends StatelessWidget {
+  const _ActorListWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    var cast = model?.movieDetails?.credits.cast;
+    if (cast == null || cast.isEmpty) return const SizedBox.shrink();
+    return ListView.builder(
+      itemCount: 20,
+      itemExtent: 120,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (BuildContext context, int index) {
+        return _ActorListItemWidget(actorIndex: index);
+      });
+  }
+}
+
+class _ActorListItemWidget extends StatelessWidget {
+  final int actorIndex;
+  const _ActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.read<MovieDetailsModel>(context);
+    final actor = model!.movieDetails?.credits.cast[actorIndex];
+    final backdropPath = actor?.profilePath;
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.black.withOpacity(0.2)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            children: [
+              // TODO if image doesn't exist load 'no image'
+              backdropPath != null
+                  ? Image.network(ApiClient.imageUrl(backdropPath))
+                  : const SizedBox.shrink(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(actor!.name, maxLines: 1,),
+                      const SizedBox(height: 7),
+                      Text(actor.character, maxLines: 2),
+                      // SizedBox(height: 7),
+                      // Text('4 Episodes', maxLines: 1),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+      ),
+    );
+  }
+}
+
+
+
 
 
