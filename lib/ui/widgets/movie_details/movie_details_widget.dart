@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
@@ -91,27 +90,27 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 }
 
 
-class _FavoritesButton extends StatelessWidget {
-  const _FavoritesButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
-      child: ElevatedButton(
-        onPressed: () {},
-        child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-          backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
-        ),
-        ),
-    );
-  }
-}
+// class _FavoritesButton extends StatelessWidget {
+//   const _FavoritesButton({
+//     Key? key,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
+//       child: ElevatedButton(
+//         onPressed: () {},
+//         child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
+//         style: ButtonStyle(
+//           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+//           backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+//           padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
+//         ),
+//         ),
+//     );
+//   }
+// }
 
 class _DescriptionWidget extends StatelessWidget {
   const _DescriptionWidget({
@@ -187,7 +186,8 @@ class _TrailerAndRatingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
-    var rating = model.movieDetails?.voteAverage.toString();
+    // TODO add rating
+    // var rating = model.movieDetails?.voteAverage.toString();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -256,7 +256,7 @@ class _TopPosterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var posterPath = model?.movieDetails?.posterPath;
-    var backdropPath = model?.movieDetails?.backdropPath;
+    // var backdropPath = model?.movieDetails?.backdropPath;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

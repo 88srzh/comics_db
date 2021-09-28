@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/widgets/tv_details/tv_details_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 
 class TVDetailsWidget extends StatefulWidget {
@@ -245,7 +245,7 @@ class _TopPosterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     var posterPath = model?.tvDetails?.posterPath;
-    var backdropPath = model?.tvDetails?.backdropPath;
+    // var backdropPath = model?.tvDetails?.backdropPath;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

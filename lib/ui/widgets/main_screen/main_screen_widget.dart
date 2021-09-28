@@ -1,11 +1,11 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/widgets/movie_list/movie_list_widget.dart';
-import 'package:comics_db_app/widgets/news/news_list_widget.dart';
-import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
-import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
-import 'package:comics_db_app/widgets/tv_list/tv_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 

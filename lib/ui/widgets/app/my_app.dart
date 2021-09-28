@@ -1,8 +1,9 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:flutter/material.dart';
-import 'package:comics_db_app/widgets/app/my_app_model.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 class MyApp extends StatelessWidget {
   final MyAppModel model;

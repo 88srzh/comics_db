@@ -1,7 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/widgets/tv_list/tv_list_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
 import 'package:flutter/material.dart';
 
 class TVListWidget extends StatelessWidget {

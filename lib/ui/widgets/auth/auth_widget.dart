@@ -1,6 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/widgets/auth/auth_model.dart';
+import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
 import 'package:flutter/material.dart';
 
 class AuthWidget extends StatelessWidget {

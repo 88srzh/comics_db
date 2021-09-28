@@ -1,21 +1,20 @@
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/widgets/trending/trending_all_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 
-class NewsWidgetTrending extends StatefulWidget {
-  const NewsWidgetTrending({Key? key}) : super(key: key);
+class NewsWidgetPopular extends StatefulWidget {
+  const NewsWidgetPopular({Key? key}) : super(key: key);
 
   @override
-  _NewsWidgetTrendingState createState() => _NewsWidgetTrendingState();
+  _NewsWidgetPopularState createState() => _NewsWidgetPopularState();
 }
 
-class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
-  final _category = 'movies';
+class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TrendingAllModel>(context);
+    const _category = 'movies';
+    final model = NotifierProvider.watch<MovieListModel>(context);
     if (model == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,18 +25,15 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Новое',
+                'Популярное',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
               DropdownButton<String>(
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(
-                      value: 'movies', child: Text('Фильмы')),
-                  DropdownMenuItem(value: 'tv', child: Text('Сериалы')),
-                  DropdownMenuItem(
-                      value: 'tvShows', child: Text('TVShows')),
+                  DropdownMenuItem(value: 'movies', child: Text('Movies')),
+                  DropdownMenuItem(value: 'tv', child: Text('TV')),
                 ],
               ),
             ],
@@ -48,12 +44,12 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
           height: 306,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: model.trendingAll.length,
+            itemCount: model.movies.length,
             itemExtent: 150,
             itemBuilder: (BuildContext context, int index) {
-              model.showedTrendingAllAtIndex(index);
-              final trendingAll = model.trendingAll[index];
-              final posterPath = trendingAll.posterPath;
+              model.showedMovieAtIndex(index);
+              final movie = model.movies[index];
+              final posterPath = movie.posterPath;
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -62,10 +58,16 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
                     Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.only(bottom: 20),
                           child: posterPath != null ? Image.network(
-                            ApiClient.imageUrl(posterPath)
-                          ) : const SizedBox.shrink()
+                            ApiClient.imageUrl(posterPath), width: 140)
+                            : const SizedBox.shrink(),
+                          // child: ClipRRect(
+                          //   borderRadius: BorderRadius.circular(8),
+                          //   child: const Image(
+                          //     image: AssetImage(AppImages.waifu),
+                          //   ),
+                          // ),
                         ),
                         Positioned(
                           top: 15,
@@ -103,19 +105,21 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
                         // ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      child: Text(
-                        'Willy`s Wonderland',
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Text(
+                          movie.title,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      child: Text('Feb 12, 2021'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
+                      child: Text(model.stringFromDate(movie.releaseDate)),
                     ),
                   ],
                 ),
