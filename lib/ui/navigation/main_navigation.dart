@@ -17,6 +17,7 @@ abstract class MainNavigationRouteNames {
   static const auth = 'auth';
   static const mainScreen = '/';
   static const movieDetails = '/movie_details';
+  static const fullCastAndCrew = '/movie_details/fullCastAndCrew';
   static const tv = '/tv';
   static const tvDetails = '/tv_details';
   static const news = '/news';
@@ -60,6 +61,9 @@ class MainNavigation {
                 child: const TVDetailsWidget(),
             ),
         );
+      case MainNavigationRouteNames.fullCastAndCrew:
+        final arguments = setting.arguments;
+
       default:
         const widget = Text('Ошибка навигации');
         return MaterialPageRoute(builder: (context) => widget);

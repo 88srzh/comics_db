@@ -4,7 +4,9 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
@@ -356,6 +358,7 @@ class _CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieListModel>(context);
     return ColoredBox(
         color: Colors.transparent,
         child: Column(
@@ -372,7 +375,9 @@ class _CastWidget extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () {},
-                child: const Text('Full cast & crew')),
+                child: InkWell(
+                  onTap: () => model?.onFullCastAndCrewTap(context, index),
+                    child: const Text('Full cast & crew'))),
           ],
         ),
     );
@@ -388,7 +393,7 @@ class _ActorListWidget extends StatelessWidget {
     var cast = model?.movieDetails?.credits.cast;
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: cast.length,
+      itemCount: 6,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {

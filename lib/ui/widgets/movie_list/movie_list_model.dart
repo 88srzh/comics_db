@@ -72,6 +72,11 @@ class MovieListModel extends ChangeNotifier {
         .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
+  void onFullCastAndCrewTap(BuildContext context, int index) {
+    final id = _movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.fullCastAndCrew, arguments: id);
+  }
+
   Future<void> searchMovie(String text) async {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
