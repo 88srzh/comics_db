@@ -388,7 +388,7 @@ class _ActorListWidget extends StatelessWidget {
     var cast = model?.movieDetails?.credits.cast;
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: 20,
+      itemCount: cast.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -429,7 +429,8 @@ class _ActorListItemWidget extends StatelessWidget {
               // TODO if image doesn't exist load 'no image'
               backdropPath != null
                   ? Image.network(ApiClient.imageUrl(backdropPath))
-                  : const SizedBox.shrink(),
+                  // : const SizedBox.shrink(),
+                  : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -448,7 +449,6 @@ class _ActorListItemWidget extends StatelessWidget {
             ],
           ),
         ),
-
       ),
     );
   }
