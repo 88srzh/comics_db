@@ -61,9 +61,6 @@ class MainNavigation {
                 child: const TVDetailsWidget(),
             ),
         );
-      case MainNavigationRouteNames.fullCastAndCrew:
-        final arguments = setting.arguments;
-
       default:
         const widget = Text('Ошибка навигации');
         return MaterialPageRoute(builder: (context) => widget);
