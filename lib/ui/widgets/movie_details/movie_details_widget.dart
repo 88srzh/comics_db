@@ -4,8 +4,8 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
@@ -185,19 +185,29 @@ class _TrailerAndRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    if (model == null) return const SizedBox.shrink();
+    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // if (model == null) return const SizedBox.shrink();
+    final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    final videos = movieDetails?.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
     // TODO add rating
     // var rating = model.movieDetails?.voteAverage.toString();
-    return Row(
+    return
+      Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: const [
-            Icon(Icons.play_arrow),
-            Text('Трейлер'),
+          trailerKey != null ? Row(
+          children: [
+            const Icon(Icons.play_arrow),
+            InkWell(
+              // лучше вынести в модель или еще куда-нибудь
+              onTap: () => Navigator.of(context).pushNamed(
+                  MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
+              child: const Text('Трейлер'),
+            ),
           ],
-        ),
+        ) : const SizedBox.shrink(),
       ],
     );
   }

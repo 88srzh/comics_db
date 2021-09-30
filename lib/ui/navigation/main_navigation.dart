@@ -6,6 +6,7 @@ import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_trailer/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
@@ -24,6 +25,7 @@ abstract class MainNavigationRouteNames {
   static const trending = 'trending';
   static const popularMovie = '/popularMovie';
   static const networkConnectionError = '/errors/network_connection';
+  static const movieTrailer = '/movie_details/trailer';
 }
 
 class MainNavigation {
@@ -60,6 +62,12 @@ class MainNavigation {
                 create: () => TVDetailsModel(tvId),
                 child: const TVDetailsWidget(),
             ),
+        );
+      case MainNavigationRouteNames.movieTrailer:
+        final arguments = settings.arguments;
+        final youtubeKey = arguments is String ? arguments : '';
+        return MaterialPageRoute(
+          builder: (context) => MovieTrailerWidget(youtubeKey: youtubeKey),
         );
       default:
         const widget = Text('Ошибка навигации');
