@@ -240,8 +240,9 @@ class _TitleAndYearWidget extends StatelessWidget {
                     fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            Text(year, style: const TextStyle(
-              fontSize: 16),
+            Text(year,
+              style: const TextStyle(
+                fontSize: 16),
             ),
           ],
         ),

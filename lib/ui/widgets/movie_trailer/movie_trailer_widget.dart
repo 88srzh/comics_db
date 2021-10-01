@@ -26,8 +26,21 @@ class _MovieTrailerWidgetState extends State<MovieTrailerWidget> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
+    return YoutubePlayerBuilder(
+        player: YoutubePlayer(
+          controller: _controller,
+          showVideoProgressIndicator: true,
+    ),
+        builder: (context, player) {
+          return Scaffold(
+              appBar: AppBar(),
+          body: Column(
+            children: [
+              player,
+            ],
+          ),
+          );
+        }
     );
   }
 }
