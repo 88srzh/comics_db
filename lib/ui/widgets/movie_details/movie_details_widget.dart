@@ -4,19 +4,19 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
+
 
   @override
   _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
 }
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -178,10 +178,17 @@ class _GenresWidget extends StatelessWidget {
   }
 }
 
-class _TrailerAndRatingWidget extends StatelessWidget {
-  const _TrailerAndRatingWidget({
+class _TrailerAndRatingWidget extends StatefulWidget {
+     const _TrailerAndRatingWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<_TrailerAndRatingWidget> createState() => _TrailerAndRatingWidgetState();
+}
+
+class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
+  late final YoutubePlayerController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -191,8 +198,19 @@ class _TrailerAndRatingWidget extends StatelessWidget {
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
+    final trailerKeyNew =videos!.first.key;
+    // String trailerKeyString = trailerKey.toString();
     // TODO add rating
     // var rating = model.movieDetails?.voteAverage.toString();
+
+    // TODO поменять контроллер в initstate, чтобы инициализировалось один раз при загрузке страницы
+    _controller = YoutubePlayerController(
+      initialVideoId: trailerKeyNew,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
     return
       Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -202,13 +220,44 @@ class _TrailerAndRatingWidget extends StatelessWidget {
             const Icon(Icons.play_arrow),
             InkWell(
               // лучше вынести в модель или еще куда-нибудь
-              onTap: () => Navigator.of(context).pushNamed(
-                  MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
+              // onTap: () => Navigator.of(context).pushNamed(
+              //     MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
+              onTap: () => _trailerDialog,
               child: const Text('Трейлер'),
             ),
           ],
         ) : const SizedBox.shrink(),
       ],
+    );
+  }
+
+  void _trailerDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) => Scaffold(
+          backgroundColor: Colors.white,
+          body: Builder(
+            builder: (context) => AlertDialog(
+              content: SizedBox(
+                height: 300,
+                width: 400,
+                child: YoutubePlayerBuilder(
+                  player: YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                  ),
+                  builder: (context, player) {
+                    return Column(
+                      children: [
+                        player,
+                    ],
+                  );
+                },
+            ),
+              ),
+          ),
+        ),
+        ),
     );
   }
 }
