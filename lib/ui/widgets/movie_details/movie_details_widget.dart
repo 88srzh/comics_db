@@ -4,9 +4,9 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
@@ -188,7 +188,7 @@ class _TrailerAndRatingWidget extends StatefulWidget {
 }
 
 class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
-  late final YoutubePlayerController _controller;
+  // late final YoutubePlayerController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -198,19 +198,19 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
-    final trailerKeyNew =videos!.first.key;
+    // final trailerKeyNew = trailerKey.toString();
     // String trailerKeyString = trailerKey.toString();
     // TODO add rating
     // var rating = model.movieDetails?.voteAverage.toString();
 
     // TODO поменять контроллер в initstate, чтобы инициализировалось один раз при загрузке страницы
-    _controller = YoutubePlayerController(
-      initialVideoId: trailerKeyNew,
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: true,
-      ),
-    );
+    // _controller = YoutubePlayerController(
+    //   initialVideoId: trailerKeyNew,
+    //   flags: const YoutubePlayerFlags(
+    //     autoPlay: true,
+    //     mute: true,
+    //   ),
+    // );
     return
       Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -220,9 +220,9 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
             const Icon(Icons.play_arrow),
             InkWell(
               // лучше вынести в модель или еще куда-нибудь
-              // onTap: () => Navigator.of(context).pushNamed(
-              //     MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
-              onTap: () => _trailerDialog,
+              onTap: () => Navigator.of(context).pushNamed(
+                  MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
+              // onTap: () => _trailerDialog,
               child: const Text('Трейлер'),
             ),
           ],
@@ -231,35 +231,35 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
     );
   }
 
-  void _trailerDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) => Scaffold(
-          backgroundColor: Colors.white,
-          body: Builder(
-            builder: (context) => AlertDialog(
-              content: SizedBox(
-                height: 300,
-                width: 400,
-                child: YoutubePlayerBuilder(
-                  player: YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                  ),
-                  builder: (context, player) {
-                    return Column(
-                      children: [
-                        player,
-                    ],
-                  );
-                },
-            ),
-              ),
-          ),
-        ),
-        ),
-    );
-  }
+  // void _trailerDialog(BuildContext context) async {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (context) => Scaffold(
+  //         backgroundColor: Colors.white,
+  //         body: Builder(
+  //           builder: (context) => AlertDialog(
+  //             content: SizedBox(
+  //               height: 300,
+  //               width: 400,
+  //               child: YoutubePlayerBuilder(
+  //                 player: YoutubePlayer(
+  //                   controller: _controller,
+  //                   showVideoProgressIndicator: true,
+  //                 ),
+  //                 builder: (context, player) {
+  //                   return Column(
+  //                     children: [
+  //                       player,
+  //                   ],
+  //                 );
+  //               },
+  //           ),
+  //             ),
+  //         ),
+  //       ),
+  //       ),
+  //   );
+  // }
 }
 
 class _TitleAndYearWidget extends StatelessWidget {
@@ -414,7 +414,6 @@ class _PeopleWidgetRowItem extends StatelessWidget {
 
 class _CastWidget extends StatelessWidget {
   const _CastWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
@@ -429,15 +428,51 @@ class _CastWidget extends StatelessWidget {
             const SizedBox(
               height: 250.0,
               child: Scrollbar(
-                child: _ActorListWidget(),),
+                child: _ActorListWidget()),
             ),
-            TextButton(
-                onPressed: () {},
-                child: const Text('Full cast & crew')),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {},
+                  // onTap: () async => showFullCastAndCrew(context),
+                  child: const Text('Full cast & crew')),
+            ),
           ],
         ),
     );
   }
+
+  // Future<dynamic> showFullCastAndCrew(BuildContext context) {
+  //   final int actorIndex;
+  //   final model = NotifierProvider.read<MovieDetailsModel>(context);
+  //   final actor = model!.movieDetails?.credits.cast[actorIndex];
+  //   final backdropPath = actor?.profilePath;
+  //   return showDialog<void>(
+  //       context: context,
+  //       builder: (context) => Scaffold(
+  //         backgroundColor: Colors.transparent,
+  //         body: Builder(
+  //             builder: (context) => AlertDialog(
+  //               content: Container(
+  //                 height: 600,
+  //                 width: 400,
+  //                 decoration: BoxDecoration(
+  //                   color: Colors.white,
+  //                   borderRadius: BorderRadius.circular(20)
+  //                 ),
+  //                 child: GridView.builder(
+  //                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+  //                   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+  //                   padding: const EdgeInsets.all(10),
+  //                   itemBuilder: (BuildContext context, int index) {
+  //                     return _ActorListItemWidget(actorIndex: index);
+  //                   },
+  //                 ),
+  //               ),
+  //             )),
+  //       ));
+  //
+  // }
 }
 
 class _ActorListWidget extends StatelessWidget {
