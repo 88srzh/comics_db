@@ -47,7 +47,6 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                       child: Text(value),
                   );
                 }).toList(),
-
                 // [
                 //   DropdownMenuItem(value: 'movies', child: Text('Movies')),
                 //   DropdownMenuItem(value: 'tv', child: Text('TV')),
@@ -58,7 +57,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
         ),
         const SizedBox(height: 20),
         SizedBox(
-          height: 700,
+          height: 400,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: movieModel.movies.length,
