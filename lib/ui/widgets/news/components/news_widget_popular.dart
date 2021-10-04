@@ -44,7 +44,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                      child: Text(value),
+                    child: Text(value),
                   );
                 }).toList(),
                 // [
@@ -56,7 +56,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
           ),
         ),
         const SizedBox(height: 20),
-        SizedBox(
+        Container(
           height: 400,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -70,68 +70,34 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Stack(
                       children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          child: Column(
-                          children: [
-                              posterPath != null ? Image.network(
+                        Column(
+                        children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: posterPath != null ? Image.network(
                               ApiClient.imageUrl(posterPath), width: 340)
                               : const SizedBox.shrink(),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10),
-                                  child: Text(
-                                    movie.title,
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                            ),
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                                child: Text(
+                                  movie.title,
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
-                              child: Text(movieModel.stringFromDate(movie.releaseDate)),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
+                            child: Text(movieModel.stringFromDate(movie.releaseDate)),
+                        ),
                         ],
                       ),
-                        // Positioned(
-                        //   top: 15,
-                        //   right: 15,
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.grey.withOpacity(0.7),
-                        //       borderRadius: BorderRadius.circular(20),
-                        //     ),
-                        //     child: const Icon(Icons.more_horiz),
-                        //   ),
-                        // ),
-                        // Positioned(
-                        //   left: 10,
-                        //   bottom: 0,
-                        //   child: SizedBox(
-                        //     width: 40,
-                        //     height: 40,
-                        //     child: RadialPercentWidget(
-                        //       percent: 0.68,
-                        //       fillColor: const Color.fromARGB(255, 10, 23, 25),
-                        //       lineColor:
-                        //           const Color.fromARGB(255, 37, 203, 103),
-                        //       freeColor: const Color.fromARGB(255, 25, 54, 31),
-                        //       lineWidth: 3,
-                        //       child: const Text(
-                        //         '68%',
-                        //         style: TextStyle(
-                        //           color: Colors.white,
-                        //           fontSize: 11,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                         ),
                       ],
                     ),
               );
