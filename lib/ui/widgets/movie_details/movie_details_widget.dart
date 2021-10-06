@@ -86,7 +86,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               right: 50,
               child: IconButton(
                 iconSize: 30,
-                icon: const Icon(Icons.star_border),
+                icon: Icon(model?.isFavoriteMovie == true ? Icons.star : Icons.star_border),
                 onPressed: () {},
               ),
             ),

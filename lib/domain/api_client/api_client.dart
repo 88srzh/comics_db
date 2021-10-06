@@ -5,6 +5,8 @@ import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:flutter/cupertino.dart';
 
 /*
 1. нет сети
@@ -72,6 +74,8 @@ class ApiClient {
       rethrow;
     } catch (_) {
       throw ApiClientException(ApiClientExceptionType.other);
+      // if (ApiClientExceptionType.other == ApiClientExceptionType.other)
+      //   => Navigator.pushReplacementNamed(context, MainNavigationRouteNames.networkConnectionError);
     }
   }
 
@@ -178,7 +182,6 @@ class ApiClient {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final result = jsonMap['favorite'] as bool;
-      final response = MovieDetails.fromJson(jsonMap);
       return result;
     };
     final result = _get(
@@ -187,7 +190,6 @@ class ApiClient {
       <String, dynamic>{
         'api_key': _apiKey,
         'session_id': sessionId,
-        // 'movieId': movieId.toString(),
       },
     );
     return result;
