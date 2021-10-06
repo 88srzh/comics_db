@@ -171,6 +171,28 @@ class ApiClient {
     return result;
   }
 
+
+  // TODO can add watchlist and rated, look at:
+  // https://developers.themoviedb.org/3/movies/get-movie-account-states
+  Future<bool> isFavoriteMovie(int movieId, String sessionId) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['favorite'] as bool;
+      final response = MovieDetails.fromJson(jsonMap);
+      return result;
+    };
+    final result = _get(
+      '/movie/$movieId/account_states',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'session_id': sessionId,
+        // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<TVDetails> tvDetails(int tvId, String locale) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
