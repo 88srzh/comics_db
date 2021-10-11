@@ -27,6 +27,17 @@ class ApiClientException implements Exception {
   ApiClientException(this.type);
 }
 
+enum MediaType {movie, TV}
+
+extension MediaTypeAsString on MediaType {
+  String asString() {
+    switch (this) {
+      case MediaType.movie: return 'movie';
+      case MediaType.TV: return 'TV';
+    }
+  }
+}
+
 class ApiClient {
   final _client = HttpClient();
   static const _host = 'https://api.themoviedb.org/3';
@@ -114,6 +125,51 @@ class ApiClient {
       '/authentication/token/new',
       parser,
       <String, dynamic>{'api_key': _apiKey},
+    );
+    return result;
+  }
+
+  Future<int> getAccountInfo(String sessionId) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['id'] as int;
+      return result;
+    };
+    final result = _get(
+      '/account',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'session_id': sessionId,
+        // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<String> markAsFavorite({
+        required int accountId,
+        required String sessionId,
+        required MediaType mediaType,
+        required String mediaId,
+        required bool isFavorite,
+
+  }) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final token = jsonMap['request_token'] as String;
+      return token;
+    };
+    final parameters = <String, dynamic>{
+      'media_type': mediaType.asString(),
+      'media_id': mediaId,
+      'favorite': isFavorite,
+    };
+    final result = _post(
+      '/account/$accountId/favorite',
+      parameters,
+      parser,
+      <String, dynamic>{'api_key': _apiKey, 'session_id': sessionId},
     );
     return result;
   }
