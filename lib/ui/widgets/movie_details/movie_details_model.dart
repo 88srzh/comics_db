@@ -44,7 +44,9 @@ class MovieDetailsModel extends ChangeNotifier {
 
     if (sessionId == null || accountId == null) return;
 
-    await _apiClient.markAsFavorite(accountId: accountId, sessionId: sessionId, mediaType: MediaType.movie, mediaId: movieId, isFavorite: isFavorite)
+    _isFavoriteMovie = !_isFavoriteMovie;
+    notifyListeners();
 
+    await _apiClient.markAsFavorite(accountId: accountId, sessionId: sessionId, mediaType: MediaType.movie, mediaId: movieId, isFavorite: _isFavoriteMovie);
   }
 }

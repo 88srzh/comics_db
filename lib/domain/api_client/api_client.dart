@@ -110,7 +110,7 @@ class ApiClient {
       throw ApiClientException(ApiClientExceptionType.network);
     } on ApiClientException {
       rethrow;
-    } catch (_) {
+    } catch (e) {
       throw ApiClientException(ApiClientExceptionType.other);
     }
   }
@@ -147,23 +147,21 @@ class ApiClient {
     return result;
   }
 
-  Future<String> markAsFavorite({
+  Future<int> markAsFavorite({
         required int accountId,
         required String sessionId,
         required MediaType mediaType,
-        required String mediaId,
+        required int mediaId,
         required bool isFavorite,
 
   }) async {
     final parser = (dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final token = jsonMap['request_token'] as String;
-      return token;
+      return 1;
     };
     final parameters = <String, dynamic>{
       'media_type': mediaType.asString(),
       'media_id': mediaId,
-      'favorite': isFavorite.toString(),
+      'favorite': isFavorite,
     };
     final result = _post(
       '/account/$accountId/favorite',
