@@ -5,6 +5,8 @@ import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:flutter/cupertino.dart';
 
 /*
 1. нет сети
@@ -23,6 +25,17 @@ class ApiClientException implements Exception {
   final ApiClientExceptionType type;
 
   ApiClientException(this.type);
+}
+
+enum MediaType {movie, TV}
+
+extension MediaTypeAsString on MediaType {
+  String asString() {
+    switch (this) {
+      case MediaType.movie: return 'movie';
+      case MediaType.TV: return 'TV';
+    }
+  }
 }
 
 class ApiClient {
@@ -72,6 +85,8 @@ class ApiClient {
       rethrow;
     } catch (_) {
       throw ApiClientException(ApiClientExceptionType.other);
+      // if (ApiClientExceptionType.other == ApiClientExceptionType.other)
+      //   => Navigator.pushReplacementNamed(context, MainNavigationRouteNames.networkConnectionError);
     }
   }
 
@@ -95,7 +110,7 @@ class ApiClient {
       throw ApiClientException(ApiClientExceptionType.network);
     } on ApiClientException {
       rethrow;
-    } catch (_) {
+    } catch (e) {
       throw ApiClientException(ApiClientExceptionType.other);
     }
   }
@@ -110,6 +125,49 @@ class ApiClient {
       '/authentication/token/new',
       parser,
       <String, dynamic>{'api_key': _apiKey},
+    );
+    return result;
+  }
+
+  Future<int> getAccountInfo(String sessionId) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['id'] as int;
+      return result;
+    };
+    final result = _get(
+      '/account',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'session_id': sessionId,
+        // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<int> markAsFavorite({
+        required int accountId,
+        required String sessionId,
+        required MediaType mediaType,
+        required int mediaId,
+        required bool isFavorite,
+
+  }) async {
+    final parser = (dynamic json) {
+      return 1;
+    };
+    final parameters = <String, dynamic>{
+      'media_type': mediaType.asString(),
+      'media_id': mediaId,
+      'favorite': isFavorite,
+    };
+    final result = _post(
+      '/account/$accountId/favorite',
+      parameters,
+      parser,
+      <String, dynamic>{'api_key': _apiKey, 'session_id': sessionId},
     );
     return result;
   }
@@ -166,6 +224,26 @@ class ApiClient {
         'api_key': _apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+
+  // TODO can add watchlist and rated, look at:
+  // https://developers.themoviedb.org/3/movies/get-movie-account-states
+  Future<bool> isFavoriteMovie(int movieId, String sessionId) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['favorite'] as bool;
+      return result;
+    };
+    final result = _get(
+      '/movie/$movieId/account_states',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'session_id': sessionId,
       },
     );
     return result;

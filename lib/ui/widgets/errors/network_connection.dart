@@ -1,7 +1,7 @@
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:flutter/material.dart';
 
-class ConnectionFaildScreen extends StatelessWidget {
+class ConnectionFailedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

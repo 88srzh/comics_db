@@ -81,6 +81,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               ),
             ),
             const _TopPosterWidget(),
+            Positioned(
+              top: 20,
+              right: 50,
+              child: IconButton(
+                iconSize: 30,
+                icon: Icon(model?.isFavoriteMovie == true ? Icons.star : Icons.star_border),
+                onPressed: () => model?.toggleFavorite(),
+              ),
+            ),
           ],
         ),
       ],
@@ -318,8 +327,8 @@ class _TopPosterWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var posterPath = model?.movieDetails?.posterPath;
     // var backdropPath = model?.movieDetails?.backdropPath;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
@@ -332,6 +341,14 @@ class _TopPosterWidget extends StatelessWidget {
             child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
             ),
           ),
+        Positioned(
+          top: 20,
+          right: 20,
+          child: IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {},
+          ),
+        ),
       ],
     );
   }
