@@ -36,6 +36,15 @@ class MovieDetailsModel extends ChangeNotifier {
       _isFavoriteMovie = await _apiClient.isFavoriteMovie(movieId, sessionId);
     }
     notifyListeners();
+  }
+
+  Future<void> toggleFavorite() async {
+    final sessionId = await _sessionDataProvider.getSessionId();
+    final accountId = await _sessionDataProvider.getAccountId();
+
+    if (sessionId == null || accountId == null) return;
+
+    await _apiClient.markAsFavorite(accountId: accountId, sessionId: sessionId, mediaType: MediaType.movie, mediaId: movieId, isFavorite: isFavorite)
 
   }
 }

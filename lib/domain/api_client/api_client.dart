@@ -163,7 +163,7 @@ class ApiClient {
     final parameters = <String, dynamic>{
       'media_type': mediaType.asString(),
       'media_id': mediaId,
-      'favorite': isFavorite,
+      'favorite': isFavorite.toString(),
     };
     final result = _post(
       '/account/$accountId/favorite',
