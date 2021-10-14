@@ -46,7 +46,21 @@ class MovieDetailsModel extends ChangeNotifier {
 
     _isFavoriteMovie = !_isFavoriteMovie;
     notifyListeners();
+    try {
+      await _apiClient.markAsFavorite(
+          accountId: accountId,
+          sessionId: sessionId,
+          mediaType: MediaType.movie,
+          mediaId: movieId,
+          isFavorite: _isFavoriteMovie);
+    } on  ApiClientException catch (e) {
+      switch (e.type) {
+        case ApiClientExceptionType.sessionExpired:
 
-    await _apiClient.markAsFavorite(accountId: accountId, sessionId: sessionId, mediaType: MediaType.movie, mediaId: movieId, isFavorite: _isFavoriteMovie);
+          break;
+        default:
+          print(e);
+      }
+    }
   }
 }
