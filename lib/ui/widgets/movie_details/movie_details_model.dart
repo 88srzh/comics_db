@@ -12,6 +12,7 @@ class MovieDetailsModel extends ChangeNotifier {
   bool _isFavoriteMovie = false;
   String _locale = '';
   late DateFormat _dateFormat;
+  Future<void>? Function()? onSessionExpired;
   MovieDetails? _movieDetails;
 
   MovieDetails? get movieDetails => _movieDetails;
@@ -30,12 +31,16 @@ class MovieDetailsModel extends ChangeNotifier {
   }
 
   Future<void> loadMovieDetails() async {
+    try {
     _movieDetails = await _apiClient.movieDetails(movieId, _locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     if (sessionId != null) {
       _isFavoriteMovie = await _apiClient.isFavoriteMovie(movieId, sessionId);
     }
     notifyListeners();
+  } on ApiClientException catch (e) {
+      _handleApiClientException(e);
+    }
   }
 
   Future<void> toggleFavorite() async {
@@ -52,15 +57,20 @@ class MovieDetailsModel extends ChangeNotifier {
           sessionId: sessionId,
           mediaType: MediaType.movie,
           mediaId: movieId,
-          isFavorite: _isFavoriteMovie);
+          isFavorite: _isFavoriteMovie
+      );
     } on  ApiClientException catch (e) {
-      switch (e.type) {
-        case ApiClientExceptionType.sessionExpired:
-
-          break;
-        default:
-          print(e);
-      }
+      _handleApiClientException(e);
     }
+  }
+
+  void _handleApiClientException(ApiClientException exception) {
+    switch (exception.type) {
+      case ApiClientExceptionType.sessionExpired:
+        onSessionExpired?.call();
+    break;
+    default:
+    print(exception);
+  }
   }
 }
