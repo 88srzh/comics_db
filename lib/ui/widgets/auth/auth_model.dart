@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -45,6 +47,8 @@ class AuthModel extends ChangeNotifier {
         case ApiClientExceptionType.other:
           _errorMessage = 'Произошла ошибка. Попробуйте еще раз';
           break;
+        case ApiClientExceptionType.sessionExpired:
+          break;
       }
     }
     _isAuthProgress = false;
@@ -60,7 +64,8 @@ class AuthModel extends ChangeNotifier {
     }
     await _sessionDataProvider.setSessionId(sessionId);
     await _sessionDataProvider.setAccountId(accountId);
-    Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.mainScreen);
+    unawaited(Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.mainScreen),
+    );
   }
 }
 
