@@ -3,6 +3,8 @@ import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
+import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
@@ -21,6 +23,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final movieListModel = MovieListModel();
   final tvListModel = TVListModel();
   final trendingAllModel = TrendingAllModel();
+  final settingsModel = SettingsModel();
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -36,6 +39,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     movieListModel.setupLocale(context);
     trendingAllModel.setupPage(context);
     tvListModel.setupLocale(context);
+    settingsModel.setupLocale(context);
   }
 
   @override
@@ -53,6 +57,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
           NotifierProvider(create: () => movieListModel, child: const MovieListWidget()),
           NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
+          NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
@@ -62,6 +67,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.home, title: 'Новости'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Фильмы'),
           TabItem<dynamic>(icon: Icons.tv, title: 'Сериалы'),
+          TabItem<dynamic>(icon: Icons.settings, title: 'Настройки'),
         ],
         onTap: (int index) => setState(() {
     _selectedTab = index;

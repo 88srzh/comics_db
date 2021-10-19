@@ -74,10 +74,6 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           const _TopPosterWidget(),
         ],
       ),
-      bottomNavigationBar: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
-        child: _FavoritesButton(),
-      ),
     );
   }
 }
@@ -226,6 +222,9 @@ class _TitleAndRatingWidget extends StatelessWidget {
         ),
         Row(
           children: [
+            IconButton(
+                onPressed: () => model?.toggleFavoriteTV(),
+                icon: Icon(model?.isFavoriteTV == true ? Icons.favorite : Icons.favorite_border, size: 20)),
             const Icon(Icons.star_border_outlined, size: 20),
             const SizedBox(width: 5.0,),
             Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
@@ -249,6 +248,14 @@ class _TopPosterWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // Positioned(
+        //   top: 20,
+        //   right: 20,
+        //   child: IconButton(
+        //     icon: const Icon(Icons.favorite),
+        //     onPressed: () {},
+        //   ),
+        // ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
           decoration: BoxDecoration(
@@ -260,6 +267,14 @@ class _TopPosterWidget extends StatelessWidget {
             child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
           ),
         ),
+        // Positioned(
+        //   top: 20,
+        //   right: 20,
+        //   child: IconButton(
+        //     icon: const Icon(Icons.favorite),
+        //     onPressed: () {},
+        //   ),
+        // ),
       ],
     );
   }
