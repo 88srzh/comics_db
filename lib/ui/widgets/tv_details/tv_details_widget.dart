@@ -74,10 +74,6 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           const _TopPosterWidget(),
         ],
       ),
-      bottomNavigationBar: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
-        child: _FavoritesButton(),
-      ),
     );
   }
 }
@@ -249,6 +245,14 @@ class _TopPosterWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Positioned(
+          top: 20,
+          right: 20,
+          child: IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {},
+          ),
+        ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
           decoration: BoxDecoration(
@@ -258,6 +262,14 @@ class _TopPosterWidget extends StatelessWidget {
             height: 295.0,
             width: 210.0,
             child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
+          ),
+        ),
+        Positioned(
+          top: 20,
+          right: 20,
+          child: IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {},
           ),
         ),
       ],

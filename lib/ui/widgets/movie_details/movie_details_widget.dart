@@ -337,17 +337,20 @@ class _TopPosterWidget extends StatelessWidget {
     return Stack(
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-          ),
-          child: SizedBox(
-            height: 295.0,
-            width: 210.0,
-            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+        Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
             ),
-          ),
+            child: SizedBox(
+              height: 295.0,
+              width: 210.0,
+              child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+              ),
+            ),
+        ),
         Positioned(
           top: 20,
           right: 20,
