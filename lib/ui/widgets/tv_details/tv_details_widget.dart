@@ -202,6 +202,7 @@ class _TitleAndRatingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     var rating = model?.tvDetails?.voteAverage.toString();
+    // var date = model?.tvDetails?.firstAirDate.toString();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -286,7 +287,8 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
-    return Center(child: Text(model?.tvDetails?.name ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+    return Center(
+        child: Text(model?.tvDetails?.name?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
 
