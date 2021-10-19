@@ -27,13 +27,13 @@ class ApiClientException implements Exception {
   ApiClientException(this.type);
 }
 
-enum MediaType {movie, TV}
+enum MediaType {movie, tv}
 
 extension MediaTypeAsString on MediaType {
   String asString() {
     switch (this) {
       case MediaType.movie: return 'movie';
-      case MediaType.TV: return 'TV';
+      case MediaType.tv: return 'tv';
     }
   }
 }
@@ -102,6 +102,9 @@ class ApiClient {
       request.headers.contentType = ContentType.json;
       request.write(jsonEncode(bodyParameters));
       final response = await request.close();
+      if (response.statusCode == 404) {
+        print('not found - 404');
+      }
       final dynamic json = (await response.jsonDecode());
       _validateResponse(response, json);
       final result = parser(json);
@@ -262,6 +265,23 @@ class ApiClient {
         'api_key': _apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<bool> isFavoriteTV(int tvId, String sessionId) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['favorite'] as bool;
+      return result;
+    };
+    final result = _get(
+      '/tv/$tvId/account_states',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'session_id': sessionId,
       },
     );
     return result;

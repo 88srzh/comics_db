@@ -89,12 +89,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
             ),
             const _TopPosterWidget(),
             Positioned(
-              top: 20,
-              right: 50,
+              top: 40,
+              right: 60,
               child: IconButton(
                 iconSize: 30,
-                icon: Icon(model?.isFavoriteMovie == true ? Icons.star : Icons.star_border),
-                onPressed: () => model?.toggleFavorite(),
+                icon: Icon(model?.isFavoriteMovie == true ? Icons.favorite : Icons.favorite_border),
+                onPressed: () => model?.toggleFavoriteMovie(),
               ),
             ),
           ],
@@ -246,36 +246,6 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
       ],
     );
   }
-
-  // void _trailerDialog(BuildContext context) async {
-  //   return showDialog(
-  //       context: context,
-  //       builder: (context) => Scaffold(
-  //         backgroundColor: Colors.white,
-  //         body: Builder(
-  //           builder: (context) => AlertDialog(
-  //             content: SizedBox(
-  //               height: 300,
-  //               width: 400,
-  //               child: YoutubePlayerBuilder(
-  //                 player: YoutubePlayer(
-  //                   controller: _controller,
-  //                   showVideoProgressIndicator: true,
-  //                 ),
-  //                 builder: (context, player) {
-  //                   return Column(
-  //                     children: [
-  //                       player,
-  //                   ],
-  //                 );
-  //               },
-  //           ),
-  //             ),
-  //         ),
-  //       ),
-  //       ),
-  //   );
-  // }
 }
 
 class _TitleAndYearWidget extends StatelessWidget {

@@ -43,7 +43,7 @@ class MovieDetailsModel extends ChangeNotifier {
     }
   }
 
-  Future<void> toggleFavorite() async {
+  Future<void> toggleFavoriteMovie() async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
 
