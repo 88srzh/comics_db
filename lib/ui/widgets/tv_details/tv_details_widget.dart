@@ -3,11 +3,9 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TVDetailsWidget extends StatefulWidget {
@@ -30,10 +28,11 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     final tvDetails = model?.tvDetails;
+    final videos = tvDetails?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
     if (tvDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
-
     return Scaffold(
       appBar: AppBar(
         title: const _TitleWidget(),
@@ -77,6 +76,14 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
             ),
           ),
           const _TopPosterWidget(),
+          Positioned(
+            top: 220,
+            right: 70,
+            child: IconButton(
+              onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: trailerKey),
+              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
+            ),
+          ),
         ],
       ),
     );
@@ -276,14 +283,6 @@ class _TopPosterWidget extends StatelessWidget {
               width: 210.0,
               child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
             ),
-          ),
-        ),
-        Positioned(
-          // top:100,
-          // right: 10,
-          child: IconButton(
-              onPressed: () {},
-              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
           ),
         ),
         // Positioned(
