@@ -27,6 +27,8 @@ dependencies:
   flutter_lints: ^1.0.4
   flutter_secure_storage: ^4.2.1
   json_annotation: ^4.0.0
+  material_design_icons_flutter: 5.0.5955-rc.1
+  flutter_svg: ^0.23.0+1
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
