@@ -182,7 +182,7 @@ class _DirectorWidget extends StatelessWidget {
     Key? key
   }) : super(key: key);
 
-    @override
+  @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
@@ -201,7 +201,7 @@ class _DirectorWidget extends StatelessWidget {
       children: [
         const Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
         Expanded(
-            child: Text(names.join(' '), style: const TextStyle(color: Colors.black87),),
+          child: Text(names.join(' '), style: const TextStyle(color: Colors.black87),),
         ),
       ],
     );
@@ -293,4 +293,3 @@ class _TitleWidget extends StatelessWidget {
         child: Text(model?.tvDetails?.name?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
-
