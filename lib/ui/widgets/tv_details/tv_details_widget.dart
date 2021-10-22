@@ -77,6 +77,14 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
             ),
           ),
           const _TopPosterWidget(),
+          Positioned(
+            top:220,
+            right: 70,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
+            ),
+          ),
         ],
       ),
     );
@@ -256,14 +264,6 @@ class _TopPosterWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // Positioned(
-        //   top: 20,
-        //   right: 20,
-        //   child: IconButton(
-        //     icon: const Icon(Icons.favorite),
-        //     onPressed: () {},
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.only(left: 15.0),
           child: Container(
@@ -278,22 +278,6 @@ class _TopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          // top:100,
-          // right: 10,
-          child: IconButton(
-              onPressed: () {},
-              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
-          ),
-        ),
-        // Positioned(
-        //   top: 20,
-        //   right: 20,
-        //   child: IconButton(
-        //     icon: const Icon(Icons.favorite),
-        //     onPressed: () {},
-        //   ),
-        // ),
       ],
     );
   }
