@@ -62,6 +62,7 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     voteAverage: (json['vote_average'] as num).toDouble(),
     voteCount: json['vote_count'] as int,
+    videos: TvDetailsVideos.fromJson(json['videos'] as Map<String, dynamic>),
   );
 }
 
@@ -100,6 +101,7 @@ Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
       'type': instance.type,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'videos': instance.videos.toJson(),
     };
 
 CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) {

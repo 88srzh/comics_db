@@ -5,8 +5,6 @@ import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/cupertino.dart';
 
 /*
 1. нет сети
@@ -262,9 +260,9 @@ class ApiClient {
       '/tv/$tvId',
       parser,
       <String, dynamic>{
+        'append_to_response': 'videos',
         'api_key': _apiKey,
         'language': locale,
-        // 'movieId': movieId.toString(),
       },
     );
     return result;
