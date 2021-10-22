@@ -3,8 +3,12 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TVDetailsWidget extends StatefulWidget {
   const TVDetailsWidget({Key? key}) : super(key: key);
@@ -37,7 +41,8 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
         backgroundColor: Colors.grey[100],
       ),
       body: Stack(
-        clipBehavior: Clip.hardEdge,
+        // clipBehavior: Clip.hardEdge,
+        fit: StackFit.passthrough,
         children: [
           Container(
             color: Colors.white,
@@ -62,7 +67,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
                       _TitleAndRatingWidget(),
                       SizedBox(height: 5.0,),
                       _DirectorWidget(),
-                      SizedBox(height: 25.0),
+                      SizedBox(height: 15.0),
                       _GenresWidget(),
                       _DescriptionWidget(),
                     ],
@@ -72,6 +77,14 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
             ),
           ),
           const _TopPosterWidget(),
+          Positioned(
+            top:220,
+            right: 70,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
+            ),
+          ),
         ],
       ),
     );
@@ -187,7 +200,9 @@ class _DirectorWidget extends StatelessWidget {
     return Row(
       children: [
         const Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
-        Text(names.join(' ')),
+        Expanded(
+            child: Text(names.join(' '), style: const TextStyle(color: Colors.black87),),
+        ),
       ],
     );
   }
@@ -202,6 +217,7 @@ class _TitleAndRatingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     var rating = model?.tvDetails?.voteAverage.toString();
+    // var date = model?.tvDetails?.firstAirDate.toString();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -246,35 +262,22 @@ class _TopPosterWidget extends StatelessWidget {
     var posterPath = model?.tvDetails?.posterPath;
     // var backdropPath = model?.tvDetails?.backdropPath;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // Positioned(
-        //   top: 20,
-        //   right: 20,
-        //   child: IconButton(
-        //     icon: const Icon(Icons.favorite),
-        //     onPressed: () {},
-        //   ),
-        // ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-          ),
-          child: SizedBox(
-            height: 295.0,
-            width: 210.0,
-            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+            ),
+            child: SizedBox(
+              height: 295.0,
+              width: 210.0,
+              child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const Center(child: CircularProgressIndicator()),
+            ),
           ),
         ),
-        // Positioned(
-        //   top: 20,
-        //   right: 20,
-        //   child: IconButton(
-        //     icon: const Icon(Icons.favorite),
-        //     onPressed: () {},
-        //   ),
-        // ),
       ],
     );
   }
@@ -286,7 +289,8 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
-    return Center(child: Text(model?.tvDetails?.name ?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+    return Center(
+        child: Text(model?.tvDetails?.name?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
 

@@ -76,7 +76,11 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                         _TitleAndYearWidget(),
                         SizedBox(height: 5.0,),
                         _TrailerAndRatingWidget(),
-                        SizedBox(height: 15.0),
+                        SizedBox(height: 5.0),
+                        _DirectorWidget(),
+                        SizedBox(height: 5.0),
+                       _YearWidget(),
+                        SizedBox(height: 5.0),
                        _GenresWidget(),
                        _DescriptionWidget(),
                        _PeoplesWidget(),
@@ -156,6 +160,23 @@ class _DescriptionWidget extends StatelessWidget {
     );
   }
 }
+
+class _YearWidget extends StatelessWidget {
+  const _YearWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    var year = model?.movieDetails?.releaseDate?.year.toString();
+    return Row(
+      children: [
+        const Text('Год: ', style: TextStyle(color: Colors.grey),),
+        Text(year!, style: const TextStyle(color: Colors.grey),)
+      ],
+    );
+  }
+}
+
 
 class _GenresWidget extends StatelessWidget {
   const _GenresWidget({
@@ -248,6 +269,19 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
   }
 }
 
+class _DirectorWidget extends StatelessWidget {
+  const _DirectorWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    return Row(
+
+    );
+  }
+}
+
+
 class _TitleAndYearWidget extends StatelessWidget {
   const _TitleAndYearWidget({
     Key? key,
@@ -274,10 +308,6 @@ class _TitleAndYearWidget extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
-            Text(year,
-              style: const TextStyle(
-                fontSize: 16),
             ),
           ],
         ),

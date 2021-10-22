@@ -6,4 +6,5 @@ class AppImages {
   static const String waifu = 'images/waifu.jpg';
   static const String networkConnection = 'images/errors/19_Error.png';
   static const String noImage = 'images/no-image.png';
+  static const String playTrailer = 'icons/arrow-right-drop-circle-outline.svg';
 }
