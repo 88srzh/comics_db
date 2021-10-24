@@ -26,7 +26,7 @@ class TvDetailsVideosResult {
   final int size;
   final String type;
   final bool official;
-  final int publishedAt;
+  final String publishedAt;
   final String id;
 
   TvDetailsVideosResult({

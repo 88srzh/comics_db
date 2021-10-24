@@ -33,6 +33,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
     final videos = tvDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+    // final trailerKey = videos?.isNotEmpty == true ? videos : null;
     if (tvDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }

@@ -30,7 +30,7 @@ TvDetailsVideosResult _$TvDetailsVideosResultFromJson(
     size: json['size'] as int,
     type: json['type'] as String,
     official: json['official'] as bool,
-    publishedAt: json['published_at'] as int,
+    publishedAt: json['published_at'] as String,
     id: json['id'] as String,
   );
 }

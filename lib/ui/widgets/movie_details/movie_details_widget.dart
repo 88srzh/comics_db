@@ -198,15 +198,17 @@ class _GenresWidget extends StatelessWidget {
     }
     return Row(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(246,246,246, 1.0),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-            child: Text(
-              texts.join(' '), style: const TextStyle(color: Colors.grey),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(246,246,246, 1.0),
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+              child: Text(
+                texts.join(' '), style: const TextStyle(color: Colors.grey),
+              ),
             ),
           ),
         ),
