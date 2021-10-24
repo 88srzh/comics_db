@@ -4,6 +4,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,11 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
-    final tvDetails = model?.tvDetails;
+    final tvDetails = NotifierProvider.watch<TVDetailsModel>(context)?.tvDetails;
+    final videos = tvDetails?.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+    // final trailerKey = videos?.isNotEmpty == true ? videos : null;
     if (tvDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
@@ -77,14 +81,15 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
             ),
           ),
           const _TopPosterWidget(),
-          Positioned(
+          tvTrailerKey != null ? Positioned(
             top:220,
             right: 70,
             child: IconButton(
-              onPressed: () {},
+              // TODO: если есть трейлер, то не открывает
+              onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
               icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
             ),
-          ),
+          ) : const SizedBox.shrink(),
         ],
       ),
     );
@@ -182,7 +187,7 @@ class _DirectorWidget extends StatelessWidget {
     Key? key
   }) : super(key: key);
 
-    @override
+  @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<TVDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
@@ -201,7 +206,7 @@ class _DirectorWidget extends StatelessWidget {
       children: [
         const Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
         Expanded(
-            child: Text(names.join(' '), style: const TextStyle(color: Colors.black87),),
+          child: Text(names.join(' '), style: const TextStyle(color: Colors.black87),),
         ),
       ],
     );
@@ -293,4 +298,3 @@ class _TitleWidget extends StatelessWidget {
         child: Text(model?.tvDetails?.name?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
-
