@@ -82,7 +82,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           ),
           const _TopPosterWidget(),
           tvTrailerKey != null ? Positioned(
-            top:220,
+            top: 220,
             right: 70,
             child: IconButton(
               // TODO: если есть трейлер, то не открывает
@@ -90,10 +90,42 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
               icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
             ),
           ) : const SizedBox.shrink(),
+          Positioned(
+            top: 40,
+              right: 30,
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.red),
+                ),
+                child: CustomPaint(
+                  painter: MyPainter(),
+
+                ),
+              ),
+          ),
         ],
       ),
     );
   }
+}
+
+class MyPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    paint.color = Colors.green;
+    paint.style = PaintingStyle.stroke;
+    paint.strokeWidth = 5;
+    canvas.drawCircle(Offset(size.width / 2, size.height / 2), 23, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+  
 }
 
 class _FavoritesButton extends StatelessWidget {
