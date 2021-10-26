@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
@@ -91,17 +92,16 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
             ),
           ) : const SizedBox.shrink(),
           Positioned(
-            top: 40,
-              right: 30,
+            top: 60,
+              right: 55,
               child: Container(
-                width: 100,
-                height: 100,
+                width: 50,
+                height: 50,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.red),
                 ),
                 child: CustomPaint(
                   painter: MyPainter(),
-
                 ),
               ),
           ),
@@ -114,11 +114,20 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
 class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    paint.color = Colors.green;
-    paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 5;
-    canvas.drawCircle(Offset(size.width / 2, size.height / 2), 23, paint);
+    final backgroundPaint = Paint();
+    backgroundPaint.color = Colors.white;
+    backgroundPaint.style = PaintingStyle.fill;
+    // paint.strokeWidth = 5;
+    // canvas.drawCircle(
+    //     Offset(size.width / 2, size.height / 2), 23, backgroundPaint);
+    canvas.drawOval(Offset.zero & size, backgroundPaint);
+
+    final feelPaint = Paint();
+    feelPaint.color = Colors.green;
+    feelPaint.style = PaintingStyle.stroke;
+    feelPaint.strokeWidth = 5;
+    canvas.drawArc(
+        const Offset(2.5, 2.5) & Size(size.width - 5, size.height -5), 0, pi, false, feelPaint);
   }
 
   @override
