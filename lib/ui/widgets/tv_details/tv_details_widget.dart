@@ -127,7 +127,7 @@ class MyPainter extends CustomPainter {
     feelPaint.style = PaintingStyle.stroke;
     feelPaint.strokeWidth = 5;
     canvas.drawArc(
-        const Offset(2.5, 2.5) & Size(size.width - 5, size.height -5), 0, pi, false, feelPaint);
+        const Offset(2.5, 2.5) & Size(size.width - 5, size.height -5), -pi / 2, pi / 2, false, feelPaint);
   }
 
   @override
