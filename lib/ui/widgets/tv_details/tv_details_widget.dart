@@ -100,11 +100,11 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.red),
                 ),
-                child: CustomPaint(
-                  painter: MyPainter(),
+                child: RadialPercentWidget(
+                  percent: 72,
+                  child: Text('72%'),),
                 ),
               ),
-          ),
         ],
       ),
     );
@@ -112,6 +112,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
 }
 
 class MyPainter extends CustomPainter {
+  final double percent = 0.72;
   @override
   void paint(Canvas canvas, Size size) {
     final backgroundPaint = Paint();
@@ -122,12 +123,30 @@ class MyPainter extends CustomPainter {
     //     Offset(size.width / 2, size.height / 2), 23, backgroundPaint);
     canvas.drawOval(Offset.zero & size, backgroundPaint);
 
+    final filedPaint = Paint();
+    filedPaint.color = Colors.yellow;
+    filedPaint.style = PaintingStyle.stroke;
+    filedPaint.strokeWidth = 5;
+    canvas.drawArc(
+        const Offset(5.5, 5.5) & Size(size.width - 11, size.height - 11),
+        pi * 2 * percent - (pi / 2),
+        pi * 2 * (1.0 - percent),
+        false,
+        filedPaint
+    );
+
     final feelPaint = Paint();
     feelPaint.color = Colors.green;
     feelPaint.style = PaintingStyle.stroke;
     feelPaint.strokeWidth = 5;
+    feelPaint.strokeCap = StrokeCap.round;
     canvas.drawArc(
-        const Offset(2.5, 2.5) & Size(size.width - 5, size.height -5), -pi / 2, pi / 2, false, feelPaint);
+        const Offset(5.5, 5.5) & Size(size.width - 11, size.height - 11),
+        -pi / 2,
+        pi * 2 * percent,
+        false,
+        feelPaint
+    );
   }
 
   @override
@@ -136,6 +155,28 @@ class MyPainter extends CustomPainter {
   }
   
 }
+
+class RadialPercentWidget extends StatelessWidget {
+  final Widget child;
+  final double percent;
+  const RadialPercentWidget({Key? key, required this.child, required this.percent}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        CustomPaint(
+          painter: MyPainter()),
+        Center(child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: child,
+        )),
+    ],
+    );
+  }
+}
+
 
 class _FavoritesButton extends StatelessWidget {
   const _FavoritesButton({
