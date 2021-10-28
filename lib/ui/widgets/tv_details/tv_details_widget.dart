@@ -1,15 +1,12 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TVDetailsWidget extends StatefulWidget {
@@ -97,82 +94,18 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
               child: Container(
                 width: 50,
                 height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.red),
-                ),
                 child: RadialPercentWidget(
-                  percent: 72,
-                  child: Text('72%'),),
+                  percent: 0.72,
+                  child: Text('72%'),
+                    fillColor: Colors.white,
+                    lineColor: Colors.red,
+                    freeColor: Colors.yellow,
+                    lineWidth: 5.0,
+                    ),
                 ),
               ),
         ],
       ),
-    );
-  }
-}
-
-class MyPainter extends CustomPainter {
-  final double percent = 0.72;
-  @override
-  void paint(Canvas canvas, Size size) {
-    final backgroundPaint = Paint();
-    backgroundPaint.color = Colors.white;
-    backgroundPaint.style = PaintingStyle.fill;
-    // paint.strokeWidth = 5;
-    // canvas.drawCircle(
-    //     Offset(size.width / 2, size.height / 2), 23, backgroundPaint);
-    canvas.drawOval(Offset.zero & size, backgroundPaint);
-
-    final filedPaint = Paint();
-    filedPaint.color = Colors.yellow;
-    filedPaint.style = PaintingStyle.stroke;
-    filedPaint.strokeWidth = 5;
-    canvas.drawArc(
-        const Offset(5.5, 5.5) & Size(size.width - 11, size.height - 11),
-        pi * 2 * percent - (pi / 2),
-        pi * 2 * (1.0 - percent),
-        false,
-        filedPaint
-    );
-
-    final feelPaint = Paint();
-    feelPaint.color = Colors.green;
-    feelPaint.style = PaintingStyle.stroke;
-    feelPaint.strokeWidth = 5;
-    feelPaint.strokeCap = StrokeCap.round;
-    canvas.drawArc(
-        const Offset(5.5, 5.5) & Size(size.width - 11, size.height - 11),
-        -pi / 2,
-        pi * 2 * percent,
-        false,
-        feelPaint
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-  
-}
-
-class RadialPercentWidget extends StatelessWidget {
-  final Widget child;
-  final double percent;
-  const RadialPercentWidget({Key? key, required this.child, required this.percent}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        CustomPaint(
-          painter: MyPainter()),
-        Center(child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: child,
-        )),
-    ],
     );
   }
 }
