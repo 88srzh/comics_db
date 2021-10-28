@@ -3,12 +3,10 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TVDetailsWidget extends StatefulWidget {
@@ -82,7 +80,7 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           ),
           const _TopPosterWidget(),
           tvTrailerKey != null ? Positioned(
-            top:220,
+            top: 220,
             right: 70,
             child: IconButton(
               // TODO: если есть трейлер, то не открывает
@@ -90,11 +88,28 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
               icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
             ),
           ) : const SizedBox.shrink(),
+          Positioned(
+            top: 60,
+              right: 40,
+              child: Container(
+                width: 70,
+                height: 70,
+                child: RadialPercentWidget(
+                  percent: 0.72,
+                  child: Text('72%', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                    fillColor: Colors.white,
+                    lineColor: Colors.black,
+                    freeColor: Colors.grey,
+                    lineWidth: 5.0,
+                    ),
+                ),
+              ),
         ],
       ),
     );
   }
 }
+
 
 class _FavoritesButton extends StatelessWidget {
   const _FavoritesButton({
