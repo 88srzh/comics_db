@@ -90,16 +90,16 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
           ) : const SizedBox.shrink(),
           Positioned(
             top: 60,
-              right: 55,
+              right: 40,
               child: Container(
-                width: 50,
-                height: 50,
+                width: 70,
+                height: 70,
                 child: RadialPercentWidget(
                   percent: 0.72,
-                  child: Text('72%'),
+                  child: Text('72%', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                     fillColor: Colors.white,
-                    lineColor: Colors.red,
-                    freeColor: Colors.yellow,
+                    lineColor: Colors.black,
+                    freeColor: Colors.grey,
                     lineWidth: 5.0,
                     ),
                 ),
