@@ -31,7 +31,8 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
     final videos = tvDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
-    // final trailerKey = videos?.isNotEmpty == true ? videos : null;
+    var voteAverage = tvDetails?.voteAverage ?? 0;
+    voteAverage = voteAverage * 10;
     if (tvDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
@@ -83,20 +84,19 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
             top: 220,
             right: 70,
             child: IconButton(
-              // TODO: если есть трейлер, то не открывает
               onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
               icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
             ),
           ) : const SizedBox.shrink(),
           Positioned(
             top: 60,
-              right: 40,
-              child: Container(
-                width: 70,
-                height: 70,
+              right: 45,
+              child: SizedBox(
+                width: 65,
+                height: 65,
                 child: RadialPercentWidget(
-                  percent: 0.72,
-                  child: Text('72%', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                  percent: voteAverage / 100,
+                  child: Text(voteAverage.toStringAsFixed(0) + '%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     fillColor: Colors.white,
                     lineColor: Colors.black,
                     freeColor: Colors.grey,
