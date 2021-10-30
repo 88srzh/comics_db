@@ -61,8 +61,8 @@ class MainNavigation {
         final tvId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
             builder: (context) => NotifierProvider(
-                create: () => TVDetailsModel(tvId),
-                child: const TVDetailsWidget(),
+                create: () => TvDetailsModel(tvId),
+                child: const TvDetailsWidget(),
             ),
         );
       case MainNavigationRouteNames.movieTrailer:

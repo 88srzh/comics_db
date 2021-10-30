@@ -1,3 +1,4 @@
+import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -37,6 +38,7 @@ class TVDetails {
   final String type;
   final double voteAverage;
   final int voteCount;
+  final TvDetailsCredits credits;
   final TvDetailsVideos videos;
   TVDetails({
     required this.backdropPath,
@@ -70,7 +72,8 @@ class TVDetails {
     required this.type,
     required this.voteAverage,
     required this.voteCount,
-    required this.videos
+    required this.videos,
+    required this.credits,
   });
 
   factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);

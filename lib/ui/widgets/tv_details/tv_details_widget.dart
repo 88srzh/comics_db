@@ -9,25 +9,25 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class TVDetailsWidget extends StatefulWidget {
-  const TVDetailsWidget({Key? key}) : super(key: key);
+class TvDetailsWidget extends StatefulWidget {
+  const TvDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _TVDetailsWidgetState createState() => _TVDetailsWidgetState();
+  _TvDetailsWidgetState createState() => _TvDetailsWidgetState();
 }
 
-class _TVDetailsWidgetState extends State<TVDetailsWidget> {
+class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    NotifierProvider.read<TVDetailsModel>(context)?.setupLocale(context);
+    NotifierProvider.read<TvDetailsModel>(context)?.setupLocale(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final tvDetails = NotifierProvider.watch<TVDetailsModel>(context)?.tvDetails;
+    final tvDetails = NotifierProvider.watch<TvDetailsModel>(context)?.tvDetails;
     final videos = tvDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
@@ -137,7 +137,7 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
@@ -166,7 +166,7 @@ class _GenresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
     // возможно нужно поменять на нул модел
@@ -204,7 +204,7 @@ class _DirectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var names = <String>[];
     final createdBy = model.tvDetails?.createdBy;
@@ -235,7 +235,7 @@ class _TitleAndRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     var rating = model?.tvDetails?.voteAverage.toString();
     // var date = model?.tvDetails?.firstAirDate.toString();
     return Row(
@@ -278,7 +278,7 @@ class _TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     var posterPath = model?.tvDetails?.posterPath;
     // var backdropPath = model?.tvDetails?.backdropPath;
     return Row(
@@ -308,8 +308,116 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     return Center(
         child: Text(model?.tvDetails?.name?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
   }
 }
+
+// class _CastWidget extends StatelessWidget {
+//   const _CastWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ColoredBox(
+//       color: Colors.transparent,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           const Padding(
+//             padding: EdgeInsets.all(8.0),
+//             child: Text('Series Cast'),
+//           ),
+//           const SizedBox(
+//             height: 250.0,
+//             child: Scrollbar(
+//                 // child: _TvActorListWidget()),
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: InkWell(
+//                 onTap: () {},
+//                 // onTap: () async => showFullCastAndCrew(context),
+//                 child: const Text('Full cast & crew')),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// class _TvActorListWidget extends StatelessWidget {
+//   const _TvActorListWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final model = NotifierProvider.watch<TvDetailsModel>(context);
+//     // var cast = model?.tvDetails?.credits.cast;
+//     // var cast = model?.tvDetails?.c
+//     // if (cast == null || cast.isEmpty) return const SizedBox.shrink();
+//     return ListView.builder(
+//         itemCount: 6,
+//         itemExtent: 120,
+//         scrollDirection: Axis.horizontal,
+//         itemBuilder: (BuildContext context, int index) {
+//           return _MovieActorListItemWidget(actorIndex: index);
+//         });
+//   }
+// }
+
+// class _MovieActorListItemWidget extends StatelessWidget {
+//   final int actorIndex;
+//   const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // final model = NotifierProvider.read<MovieDetailsModel>(context);
+//     // final actor = model!.movieDetails?.credits.cast[actorIndex];
+//     // final backdropPath = actor?.profilePath;
+//     return Padding(
+//       padding: const EdgeInsets.only(right: 10.0),
+//       child: DecoratedBox(
+//         decoration: BoxDecoration(
+//           color: Colors.white,
+//           border: Border.all(color: Colors.black.withOpacity(0.2)),
+//           borderRadius: const BorderRadius.all(Radius.circular(10)),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.purple.withOpacity(0.1),
+//               blurRadius: 8,
+//               offset: const Offset(0, 2),
+//             ),
+//           ],
+//         ),
+//         child: ClipRRect(
+//           borderRadius: const BorderRadius.all(Radius.circular(8)),
+//           clipBehavior: Clip.hardEdge,
+//           child: Column(
+//             children: [
+//               // TODO if image doesn't exist load 'no image'
+//               backdropPath != null
+//                   // ? Image.network(ApiClient.imageUrl(backdropPath))
+//               // : const SizedBox.shrink(),
+//               //     : const Image(image: AssetImage(AppImages.noImage)),
+//               Expanded(
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(actor!.name, maxLines: 1),
+//                       const SizedBox(height: 7),
+//                       Text(actor.character, maxLines: 2),
+//                       // SizedBox(height: 7),
+//                       // Text('4 Episodes', maxLines: 1),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

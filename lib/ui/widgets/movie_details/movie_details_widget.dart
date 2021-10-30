@@ -457,7 +457,7 @@ class _CastWidget extends StatelessWidget {
             const SizedBox(
               height: 250.0,
               child: Scrollbar(
-                child: _ActorListWidget()),
+                child: _MovieActorListWidget()),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -504,8 +504,8 @@ class _CastWidget extends StatelessWidget {
   // }
 }
 
-class _ActorListWidget extends StatelessWidget {
-  const _ActorListWidget({Key? key}) : super(key: key);
+class _MovieActorListWidget extends StatelessWidget {
+  const _MovieActorListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -517,14 +517,14 @@ class _ActorListWidget extends StatelessWidget {
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
-        return _ActorListItemWidget(actorIndex: index);
+        return _MovieActorListItemWidget(actorIndex: index);
       });
   }
 }
 
-class _ActorListItemWidget extends StatelessWidget {
+class _MovieActorListItemWidget extends StatelessWidget {
   final int actorIndex;
-  const _ActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
