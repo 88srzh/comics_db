@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -43,68 +44,76 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
       ),
-      body: Stack(
-        // clipBehavior: Clip.hardEdge,
-        fit: StackFit.passthrough,
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         children: [
-          Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: Container(
-                    color: Colors.grey[100],
-                  ),
-                ),
-                SizedBox(
-                  height: 150,
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                  child: Column(
-                    children: const [
-                      _TitleAndRatingWidget(),
-                      SizedBox(height: 5.0,),
-                      _DirectorWidget(),
-                      SizedBox(height: 15.0),
-                      _GenresWidget(),
-                      _DescriptionWidget(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const _TopPosterWidget(),
-          tvTrailerKey != null ? Positioned(
-            top: 220,
-            right: 70,
-            child: IconButton(
-              onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
-              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
-            ),
-          ) : const SizedBox.shrink(),
-          Positioned(
-            top: 60,
-              right: 45,
-              child: SizedBox(
-                width: 65,
-                height: 65,
-                child: RadialPercentWidget(
-                  percent: voteAverage / 100,
-                  child: Text(voteAverage.toStringAsFixed(0) + '%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                    fillColor: Colors.white,
-                    lineColor: Colors.black,
-                    freeColor: Colors.grey,
-                    lineWidth: 5.0,
+          Stack(
+          clipBehavior: Clip.hardEdge,
+          // fit: StackFit.passthrough,
+          children: [
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 180,
+                    child: Container(
+                      color: Colors.grey[100],
                     ),
-                ),
+                  ),
+                  SizedBox(
+                    height: 150,
+                    child: Container(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                    child: Column(
+                      children: const [
+                        _TitleAndRatingWidget(),
+                        SizedBox(height: 5.0,),
+                        _DirectorWidget(),
+                        SizedBox(height: 15.0),
+                        _GenresWidget(),
+                        _DescriptionWidget(),
+                        SizedBox(height: 5.0,),
+                        _CastWidget(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-        ],
+            ),
+            const _TopPosterWidget(),
+            tvTrailerKey != null ? Positioned(
+              top: 220,
+              right: 70,
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
+                icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
+              ),
+            ) : const SizedBox.shrink(),
+            Positioned(
+              top: 60,
+                right: 45,
+                child: SizedBox(
+                  width: 65,
+                  height: 65,
+                  child: RadialPercentWidget(
+                    percent: voteAverage / 100,
+                    child: Text(voteAverage.toStringAsFixed(0) + '%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                      fillColor: Colors.white,
+                      lineColor: Colors.black,
+                      freeColor: Colors.grey,
+                      lineWidth: 5.0,
+                      ),
+                  ),
+                ),
+          ],
+        ),
+      ],
       ),
     );
   }
@@ -314,110 +323,109 @@ class _TitleWidget extends StatelessWidget {
   }
 }
 
-// class _CastWidget extends StatelessWidget {
-//   const _CastWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ColoredBox(
-//       color: Colors.transparent,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           const Padding(
-//             padding: EdgeInsets.all(8.0),
-//             child: Text('Series Cast'),
-//           ),
-//           const SizedBox(
-//             height: 250.0,
-//             child: Scrollbar(
-//                 // child: _TvActorListWidget()),
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: InkWell(
-//                 onTap: () {},
-//                 // onTap: () async => showFullCastAndCrew(context),
-//                 child: const Text('Full cast & crew')),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+class _CastWidget extends StatelessWidget {
+  const _CastWidget({Key? key}) : super(key: key);
 
-// class _TvActorListWidget extends StatelessWidget {
-//   const _TvActorListWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final model = NotifierProvider.watch<TvDetailsModel>(context);
-//     // var cast = model?.tvDetails?.credits.cast;
-//     // var cast = model?.tvDetails?.c
-//     // if (cast == null || cast.isEmpty) return const SizedBox.shrink();
-//     return ListView.builder(
-//         itemCount: 6,
-//         itemExtent: 120,
-//         scrollDirection: Axis.horizontal,
-//         itemBuilder: (BuildContext context, int index) {
-//           return _MovieActorListItemWidget(actorIndex: index);
-//         });
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.transparent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Актеры'),
+          ),
+          const SizedBox(
+            height: 250.0,
+            child: Scrollbar(
+                child: _TvActorListWidget()),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+                onTap: () {},
+                // onTap: () async => showFullCastAndCrew(context),
+                child: const Text('Полный актерский состав')),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-// class _MovieActorListItemWidget extends StatelessWidget {
-//   final int actorIndex;
-//   const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // final model = NotifierProvider.read<MovieDetailsModel>(context);
-//     // final actor = model!.movieDetails?.credits.cast[actorIndex];
-//     // final backdropPath = actor?.profilePath;
-//     return Padding(
-//       padding: const EdgeInsets.only(right: 10.0),
-//       child: DecoratedBox(
-//         decoration: BoxDecoration(
-//           color: Colors.white,
-//           border: Border.all(color: Colors.black.withOpacity(0.2)),
-//           borderRadius: const BorderRadius.all(Radius.circular(10)),
-//           boxShadow: [
-//             BoxShadow(
-//               color: Colors.purple.withOpacity(0.1),
-//               blurRadius: 8,
-//               offset: const Offset(0, 2),
-//             ),
-//           ],
-//         ),
-//         child: ClipRRect(
-//           borderRadius: const BorderRadius.all(Radius.circular(8)),
-//           clipBehavior: Clip.hardEdge,
-//           child: Column(
-//             children: [
-//               // TODO if image doesn't exist load 'no image'
-//               backdropPath != null
-//                   // ? Image.network(ApiClient.imageUrl(backdropPath))
-//               // : const SizedBox.shrink(),
-//               //     : const Image(image: AssetImage(AppImages.noImage)),
-//               Expanded(
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(actor!.name, maxLines: 1),
-//                       const SizedBox(height: 7),
-//                       Text(actor.character, maxLines: 2),
-//                       // SizedBox(height: 7),
-//                       // Text('4 Episodes', maxLines: 1),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _TvActorListWidget extends StatelessWidget {
+  const _TvActorListWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
+    var cast = model?.tvDetails?.credits.cast;
+    if (cast == null || cast.isEmpty) return const SizedBox.shrink();
+    return ListView.builder(
+        itemCount: 6,
+        itemExtent: 120,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          return _TvActorListItemWidget(actorIndex: index);
+        });
+  }
+}
+
+class _TvActorListItemWidget extends StatelessWidget {
+  final int actorIndex;
+  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.read<TvDetailsModel>(context);
+    final actor = model!.tvDetails?.credits.cast[actorIndex];
+    final backdropPath = actor?.profilePath;
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.2)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            children: [
+              // TODO if image doesn't exist load 'no image'
+              backdropPath != null
+                  ? Image.network(ApiClient.imageUrl(backdropPath))
+              // : const SizedBox.shrink(),
+                  : const Image(image: AssetImage(AppImages.noImage)),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(actor!.name, maxLines: 1),
+                      const SizedBox(height: 7),
+                      Text(actor.character, maxLines: 2),
+                      // SizedBox(height: 7),
+                      // Text('4 Episodes', maxLines: 1),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

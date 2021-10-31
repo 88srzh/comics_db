@@ -19,17 +19,17 @@ class TvDetailsCredits {
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TvActor {
-  bool adult;
-  int? gender;
-  int id;
-  String knownForDepartment;
-  String name;
-  String originalName;
-  int popularity;
-  String? profilePath;
-  String character;
-  String creditId;
-  int order;
+  final bool adult;
+  final int? gender;
+  final int id;
+  final String knownForDepartment;
+  final String name;
+  final String originalName;
+  final double popularity;
+  final String? profilePath;
+  final String character;
+  final String creditId;
+  final int order;
 
   TvActor({
     required this.adult,
@@ -58,7 +58,7 @@ class TvEmployee {
   final String knownForDepartment;
   final String name;
   final String originalName;
-  final int popularity;
+  final double popularity;
   final String? profilePath;
   final String creditId;
   final String department;
