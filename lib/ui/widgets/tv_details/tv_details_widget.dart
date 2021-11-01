@@ -345,8 +345,28 @@ class _CastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-                onTap: () {},
-                // onTap: () async => showFullCastAndCrew(context),
+                // onTap: () {
+                //   showDialog<void>(
+                //       context: context,
+                //       builder: (BuildContext context) {
+                //         return Dialog(
+                //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                //           elevation: 16,
+                //           child: Container(
+                //             height: 400,
+                //             width: 360,
+                //             child: ListView.builder(
+                //               itemCount: 6,
+                //                 itemExtent: 120,
+                //                 scrollDirection: Axis.horizontal,
+                //                 itemBuilder: (BuildContext context, int index) {
+                //                 return _TvActorListItemWidget(actorIndex: index);
+                //                 }),
+                //           ),
+                //         );
+                //       });
+                // },
+              onTap: () {},
                 child: const Text('Полный актерский состав')),
           ),
         ],
@@ -402,7 +422,6 @@ class _TvActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              // TODO if image doesn't exist load 'no image'
               backdropPath != null
                   ? Image.network(ApiClient.imageUrl(backdropPath))
               // : const SizedBox.shrink(),
@@ -416,8 +435,6 @@ class _TvActorListItemWidget extends StatelessWidget {
                       Text(actor!.name, maxLines: 1),
                       const SizedBox(height: 7),
                       Text(actor.character, maxLines: 2),
-                      // SizedBox(height: 7),
-                      // Text('4 Episodes', maxLines: 1),
                     ],
                   ),
                 ),
