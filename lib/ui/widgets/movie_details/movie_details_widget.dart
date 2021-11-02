@@ -77,7 +77,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                         SizedBox(height: 5.0,),
                         _TrailerAndRatingWidget(),
                         SizedBox(height: 5.0),
-                        _DirectorWidget(),
+                        // _DirectorWidget(),
                         SizedBox(height: 5.0),
                        _YearWidget(),
                         SizedBox(height: 5.0),
@@ -271,17 +271,17 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
   }
 }
 
-class _DirectorWidget extends StatelessWidget {
-  const _DirectorWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    return Row(
-
-    );
-  }
-}
+// class _DirectorWidget extends StatelessWidget {
+//   const _DirectorWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final model = NotifierProvider.watch<MovieDetailsModel>(context);
+//     return Row(
+//
+//     );
+//   }
+// }
 
 
 class _TitleAndYearWidget extends StatelessWidget {
@@ -452,60 +452,28 @@ class _CastWidget extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Series Cast'),
+              child: Text('Актеры'),
             ),
             const SizedBox(
               height: 250.0,
               child: Scrollbar(
-                child: _ActorListWidget()),
+                child: _MovieActorListWidget()),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () {},
                   // onTap: () async => showFullCastAndCrew(context),
-                  child: const Text('Full cast & crew')),
+                  child: const Text('Полный актерский состав')),
             ),
           ],
         ),
     );
   }
-
-  // Future<dynamic> showFullCastAndCrew(BuildContext context) {
-  //   final int actorIndex;
-  //   final model = NotifierProvider.read<MovieDetailsModel>(context);
-  //   final actor = model!.movieDetails?.credits.cast[actorIndex];
-  //   final backdropPath = actor?.profilePath;
-  //   return showDialog<void>(
-  //       context: context,
-  //       builder: (context) => Scaffold(
-  //         backgroundColor: Colors.transparent,
-  //         body: Builder(
-  //             builder: (context) => AlertDialog(
-  //               content: Container(
-  //                 height: 600,
-  //                 width: 400,
-  //                 decoration: BoxDecoration(
-  //                   color: Colors.white,
-  //                   borderRadius: BorderRadius.circular(20)
-  //                 ),
-  //                 child: GridView.builder(
-  //                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-  //                   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-  //                   padding: const EdgeInsets.all(10),
-  //                   itemBuilder: (BuildContext context, int index) {
-  //                     return _ActorListItemWidget(actorIndex: index);
-  //                   },
-  //                 ),
-  //               ),
-  //             )),
-  //       ));
-  //
-  // }
 }
 
-class _ActorListWidget extends StatelessWidget {
-  const _ActorListWidget({Key? key}) : super(key: key);
+class _MovieActorListWidget extends StatelessWidget {
+  const _MovieActorListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -517,14 +485,14 @@ class _ActorListWidget extends StatelessWidget {
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
-        return _ActorListItemWidget(actorIndex: index);
+        return _MovieActorListItemWidget(actorIndex: index);
       });
   }
 }
 
-class _ActorListItemWidget extends StatelessWidget {
+class _MovieActorListItemWidget extends StatelessWidget {
   final int actorIndex;
-  const _ActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

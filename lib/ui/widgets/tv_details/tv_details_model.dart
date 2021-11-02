@@ -4,7 +4,7 @@ import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class TVDetailsModel extends ChangeNotifier {
+class TvDetailsModel extends ChangeNotifier {
   final _sessionDataProvider = SessionDataProvider();
   final _apiClient = ApiClient();
   final int tvId;
@@ -17,7 +17,7 @@ class TVDetailsModel extends ChangeNotifier {
   TVDetails? get tvDetails => _tvDetails;
   bool get isFavoriteTV => _isFavoriteTV;
 
-  TVDetailsModel(this.tvId);
+  TvDetailsModel(this.tvId);
 
   Future<void> setupLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();

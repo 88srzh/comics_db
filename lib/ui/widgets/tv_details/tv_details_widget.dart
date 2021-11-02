@@ -3,38 +3,43 @@ import 'dart:ui';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class TVDetailsWidget extends StatefulWidget {
-  const TVDetailsWidget({Key? key}) : super(key: key);
+class TvDetailsWidget extends StatefulWidget {
+  const TvDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _TVDetailsWidgetState createState() => _TVDetailsWidgetState();
+  _TvDetailsWidgetState createState() => _TvDetailsWidgetState();
 }
 
-class _TVDetailsWidgetState extends State<TVDetailsWidget> {
+class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    NotifierProvider.read<TVDetailsModel>(context)?.setupLocale(context);
+    NotifierProvider.read<TvDetailsModel>(context)?.setupLocale(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final tvDetails = NotifierProvider.watch<TVDetailsModel>(context)?.tvDetails;
+    final tvDetails = NotifierProvider.watch<TvDetailsModel>(context)?.tvDetails;
     final videos = tvDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
-    // final trailerKey = videos?.isNotEmpty == true ? videos : null;
+    var voteAverage = tvDetails?.voteAverage ?? 0;
+    voteAverage = voteAverage * 10;
     if (tvDetails == null) {
-      return const Center(child: CircularProgressIndicator(),);
+      // return const Center(child: CircularProgressIndicator(),);
+      return const LoadingIndicatorWidget();
     }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -42,74 +47,80 @@ class _TVDetailsWidgetState extends State<TVDetailsWidget> {
         shadowColor: Colors.transparent,
         backgroundColor: Colors.grey[100],
       ),
-      body: Stack(
-        // clipBehavior: Clip.hardEdge,
-        fit: StackFit.passthrough,
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         children: [
-          Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: Container(
-                    color: Colors.grey[100],
-                  ),
-                ),
-                SizedBox(
-                  height: 150,
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                  child: Column(
-                    children: const [
-                      _TitleAndRatingWidget(),
-                      SizedBox(height: 5.0,),
-                      _DirectorWidget(),
-                      SizedBox(height: 15.0),
-                      _GenresWidget(),
-                      _DescriptionWidget(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const _TopPosterWidget(),
-          tvTrailerKey != null ? Positioned(
-            top: 220,
-            right: 70,
-            child: IconButton(
-              // TODO: если есть трейлер, то не открывает
-              onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
-              icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
-            ),
-          ) : const SizedBox.shrink(),
-          Positioned(
-            top: 60,
-              right: 40,
-              child: Container(
-                width: 70,
-                height: 70,
-                child: RadialPercentWidget(
-                  percent: 0.72,
-                  child: Text('72%', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                    fillColor: Colors.white,
-                    lineColor: Colors.black,
-                    freeColor: Colors.grey,
-                    lineWidth: 5.0,
+          Stack(
+          clipBehavior: Clip.hardEdge,
+          // fit: StackFit.passthrough,
+          children: [
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 180,
+                    child: Container(
+                      color: Colors.grey[100],
                     ),
-                ),
+                  ),
+                  SizedBox(
+                    height: 150,
+                    child: Container(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                    child: Column(
+                      children: const [
+                        _TitleAndRatingWidget(),
+                        SizedBox(height: 5.0,),
+                        _DirectorWidget(),
+                        SizedBox(height: 15.0),
+                        _GenresWidget(),
+                        _DescriptionWidget(),
+                        SizedBox(height: 5.0,),
+                        _CastWidget(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-        ],
+            ),
+            const _TopPosterWidget(),
+            tvTrailerKey != null ? Positioned(
+              top: 220,
+              right: 70,
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
+                icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
+              ),
+            ) : const SizedBox.shrink(),
+            Positioned(
+              top: 60,
+                right: 45,
+                child: SizedBox(
+                  width: 65,
+                  height: 65,
+                  child: RadialPercentWidget(
+                    percent: voteAverage / 100,
+                    child: Text(voteAverage.toStringAsFixed(0) + '%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                      fillColor: Colors.white,
+                      lineColor: Colors.black,
+                      freeColor: Colors.grey,
+                      lineWidth: 5.0,
+                      ),
+                  ),
+                ),
+          ],
+        ),
+      ],
       ),
     );
   }
 }
-
 
 class _FavoritesButton extends StatelessWidget {
   const _FavoritesButton({
@@ -137,7 +148,7 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
@@ -166,7 +177,7 @@ class _GenresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
     // возможно нужно поменять на нул модел
@@ -204,7 +215,7 @@ class _DirectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     if (model == null) return const SizedBox.shrink();
     var names = <String>[];
     final createdBy = model.tvDetails?.createdBy;
@@ -235,7 +246,7 @@ class _TitleAndRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     var rating = model?.tvDetails?.voteAverage.toString();
     // var date = model?.tvDetails?.firstAirDate.toString();
     return Row(
@@ -278,7 +289,7 @@ class _TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     var posterPath = model?.tvDetails?.posterPath;
     // var backdropPath = model?.tvDetails?.backdropPath;
     return Row(
@@ -308,8 +319,132 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TVDetailsModel>(context);
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
     return Center(
         child: Text(model?.tvDetails?.name?? 'Загрузка...', style: const TextStyle(color: Colors.black)));
+  }
+}
+
+class _CastWidget extends StatelessWidget {
+  const _CastWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.transparent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Актеры'),
+          ),
+          const SizedBox(
+            height: 250.0,
+            child: Scrollbar(
+                child: _TvActorListWidget()),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+                // onTap: () {
+                //   showDialog<void>(
+                //       context: context,
+                //       builder: (BuildContext context) {
+                //         return Dialog(
+                //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                //           elevation: 16,
+                //           child: Container(
+                //             height: 400,
+                //             width: 360,
+                //             child: ListView.builder(
+                //               itemCount: 6,
+                //                 itemExtent: 120,
+                //                 scrollDirection: Axis.horizontal,
+                //                 itemBuilder: (BuildContext context, int index) {
+                //                 return _TvActorListItemWidget(actorIndex: index);
+                //                 }),
+                //           ),
+                //         );
+                //       });
+                // },
+              onTap: () {},
+                child: const Text('Полный актерский состав')),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TvActorListWidget extends StatelessWidget {
+  const _TvActorListWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<TvDetailsModel>(context);
+    var cast = model?.tvDetails?.credits.cast;
+    if (cast == null || cast.isEmpty) return const SizedBox.shrink();
+    return ListView.builder(
+        itemCount: 6,
+        itemExtent: 120,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          return _TvActorListItemWidget(actorIndex: index);
+        });
+  }
+}
+
+class _TvActorListItemWidget extends StatelessWidget {
+  final int actorIndex;
+  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.read<TvDetailsModel>(context);
+    final actor = model!.tvDetails?.credits.cast[actorIndex];
+    final backdropPath = actor?.profilePath;
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.2)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            children: [
+              backdropPath != null
+                  ? Image.network(ApiClient.imageUrl(backdropPath))
+              // : const SizedBox.shrink(),
+                  : const Image(image: AssetImage(AppImages.noImage)),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(actor!.name, maxLines: 1),
+                      const SizedBox(height: 7),
+                      Text(actor.character, maxLines: 2),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
