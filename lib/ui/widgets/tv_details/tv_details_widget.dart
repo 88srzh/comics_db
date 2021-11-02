@@ -4,6 +4,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -35,8 +36,10 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     var voteAverage = tvDetails?.voteAverage ?? 0;
     voteAverage = voteAverage * 10;
     if (tvDetails == null) {
-      return const Center(child: CircularProgressIndicator(),);
+      // return const Center(child: CircularProgressIndicator(),);
+      return const LoadingIndicatorWidget();
     }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -118,7 +121,6 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     );
   }
 }
-
 
 class _FavoritesButton extends StatelessWidget {
   const _FavoritesButton({
