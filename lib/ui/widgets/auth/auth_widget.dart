@@ -48,16 +48,7 @@ class _AuthWidgetState extends State<AuthWidget> with SingleTickerProviderStateM
     final model = NotifierProvider.read<AuthModel>(context);
     final _size = MediaQuery.of(context).size;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Center(
-      //     child: Text(
-      //       'Войти',
-      //       style: TextStyle(
-      //         color: Colors.grey,
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      resizeToAvoidBottomInset: false,
       body: AnimatedBuilder(
         animation: _animationController,
         builder: (context, _) {
@@ -163,7 +154,7 @@ class _AuthWidgetState extends State<AuthWidget> with SingleTickerProviderStateM
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: AppColors.defaultPadding * 0.75),
                         width: 170,
-                        // color: Colors.red,
+                        color: Colors.red,
                         child: Text(
                           'Регистрация'.toUpperCase(),
                         ),
@@ -208,8 +199,6 @@ class _AuthWidgetState extends State<AuthWidget> with SingleTickerProviderStateM
             const SizedBox(height: 20.0),
             // loginButton(),
             const AuthButtonWidget(),
-            const SizedBox(height: 15.0),
-            registerRow()
           ],
         ),
       );
@@ -241,22 +230,6 @@ class _AuthWidgetState extends State<AuthWidget> with SingleTickerProviderStateM
           child: const Text(
             'Забыли пароль?',
             style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Row registerRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text('Нет аккаунта? '),
-        InkWell(
-          onTap: () {},
-          child: const Text(
-            'Зарегистрируйтесь',
-            style: TextStyle(color: AppColors.kPrimaryColor),
           ),
         ),
       ],
