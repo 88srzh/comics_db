@@ -37,6 +37,7 @@ class _AuthWidgetState extends State<AuthWidget> with SingleTickerProviderStateM
     super.initState();
   }
 
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
@@ -154,7 +155,7 @@ class _AuthWidgetState extends State<AuthWidget> with SingleTickerProviderStateM
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: AppColors.defaultPadding * 0.75),
                         width: 170,
-                        color: Colors.red,
+                        // color: Colors.red,
                         child: Text(
                           'Регистрация'.toUpperCase(),
                         ),
@@ -249,7 +250,7 @@ class AuthButtonWidget extends StatelessWidget {
         ? const CircularProgressIndicator(strokeWidth: 5.0)
         : const Text(
             'Войти',
-            style: TextStyle(fontSize: 24, color: Colors.black),
+            // style: TextStyle(fontSize: 24, color: Colors.black),
           );
     return SizedBox(
       width: double.infinity,
