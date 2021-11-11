@@ -1,6 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
@@ -15,14 +14,6 @@ class MovieListWidget extends StatelessWidget {
     if (model == null) return const SizedBox.shrink();
     // Временный скаффолд с аппбаром с кнопкой
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          ElevatedButton(
-            onPressed: () => SessionDataProvider().setSessionId(null),
-            child: const Text('Logout'),
-            ),
-        ],
-      ),
       body: Stack(
         children: [
           // TODO FIX doesn't work
