@@ -17,17 +17,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        // TODO: later add it
-        // inputDecorationTheme: InputDecorationTheme(
-        //   filled: true,
-        //   fillColor: Colors.white38,
-        //   border: InputBorder.none,
-        //   hintStyle: TextStyle(color: Colors.white),
-        //   contentPadding: EdgeInsets.symmetric(
-        //     vertical: AppColors.defaultPadding * 1.2,
-        //     horizontal: AppColors.defaultPadding,
-        //   ),
-        // ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(
