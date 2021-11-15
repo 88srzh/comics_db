@@ -8,5 +8,6 @@ class AppImages {
   static const String noImage = 'images/no-image.png';
   static const String playTrailer = 'icons/arrow-right-drop-circle-outline.svg';
   static const String logo = 'images/logo.png';
-  static const String splashScreen = 'images/cover1x.png';
+  static const String splashScreen = 'images/splashscreen/cover@1x.png';
+  static const String splashScreenBackground = 'images/splashscreen/rectangle@1x.png';
 }

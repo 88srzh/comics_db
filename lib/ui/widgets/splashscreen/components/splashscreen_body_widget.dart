@@ -13,11 +13,24 @@ class SplashScreenBodyWidget extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  AppImages.noImage),
+                  AppImages.splashScreen
+                ),
                 fit: BoxFit.cover,
+                // colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.xor)
                 )
               ),
             ),
+          Container(
+            // color: Colors.black,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    AppImages.splashScreenBackground
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
         ],
       ),
     );
