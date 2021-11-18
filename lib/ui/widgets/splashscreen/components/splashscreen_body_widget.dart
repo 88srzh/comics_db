@@ -1,4 +1,5 @@
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreenBodyWidget extends StatelessWidget {
@@ -8,9 +9,10 @@ class SplashScreenBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Stack(
+        alignment: Alignment.topCenter,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                   AppImages.splashScreen
@@ -22,7 +24,7 @@ class SplashScreenBodyWidget extends StatelessWidget {
             ),
           Container(
             // color: Colors.black,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                     AppImages.splashScreenBackground
@@ -30,6 +32,11 @@ class SplashScreenBodyWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+          Center(
+              child: ClipRRect(
+                child: Image.asset(AppImages.splashScreenLogo),
+          ),
           ),
         ],
       ),
