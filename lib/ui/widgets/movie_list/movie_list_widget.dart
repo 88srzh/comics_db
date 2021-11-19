@@ -27,54 +27,45 @@ class MovieListWidget extends StatelessWidget {
                   model.showedMovieAtIndex(index);
                   final movie = model.movies[index];
                   final posterPath = movie.posterPath;
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    duration: const Duration(milliseconds: 375),
-                    child: SlideAnimation(
-                      verticalOffset: 50.0,
-                      child: FadeInAnimation(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 10.0),
-                          child: Stack(
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 10.0),
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                                  Border.all(color: Colors.black.withOpacity(0.2)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                )
+                              ]),
+                          clipBehavior: Clip.hardEdge,
+                          child: Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border:
-                                        Border.all(color: Colors.black.withOpacity(0.2)),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(20.0)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      )
-                                    ]),
-                                clipBehavior: Clip.hardEdge,
-                                child: Row(
-                                  children: [
-                                    posterPath != null ? Image.network(
-                                      ApiClient.imageUrl(posterPath), width: 95)
-                                      : const SizedBox.shrink(),
-                                    const SizedBox(width: 15.0),
-                                    MovieCard(movie: movie, model: model),
-                                    const SizedBox(width: 10.0),
-                                  ],
-                                ),
-                              ),
-                              Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  onTap: () => model.onMovieTap(context, index),
-                                ),
-                              ),
+                              posterPath != null ? Image.network(
+                                ApiClient.imageUrl(posterPath), width: 95)
+                                : const SizedBox.shrink(),
+                              const SizedBox(width: 15.0),
+                              MovieCard(movie: movie, model: model),
+                              const SizedBox(width: 10.0),
                             ],
                           ),
                         ),
-                      ),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(20.0),
+                            onTap: () => model.onMovieTap(context, index),
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 }),

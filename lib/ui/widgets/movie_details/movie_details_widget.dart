@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
@@ -39,74 +40,28 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       return const Center(child: CircularProgressIndicator(),);
     }
     return Scaffold(
-      appBar: AppBar(
-        // пропадает стрелочка
-        // automaticallyImplyLeading: false,
-        title: const _TitleAppBarWidget(),
-        shadowColor: Colors.transparent,
-        backgroundColor: Colors.grey[100],
-      ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        children: [
-          Stack(
-          clipBehavior: Clip.hardEdge,
+      // appBar: AppBar(
+      //   // пропадает стрелочка
+      //   // automaticallyImplyLeading: false,
+      //   title: const _TitleAppBarWidget(),
+      //   shadowColor: Colors.transparent,
+      //   backgroundColor: Colors.grey[100],
+      // ),
+      body: ColoredBox(
+        color: AppColors.kPrimaryColorNew,
+        child: ListView(
           children: [
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 180,
-                    child: Container(
-                      color: Colors.grey[100],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 150,
-                    child: Container(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                    child: Column(
-                      children: const [
-                        _TitleAndYearWidget(),
-                        SizedBox(height: 5.0,),
-                        _TrailerAndRatingWidget(),
-                        SizedBox(height: 5.0),
-                        // _DirectorWidget(),
-                        SizedBox(height: 5.0),
-                       _YearWidget(),
-                        SizedBox(height: 5.0),
-                       _GenresWidget(),
-                       _DescriptionWidget(),
-                       _PeoplesWidget(),
-                       _CastWidget(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const _TopPosterWidget(),
-            Positioned(
-              top: 40,
-              right: 60,
-              child: IconButton(
-                iconSize: 30,
-                icon: Icon(model?.isFavoriteMovie == true ? Icons.favorite : Icons.favorite_border),
-                onPressed: () => model?.toggleFavoriteMovie(),
-              ),
-            ),
-          ],
+            Column(
+            children: [
+              const _TopPosterWidget(),
+              const _TitleAndYearWidget(),
+                 ],
+                ),
+    ],
         ),
-      ],
       ),
+          );
       // bottomNavigationBar: const _FavoritesButton(),
-    );
   }
 }
 
@@ -294,35 +249,93 @@ class _TitleAndYearWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var rating = model?.movieDetails?.voteAverage.toString();
     var year = model?.movieDetails?.releaseDate?.year.toString();
+
+    // genres
+    if (model == null) return const SizedBox.shrink();
+    var texts = <String>[];
+    final genres = model.movieDetails?.genres;
+    if (genres != null && genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genre in genres) {
+        genresNames.add(genre.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
     year = year != null ? ' ($year)' : 'нету года';
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+      return Center(
+        child: Column(
           children: [
-            Expanded(
-              child: Text(
-                model?.movieDetails?.title ?? 'Загрузка названия...',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+            Text(model.movieDetails?.title ?? 'Загрузка названия...',
+            style: const TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w600,
+              color: AppColors.titleText,
+              ),
+            ),
+            Text(
+              texts.join(' '),
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 13,
+                color: AppColors.genresText,
               ),
             ),
           ],
         ),
-        ),
-        Row(
-          children: [
-            const Icon(Icons.star_border_outlined, size: 20),
-            const SizedBox(width: 5.0),
-            Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
-          ],
-        ),
-      ],
-    );
+
+        // Это мне понадобится, когда буду добавлять ЖАНРЫ
+
+        // child: Padding(
+        //   padding: const EdgeInsets.only(top: 12.0),
+        //   child: RichText(
+        //     maxLines: 3,
+        //     textAlign: TextAlign.center,
+        //     text: TextSpan(
+        //       children: [
+        //         TextSpan(
+        //           text: model?.movieDetails?.title ?? 'Загрузка названия...',
+        //           style: const TextStyle(
+        //             fontSize: 21,
+        //             fontWeight: FontWeight.w600,
+        //           ),
+        //         ),
+        //         TextSpan(
+        //           text: year,
+        //         ),
+        //       ]
+        //     ),
+        //   ),
+        // ),
+      );
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //   children: [
+    //     Expanded(
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.start,
+    //       children: [
+    //         Expanded(
+    //           child: Text(
+    //             model?.movieDetails?.title ?? 'Загрузка названия...',
+    //             overflow: TextOverflow.ellipsis,
+    //             maxLines: 2,
+    //             style: const TextStyle(
+    //                 fontSize: 20, fontWeight: FontWeight.bold),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //     ),
+    //     Row(
+    //       children: [
+    //         const Icon(Icons.star_border_outlined, size: 20),
+    //         const SizedBox(width: 5.0),
+    //         Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+    //       ],
+    //     ),
+    //   ],
+    // );
   }
 }
 
@@ -334,31 +347,32 @@ class _TopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    var posterPath = model?.movieDetails?.posterPath;
-    // var backdropPath = model?.movieDetails?.backdropPath;
+    final posterPath = model?.movieDetails?.posterPath;
+    final backdropPath = model?.movieDetails?.backdropPath;
     return Stack(
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-            ),
+        Positioned(
+          child: AspectRatio(
+            aspectRatio: 390 / 220,
+            child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 110.0),
             child: SizedBox(
-              height: 295.0,
-              width: 210.0,
+              height: 212.0,
+              width: 174.0,
               child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
-              ),
             ),
+          ),
         ),
         Positioned(
-          top: 20,
-          right: 20,
+          left: 10,
+          top: 10,
           child: IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
           ),
         ),
       ],

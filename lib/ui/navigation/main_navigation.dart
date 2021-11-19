@@ -35,8 +35,8 @@ abstract class MainNavigationRouteNames {
 
 class MainNavigation {
   String initialRoute(bool isAuth) => isAuth
-      ? MainNavigationRouteNames.splashScreen
-      // ? MainNavigationRouteNames.mainScreen
+      // ? MainNavigationRouteNames.splashScreen
+      ? MainNavigationRouteNames.mainScreen
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
     'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
