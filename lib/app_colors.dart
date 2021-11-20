@@ -7,6 +7,9 @@ abstract class AppColors {
   static const kPrimaryColorNew = Color.fromRGBO(28, 26, 41, 1.0);
   static const titleText = Color.fromRGBO(255, 255, 255, 1.0);
   static const genresText = Color.fromRGBO(222, 221, 223, 1.0);
+  static const ratingText = Color.fromRGBO(119, 119, 119, 1.0);
+  static const ratingStar = Color.fromRGBO(249, 150, 1, 1.0);
+  static const ratingThumb = Color.fromRGBO(164, 163, 169, 1.0);
 
   static const Color loginBackground = Colors.deepPurpleAccent;
   static const Color signUpBackground = Color(0xFF000A54);

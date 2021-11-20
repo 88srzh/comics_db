@@ -74,7 +74,8 @@ class MainNavigation {
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
-          builder: (context) => MovieTrailerWidget(youtubeKey: youtubeKey),
+          // builder: (context) => MovieTrailerWidget(youtubeKey: youtubeKey),
+          builder: (context) => TrailerAndRatingWidget(youtubeKey: youtubeKey),
         );
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;

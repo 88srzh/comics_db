@@ -9,8 +9,10 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
+  // final String youtubeKey;
   const MovieDetailsWidget({Key? key}) : super(key: key);
 
 
@@ -26,11 +28,14 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final appModel = Provider.read<MyAppModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
   }
+
+  late final YoutubePlayerController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +44,18 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     if (movieDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
+    final videos = movieDetails.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty  == true ? videos.first.key : null;
+
+    _controller = YoutubePlayerController(
+      initialVideoId: trailerKey ?? '',
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
+
     return Scaffold(
       // appBar: AppBar(
       //   // пропадает стрелочка
@@ -54,7 +71,51 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
             Column(
             children: [
               const _TopPosterWidget(),
-              const _TitleAndYearWidget(),
+              const _TitleGenresRatingVoteAverageWidget(),
+              const _DescriptionWidget(),
+        Column(
+          children: [
+            const Text('Трейлер',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 21,
+                color: AppColors.genresText,
+
+              ),
+            ),
+            YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                ),
+                builder: (context, player) {
+                  return Column(
+                    children: [
+                      player,
+                    ],
+                  );
+                }
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //       trailerKey != null ? Row(
+            //       children: [
+            //         const Icon(Icons.play_arrow),
+            //         InkWell(
+            //           // лучше вынести в модель или еще куда-нибудь
+            //           onTap: () => Navigator.of(context).pushNamed(
+            //               MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
+            //           // onTap: () => _trailerDialog,
+            //           child: const Text('Трейлер'),
+            //         ),
+            //       ],
+            //     ) : const SizedBox.shrink(),
+            //   ],
+            // ),
+          ],
+        ),
+              // const TrailerAndRatingWidget(youtubeKey: trail,),
                  ],
                 ),
     ],
@@ -97,18 +158,34 @@ class _DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-      child: Row(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Text(model?.movieDetails?.overview ?? 'Загрузка описания...',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 4,
-              style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-              ),
+          const Text('Описание',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w600,
+              // TODO rename text
+              color: AppColors.genresText,
             ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                // Добавить расстояние между строками
+                child: Text(model?.movieDetails?.overview ?? 'Загрузка описания...',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 4,
+                  style: const TextStyle(
+                color: AppColors.genresText,
+                fontSize: 12,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -172,17 +249,31 @@ class _GenresWidget extends StatelessWidget {
   }
 }
 
-class _TrailerAndRatingWidget extends StatefulWidget {
-     const _TrailerAndRatingWidget({
-    Key? key,
+class TrailerAndRatingWidget extends StatefulWidget {
+  final String youtubeKey;
+     const TrailerAndRatingWidget({
+       Key? key, required this.youtubeKey
   }) : super(key: key);
 
   @override
-  State<_TrailerAndRatingWidget> createState() => _TrailerAndRatingWidgetState();
+  State<TrailerAndRatingWidget> createState() => _TrailerAndRatingWidgetState();
 }
 
-class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
-  // late final YoutubePlayerController _controller;
+class _TrailerAndRatingWidgetState extends State<TrailerAndRatingWidget> {
+  late final YoutubePlayerController _controller;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   _controller = YoutubePlayerController(
+  //     initialVideoId: widget.youtubeKey,
+  //     flags: const YoutubePlayerFlags(
+  //       autoPlay: true,
+  //       mute: true,
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -198,29 +289,53 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
     // var rating = model.movieDetails?.voteAverage.toString();
 
     // TODO поменять контроллер в initstate, чтобы инициализировалось один раз при загрузке страницы
-    // _controller = YoutubePlayerController(
-    //   initialVideoId: trailerKeyNew,
-    //   flags: const YoutubePlayerFlags(
-    //     autoPlay: true,
-    //     mute: true,
-    //   ),
-    // );
-    return
-      Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.youtubeKey,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
+    return Column(
       children: [
-          trailerKey != null ? Row(
-          children: [
-            const Icon(Icons.play_arrow),
-            InkWell(
-              // лучше вынести в модель или еще куда-нибудь
-              onTap: () => Navigator.of(context).pushNamed(
-                  MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
-              // onTap: () => _trailerDialog,
-              child: const Text('Трейлер'),
+        const Text('Трейлер',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 21,
+            color: AppColors.genresText,
+
+          ),
+        ),
+        YoutubePlayerBuilder(
+          player: YoutubePlayer(
+          controller: _controller,
+          showVideoProgressIndicator: true,
             ),
-          ],
-        ) : const SizedBox.shrink(),
+          builder: (context, player) {
+             return Column(
+              children: [
+                player,
+                    ],
+                  );
+                }
+              ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //       trailerKey != null ? Row(
+        //       children: [
+        //         const Icon(Icons.play_arrow),
+        //         InkWell(
+        //           // лучше вынести в модель или еще куда-нибудь
+        //           onTap: () => Navigator.of(context).pushNamed(
+        //               MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
+        //           // onTap: () => _trailerDialog,
+        //           child: const Text('Трейлер'),
+        //         ),
+        //       ],
+        //     ) : const SizedBox.shrink(),
+        //   ],
+        // ),
       ],
     );
   }
@@ -239,8 +354,8 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
 // }
 
 
-class _TitleAndYearWidget extends StatelessWidget {
-  const _TitleAndYearWidget({
+class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
+  const _TitleGenresRatingVoteAverageWidget({
     Key? key,
   }) : super(key: key);
 
@@ -249,6 +364,8 @@ class _TitleAndYearWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var rating = model?.movieDetails?.voteAverage.toString();
     var year = model?.movieDetails?.releaseDate?.year.toString();
+    var voteAverage = model?.movieDetails?.voteAverage ?? 0;
+    voteAverage = voteAverage * 10;
 
     // genres
     if (model == null) return const SizedBox.shrink();
@@ -261,10 +378,11 @@ class _TitleAndYearWidget extends StatelessWidget {
       }
       texts.add(genresNames.join(', '));
     }
-    year = year != null ? ' ($year)' : 'нету года';
+    // year = year != null ? ' ($year)' : 'нету года';
       return Center(
         child: Column(
           children: [
+            const SizedBox(height: 12),
             Text(model.movieDetails?.title ?? 'Загрузка названия...',
             style: const TextStyle(
               fontSize: 21,
@@ -272,6 +390,7 @@ class _TitleAndYearWidget extends StatelessWidget {
               color: AppColors.titleText,
               ),
             ),
+            const SizedBox(height: 8),
             Text(
               texts.join(' '),
               maxLines: 3,
@@ -280,6 +399,41 @@ class _TitleAndYearWidget extends StatelessWidget {
                 fontSize: 13,
                 color: AppColors.genresText,
               ),
+            ),
+            const SizedBox(height: 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.star, color: AppColors.ratingStar, size: 14),
+                const SizedBox(width: 2),
+                Text(rating ?? '0.0',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+                const Text(' / 10 от themoviedb',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+                const SizedBox(width: 20),
+                const Icon(Icons.thumb_up_alt_outlined, color: AppColors.ratingThumb, size: 14),
+                const SizedBox(width: 2),
+                Text(voteAverage.toStringAsFixed(0) + '%',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+                const Text('от пользователей',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
