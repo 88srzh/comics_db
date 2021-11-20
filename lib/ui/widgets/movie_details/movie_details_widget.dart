@@ -51,19 +51,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     _controller = YoutubePlayerController(
       initialVideoId: trailerKey ?? '',
       flags: const YoutubePlayerFlags(
-        autoPlay: true,
+        autoPlay: false,
         mute: true,
       ),
     );
 
     return Scaffold(
-      // appBar: AppBar(
-      //   // пропадает стрелочка
-      //   // automaticallyImplyLeading: false,
-      //   title: const _TitleAppBarWidget(),
-      //   shadowColor: Colors.transparent,
-      //   backgroundColor: Colors.grey[100],
-      // ),
       body: ColoredBox(
         color: AppColors.kPrimaryColorNew,
         child: ListView(
@@ -83,6 +76,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
               ),
             ),
+            trailerKey != null ?
             YoutubePlayerBuilder(
                 player: YoutubePlayer(
                   controller: _controller,
@@ -95,7 +89,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                     ],
                   );
                 }
-            ),
+            ) : const SizedBox.shrink(),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: [
