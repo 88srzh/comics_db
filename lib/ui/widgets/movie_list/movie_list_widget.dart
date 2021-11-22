@@ -12,7 +12,6 @@ class MovieListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieListModel>(context);
     if (model == null) return const SizedBox.shrink();
-    // Временный скаффолд с аппбаром с кнопкой
     return Scaffold(
       body: Stack(
         children: [

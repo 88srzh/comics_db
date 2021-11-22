@@ -5,14 +5,12 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
-  // final String youtubeKey;
   const MovieDetailsWidget({Key? key}) : super(key: key);
 
 
@@ -35,8 +33,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
   }
 
-  late final YoutubePlayerController _controller;
-
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
@@ -47,14 +43,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final videos = movieDetails.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty  == true ? videos.first.key : null;
-
-    _controller = YoutubePlayerController(
-      initialVideoId: trailerKey ?? '',
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: true,
-      ),
-    );
+    String youtubeKey = trailerKey.toString();
 
     return Scaffold(
       body: ColoredBox(
@@ -66,82 +55,16 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const _TopPosterWidget(),
               const _TitleGenresRatingVoteAverageWidget(),
               const _DescriptionWidget(),
-        Column(
-          children: [
-            const Text('Трейлер',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 21,
-                color: AppColors.genresText,
-
-              ),
-            ),
-            trailerKey != null ?
-            YoutubePlayerBuilder(
-                player: YoutubePlayer(
-                  controller: _controller,
-                  showVideoProgressIndicator: true,
-                ),
-                builder: (context, player) {
-                  return Column(
-                    children: [
-                      player,
-                    ],
-                  );
-                }
-            ) : const SizedBox.shrink(),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //       trailerKey != null ? Row(
-            //       children: [
-            //         const Icon(Icons.play_arrow),
-            //         InkWell(
-            //           // лучше вынести в модель или еще куда-нибудь
-            //           onTap: () => Navigator.of(context).pushNamed(
-            //               MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
-            //           // onTap: () => _trailerDialog,
-            //           child: const Text('Трейлер'),
-            //         ),
-            //       ],
-            //     ) : const SizedBox.shrink(),
-            //   ],
-            // ),
-          ],
-        ),
-              // const TrailerAndRatingWidget(youtubeKey: trail,),
+              TrailerWidget(youtubeKey: youtubeKey),
                  ],
                 ),
-    ],
+              ],
         ),
       ),
           );
       // bottomNavigationBar: const _FavoritesButton(),
   }
 }
-
-
-// class _FavoritesButton extends StatelessWidget {
-//   const _FavoritesButton({
-//     Key? key,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
-//       child: ElevatedButton(
-//         onPressed: () {},
-//         child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-//         style: ButtonStyle(
-//           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-//           backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-//           padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
-//         ),
-//         ),
-//     );
-//   }
-// }
 
 class _DescriptionWidget extends StatelessWidget {
   const _DescriptionWidget({
@@ -187,150 +110,68 @@ class _DescriptionWidget extends StatelessWidget {
   }
 }
 
-class _YearWidget extends StatelessWidget {
-  const _YearWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    var year = model?.movieDetails?.releaseDate?.year.toString();
-    return Row(
-      children: [
-        const Text('Год: ', style: TextStyle(color: Colors.grey),),
-        Text(year!, style: const TextStyle(color: Colors.grey),)
-      ],
-    );
-  }
-}
-
-
-class _GenresWidget extends StatelessWidget {
-  const _GenresWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    if (model == null) return const SizedBox.shrink();
-    var texts = <String>[];
-    final genres = model.movieDetails?.genres;
-    if (genres != null && genres.isNotEmpty) {
-      var genresNames = <String>[];
-      for (var genre in genres) {
-        genresNames.add(genre.name);
-      }
-      texts.add(genresNames.join(', '));
-    }
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(246,246,246, 1.0),
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-              child: Text(
-                texts.join(' '), style: const TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TrailerAndRatingWidget extends StatefulWidget {
+class TrailerWidget extends StatefulWidget {
   final String youtubeKey;
-     const TrailerAndRatingWidget({
+     const TrailerWidget({
        Key? key, required this.youtubeKey
   }) : super(key: key);
 
   @override
-  State<TrailerAndRatingWidget> createState() => _TrailerAndRatingWidgetState();
+  State<TrailerWidget> createState() => _TrailerWidgetState();
 }
 
-class _TrailerAndRatingWidgetState extends State<TrailerAndRatingWidget> {
+class _TrailerWidgetState extends State<TrailerWidget> {
   late final YoutubePlayerController _controller;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //
-  //   _controller = YoutubePlayerController(
-  //     initialVideoId: widget.youtubeKey,
-  //     flags: const YoutubePlayerFlags(
-  //       autoPlay: true,
-  //       mute: true,
-  //     ),
-  //   );
-  // }
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.youtubeKey,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    // if (model == null) return const SizedBox.shrink();
     final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
-    // final trailerKeyNew = trailerKey.toString();
-    // String trailerKeyString = trailerKey.toString();
-    // TODO add rating
-    // var rating = model.movieDetails?.voteAverage.toString();
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Трейлер',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 21,
+              color: AppColors.genresText,
 
-    // TODO поменять контроллер в initstate, чтобы инициализировалось один раз при загрузке страницы
-    _controller = YoutubePlayerController(
-      initialVideoId: widget.youtubeKey,
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: true,
-      ),
-    );
-    return Column(
-      children: [
-        const Text('Трейлер',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 21,
-            color: AppColors.genresText,
-
-          ),
-        ),
-        YoutubePlayerBuilder(
-          player: YoutubePlayer(
-          controller: _controller,
-          showVideoProgressIndicator: true,
             ),
-          builder: (context, player) {
-             return Column(
-              children: [
-                player,
-                    ],
-                  );
-                }
+          ),
+          const SizedBox(height: 8.0),
+          trailerKey != null ?
+          YoutubePlayerBuilder(
+              player: YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: true,
               ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //       trailerKey != null ? Row(
-        //       children: [
-        //         const Icon(Icons.play_arrow),
-        //         InkWell(
-        //           // лучше вынести в модель или еще куда-нибудь
-        //           onTap: () => Navigator.of(context).pushNamed(
-        //               MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
-        //           // onTap: () => _trailerDialog,
-        //           child: const Text('Трейлер'),
-        //         ),
-        //       ],
-        //     ) : const SizedBox.shrink(),
-        //   ],
-        // ),
-      ],
+              builder: (context, player) {
+                return Column(
+                  children: [
+                    player,
+                  ],
+                );
+              }
+          ) : const SizedBox.shrink(),
+        ],
+      ),
     );
   }
 }
