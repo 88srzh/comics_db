@@ -8,6 +8,8 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_trailer/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/news/components/news_widget_popular.dart';
+import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
+import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
@@ -16,6 +18,7 @@ import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
 abstract class MainNavigationRouteNames {
+  static const splashScreen = 'splashscreen';
   static const auth = 'auth';
   static const mainScreen = '/';
   static const movieDetails = '/movie_details';
@@ -32,10 +35,12 @@ abstract class MainNavigationRouteNames {
 
 class MainNavigation {
   String initialRoute(bool isAuth) => isAuth
+      // ? MainNavigationRouteNames.splashScreen
       ? MainNavigationRouteNames.mainScreen
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
     'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
+    MainNavigationRouteNames.splashScreen: (context) => NotifierProvider(create: () => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
     MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const NewsWidgetPopular()),
     MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
@@ -69,7 +74,8 @@ class MainNavigation {
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
-          builder: (context) => MovieTrailerWidget(youtubeKey: youtubeKey),
+          // builder: (context) => MovieTrailerWidget(youtubeKey: youtubeKey),
+          builder: (context) => TrailerWidget(youtubeKey: youtubeKey),
         );
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;

@@ -1,13 +1,14 @@
 import 'dart:ui';
 
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final appModel = Provider.read<MyAppModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -38,100 +40,31 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     if (movieDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
+    final videos = movieDetails.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty  == true ? videos.first.key : null;
+    String youtubeKey = trailerKey.toString();
+
     return Scaffold(
-      appBar: AppBar(
-        // пропадает стрелочка
-        // automaticallyImplyLeading: false,
-        title: const _TitleAppBarWidget(),
-        shadowColor: Colors.transparent,
-        backgroundColor: Colors.grey[100],
-      ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        children: [
-          Stack(
-          clipBehavior: Clip.hardEdge,
+      body: ColoredBox(
+        color: AppColors.kPrimaryColorNew,
+        child: ListView(
           children: [
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 180,
-                    child: Container(
-                      color: Colors.grey[100],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 150,
-                    child: Container(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                    child: Column(
-                      children: const [
-                        _TitleAndYearWidget(),
-                        SizedBox(height: 5.0,),
-                        _TrailerAndRatingWidget(),
-                        SizedBox(height: 5.0),
-                        // _DirectorWidget(),
-                        SizedBox(height: 5.0),
-                       _YearWidget(),
-                        SizedBox(height: 5.0),
-                       _GenresWidget(),
-                       _DescriptionWidget(),
-                       _PeoplesWidget(),
-                       _CastWidget(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const _TopPosterWidget(),
-            Positioned(
-              top: 40,
-              right: 60,
-              child: IconButton(
-                iconSize: 30,
-                icon: Icon(model?.isFavoriteMovie == true ? Icons.favorite : Icons.favorite_border),
-                onPressed: () => model?.toggleFavoriteMovie(),
-              ),
-            ),
-          ],
+            Column(
+            children: [
+              const _TopPosterWidget(),
+              const _TitleGenresRatingVoteAverageWidget(),
+              const _DescriptionWidget(),
+              TrailerWidget(youtubeKey: youtubeKey),
+                 ],
+                ),
+              ],
         ),
-      ],
       ),
+          );
       // bottomNavigationBar: const _FavoritesButton(),
-    );
   }
 }
-
-
-// class _FavoritesButton extends StatelessWidget {
-//   const _FavoritesButton({
-//     Key? key,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 56.0, vertical: 10.0),
-//       child: ElevatedButton(
-//         onPressed: () {},
-//         child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
-//         style: ButtonStyle(
-//           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-//           backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-//           padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
-//         ),
-//         ),
-//     );
-//   }
-// }
 
 class _DescriptionWidget extends StatelessWidget {
   const _DescriptionWidget({
@@ -142,18 +75,34 @@ class _DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-      child: Row(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Text(model?.movieDetails?.overview ?? 'Загрузка описания...',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 4,
-              style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-              ),
+          const Text('Описание',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w600,
+              // TODO rename text
+              color: AppColors.genresText,
             ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                // Добавить расстояние между строками
+                child: Text(model?.movieDetails?.overview ?? 'Загрузка описания...',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 4,
+                  style: const TextStyle(
+                color: AppColors.genresText,
+                fontSize: 12,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -161,112 +110,68 @@ class _DescriptionWidget extends StatelessWidget {
   }
 }
 
-class _YearWidget extends StatelessWidget {
-  const _YearWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    var year = model?.movieDetails?.releaseDate?.year.toString();
-    return Row(
-      children: [
-        const Text('Год: ', style: TextStyle(color: Colors.grey),),
-        Text(year!, style: const TextStyle(color: Colors.grey),)
-      ],
-    );
-  }
-}
-
-
-class _GenresWidget extends StatelessWidget {
-  const _GenresWidget({
-    Key? key,
+class TrailerWidget extends StatefulWidget {
+  final String youtubeKey;
+     const TrailerWidget({
+       Key? key, required this.youtubeKey
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    if (model == null) return const SizedBox.shrink();
-    var texts = <String>[];
-    final genres = model.movieDetails?.genres;
-    if (genres != null && genres.isNotEmpty) {
-      var genresNames = <String>[];
-      for (var genre in genres) {
-        genresNames.add(genre.name);
-      }
-      texts.add(genresNames.join(', '));
-    }
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(246,246,246, 1.0),
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-              child: Text(
-                texts.join(' '), style: const TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
-        ),
-      ],
+  State<TrailerWidget> createState() => _TrailerWidgetState();
+}
+
+class _TrailerWidgetState extends State<TrailerWidget> {
+  late final YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.youtubeKey,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
     );
   }
-}
-
-class _TrailerAndRatingWidget extends StatefulWidget {
-     const _TrailerAndRatingWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<_TrailerAndRatingWidget> createState() => _TrailerAndRatingWidgetState();
-}
-
-class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
-  // late final YoutubePlayerController _controller;
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    // if (model == null) return const SizedBox.shrink();
     final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
-    // final trailerKeyNew = trailerKey.toString();
-    // String trailerKeyString = trailerKey.toString();
-    // TODO add rating
-    // var rating = model.movieDetails?.voteAverage.toString();
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Трейлер',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 21,
+              color: AppColors.genresText,
 
-    // TODO поменять контроллер в initstate, чтобы инициализировалось один раз при загрузке страницы
-    // _controller = YoutubePlayerController(
-    //   initialVideoId: trailerKeyNew,
-    //   flags: const YoutubePlayerFlags(
-    //     autoPlay: true,
-    //     mute: true,
-    //   ),
-    // );
-    return
-      Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-          trailerKey != null ? Row(
-          children: [
-            const Icon(Icons.play_arrow),
-            InkWell(
-              // лучше вынести в модель или еще куда-нибудь
-              onTap: () => Navigator.of(context).pushNamed(
-                  MainNavigationRouteNames.movieTrailer, arguments: trailerKey),
-              // onTap: () => _trailerDialog,
-              child: const Text('Трейлер'),
             ),
-          ],
-        ) : const SizedBox.shrink(),
-      ],
+          ),
+          const SizedBox(height: 8.0),
+          trailerKey != null ?
+          YoutubePlayerBuilder(
+              player: YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: true,
+              ),
+              builder: (context, player) {
+                return Column(
+                  children: [
+                    player,
+                  ],
+                );
+              }
+          ) : const SizedBox.shrink(),
+        ],
+      ),
     );
   }
 }
@@ -284,8 +189,8 @@ class _TrailerAndRatingWidgetState extends State<_TrailerAndRatingWidget> {
 // }
 
 
-class _TitleAndYearWidget extends StatelessWidget {
-  const _TitleAndYearWidget({
+class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
+  const _TitleGenresRatingVoteAverageWidget({
     Key? key,
   }) : super(key: key);
 
@@ -294,35 +199,132 @@ class _TitleAndYearWidget extends StatelessWidget {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
     var rating = model?.movieDetails?.voteAverage.toString();
     var year = model?.movieDetails?.releaseDate?.year.toString();
-    year = year != null ? ' ($year)' : 'нету года';
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+    var voteAverage = model?.movieDetails?.voteAverage ?? 0;
+    voteAverage = voteAverage * 10;
+
+    // genres
+    if (model == null) return const SizedBox.shrink();
+    var texts = <String>[];
+    final genres = model.movieDetails?.genres;
+    if (genres != null && genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genre in genres) {
+        genresNames.add(genre.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
+    // year = year != null ? ' ($year)' : 'нету года';
+      return Center(
+        child: Column(
           children: [
-            Expanded(
-              child: Text(
-                model?.movieDetails?.title ?? 'Загрузка названия...',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+            const SizedBox(height: 12),
+            Text(model.movieDetails?.title ?? 'Загрузка названия...',
+            style: const TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w600,
+              color: AppColors.titleText,
               ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              texts.join(' '),
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 13,
+                color: AppColors.genresText,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.star, color: AppColors.ratingStar, size: 14),
+                const SizedBox(width: 2),
+                Text(rating ?? '0.0',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+                const Text(' / 10 от themoviedb',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+                const SizedBox(width: 20),
+                const Icon(Icons.thumb_up_alt_outlined, color: AppColors.ratingThumb, size: 14),
+                const SizedBox(width: 2),
+                Text(voteAverage.toStringAsFixed(0) + '%',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+                const Text('от пользователей',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.ratingText,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        ),
-        Row(
-          children: [
-            const Icon(Icons.star_border_outlined, size: 20),
-            const SizedBox(width: 5.0),
-            Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
-          ],
-        ),
-      ],
-    );
+
+        // Это мне понадобится, когда буду добавлять ЖАНРЫ
+
+        // child: Padding(
+        //   padding: const EdgeInsets.only(top: 12.0),
+        //   child: RichText(
+        //     maxLines: 3,
+        //     textAlign: TextAlign.center,
+        //     text: TextSpan(
+        //       children: [
+        //         TextSpan(
+        //           text: model?.movieDetails?.title ?? 'Загрузка названия...',
+        //           style: const TextStyle(
+        //             fontSize: 21,
+        //             fontWeight: FontWeight.w600,
+        //           ),
+        //         ),
+        //         TextSpan(
+        //           text: year,
+        //         ),
+        //       ]
+        //     ),
+        //   ),
+        // ),
+      );
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //   children: [
+    //     Expanded(
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.start,
+    //       children: [
+    //         Expanded(
+    //           child: Text(
+    //             model?.movieDetails?.title ?? 'Загрузка названия...',
+    //             overflow: TextOverflow.ellipsis,
+    //             maxLines: 2,
+    //             style: const TextStyle(
+    //                 fontSize: 20, fontWeight: FontWeight.bold),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //     ),
+    //     Row(
+    //       children: [
+    //         const Icon(Icons.star_border_outlined, size: 20),
+    //         const SizedBox(width: 5.0),
+    //         Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+    //       ],
+    //     ),
+    //   ],
+    // );
   }
 }
 
@@ -334,31 +336,32 @@ class _TopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    var posterPath = model?.movieDetails?.posterPath;
-    // var backdropPath = model?.movieDetails?.backdropPath;
+    final posterPath = model?.movieDetails?.posterPath;
+    final backdropPath = model?.movieDetails?.backdropPath;
     return Stack(
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-            ),
+        Positioned(
+          child: AspectRatio(
+            aspectRatio: 390 / 220,
+            child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 110.0),
             child: SizedBox(
-              height: 295.0,
-              width: 210.0,
+              height: 212.0,
+              width: 174.0,
               child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
-              ),
             ),
+          ),
         ),
         Positioned(
-          top: 20,
-          right: 20,
+          left: 10,
+          top: 10,
           child: IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
           ),
         ),
       ],
