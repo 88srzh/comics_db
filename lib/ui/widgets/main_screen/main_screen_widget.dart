@@ -47,9 +47,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     // просто получение модели без цели
     // final model = NotifierProvider.read<MainScreenModel>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Обзор'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Обзор'),
+      // ),
       body: IndexedStack(
         index: _selectedTab,
         children: [
