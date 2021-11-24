@@ -32,35 +32,75 @@ class MovieListModel extends ChangeNotifier {
     await _resetMovieList();
   }
 
+  Future<void> setupTopRatedMovieLocale(BuildContext context) async {
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    if (_locale == locale) return;
+    _locale = locale;
+    _dateFormat = DateFormat.yMMMd(locale);
+    await _resetTopRatedMovieList();
+  }
+
   Future<void> _resetMovieList() async {
     _currentPage = 0;
     _totalPage = 1;
     _movies.clear();
-    await _loadNextMoviesPage();
+    await _loadNextPopularMoviesPage();
   }
 
-  Future<PopularMovieResponse> _loadMovies(int nextPage, String locale) async {
+  Future<void> _resetTopRatedMovieList() async {
+    _currentPage = 0;
+    _totalPage = 1;
+    _movies.clear();
+    await _loadNextTopRatedMoviesPage();
+  }
+
+  Future<PopularMovieResponse> _loadPopularMovies(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
       return await _apiClient.popularMovie(nextPage, _locale);
     } else {
       return await _apiClient.searchMovie(nextPage, _locale, query);
     }
-
   }
 
-  Future<void> _loadNextMoviesPage() async {
+  Future<PopularMovieResponse> _loadTopRatedMovies(int nextPage, String locale) async {
+    final query = _searchQuery;
+    if (query == null) {
+      return await _apiClient.topRatedMovie(nextPage, _locale);
+    } else {
+      return await _apiClient.searchMovie(nextPage, _locale, query);
+    }
+  }
+
+  Future<void> _loadNextPopularMoviesPage() async {
     if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
 
     try {
-      final moviesResponse = await _loadMovies(nextPage, _locale);
+      final moviesResponse = await _loadPopularMovies(nextPage, _locale);
     _movies.addAll(moviesResponse.movies);
     _currentPage = moviesResponse.page;
     _totalPage = moviesResponse.totalPages;
     _isLoadingInProgress = false;
     notifyListeners();
+    } catch (e) {
+      _isLoadingInProgress = false;
+    }
+  }
+
+  Future<void> _loadNextTopRatedMoviesPage() async {
+    if (_isLoadingInProgress || _currentPage >= _totalPage) return;
+    _isLoadingInProgress = true;
+    final nextPage = _currentPage + 1;
+
+    try {
+      final moviesResponse = await _loadTopRatedMovies(nextPage, _locale);
+      _movies.addAll(moviesResponse.movies);
+      _currentPage = moviesResponse.page;
+      _totalPage = moviesResponse.totalPages;
+      _isLoadingInProgress = false;
+      notifyListeners();
     } catch (e) {
       _isLoadingInProgress = false;
     }
@@ -87,8 +127,23 @@ class MovieListModel extends ChangeNotifier {
     });
   }
 
-  void showedMovieAtIndex(int index) {
+  Future<void> searchTopRatedMovie(String text) async {
+    searchDebounce?.cancel();
+    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
+      final searchQuery = text.isNotEmpty ? text : null;
+      if(_searchQuery == searchQuery) return;
+      _searchQuery = searchQuery;
+      await _resetTopRatedMovieList();
+    });
+  }
+
+  void showedPopularMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
-    _loadNextMoviesPage();
+    _loadNextPopularMoviesPage();
+  }
+
+  void showedTopRatedMovieAtIndex(int index) {
+    if (index < _movies.length - 1) return;
+    _loadNextTopRatedMoviesPage();
   }
 }

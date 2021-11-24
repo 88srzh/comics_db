@@ -191,6 +191,24 @@ class ApiClient {
     return result;
   }
 
+  Future<PopularMovieResponse> topRatedMovie(int page, String locale) {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularMovieResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/movie/top_rated',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
     Future<PopularMovieResponse> searchMovie(int page, String locale, String query) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;

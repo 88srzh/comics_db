@@ -11,6 +11,7 @@ abstract class AppColors {
   static const ratingStar = Color.fromRGBO(249, 150, 1, 1.0);
   static const ratingThumb = Color.fromRGBO(164, 163, 169, 1.0);
   static const searchIcon = Color.fromRGBO(232, 38, 38, 1.0);
+  static const movieBorderLine = Color.fromRGBO(196, 196, 196, 1.0);
 
   static const Color loginBackground = Colors.deepPurpleAccent;
   static const Color signUpBackground = Color(0xFF000A54);

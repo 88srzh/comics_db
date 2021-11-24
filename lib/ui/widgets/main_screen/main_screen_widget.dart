@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
@@ -21,6 +22,8 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final movieListModel = MovieListModel();
+  final topRatedMovieModel = MovieListModel();
+  // final topRatedMovieModel = TopRatedMovieModel();
   final tvListModel = TVListModel();
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
@@ -40,6 +43,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     trendingAllModel.setupPage(context);
     tvListModel.setupLocale(context);
     settingsModel.setupLocale(context);
+    topRatedMovieModel.setupTopRatedMovieLocale(context);
   }
 
   @override
@@ -55,7 +59,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         children: [
           // TODO: need to add newsListWidget model may be
           NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
-          NotifierProvider(create: () => movieListModel, child: const MovieListWidget()),
+          NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
           NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
           NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
         ],
