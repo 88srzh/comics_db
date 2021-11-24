@@ -16,28 +16,37 @@ class MovieListWidget extends StatelessWidget {
     return Scaffold (
       appBar: AppBar(
         titleSpacing: 0.0,
-        leading: Image.asset(AppImages.movieAppBarLogo),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal:   8.0),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // TODO оптимизировать значки
-              GestureDetector(
-                onTap: () {},
-                  child: const Icon(Icons.search, color: AppColors.searchIcon, size: 30,),
+              Row(
+                children: [
+                  Image.asset(AppImages.movieAppBarLogo)
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                    child: const Icon(Icons.filter_alt_outlined, color: AppColors.ratingThumb, size: 30,),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                  child: const Icon(Icons.menu, color: AppColors.ratingThumb, size: 30,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  // TODO оптимизировать значки
+                  GestureDetector(
+                    onTap: () {},
+                      child: const Icon(Icons.search, color: AppColors.searchIcon, size: 30,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: GestureDetector(
+                      onTap: () {},
+                        child: const Icon(Icons.filter_alt_outlined, color: AppColors.ratingThumb, size: 30,),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                      child: const Icon(Icons.menu, color: AppColors.ratingThumb, size: 30,),
+                  ),
+                ],
               ),
             ],
           ),
