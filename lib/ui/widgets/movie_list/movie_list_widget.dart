@@ -94,10 +94,13 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   ),
                 ),
                 // TODO тут бага с горизонтальным
-                const SizedBox(
-                  height: 285,
-                  child: Scrollbar(
-                      child: _PopularMovieWidget()),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: SizedBox(
+                    height: 200,
+                    child: Scrollbar(
+                        child: _PopularMovieWidget()),
+                  ),
                 ),
               ],
             ),
@@ -253,8 +256,11 @@ class _PopularMovieListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              posterPath != null ? Image.network(
-                  ApiClient.imageUrl(posterPath), width: 340)
+              posterPath != null ? Expanded(
+                child: Image.network(
+                    ApiClient.imageUrl(posterPath) ,
+                ),
+              )
                   : const SizedBox.shrink(),
               // Center(
               //   child: Padding(
@@ -296,11 +302,14 @@ class _TopRatedMovieWidget extends StatelessWidget {
           topRatedMovieModel.showedTopRatedMovieAtIndex(index);
           final topMovie = topRatedMovieModel.movies[index];
           final posterPath = topMovie.posterPath;
-          return _TopRatedMovieListItemWidget(
-              index: index,
-              posterPath: posterPath,
-              movie: topMovie,
-              topMovieModel: topRatedMovieModel);
+          return InkWell(
+            onTap: () => topRatedMovieModel.onMovieTap(context, index),
+            child: _TopRatedMovieListItemWidget(
+                index: index,
+                posterPath: posterPath,
+                movie: topMovie,
+                topMovieModel: topRatedMovieModel),
+          );
         }
     );
   }
@@ -314,7 +323,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     required this.movie,
     required this.topMovieModel,
   }) : super(key: key);
-
+  
   final int index;
   final String? posterPath;
   final Movie movie;
