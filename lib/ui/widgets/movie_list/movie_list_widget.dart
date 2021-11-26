@@ -4,9 +4,7 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -94,7 +92,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   ),
                 ),
                 // TODO тут бага с горизонтальным
-                Padding(
+                const Padding(
                   padding: const EdgeInsets.only(top: 15.0),
                   child: SizedBox(
                     height: 200,

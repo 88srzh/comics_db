@@ -65,7 +65,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: AppColors.kPrimaryColor,
+        backgroundColor: AppColors.bottomBarBackgroundColor,
         initialActiveIndex: 1,
         items: const [
           TabItem<dynamic>(icon: Icons.home, title: 'Новости'),

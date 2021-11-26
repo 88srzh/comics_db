@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            selectedItemColor: AppColors.kPrimaryColor,
-            unselectedItemColor: Colors.grey),
+            selectedItemColor: AppColors.bottomBarBackgroundColor,
+            unselectedItemColor: AppColors.bottomBarIconColor),
       ),
     localizationsDelegates: const [
       GlobalMaterialLocalizations.delegate,
