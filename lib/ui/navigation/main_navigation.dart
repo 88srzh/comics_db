@@ -47,7 +47,8 @@ class MainNavigation {
     MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
     MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
-    MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
+    // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
+    MainNavigationRouteNames.tv: (context) => const TvWidget(),
     // '/': (context) => NotifierProvider(
     //     model: MainScreenModel(), child: const MainScreenWidget()),
     // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),

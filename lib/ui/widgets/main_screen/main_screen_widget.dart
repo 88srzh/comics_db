@@ -11,6 +11,7 @@ import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -60,7 +61,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           // TODO: need to add newsListWidget model may be
           NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
           NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
-          NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
+          // NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
+          ChangeNotifierProvider(create: (context) => tvListModel, child: const TVListWidget()),
+
           NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
         ],
       ),
