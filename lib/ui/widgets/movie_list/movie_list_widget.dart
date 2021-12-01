@@ -5,12 +5,19 @@ import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class MovieListWidget extends StatelessWidget {
+class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MovieListWidget> createState() => _MovieListWidgetState();
+}
+
+class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   Widget build(BuildContext context) {
+    final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    if (topRatedMovieModel == null) return const SizedBox.shrink();
     final model = NotifierProvider.watch<MovieListModel>(context);
     if (model == null) return const SizedBox.shrink();
     return Scaffold (
@@ -59,7 +66,45 @@ class MovieListWidget extends StatelessWidget {
         // ],
         backgroundColor: AppColors.kPrimaryColorNew,
       ),
-      body: Column(),
+      body: ColoredBox(
+        color: AppColors.kPrimaryColorNew,
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 15.0),
+                  child: SizedBox(
+                    height: 285,
+                    child: Scrollbar(
+                        child: _TopRatedMovieWidget()
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('Популярные', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),),
+                      Text('Все', style: TextStyle(color: AppColors.ratingText, fontSize: 15),),
+                    ],
+                  ),
+                ),
+                // TODO тут бага с горизонтальным
+                const Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: SizedBox(
+                    height: 200,
+                    child: Scrollbar(
+                        child: _PopularMovieWidget()),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       // body: Stack(
       //   children: [
       //     // TODO FIX doesn't work
@@ -145,47 +190,238 @@ class MovieListWidget extends StatelessWidget {
   }
 }
 
-class MovieCard extends StatelessWidget {
-  const MovieCard({
-    Key? key,
-    required this.movie,
-    required this.model,
-  }) : super(key: key);
-
-  final Movie movie;
-  final MovieListModel? model;
+class _PopularMovieWidget extends StatelessWidget {
+  const _PopularMovieWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieListModel>(context);
-    if (model == null) return const SizedBox.shrink();
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20.0),
-          Text(
-            movie.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold),
+    final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    if (popularMovieModel == null) return const SizedBox.shrink();
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: popularMovieModel.movies.length,
+        itemExtent: 200,
+        itemBuilder: (BuildContext context, int index) {
+          popularMovieModel.showedPopularMovieAtIndex(index);
+          final popularMovie = popularMovieModel.movies[index];
+          final posterPath = popularMovie.posterPath;
+          return _PopularMovieListItemWidget(
+              index: index,
+              posterPath: posterPath,
+              movie: popularMovie,
+              popularMovieModel: popularMovieModel);
+        }
+    );
+  }
+}
+
+class _PopularMovieListItemWidget extends StatelessWidget {
+  const _PopularMovieListItemWidget({
+    Key? key,
+    required this.index,
+    required this.posterPath,
+    required this.movie,
+    required this.popularMovieModel,
+  }) : super(key: key);
+
+  final int index;
+  final String? posterPath;
+  final Movie movie;
+  final MovieListModel? popularMovieModel;
+
+  @override
+  Widget build(BuildContext context) {
+    final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    final popularMovie = popularMovieModel?.movies[index];
+    final posterPath = popularMovie?.posterPath;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.2)),
+          borderRadius: const BorderRadius.all(Radius.circular(28)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0,2),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(28)),
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            children: [
+              posterPath != null ? Expanded(
+                child: Image.network(
+                    ApiClient.imageUrl(posterPath) ,
+                ),
+              )
+                  : const SizedBox.shrink(),
+              // Center(
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 10, right: 10),
+              //     // TODO second line not center
+              //     child: Text(
+              //       title != null ? title : 'Нет названия',
+              //       maxLines: 2,
+              //       style: const TextStyle(
+              //         fontWeight: FontWeight.w800,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
+              //   child: Text(topRatedMovieModel!.stringFromDate(topMovie!.releaseDate)),
+              // ),
+            ],
           ),
-          const SizedBox(height: 5.0),
-          Text(
-            model.stringFromDate(movie.releaseDate),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: Colors.grey),
-          ),
-          const SizedBox(height: 20.0),
-          Text(
-            movie.overview,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+        ),
       ),
     );
   }
 }
+
+class _TopRatedMovieWidget extends StatelessWidget {
+  const _TopRatedMovieWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    if (topRatedMovieModel == null) return const SizedBox.shrink();
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+        itemCount: topRatedMovieModel.movies.length,
+        itemExtent: 200,
+        itemBuilder: (BuildContext context, int index) {
+          topRatedMovieModel.showedTopRatedMovieAtIndex(index);
+          final topMovie = topRatedMovieModel.movies[index];
+          final posterPath = topMovie.posterPath;
+          return InkWell(
+            onTap: () => topRatedMovieModel.onMovieTap(context, index),
+            child: _TopRatedMovieListItemWidget(
+                index: index,
+                posterPath: posterPath,
+                movie: topMovie,
+                topMovieModel: topRatedMovieModel),
+          );
+        }
+    );
+  }
+}
+
+class _TopRatedMovieListItemWidget extends StatelessWidget {
+  const _TopRatedMovieListItemWidget({
+    Key? key,
+    required this.index,
+    required this.posterPath,
+    required this.movie,
+    required this.topMovieModel,
+  }) : super(key: key);
+  
+  final int index;
+  final String? posterPath;
+  final Movie movie;
+  final MovieListModel? topMovieModel;
+
+  @override
+  Widget build(BuildContext context) {
+    final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    final topMovie = topRatedMovieModel?.movies[index];
+    final posterPath = topMovie?.posterPath;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.2)),
+          borderRadius: const BorderRadius.all(Radius.circular(28)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0,2),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(28)),
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            children: [
+              posterPath != null ? Image.network(
+                  ApiClient.imageUrl(posterPath), width: 340)
+                  : const SizedBox.shrink(),
+              // Center(
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 10, right: 10),
+              //     // TODO second line not center
+              //     child: Text(
+              //       title != null ? title : 'Нет названия',
+              //       maxLines: 2,
+              //       style: const TextStyle(
+              //         fontWeight: FontWeight.w800,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
+              //   child: Text(topRatedMovieModel!.stringFromDate(topMovie!.releaseDate)),
+              // ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+// class MovieCard extends StatelessWidget {
+//   const MovieCard({
+//     Key? key,
+//     required this.movie,
+//     required this.model,
+//   }) : super(key: key);
+//
+//   final Movie movie;
+//   final MovieListModel? model;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final model = NotifierProvider.watch<MovieListModel>(context);
+//     if (model == null) return const SizedBox.shrink();
+//     return Expanded(
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           const SizedBox(height: 20.0),
+//           Text(
+//             movie.title,
+//             maxLines: 1,
+//             overflow: TextOverflow.ellipsis,
+//             style: const TextStyle(
+//                 fontWeight: FontWeight.bold),
+//           ),
+//           const SizedBox(height: 5.0),
+//           Text(
+//             model.stringFromDate(movie.releaseDate),
+//             maxLines: 1,
+//             overflow: TextOverflow.ellipsis,
+//             style: const TextStyle(color: Colors.grey),
+//           ),
+//           const SizedBox(height: 20.0),
+//           Text(
+//             movie.overview,
+//             maxLines: 2,
+//             overflow: TextOverflow.ellipsis,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

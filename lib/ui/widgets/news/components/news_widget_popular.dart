@@ -79,7 +79,7 @@ class _PopularMoviesWidget extends StatelessWidget {
       itemCount: movieModel.movies.length,
       itemExtent: 200,
       itemBuilder: (BuildContext context, int index) {
-        movieModel.showedMovieAtIndex(index);
+        movieModel.showedPopularMovieAtIndex(index);
         final movie = movieModel.movies[index];
         final posterPath = movie.posterPath;
         return _MovieListItemWidget(

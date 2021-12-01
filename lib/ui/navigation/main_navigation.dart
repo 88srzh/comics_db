@@ -6,6 +6,8 @@ import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_trailer/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
@@ -31,6 +33,7 @@ abstract class MainNavigationRouteNames {
   static const networkConnectionError = '/errors/network_connection';
   static const movieTrailer = '/movie_details/trailer';
   static const tvTrailer = '/tv_details/trailer';
+  static const topRatedMovie = '/topRatedMovie';
 }
 
 class MainNavigation {
@@ -42,7 +45,8 @@ class MainNavigation {
     'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
     MainNavigationRouteNames.splashScreen: (context) => NotifierProvider(create: () => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
-    MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const NewsWidgetPopular()),
+    MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
+    MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     // '/': (context) => NotifierProvider(
     //     model: MainScreenModel(), child: const MainScreenWidget()),
