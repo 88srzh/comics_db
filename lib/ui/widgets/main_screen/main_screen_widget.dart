@@ -25,7 +25,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final movieListModel = MovieListModel();
   final topRatedMovieModel = MovieListModel();
   // final topRatedMovieModel = TopRatedMovieModel();
-  final tvListModel = TVListModel();
+  final tvListModel = TvListModel();
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -62,7 +62,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
           NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
           // NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
-          ChangeNotifierProvider(create: (context) => tvListModel, child: const TVListWidget()),
+          ChangeNotifierProvider(create: (context) => tvListModel, child: const TvListWidget()),
 
           NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
         ],

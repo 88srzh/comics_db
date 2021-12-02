@@ -1,30 +1,26 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TvWidget extends StatefulWidget {
+class TvWidget extends StatelessWidget {
   const TvWidget({Key? key}) : super(key: key);
-
-  @override
-  _TvWidgetState createState() => _TvWidgetState();
-}
-
-class _TvWidgetState extends State<TvWidget> {
   @override
   // TODO возможно сделать виджет закрытым
-  Widget build(BuildContext context) => ChangeNotifierProvider(create: (context) => TVListModel(), child: const TVListWidget());
+  Widget build(BuildContext context) => ChangeNotifierProvider(create: (context) => TvListModel(), child: const TvListWidget());
 }
 
 
-class TVListWidget extends StatelessWidget {
-  const TVListWidget({Key? key}) : super(key: key);
+class TvListWidget extends StatelessWidget {
+  const TvListWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // final model = NotifierProvider.watch<TVListModel>(context);
-    final model = context.watch<TVListModel>();
+
+    // TODO не могу добавить пока не уберу кастомный провайдер
+    // Provider.of<TvListModel>(context, listen: true);
+    final model = context.watch<TvListModel>();
     if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [

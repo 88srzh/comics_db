@@ -7,7 +7,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class TVListModel extends ChangeNotifier {
+class TvListModel extends ChangeNotifier {
   final _apiClient = ApiClient();
   final _tvs = <TV>[];
   late int _currentPage;
