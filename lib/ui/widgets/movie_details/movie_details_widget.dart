@@ -23,7 +23,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void initState() {
     super.initState();
     final model = NotifierProvider.read<MovieDetailsModel>(context);
-    final appModel = Provider.read<MyAppModel>(context);
+    final appModel = ProviderCustom.read<MyAppModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
   }
 

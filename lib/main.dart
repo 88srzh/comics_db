@@ -9,6 +9,6 @@ void main() async {
   final model = MyAppModel();
   await model.checkAuth();
   const app = MyApp();
-  final widget = Provider(model: model,child: app);
+  final widget = ProviderCustom(model: model,child: app);
   runApp(widget);
 }

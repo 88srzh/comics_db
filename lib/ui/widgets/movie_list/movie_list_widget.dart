@@ -4,7 +4,18 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class MovieWidget extends StatelessWidget {
+  const MovieWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => MovieListModel(), child: const MovieListWidget());
+}
+
 
 class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -16,10 +27,11 @@ class MovieListWidget extends StatefulWidget {
 class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    // final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    final topRatedMovieModel = context.watch<MovieListModel>();
     if (topRatedMovieModel == null) return const SizedBox.shrink();
-    final model = NotifierProvider.watch<MovieListModel>(context);
-    if (model == null) return const SizedBox.shrink();
+    // final model = NotifierProvider.watch<MovieListModel>(context);
+    // if (model == null) return const SizedBox.shrink();
     return Scaffold (
       appBar: AppBar(
         titleSpacing: 0.0,
@@ -195,7 +207,8 @@ class _PopularMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    final popularMovieModel = context.watch<MovieListModel>();
+    // final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
     if (popularMovieModel == null) return const SizedBox.shrink();
     return ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -231,7 +244,9 @@ class _PopularMovieListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    final popularMovieModel = context.watch<MovieListModel>();
+    if (popularMovieModel == null) return SizedBox.shrink();
+    // final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
     final popularMovie = popularMovieModel?.movies[index];
     final posterPath = popularMovie?.posterPath;
     return Padding(
@@ -290,14 +305,16 @@ class _TopRatedMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
+    // final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
     if (topRatedMovieModel == null) return const SizedBox.shrink();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
         itemCount: topRatedMovieModel.movies.length,
         itemExtent: 200,
         itemBuilder: (BuildContext context, int index) {
-          topRatedMovieModel.showedTopRatedMovieAtIndex(index);
+          topRatedMovieModel.showedMovieAtIndex(index);
           final topMovie = topRatedMovieModel.movies[index];
           final posterPath = topMovie.posterPath;
           return InkWell(
@@ -325,11 +342,13 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
   final int index;
   final String? posterPath;
   final Movie movie;
-  final MovieListModel? topMovieModel;
+  final TopRatedMovieModel? topMovieModel;
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
+    final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
+    // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    // final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
     final topMovie = topRatedMovieModel?.movies[index];
     final posterPath = topMovie?.posterPath;
     return Padding(

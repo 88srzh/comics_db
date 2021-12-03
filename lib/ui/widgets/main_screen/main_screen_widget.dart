@@ -23,7 +23,7 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final movieListModel = MovieListModel();
-  final topRatedMovieModel = MovieListModel();
+  final topRatedMovieModel = TopRatedMovieModel();
   // final topRatedMovieModel = TopRatedMovieModel();
   final tvListModel = TvListModel();
   final trendingAllModel = TrendingAllModel();
@@ -44,7 +44,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     trendingAllModel.setupPage(context);
     tvListModel.setupLocale(context);
     settingsModel.setupLocale(context);
-    topRatedMovieModel.setupTopRatedMovieLocale(context);
+    topRatedMovieModel.setupLocale(context);
   }
 
   @override
@@ -60,7 +60,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         children: [
           // TODO: need to add newsListWidget model may be
           NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
-          NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
+          // NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
+          MultiProvider(providers: [
+            // ListenableProvider(create: (_) => topRatedMovieModel),
+            // ListenableProvider(create: (_) => movieListModel),
+            ChangeNotifierProvider(create: (_) => topRatedMovieModel),
+            ChangeNotifierProvider(create: (_) => movieListModel),
+          ],
+          child: const MovieListWidget(),
+          ),
           // NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
           ChangeNotifierProvider(create: (context) => tvListModel, child: const TvListWidget()),
 

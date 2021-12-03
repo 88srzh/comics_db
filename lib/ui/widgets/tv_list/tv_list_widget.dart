@@ -8,7 +8,8 @@ class TvWidget extends StatelessWidget {
   const TvWidget({Key? key}) : super(key: key);
   @override
   // TODO возможно сделать виджет закрытым
-  Widget build(BuildContext context) => ChangeNotifierProvider(create: (context) => TvListModel(), child: const TvListWidget());
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => TvListModel(), child: const TvListWidget());
 }
 
 
@@ -19,8 +20,8 @@ class TvListWidget extends StatelessWidget {
     // final model = NotifierProvider.watch<TVListModel>(context);
 
     // TODO не могу добавить пока не уберу кастомный провайдер
-    // Provider.of<TvListModel>(context, listen: true);
-    final model = context.watch<TvListModel>();
+    final model = Provider.of<TvListModel>(context, listen: true);
+    // final model = context.watch<TvListModel>();
     if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [
