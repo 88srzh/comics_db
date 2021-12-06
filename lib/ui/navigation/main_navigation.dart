@@ -18,6 +18,7 @@ import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 abstract class MainNavigationRouteNames {
   static const splashScreen = 'splashscreen';
@@ -45,7 +46,8 @@ class MainNavigation {
     'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
     MainNavigationRouteNames.splashScreen: (context) => NotifierProvider(create: () => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
-    MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
+    // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
+    MainNavigationRouteNames.popularMovie: (context) => const MovieWidget(),
     MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
@@ -60,12 +62,19 @@ class MainNavigation {
       case MainNavigationRouteNames.movieDetails:
         final arguments = settings.arguments;
         final movieId = arguments is int ? arguments : 0;
+        // final movieId = arguments is int;
         return MaterialPageRoute(
-            builder: (context) => NotifierProvider(
-                create: () => MovieDetailsModel(movieId),
-                child: const MovieDetailsWidget(),
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => MovieDetailsModel(movieId),
+              child: const MovieDetailsWidget(),
             ),
         );
+        // return MaterialPageRoute(
+        //     builder: (context) => NotifierProvider(
+        //         create: () => MovieDetailsModel(movieId),
+        //         child: const MovieDetailsWidget(),
+        //     ),
+        // );
       case MainNavigationRouteNames.tvDetails:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;

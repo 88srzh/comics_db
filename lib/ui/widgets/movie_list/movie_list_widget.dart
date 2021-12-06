@@ -1,7 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
@@ -28,7 +27,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   Widget build(BuildContext context) {
     // final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
-    final topRatedMovieModel = context.watch<MovieListModel>();
+    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     if (topRatedMovieModel == null) return const SizedBox.shrink();
     // final model = NotifierProvider.watch<MovieListModel>(context);
     // if (model == null) return const SizedBox.shrink();
@@ -218,11 +217,14 @@ class _PopularMovieWidget extends StatelessWidget {
           popularMovieModel.showedPopularMovieAtIndex(index);
           final popularMovie = popularMovieModel.movies[index];
           final posterPath = popularMovie.posterPath;
-          return _PopularMovieListItemWidget(
-              index: index,
-              posterPath: posterPath,
-              movie: popularMovie,
-              popularMovieModel: popularMovieModel);
+          return InkWell(
+            onTap: () => popularMovieModel.onMovieTap(context, index),
+            child: _PopularMovieListItemWidget(
+                index: index,
+                posterPath: posterPath,
+                movie: popularMovie,
+                popularMovieModel: popularMovieModel),
+          );
         }
     );
   }

@@ -9,6 +9,7 @@ import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:provider/provider.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
@@ -25,17 +26,23 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final model = NotifierProvider.read<MovieDetailsModel>(context);
     final appModel = ProviderCustom.read<MyAppModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
+
+    // final model = Provider.of<MovieDetailsModel>(context, listen: false);
+    // final appModel = Provider.of<MyAppModel>(context, listen: false);
+    // model?.onSessionExpired = () => appModel?.resetSession(context);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
+    // NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
+    Provider.of<MovieDetailsModel>(context, listen: false)?.setupLocale(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final model = Provider.of<MovieDetailsModel>(context);
     final movieDetails = model?.movieDetails;
     if (movieDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
@@ -53,9 +60,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
             Column(
             children: [
               const _TopPosterWidget(),
-              const _TitleGenresRatingVoteAverageWidget(),
-              const _DescriptionWidget(),
-              TrailerWidget(youtubeKey: youtubeKey),
+              // const _TitleGenresRatingVoteAverageWidget(),
+              // const _DescriptionWidget(),
+              // TrailerWidget(youtubeKey: youtubeKey),
                  ],
                 ),
               ],
@@ -335,7 +342,8 @@ class _TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final model = Provider.of<MovieDetailsModel>(context, listen: true);
     final posterPath = model?.movieDetails?.posterPath;
     final backdropPath = model?.movieDetails?.backdropPath;
     return Stack(
