@@ -371,6 +371,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(28)),
           clipBehavior: Clip.hardEdge,
+          // TODO: Добавить флекс, не влезает по высоте
           child: Column(
             children: [
               posterPath != null ? Image.network(

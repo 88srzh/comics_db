@@ -23,6 +23,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void initState() {
     super.initState();
+    // TODO: ХЗ как исправить на стандартный провайдер, смотреть в main где ProviderCustom
     final model = NotifierProvider.read<MovieDetailsModel>(context);
     final appModel = ProviderCustom.read<MyAppModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
@@ -60,9 +61,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
             Column(
             children: [
               const _TopPosterWidget(),
-              // const _TitleGenresRatingVoteAverageWidget(),
-              // const _DescriptionWidget(),
-              // TrailerWidget(youtubeKey: youtubeKey),
+              const _TitleGenresRatingVoteAverageWidget(),
+              const _DescriptionWidget(),
+              TrailerWidget(youtubeKey: youtubeKey),
                  ],
                 ),
               ],
@@ -80,7 +81,8 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final model = Provider.of<MovieDetailsModel>(context, listen: true);
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -145,7 +147,8 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    // final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    final movieDetails = Provider.of<MovieDetailsModel>(context, listen: true)?.movieDetails;
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
@@ -203,7 +206,8 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final model = Provider.of<MovieDetailsModel>(context, listen: true);
     var rating = model?.movieDetails?.voteAverage.toString();
     var year = model?.movieDetails?.releaseDate?.year.toString();
     var voteAverage = model?.movieDetails?.voteAverage ?? 0;
