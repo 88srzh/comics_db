@@ -163,12 +163,13 @@ class _PopularMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = context.watch<MovieListModel>();
+    // final popularMovieModel = context.watch<MovieListModel>();
+    final popularMovieModel = Provider.of<MovieListModel>(context, listen: true);
     // if (popularMovieModel == null) return const SizedBox.shrink();
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: popularMovieModel.movies.length,
-        itemExtent: 200,
+        itemExtent: 110,
         itemBuilder: (BuildContext context, int index) {
           popularMovieModel.showedPopularMovieAtIndex(index);
           final popularMovie = popularMovieModel.movies[index];
@@ -207,43 +208,15 @@ class _PopularMovieListItemWidget extends StatelessWidget {
     // if (popularMovieModel == null) return const SizedBox.shrink();
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: SizedBox(
+    return SizedBox(
+      child: Container(
+        height: 150,
         width: 100,
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(28)),
-          clipBehavior: Clip.hardEdge,
-          child: posterPath != null ?
-              Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
-          // child: Column(
-            // children: [
-            //   posterPath != null ? Expanded(
-            //     child: Image.network(
-            //         ApiClient.imageUrl(posterPath) ,
-            //     ),
-            //   )
-            //       : const SizedBox.shrink(),
-              // Center(
-              //   child: Padding(
-              //     padding: const EdgeInsets.only(left: 10, right: 10),
-              //     // TODO second line not center
-              //     child: Text(
-              //       title != null ? title : 'Нет названия',
-              //       maxLines: 2,
-              //       style: const TextStyle(
-              //         fontWeight: FontWeight.w800,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
-              //   child: Text(topRatedMovieModel!.stringFromDate(topMovie!.releaseDate)),
-              // ),
-            // ],
-          ),
-      ),
+        // borderRadius: const BorderRadius.all(Radius.circular(28)),
+        // clipBehavior: Clip.hardEdge,
+        child: posterPath != null ?
+            Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+        ),
     );
   }
 }
@@ -258,16 +231,17 @@ class _TopRatedMovieWidget extends StatelessWidget {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
         itemCount: topRatedMovieModel.movies.length,
-        itemExtent: 200,
+        // itemExtent: 300,
         itemBuilder: (BuildContext context, int index) {
           topRatedMovieModel.showedMovieAtIndex(index);
           final topMovie = topRatedMovieModel.movies[index];
           final posterPath = topMovie.posterPath;
+          final backdropPath = topMovie.backdropPath;
           return InkWell(
             onTap: () => topRatedMovieModel.onMovieTap(context, index),
             child: _TopRatedMovieListItemWidget(
                 index: index,
-                posterPath: posterPath,
+                backdropPath: backdropPath,
                 movie: topMovie,
                 topMovieModel: topRatedMovieModel),
           );
@@ -280,13 +254,13 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
   const _TopRatedMovieListItemWidget({
     Key? key,
     required this.index,
-    required this.posterPath,
+    required this.backdropPath,
     required this.movie,
     required this.topMovieModel,
   }) : super(key: key);
   
   final int index;
-  final String? posterPath;
+  final String? backdropPath;
   final Movie movie;
   final TopRatedMovieModel? topMovieModel;
 
@@ -295,34 +269,40 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
     final topMovie = topRatedMovieModel.movies[index];
     final posterPath = topMovie.posterPath;
+    final backdropPath = topMovie.backdropPath;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black.withOpacity(0.2)),
-          borderRadius: const BorderRadius.all(Radius.circular(28)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0,2),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(28)),
-          clipBehavior: Clip.hardEdge,
-          // TODO: Добавить флекс, не влезает по высоте
-          child: Column(
-            children: [
-              posterPath != null ? Image.network(
-                  ApiClient.imageUrl(posterPath), width: 340)
-                  : const SizedBox.shrink(),
-            ],
+      // child: DecoratedBox(
+      //   decoration: BoxDecoration(
+      //     color: Colors.white,
+      //     border: Border.all(color: Colors.black.withOpacity(0.2)),
+      //     borderRadius: const BorderRadius.all(Radius.circular(28)),
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.purple.withOpacity(0.1),
+      //         blurRadius: 8,
+      //         offset: const Offset(0,2),
+      //       ),
+      //     ],
+      //   ),
+        child: Container(
+          height: 200,
+          width: 200,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(28)),
           ),
-        ),
-      ),
+          // borderRadius: const BorderRadius.all(Radius.circular(28)),
+          // clipBehavior: Clip.hardEdge,
+          // TODO: Добавить флекс, не влезает по высоте
+          child: posterPath != null ? Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
+              // posterPath != null ? Image.network(
+              //     ApiClient.imageUrl(backdropPath!))
+              //     : const SizedBox.shrink(),
+
+          ),
     );
+        // ),
+      // ),
+    // );
   }
 }
