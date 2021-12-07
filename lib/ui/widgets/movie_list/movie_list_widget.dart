@@ -87,9 +87,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   padding: EdgeInsets.only(top: 15.0),
                   child: SizedBox(
                     height: 285,
-                    child: Scrollbar(
-                        child: _TopRatedMovieWidget()
-                    ),
+                    child: _TopRatedMovieWidget(),
                   ),
                 ),
                 Padding(
@@ -102,22 +100,17 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     ],
                   ),
                 ),
-                // TODO тут бага с горизонтальным
-                const Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: SizedBox(
-                    height: 200,
-                    child: Scrollbar(
-                        child: _PopularMovieWidget()),
-                  ),
+                // TODO тут бага с горизонтальным, ровно 2 элемента влезает
+         Container(
+           height: 150,
+             child: _PopularMovieWidget()),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-      // body: Stack(
-      //   children: [
+                  ),
+
+      );
       //     // TODO FIX doesn't work
       //     AnimationLimiter(
       //       child: ListView.builder(
@@ -172,32 +165,6 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       //             );
       //           }),
       //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.all(10.0),
-      //       child: TextField(
-      //         onChanged: model.searchMovie,
-      //         decoration: InputDecoration(
-      //           labelText: 'Поиск',
-      //           labelStyle: const TextStyle(
-      //             color: AppColors.kPrimaryColor,
-      //           ),
-      //           filled: true,
-      //           fillColor: Colors.white.withAlpha(235),
-      //           border: OutlineInputBorder(
-      //             borderRadius: BorderRadius.circular(10.0),
-      //           ),
-      //           focusedBorder: const OutlineInputBorder(
-      //             borderSide: BorderSide(color: AppColors.kPrimaryColor),
-      //           ),
-      //           enabledBorder: const OutlineInputBorder(
-      //             borderSide: BorderSide(color: AppColors.kPrimaryColor),
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
-    );
   }
 }
 
@@ -207,8 +174,7 @@ class _PopularMovieWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final popularMovieModel = context.watch<MovieListModel>();
-    // final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
-    if (popularMovieModel == null) return const SizedBox.shrink();
+    // if (popularMovieModel == null) return const SizedBox.shrink();
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: popularMovieModel.movies.length,
@@ -223,7 +189,8 @@ class _PopularMovieWidget extends StatelessWidget {
                 index: index,
                 posterPath: posterPath,
                 movie: popularMovie,
-                popularMovieModel: popularMovieModel),
+                popularMovieModel: popularMovieModel,
+            ),
           );
         }
     );
@@ -246,37 +213,27 @@ class _PopularMovieListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = context.watch<MovieListModel>();
-    if (popularMovieModel == null) return SizedBox.shrink();
-    // final popularMovieModel = NotifierProvider.watch<MovieListModel>(context);
-    final popularMovie = popularMovieModel?.movies[index];
-    final posterPath = popularMovie?.posterPath;
+    final popularMovieModel = Provider.of<MovieListModel>(context, listen: true);
+    // if (popularMovieModel == null) return const SizedBox.shrink();
+    final popularMovie = popularMovieModel.movies[index];
+    final posterPath = popularMovie.posterPath;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black.withOpacity(0.2)),
-          borderRadius: const BorderRadius.all(Radius.circular(28)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0,2),
-            ),
-          ],
-        ),
+      child: Container(
+        width: 100,
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(28)),
           clipBehavior: Clip.hardEdge,
-          child: Column(
-            children: [
-              posterPath != null ? Expanded(
-                child: Image.network(
-                    ApiClient.imageUrl(posterPath) ,
-                ),
-              )
-                  : const SizedBox.shrink(),
+          child: posterPath != null ?
+              Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+          // child: Column(
+            // children: [
+            //   posterPath != null ? Expanded(
+            //     child: Image.network(
+            //         ApiClient.imageUrl(posterPath) ,
+            //     ),
+            //   )
+            //       : const SizedBox.shrink(),
               // Center(
               //   child: Padding(
               //     padding: const EdgeInsets.only(left: 10, right: 10),
@@ -294,10 +251,10 @@ class _PopularMovieListItemWidget extends StatelessWidget {
               //   padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
               //   child: Text(topRatedMovieModel!.stringFromDate(topMovie!.releaseDate)),
               // ),
-            ],
+            // ],
           ),
-        ),
       ),
+    //   ),
     );
   }
 }
@@ -351,8 +308,8 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
     // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // final topRatedMovieModel = NotifierProvider.watch<MovieListModel>(context);
-    final topMovie = topRatedMovieModel?.movies[index];
-    final posterPath = topMovie?.posterPath;
+    final topMovie = topRatedMovieModel.movies[index];
+    final posterPath = topMovie.posterPath;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: DecoratedBox(

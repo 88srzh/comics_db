@@ -37,14 +37,14 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
-    Provider.of<MovieDetailsModel>(context, listen: false)?.setupLocale(context);
+    Provider.of<MovieDetailsModel>(context, listen: false).setupLocale(context);
   }
 
   @override
   Widget build(BuildContext context) {
     // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context);
-    final movieDetails = model?.movieDetails;
+    final movieDetails = model.movieDetails;
     if (movieDetails == null) {
       return const Center(child: CircularProgressIndicator(),);
     }
@@ -102,7 +102,7 @@ class _DescriptionWidget extends StatelessWidget {
             children: [
               Expanded(
                 // Добавить расстояние между строками
-                child: Text(model?.movieDetails?.overview ?? 'Загрузка описания...',
+                child: Text(model.movieDetails?.overview ?? 'Загрузка описания...',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   style: const TextStyle(
@@ -148,7 +148,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   @override
   Widget build(BuildContext context) {
     // final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
-    final movieDetails = Provider.of<MovieDetailsModel>(context, listen: true)?.movieDetails;
+    final movieDetails = Provider.of<MovieDetailsModel>(context, listen: true).movieDetails;
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty  == true ? videos?.first.key : null;
@@ -208,9 +208,9 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
-    var rating = model?.movieDetails?.voteAverage.toString();
-    var year = model?.movieDetails?.releaseDate?.year.toString();
-    var voteAverage = model?.movieDetails?.voteAverage ?? 0;
+    var rating = model.movieDetails?.voteAverage.toString();
+    var year = model.movieDetails?.releaseDate?.year.toString();
+    var voteAverage = model.movieDetails?.voteAverage ?? 0;
     voteAverage = voteAverage * 10;
 
     // genres
@@ -348,8 +348,8 @@ class _TopPosterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
-    final posterPath = model?.movieDetails?.posterPath;
-    final backdropPath = model?.movieDetails?.backdropPath;
+    final posterPath = model.movieDetails?.posterPath;
+    final backdropPath = model.movieDetails?.backdropPath;
     return Stack(
       children: [
         Positioned(

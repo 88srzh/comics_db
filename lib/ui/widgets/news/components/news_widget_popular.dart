@@ -56,9 +56,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
         const SizedBox(height: 20),
         const SizedBox(
           height: 350,
-          child: Scrollbar(
-            child: _PopularMoviesWidget(),
-          ),
+          child: _PopularMoviesWidget(),
         ),
       ],
     );
