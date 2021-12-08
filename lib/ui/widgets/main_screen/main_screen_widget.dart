@@ -9,6 +9,7 @@ import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final movieListModel = MovieListModel();
   final topRatedMovieModel = TopRatedMovieModel();
+  final upcomingMovieModel = UpcomingMovieModel();
   // final topRatedMovieModel = TopRatedMovieModel();
   final tvListModel = TvListModel();
   final trendingAllModel = TrendingAllModel();
@@ -45,6 +47,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     tvListModel.setupLocale(context);
     settingsModel.setupLocale(context);
     topRatedMovieModel.setupLocale(context);
+    upcomingMovieModel.setupLocale(context);
   }
 
   @override
@@ -66,6 +69,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             // ListenableProvider(create: (_) => movieListModel),
             ChangeNotifierProvider(create: (_) => topRatedMovieModel),
             ChangeNotifierProvider(create: (_) => movieListModel),
+            ChangeNotifierProvider(create: (_) => upcomingMovieModel),
           ],
           child: const MovieListWidget(),
           ),

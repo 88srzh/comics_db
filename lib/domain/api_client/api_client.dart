@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
-import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
+import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
+import 'package:comics_db_app/domain/entity/upcoming_movie_response.dart';
 
 /*
 1. нет сети
@@ -173,10 +174,10 @@ class ApiClient {
     return result;
   }
 
-  Future<PopularMovieResponse> popularMovie(int page, String locale) async {
+  Future<PopularAndTopRatedMovieResponse> popularMovie(int page, String locale) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularMovieResponse.fromJson(jsonMap);
+      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
       return response;
     };
     final result = _get(
@@ -191,10 +192,10 @@ class ApiClient {
     return result;
   }
 
-  Future<PopularMovieResponse> topRatedMovie(int page, String locale) {
+  Future<PopularAndTopRatedMovieResponse> topRatedMovie(int page, String locale) {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularMovieResponse.fromJson(jsonMap);
+      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
       return response;
     };
     final result = _get(
@@ -209,10 +210,48 @@ class ApiClient {
     return result;
   }
 
-    Future<PopularMovieResponse> searchMovie(int page, String locale, String query) async {
+  Future<PopularAndTopRatedMovieResponse> upcomingMovie(int page, String locale) {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularMovieResponse.fromJson(jsonMap);
+      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/movie/upcoming',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
+    Future<PopularAndTopRatedMovieResponse> searchMovie(int page, String locale, String query) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/search/movie',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'query': query,
+        'include_adult': true.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<PopularAndTopRatedMovieResponse> searchUpcomingMovie(int page, String locale, String query) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
       return response;
     };
     final result = _get(

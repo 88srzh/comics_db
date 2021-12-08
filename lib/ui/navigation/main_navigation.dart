@@ -35,6 +35,7 @@ abstract class MainNavigationRouteNames {
   static const movieTrailer = '/movie_details/trailer';
   static const tvTrailer = '/tv_details/trailer';
   static const topRatedMovie = '/topRatedMovie';
+  static const upcomingMovie = '/upcomingMovie';
 }
 
 class MainNavigation {
@@ -51,6 +52,7 @@ class MainNavigation {
     MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
+    MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
     // '/': (context) => NotifierProvider(
     //     model: MainScreenModel(), child: const MainScreenWidget()),
     // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
@@ -75,6 +77,7 @@ class MainNavigation {
         //         child: const MovieDetailsWidget(),
         //     ),
         // );
+    // TODO: изменить старый провайдер
       case MainNavigationRouteNames.tvDetails:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;

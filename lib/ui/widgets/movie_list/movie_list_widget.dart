@@ -4,6 +4,7 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
+import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ class MovieWidget extends StatelessWidget {
   const MovieWidget({Key? key}) : super(key: key);
 
   @override
+  //TODO не совсем понимаю зачем тут модель одна передается, если используется минимум 3
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (context) => MovieListModel(), child: const MovieListWidget());
 }
@@ -77,7 +79,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                 const Padding(
                   padding: EdgeInsets.only(top: 15.0),
                   child: SizedBox(
-                    height: 285,
+                    height: 220,
                     child: _TopRatedMovieWidget(),
                   ),
                 ),
@@ -91,11 +93,24 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     ],
                   ),
                 ),
-                // TODO тут бага с горизонтальным, ровно 2 элемента влезает
          const SizedBox(
-           height: 150,
+           height: 200,
              child: _PopularMovieWidget(),
                      ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('Скоро', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                    ],
+                  ),
+                ),
+          const SizedBox(
+                  height: 160,
+                  width: 335,
+                  child: _ComingSoonMovieWidget(),
+                ),
                   ],
                 ),
               ],
@@ -157,6 +172,69 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       //     ),
   }
 }
+
+class _ComingSoonMovieWidget extends StatelessWidget {
+  const _ComingSoonMovieWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
+    // if (popularMovieModel == null) return const SizedBox.shrink();
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: upcomingMovieModel.movies.length,
+        itemExtent: 110,
+        itemBuilder: (BuildContext context, int index) {
+          upcomingMovieModel.showedMovieAtIndex(index);
+          final upcomingMovie = upcomingMovieModel.movies[index];
+          final posterPath = upcomingMovie.posterPath;
+          return InkWell(
+            onTap: () => upcomingMovieModel.onMovieTap(context, index),
+            child: _ComingSoonListItemWidget(
+              index: index,
+              posterPath: posterPath,
+              movie: upcomingMovie,
+              upcomingMovieModel: upcomingMovieModel,
+            ),
+          );
+        }
+    );
+  }
+}
+
+class _ComingSoonListItemWidget extends StatelessWidget {
+  const _ComingSoonListItemWidget({
+    Key? key,
+    required this.index,
+    required this.posterPath,
+    required this.movie,
+    required this.upcomingMovieModel,
+  }) : super(key: key);
+
+  final int index;
+  final String? posterPath;
+  final Movie movie;
+  final UpcomingMovieModel? upcomingMovieModel;
+
+  @override
+  Widget build(BuildContext context) {
+    final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
+    // if (popularMovieModel == null) return const SizedBox.shrink();
+    final upcomingMovie = upcomingMovieModel.movies[index];
+    final posterPath = upcomingMovie.posterPath;
+    return Container(
+      height: 160,
+      width: 335,
+      // borderRadius: const BorderRadius.all(Radius.circular(28)),
+      // clipBehavior: Clip.hardEdge,
+      child: posterPath != null ?
+      Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+    );
+  }
+}
+
+
+
 
 class _PopularMovieWidget extends StatelessWidget {
   const _PopularMovieWidget({Key? key}) : super(key: key);
@@ -285,21 +363,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
       //       ),
       //     ],
       //   ),
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(28)),
-          ),
-          // borderRadius: const BorderRadius.all(Radius.circular(28)),
-          // clipBehavior: Clip.hardEdge,
-          // TODO: Добавить флекс, не влезает по высоте
-          child: posterPath != null ? Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
-              // posterPath != null ? Image.network(
-              //     ApiClient.imageUrl(backdropPath!))
-              //     : const SizedBox.shrink(),
-
-          ),
+        child: posterPath != null ? Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
     );
         // ),
       // ),
