@@ -107,6 +107,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   ),
                 ),
           const SizedBox(
+            // TODO: поменять на другой слайдер
                   height: 160,
                   child: _ComingSoonMovieWidget(),
                 ),
@@ -222,18 +223,21 @@ class _ComingSoonListItemWidget extends StatelessWidget {
     final upcomingMovie = upcomingMovieModel.movies[index];
     final posterPath = upcomingMovie.posterPath;
     final backdropPath = upcomingMovie.backdropPath;
-    return Container(
-      height: 160,
-      width: 335,
-      clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
-        color: AppColors.movieBorderLine,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-      child: FittedBox(
-        child: posterPath != null ?
-        Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
-        fit: BoxFit.fill,
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Container(
+        height: 160,
+        width: 335,
+        clipBehavior: Clip.antiAlias,
+        decoration: const BoxDecoration(
+          color: AppColors.movieBorderLine,
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+        child: FittedBox(
+          child: posterPath != null ?
+          Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
