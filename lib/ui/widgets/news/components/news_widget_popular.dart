@@ -56,9 +56,7 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
         const SizedBox(height: 20),
         const SizedBox(
           height: 350,
-          child: Scrollbar(
-            child: _PopularMoviesWidget(),
-          ),
+          child: _PopularMoviesWidget(),
         ),
       ],
     );
@@ -130,7 +128,7 @@ class _MovieListItemWidget extends StatelessWidget {
             child: Column(
               children: [
                 posterPath != null ? Image.network(
-                    ApiClient.imageUrl(posterPath), width: 340)
+                    ApiClient.imageUrl(posterPath), width: 190)
                     : const SizedBox.shrink(),
                 Center(
                   child: Padding(

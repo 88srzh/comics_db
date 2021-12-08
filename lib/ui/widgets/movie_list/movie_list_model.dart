@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/popular_movie_response.dart';
+import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -54,7 +54,7 @@ class MovieListModel extends ChangeNotifier {
     await _loadNextTopRatedMoviesPage();
   }
 
-  Future<PopularMovieResponse> _loadPopularMovies(int nextPage, String locale) async {
+  Future<PopularAndTopRatedMovieResponse> _loadPopularMovies(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
       return await _apiClient.popularMovie(nextPage, _locale);
@@ -63,7 +63,7 @@ class MovieListModel extends ChangeNotifier {
     }
   }
 
-  Future<PopularMovieResponse> _loadTopRatedMovies(int nextPage, String locale) async {
+  Future<PopularAndTopRatedMovieResponse> _loadTopRatedMovies(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
       return await _apiClient.topRatedMovie(nextPage, _locale);

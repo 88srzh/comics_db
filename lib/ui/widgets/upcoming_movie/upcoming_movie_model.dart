@@ -4,14 +4,16 @@ import 'dart:async';
 
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/domain/entity/movie_dates.dart';
 import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class TopRatedMovieModel extends ChangeNotifier {
+class UpcomingMovieModel extends ChangeNotifier {
   final _apiClient = ApiClient();
   final _movies = <Movie>[];
+  // final _dates = <MovieDates>[];
   late int _currentPage;
   late int _totalPage;
   var _isLoadingInProgress = false;
@@ -22,6 +24,8 @@ class TopRatedMovieModel extends ChangeNotifier {
   List<Movie> get movies => List.unmodifiable(_movies);
   late DateFormat _dateFormat;
 
+  // List<MovieDates> get dates => List.unmodifiable(_dates);
+
   String stringFromDate(DateTime? date) =>
       date != null ? _dateFormat.format(date) : '';
 
@@ -31,36 +35,38 @@ class TopRatedMovieModel extends ChangeNotifier {
     if (_locale == locale) return;
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
-    await _resetMovieList();
+    await _resetUpcomingMovieList();
   }
 
-  Future<void> _resetMovieList() async {
+  Future<void> _resetUpcomingMovieList() async {
     _currentPage = 0;
     _totalPage = 1;
     _movies.clear();
-    await _loadNextMoviesPage();
+    await _loadNextUpcomingMoviesPage();
   }
 
-  Future<PopularAndTopRatedMovieResponse> _loadMovies(int nextPage, String locale) async {
+  Future<PopularAndTopRatedMovieResponse> _loadUpcomingMovies(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
-      return await _apiClient.topRatedMovie(nextPage, _locale);
+      return await _apiClient.upcomingMovie(nextPage, _locale);
     } else {
-      return await _apiClient.searchMovie(nextPage, _locale, query);
+      // return await _apiClient.searchUpcomingMovie(nextPage, _locale, query);
+      return await _apiClient.searchUpcomingMovie(nextPage, _locale, query);
     }
 
   }
 
-  Future<void> _loadNextMoviesPage() async {
+  Future<void> _loadNextUpcomingMoviesPage() async {
     if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
 
     try {
-      final moviesResponse = await _loadMovies(nextPage, _locale);
-      _movies.addAll(moviesResponse.movies);
-      _currentPage = moviesResponse.page;
-      _totalPage = moviesResponse.totalPages;
+      final upcomingMoviesResponse = await _loadUpcomingMovies(nextPage, _locale);
+      _movies.addAll(upcomingMoviesResponse.movies);
+      // _dates.addAll(upcomingMoviesResponse.dates);
+      _currentPage = upcomingMoviesResponse.page;
+      _totalPage = upcomingMoviesResponse.totalPages;
       _isLoadingInProgress = false;
       notifyListeners();
     } catch (e) {
@@ -85,12 +91,12 @@ class TopRatedMovieModel extends ChangeNotifier {
       final searchQuery = text.isNotEmpty ? text : null;
       if(_searchQuery == searchQuery) return;
       _searchQuery = searchQuery;
-      await _resetMovieList();
+      await _resetUpcomingMovieList();
     });
   }
 
   void showedMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
-    _loadNextMoviesPage();
+    _loadNextUpcomingMoviesPage();
   }
 }

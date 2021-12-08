@@ -5,7 +5,8 @@ class NotifierProvider<Model extends ChangeNotifier> extends StatefulWidget {
   final Widget child;
   final bool isManagingModel;
 
-  const NotifierProvider({
+  const NotifierProvider(
+      {
     Key? key,
     required this.create,
     required this.child,
@@ -57,10 +58,10 @@ class _InheritedNotifierProvider<Model extends ChangeNotifier> extends Inherited
       : super(key: key, notifier: model, child: child);
 }
 
-class Provider<Model> extends InheritedWidget {
+class ProviderCustom<Model> extends InheritedWidget {
   final Model model;
 
-  const Provider({
+  const ProviderCustom({
     Key? key,
     required this.model,
     required Widget child,
@@ -70,18 +71,18 @@ class Provider<Model> extends InheritedWidget {
   );
 
   static Model? watch<Model>(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<Provider<Model>>()?.model;
+    return context.dependOnInheritedWidgetOfExactType<ProviderCustom<Model>>()?.model;
   }
 
   static Model? read<Model>(BuildContext context) {
     final widget = context
-        .getElementForInheritedWidgetOfExactType<Provider<Model>>()
+        .getElementForInheritedWidgetOfExactType<ProviderCustom<Model>>()
         ?.widget;
-    return widget is Provider<Model> ? widget.model : null;
+    return widget is ProviderCustom<Model> ? widget.model : null;
   }
 
   @override
-  bool updateShouldNotify(Provider oldWidget) {
+  bool updateShouldNotify(ProviderCustom oldWidget) {
     return model != oldWidget.model;
   }
 }
