@@ -106,12 +106,12 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     ],
                   ),
                 ),
-          const SizedBox(
-            // TODO: поменять на другой слайдер
-                  height: 160,
-                  child: _ComingSoonMovieWidget(),
-                ),
-                _UpcomingMovieWidget(),
+          // const SizedBox(
+          //   // TODO: поменять на другой слайдер
+          //         height: 160,
+          //         child: _ComingSoonMovieWidget(),
+          //       ),
+                const _UpcomingMovieWidget(),
                   ],
                 ),
               ],
@@ -189,49 +189,51 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
   Widget build(BuildContext context) {
     final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
 
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            height: 160,
-            width: 335,
-            child: PageView.builder(
-              onPageChanged: (value) {
-                setState(() {
-                  _currentMovie = value;
-                });
-              },
-                itemCount: upcomingMovieModel.movies.length,
-                itemBuilder: (BuildContext context, int index) {
-                  upcomingMovieModel.showedMovieAtIndex(index);
-                  final upcomingMovie = upcomingMovieModel.movies[index];
-                  final backdropPath = upcomingMovie.backdropPath;
-                  return Container(
-                    height: 150,
-                    width: 325,
-                    child: Stack(
-                      children: [
-                        backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath))
-                            : const SizedBox.shrink(),
-                      ],
-                    ),
-                  );
-                }
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+          child: Stack(
+            children: [
+              Container(
+              height: 200,
+              width: 360,
+              child: PageView.builder(
+                onPageChanged: (value) {
+                  setState(() {
+                    _currentMovie = value;
+                  });
+                },
+                  itemCount: upcomingMovieModel.movies.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    upcomingMovieModel.showedMovieAtIndex(index);
+                    final upcomingMovie = upcomingMovieModel.movies[index];
+                    final backdropPath = upcomingMovie.backdropPath;
+                    return backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath))
+                        : const SizedBox.shrink();
+                  }
+              ),
+            ),
+          Positioned(
+            left: 50,
+            top: 40,
+            right: 50,
+            bottom: 10,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:
+                  List.generate(upcomingMovieModel.movies.length,
+                        (index) => buildDotNew(index: index)),
+              ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:
-                List.generate(upcomingMovieModel.movies.length,
-                      (index) => buildDotNew(index: index)),
-            ),
-          ),
-        ],
-      ),
-    );
-
+      ],
+    ),
+        ),
+   ],
+  );
   }
   AnimatedContainer buildDotNew({int? index}) {
     return AnimatedContainer(
