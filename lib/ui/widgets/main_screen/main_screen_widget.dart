@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
@@ -23,7 +24,7 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
-  final movieListModel = MovieListModel();
+  final moviePopularListModel = MoviePopularListModel();
   final topRatedMovieModel = TopRatedMovieModel();
   final upcomingMovieModel = UpcomingMovieModel();
   // final topRatedMovieModel = TopRatedMovieModel();
@@ -42,7 +43,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    movieListModel.setupLocale(context);
+    moviePopularListModel.setupLocale(context);
     trendingAllModel.setupPage(context);
     tvListModel.setupLocale(context);
     settingsModel.setupLocale(context);
@@ -62,13 +63,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         index: _selectedTab,
         children: [
           // TODO: need to add newsListWidget model may be
-          NotifierProvider(create: () => movieListModel, child: const NewsListWidget(), isManagingModel: false),
+          // NotifierProvider(create: () => moviePopularListModel, child: const NewsListWidget(), isManagingModel: false),
+          ChangeNotifierProvider(create: (_) => moviePopularListModel, child: const MoviePopularWidget()),
           // NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
           MultiProvider(providers: [
             // ListenableProvider(create: (_) => topRatedMovieModel),
             // ListenableProvider(create: (_) => movieListModel),
             ChangeNotifierProvider(create: (_) => topRatedMovieModel),
-            ChangeNotifierProvider(create: (_) => movieListModel),
+            ChangeNotifierProvider(create: (_) => moviePopularListModel),
             ChangeNotifierProvider(create: (_) => upcomingMovieModel),
           ],
           child: const MovieListWidget(),

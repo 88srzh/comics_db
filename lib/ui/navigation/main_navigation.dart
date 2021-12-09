@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart'
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_trailer/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/news/components/news_widget_popular.dart';
@@ -31,6 +32,7 @@ abstract class MainNavigationRouteNames {
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/popularMovie';
+  static const popularMovieList = '/popularMovieList';
   static const networkConnectionError = '/errors/network_connection';
   static const movieTrailer = '/movie_details/trailer';
   static const tvTrailer = '/tv_details/trailer';
@@ -49,10 +51,11 @@ class MainNavigation {
     MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     MainNavigationRouteNames.popularMovie: (context) => const MovieWidget(),
-    MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
+    // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
     MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
+    MainNavigationRouteNames.popularMovieList: (context) => const MoviePopularWidget(),
     // '/': (context) => NotifierProvider(
     //     model: MainScreenModel(), child: const MainScreenWidget()),
     // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),

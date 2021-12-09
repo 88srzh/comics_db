@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
@@ -14,7 +15,7 @@ class MovieWidget extends StatelessWidget {
   @override
   //TODO не совсем понимаю зачем тут модель одна передается, если используется минимум 3
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MovieListModel(), child: const MovieListWidget());
+      create: (context) => MoviePopularListModel(), child: const MovieListWidget());
 }
 
 
@@ -87,9 +88,11 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Популярные', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
-                      Text('Все', style: TextStyle(color: AppColors.ratingText, fontSize: 15),),
+                    children: [
+                      const Text('Популярные', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                      InkWell(
+                        onTap: () => Navigator.pushNamed(context, MainNavigationRouteNames.popularMovieList),
+                          child: const Text('Все', style: TextStyle(color: AppColors.ratingText, fontSize: 15),)),
                     ],
                   ),
                 ),
@@ -262,7 +265,7 @@ class _PopularMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = Provider.of<MovieListModel>(context, listen: true);
+    final popularMovieModel = Provider.of<MoviePopularListModel>(context, listen: true);
     // if (popularMovieModel == null) return const SizedBox.shrink();
     return ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -297,11 +300,11 @@ class _PopularMovieListItemWidget extends StatelessWidget {
   final int index;
   final String? posterPath;
   final Movie movie;
-  final MovieListModel? popularMovieModel;
+  final MoviePopularListModel? popularMovieModel;
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = Provider.of<MovieListModel>(context, listen: true);
+    final popularMovieModel = Provider.of<MoviePopularListModel>(context, listen: true);
     // if (popularMovieModel == null) return const SizedBox.shrink();
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;

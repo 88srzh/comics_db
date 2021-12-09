@@ -70,7 +70,7 @@ class _PopularMoviesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieModel = NotifierProvider.watch<MovieListModel>(context);
+    final movieModel = NotifierProvider.watch<MoviePopularListModel>(context);
     if (movieModel == null) return const SizedBox.shrink();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
@@ -99,11 +99,11 @@ class _MovieListItemWidget extends StatelessWidget {
   final int index;
   final String? posterPath;
   final Movie movie;
-  final MovieListModel? movieModel;
+  final MoviePopularListModel? movieModel;
 
   @override
   Widget build(BuildContext context) {
-    final movieModel = NotifierProvider.watch<MovieListModel>(context);
+    final movieModel = NotifierProvider.watch<MoviePopularListModel>(context);
     final movie = movieModel?.movies[index];
     final posterPath = movie?.posterPath;
     final title = movie?.title;
