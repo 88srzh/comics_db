@@ -77,9 +77,9 @@ class _MovieListWidgetState extends State<MovieListWidget> {
             Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 15.0),
+                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
                   child: SizedBox(
-                    height: 220,
+                    height: 180,
                     child: _TopRatedMovieWidget(),
                   ),
                 ),
@@ -95,10 +95,13 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                 ),
          const SizedBox(
            height: 200,
-             child: _PopularMovieWidget(),
+             child: Padding(
+               padding: EdgeInsets.symmetric(horizontal: 20.0),
+               child: _PopularMovieWidget(),
+             ),
                      ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -106,10 +109,9 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     ],
                   ),
                 ),
-          const SizedBox(
-            // TODO: поменять на другой слайдер
-                  height: 160,
-                  child: _ComingSoonMovieWidget(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: _UpcomingMovieWidget(),
                 ),
                   ],
                 ),
@@ -173,78 +175,87 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   }
 }
 
-class _ComingSoonMovieWidget extends StatelessWidget {
-  const _ComingSoonMovieWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
-    // if (popularMovieModel == null) return const SizedBox.shrink();
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: upcomingMovieModel.movies.length,
-        itemBuilder: (BuildContext context, int index) {
-          upcomingMovieModel.showedMovieAtIndex(index);
-          final upcomingMovie = upcomingMovieModel.movies[index];
-          final posterPath = upcomingMovie.posterPath;
-          final backdropPath = upcomingMovie.backdropPath;
-          return InkWell(
-            onTap: () => upcomingMovieModel.onMovieTap(context, index),
-            child: _ComingSoonListItemWidget(
-              index: index,
-              backdropPath: backdropPath,
-              movie: upcomingMovie,
-              upcomingMovieModel: upcomingMovieModel,
-            ),
-          );
-        }
-    );
-  }
-}
-
-class _ComingSoonListItemWidget extends StatelessWidget {
-  const _ComingSoonListItemWidget({
+class _UpcomingMovieWidget extends StatefulWidget {
+  const _UpcomingMovieWidget({
     Key? key,
-    required this.index,
-    required this.backdropPath,
-    required this.movie,
-    required this.upcomingMovieModel,
   }) : super(key: key);
 
-  final int index;
-  final String? backdropPath;
-  final Movie movie;
-  final UpcomingMovieModel? upcomingMovieModel;
+  @override
+  State<_UpcomingMovieWidget> createState() => _UpcomingMovieWidgetState();
+}
 
+class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
+  int _currentMovie = 0;
   @override
   Widget build(BuildContext context) {
     final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
-    // if (popularMovieModel == null) return const SizedBox.shrink();
-    final upcomingMovie = upcomingMovieModel.movies[index];
-    final posterPath = upcomingMovie.posterPath;
-    final backdropPath = upcomingMovie.backdropPath;
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: Container(
-        height: 160,
-        width: 335,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          color: AppColors.movieBorderLine,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+          child: Stack(
+            children: [
+              Container(
+              height: 200,
+              width: 350,
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                // color: AppColors.movieBorderLine,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: PageView.builder(
+                onPageChanged: (value) {
+                  setState(() {
+                    _currentMovie = value;
+                  });
+                },
+                  // TODO: уменьшить кол-во фильмов либо исправить ползунок
+                  itemCount: upcomingMovieModel.movies.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    upcomingMovieModel.showedMovieAtIndex(index);
+                    final upcomingMovie = upcomingMovieModel.movies[index];
+                    final backdropPath = upcomingMovie.backdropPath;
+                    return backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath))
+                        : const SizedBox.shrink();
+                  }
+              ),
+            ),
+          Positioned(
+            left: 50,
+            top: 40,
+            right: 50,
+            bottom: 10,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:
+                  List.generate(upcomingMovieModel.movies.length,
+                        (index) => buildDotNew(index: index)),
+              ),
+            ),
+          ),
+      ],
+    ),
         ),
-        child: FittedBox(
-          child: posterPath != null ?
-          Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
-          fit: BoxFit.fill,
-        ),
+   ],
+  );
+  }
+
+  AnimatedContainer buildDotNew({int? index}) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.only(right: 5.0),
+      height: 6,
+      width: _currentMovie == index ? 20 : 6,
+      decoration: BoxDecoration(
+        color: _currentMovie == index ? Colors.white : Color(0xFFD8D8D8),
+        borderRadius: BorderRadius.circular(3),
       ),
     );
   }
 }
-
-
-
 
 class _PopularMovieWidget extends StatelessWidget {
   const _PopularMovieWidget({Key? key}) : super(key: key);
@@ -295,20 +306,19 @@ class _PopularMovieListItemWidget extends StatelessWidget {
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 6.0, right: 6.0),
+      padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
       child: Container(
         height: 200,
-        width: 150,
+        width: 114,
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
-          color: AppColors.movieBorderLine,
+          // color: AppColors.movieBorderLine,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
           child: posterPath != null ?
               Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
-          // TODO: растягивает изображение по размеру контейнера fill
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
         ),
     );
@@ -364,13 +374,12 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     final posterPath = topMovie.posterPath;
     final backdropPath = topMovie.backdropPath;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7.5, vertical: 20.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: Container(
-        height: 180,
-        width: 270,
+        width: 320,
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
-          color: AppColors.movieBorderLine,
+          // color: AppColors.movieBorderLine,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         // padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -388,7 +397,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
         //     ],
         //   ),
           child: FittedBox(
-              child: posterPath != null ? Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
+              child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
           fit: BoxFit.fill,
           ),
       ),
