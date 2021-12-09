@@ -77,9 +77,9 @@ class _MovieListWidgetState extends State<MovieListWidget> {
             Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 15.0),
+                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
                   child: SizedBox(
-                    height: 220,
+                    height: 180,
                     child: _TopRatedMovieWidget(),
                   ),
                 ),
@@ -95,10 +95,13 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                 ),
          const SizedBox(
            height: 200,
-             child: _PopularMovieWidget(),
+             child: Padding(
+               padding: EdgeInsets.symmetric(horizontal: 20.0),
+               child: _PopularMovieWidget(),
+             ),
                      ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -106,7 +109,10 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     ],
                   ),
                 ),
-                const _UpcomingMovieWidget(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: _UpcomingMovieWidget(),
+                ),
                   ],
                 ),
               ],
@@ -191,8 +197,8 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
           child: Stack(
             children: [
               Container(
-              height: 190,
-              width: 337,
+              height: 200,
+              width: 350,
               clipBehavior: Clip.antiAlias,
               decoration: const BoxDecoration(
                 // color: AppColors.movieBorderLine,
@@ -300,7 +306,7 @@ class _PopularMovieListItemWidget extends StatelessWidget {
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 6.0, right: 6.0),
+      padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
       child: Container(
         height: 200,
         width: 114,
@@ -312,7 +318,6 @@ class _PopularMovieListItemWidget extends StatelessWidget {
         child: FittedBox(
           child: posterPath != null ?
               Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
-          // TODO: растягивает изображение по размеру контейнера fill
           fit: BoxFit.contain,
         ),
         ),
@@ -369,10 +374,9 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     final posterPath = topMovie.posterPath;
     final backdropPath = topMovie.backdropPath;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7.5, vertical: 20.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: Container(
-        height: 180,
-        width: 270,
+        width: 320,
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
           // color: AppColors.movieBorderLine,
@@ -393,7 +397,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
         //     ],
         //   ),
           child: FittedBox(
-              child: posterPath != null ? Image.network(ApiClient.imageUrl(backdropPath!)) : const SizedBox.shrink(),
+              child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
           fit: BoxFit.fill,
           ),
       ),
