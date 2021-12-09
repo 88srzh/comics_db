@@ -111,6 +111,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   height: 160,
                   child: _ComingSoonMovieWidget(),
                 ),
+                _UpcomingMovieWidget(),
                   ],
                 ),
               ],
@@ -170,6 +171,79 @@ class _MovieListWidgetState extends State<MovieListWidget> {
       //             );
       //           }),
       //     ),
+  }
+}
+
+class _UpcomingMovieWidget extends StatefulWidget {
+  const _UpcomingMovieWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_UpcomingMovieWidget> createState() => _UpcomingMovieWidgetState();
+}
+
+class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
+  int _currentMovie = 0;
+  @override
+  Widget build(BuildContext context) {
+    final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
+
+    return Center(
+      child: Column(
+        children: [
+          Container(
+            height: 160,
+            width: 335,
+            child: PageView.builder(
+              onPageChanged: (value) {
+                setState(() {
+                  _currentMovie = value;
+                });
+              },
+                itemCount: upcomingMovieModel.movies.length,
+                itemBuilder: (BuildContext context, int index) {
+                  upcomingMovieModel.showedMovieAtIndex(index);
+                  final upcomingMovie = upcomingMovieModel.movies[index];
+                  final backdropPath = upcomingMovie.backdropPath;
+                  return Container(
+                    height: 150,
+                    width: 325,
+                    child: Stack(
+                      children: [
+                        backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath))
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
+                  );
+                }
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+                List.generate(upcomingMovieModel.movies.length,
+                      (index) => buildDotNew(index: index)),
+            ),
+          ),
+        ],
+      ),
+    );
+
+  }
+  AnimatedContainer buildDotNew({int? index}) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.only(right: 5.0),
+      height: 6,
+      width: _currentMovie == index ? 20 : 6,
+      decoration: BoxDecoration(
+        color: _currentMovie == index ? Colors.white : Color(0xFFD8D8D8),
+        borderRadius: BorderRadius.circular(3),
+      ),
+    );
   }
 }
 
@@ -298,7 +372,7 @@ class _PopularMovieListItemWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 6.0, right: 6.0),
       child: Container(
         height: 200,
-        width: 150,
+        width: 114,
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
           color: AppColors.movieBorderLine,
@@ -308,7 +382,7 @@ class _PopularMovieListItemWidget extends StatelessWidget {
           child: posterPath != null ?
               Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
           // TODO: растягивает изображение по размеру контейнера fill
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
         ),
     );
