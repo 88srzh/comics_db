@@ -32,7 +32,7 @@ abstract class MainNavigationRouteNames {
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/popularMovie';
-  static const popularMovieList = '/popularMovieList';
+  // static const popularMovieList = '/popularMovieList';
   static const networkConnectionError = '/errors/network_connection';
   static const movieTrailer = '/movie_details/trailer';
   static const tvTrailer = '/tv_details/trailer';
@@ -50,12 +50,13 @@ class MainNavigation {
     MainNavigationRouteNames.splashScreen: (context) => NotifierProvider(create: () => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
-    MainNavigationRouteNames.popularMovie: (context) => const MovieWidget(),
+    // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
+    MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
     // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
     MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
-    MainNavigationRouteNames.popularMovieList: (context) => const MoviePopularWidget(),
+    // MainNavigationRouteNames.popularMovieList: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MoviePopularListWidget(),),
     // '/': (context) => NotifierProvider(
     //     model: MainScreenModel(), child: const MainScreenWidget()),
     // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
