@@ -55,7 +55,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     return Scaffold(
       body: ColoredBox(
-        color: AppColors.kPrimaryColorNew,
+        color: AppColors.kPrimaryColor,
         child: ListView(
           children: [
             Column(

@@ -8,7 +8,7 @@ import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -27,7 +27,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final moviePopularListModel = MoviePopularListModel();
   final topRatedMovieModel = TopRatedMovieModel();
   final upcomingMovieModel = UpcomingMovieModel();
-  final tvListModel = TvListModel();
+  final tvPopularModel = TvPopularModel();
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -44,7 +44,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
     moviePopularListModel.setupLocale(context);
     trendingAllModel.setupPage(context);
-    tvListModel.setupLocale(context);
+    tvPopularModel.setupLocale(context);
     settingsModel.setupLocale(context);
     topRatedMovieModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
@@ -61,13 +61,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          // TODO: need to add newsListWidget model may be
           // NotifierProvider(create: () => moviePopularListModel, child: const NewsListWidget(), isManagingModel: false),
           ChangeNotifierProvider(create: (_) => moviePopularListModel, child: const MoviePopularListWidget()),
-          // NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
           MultiProvider(providers: [
-            // ListenableProvider(create: (_) => topRatedMovieModel),
-            // ListenableProvider(create: (_) => movieListModel),
             ChangeNotifierProvider(create: (_) => topRatedMovieModel),
             ChangeNotifierProvider(create: (_) => moviePopularListModel),
             ChangeNotifierProvider(create: (_) => upcomingMovieModel),
@@ -75,7 +71,13 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           child: const MovieListWidget(),
           ),
           // NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
-          ChangeNotifierProvider(create: (context) => tvListModel, child: const TvListWidget()),
+          // ChangeNotifierProvider(create: (context) => tvListModel, child: const TvPopularWidget()),
+          MultiProvider(providers: [
+            // ChangeNotifierProvider(create: (_) => topRatedTvModel),
+            ChangeNotifierProvider(create: (_) => tvPopularModel),
+          ],
+            child: const TvListWidget(),
+          ),
 
           NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
         ],

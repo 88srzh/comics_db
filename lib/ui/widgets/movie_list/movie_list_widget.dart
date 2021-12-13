@@ -4,7 +4,6 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
@@ -70,10 +69,10 @@ class _MovieListWidgetState extends State<MovieListWidget> {
             ],
           ),
         ),
-        backgroundColor: AppColors.kPrimaryColorNew,
+        backgroundColor: AppColors.kPrimaryColor,
       ),
       body: ColoredBox(
-        color: AppColors.kPrimaryColorNew,
+        color: AppColors.kPrimaryColor,
         child: ListView(
           children: [
             Column(

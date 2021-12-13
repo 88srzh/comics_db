@@ -262,9 +262,9 @@ class AuthButtonWidget extends StatelessWidget {
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0))),
           side: MaterialStateProperty.all(
-              const BorderSide(color: AppColors.kPrimaryColor)),
+              const BorderSide(color: AppColors.kPrimaryColorOld)),
           backgroundColor: MaterialStateProperty.all(Colors.white),
-          foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+          foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColorOld),
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(horizontal: 130.0, vertical: 15.0),
           ),

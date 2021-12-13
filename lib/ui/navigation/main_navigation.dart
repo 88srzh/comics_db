@@ -15,7 +15,7 @@ import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 import 'package:flutter/material.dart';

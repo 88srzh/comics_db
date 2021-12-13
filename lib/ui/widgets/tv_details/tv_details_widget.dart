@@ -134,7 +134,7 @@ class _FavoritesButton extends StatelessWidget {
       child: const Text('В Избранное', style: TextStyle(fontSize: 24)),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-        backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+        backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColorOld),
         padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),),
       ),
     );
