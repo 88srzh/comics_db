@@ -1,14 +1,15 @@
 import 'dart:async';
+
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
+import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
+import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class TopRatedTvModel extends ChangeNotifier {
+class TvTopRatedModel extends ChangeNotifier {
   final _apiClient = ApiClient();
-  final _movies = <Movie>[];
+  final _tvs = <TV>[];
   late int _currentPage;
   late int _totalPage;
   var _isLoadingInProgress = false;
@@ -16,78 +17,74 @@ class TopRatedTvModel extends ChangeNotifier {
   String _locale = '';
   Timer? searchDebounce;
 
-  List<Movie> get movies => List.unmodifiable(_movies);
+  List<TV> get tvs => List.unmodifiable(_tvs);
   late DateFormat _dateFormat;
 
+
+// ! - TODO: вынести в отдельный файл
   String stringFromDate(DateTime? date) =>
       date != null ? _dateFormat.format(date) : '';
 
-// ! - TODO: вынести в отдельный файл
   Future<void> setupLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
-    await _resetMovieList();
+    await _resetTVList();
   }
 
-  Future<void> _resetMovieList() async {
+  Future<void> _resetTVList() async {
     _currentPage = 0;
     _totalPage = 1;
-    _movies.clear();
-    await _loadNextMoviesPage();
+    _tvs.clear();
+    _loadNextTVsPage();
   }
 
-  Future<PopularAndTopRatedMovieResponse> _loadMovies(int nextPage, String locale) async {
+  Future<PopularTVResponse> _loadTVs(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
-      return await _apiClient.topRatedMovie(nextPage, _locale);
+      return await _apiClient.topRatedTvs(nextPage, _locale);
     } else {
-      return await _apiClient.searchMovie(nextPage, _locale, query);
+      return await _apiClient.searchTV(nextPage, _locale, query);
     }
 
   }
 
-  Future<void> _loadNextMoviesPage() async {
+  Future<void> _loadNextTVsPage() async {
     if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
 
     try {
-      final moviesResponse = await _loadMovies(nextPage, _locale);
-      _movies.addAll(moviesResponse.movies);
-      _currentPage = moviesResponse.page;
-      _totalPage = moviesResponse.totalPages;
+      final tvsResponse = await _loadTVs(nextPage, _locale);
+      _tvs.addAll(tvsResponse.tvs);
+      _currentPage = tvsResponse.page;
+      _totalPage = tvsResponse.totalPages;
       _isLoadingInProgress = false;
       notifyListeners();
     } catch (e) {
       _isLoadingInProgress = false;
+      print('что-то пошло не так');
     }
   }
 
-  void onMovieTap(BuildContext context, int index) {
-    final id = _movies[index].id;
+  void onTVTap(BuildContext context, int index) {
+    final id = _tvs[index].id;
     Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 
-  void onFullCastAndCrewTap(BuildContext context, int index) {
-    final id = _movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.fullCastAndCrew, arguments: id);
-  }
-
-  Future<void> searchMovie(String text) async {
+  Future<void> searchTV(String text) async {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
       final searchQuery = text.isNotEmpty ? text : null;
       if(_searchQuery == searchQuery) return;
       _searchQuery = searchQuery;
-      await _resetMovieList();
+      await _resetTVList();
     });
   }
-
-  void showedMovieAtIndex(int index) {
-    if (index < _movies.length - 1) return;
-    _loadNextMoviesPage();
+  void showedTVAtIndex(int index) {
+    if (index < _tvs.length - 1) return;
+    _loadNextTVsPage();
   }
 }

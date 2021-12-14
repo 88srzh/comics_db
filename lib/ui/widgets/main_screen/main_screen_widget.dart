@@ -10,6 +10,7 @@ import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final topRatedMovieModel = TopRatedMovieModel();
   final upcomingMovieModel = UpcomingMovieModel();
   final tvPopularModel = TvPopularModel();
+  final tvTopRatedModel = TvTopRatedModel();
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -45,6 +47,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     moviePopularListModel.setupLocale(context);
     trendingAllModel.setupPage(context);
     tvPopularModel.setupLocale(context);
+    tvTopRatedModel.setupLocale(context);
     settingsModel.setupLocale(context);
     topRatedMovieModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
@@ -74,6 +77,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           // ChangeNotifierProvider(create: (context) => tvListModel, child: const TvPopularWidget()),
           MultiProvider(providers: [
             // ChangeNotifierProvider(create: (_) => topRatedTvModel),
+            ChangeNotifierProvider(create: (_) => tvTopRatedModel),
             ChangeNotifierProvider(create: (_) => tvPopularModel),
           ],
             child: const TvListWidget(),
