@@ -10,6 +10,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 
 class TvDetailsWidget extends StatefulWidget {
   const TvDetailsWidget({Key? key}) : super(key: key);
@@ -20,11 +21,14 @@ class TvDetailsWidget extends StatefulWidget {
 
 class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
+  // TODO: возможно добавить проверку на session expired
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    NotifierProvider.read<TvDetailsModel>(context)?.setupLocale(context);
+    // NotifierProvider.read<TvDetailsModel>(context)?.setupLocale(context);
+    Provider.of<TvDetailsModel>(context, listen: false).setupLocale(context);
   }
 
   @override

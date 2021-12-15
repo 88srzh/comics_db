@@ -36,7 +36,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
     Provider.of<MovieDetailsModel>(context, listen: false).setupLocale(context);
   }
 
@@ -69,8 +68,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               ],
         ),
       ),
-          );
-      // bottomNavigationBar: const _FavoritesButton(),
+    );
   }
 }
 
@@ -81,7 +79,6 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -361,7 +358,12 @@ class _TopPosterWidget extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 110.0),
-            child: SizedBox(
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              // TODO: почему-то не закругляет края
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
               height: 212.0,
               width: 174.0,
               child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
