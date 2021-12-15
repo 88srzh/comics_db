@@ -8,6 +8,7 @@ import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
@@ -30,6 +31,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final upcomingMovieModel = UpcomingMovieModel();
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
+  final airingTodayModel = AiringTodayTvsModel();
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -51,6 +53,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     settingsModel.setupLocale(context);
     topRatedMovieModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
+    airingTodayModel.setupLocale(context);
   }
 
   @override
@@ -79,6 +82,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             // ChangeNotifierProvider(create: (_) => topRatedTvModel),
             ChangeNotifierProvider(create: (_) => tvTopRatedModel),
             ChangeNotifierProvider(create: (_) => tvPopularModel),
+            ChangeNotifierProvider(create: (_) => airingTodayModel),
           ],
             child: const TvListWidget(),
           ),

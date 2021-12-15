@@ -54,13 +54,14 @@ class _PopularTvListItemWidget extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
         child: Container(
           height: 200,
-          width: 144,
+          width: 114,
           clipBehavior: Clip.antiAlias,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           child: FittedBox(
-            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath))
+                : const SizedBox.shrink(),
             fit: BoxFit.contain,
           ),
         ),

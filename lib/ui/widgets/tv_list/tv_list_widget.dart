@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
@@ -107,22 +108,23 @@ class _TvListWidgetState extends State<TvListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Скоро', style: TextStyle(
+                      Text('В эфире сегодня', style: TextStyle(
                         color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600,
                       ),)
                     ],
                   ),
                 ),
-                const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-
+                const SizedBox(
+                  height: 200,
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: AiringTodayTvsWidget(),
+                  ),
                 ),
               ],
             ),
           ],
         ),
-
-
       ),
       );
   }
