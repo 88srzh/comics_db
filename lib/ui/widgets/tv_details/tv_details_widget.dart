@@ -7,6 +7,7 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/tv_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -33,95 +34,120 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final tvDetails = NotifierProvider.watch<TvDetailsModel>(context)?.tvDetails;
-    final videos = tvDetails?.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
-    var voteAverage = tvDetails?.voteAverage ?? 0;
-    voteAverage = voteAverage * 10;
-    if (tvDetails == null) {
-      // return const Center(child: CircularProgressIndicator(),);
-      return const LoadingIndicatorWidget();
+    final tvDetailsModel = Provider.of<TvDetailsModel>(context).tvDetails;
+    if (tvDetailsModel == null) {
+      return const Center(child: LoadingIndicatorWidget());
     }
+    final tvVideos = tvDetailsModel.videos.results
+        .where((video) => video.type == "Trailer" && video.site == 'YouTube');
+    final tvTrailerKey = tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
+    var voteAverage = tvDetailsModel.voteAverage ?? 0;
+    voteAverage = voteAverage * 10;
+    String youtubeKey = tvTrailerKey.toString();
+    // final tvDetails = NotifierProvider.watch<TvDetailsModel>(context)?.tvDetails;
+    // final videos = tvDetails?.videos.results
+    //     .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    // final tvTrailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+    // var voteAverage = tvDetails?.voteAverage ?? 0;
+    // voteAverage = voteAverage * 10;
+    // if (tvDetails == null) {
+      // return const Center(child: CircularProgressIndicator(),);
+    //   return const LoadingIndicatorWidget();
+    // }
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: const _TitleWidget(),
-        shadowColor: Colors.transparent,
-        backgroundColor: Colors.grey[100],
-      ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        children: [
-          Stack(
-          clipBehavior: Clip.hardEdge,
-          // fit: StackFit.passthrough,
+      body: ColoredBox(
+        color: AppColors.kPrimaryColor,
+        child: ListView(
           children: [
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 180,
-                    child: Container(
-                      color: Colors.grey[100],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 150,
-                    child: Container(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                    child: Column(
-                      children: const [
-                        _TitleAndRatingWidget(),
-                        SizedBox(height: 5.0,),
-                        _DirectorWidget(),
-                        SizedBox(height: 15.0),
-                        _GenresWidget(),
-                        _DescriptionWidget(),
-                        SizedBox(height: 5.0,),
-                        _CastWidget(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                const TvTopPosterWidget(),
+                // const TitleGenresRatingVoteAverageWidget(),
+                // const DescriptionWidget(),
+                // TrailerWidget(),
+              ],
             ),
-            const _TopPosterWidget(),
-            tvTrailerKey != null ? Positioned(
-              top: 220,
-              right: 70,
-              child: IconButton(
-                onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
-                icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
-              ),
-            ) : const SizedBox.shrink(),
-            Positioned(
-              top: 60,
-                right: 45,
-                child: SizedBox(
-                  width: 65,
-                  height: 65,
-                  child: RadialPercentWidget(
-                    percent: voteAverage / 100,
-                    child: Text(voteAverage.toStringAsFixed(0) + '%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                      fillColor: Colors.white,
-                      lineColor: Colors.black,
-                      freeColor: Colors.grey,
-                      lineWidth: 5.0,
-                      ),
-                  ),
-                ),
           ],
         ),
-      ],
       ),
+      // appBar: AppBar(
+      //   title: const _TitleWidget(),
+      //   shadowColor: Colors.transparent,
+      //   backgroundColor: Colors.grey[100],
+      // ),
+      // body: ListView(
+      //   scrollDirection: Axis.vertical,
+      //   shrinkWrap: true,
+      //   children: [
+      //     Stack(
+      //     clipBehavior: Clip.hardEdge,
+      //     // fit: StackFit.passthrough,
+      //     children: [
+      //       Container(
+      //         color: Colors.white,
+      //         child: Column(
+      //           children: [
+      //             SizedBox(
+      //               height: 180,
+      //               child: Container(
+      //                 color: Colors.grey[100],
+      //               ),
+      //             ),
+      //             SizedBox(
+      //               height: 150,
+      //               child: Container(
+      //                 color: Colors.white,
+      //               ),
+      //             ),
+      //             Padding(
+      //               padding: const EdgeInsets.symmetric(horizontal: 26.0),
+      //               child: Column(
+      //                 children: const [
+      //                   _TitleAndRatingWidget(),
+      //                   SizedBox(height: 5.0,),
+      //                   _DirectorWidget(),
+      //                   SizedBox(height: 15.0),
+      //                   _GenresWidget(),
+      //                   _DescriptionWidget(),
+      //                   SizedBox(height: 5.0,),
+      //                   _CastWidget(),
+      //                 ],
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //       const _TopPosterWidget(),
+      //       tvTrailerKey != null ? Positioned(
+      //         top: 220,
+      //         right: 70,
+      //         child: IconButton(
+      //           onPressed: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: tvTrailerKey),
+      //           icon: const Icon(MdiIcons.motionPlayOutline, size: 60),
+      //         ),
+      //       ) : const SizedBox.shrink(),
+      //       Positioned(
+      //         top: 60,
+      //           right: 45,
+      //           child: SizedBox(
+      //             width: 65,
+      //             height: 65,
+      //             child: RadialPercentWidget(
+      //               percent: voteAverage / 100,
+      //               child: Text(voteAverage.toStringAsFixed(0) + '%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+      //                 fillColor: Colors.white,
+      //                 lineColor: Colors.black,
+      //                 freeColor: Colors.grey,
+      //                 lineWidth: 5.0,
+      //                 ),
+      //             ),
+      //           ),
+      //     ],
+      //   ),
+      // ],
+      // ),
     );
   }
 }

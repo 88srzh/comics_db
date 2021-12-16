@@ -144,7 +144,6 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     final movieDetails = Provider.of<MovieDetailsModel>(context, listen: true).movieDetails;
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
@@ -182,19 +181,6 @@ class _TrailerWidgetState extends State<TrailerWidget> {
     );
   }
 }
-
-// class _DirectorWidget extends StatelessWidget {
-//   const _DirectorWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-//     return Row(
-//
-//     );
-//   }
-// }
-
 
 class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
   const _TitleGenresRatingVoteAverageWidget({
@@ -343,7 +329,6 @@ class _TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
     final posterPath = model.movieDetails?.posterPath;
     final backdropPath = model.movieDetails?.backdropPath;
