@@ -5,12 +5,10 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
-import 'package:comics_db_app/ui/components/radial_percent_widget.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/tv_top_poster_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_title_genres_rating_voteaverage_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
 class TvDetailsWidget extends StatefulWidget {
@@ -62,8 +60,9 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
         child: ListView(
           children: [
             Column(
-              children: [
-                const TvTopPosterWidget(),
+              children: const [
+                TvTopPosterWidget(),
+                TitleGenresRatingVoteAverageWidget(),
                 // const TitleGenresRatingVoteAverageWidget(),
                 // const DescriptionWidget(),
                 // TrailerWidget(),

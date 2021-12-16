@@ -189,15 +189,15 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
+    // TODO: возможно косяк voteAverage = rating
     var rating = model.movieDetails?.voteAverage.toString();
     var year = model.movieDetails?.releaseDate?.year.toString();
     var voteAverage = model.movieDetails?.voteAverage ?? 0;
     voteAverage = voteAverage * 10;
 
     // genres
-    if (model == null) return const SizedBox.shrink();
+    // if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
     final genres = model.movieDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
