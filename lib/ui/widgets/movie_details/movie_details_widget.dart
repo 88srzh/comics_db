@@ -267,6 +267,7 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
           ],
         ),
 
+
         // Это мне понадобится, когда буду добавлять ЖАНРЫ
 
         // child: Padding(
@@ -335,9 +336,16 @@ class _TopPosterWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
+          // TODO: backdropPath изображение поверх posterPath исправить
           child: AspectRatio(
             aspectRatio: 390 / 220,
-            child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+            child: ColorFiltered(
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3),
+                  BlendMode.dstATop,
+              ),
+                child: backdropPath != null ? Image.network(
+                    ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+            ),
           ),
         ),
         Center(

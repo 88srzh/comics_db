@@ -39,7 +39,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     final tvVideos = tvDetailsModel.videos.results
         .where((video) => video.type == "Trailer" && video.site == 'YouTube');
     final tvTrailerKey = tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
-    var voteAverage = tvDetailsModel.voteAverage ?? 0;
+    var voteAverage = tvDetailsModel.voteAverage;
     voteAverage = voteAverage * 10;
     String youtubeKey = tvTrailerKey.toString();
     // final tvDetails = NotifierProvider.watch<TvDetailsModel>(context)?.tvDetails;
