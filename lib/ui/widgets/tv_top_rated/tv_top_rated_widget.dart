@@ -59,7 +59,7 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
-          child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+          child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)): const SizedBox.shrink(),
         ),
       ),
     );

@@ -27,11 +27,13 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
      child: Column(
        children: [
          const SizedBox(height: 12),
-         Text(tvModel.tvDetails?.name ?? 'Загрузка названия',
-           style: const TextStyle(
-             fontSize: 21,
-             fontWeight: FontWeight.w600,
-             color: AppColors.titleText,
+         SizedBox(
+           child: Text(tvModel.tvDetails?.name ?? 'Загрузка названия',
+             style: const TextStyle(
+               fontSize: 21,
+               fontWeight: FontWeight.w600,
+               color: AppColors.titleText,
+             ),
            ),
          ),
          const SizedBox(height: 8),

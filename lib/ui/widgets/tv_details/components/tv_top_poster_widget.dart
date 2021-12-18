@@ -62,80 +62,89 @@ class TvTopPosterWidget extends StatelessWidget {
             left: 10,
             child: SizedBox(
               height: 300,
-              width: 240,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(tvModel.tvDetails?.name ?? 'Загрузка названия',
-                      maxLines: 2,
-                      style: const TextStyle(
-                        fontSize: 21,
-                        color: AppColors.titleText,
-                      ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  // TODO: пофикссить
-                  const Align(
-                    alignment: Alignment.topLeft,
-                    child: Text('1 час 39 минут',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: AppColors.genresText,
+              width: 230,
+              child: Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Expanded(
+                              child: Text(tvModel.tvDetails?.name ?? 'Загрузка названия',
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontSize: 21,
+                                color: AppColors.titleText,
+                              ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      texts.join(' '),
-                      maxLines: 3,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.genresText,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    children: [
-                      const Icon(Icons.star, color: AppColors.ratingStar, size: 14),
-                      const SizedBox(width: 4),
-                      Text(voteCount,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.ratingText,
-                        ),
-                      ),
-                      const Text(' пользователям понравилось',
+                    const SizedBox(height: 10),
+                    // TODO: пофикссить
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('1 час 39 минут',
                         style: TextStyle(
                           fontSize: 13,
-                          color: AppColors.ratingText,
+                          color: AppColors.genresText,
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    children: [
-                      const Icon(Icons.thumb_up_alt_outlined, color: AppColors.ratingThumb, size: 14),
-                      const SizedBox(width: 4),
-                      Text(voteAverage.toStringAsFixed(0) + '% от пользователей',
+                    ),
+                    const SizedBox(height: 5),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        texts.join(' '),
+                        maxLines: 3,
                         style: const TextStyle(
                           fontSize: 13,
-                          color: AppColors.ratingText,
+                          color: AppColors.genresText,
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Icon(Icons.star, color: AppColors.ratingStar, size: 14),
+                        const SizedBox(width: 4),
+                        Text(voteCount,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.ratingText,
+                          ),
+                        ),
+                        const Text(' пользователям понравилось',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppColors.ratingText,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Icon(Icons.thumb_up_alt_outlined, color: AppColors.ratingThumb, size: 14),
+                        const SizedBox(width: 4),
+                        Text(voteAverage.toStringAsFixed(0) + '% от пользователей',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.ratingText,
+                          ),
+                        ),
 
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
         ),

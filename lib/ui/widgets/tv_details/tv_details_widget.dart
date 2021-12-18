@@ -25,8 +25,6 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    // NotifierProvider.read<TvDetailsModel>(context)?.setupLocale(context);
     Provider.of<TvDetailsModel>(context, listen: false).setupLocale(context);
   }
 
