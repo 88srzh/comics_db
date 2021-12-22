@@ -91,7 +91,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     children: [
                       const Text('Популярные', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
                       InkWell(
-                        onTap: () {Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.popularMovie);},
+                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
                           child: const Text('Все', style: TextStyle(color: AppColors.ratingText, fontSize: 15),)),
                     ],
                   ),

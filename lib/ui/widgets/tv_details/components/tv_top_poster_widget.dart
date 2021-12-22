@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +16,22 @@ class TvTopPosterWidget extends StatelessWidget {
     final posterPath = tvModel.tvDetails?.posterPath;
     final backdropPath = tvModel.tvDetails?.backdropPath;
 
+    var allRuntimes = <String>[];
+    final runtimes = tvModel.tvDetails?.episodeRunTime;
+
+    // TODO:  упростить, я получаю одно число только
+    if (runtimes != null && runtimes.isNotEmpty) {
+      var singleRuntime = <String>[];
+      for (var runtime in runtimes) {
+        singleRuntime.add(runtime.toString());
+      }
+      allRuntimes.add(singleRuntime.join(', '));
+    }
+
+
     var voteCount = tvModel.tvDetails?.voteCount.toString() ?? '0';
     var voteAverage = tvModel.tvDetails?.voteAverage ?? 0;
-    voteAverage = voteAverage *10;
+    voteAverage = voteAverage * 10;
 
     var texts = <String>[];
     final genres = tvModel.tvDetails?.genres;
@@ -71,6 +87,7 @@ class TvTopPosterWidget extends StatelessWidget {
                     height: 50,
                     child: Column(
                       children: [
+                        // TODO: центрировать текст по высоте
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(tvModel.tvDetails?.name ?? 'Загрузка названия',
@@ -85,27 +102,52 @@ class TvTopPosterWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  // TODO: пофикссить
-                  const Align(
+                  // TODO: пофиксить
+                  Align(
                     alignment: Alignment.topLeft,
-                    child: Text('1 час 39 минут',
-                      style: TextStyle(
+                    child: Text(
+                      allRuntimes.join(' '),
+                      // runtimes.toString(),
+                      style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.genresText,
                       ),
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      texts.join(' '),
-                      maxLines: 3,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.genresText,
+                  Row(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          texts.join(' '),
+                          maxLines: 3,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.genresText,
+                          ),
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Image.asset(AppImages.ellipseDot),
+                      ),
+                      Text(
+                        allRuntimes.join(' '),
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppColors.genresText,
+                        ),
+                      ),
+                      const Text(
+                        'мин',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: AppColors.genresText,
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 5),
                   Row(
