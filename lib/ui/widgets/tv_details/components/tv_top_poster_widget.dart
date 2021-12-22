@@ -103,51 +103,43 @@ class TvTopPosterWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   // TODO: пофиксить
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      allRuntimes.join(' '),
-                      // runtimes.toString(),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.genresText,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
                   Row(
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          texts.join(' '),
-                          maxLines: 3,
+                          allRuntimes.join(' '),
+                          // runtimes.toString(),
                           style: const TextStyle(
                             fontSize: 13,
                             color: AppColors.genresText,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Image.asset(AppImages.ellipseDot),
-                      ),
-                      Text(
-                        allRuntimes.join(' '),
-                        maxLines: 2,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
                       const Text(
-                        'мин',
+                        ' минут(ы)',
                         style: TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
                         ),
-                      )
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      //   child: Image.asset(AppImages.ellipseDot),
+                      // ),
                     ],
+                  ),
+                  const SizedBox(height: 5),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      texts.join(' '),
+                      maxLines: 3,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppColors.genresText,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 5),
                   Row(
