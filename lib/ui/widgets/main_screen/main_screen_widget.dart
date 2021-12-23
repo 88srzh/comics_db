@@ -11,6 +11,7 @@ import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -60,12 +61,13 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     // просто получение модели без цели
     // final model = NotifierProvider.read<MainScreenModel>(context);
-    return Scaffold(,
+    return Scaffold(
       body: IndexedStack(
         index: _selectedTab,
         children: [
           // NotifierProvider(create: () => moviePopularListModel, child: const NewsListWidget(), isManagingModel: false),
           ChangeNotifierProvider(create: (_) => moviePopularListModel, child: const MoviePopularListWidget()),
+          // ChangeNotifierProvider(create: (_) => tvPopularModel, child: const PopularTvWidget()),
           MultiProvider(providers: [
             ChangeNotifierProvider(create: (_) => topRatedMovieModel),
             ChangeNotifierProvider(create: (_) => moviePopularListModel),

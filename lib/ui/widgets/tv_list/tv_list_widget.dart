@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
@@ -11,7 +12,8 @@ class TvWidget extends StatelessWidget {
   const TvWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => TvPopularModel(), child: const TvListWidget());
+      create: (context) => TvPopularModel(), child: const TvListWidget(),
+  );
 }
 
 class TvListWidget extends StatefulWidget {
@@ -24,7 +26,6 @@ class TvListWidget extends StatefulWidget {
 class _TvListWidgetState extends State<TvListWidget> {
   @override
   Widget build(BuildContext context) {
-    // final topRatedTvModel = context.watch<TopRatedTvModel>();
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0.0,
@@ -87,7 +88,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                       ),
                       InkWell(
                         // TODO: Исправить переход на страницу
-                        onTap: () => Navigator.of(context).pushNamed('popularTv'),
+                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopular),
                         child: const Text('Все', style: TextStyle(
                           color: AppColors.ratingText, fontSize: 15,
                           ),

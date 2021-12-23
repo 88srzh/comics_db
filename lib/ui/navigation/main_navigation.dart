@@ -17,6 +17,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,13 +30,13 @@ abstract class MainNavigationRouteNames {
   static const fullCastAndCrew = '/movie_details/fullCastAndCrew';
   static const tv = '/tv';
   static const tvDetails = '/tv_details';
+  static const tvTrailer = '/tv_details/trailer';
+  static const tvPopular = '/tvPopular';
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/popularMovie';
-  // static const popularMovieList = '/popularMovieList';
   static const networkConnectionError = '/errors/network_connection';
   static const movieTrailer = '/movie_details/trailer';
-  static const tvTrailer = '/tv_details/trailer';
   static const topRatedMovie = '/topRatedMovie';
   static const upcomingMovie = '/upcomingMovie';
 }
@@ -52,6 +53,7 @@ class MainNavigation {
     // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
     MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
+    MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
