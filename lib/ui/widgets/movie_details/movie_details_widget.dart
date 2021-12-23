@@ -5,6 +5,7 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import 'package:provider/provider.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
-
 
   @override
   _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
@@ -41,11 +41,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    final model = Provider.of<MovieDetailsModel>(context);
+    final model = Provider.of<MovieDetailsModel>(context, listen: true);
     final movieDetails = model.movieDetails;
     if (movieDetails == null) {
-      return const Center(child: CircularProgressIndicator(),);
+      return const Center(child: LoadingIndicatorWidget(),);
     }
     final videos = movieDetails.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
@@ -266,60 +265,7 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
             ),
           ],
         ),
-
-
-        // Это мне понадобится, когда буду добавлять ЖАНРЫ
-
-        // child: Padding(
-        //   padding: const EdgeInsets.only(top: 12.0),
-        //   child: RichText(
-        //     maxLines: 3,
-        //     textAlign: TextAlign.center,
-        //     text: TextSpan(
-        //       children: [
-        //         TextSpan(
-        //           text: model?.movieDetails?.title ?? 'Загрузка названия...',
-        //           style: const TextStyle(
-        //             fontSize: 21,
-        //             fontWeight: FontWeight.w600,
-        //           ),
-        //         ),
-        //         TextSpan(
-        //           text: year,
-        //         ),
-        //       ]
-        //     ),
-        //   ),
-        // ),
       );
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: [
-    //     Expanded(
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.start,
-    //       children: [
-    //         Expanded(
-    //           child: Text(
-    //             model?.movieDetails?.title ?? 'Загрузка названия...',
-    //             overflow: TextOverflow.ellipsis,
-    //             maxLines: 2,
-    //             style: const TextStyle(
-    //                 fontSize: 20, fontWeight: FontWeight.bold),
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //     ),
-    //     Row(
-    //       children: [
-    //         const Icon(Icons.star_border_outlined, size: 20),
-    //         const SizedBox(width: 5.0),
-    //         Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
-    //       ],
-    //     ),
-    //   ],
-    // );
   }
 }
 
@@ -467,7 +413,8 @@ class _CastWidget extends StatelessWidget {
             const SizedBox(
               height: 250.0,
               child: Scrollbar(
-                child: _MovieActorListWidget()),
+                child: _MovieActorListWidget(),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

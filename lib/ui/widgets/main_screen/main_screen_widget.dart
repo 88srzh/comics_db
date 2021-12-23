@@ -60,10 +60,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     // просто получение модели без цели
     // final model = NotifierProvider.read<MainScreenModel>(context);
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Обзор'),
-      // ),
+    return Scaffold(,
       body: IndexedStack(
         index: _selectedTab,
         children: [
@@ -76,10 +73,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ],
           child: const MovieListWidget(),
           ),
-          // NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
-          // ChangeNotifierProvider(create: (context) => tvListModel, child: const TvPopularWidget()),
           MultiProvider(providers: [
-            // ChangeNotifierProvider(create: (_) => topRatedTvModel),
             ChangeNotifierProvider(create: (_) => tvTopRatedModel),
             ChangeNotifierProvider(create: (_) => tvPopularModel),
             ChangeNotifierProvider(create: (_) => airingTodayModel),

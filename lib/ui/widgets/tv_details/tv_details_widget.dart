@@ -5,8 +5,10 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_description_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_title_genres_rating_voteaverage_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_top_poster_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,15 +32,13 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsModel = Provider.of<TvDetailsModel>(context).tvDetails;
+    final tvDetailsModel = Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
     if (tvDetailsModel == null) {
       return const Center(child: LoadingIndicatorWidget());
     }
     final tvVideos = tvDetailsModel.videos.results
         .where((video) => video.type == "Trailer" && video.site == 'YouTube');
     final tvTrailerKey = tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
-    var voteAverage = tvDetailsModel.voteAverage;
-    voteAverage = voteAverage * 10;
     String youtubeKey = tvTrailerKey.toString();
     // final tvDetails = NotifierProvider.watch<TvDetailsModel>(context)?.tvDetails;
     // final videos = tvDetails?.videos.results
@@ -58,11 +58,13 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
         child: ListView(
           children: [
             Column(
-              children: const [
-                TvTopPosterWidget(),
+              children: [
+                const TvTopPosterWidget(),
+                const TvDescriptionWidget(),
+                TvTrailerWidget(youtubeKey: youtubeKey),
+
                 // TitleGenresRatingVoteAverageWidget(),
                 // const TitleGenresRatingVoteAverageWidget(),
-                // const DescriptionWidget(),
                 // TrailerWidget(),
               ],
             ),
