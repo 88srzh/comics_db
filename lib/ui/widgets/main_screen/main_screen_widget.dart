@@ -8,8 +8,11 @@ import 'package:comics_db_app/ui/widgets/news/news_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_list_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +30,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final moviePopularListModel = MoviePopularListModel();
   final topRatedMovieModel = TopRatedMovieModel();
   final upcomingMovieModel = UpcomingMovieModel();
-  final tvListModel = TvListModel();
+  final tvPopularModel = TvPopularModel();
+  final tvTopRatedModel = TvTopRatedModel();
+  final airingTodayModel = AiringTodayTvsModel();
+
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -43,11 +49,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     super.didChangeDependencies();
 
     moviePopularListModel.setupLocale(context);
-    trendingAllModel.setupPage(context);
-    tvListModel.setupLocale(context);
-    settingsModel.setupLocale(context);
-    topRatedMovieModel.setupLocale(context);
+    tvTopRatedModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
+    tvPopularModel.setupLocale(context);
+    topRatedMovieModel.setupLocale(context);
+    airingTodayModel.setupLocale(context);
+
+    settingsModel.setupLocale(context);
+    trendingAllModel.setupPage(context);
   }
 
   @override
@@ -55,29 +64,25 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     // просто получение модели без цели
     // final model = NotifierProvider.read<MainScreenModel>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Обзор'),
-      // ),
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          // TODO: need to add newsListWidget model may be
-          // NotifierProvider(create: () => moviePopularListModel, child: const NewsListWidget(), isManagingModel: false),
           ChangeNotifierProvider(create: (_) => moviePopularListModel, child: const MoviePopularListWidget()),
-          // NotifierProvider(create: () => topRatedMovieModel, child: const MovieListWidget()),
           MultiProvider(providers: [
-            // ListenableProvider(create: (_) => topRatedMovieModel),
-            // ListenableProvider(create: (_) => movieListModel),
             ChangeNotifierProvider(create: (_) => topRatedMovieModel),
             ChangeNotifierProvider(create: (_) => moviePopularListModel),
             ChangeNotifierProvider(create: (_) => upcomingMovieModel),
           ],
           child: const MovieListWidget(),
           ),
-          // NotifierProvider(create: () => tvListModel, child: const TVListWidget()),
-          ChangeNotifierProvider(create: (context) => tvListModel, child: const TvListWidget()),
-
-          NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
+          MultiProvider(providers: [
+            ChangeNotifierProvider(create: (_) => tvTopRatedModel),
+            ChangeNotifierProvider(create: (_) => tvPopularModel),
+            ChangeNotifierProvider(create: (_) => airingTodayModel),
+          ],
+            child: const TvListWidget(),
+          ),
+          ChangeNotifierProvider(create: (_) => settingsModel, child: const SettingsWidget()),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
@@ -90,8 +95,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.settings, title: 'Настройки'),
         ],
         onTap: (int index) => setState(() {
-    _selectedTab = index;
-    }),
+          _selectedTab = index;
+        }),
    // onTap: onSelectTab,
       ),
     );

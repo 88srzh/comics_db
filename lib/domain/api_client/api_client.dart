@@ -210,6 +210,42 @@ class ApiClient {
     return result;
   }
 
+  Future<PopularTVResponse> topRatedTvs(int page, String locale) {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/tv/top_rated',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
+  Future<PopularTVResponse> airingTodayTvs(int page, String locale) {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      '/tv/airing_today',
+      parser,
+      <String, dynamic>{
+        'api_key': _apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
   Future<PopularAndTopRatedMovieResponse> upcomingMovie(int page, String locale) {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;

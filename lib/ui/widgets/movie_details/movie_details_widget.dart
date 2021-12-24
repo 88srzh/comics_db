@@ -5,6 +5,7 @@ import 'package:comics_db_app/domain/api_client/api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import 'package:provider/provider.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
-
 
   @override
   _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
@@ -36,17 +36,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // NotifierProvider.read<MovieDetailsModel>(context)?.setupLocale(context);
     Provider.of<MovieDetailsModel>(context, listen: false).setupLocale(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    final model = Provider.of<MovieDetailsModel>(context);
+    final model = Provider.of<MovieDetailsModel>(context, listen: true);
     final movieDetails = model.movieDetails;
     if (movieDetails == null) {
-      return const Center(child: CircularProgressIndicator(),);
+      return const Center(child: LoadingIndicatorWidget(),);
     }
     final videos = movieDetails.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
@@ -55,7 +53,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     return Scaffold(
       body: ColoredBox(
-        color: AppColors.kPrimaryColorNew,
+        color: AppColors.kPrimaryColor,
         child: ListView(
           children: [
             Column(
@@ -69,8 +67,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               ],
         ),
       ),
-          );
-      // bottomNavigationBar: const _FavoritesButton(),
+    );
   }
 }
 
@@ -81,7 +78,6 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -147,7 +143,6 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final movieDetails = NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     final movieDetails = Provider.of<MovieDetailsModel>(context, listen: true).movieDetails;
     final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
@@ -186,19 +181,6 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   }
 }
 
-// class _DirectorWidget extends StatelessWidget {
-//   const _DirectorWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-//     return Row(
-//
-//     );
-//   }
-// }
-
-
 class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
   const _TitleGenresRatingVoteAverageWidget({
     Key? key,
@@ -206,15 +188,15 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
+    // TODO: возможно косяк voteAverage = rating
     var rating = model.movieDetails?.voteAverage.toString();
     var year = model.movieDetails?.releaseDate?.year.toString();
     var voteAverage = model.movieDetails?.voteAverage ?? 0;
     voteAverage = voteAverage * 10;
 
     // genres
-    if (model == null) return const SizedBox.shrink();
+    // if (model == null) return const SizedBox.shrink();
     var texts = <String>[];
     final genres = model.movieDetails?.genres;
     if (genres != null && genres.isNotEmpty) {
@@ -283,59 +265,7 @@ class _TitleGenresRatingVoteAverageWidget extends StatelessWidget {
             ),
           ],
         ),
-
-        // Это мне понадобится, когда буду добавлять ЖАНРЫ
-
-        // child: Padding(
-        //   padding: const EdgeInsets.only(top: 12.0),
-        //   child: RichText(
-        //     maxLines: 3,
-        //     textAlign: TextAlign.center,
-        //     text: TextSpan(
-        //       children: [
-        //         TextSpan(
-        //           text: model?.movieDetails?.title ?? 'Загрузка названия...',
-        //           style: const TextStyle(
-        //             fontSize: 21,
-        //             fontWeight: FontWeight.w600,
-        //           ),
-        //         ),
-        //         TextSpan(
-        //           text: year,
-        //         ),
-        //       ]
-        //     ),
-        //   ),
-        // ),
       );
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: [
-    //     Expanded(
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.start,
-    //       children: [
-    //         Expanded(
-    //           child: Text(
-    //             model?.movieDetails?.title ?? 'Загрузка названия...',
-    //             overflow: TextOverflow.ellipsis,
-    //             maxLines: 2,
-    //             style: const TextStyle(
-    //                 fontSize: 20, fontWeight: FontWeight.bold),
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //     ),
-    //     Row(
-    //       children: [
-    //         const Icon(Icons.star_border_outlined, size: 20),
-    //         const SizedBox(width: 5.0),
-    //         Text(rating ?? '0.0', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
-    //       ],
-    //     ),
-    //   ],
-    // );
   }
 }
 
@@ -346,22 +276,33 @@ class _TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.watch<MovieDetailsModel>(context);
     final model = Provider.of<MovieDetailsModel>(context, listen: true);
     final posterPath = model.movieDetails?.posterPath;
     final backdropPath = model.movieDetails?.backdropPath;
     return Stack(
       children: [
         Positioned(
+          // TODO: backdropPath изображение поверх posterPath исправить
           child: AspectRatio(
             aspectRatio: 390 / 220,
-            child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+            child: ColorFiltered(
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3),
+                  BlendMode.dstATop,
+              ),
+                child: backdropPath != null ? Image.network(
+                    ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+            ),
           ),
         ),
         Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 110.0),
-            child: SizedBox(
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              // TODO: почему-то не закругляет края
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
               height: 212.0,
               width: 174.0,
               child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
@@ -472,7 +413,8 @@ class _CastWidget extends StatelessWidget {
             const SizedBox(
               height: 250.0,
               child: Scrollbar(
-                child: _MovieActorListWidget()),
+                child: _MovieActorListWidget(),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
