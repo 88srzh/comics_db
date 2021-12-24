@@ -33,6 +33,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
   final airingTodayModel = AiringTodayTvsModel();
+
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -48,13 +49,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     super.didChangeDependencies();
 
     moviePopularListModel.setupLocale(context);
-    trendingAllModel.setupPage(context);
-    tvPopularModel.setupLocale(context);
     tvTopRatedModel.setupLocale(context);
-    settingsModel.setupLocale(context);
-    topRatedMovieModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
+    tvPopularModel.setupLocale(context);
+    topRatedMovieModel.setupLocale(context);
     airingTodayModel.setupLocale(context);
+
+    settingsModel.setupLocale(context);
+    trendingAllModel.setupPage(context);
   }
 
   @override
@@ -65,9 +67,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          // NotifierProvider(create: () => moviePopularListModel, child: const NewsListWidget(), isManagingModel: false),
           ChangeNotifierProvider(create: (_) => moviePopularListModel, child: const MoviePopularListWidget()),
-          // ChangeNotifierProvider(create: (_) => tvPopularModel, child: const PopularTvWidget()),
           MultiProvider(providers: [
             ChangeNotifierProvider(create: (_) => topRatedMovieModel),
             ChangeNotifierProvider(create: (_) => moviePopularListModel),
@@ -82,8 +82,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ],
             child: const TvListWidget(),
           ),
-
-          NotifierProvider(create: () => settingsModel, child: const SettingsWidget()),
+          ChangeNotifierProvider(create: (_) => settingsModel, child: const SettingsWidget()),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
@@ -96,8 +95,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.settings, title: 'Настройки'),
         ],
         onTap: (int index) => setState(() {
-    _selectedTab = index;
-    }),
+          _selectedTab = index;
+        }),
    // onTap: onSelectTab,
       ),
     );

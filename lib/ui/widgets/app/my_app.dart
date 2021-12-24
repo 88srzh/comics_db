@@ -4,7 +4,6 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -16,7 +15,6 @@ class MyApp extends StatelessWidget {
     final model = ProviderCustom.read<MyAppModel>(context);
     // final model = Provider.of<MyAppModel>(context, listen: false);
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(

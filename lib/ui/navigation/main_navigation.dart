@@ -5,17 +5,12 @@ import 'package:comics_db_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_trailer/movie_trailer_widget.dart';
-import 'package:comics_db_app/ui/widgets/news/components/news_widget_popular.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
@@ -48,42 +43,29 @@ class MainNavigation {
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
     'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
-    MainNavigationRouteNames.splashScreen: (context) => NotifierProvider(create: () => SplashscreenModel(), child: const SplashscreenWidget()),
-    MainNavigationRouteNames.mainScreen: (context) => NotifierProvider(create: () => MainScreenModel(), child: const MainScreenWidget()),
+    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    MainNavigationRouteNames.mainScreen: (context) => ChangeNotifierProvider(create: (_) => MainScreenModel(), child: const MainScreenWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
     MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
-    // MainNavigationRouteNames.tv: (context) => NotifierProvider(create: () => TVListModel(), child: const TVListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
     MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
     // MainNavigationRouteNames.popularMovieList: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MoviePopularListWidget(),),
-    // '/': (context) => NotifierProvider(
-    //     model: MainScreenModel(), child: const MainScreenWidget()),
     // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
-    // '/tv': (context) => NotifierProvider(
-    //   model: TVListModel(), child: const TVListWidget())
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MainNavigationRouteNames.movieDetails:
         final arguments = settings.arguments;
         final movieId = arguments is int ? arguments : 0;
-        // final movieId = arguments is int;
         return MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
                 create: (context) => MovieDetailsModel(movieId),
               child: const MovieDetailsWidget(),
             ),
         );
-        // return MaterialPageRoute(
-        //     builder: (context) => NotifierProvider(
-        //         create: () => MovieDetailsModel(movieId),
-        //         child: const MovieDetailsWidget(),
-        //     ),
-        // );
-    // TODO: изменить старый провайдер
       case MainNavigationRouteNames.tvDetails:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
@@ -92,15 +74,11 @@ class MainNavigation {
               create: (context) => TvDetailsModel(tvId),
             child: const TvDetailsWidget(),
           ),
-            // builder: (context) => NotifierProvider(
-            //     create: () => TvDetailsModel(tvId),
-            //     child: const TvDetailsWidget(),
         );
       case MainNavigationRouteNames.movieTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
-          // builder: (context) => MovieTrailerWidget(youtubeKey: youtubeKey),
           builder: (context) => TrailerWidget(youtubeKey: youtubeKey),
         );
       case MainNavigationRouteNames.tvTrailer:
