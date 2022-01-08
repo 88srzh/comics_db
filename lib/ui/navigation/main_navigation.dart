@@ -5,6 +5,7 @@ import 'package:comics_db_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
@@ -47,7 +48,8 @@ class MainNavigation {
     MainNavigationRouteNames.mainScreen: (context) => ChangeNotifierProvider(create: (_) => MainScreenModel(), child: const MainScreenWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
-    MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
+    // MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
+    MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),

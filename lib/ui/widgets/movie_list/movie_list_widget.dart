@@ -31,6 +31,33 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   Widget build(BuildContext context) {
     final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // if (topRatedMovieModel == null) return const SizedBox.shrink();
+    // TODO: перенести в каждую категорию
+    final AlertDialog dialog = AlertDialog(
+      content: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: TextField(
+          onChanged: topRatedMovieModel.searchMovie,
+          decoration: InputDecoration(
+            labelText: 'Поиск',
+            labelStyle: const TextStyle(
+              color: AppColors.kPrimaryColor,
+            ),
+            filled: true,
+            fillColor: Colors.white.withAlpha(235),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.kPrimaryColor),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.kPrimaryColor),
+            ),
+          ),
+        ),
+      ),
+
+    );
     return Scaffold (
       appBar: AppBar(
         titleSpacing: 0.0,
@@ -50,7 +77,9 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                 children: [
                   // TODO оптимизировать значки
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog<void>(context: context, builder: (context) => dialog);
+                    },
                       child: const Icon(Icons.search, color: AppColors.searchIcon, size: 30,),
                   ),
                   Padding(
@@ -91,7 +120,8 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     children: [
                       const Text('Популярные', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
                       InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                        // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                        onTap: () {Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie);},
                           child: const Text('Все', style: TextStyle(color: AppColors.ratingText, fontSize: 15),)),
                     ],
                   ),
