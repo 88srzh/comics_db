@@ -13,4 +13,5 @@ class AppImages {
   static const String splashScreenLogo = 'images/splashscreen/movie-logo@1x.png';
   static const String ellipseDot = 'images/components/Ellipse@1x.png';
   static const String movieAppBarLogo = 'images/components/movie_logo@1x.png';
+  static const String noImageBig = 'images/no-image-big.png';
 }

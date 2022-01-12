@@ -1,23 +1,20 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class TvTrailerWidget extends StatefulWidget {
+class TrailerWidget extends StatefulWidget {
   final String youtubeKey;
 
-  const TvTrailerWidget({
-    Key? key,
-    required this.youtubeKey,
-  }) : super(key: key);
+  const TrailerWidget({Key? key, required this.youtubeKey}) : super(key: key);
 
   @override
-  _TvTrailerWidgetState createState() => _TvTrailerWidgetState();
+  State<TrailerWidget> createState() => _TrailerWidgetState();
 }
 
-class _TvTrailerWidgetState extends State<TvTrailerWidget> {
+class _TrailerWidgetState extends State<TrailerWidget> {
   late final YoutubePlayerController _controller;
 
   @override
@@ -25,18 +22,19 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
     super.initState();
 
     _controller = YoutubePlayerController(
-        initialVideoId: widget.youtubeKey,
-        flags: const YoutubePlayerFlags(
-          autoPlay: false,
-          mute: true,
-        ));
+      initialVideoId: widget.youtubeKey,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final tvDetails =
-        Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
-    final videos = tvDetails?.videos.results
+    final movieDetails =
+        Provider.of<MovieDetailsModel>(context, listen: true).movieDetails;
+    final videos = movieDetails?.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
     return Padding(
@@ -65,7 +63,8 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
                         player,
                       ],
                     );
-                  })
+                  },
+                )
               : Image.asset(AppImages.noImageBig),
         ],
       ),

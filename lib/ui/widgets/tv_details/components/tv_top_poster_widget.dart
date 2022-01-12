@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/api_client.dart';
-import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +25,6 @@ class TvTopPosterWidget extends StatelessWidget {
       allRuntimes.add(singleRuntime.join(', '));
     }
 
-
     var voteCount = tvModel.tvDetails?.voteCount.toString() ?? '0';
     var voteAverage = tvModel.tvDetails?.voteAverage ?? 0;
     voteAverage = voteAverage * 10;
@@ -46,18 +42,19 @@ class TvTopPosterWidget extends StatelessWidget {
       children: [
         Positioned(
             child: AspectRatio(
-              aspectRatio: 390/220,
-              child: ColorFiltered(
-                colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2),
-                    BlendMode.dstATop,
-                ),
-                child: backdropPath != null ? Image.network(
+          aspectRatio: 390 / 220,
+          child: ColorFiltered(
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.2),
+              BlendMode.dstATop,
+            ),
+            child: backdropPath != null
+                ? Image.network(
                     ApiClient.imageUrl(backdropPath),
-                )
+                  )
                 : const SizedBox.shrink(),
-              ),
-            )
-        ),
+          ),
+        )),
         Positioned(
           top: 55,
           left: 240,
@@ -69,12 +66,13 @@ class TvTopPosterWidget extends StatelessWidget {
             ),
             height: 170.0,
             width: 140.0,
-            child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath))
-            : const SizedBox.shrink(),
+            child: posterPath != null
+                ? Image.network(ApiClient.imageUrl(posterPath))
+                : const SizedBox.shrink(),
           ),
         ),
         Positioned(
-          top: 65,
+            top: 65,
             left: 10,
             child: SizedBox(
               height: 300,
@@ -90,12 +88,13 @@ class TvTopPosterWidget extends StatelessWidget {
                         // TODO: центрировать текст по высоте
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(tvModel.tvDetails?.name ?? 'Загрузка названия',
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 21,
-                            color: AppColors.titleText,
-                          ),
+                          child: Text(
+                            tvModel.tvDetails?.name ?? 'Загрузка названия',
+                            maxLines: 2,
+                            style: const TextStyle(
+                              fontSize: 21,
+                              color: AppColors.titleText,
+                            ),
                           ),
                         ),
                       ],
@@ -144,15 +143,18 @@ class TvTopPosterWidget extends StatelessWidget {
                   const SizedBox(height: 5),
                   Row(
                     children: [
-                      const Icon(Icons.star, color: AppColors.ratingStar, size: 14),
+                      const Icon(Icons.star,
+                          color: AppColors.ratingStar, size: 14),
                       const SizedBox(width: 4),
-                      Text(voteCount,
+                      Text(
+                        voteCount,
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.ratingText,
                         ),
                       ),
-                      const Text(' пользователям понравилось',
+                      const Text(
+                        ' пользователям понравилось',
                         style: TextStyle(
                           fontSize: 13,
                           color: AppColors.ratingText,
@@ -163,29 +165,29 @@ class TvTopPosterWidget extends StatelessWidget {
                   const SizedBox(height: 5),
                   Row(
                     children: [
-                      const Icon(Icons.thumb_up_alt_outlined, color: AppColors.ratingThumb, size: 14),
+                      const Icon(Icons.thumb_up_alt_outlined,
+                          color: AppColors.ratingThumb, size: 14),
                       const SizedBox(width: 4),
-                      Text(voteAverage.toStringAsFixed(0) + '% от пользователей',
+                      Text(
+                        voteAverage.toStringAsFixed(0) + '% от пользователей',
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.ratingText,
                         ),
                       ),
-
                     ],
                   ),
                 ],
               ),
-            )
-        ),
+            )),
         // TODO: исправить стрелку, чтобы не съезжала
         Positioned(
           left: 10,
-            top: 10,
-            child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
-            ),
+          top: 10,
+          child: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+          ),
         ),
       ],
     );

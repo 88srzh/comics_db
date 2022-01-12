@@ -3,6 +3,7 @@ import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
