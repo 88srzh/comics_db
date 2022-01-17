@@ -50,7 +50,7 @@ class MainNavigation {
     // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
     // MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
-    MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
+    MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (context) => MoviePopularListModel(), child: const MoviePopularListWidget()),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
