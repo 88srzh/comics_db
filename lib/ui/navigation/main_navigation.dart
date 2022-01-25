@@ -1,6 +1,7 @@
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
+import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_model.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
@@ -21,29 +22,35 @@ import 'package:provider/provider.dart';
 
 abstract class MainNavigationRouteNames {
   static const splashScreen = 'splashscreen';
-  static const auth = 'auth';
-  static const mainScreen = '/';
-  static const movieDetails = '/movie_details';
-  static const fullCastAndCrew = '/movie_details/fullCastAndCrew';
+  // TODO: may be move to start loaderWidget
+  static const loaderWidget = '/';
+  static const auth = '/auth';
+  static const mainScreen = '/main_screen';
+  static const movieDetails = '/main_screen/movie_details';
+  static const fullCastAndCrew = '/main_screen/movie_details/fullCastAndCrew';
   static const tv = '/tv';
-  static const tvDetails = '/tv_details';
-  static const tvTrailer = '/tv_details/trailer';
-  static const tvPopular = '/tvPopular';
+  static const tvDetails = '/main_screen/tv_details';
+  static const tvTrailer = '/main_screen/tv_details/trailer';
+  static const tvPopular = '/main_screen/tvPopular';
   static const news = '/news';
   static const trending = 'trending';
-  static const popularMovie = '/popularMovie';
+  static const popularMovie = '/main_screen/popularMovie';
   static const networkConnectionError = '/errors/network_connection';
-  static const movieTrailer = '/movie_details/trailer';
-  static const topRatedMovie = '/topRatedMovie';
-  static const upcomingMovie = '/upcomingMovie';
+  static const movieTrailer = '/main_screen/movie_details/trailer';
+  static const topRatedMovie = '/main_screen/topRatedMovie';
+  static const upcomingMovie = '/main_screen/upcomingMovie';
+
 }
 
 class MainNavigation {
+  // |TODO: does necessary initialRoute?
   String initialRoute(bool isAuth) => isAuth
       // ? MainNavigationRouteNames.splashScreen
       ? MainNavigationRouteNames.mainScreen
       : MainNavigationRouteNames.auth;
   final routes = <String, Widget Function(BuildContext)>{
+    MainNavigationRouteNames.loaderWidget: (context) => const LoaderWidget(),
+    // MainNavigationRouteNames.auth: (context) => ChangeNotifierProvider(create: (_) => AuthModel(), child: const AuthWidget()),
     'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
     MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.mainScreen: (context) => ChangeNotifierProvider(create: (_) => MainScreenModel(), child: const MainScreenWidget()),
