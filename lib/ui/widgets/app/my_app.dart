@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 class MyApp extends StatelessWidget {
+  // TODO: нужно отказаться от mainNavigation
   static final mainNavigation = MainNavigation();
   const MyApp({Key? key}) : super(key: key);
 

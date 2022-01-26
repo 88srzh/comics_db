@@ -1,12 +1,4 @@
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
-import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
-import 'package:comics_db_app/ui/widgets/main_screen/main_screen_model.dart';
-import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
+import 'package:comics_db_app/domain/factoryes/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
@@ -22,6 +14,7 @@ import 'package:provider/provider.dart';
 
 abstract class MainNavigationRouteNames {
   static const splashScreen = 'splashscreen';
+
   // TODO: may be move to start loaderWidget
   static const loaderWidget = '/';
   static const auth = '/auth';
@@ -39,66 +32,58 @@ abstract class MainNavigationRouteNames {
   static const movieTrailer = '/main_screen/movie_details/trailer';
   static const topRatedMovie = '/main_screen/topRatedMovie';
   static const upcomingMovie = '/main_screen/upcomingMovie';
-
 }
 
 class MainNavigation {
-  // |TODO: does necessary initialRoute?
-  String initialRoute(bool isAuth) => isAuth
-      // ? MainNavigationRouteNames.splashScreen
-      ? MainNavigationRouteNames.mainScreen
-      : MainNavigationRouteNames.auth;
+  static final _screenFactory = ScreenFactory();
   final routes = <String, Widget Function(BuildContext)>{
-    MainNavigationRouteNames.loaderWidget: (context) => const LoaderWidget(),
+    MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     // MainNavigationRouteNames.auth: (context) => ChangeNotifierProvider(create: (_) => AuthModel(), child: const AuthWidget()),
-    'auth': (context) => NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
-    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-    MainNavigationRouteNames.mainScreen: (context) => ChangeNotifierProvider(create: (_) => MainScreenModel(), child: const MainScreenWidget()),
-    // MainNavigationRouteNames.popularMovie: (context) => NotifierProvider(create: () => MovieListModel(), child: const MovieListWidget()),
-    // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (_) => MoviePopularListModel(), child: const MoviePopularListWidget()),
-    // MainNavigationRouteNames.popularMovie: (context) => const MoviePopularWidget(),
-    MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(create: (context) => MoviePopularListModel(), child: const MoviePopularListWidget()),
+    MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
+    MainNavigationRouteNames.mainScreen: (context) =>
+        _screenFactory.makeMainScreen(),
+    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(
+        create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(
+        create: (context) => MoviePopularListModel(),
+        child: const MoviePopularListWidget()),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
-    // MainNavigationRouteNames.topRatedMovie: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MovieListWidget()),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
     MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
-    // MainNavigationRouteNames.popularMovieList: (context) => NotifierProvider(create: () => MoviePopularListModel(), child: const MoviePopularListWidget(),),
-    // '/trending': (context) => NotifierProvider(model: TrendingAllModel(), child: const NewsWidgetTrending()),
   };
+
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MainNavigationRouteNames.movieDetails:
         final arguments = settings.arguments;
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-                create: (context) => MovieDetailsModel(movieId),
-              child: const MovieDetailsWidget(),
-            ),
+          builder: (_) => _screenFactory.makeMovieDetails(movieId),
+        );
+      case MainNavigationRouteNames.movieTrailer:
+        final arguments = settings.arguments;
+        final youtubeKey = arguments is String ? arguments : '';
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.makeMovieTrailer(youtubeKey),
         );
       case MainNavigationRouteNames.tvDetails:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider(
-              create: (context) => TvDetailsModel(tvId),
+            create: (context) => TvDetailsModel(tvId),
             child: const TvDetailsWidget(),
           ),
-        );
-      case MainNavigationRouteNames.movieTrailer:
-        final arguments = settings.arguments;
-        final youtubeKey = arguments is String ? arguments : '';
-        return MaterialPageRoute(
-          builder: (context) => TrailerWidget(youtubeKey: youtubeKey),
         );
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
-            builder: (context) => TvTrailerWidget(tvYoutubeKey: youtubeKey));
+          builder: (context) => TvTrailerWidget(tvYoutubeKey: youtubeKey),
+        );
       default:
         const widget = Text('Ошибка навигации');
-        return MaterialPageRoute(builder: (context) => widget);
+        return MaterialPageRoute(builder: (_) => widget);
     }
   }
 }

@@ -24,7 +24,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // TODO: ХЗ как исправить на стандартный провайдер, смотреть в main где ProviderCustom
     final model = NotifierProvider.read<MovieDetailsModel>(context);
     final appModel = ProviderCustom.read<MyAppModel>(context);
-    model?.onSessionExpired = () => appModel?.resetSession(context);
+    // model?.onSessionExpired = () => appModel?.resetSession(context);
 
     // final model = Provider.of<MovieDetailsModel>(context, listen: false);
     // final appModel = Provider.of<MyAppModel>(context, listen: false);
