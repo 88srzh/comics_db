@@ -4,7 +4,6 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_description_wi
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,9 +15,7 @@ class TvDetailsWidget extends StatefulWidget {
 }
 
 class _TvDetailsWidgetState extends State<TvDetailsWidget> {
-
   // TODO: возможно добавить проверку на session expired
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -27,13 +24,15 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsModel = Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
+    final tvDetailsModel =
+        Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
     if (tvDetailsModel == null) {
       return const Center(child: LoadingIndicatorWidget());
     }
     final tvVideos = tvDetailsModel.videos.results
         .where((video) => video.type == "Trailer" && video.site == 'YouTube');
-    final tvTrailerKey = tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
+    final tvTrailerKey =
+        tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
     String youtubeKey = tvTrailerKey.toString();
     return Scaffold(
       body: ColoredBox(

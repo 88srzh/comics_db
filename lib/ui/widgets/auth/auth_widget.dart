@@ -5,6 +5,7 @@ import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);
@@ -243,6 +244,7 @@ class AuthButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final model = Provider.of<AuthModel>(context, listen: true);
     final model = NotifierProvider.watch<AuthModel>(context);
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
@@ -250,7 +252,7 @@ class AuthButtonWidget extends StatelessWidget {
         ? const CircularProgressIndicator(strokeWidth: 5.0)
         : const Text(
             'Войти',
-            // style: TextStyle(fontSize: 24, color: Colors.black),
+            style: TextStyle(fontSize: 24, color: Colors.black),
           );
     return SizedBox(
       width: double.infinity,
