@@ -133,14 +133,13 @@ class _AuthButtonWidget extends StatelessWidget {
     // final model = NotifierProvider.watch<AuthViewModel>(context);
     final model = Provider.of<AuthViewModel>(context, listen: true);
     const color = Color(0xFF01B4E4);
-    final onPressed =
-    model.canStartAuth ? () => model.auth(context) : null;
-    final child = model.isAuthProgress == true
+    final onPressed = model.canStartAuth ? () => model.auth(context) : null;
+    final child = model.isAuthProgress
         ? const SizedBox(
-      width: 15,
-      height: 15,
-      child: CircularProgressIndicator(strokeWidth: 2),
-    )
+            width: 15,
+            height: 15,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          )
         : const Text('Login');
     return ElevatedButton(
       onPressed: onPressed,
@@ -169,7 +168,8 @@ class _ErrorMessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final errorMessage =
     //     NotifierProvider.watch<AuthViewModel>(context)?.errorMessage;
-    final errorMessage = Provider.of<AuthViewModel>(context, listen: true).errorMessage;
+    final errorMessage =
+        context.select((AuthViewModel model) => model.errorMessage);
     if (errorMessage == null) return const SizedBox.shrink();
 
     return Padding(
