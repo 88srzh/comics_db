@@ -40,7 +40,7 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     // MainNavigationRouteNames.auth: (context) => ChangeNotifierProvider(create: (_) => AuthModel(), child: const AuthWidget()),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
-    MainNavigationRouteNames.mainScreen: (context) =>
+    MainNavigationRouteNames.mainScreen: (_) =>
         _screenFactory.makeMainScreen(),
     MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(
         create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
@@ -85,5 +85,10 @@ class MainNavigation {
         const widget = Text('Ошибка навигации');
         return MaterialPageRoute(builder: (_) => widget);
     }
+  }
+
+  static void resetNavigation(BuildContext context) {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        MainNavigationRouteNames.loaderWidget, (route) => false);
   }
 }

@@ -1,6 +1,5 @@
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
+import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_model.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_model.dart';
@@ -21,8 +20,8 @@ class ScreenFactory {
   }
 
   Widget makeAuth() {
-    return NotifierProvider(
-      create: () => AuthModel(),
+    return ChangeNotifierProvider(
+      create: (_) => AuthViewModel(),
       child: const AuthWidget(),
     );
   }
