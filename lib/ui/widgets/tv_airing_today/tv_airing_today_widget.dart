@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
-          child: posterPath != null ? Image.network(ApiClient.imageUrl(posterPath))
+          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath))
               : const SizedBox.shrink(),
           fit: BoxFit.contain,
         ),

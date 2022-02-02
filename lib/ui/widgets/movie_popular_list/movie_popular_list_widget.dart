@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class MoviePopularListWidget extends StatelessWidget {
                       clipBehavior: Clip.hardEdge,
                       child: Row(
                         children: [
-                          posterPath != null ? Image.network(ApiClient.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
+                          posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath), width: 95) : const SizedBox.shrink(),
                           const SizedBox(width: 15.0),
                           Expanded(
                             child: Column(

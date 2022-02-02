@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +63,7 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: posterPath != null ? Image.network(
-                            ApiClient.imageUrl(posterPath)
+                            ImageDownloader.imageUrl(posterPath)
                           ) : const SizedBox.shrink()
                         ),
                         Positioned(

@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class TopPosterWidget extends StatelessWidget {
                 BlendMode.dstATop,
               ),
               child: backdropPath != null
-                  ? Image.network(ApiClient.imageUrl(backdropPath))
+                  ? Image.network(ImageDownloader.imageUrl(backdropPath))
                   // : const SizedBox.shrink(),
               : Image.asset(AppImages.noImageBig),
             ),
@@ -45,7 +45,7 @@ class TopPosterWidget extends StatelessWidget {
                 height: 212.0,
                 width: 174.0,
                 child: posterPath != null
-                    ? Image.network(ApiClient.imageUrl(posterPath))
+                    ? Image.network(ImageDownloader.imageUrl(posterPath))
                     : const SizedBox.shrink(),
               ),
             ),

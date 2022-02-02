@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
-          child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)): const SizedBox.shrink(),
+          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)): const SizedBox.shrink(),
         ),
       ),
     );

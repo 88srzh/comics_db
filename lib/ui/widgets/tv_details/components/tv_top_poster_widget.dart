@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +50,7 @@ class TvTopPosterWidget extends StatelessWidget {
             ),
             child: backdropPath != null
                 ? Image.network(
-                    ApiClient.imageUrl(backdropPath),
+                    ImageDownloader.imageUrl(backdropPath),
                   )
                 : const SizedBox.shrink(),
           ),
@@ -67,7 +67,7 @@ class TvTopPosterWidget extends StatelessWidget {
             height: 170.0,
             width: 140.0,
             child: posterPath != null
-                ? Image.network(ApiClient.imageUrl(posterPath))
+                ? Image.network(ImageDownloader.imageUrl(posterPath))
                 : const SizedBox.shrink(),
           ),
         ),
@@ -101,7 +101,7 @@ class TvTopPosterWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  // TODO: пофиксить
+                  // TODO: исправить
                   Row(
                     children: [
                       Align(
