@@ -1,9 +1,11 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/account_api_client.dart';
+import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 
 class AuthService {
   final _sessionDataProvider = SessionDataProvider();
-  final _apiClient = ApiClient();
+  final _authApiClient = AuthApiClient();
+  final _accountApiClient = AccountApiClient();
 
   Future<bool> isAuth() async {
     final sessionId = await _sessionDataProvider.getSessionId();
@@ -12,8 +14,8 @@ class AuthService {
   }
 
   Future<void> login(String login, String password) async {
-    final sessionId = await _apiClient.auth(username: login, password: password);
-    final accountId = await _apiClient.getAccountInfo(sessionId);
+    final sessionId = await _authApiClient.auth(username: login, password: password);
+    final accountId = await _accountApiClient.getAccountInfo(sessionId);
     await _sessionDataProvider.setSessionId(sessionId);
     await _sessionDataProvider.setAccountId(accountId);
   }

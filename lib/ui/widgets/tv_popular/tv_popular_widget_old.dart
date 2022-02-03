@@ -1,5 +1,5 @@
 // import 'package:comics_db_app/app_colors.dart';
-// import 'package:comics_db_app/domain/api_client/api_client.dart';
+// import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 // import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';

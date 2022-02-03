@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_dates.dart';
 import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class UpcomingMovieModel extends ChangeNotifier {
-  final _apiClient = ApiClient();
+  final _apiClient = MovieAndTvApiClient();
   final _movies = <Movie>[];
   // final _dates = <MovieDates>[];
   late int _currentPage;

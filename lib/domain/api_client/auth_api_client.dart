@@ -8,6 +8,7 @@ class AuthApiClient {
     required String username,
     required String password,
   }) async {
+    // TODO: вынести в отдельный файл в будущем
     final token = await _makeToken();
     final validToken = await _validateUser(
         username: username, password: password, requestToken: token);

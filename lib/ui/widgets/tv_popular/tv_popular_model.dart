@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class TvPopularModel extends ChangeNotifier {
-  final _apiClient = ApiClient();
+  final _apiClient = MovieAndTvApiClient();
   final _tvs = <TV>[];
   late int _currentPage;
   late int _totalPage;
