@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
@@ -15,7 +15,7 @@ class FullCastAndCrewWidget extends StatelessWidget {
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Полный актерский и съемочный соства'),
+        title: const Text('Полный актерский и съемочный состав'),
         shadowColor: Colors.transparent,
       ),
       body: GridView.builder(
@@ -44,7 +44,7 @@ class _ActorListItemWidget extends StatelessWidget {
     return ListView(
       children: [
         backdropPath != null
-            ? Image.network(ApiClient.imageUrl(backdropPath))
+            ? Image.network(ImageDownloader.imageUrl(backdropPath))
             : const Image(image: AssetImage(AppImages.noImage)),
 
       ],

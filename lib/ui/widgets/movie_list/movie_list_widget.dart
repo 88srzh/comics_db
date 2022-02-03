@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -197,7 +197,7 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
                     final backdropPath = upcomingMovie.backdropPath;
                     return InkWell(
                       onTap: () => upcomingMovieModel.onMovieTap(context, index),
-                      child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath))
+                      child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath))
                           : const SizedBox.shrink(),
                     );
                   }
@@ -232,7 +232,7 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
       height: 6,
       width: _currentMovie == index ? 20 : 6,
       decoration: BoxDecoration(
-        color: _currentMovie == index ? Colors.white : Color(0xFFD8D8D8),
+        color: _currentMovie == index ? Colors.white : const Color(0xFFD8D8D8),
         borderRadius: BorderRadius.circular(3),
       ),
     );
@@ -299,7 +299,7 @@ class _PopularMovieListItemWidget extends StatelessWidget {
         ),
         child: FittedBox(
           child: posterPath != null ?
-              Image.network(ApiClient.imageUrl(posterPath)) : const SizedBox.shrink(),
+              Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
           fit: BoxFit.contain,
         ),
         ),
@@ -320,7 +320,7 @@ class _TopRatedMovieWidget extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           topRatedMovieModel.showedMovieAtIndex(index);
           final topMovie = topRatedMovieModel.movies[index];
-          final posterPath = topMovie.posterPath;
+          // final posterPath = topMovie.posterPath;
           final backdropPath = topMovie.backdropPath;
           return InkWell(
             onTap: () => topRatedMovieModel.onMovieTap(context, index),
@@ -353,7 +353,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
     final topMovie = topRatedMovieModel.movies[index];
-    final posterPath = topMovie.posterPath;
+    // final posterPath = topMovie.posterPath;
     final backdropPath = topMovie.backdropPath;
     return Padding(
       padding: const EdgeInsets.only(right: 15.0),
@@ -379,7 +379,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
         //     ],
         //   ),
           child: FittedBox(
-              child: backdropPath != null ? Image.network(ApiClient.imageUrl(backdropPath)) : const SizedBox.shrink(),
+              child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
           fit: BoxFit.fill,
           ),
       ),

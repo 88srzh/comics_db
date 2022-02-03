@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
@@ -106,7 +106,7 @@ class _MovieListItemWidget extends StatelessWidget {
     final movieModel = NotifierProvider.watch<MoviePopularListModel>(context);
     final movie = movieModel?.movies[index];
     final posterPath = movie?.posterPath;
-    final title = movie?.title;
+    var title = movie?.title;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: DecoratedBox(
@@ -128,14 +128,14 @@ class _MovieListItemWidget extends StatelessWidget {
             child: Column(
               children: [
                 posterPath != null ? Image.network(
-                    ApiClient.imageUrl(posterPath), width: 190)
+                    ImageDownloader.imageUrl(posterPath), width: 190)
                     : const SizedBox.shrink(),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     // TODO second line not center
                     child: Text(
-                      title != null ? title : 'Нет названия',
+                      title = title ?? 'Нет названия',
                       maxLines: 2,
                       style: const TextStyle(
                         fontWeight: FontWeight.w800,

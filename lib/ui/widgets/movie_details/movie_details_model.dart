@@ -1,4 +1,6 @@
-import 'package:comics_db_app/domain/api_client/api_client.dart';
+import 'package:comics_db_app/domain/api_client/account_api_client.dart';
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,12 +8,13 @@ import 'package:intl/intl.dart';
 
 class MovieDetailsModel extends ChangeNotifier {
   final _sessionDataProvider = SessionDataProvider();
-  final _apiClient = ApiClient();
+  final _movieAndTvApiClient = MovieAndTvApiClient();
+  final _accountApiClient = AccountApiClient();
 
   final int movieId;
   bool _isFavoriteMovie = false;
   String _locale = '';
-  late DateFormat _dateFormat;
+  late DateFormat dateFormat;
   Future<void>? Function()? onSessionExpired;
   MovieDetails? _movieDetails;
 
@@ -26,16 +29,16 @@ class MovieDetailsModel extends ChangeNotifier {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
-    _dateFormat = DateFormat.yMMMd(locale);
+    dateFormat = DateFormat.yMMMd(locale);
     await loadMovieDetails();
   }
 
   Future<void> loadMovieDetails() async {
     try {
-    _movieDetails = await _apiClient.movieDetails(movieId, _locale);
+    _movieDetails = await _movieAndTvApiClient.movieDetails(movieId, _locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     if (sessionId != null) {
-      _isFavoriteMovie = await _apiClient.isFavoriteMovie(movieId, sessionId);
+      _isFavoriteMovie = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
     }
     notifyListeners();
   } on ApiClientException catch (e) {
@@ -52,7 +55,7 @@ class MovieDetailsModel extends ChangeNotifier {
     _isFavoriteMovie = !_isFavoriteMovie;
     notifyListeners();
     try {
-      await _apiClient.markAsFavorite(
+      await _accountApiClient.markAsFavorite(
           accountId: accountId,
           sessionId: sessionId,
           mediaType: MediaType.movie,
