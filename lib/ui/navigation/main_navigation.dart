@@ -45,7 +45,7 @@ class MainNavigation {
     MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(
         create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(
-        create: (context) => MoviePopularListModel(),
+        create: (context) => MoviePopularListViewModel(),
         child: const MoviePopularListWidget()),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),

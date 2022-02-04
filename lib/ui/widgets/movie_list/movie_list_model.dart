@@ -7,7 +7,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class MoviePopularListModel extends ChangeNotifier {
+class MoviePopularListViewModel extends ChangeNotifier {
   final _apiClient = MovieAndTvApiClient();
   final _movies = <Movie>[];
   late int _currentPage;

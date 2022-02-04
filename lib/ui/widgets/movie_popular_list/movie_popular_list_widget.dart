@@ -8,7 +8,7 @@ class MoviePopularWidget extends StatelessWidget {
   @override
   // TODO возможно сделать виджет закрытым
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MoviePopularListModel(), child: const MoviePopularListWidget());
+      create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
 }
 
 
@@ -16,7 +16,7 @@ class MoviePopularListWidget extends StatelessWidget {
   const MoviePopularListWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<MoviePopularListModel>(context, listen: true);
+    final model = Provider.of<MoviePopularListViewModel>(context, listen: true);
     // if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [

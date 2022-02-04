@@ -15,7 +15,7 @@ class MovieWidget extends StatelessWidget {
   @override
   //TODO не совсем понимаю зачем тут модель одна передается, если используется минимум 3
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MoviePopularListModel(), child: const MovieListWidget());
+      create: (context) => MoviePopularListViewModel(), child: const MovieListWidget());
 }
 
 
@@ -239,13 +239,40 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
   }
 }
 
-class _PopularMovieWidget extends StatelessWidget {
+class _PopularMovieWidget extends StatefulWidget {
   const _PopularMovieWidget({Key? key}) : super(key: key);
 
   @override
+  State<_PopularMovieWidget> createState() => _PopularMovieWidgetState();
+}
+
+class _PopularMovieWidgetState extends State<_PopularMovieWidget> {
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    // TODO: может поменять на context.read ?
+    Provider.of<MoviePopularListViewModel>(context, listen: false).setupLocale(context);
+  }
+  @override
   Widget build(BuildContext context) {
-    final popularMovieModel = Provider.of<MoviePopularListModel>(context, listen: true);
-    // if (popularMovieModel == null) return const SizedBox.shrink();
+    final popularMovieModel = Provider.of<MoviePopularListViewModel>(context, listen: true);
+    return PopularMovieListWidget(popularMovieModel: popularMovieModel);
+  }
+}
+
+class PopularMovieListWidget extends StatelessWidget {
+  const PopularMovieListWidget({
+    Key? key,
+    required this.popularMovieModel,
+  }) : super(key: key);
+
+  final MoviePopularListViewModel popularMovieModel;
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: popularMovieModel.movies.length,
@@ -279,11 +306,11 @@ class _PopularMovieListItemWidget extends StatelessWidget {
   final int index;
   final String? posterPath;
   final Movie movie;
-  final MoviePopularListModel? popularMovieModel;
+  final MoviePopularListViewModel? popularMovieModel;
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = Provider.of<MoviePopularListModel>(context, listen: true);
+    final popularMovieModel = Provider.of<MoviePopularListViewModel>(context, listen: true);
     // if (popularMovieModel == null) return const SizedBox.shrink();
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
