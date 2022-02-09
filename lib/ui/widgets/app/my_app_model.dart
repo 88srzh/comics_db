@@ -1,6 +1,6 @@
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MyAppModel {
   final _sessionDataProvider = SessionDataProvider();

@@ -13,11 +13,11 @@ class MovieWidget extends StatelessWidget {
   const MovieWidget({Key? key}) : super(key: key);
 
   @override
-  //TODO не совсем понимаю зачем тут модель одна передается, если используется минимум 3
+  //TODO не совсем понимаю зачем тут модель одна передается
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MoviePopularListViewModel(), child: const MovieListWidget());
+      create: (context) => MoviePopularListViewModel(),
+      child: const MovieListWidget());
 }
-
 
 class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -29,69 +29,46 @@ class MovieListWidget extends StatefulWidget {
 class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
-    // if (topRatedMovieModel == null) return const SizedBox.shrink();
+    // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // TODO: перенести в каждую категорию
     final AlertDialog dialog = AlertDialog(
-      content: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: TextField(
-          onChanged: topRatedMovieModel.searchMovie,
-          decoration: InputDecoration(
-            labelText: 'Поиск',
-            labelStyle: const TextStyle(
-              color: AppColors.kPrimaryColor,
-            ),
-            filled: true,
-            fillColor: Colors.white.withAlpha(235),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.kPrimaryColor),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.kPrimaryColor),
-            ),
-          ),
-        ),
-      ),
-
+      content: _SearchWidget(),
     );
-    return Scaffold (
+    return Scaffold(
       appBar: AppBar(
         titleSpacing: 0.0,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:   8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: [
-                  Image.asset(AppImages.movieAppBarLogo)
-                ],
+                children: [Image.asset(AppImages.movieAppBarLogo)],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // TODO оптимизировать значки
-                  GestureDetector(
-                    onTap: () {
-                      showDialog<void>(context: context, builder: (context) => dialog);
-                    },
-                      child: const Icon(Icons.search, color: AppColors.searchIcon, size: 30,),
-                  ),
+                  _SearchIconWidget(dialog: dialog),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: GestureDetector(
                       onTap: () {},
-                        child: const Icon(Icons.filter_alt_outlined, color: AppColors.ratingThumb, size: 30,),
+                      child: const Icon(
+                        Icons.filter_alt_outlined,
+                        color: AppColors.ratingThumb,
+                        size: 30,
+                      ),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {},
-                      child: const Icon(Icons.menu, color: AppColors.ratingThumb, size: 30,),
+                    child: const Icon(
+                      Icons.menu,
+                      color: AppColors.ratingThumb,
+                      size: 30,
+                    ),
                   ),
                 ],
               ),
@@ -118,26 +95,39 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Популярные', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                      const Text('Популярные',
+                          style: TextStyle(
+                              color: AppColors.genresText,
+                              fontSize: 21,
+                              fontWeight: FontWeight.w600)),
                       InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
-                          child: const Text('Все', style: TextStyle(color: AppColors.ratingText, fontSize: 15),)),
+                          onTap: () => Navigator.of(context)
+                              .pushNamed(MainNavigationRouteNames.popularMovie),
+                          child: const Text(
+                            'Все',
+                            style: TextStyle(
+                                color: AppColors.ratingText, fontSize: 15),
+                          )),
                     ],
                   ),
                 ),
-         const SizedBox(
-           height: 200,
-             child: Padding(
-               padding: EdgeInsets.symmetric(horizontal: 20.0),
-               child: _PopularMovieWidget(),
-             ),
-                     ),
+                const SizedBox(
+                  height: 200,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: _PopularMovieWidget(),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Скоро', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                      Text('Скоро',
+                          style: TextStyle(
+                              color: AppColors.genresText,
+                              fontSize: 21,
+                              fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),
@@ -145,12 +135,72 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: _UpcomingMovieWidget(),
                 ),
-                  ],
-                ),
               ],
             ),
-                  ),
-      );
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SearchIconWidget extends StatelessWidget {
+  const _SearchIconWidget({
+    Key? key,
+    required this.dialog,
+  }) : super(key: key);
+
+  final AlertDialog dialog;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog<void>(
+            context: context, builder: (context) => dialog);
+      },
+      child: const Icon(
+        Icons.search,
+        color: AppColors.searchIcon,
+        size: 30,
+      ),
+    );
+  }
+}
+
+class _SearchWidget extends StatelessWidget {
+  const _SearchWidget({
+    Key? key,
+    required this.topRatedMovieModel,
+  }) : super(key: key);
+
+  final TopRatedMovieModel topRatedMovieModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        onChanged: topRatedMovieModel.searchMovie,
+        decoration: InputDecoration(
+          labelText: 'Поиск',
+          labelStyle: const TextStyle(
+            color: AppColors.kPrimaryColor,
+          ),
+          filled: true,
+          fillColor: Colors.white.withAlpha(235),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.kPrimaryColor),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.kPrimaryColor),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -165,9 +215,11 @@ class _UpcomingMovieWidget extends StatefulWidget {
 
 class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
   int _currentMovie = 0;
+
   @override
   Widget build(BuildContext context) {
-    final upcomingMovieModel = Provider.of<UpcomingMovieModel>(context, listen: true);
+    final upcomingMovieModel =
+        Provider.of<UpcomingMovieModel>(context, listen: true);
 
     return Column(
       children: [
@@ -176,53 +228,55 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
           child: Stack(
             children: [
               Container(
-              height: 200,
-              width: 350,
-              clipBehavior: Clip.antiAlias,
-              decoration: const BoxDecoration(
-                // color: AppColors.movieBorderLine,
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+                height: 200,
+                width: 350,
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  // color: AppColors.movieBorderLine,
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: PageView.builder(
+                    onPageChanged: (value) {
+                      setState(() {
+                        _currentMovie = value;
+                      });
+                    },
+                    // TODO: уменьшить кол-во фильмов либо исправить ползунок
+                    itemCount: upcomingMovieModel.movies.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      upcomingMovieModel.showedMovieAtIndex(index);
+                      final upcomingMovie = upcomingMovieModel.movies[index];
+                      final backdropPath = upcomingMovie.backdropPath;
+                      return InkWell(
+                        onTap: () =>
+                            upcomingMovieModel.onMovieTap(context, index),
+                        child: backdropPath != null
+                            ? Image.network(
+                                ImageDownloader.imageUrl(backdropPath))
+                            : const SizedBox.shrink(),
+                      );
+                    }),
               ),
-              child: PageView.builder(
-                onPageChanged: (value) {
-                  setState(() {
-                    _currentMovie = value;
-                  });
-                },
-                  // TODO: уменьшить кол-во фильмов либо исправить ползунок
-                  itemCount: upcomingMovieModel.movies.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    upcomingMovieModel.showedMovieAtIndex(index);
-                    final upcomingMovie = upcomingMovieModel.movies[index];
-                    final backdropPath = upcomingMovie.backdropPath;
-                    return InkWell(
-                      onTap: () => upcomingMovieModel.onMovieTap(context, index),
-                      child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                          : const SizedBox.shrink(),
-                    );
-                  }
-              ),
-            ),
-          Positioned(
-            left: 50,
-            top: 40,
-            right: 50,
-            bottom: 10,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:
-                  List.generate(upcomingMovieModel.movies.length,
+              // TODO: сделать в отдельный виджет
+              Positioned(
+                left: 50,
+                top: 40,
+                right: 50,
+                bottom: 10,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(upcomingMovieModel.movies.length,
                         (index) => buildDotNew(index: index)),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-      ],
-    ),
         ),
-   ],
-  );
+      ],
+    );
   }
 
   AnimatedContainer buildDotNew({int? index}) {
@@ -247,18 +301,20 @@ class _PopularMovieWidget extends StatefulWidget {
 }
 
 class _PopularMovieWidgetState extends State<_PopularMovieWidget> {
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     // TODO: может поменять на context.read ?
-    Provider.of<MoviePopularListViewModel>(context, listen: false).setupLocale(context);
+    Provider.of<MoviePopularListViewModel>(context, listen: false)
+        .setupLocale(context);
   }
+
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = Provider.of<MoviePopularListViewModel>(context, listen: true);
+    final popularMovieModel =
+        Provider.of<MoviePopularListViewModel>(context, listen: true);
     return PopularMovieListWidget(popularMovieModel: popularMovieModel);
   }
 }
@@ -283,14 +339,13 @@ class PopularMovieListWidget extends StatelessWidget {
           return InkWell(
             onTap: () => popularMovieModel.onMovieTap(context, index),
             child: _PopularMovieListItemWidget(
-                index: index,
-                posterPath: posterPath,
-                movie: popularMovie,
-                popularMovieModel: popularMovieModel,
+              index: index,
+              posterPath: posterPath,
+              movie: popularMovie,
+              popularMovieModel: popularMovieModel,
             ),
           );
-        }
-    );
+        });
   }
 }
 
@@ -310,7 +365,8 @@ class _PopularMovieListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = Provider.of<MoviePopularListViewModel>(context, listen: true);
+    final popularMovieModel =
+        Provider.of<MoviePopularListViewModel>(context, listen: true);
     // if (popularMovieModel == null) return const SizedBox.shrink();
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
@@ -325,11 +381,12 @@ class _PopularMovieListItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
-          child: posterPath != null ?
-              Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+          child: posterPath != null
+              ? Image.network(ImageDownloader.imageUrl(posterPath))
+              : const SizedBox.shrink(),
           fit: BoxFit.contain,
         ),
-        ),
+      ),
     );
   }
 }
@@ -339,10 +396,11 @@ class _TopRatedMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
+    final topRatedMovieModel =
+        Provider.of<TopRatedMovieModel>(context, listen: true);
     // if (topRatedMovieModel == null) return const SizedBox.shrink();
     return ListView.builder(
-      scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.horizontal,
         itemCount: topRatedMovieModel.movies.length,
         itemBuilder: (BuildContext context, int index) {
           topRatedMovieModel.showedMovieAtIndex(index);
@@ -357,8 +415,7 @@ class _TopRatedMovieWidget extends StatelessWidget {
                 movie: topMovie,
                 topMovieModel: topRatedMovieModel),
           );
-        }
-    );
+        });
   }
 }
 
@@ -370,7 +427,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     required this.movie,
     required this.topMovieModel,
   }) : super(key: key);
-  
+
   final int index;
   final String? backdropPath;
   final Movie movie;
@@ -378,7 +435,8 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = Provider.of<TopRatedMovieModel>(context, listen: true);
+    final topRatedMovieModel =
+        Provider.of<TopRatedMovieModel>(context, listen: true);
     final topMovie = topRatedMovieModel.movies[index];
     // final posterPath = topMovie.posterPath;
     final backdropPath = topMovie.backdropPath;
@@ -405,10 +463,12 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
         //       ),
         //     ],
         //   ),
-          child: FittedBox(
-              child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
+        child: FittedBox(
+          child: backdropPath != null
+              ? Image.network(ImageDownloader.imageUrl(backdropPath))
+              : const SizedBox.shrink(),
           fit: BoxFit.fill,
-          ),
+        ),
       ),
     );
   }
