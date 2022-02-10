@@ -98,7 +98,7 @@ class _MovieListItemWidget extends StatelessWidget {
 
   final int index;
   final String? posterPath;
-  final Movie movie;
+  final MovieListData movie;
   final MoviePopularListViewModel? movieModel;
 
   @override
@@ -145,7 +145,7 @@ class _MovieListItemWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
-                  child: Text(movieModel!.stringFromDate(movie!.releaseDate)),
+                  child: Text(movie!.releaseDate),
                 ),
               ],
             ),

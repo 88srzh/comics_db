@@ -49,7 +49,8 @@ class MainNavigation {
         child: const MoviePopularListWidget()),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
-    MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
+    // MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
+    MainNavigationRouteNames.upcomingMovie: (context) => const MovieListWidget(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {

@@ -9,15 +9,15 @@ import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MovieWidget extends StatelessWidget {
-  const MovieWidget({Key? key}) : super(key: key);
-
-  @override
-  //TODO не совсем понимаю зачем тут модель одна передается
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MoviePopularListViewModel(),
-      child: const MovieListWidget());
-}
+// class MovieWidget extends StatelessWidget {
+//   const MovieWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   //TODO не совсем понимаю зачем тут модель одна передается
+//   Widget build(BuildContext context) => ChangeNotifierProvider(
+//       create: (context) => MoviePopularListViewModel(),
+//       child: const MovieListWidget());
+// }
 
 class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -28,10 +28,18 @@ class MovieListWidget extends StatefulWidget {
 
 class _MovieListWidgetState extends State<MovieListWidget> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    context.read<MoviePopularListViewModel>().setupLocale(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // TODO: перенести в каждую категорию
-    final AlertDialog dialog = AlertDialog(
+    AlertDialog dialog = const AlertDialog(
+      // TODO: после ре факторинга не работает поиск
       content: _SearchWidget(),
     );
     return Scaffold(
@@ -156,8 +164,7 @@ class _SearchIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog<void>(
-            context: context, builder: (context) => dialog);
+        showDialog<void>(context: context, builder: (context) => dialog);
       },
       child: const Icon(
         Icons.search,
@@ -171,17 +178,18 @@ class _SearchIconWidget extends StatelessWidget {
 class _SearchWidget extends StatelessWidget {
   const _SearchWidget({
     Key? key,
-    required this.topRatedMovieModel,
   }) : super(key: key);
 
-  final TopRatedMovieModel topRatedMovieModel;
+  // final TopRatedMovieModel topRatedMovieModel;
 
   @override
   Widget build(BuildContext context) {
+    //TODO: поменять на модель поиска по всем фильмам
+    final model = context.read<MoviePopularListViewModel>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
-        onChanged: topRatedMovieModel.searchMovie,
+        onChanged: model.searchMovie,
         decoration: InputDecoration(
           labelText: 'Поиск',
           labelStyle: const TextStyle(
@@ -303,18 +311,13 @@ class _PopularMovieWidget extends StatefulWidget {
 class _PopularMovieWidgetState extends State<_PopularMovieWidget> {
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-
-    // TODO: может поменять на context.read ?
-    Provider.of<MoviePopularListViewModel>(context, listen: false)
-        .setupLocale(context);
+    context.read<MoviePopularListViewModel>().setupLocale(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel =
-        Provider.of<MoviePopularListViewModel>(context, listen: true);
+    final popularMovieModel = context.watch<MoviePopularListViewModel>();
     return PopularMovieListWidget(popularMovieModel: popularMovieModel);
   }
 }
@@ -330,22 +333,24 @@ class PopularMovieListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: popularMovieModel.movies.length,
-        itemBuilder: (BuildContext context, int index) {
-          popularMovieModel.showedPopularMovieAtIndex(index);
-          final popularMovie = popularMovieModel.movies[index];
-          final posterPath = popularMovie.posterPath;
-          return InkWell(
-            onTap: () => popularMovieModel.onMovieTap(context, index),
-            child: _PopularMovieListItemWidget(
-              index: index,
-              posterPath: posterPath,
-              movie: popularMovie,
-              popularMovieModel: popularMovieModel,
-            ),
-          );
-        });
+      scrollDirection: Axis.horizontal,
+      itemCount: popularMovieModel.movies.length,
+      itemBuilder: (BuildContext context, int index) {
+        popularMovieModel.showedPopularMovieAtIndex(index);
+        final popularMovie = popularMovieModel.movies[index];
+        final posterPath = popularMovie.posterPath;
+        // TODO: вынести в отдельный виджет?
+        return InkWell(
+          onTap: () => popularMovieModel.onMovieTap(context, index),
+          child: _PopularMovieListItemWidget(
+            index: index,
+            posterPath: posterPath,
+            movie: popularMovie,
+            popularMovieModel: popularMovieModel,
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -360,14 +365,12 @@ class _PopularMovieListItemWidget extends StatelessWidget {
 
   final int index;
   final String? posterPath;
-  final Movie movie;
+  final MovieListData movie;
   final MoviePopularListViewModel? popularMovieModel;
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel =
-        Provider.of<MoviePopularListViewModel>(context, listen: true);
-    // if (popularMovieModel == null) return const SizedBox.shrink();
+    final popularMovieModel = context.watch<MoviePopularListViewModel>();
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
     return Padding(
@@ -396,26 +399,25 @@ class _TopRatedMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel =
-        Provider.of<TopRatedMovieModel>(context, listen: true);
-    // if (topRatedMovieModel == null) return const SizedBox.shrink();
+    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: topRatedMovieModel.movies.length,
-        itemBuilder: (BuildContext context, int index) {
-          topRatedMovieModel.showedMovieAtIndex(index);
-          final topMovie = topRatedMovieModel.movies[index];
-          // final posterPath = topMovie.posterPath;
-          final backdropPath = topMovie.backdropPath;
-          return InkWell(
-            onTap: () => topRatedMovieModel.onMovieTap(context, index),
-            child: _TopRatedMovieListItemWidget(
-                index: index,
-                backdropPath: backdropPath,
-                movie: topMovie,
-                topMovieModel: topRatedMovieModel),
-          );
-        });
+      scrollDirection: Axis.horizontal,
+      itemCount: topRatedMovieModel.movies.length,
+      itemBuilder: (BuildContext context, int index) {
+        topRatedMovieModel.showedMovieAtIndex(index);
+        final topMovie = topRatedMovieModel.movies[index];
+        final backdropPath = topMovie.backdropPath;
+        return InkWell(
+          onTap: () => topRatedMovieModel.onMovieTap(context, index),
+          child: _TopRatedMovieListItemWidget(
+            index: index,
+            backdropPath: backdropPath,
+            movie: topMovie,
+            topMovieModel: topRatedMovieModel,
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -438,7 +440,6 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
     final topRatedMovieModel =
         Provider.of<TopRatedMovieModel>(context, listen: true);
     final topMovie = topRatedMovieModel.movies[index];
-    // final posterPath = topMovie.posterPath;
     final backdropPath = topMovie.backdropPath;
     return Padding(
       padding: const EdgeInsets.only(right: 15.0),
