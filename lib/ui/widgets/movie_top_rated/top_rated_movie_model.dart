@@ -46,9 +46,8 @@ class TopRatedMovieModel extends ChangeNotifier {
     if (query == null) {
       return await _apiClient.topRatedMovie(nextPage, _locale);
     } else {
-      return await _apiClient.searchMovie(nextPage, _locale, query);
+      // return await _apiClient.searchMovie(nextPage, _locale, query);
     }
-
   }
 
   Future<void> _loadNextMoviesPage() async {

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
+import 'package:comics_db_app/domain/services/movie_service.dart';
+import 'package:comics_db_app/library/paginator.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -28,21 +28,44 @@ class MovieListData {
 }
 
 class MoviePopularListViewModel extends ChangeNotifier {
-  final _apiClient = MovieAndTvApiClient();
+  final _movieService = MovieService();
+  late final Paginator<Movie> _popularMoviePaginator;
+  late final Paginator<Movie> _searchMoviePaginator;
   Timer? searchDebounce;
   String _locale = '';
 
-  final _movies = <MovieListData>[];
-  late int _currentPage;
-  late int _totalPage;
-  var _isLoadingInProgress = false;
+  var _movies = <MovieListData>[];
   String? _searchQuery;
+
+  bool get isSearchMode {
+    final searchQuery = _searchQuery;
+    return searchQuery != null && searchQuery.isNotEmpty;
+  }
 
   List<MovieListData> get movies => List.unmodifiable(_movies);
   late DateFormat _dateFormat;
 
-  String stringFromDate(DateTime? date) =>
-      date != null ? _dateFormat.format(date) : '';
+  MoviePopularListViewModel() {
+    _popularMoviePaginator = Paginator<Movie>((page) async {
+      final result = await _movieService.popularAndTopMovie(page, _locale);
+      return PaginatorLoadResult(
+          data: result.movies,
+          currentPage: result.page,
+          totalPage: result.totalPages);
+    });
+
+    _searchMoviePaginator = Paginator<Movie>((page) async {
+      final result =
+          await _movieService.searchMovie(page, _locale, _searchQuery ?? '');
+      return PaginatorLoadResult(
+          data: result.movies,
+          currentPage: result.page,
+          totalPage: result.totalPages);
+    });
+  }
+
+  // String stringFromDate(DateTime? date) =>
+  //     date != null ? _dateFormat.format(date) : '';
 
 // ! - TODO: вынести в отдельный файл
   Future<void> setupLocale(BuildContext context) async {
@@ -54,42 +77,16 @@ class MoviePopularListViewModel extends ChangeNotifier {
   }
 
   Future<void> _resetMovieList() async {
-    _currentPage = 0;
-    _totalPage = 1;
+    await _popularMoviePaginator.reset();
+    await _searchMoviePaginator.reset();
     _movies.clear();
     await _loadNextPopularMoviesPage();
   }
 
-  Future<PopularAndTopRatedMovieResponse> _loadPopularMovies(
-      int nextPage, String locale) async {
-    final query = _searchQuery;
-    if (query == null) {
-      return await _apiClient.popularMovie(nextPage, _locale);
-    } else {
-      return await _apiClient.searchMovie(nextPage, _locale, query);
-    }
-  }
-
-  Future<void> _loadNextPopularMoviesPage() async {
-    if (_isLoadingInProgress || _currentPage >= _totalPage) return;
-    _isLoadingInProgress = true;
-    final nextPage = _currentPage + 1;
-
-    try {
-      final moviesResponse = await _loadPopularMovies(nextPage, _locale);
-      _movies.addAll(moviesResponse.movies.map(makeListData).toList());
-      _currentPage = moviesResponse.page;
-      _totalPage = moviesResponse.totalPages;
-      _isLoadingInProgress = false;
-      notifyListeners();
-    } catch (e) {
-      _isLoadingInProgress = false;
-    }
-  }
-
-  MovieListData makeListData(Movie movie) {
+  MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
-    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    final releaseDateTitle =
+        releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
       title: movie.title,
       posterPath: movie.posterPath,
@@ -99,6 +96,17 @@ class MoviePopularListViewModel extends ChangeNotifier {
       overview: movie.overview,
       releaseDate: releaseDateTitle,
     );
+  }
+
+  Future<void> _loadNextPopularMoviesPage() async {
+    if (isSearchMode) {
+      await _searchMoviePaginator.loadNextPopularMoviesPage();
+      _movies = _searchMoviePaginator.data.map(_makeListData).toList();
+    } else {
+      await _popularMoviePaginator.loadNextPopularMoviesPage();
+      _movies = _popularMoviePaginator.data.map(_makeListData).toList();
+    }
+    notifyListeners();
   }
 
   void onMovieTap(BuildContext context, int index) {
@@ -119,7 +127,11 @@ class MoviePopularListViewModel extends ChangeNotifier {
       final searchQuery = text.isNotEmpty ? text : null;
       if (_searchQuery == searchQuery) return;
       _searchQuery = searchQuery;
-      await _resetMovieList();
+      _movies.clear();
+      if (isSearchMode) {
+        await _searchMoviePaginator.reset();
+      }
+      _loadNextPopularMoviesPage();
     });
   }
 

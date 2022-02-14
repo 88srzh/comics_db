@@ -10,7 +10,10 @@ class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
 
   Future<PopularAndTopRatedMovieResponse> popularMovie(
-      int page, String locale) async {
+    int page,
+    String locale,
+    String apiKey,
+  ) async {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
@@ -21,7 +24,7 @@ class MovieAndTvApiClient {
       '/movie/popular',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
+        'api_key': apiKey,
         'page': page.toString(),
         'language': locale,
       },
@@ -108,7 +111,11 @@ class MovieAndTvApiClient {
   }
 
   Future<PopularAndTopRatedMovieResponse> searchMovie(
-      int page, String locale, String query) async {
+    int page,
+    String locale,
+    String query,
+    String apiKey,
+  ) async {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
@@ -119,7 +126,7 @@ class MovieAndTvApiClient {
       '/search/movie',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
+        'api_key': apiKey,
         'page': page.toString(),
         'language': locale,
         'query': query,
