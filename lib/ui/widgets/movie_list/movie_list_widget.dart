@@ -189,7 +189,7 @@ class _SearchWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
-        onChanged: model.searchMovie,
+        onChanged: model.searchPopularMovie,
         decoration: InputDecoration(
           labelText: 'Поиск',
           labelStyle: const TextStyle(
@@ -394,17 +394,31 @@ class _PopularMovieListItemWidget extends StatelessWidget {
   }
 }
 
-class _TopRatedMovieWidget extends StatelessWidget {
+class _TopRatedMovieWidget extends StatefulWidget {
   const _TopRatedMovieWidget({Key? key}) : super(key: key);
 
   @override
+  State<_TopRatedMovieWidget> createState() => _TopRatedMovieWidgetState();
+}
+
+class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
+  @override
+  void didChangeDependencies() {
+  super.didChangeDependencies();
+  context.read<MoviePopularListViewModel>().setupLocale(context);
+  }
+
+  @override
+
+
+    @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    final topRatedMovieModel = context.watch<MoviePopularListViewModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: topRatedMovieModel.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        topRatedMovieModel.showedMovieAtIndex(index);
+        topRatedMovieModel.showedTopRatedMovieAtIndex(index);
         final topMovie = topRatedMovieModel.movies[index];
         final backdropPath = topMovie.backdropPath;
         return InkWell(
@@ -433,12 +447,12 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
   final int index;
   final String? backdropPath;
   final Movie movie;
-  final TopRatedMovieModel? topMovieModel;
+  final MoviePopularListViewModel? topMovieModel;
 
   @override
   Widget build(BuildContext context) {
     final topRatedMovieModel =
-        Provider.of<TopRatedMovieModel>(context, listen: true);
+        Provider.of<MoviePopularListViewModel>(context, listen: true);
     final topMovie = topRatedMovieModel.movies[index];
     final backdropPath = topMovie.backdropPath;
     return Padding(

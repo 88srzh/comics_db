@@ -31,6 +31,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
   final _movieService = MovieService();
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
+  late final Paginator<Movie> _topRatedMoviePaginator;
   Timer? searchDebounce;
   String _locale = '';
 
@@ -47,20 +48,31 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   MoviePopularListViewModel() {
     _popularMoviePaginator = Paginator<Movie>((page) async {
-      final result = await _movieService.popularAndTopMovie(page, _locale);
+      final result = await _movieService.popularMovie(page, _locale);
       return PaginatorLoadResult(
-          data: result.movies,
-          currentPage: result.page,
-          totalPage: result.totalPages);
+        data: result.movies,
+        currentPage: result.page,
+        totalPage: result.totalPages,
+      );
+    });
+
+    _topRatedMoviePaginator = Paginator<Movie>((page) async {
+      final result = await _movieService.topRatedMovie(page, _locale);
+      return PaginatorLoadResult(
+        data: result.movies,
+        currentPage: result.page,
+        totalPage: result.totalPages,
+      );
     });
 
     _searchMoviePaginator = Paginator<Movie>((page) async {
       final result =
           await _movieService.searchMovie(page, _locale, _searchQuery ?? '');
       return PaginatorLoadResult(
-          data: result.movies,
-          currentPage: result.page,
-          totalPage: result.totalPages);
+        data: result.movies,
+        currentPage: result.page,
+        totalPage: result.totalPages,
+      );
     });
   }
 
@@ -109,6 +121,16 @@ class MoviePopularListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> _loadNextTopRatedMoviesPage() async {
+    if (isSearchMode) {
+      await _searchMoviePaginator.loadNextPopularMoviesPage();
+      _movies = _searchMoviePaginator.data.map(_makeListData).toList();
+    } else {
+      await _topRatedMoviePaginator.loadNextPopularMoviesPage();
+      _movies = _topRatedMoviePaginator.data.map(_makeListData).toList();
+    }
+  }
+
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
     Navigator.of(context)
@@ -121,7 +143,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
         .pushNamed(MainNavigationRouteNames.fullCastAndCrew, arguments: id);
   }
 
-  Future<void> searchMovie(String text) async {
+  Future<void> searchPopularMovie(String text) async {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
       final searchQuery = text.isNotEmpty ? text : null;
@@ -135,8 +157,27 @@ class MoviePopularListViewModel extends ChangeNotifier {
     });
   }
 
+  Future<void> searchTopRatedMovie(String text) async {
+    searchDebounce?.cancel();
+    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
+      final searchQuery = text.isNotEmpty ? text : null;
+      if (_searchQuery == searchQuery) return;
+      _searchQuery = searchQuery;
+      _movies.clear();
+      if (isSearchMode) {
+        await _searchMoviePaginator.reset();
+      }
+      _loadNextTopRatedMoviesPage();
+    });
+  }
+
   void showedPopularMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
     _loadNextPopularMoviesPage();
+  }
+
+  void showedTopRatedMovieAtIndex(int index) {
+    if (index < _movies.length -1) return;
+    _loadNextTopRatedMoviesPage();
   }
 }

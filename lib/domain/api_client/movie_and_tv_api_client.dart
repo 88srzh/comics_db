@@ -33,7 +33,10 @@ class MovieAndTvApiClient {
   }
 
   Future<PopularAndTopRatedMovieResponse> topRatedMovie(
-      int page, String locale) {
+    int page,
+    String locale,
+    String apiKey,
+  ) {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
@@ -44,7 +47,7 @@ class MovieAndTvApiClient {
       '/movie/top_rated',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
+        'api_key': apiKey,
         'page': page.toString(),
         'language': locale,
       },

@@ -5,9 +5,13 @@ import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response
 class MovieService {
   final _movieApiClient = MovieAndTvApiClient();
 
-  Future<PopularAndTopRatedMovieResponse> popularAndTopMovie(
+  Future<PopularAndTopRatedMovieResponse> popularMovie(
           int page, String locale) async =>
       _movieApiClient.popularMovie(page, locale, Configuration.apiKey);
+
+  Future<PopularAndTopRatedMovieResponse> topRatedMovie(
+          int page, String locale) async =>
+      _movieApiClient.topRatedMovie(page, locale, Configuration.apiKey);
 
   Future<PopularAndTopRatedMovieResponse> searchMovie(
           int page, String locale, String query) async =>
