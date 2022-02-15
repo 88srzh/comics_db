@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,12 @@ class ScreenFactory {
     return ChangeNotifierProvider(
       create: (_) => MoviePopularListViewModel(),
       child: const MoviePopularListWidget(),
+    );
+  }
+
+  Widget makeTopRatedMovieWidget() {
+    return ChangeNotifierProvider(
+        create: (_) => TopR
     );
   }
 }

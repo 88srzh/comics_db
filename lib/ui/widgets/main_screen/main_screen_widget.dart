@@ -2,7 +2,6 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/factoryes/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
@@ -26,7 +25,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
   final moviePopularListModel = MoviePopularListViewModel();
-  final topRatedMovieModel = TopRatedMovieModel();
   final upcomingMovieModel = UpcomingMovieModel();
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
@@ -45,11 +43,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    moviePopularListModel.setupLocale(context);
+    // moviePopularListModel.setupLocale(context);
     tvTopRatedModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
     tvPopularModel.setupLocale(context);
-    topRatedMovieModel.setupLocale(context);
+    // topRatedMovieModel.setupLocale(context);
     airingTodayModel.setupLocale(context);
     settingsModel.setupLocale(context);
     trendingAllModel.setupPage(context);
@@ -64,7 +62,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularMovieList(),
           MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => topRatedMovieModel),
+              ChangeNotifierProvider(create: (_) => moviePopularListModel),
               ChangeNotifierProvider(create: (_) => moviePopularListModel),
               ChangeNotifierProvider(create: (_) => upcomingMovieModel),
             ],

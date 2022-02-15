@@ -116,6 +116,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
       _movies = _searchMoviePaginator.data.map(_makeListData).toList();
     } else {
       await _popularMoviePaginator.loadNextPopularMoviesPage();
+
       _movies = _popularMoviePaginator.data.map(_makeListData).toList();
     }
     notifyListeners();
@@ -129,6 +130,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
       await _topRatedMoviePaginator.loadNextPopularMoviesPage();
       _movies = _topRatedMoviePaginator.data.map(_makeListData).toList();
     }
+    notifyListeners();
   }
 
   void onMovieTap(BuildContext context, int index) {

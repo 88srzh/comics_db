@@ -1,17 +1,14 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // class MovieWidget extends StatelessWidget {
 //   const MovieWidget({Key? key}) : super(key: key);
-//
 //   @override
 //   //TODO не совсем понимаю зачем тут модель одна передается
 //   Widget build(BuildContext context) => ChangeNotifierProvider(
@@ -404,16 +401,28 @@ class _TopRatedMovieWidget extends StatefulWidget {
 class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
   @override
   void didChangeDependencies() {
-  super.didChangeDependencies();
-  context.read<MoviePopularListViewModel>().setupLocale(context);
+    super.didChangeDependencies();
+    context.read<MoviePopularListViewModel>().setupLocale(context);
   }
 
   @override
-
-
-    @override
+  @override
   Widget build(BuildContext context) {
     final topRatedMovieModel = context.watch<MoviePopularListViewModel>();
+    return TopRatedMovieListWidget(topRatedMovieModel: topRatedMovieModel);
+  }
+}
+
+class TopRatedMovieListWidget extends StatelessWidget {
+  const TopRatedMovieListWidget({
+    Key? key,
+    required this.topRatedMovieModel,
+  }) : super(key: key);
+
+  final MoviePopularListViewModel topRatedMovieModel;
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: topRatedMovieModel.movies.length,
@@ -446,13 +455,15 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
 
   final int index;
   final String? backdropPath;
-  final Movie movie;
+  final MovieListData movie;
   final MoviePopularListViewModel? topMovieModel;
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel =
-        Provider.of<MoviePopularListViewModel>(context, listen: true);
+    // final topRatedMovieModel =
+    //     Provider.of<MoviePopularListViewModel>(context, listen: true);
+    final topRatedMovieModel = context.watch<MoviePopularListViewModel>();
+
     final topMovie = topRatedMovieModel.movies[index];
     final backdropPath = topMovie.backdropPath;
     return Padding(
