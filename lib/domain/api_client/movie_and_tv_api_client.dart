@@ -6,6 +6,8 @@ import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
+
+
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
 
@@ -33,10 +35,10 @@ class MovieAndTvApiClient {
   }
 
   Future<PopularAndTopRatedMovieResponse> topRatedMovie(
-    int page,
-    String locale,
-    String apiKey,
-  ) {
+      int page,
+      String locale,
+      String apiKey,
+      ) {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);

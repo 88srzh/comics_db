@@ -1,10 +1,8 @@
 
-
 import 'dart:async';
 
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/movie_dates.dart';
 import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';

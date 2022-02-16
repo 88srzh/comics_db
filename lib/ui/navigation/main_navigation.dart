@@ -1,7 +1,5 @@
 import 'package:comics_db_app/domain/factoryes/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -9,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
+import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,19 +37,25 @@ class MainNavigation {
   static final _screenFactory = ScreenFactory();
   final routes = <String, Widget Function(BuildContext)>{
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
-    // MainNavigationRouteNames.auth: (context) => ChangeNotifierProvider(create: (_) => AuthModel(), child: const AuthWidget()),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
-    MainNavigationRouteNames.mainScreen: (_) =>
-        _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(
-        create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-    MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(
-        create: (context) => MoviePopularListViewModel(),
-        child: const MoviePopularListWidget()),
+    MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
+    MainNavigationRouteNames.splashScreen: (context) =>
+        ChangeNotifierProvider(
+            create: (_) => SplashscreenModel(),
+            child: const SplashscreenWidget()),
+    // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(
+    //     create: (context) => MoviePopularListViewModel(),
+    //     child: const MoviePopularListWidget()),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
+    // MainNavigationRouteNames.upcomingMovie: (context) => const MovieListWidget(),
     // MainNavigationRouteNames.upcomingMovie: (context) => const MovieWidget(),
-    MainNavigationRouteNames.upcomingMovie: (context) => const MovieListWidget(),
+    // MainNavigationRouteNames.upcomingMovie: (_) =>
+    //     _screenFactory.makeUpcomingMovieList(),
+    MainNavigationRouteNames.upcomingMovie: (context) =>
+        ChangeNotifierProvider(
+          create: (_) => UpcomingMovieModel(), child: const MovieWidget(),
+        ),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {

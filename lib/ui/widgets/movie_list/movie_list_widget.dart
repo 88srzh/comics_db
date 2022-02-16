@@ -7,14 +7,14 @@ import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// class MovieWidget extends StatelessWidget {
-//   const MovieWidget({Key? key}) : super(key: key);
-//   @override
-//   //TODO не совсем понимаю зачем тут модель одна передается
-//   Widget build(BuildContext context) => ChangeNotifierProvider(
-//       create: (context) => MoviePopularListViewModel(),
-//       child: const MovieListWidget());
-// }
+class MovieWidget extends StatelessWidget {
+  const MovieWidget({Key? key}) : super(key: key);
+  @override
+  //TODO не совсем понимаю зачем тут модель одна передается
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => MoviePopularListViewModel(),
+      child: const MovieListWidget());
+}
 
 class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -222,9 +222,16 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
   int _currentMovie = 0;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<UpcomingMovieModel>().setupLocale(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final upcomingMovieModel =
-        Provider.of<UpcomingMovieModel>(context, listen: true);
+    // final upcomingMovieModel =
+    //     Provider.of<UpcomingMovieModel>(context, listen: true);
+    final upcomingMovieModel = context.watch<UpcomingMovieModel>();
 
     return Column(
       children: [

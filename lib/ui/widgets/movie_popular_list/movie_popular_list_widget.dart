@@ -3,13 +3,13 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MoviePopularWidget extends StatelessWidget {
-  const MoviePopularWidget({Key? key}) : super(key: key);
-  @override
-  // TODO возможно сделать виджет закрытым
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
-}
+// class MoviePopularWidget extends StatelessWidget {
+//   const MoviePopularWidget({Key? key}) : super(key: key);
+//   @override
+//   // TODO возможно сделать виджет закрытым
+//   Widget build(BuildContext context) => ChangeNotifierProvider(
+//       create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
+// }
 
 
 class MoviePopularListWidget extends StatelessWidget {
