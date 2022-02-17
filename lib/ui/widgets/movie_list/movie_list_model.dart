@@ -91,6 +91,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
   Future<void> _resetMovieList() async {
     await _popularMoviePaginator.reset();
     await _searchMoviePaginator.reset();
+    await _topRatedMoviePaginator.reset();
     _movies.clear();
     await _loadNextPopularMoviesPage();
   }
