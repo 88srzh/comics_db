@@ -65,6 +65,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               ChangeNotifierProvider(create: (_) => moviePopularListModel),
               ChangeNotifierProvider(create: (_) => moviePopularListModel),
               ChangeNotifierProvider(create: (_) => upcomingMovieModel),
+              // _screenFactory.makeUpcomingMovieList(),
             ],
             child: const MovieListWidget(),
           ),
@@ -77,7 +78,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             child: const TvListWidget(),
           ),
           ChangeNotifierProvider(
-              create: (_) => settingsModel, child: const SettingsWidget()),
+            create: (_) => settingsModel,
+            child: const SettingsWidget(),
+          ),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
