@@ -34,7 +34,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Provider.of<MovieDetailsModel>(context, listen: false).setupLocale(context);
+    context.watch<MovieDetailsModel>().setupLocale(context);
   }
 
   @override
