@@ -3,10 +3,13 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:comics_db_app/domain/services/auth_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MovieDetailsModel extends ChangeNotifier {
+  final authService = AuthService();
   final _sessionDataProvider = SessionDataProvider();
   final _movieAndTvApiClient = MovieAndTvApiClient();
   final _accountApiClient = AccountApiClient();
@@ -19,6 +22,7 @@ class MovieDetailsModel extends ChangeNotifier {
   MovieDetails? _movieDetails;
 
   MovieDetails? get movieDetails => _movieDetails;
+
   bool get isFavoriteMovie => _isFavoriteMovie;
 
   MovieDetailsModel(this.movieId);
@@ -30,23 +34,24 @@ class MovieDetailsModel extends ChangeNotifier {
     if (_locale == locale) return;
     _locale = locale;
     dateFormat = DateFormat.yMMMd(locale);
-    await loadMovieDetails();
+    await loadMovieDetails(context);
   }
 
-  Future<void> loadMovieDetails() async {
+  Future<void> loadMovieDetails(BuildContext context) async {
     try {
-    _movieDetails = await _movieAndTvApiClient.movieDetails(movieId, _locale);
-    final sessionId = await _sessionDataProvider.getSessionId();
-    if (sessionId != null) {
-      _isFavoriteMovie = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
-    }
-    notifyListeners();
-  } on ApiClientException catch (e) {
-      _handleApiClientException(e);
+      _movieDetails = await _movieAndTvApiClient.movieDetails(movieId, _locale);
+      final sessionId = await _sessionDataProvider.getSessionId();
+      if (sessionId != null) {
+        _isFavoriteMovie =
+            await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
+      }
+      notifyListeners();
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
     }
   }
 
-  Future<void> toggleFavoriteMovie() async {
+  Future<void> toggleFavoriteMovie(BuildContext context) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
 
@@ -60,20 +65,20 @@ class MovieDetailsModel extends ChangeNotifier {
           sessionId: sessionId,
           mediaType: MediaType.movie,
           mediaId: movieId,
-          isFavorite: _isFavoriteMovie
-      );
-    } on  ApiClientException catch (e) {
-      _handleApiClientException(e);
+          isFavorite: _isFavoriteMovie);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
     }
   }
 
-  void _handleApiClientException(ApiClientException exception) {
+  void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
-        onSessionExpired?.call();
-    break;
-    default:
-    print(exception);
-  }
+        authService.logout();
+        MainNavigation.resetNavigation(context);
+        break;
+      default:
+        print(exception);
+    }
   }
 }
