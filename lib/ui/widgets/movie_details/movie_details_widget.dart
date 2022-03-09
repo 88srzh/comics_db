@@ -1,7 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
-import 'package:comics_db_app/ui/widgets/app/my_app_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_title_genres_rating_voteaverage_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_top_poster_widget.dart';
@@ -19,22 +17,9 @@ class MovieDetailsWidget extends StatefulWidget {
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
-  void initState() {
-    super.initState();
-    // TODO: ХЗ как исправить на стандартный провайдер, смотреть в main где ProviderCustom
-    final model = NotifierProvider.read<MovieDetailsModel>(context);
-    final appModel = ProviderCustom.read<MyAppModel>(context);
-    // model?.onSessionExpired = () => appModel?.resetSession(context);
-
-    // final model = Provider.of<MovieDetailsModel>(context, listen: false);
-    // final appModel = Provider.of<MyAppModel>(context, listen: false);
-    // model?.onSessionExpired = () => appModel?.resetSession(context);
-  }
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Provider.of<MovieDetailsModel>(context, listen: false).setupLocale(context);
+    context.watch<MovieDetailsModel>().setupLocale(context);
   }
 
   @override

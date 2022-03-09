@@ -1,8 +1,7 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewsWidgetPopular extends StatefulWidget {
   const NewsWidgetPopular({Key? key}) : super(key: key);
@@ -70,8 +69,8 @@ class _PopularMoviesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movieModel = NotifierProvider.watch<MoviePopularListModel>(context);
-    if (movieModel == null) return const SizedBox.shrink();
+    // TODO: не работает context.watch
+    final movieModel = context.watch<MoviePopularListViewModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: movieModel.movies.length,
@@ -98,15 +97,16 @@ class _MovieListItemWidget extends StatelessWidget {
 
   final int index;
   final String? posterPath;
-  final Movie movie;
-  final MoviePopularListModel? movieModel;
+  final MovieListData movie;
+  final MoviePopularListViewModel movieModel;
 
   @override
   Widget build(BuildContext context) {
-    final movieModel = NotifierProvider.watch<MoviePopularListModel>(context);
-    final movie = movieModel?.movies[index];
-    final posterPath = movie?.posterPath;
-    var title = movie?.title;
+    // final movieModel = NotifierProvider.watch<MoviePopularListViewModel>(context);
+    // final model = context.watch<MoviePopularListViewModel>();
+    final movie = movieModel.movies[index];
+    final posterPath = movie.posterPath;
+    var title = movie.title;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: DecoratedBox(
@@ -135,7 +135,7 @@ class _MovieListItemWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     // TODO second line not center
                     child: Text(
-                      title = title ?? 'Нет названия',
+                      title,
                       maxLines: 2,
                       style: const TextStyle(
                         fontWeight: FontWeight.w800,
@@ -145,7 +145,7 @@ class _MovieListItemWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
-                  child: Text(movieModel!.stringFromDate(movie!.releaseDate)),
+                  child: Text(movie.releaseDate),
                 ),
               ],
             ),

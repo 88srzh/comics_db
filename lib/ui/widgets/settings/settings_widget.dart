@@ -1,7 +1,6 @@
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsWidget extends StatefulWidget {
@@ -25,16 +24,14 @@ class BodySettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          HeadingCardWidget(headingText: 'Общее'),
-          CustomSettingDivider(),
-          GeneralCard(),
-          CustomSettingDivider(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        HeadingCardWidget(headingText: 'Общее'),
+        CustomSettingDivider(),
+        GeneralCard(),
+        CustomSettingDivider(),
+      ],
     );
   }
 }
@@ -72,15 +69,13 @@ class GeneralCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListTile(
-        onTap: () {
-          SessionDataProvider().setSessionId(null);
-          Navigator.pushNamed(context, MainNavigationRouteNames.auth);
-        },
-        title: const Text('Выйти'),
-        trailing: const Icon(Icons.logout),
-      ),
+    return ListTile(
+      onTap: () {
+        // SessionDataProvider().setSessionId(null);
+        Navigator.pushNamed(context, MainNavigationRouteNames.auth);
+      },
+      title: const Text('Выйти'),
+      trailing: const Icon(Icons.logout),
     );
   }
 }
