@@ -71,7 +71,8 @@ class MovieDetailsModel extends ChangeNotifier {
     }
   }
 
-  void _handleApiClientException(ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(
+      ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         authService.logout();

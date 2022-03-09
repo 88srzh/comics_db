@@ -36,7 +36,7 @@ class ScreenFactory {
 
   Widget makeMovieDetails(int movieId) {
     return ChangeNotifierProvider(
-      create: (context) => MovieDetailsModel(movieId),
+      create: (_) => MovieDetailsModel(movieId),
       child: const MovieDetailsWidget(),
     );
   }

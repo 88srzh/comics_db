@@ -1,6 +1,6 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/library/widgets/inherited/notifier_provider.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidgetTrending extends StatefulWidget {
@@ -14,8 +14,7 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
   final _category = 'movies';
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<TrendingAllModel>(context);
-    if (model == null) return const SizedBox.shrink();
+    final model = context.watch<TrendingAllModel>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
