@@ -1,7 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_description_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_title_genres_rating_voteaverage_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
@@ -19,7 +19,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.watch<MovieDetailsModel>().setupLocale(context);
+    context.read<MovieDetailsModel>().setupLocale(context);
   }
 
   @override
