@@ -24,8 +24,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<MovieDetailsModel>(context, listen: true);
-    final movieDetails = model.movieDetails;
+    final movieDetails = context.select((MovieDetailsModel model) => model.movieDetails);
     if (movieDetails == null) {
       return const Center(
         child: LoadingIndicatorWidget(),
