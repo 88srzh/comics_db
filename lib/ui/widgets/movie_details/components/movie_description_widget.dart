@@ -10,7 +10,8 @@ class DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<MovieDetailsModel>(context, listen: true);
+    final movieDetails =
+        context.select((MovieDetailsModel model) => model.movieDetails);
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -30,9 +31,9 @@ class DescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                // Добавить расстояние между строками
+                // TODO: Добавить расстояние между строками
                 child: Text(
-                  model.movieDetails?.overview ?? 'Загрузка описания...',
+                  movieDetails?.overview ?? 'Загрузка описания...',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   style: const TextStyle(

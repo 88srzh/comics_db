@@ -11,7 +11,7 @@ class TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<MovieDetailsModel>(context, listen: true);
+    final model = context.watch<MovieDetailsModel>();
     final posterPath = model.movieDetails?.posterPath;
     final backdropPath = model.movieDetails?.backdropPath;
     return Stack(
@@ -27,7 +27,6 @@ class TopPosterWidget extends StatelessWidget {
               ),
               child: backdropPath != null
                   ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                  // : const SizedBox.shrink(),
               : Image.asset(AppImages.noImageBig),
             ),
           ),
@@ -46,7 +45,7 @@ class TopPosterWidget extends StatelessWidget {
                 width: 174.0,
                 child: posterPath != null
                     ? Image.network(ImageDownloader.imageUrl(posterPath))
-                    : const SizedBox.shrink(),
+                : Image.asset(AppImages.noImageBig),
               ),
             ),
           ),

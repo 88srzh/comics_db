@@ -55,20 +55,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   }
 }
 
-// class _TitleAppBarWidget extends StatelessWidget {
-//   const _TitleAppBarWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-//     // TODO не по центру название
-//     return Center(
-//         child: Text(model?.movieDetails?.title ?? 'Загрузка...',
-//             style: const TextStyle(color: Colors.black)));
-//   }
-// }
-//
-// // TODO change font color to grey, may be do coloredbox
+// // TODO change font color to grey, may be do colored box
 // class _PeoplesWidget extends StatelessWidget {
 //   const _PeoplesWidget({Key? key}) : super(key: key);
 //
