@@ -8,6 +8,11 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+class MovieDetailsData {
+  String title = '';
+  bool isLoading = true;
+}
+
 class MovieDetailsModel extends ChangeNotifier {
   final authService = AuthService();
   final _sessionDataProvider = SessionDataProvider();
@@ -15,6 +20,7 @@ class MovieDetailsModel extends ChangeNotifier {
   final _accountApiClient = AccountApiClient();
 
   final int movieId;
+  final data = MovieDetailsData();
   bool _isFavoriteMovie = false;
   String _locale = '';
   late DateFormat dateFormat;
@@ -45,10 +51,20 @@ class MovieDetailsModel extends ChangeNotifier {
         _isFavoriteMovie =
             await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
       }
-      notifyListeners();
+      updateData(_movieDetails);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
+  }
+
+  void updateData(MovieDetails? details) {
+    data.title = details?.title ?? 'Загрузка...';
+    data.isLoading = details == null;
+    if (details == null) {
+      notifyListeners();
+      return;
+    }
+    notifyListeners();
   }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {

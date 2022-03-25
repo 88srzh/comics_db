@@ -24,6 +24,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: may be change to data.isLoading
     final movieDetails = context.select((MovieDetailsModel model) => model.movieDetails);
     if (movieDetails == null) {
       return const Center(

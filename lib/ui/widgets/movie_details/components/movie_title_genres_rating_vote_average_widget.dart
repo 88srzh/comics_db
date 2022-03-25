@@ -11,7 +11,7 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<MovieDetailsModel>();
+    final model = context.read<MovieDetailsModel>();
     var rating = model.movieDetails?.voteAverage.toString();
     // var year = model.movieDetails?.releaseDate?.year.toString();
     var voteCount = model.movieDetails?.voteCount ?? 0;
@@ -149,10 +149,11 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: fix
     final title =
-        context.select((MovieDetailsModel model) => model.movieDetails?.title);
+        context.select((MovieDetailsModel model) => model.data.title);
     return Text(
-      title ?? 'Загрузка названия...',
+      title,
       style: const TextStyle(
         fontSize: 21,
         fontWeight: FontWeight.w600,
