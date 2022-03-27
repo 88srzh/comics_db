@@ -19,7 +19,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<MovieDetailsModel>().setupLocale(context);
+    Future.microtask(() =>
+        context.read<MovieDetailsModel>().setupLocale(context),
+    );
   }
 
   @override

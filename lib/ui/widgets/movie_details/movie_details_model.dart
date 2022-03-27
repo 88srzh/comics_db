@@ -8,9 +8,23 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+class MovieDetailsPosterData {
+  final String? posterPath;
+  final String? backdropPath;
+  final IconData favoriteIcon;
+
+  MovieDetailsPosterData({
+    this.posterPath,
+    this.backdropPath,
+    this.favoriteIcon = Icons.favorite_outline,
+  });
+}
+
 class MovieDetailsData {
   String title = '';
   bool isLoading = true;
+  String overview = '';
+  MovieDetailsPosterData posterData = MovieDetailsPosterData();
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -40,6 +54,7 @@ class MovieDetailsModel extends ChangeNotifier {
     if (_locale == locale) return;
     _locale = locale;
     dateFormat = DateFormat.yMMMd(locale);
+    updateData(null, false);
     await loadMovieDetails(context);
   }
 
@@ -51,19 +66,26 @@ class MovieDetailsModel extends ChangeNotifier {
         _isFavoriteMovie =
             await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
       }
-      updateData(_movieDetails);
+      updateData(_movieDetails, isFavoriteMovie);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
   }
 
-  void updateData(MovieDetails? details) {
+  void updateData(MovieDetails? details, bool isFavorite) {
     data.title = details?.title ?? 'Загрузка...';
     data.isLoading = details == null;
     if (details == null) {
       notifyListeners();
       return;
     }
+    data.overview = details.overview ?? 'Нет описания';
+    final iconData = isFavorite ? Icons.favorite : Icons.favorite_outline;
+    data.posterData = MovieDetailsPosterData(
+      backdropPath: details.backdropPath,
+      posterPath: details.posterPath,
+      favoriteIcon: iconData,
+    );
     notifyListeners();
   }
 

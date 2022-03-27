@@ -11,20 +11,20 @@ class TopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<MovieDetailsModel>();
-    final posterPath = model.movieDetails?.posterPath;
-    final backdropPath = model.movieDetails?.backdropPath;
+    // final model = context.watch<MovieDetailsModel>();
+    final posterData =
+        context.select((MovieDetailsModel model) => model.data.posterData);
+    final posterPath = posterData.posterPath;
+    final backdropPath = posterData.backdropPath;
     return Stack(
       children: [
-        Positioned(
-          // TODO: backdropPath изображение поверх posterPath исправить
-          child: AspectRatio(
-            aspectRatio: 390 / 220,
-            child: backdropPath != null
-                ? Image.network(ImageDownloader.imageUrl(backdropPath))
-            : Image.asset(AppImages.noImageBig),
+        if (backdropPath != null)
+          Positioned(
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: Image.network(ImageDownloader.imageUrl(backdropPath)),
+            ),
           ),
-        ),
         Positioned(
           left: 10,
           top: 10,
@@ -43,23 +43,10 @@ class TopPosterWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: posterPath != null
-                  ? Image.network(ImageDownloader.imageUrl(posterPath))
-                  : Image.asset(AppImages.noImageBig)
-                  ,
+                      ? Image.network(ImageDownloader.imageUrl(posterPath))
+                      : Image.asset(AppImages.noImageBig),
                 ),
               ),
-              // child: Container(
-              //   // clipBehavior: Clip.antiAlias,
-              //   // TODO: почему-то не закругляет края
-              //   decoration: const BoxDecoration(
-              //     borderRadius: BorderRadius.all(Radius.circular(12)),
-              //   ),
-              //   height: 212.0,
-              //   width: 174.0,
-              //   child: posterPath != null
-              //       ? Image.network(ImageDownloader.imageUrl(posterPath))
-              //       : Image.asset(AppImages.noImageBig),
-              // ),
             ),
           ),
         ),
