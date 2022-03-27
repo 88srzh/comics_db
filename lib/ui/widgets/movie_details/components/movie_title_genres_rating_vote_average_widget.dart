@@ -150,15 +150,30 @@ class _TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: fix
-    final title =
-        context.select((MovieDetailsModel model) => model.data.title);
-    return Text(
-      title,
-      style: const TextStyle(
-        fontSize: 21,
-        fontWeight: FontWeight.w600,
-        color: AppColors.titleText,
-      ),
+    // final title =
+    //     context.select((MovieDetailsModel model) => model.data.title);
+    final movieDetails = context.read<MovieDetailsModel>().movieDetails;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          movieDetails?.title ?? 'Нет названия',
+          style: const TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.w600,
+            color: AppColors.titleText,
+          ),
+        ),
+        const SizedBox(width: 2),
+        Text(
+          movieDetails?.releaseDate?.year.toString() ?? 'Нет года',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: AppColors.titleText,
+          ),
+        ),
+      ],
     );
   }
 }

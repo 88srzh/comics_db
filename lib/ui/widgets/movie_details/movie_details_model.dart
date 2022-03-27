@@ -20,6 +20,12 @@ class MovieDetailsPosterData {
   });
 }
 
+class MovieDetailsTitleData {
+  final String title;
+  final String year;
+
+}
+
 class MovieDetailsData {
   String title = '';
   bool isLoading = true;
