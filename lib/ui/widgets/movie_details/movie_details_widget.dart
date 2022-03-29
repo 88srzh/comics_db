@@ -1,7 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_description_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_title_genres_rating_voteaverage_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
@@ -19,13 +19,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.watch<MovieDetailsModel>().setupLocale(context);
+    Future.microtask(() =>
+        context.read<MovieDetailsModel>().setupLocale(context),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<MovieDetailsModel>(context, listen: true);
-    final movieDetails = model.movieDetails;
+    // TODO: may be change to data.isLoading
+    final movieDetails = context.select((MovieDetailsModel model) => model.movieDetails);
     if (movieDetails == null) {
       return const Center(
         child: LoadingIndicatorWidget(),
@@ -56,20 +58,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   }
 }
 
-// class _TitleAppBarWidget extends StatelessWidget {
-//   const _TitleAppBarWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final model = NotifierProvider.watch<MovieDetailsModel>(context);
-//     // TODO не по центру название
-//     return Center(
-//         child: Text(model?.movieDetails?.title ?? 'Загрузка...',
-//             style: const TextStyle(color: Colors.black)));
-//   }
-// }
-//
-// // TODO change font color to grey, may be do coloredbox
+// // TODO change font color to grey, may be do colored box
 // class _PeoplesWidget extends StatelessWidget {
 //   const _PeoplesWidget({Key? key}) : super(key: key);
 //
