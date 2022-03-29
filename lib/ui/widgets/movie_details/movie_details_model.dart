@@ -20,10 +20,14 @@ class MovieDetailsPosterData {
   });
 }
 
-class MovieDetailsTitleData {
+class MovieDetailsTitleAndYearData {
   final String title;
   final String year;
 
+  MovieDetailsTitleAndYearData({
+    required this.title,
+    required this.year,
+  });
 }
 
 class MovieDetailsData {
@@ -31,6 +35,8 @@ class MovieDetailsData {
   bool isLoading = true;
   String overview = '';
   MovieDetailsPosterData posterData = MovieDetailsPosterData();
+  MovieDetailsTitleAndYearData titleAndYearData =
+      MovieDetailsTitleAndYearData(title: '', year: '');
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -92,6 +98,10 @@ class MovieDetailsModel extends ChangeNotifier {
       posterPath: details.posterPath,
       favoriteIcon: iconData,
     );
+    var year = details.releaseDate?.year.toString();
+    year = year != null ? ' ($year)' : '';
+    data.titleAndYearData =
+        MovieDetailsTitleAndYearData(title: details.title, year: year);
     notifyListeners();
   }
 
