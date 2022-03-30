@@ -30,6 +30,23 @@ class MovieDetailsTitleAndYearData {
   });
 }
 
+class MovieDetailsTrailerData {
+  final String? trailerKey;
+
+  MovieDetailsTrailerData({this.trailerKey});
+}
+
+// TODO fix
+class MovieDetailsScoresData {
+  final String? voteAverage;
+  final int voteCount;
+  final double popularity;
+  final List? genres;
+
+  MovieDetailsScoresData(
+      this.voteAverage, this.voteCount, this.popularity, this.genres);
+}
+
 class MovieDetailsData {
   String title = '';
   bool isLoading = true;
@@ -37,6 +54,8 @@ class MovieDetailsData {
   MovieDetailsPosterData posterData = MovieDetailsPosterData();
   MovieDetailsTitleAndYearData titleAndYearData =
       MovieDetailsTitleAndYearData(title: '', year: '');
+  MovieDetailsTrailerData trailerData =
+      MovieDetailsTrailerData();
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -102,6 +121,10 @@ class MovieDetailsModel extends ChangeNotifier {
     year = year != null ? ' ($year)' : '';
     data.titleAndYearData =
         MovieDetailsTitleAndYearData(title: details.title, year: year);
+    final videos = details.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
     notifyListeners();
   }
 

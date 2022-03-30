@@ -12,7 +12,7 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.read<MovieDetailsModel>();
-    var rating = model.movieDetails?.voteAverage.toString();
+    var voteAverage = model.movieDetails?.voteAverage.toString();
     var voteCount = model.movieDetails?.voteCount ?? 0;
     voteCount = voteCount * 10;
     var popularity = model.movieDetails?.popularity ?? 0;
@@ -38,7 +38,7 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
           _GenresWidget(texts: texts),
           const SizedBox(height: 4),
           _RatingsRowWidget(
-            rating: rating,
+            rating: voteAverage,
             voteCount: voteCount,
             popularity: popularity,
           ),
