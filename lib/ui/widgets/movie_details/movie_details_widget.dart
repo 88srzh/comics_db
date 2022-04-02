@@ -19,15 +19,16 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.microtask(() =>
-        context.read<MovieDetailsModel>().setupLocale(context),
+    Future.microtask(
+      () => context.read<MovieDetailsModel>().setupLocale(context),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: may be change to data.isLoading
-    final movieDetails = context.select((MovieDetailsModel model) => model.movieDetails);
+    final movieDetails =
+        context.select((MovieDetailsModel model) => model.movieDetails);
     if (movieDetails == null) {
       return const Center(
         child: LoadingIndicatorWidget(),
