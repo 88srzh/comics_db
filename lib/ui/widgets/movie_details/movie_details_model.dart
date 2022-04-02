@@ -41,10 +41,12 @@ class MovieDetailsScoresData {
   final String? voteAverage;
   final int voteCount;
   final double popularity;
-  final List? genres;
 
-  MovieDetailsScoresData(
-      this.voteAverage, this.voteCount, this.popularity, this.genres);
+  MovieDetailsScoresData({
+    this.voteAverage,
+    required this.voteCount,
+    required this.popularity,
+  });
 }
 
 class MovieDetailsData {
@@ -54,8 +56,11 @@ class MovieDetailsData {
   MovieDetailsPosterData posterData = MovieDetailsPosterData();
   MovieDetailsTitleAndYearData titleAndYearData =
       MovieDetailsTitleAndYearData(title: '', year: '');
-  MovieDetailsTrailerData trailerData =
-      MovieDetailsTrailerData();
+  MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
+  MovieDetailsScoresData scoresData = MovieDetailsScoresData(
+    voteCount: 0,
+    popularity: 0,
+  );
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -125,6 +130,11 @@ class MovieDetailsModel extends ChangeNotifier {
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
+    data.scoresData = MovieDetailsScoresData(
+      voteCount: details.voteCount,
+      popularity: details.popularity,
+      voteAverage: details.voteAverage.toString(),
+    );
     notifyListeners();
   }
 

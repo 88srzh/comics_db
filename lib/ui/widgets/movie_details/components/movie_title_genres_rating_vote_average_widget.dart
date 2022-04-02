@@ -11,61 +11,36 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<MovieDetailsModel>();
-    var voteAverage = model.movieDetails?.voteAverage.toString();
-    var voteCount = model.movieDetails?.voteCount ?? 0;
-    voteCount = voteCount * 10;
-    var popularity = model.movieDetails?.popularity ?? 0;
-    popularity *= 10;
-    var texts = <String>[];
-    final genres = model.movieDetails?.genres;
-    if (genres != null && genres.isNotEmpty) {
-      var genresNames = <String>[];
-      for (var genre in genres) {
-        genresNames.add(genre.name);
-      }
-      texts.add(genresNames.join(', '));
-    }
     // year = year != null ? ' ($year)' : 'нету года';
 
     // TODO: refactoring
     return Center(
       child: Column(
-        children: [
-          const SizedBox(height: 12),
-          const _TitleWidget(),
-          const SizedBox(height: 8),
-          _GenresWidget(texts: texts),
-          const SizedBox(height: 4),
-          _RatingsRowWidget(
-            rating: voteAverage,
-            voteCount: voteCount,
-            popularity: popularity,
-          ),
+        children: const [
+          SizedBox(height: 12),
+          _TitleWidget(),
+          SizedBox(height: 8),
+          GenresWidget(),
+          SizedBox(height: 4),
+          RatingsRowWidget(),
         ],
       ),
     );
   }
 }
 
-class _RatingsRowWidget extends StatelessWidget {
-  const _RatingsRowWidget({
+class RatingsRowWidget extends StatelessWidget {
+  const RatingsRowWidget({
     Key? key,
-    required this.rating,
-    required this.voteCount,
-    required this.popularity,
   }) : super(key: key);
-
-  final String? rating;
-  final int voteCount;
-  final double popularity;
 
   @override
   Widget build(BuildContext context) {
+    var scoreData =
+        context.select((MovieDetailsModel model) => model.data.scoresData);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // TODO: refactoring need
         const Icon(
           MdiIcons.starOutline,
           color: AppColors.ratingThumb,
@@ -73,7 +48,8 @@ class _RatingsRowWidget extends StatelessWidget {
         ),
         const SizedBox(width: 2),
         Text(
-          rating ?? '0.0',
+          // TODO maybe change to String
+          scoreData.voteAverage ?? '0.0',
           style: const TextStyle(
             fontSize: 13,
             color: AppColors.ratingText,
@@ -94,7 +70,7 @@ class _RatingsRowWidget extends StatelessWidget {
         ),
         const SizedBox(width: 2),
         Text(
-          voteCount.toStringAsFixed(0),
+          scoreData.voteCount.toStringAsFixed(0),
           style: const TextStyle(
             fontSize: 13,
             color: AppColors.ratingText,
@@ -108,7 +84,7 @@ class _RatingsRowWidget extends StatelessWidget {
         ),
         const SizedBox(width: 2),
         Text(
-          popularity.toStringAsFixed(0),
+          scoreData.popularity.toStringAsFixed(0),
           style: const TextStyle(
             fontSize: 13,
             color: AppColors.ratingText,
@@ -119,16 +95,25 @@ class _RatingsRowWidget extends StatelessWidget {
   }
 }
 
-class _GenresWidget extends StatelessWidget {
-  const _GenresWidget({
+class GenresWidget extends StatelessWidget {
+  const GenresWidget({
     Key? key,
-    required this.texts,
   }) : super(key: key);
 
-  final List<String> texts;
+  // final List<String> texts;
 
   @override
   Widget build(BuildContext context) {
+    final model = context.read<MovieDetailsModel>();
+    var texts = <String>[];
+    final genres = model.movieDetails?.genres;
+    if (genres != null && genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genre in genres) {
+        genresNames.add(genre.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
     return Text(
       texts.join(' '),
       maxLines: 3,
@@ -148,8 +133,8 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleAndYear =
-        context.select((MovieDetailsModel model) => model.data.titleAndYearData);
+    final titleAndYear = context
+        .select((MovieDetailsModel model) => model.data.titleAndYearData);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

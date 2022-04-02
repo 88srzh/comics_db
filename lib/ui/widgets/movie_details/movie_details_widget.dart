@@ -26,18 +26,16 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: may be change to data.isLoading
-    final movieDetails =
-        context.select((MovieDetailsModel model) => model.movieDetails);
-    if (movieDetails == null) {
+    final isLoading =
+        context.select((MovieDetailsModel model) => model.data.isLoading);
+    if (isLoading) {
       return const Center(
         child: LoadingIndicatorWidget(),
       );
     }
-    final videos = movieDetails.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    String youtubeKey = trailerKey.toString();
+    var trailerData =
+        context.select((MovieDetailsModel model) => model.data.trailerData);
+    final trailerKey = trailerData.trailerKey;
 
     return Scaffold(
       body: ColoredBox(
@@ -49,7 +47,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                 const TopPosterWidget(),
                 const TitleGenresRatingVoteAverageWidget(),
                 const DescriptionWidget(),
-                TrailerWidget(youtubeKey: youtubeKey),
+                TrailerWidget(youtubeKey: trailerKey),
               ],
             ),
           ],
