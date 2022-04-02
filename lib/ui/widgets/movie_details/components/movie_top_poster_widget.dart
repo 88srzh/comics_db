@@ -20,9 +20,12 @@ class TopPosterWidget extends StatelessWidget {
       children: [
         if (backdropPath != null)
           Positioned(
-            child: AspectRatio(
-              aspectRatio: 390 / 220,
-              child: Image.network(ImageDownloader.imageUrl(backdropPath)),
+            child: Opacity(
+              opacity: 0.25,
+              child: AspectRatio(
+                aspectRatio: 390 / 220,
+                child: Image.network(ImageDownloader.imageUrl(backdropPath)),
+              ),
             ),
           ),
         Positioned(
