@@ -41,6 +41,8 @@ class MovieDetailsData {
   MovieDetailsPosterData movieData =
       MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
   String summary = '';
+  String releaseDate = '';
+  String genres = '';
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 }
 
@@ -114,29 +116,41 @@ class MovieDetailsModel extends ChangeNotifier {
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
     data.summary = makeSummary(details);
+    data.releaseDate = makeReleaseDate(details);
+    data.genres = makeGenres(details);
     notifyListeners();
   }
 
   String makeSummary(MovieDetails details) {
     var texts = <String>[];
-    final releaseDate = details.releaseDate;
-    if (releaseDate != null) {
-      texts.add(_dateFormat.format(releaseDate));
-    }
-    if (details.productionCountries.isNotEmpty) {
-      texts.add('(${details.productionCountries.first.iso})');
-    }
+    // if (details.productionCountries.isNotEmpty) {
+    //   texts.add('(${details.productionCountries.first.iso})');
+    // }
     final runtime = details.runtime ?? 0;
     final duration = Duration(minutes: runtime);
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    texts.add('${hours}h ${minutes}m');
+    texts.add('${hours}ч ${minutes}мин');
+    return texts.join(' ');
+  }
+
+  String makeGenres(MovieDetails details) {
+    var texts = <String>[];
     if (details.genres.isNotEmpty) {
       var genresNames = <String>[];
       for (var genr in details.genres) {
         genresNames.add(genr.name);
       }
       texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
+
+  String makeReleaseDate(MovieDetails details) {
+    var texts = <String>[];
+    final releaseDate = details.releaseDate;
+    if (releaseDate != null) {
+      texts.add(_dateFormat.format(releaseDate));
     }
     return texts.join(' ');
   }

@@ -16,27 +16,15 @@ class MovieTopPosterWidget extends StatelessWidget {
         context.select((MovieDetailsModel model) => model.data.movieData);
     final posterPath = movieData.posterPath;
     final backdropPath = movieData.backdropPath;
+    // TODO поменять на модель
     final summary =
-    context.select((MovieDetailsModel model) => model.data.summary);
+        context.select((MovieDetailsModel model) => model.data.summary);
+    final releaseDateText =
+        context.select((MovieDetailsModel model) => model.data.releaseDate);
+    final genres = context.select((MovieDetailsModel model) => model.data.genres);
 
     return Stack(
       children: [
-        Positioned(
-          top: 55,
-          left: 240,
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            // TODO: не закругляются края
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-            height: 170.0,
-            width: 140.0,
-            child: posterPath != null
-                ? Image.network(ImageDownloader.imageUrl(posterPath))
-                : const SizedBox.shrink(),
-          ),
-        ),
         Positioned(
           top: 65,
           left: 10,
@@ -73,6 +61,23 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
+                        releaseDateText,
+                        // allRuntimes.join(' '),
+                        // runtimes.toString(),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppColors.genresText,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
                         summary,
                         // allRuntimes.join(' '),
                         // runtimes.toString(),
@@ -82,27 +87,15 @@ class MovieTopPosterWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // const Text(
-                    //   ' минут(ы)',
-                    //   style: TextStyle(
-                    //     fontSize: 13,
-                    //     color: AppColors.genresText,
-                    //   ),
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    //   child: Image.asset(AppImages.ellipseDot),
-                    // ),
                   ],
                 ),
-                const SizedBox(height: 5),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'genres',
+                    genres,
                     // texts.join(' '),
                     maxLines: 3,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: AppColors.genresText,
                     ),
@@ -194,6 +187,22 @@ class MovieTopPosterWidget extends StatelessWidget {
           child: IconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+          ),
+        ),
+        Positioned(
+          top: 55,
+          left: 240,
+          child: SizedBox(
+            // clipBehavior: Clip.antiAlias,
+            // TODO: не закругляются края
+            height: 170.0,
+            width: 140.0,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: posterPath != null
+                  ? Image.network(ImageDownloader.imageUrl(posterPath))
+                  : Image.asset(AppImages.noImageBig),
+            ),
           ),
         ),
       ],
