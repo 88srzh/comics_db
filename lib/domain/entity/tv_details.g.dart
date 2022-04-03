@@ -8,7 +8,7 @@ part of 'tv_details.dart';
 
 TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) {
   return TVDetails(
-    backdropPath: json['backdrop_path'] as String,
+    backdropPath: json['backdrop_path'] as String?,
     createdBy: (json['created_by'] as List<dynamic>)
         .map((e) => CreatedBy.fromJson(e as Map<String, dynamic>))
         .toList(),

@@ -12,21 +12,19 @@ class MovieDetailsPosterData {
   final String? posterPath;
   final String? backdropPath;
   final IconData favoriteIcon;
+  final String title;
+  final String? voteAverage;
+  final int voteCount;
+  final double popularity;
 
   MovieDetailsPosterData({
     this.posterPath,
     this.backdropPath,
     this.favoriteIcon = Icons.favorite_outline,
-  });
-}
-
-class MovieDetailsTitleAndYearData {
-  final String title;
-  final String year;
-
-  MovieDetailsTitleAndYearData({
     required this.title,
-    required this.year,
+    this.voteAverage,
+    required this.voteCount,
+    required this.popularity,
   });
 }
 
@@ -36,31 +34,14 @@ class MovieDetailsTrailerData {
   MovieDetailsTrailerData({this.trailerKey});
 }
 
-// TODO fix
-class MovieDetailsScoresData {
-  final String? voteAverage;
-  final int voteCount;
-  final double popularity;
-
-  MovieDetailsScoresData({
-    this.voteAverage,
-    required this.voteCount,
-    required this.popularity,
-  });
-}
-
 class MovieDetailsData {
   String title = '';
   bool isLoading = true;
   String overview = '';
-  MovieDetailsPosterData posterData = MovieDetailsPosterData();
-  MovieDetailsTitleAndYearData titleAndYearData =
-      MovieDetailsTitleAndYearData(title: '', year: '');
+  MovieDetailsPosterData movieData =
+      MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
+  String summary = '';
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
-  MovieDetailsScoresData scoresData = MovieDetailsScoresData(
-    voteCount: 0,
-    popularity: 0,
-  );
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -73,7 +54,7 @@ class MovieDetailsModel extends ChangeNotifier {
   final data = MovieDetailsData();
   bool _isFavoriteMovie = false;
   String _locale = '';
-  late DateFormat dateFormat;
+  late DateFormat _dateFormat;
   Future<void>? Function()? onSessionExpired;
   MovieDetails? _movieDetails;
 
@@ -83,13 +64,14 @@ class MovieDetailsModel extends ChangeNotifier {
 
   MovieDetailsModel(this.movieId);
 
-  // String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
+  String stringFromDate(DateTime? date) =>
+      date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
-    dateFormat = DateFormat.yMMMd(locale);
+    _dateFormat = DateFormat.yMMMd(locale);
     updateData(null, false);
     await loadMovieDetails(context);
   }
@@ -117,25 +99,46 @@ class MovieDetailsModel extends ChangeNotifier {
     }
     data.overview = details.overview ?? 'Нет описания';
     final iconData = isFavorite ? Icons.favorite : Icons.favorite_outline;
-    data.posterData = MovieDetailsPosterData(
-      backdropPath: details.backdropPath,
-      posterPath: details.posterPath,
-      favoriteIcon: iconData,
-    );
+    data.movieData = MovieDetailsPosterData(
+        posterPath: details.posterPath,
+        backdropPath: details.backdropPath,
+        favoriteIcon: iconData,
+        title: details.title,
+        voteAverage: details.voteAverage.toString(),
+        voteCount: details.voteCount,
+        popularity: details.popularity);
     var year = details.releaseDate?.year.toString();
     year = year != null ? ' ($year)' : '';
-    data.titleAndYearData =
-        MovieDetailsTitleAndYearData(title: details.title, year: year);
     final videos = details.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
-    data.scoresData = MovieDetailsScoresData(
-      voteCount: details.voteCount,
-      popularity: details.popularity,
-      voteAverage: details.voteAverage.toString(),
-    );
+    data.summary = makeSummary(details);
     notifyListeners();
+  }
+
+  String makeSummary(MovieDetails details) {
+    var texts = <String>[];
+    final releaseDate = details.releaseDate;
+    if (releaseDate != null) {
+      texts.add(_dateFormat.format(releaseDate));
+    }
+    if (details.productionCountries.isNotEmpty) {
+      texts.add('(${details.productionCountries.first.iso})');
+    }
+    final runtime = details.runtime ?? 0;
+    final duration = Duration(minutes: runtime);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+    texts.add('${hours}h ${minutes}m');
+    if (details.genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genr in details.genres) {
+        genresNames.add(genr.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
   }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {

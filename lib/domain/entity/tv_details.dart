@@ -6,7 +6,7 @@ part 'tv_details.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TVDetails {
-  final String backdropPath;
+  final String? backdropPath;
   final List<CreatedBy> createdBy;
   final List<int> episodeRunTime;
   final String firstAirDate;

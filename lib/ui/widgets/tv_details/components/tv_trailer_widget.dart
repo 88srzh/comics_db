@@ -25,20 +25,24 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
     super.initState();
 
     _controller = YoutubePlayerController(
-        initialVideoId: widget.youtubeKey,
-        flags: const YoutubePlayerFlags(
-          autoPlay: false,
-          mute: true,
-        ));
+      initialVideoId: widget.youtubeKey,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final tvDetails =
-        Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
-    final videos = tvDetails?.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+    // final tvDetails =
+    //     Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
+    // final videos = tvDetails?.videos.results
+    //     .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    // final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+    var tvTrailerData =
+        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    final tvTrailerKey = tvTrailerData.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -53,7 +57,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          trailerKey != null
+          tvTrailerKey != null
               ? YoutubePlayerBuilder(
                   player: YoutubePlayer(
                     controller: _controller,

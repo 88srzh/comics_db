@@ -44,8 +44,8 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           children: [
             Column(
               children: [
-                const TopPosterWidget(),
-                const TitleGenresRatingVoteAverageWidget(),
+                const MovieTopPosterWidget(),
+                // const TitleGenresRatingVoteAverageWidget(),
                 const DescriptionWidget(),
                 TrailerWidget(youtubeKey: trailerKey),
               ],
@@ -57,7 +57,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   }
 }
 
-// // TODO change font color to grey, may be do colored box
 // class _PeoplesWidget extends StatelessWidget {
 //   const _PeoplesWidget({Key? key}) : super(key: key);
 //
