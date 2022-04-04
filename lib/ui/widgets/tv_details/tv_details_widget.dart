@@ -15,24 +15,26 @@ class TvDetailsWidget extends StatefulWidget {
 }
 
 class _TvDetailsWidgetState extends State<TvDetailsWidget> {
-  // TODO: возможно добавить проверку на session expired
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Provider.of<TvDetailsModel>(context, listen: false).setupLocale(context);
+    Future.microtask(
+      () => context.read<TvDetailsModel>().setupLocale(context),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsModel =
-        Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
-    if (tvDetailsModel == null) {
+    final isLoading = context.select((TvDetailsModel model) => model.tvData.isLoading);
+    if (isLoading) {
       return const Center(child: LoadingIndicatorWidget());
     }
-    final tvVideos = tvDetailsModel.videos.results
-        .where((video) => video.type == "Trailer" && video.site == 'YouTube');
-    final tvTrailerKey =
-        tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
+    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    final tvTrailerKey = tvTrailerData.trailerKey;
+    // final tvVideos = tvDetailsModel.videos.results
+    //     .where((video) => video.type == "Trailer" && video.site == 'YouTube');
+    // final tvTrailerKey =
+    //     tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
     String youtubeKey = tvTrailerKey.toString();
     return Scaffold(
       body: ColoredBox(

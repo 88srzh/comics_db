@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerWidget extends StatefulWidget {
-  final String youtubeKey;
+  final String? youtubeKey;
 
   const TrailerWidget({Key? key, required this.youtubeKey}) : super(key: key);
 
@@ -22,7 +22,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.youtubeKey,
+      initialVideoId: widget.youtubeKey ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: true,
@@ -32,11 +32,9 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final movieDetails =
-        Provider.of<MovieDetailsModel>(context, listen: true).movieDetails;
-    final videos = movieDetails?.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+    var trailerData =
+        context.select((MovieDetailsModel model) => model.data.trailerData);
+    final trailerKey = trailerData.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(

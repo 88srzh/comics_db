@@ -19,24 +19,23 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.microtask(() =>
-        context.read<MovieDetailsModel>().setupLocale(context),
+    Future.microtask(
+      () => context.read<MovieDetailsModel>().setupLocale(context),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: may be change to data.isLoading
-    final movieDetails = context.select((MovieDetailsModel model) => model.movieDetails);
-    if (movieDetails == null) {
+    final isLoading =
+        context.select((MovieDetailsModel model) => model.data.isLoading);
+    if (isLoading) {
       return const Center(
         child: LoadingIndicatorWidget(),
       );
     }
-    final videos = movieDetails.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    String youtubeKey = trailerKey.toString();
+    var trailerData =
+        context.select((MovieDetailsModel model) => model.data.trailerData);
+    final trailerKey = trailerData.trailerKey;
 
     return Scaffold(
       body: ColoredBox(
@@ -45,10 +44,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           children: [
             Column(
               children: [
-                const TopPosterWidget(),
-                const TitleGenresRatingVoteAverageWidget(),
+                const MovieTopPosterWidget(),
+                // const TitleGenresRatingVoteAverageWidget(),
                 const DescriptionWidget(),
-                TrailerWidget(youtubeKey: youtubeKey),
+                TrailerWidget(youtubeKey: trailerKey),
               ],
             ),
           ],
@@ -58,7 +57,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   }
 }
 
-// // TODO change font color to grey, may be do colored box
 // class _PeoplesWidget extends StatelessWidget {
 //   const _PeoplesWidget({Key? key}) : super(key: key);
 //
