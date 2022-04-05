@@ -82,12 +82,12 @@ class TvDetailsModel extends ChangeNotifier {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
-    updateData(null, false);
     _dateFormat = DateFormat.yMMMd(locale);
-    await loadTVDetails();
+    updateData(null, false);
+    await loadTVDetails(context);
   }
 
-  Future<void> loadTVDetails() async {
+  Future<void> loadTVDetails(BuildContext context) async {
     try {
       _tvDetails = await _movieAndTvApiClient.tvDetails(tvId, _locale);
       final sessionId = await _sessionDataProvider.getSessionId();
@@ -95,7 +95,7 @@ class TvDetailsModel extends ChangeNotifier {
         _isFavoriteTV =
             await _movieAndTvApiClient.isFavoriteTV(tvId, sessionId);
       }
-      notifyListeners();
+      updateData(_tvDetails, isFavoriteTV);
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }

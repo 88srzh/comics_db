@@ -25,17 +25,19 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = context.select((TvDetailsModel model) => model.tvData.isLoading);
+    final isLoading =
+        context.select((TvDetailsModel model) => model.tvData.isLoading);
     if (isLoading) {
       return const Center(child: LoadingIndicatorWidget());
     }
-    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData =
+        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
     // final tvVideos = tvDetailsModel.videos.results
     //     .where((video) => video.type == "Trailer" && video.site == 'YouTube');
     // final tvTrailerKey =
     //     tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
-    String youtubeKey = tvTrailerKey.toString();
+
     return Scaffold(
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
@@ -45,7 +47,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               children: [
                 const TvTopPosterWidget(),
                 const TvDescriptionWidget(),
-                TvTrailerWidget(youtubeKey: youtubeKey),
+                TvTrailerWidget(youtubeKey: tvTrailerKey),
               ],
             ),
           ],
