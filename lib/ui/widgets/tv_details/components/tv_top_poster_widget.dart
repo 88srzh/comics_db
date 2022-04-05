@@ -15,13 +15,14 @@ class TvTopPosterWidget extends StatelessWidget {
     final backdropPath = tvDetailsPosterData.backdropPath;
     return Stack(
       children: [
-        if (backdropPath != null)
           Positioned(
             child: Opacity(
               opacity: 0.25,
               child: AspectRatio(
                 aspectRatio: 390 / 220,
-                child: Image.network(ImageDownloader.imageUrl(backdropPath)),
+                child: backdropPath != null
+                ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                    : Image.asset(AppImages.noImageBig),
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_description_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_title_genres_rating_voteaverage_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -33,10 +34,6 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     var tvTrailerData =
         context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
-    // final tvVideos = tvDetailsModel.videos.results
-    //     .where((video) => video.type == "Trailer" && video.site == 'YouTube');
-    // final tvTrailerKey =
-    //     tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
 
     return Scaffold(
       body: ColoredBox(
@@ -46,6 +43,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
             Column(
               children: [
                 const TvTopPosterWidget(),
+                const TitleGenresRatingVoteAverageWidget(),
                 const TvDescriptionWidget(),
                 TvTrailerWidget(youtubeKey: tvTrailerKey),
               ],
