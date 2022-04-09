@@ -9,31 +9,34 @@ class TvTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsPosterData =
-        context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
+    final tvDetailsPosterData = context
+        .select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
     final posterPath = tvDetailsPosterData.posterPath;
     final backdropPath = tvDetailsPosterData.backdropPath;
     return Stack(
       children: [
-          Positioned(
-            child: Opacity(
-              opacity: 0.25,
-              child: AspectRatio(
-                aspectRatio: 390 / 220,
-                child: backdropPath != null
-                ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                    : Image.asset(AppImages.noImageBig),
-              ),
+        Positioned(
+          child: Opacity(
+            opacity: 0.25,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: backdropPath != null
+                  ? Image.network(
+                      ImageDownloader.imageUrl(backdropPath),
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(AppImages.noImageBig),
             ),
           ),
-        Positioned(
-          left: 10,
-          top: 10,
-          child: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
-          ),
         ),
+        // Positioned(
+        //   left: 10,
+        //   top: 10,
+        //   child: IconButton(
+        //     onPressed: () => Navigator.of(context).pop(),
+        //     icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+        //   ),
+        // ),
         Positioned(
           child: Center(
             child: Padding(

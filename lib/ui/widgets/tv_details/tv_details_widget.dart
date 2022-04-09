@@ -36,6 +36,18 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     final tvTrailerKey = tvTrailerData.trailerKey;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+          splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back)),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
+        // shadowColor: Colors.white38,
+        // foregroundColor: Colors.transparent,
+      ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
