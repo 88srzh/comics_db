@@ -19,10 +19,10 @@ class TvDetailsPosterData {
   });
 }
 
-class TvDetailsTitleAndYearData {
+class TvDetailsNameData {
   final String name;
 
-  TvDetailsTitleAndYearData({required this.name});
+  TvDetailsNameData({required this.name});
 }
 
 class TvDetailsTrailerData {
@@ -47,9 +47,10 @@ class TvDetailsData {
   String name = '';
   bool isLoading = true;
   String overview = '';
+  String genres = '';
   TvDetailsPosterData tvDetailsPosterData = TvDetailsPosterData();
-  TvDetailsTitleAndYearData tvTitleAndYearData =
-      TvDetailsTitleAndYearData(name: '');
+  TvDetailsNameData tvNameData =
+      TvDetailsNameData(name: '');
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
   TvDetailsScoresData tvDetailsScoresData =
       TvDetailsScoresData(voteCount: 0, popularity: 0);
@@ -82,12 +83,12 @@ class TvDetailsModel extends ChangeNotifier {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
-    updateData(null, false);
     _dateFormat = DateFormat.yMMMd(locale);
-    await loadTVDetails();
+    updateData(null, false);
+    await loadTVDetails(context);
   }
 
-  Future<void> loadTVDetails() async {
+  Future<void> loadTVDetails(BuildContext context) async {
     try {
       _tvDetails = await _movieAndTvApiClient.tvDetails(tvId, _locale);
       final sessionId = await _sessionDataProvider.getSessionId();
@@ -95,7 +96,7 @@ class TvDetailsModel extends ChangeNotifier {
         _isFavoriteTV =
             await _movieAndTvApiClient.isFavoriteTV(tvId, sessionId);
       }
-      notifyListeners();
+      updateData(_tvDetails, isFavoriteTV);
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }
@@ -116,7 +117,7 @@ class TvDetailsModel extends ChangeNotifier {
       posterPath: details.posterPath,
       favoriteIcon: iconData,
     );
-    tvData.tvTitleAndYearData = TvDetailsTitleAndYearData(name: details.name);
+    tvData.tvNameData = TvDetailsNameData(name: details.name);
     final videos = details.videos.results
         .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
@@ -126,7 +127,21 @@ class TvDetailsModel extends ChangeNotifier {
       popularity: details.popularity,
       voteAverage: details.voteAverage.toString(),
     );
+    tvData.genres = makeGenres(details);
     notifyListeners();
+  }
+
+  // TODO вынести в отдельный файл (дубликат из муви)
+  String makeGenres(TVDetails details) {
+    var texts = <String>[];
+    if (details.genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genr in details.genres) {
+        genresNames.add(genr.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
   }
 
   Future<void> toggleFavoriteTV() async {

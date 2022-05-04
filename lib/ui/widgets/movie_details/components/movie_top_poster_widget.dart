@@ -21,7 +21,8 @@ class MovieTopPosterWidget extends StatelessWidget {
         context.select((MovieDetailsModel model) => model.data.summary);
     final releaseDateText =
         context.select((MovieDetailsModel model) => model.data.releaseDate);
-    final genres = context.select((MovieDetailsModel model) => model.data.genres);
+    final genres =
+        context.select((MovieDetailsModel model) => model.data.genres);
 
     return Stack(
       children: [
@@ -36,34 +37,33 @@ class MovieTopPosterWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  height: 50,
-                  child: Column(
-                    children: [
-                      // TODO: центрировать текст по высоте
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          movieData.title,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 21,
-                            color: AppColors.titleText,
+                  height: 25,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // TODO: центрировать текст по высоте
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            movieData.title,
+                            maxLines: 3,
+                            style: const TextStyle(
+                              fontSize: 21,
+                              color: AppColors.titleText,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
-                // TODO: исправить
                 Row(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         releaseDateText,
-                        // allRuntimes.join(' '),
-                        // runtimes.toString(),
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -72,15 +72,13 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 2),
                 Row(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         summary,
-                        // allRuntimes.join(' '),
-                        // runtimes.toString(),
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -93,7 +91,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Text(
                     genres,
-                    // texts.join(' '),
                     maxLines: 3,
                     style: const TextStyle(
                       fontSize: 13,
@@ -101,7 +98,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -126,7 +123,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -144,9 +141,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -154,6 +149,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       color: AppColors.ratingThumb,
                       size: 14,
                     ),
+                    const SizedBox(width: 4),
                     Text(
                       movieData.popularity.toStringAsFixed(0),
                       style: const TextStyle(

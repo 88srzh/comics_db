@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TvTrailerWidget extends StatefulWidget {
-  final String youtubeKey;
+  final String? youtubeKey;
 
   const TvTrailerWidget({
     Key? key,
@@ -25,7 +25,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.youtubeKey,
+      initialVideoId: widget.youtubeKey ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: true,
@@ -35,11 +35,6 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final tvDetails =
-    //     Provider.of<TvDetailsModel>(context, listen: true).tvDetails;
-    // final videos = tvDetails?.videos.results
-    //     .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    // final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
     var tvTrailerData =
         context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;

@@ -1,6 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_description_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_title_genres_rating_voteaverage_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -25,18 +26,28 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = context.select((TvDetailsModel model) => model.tvData.isLoading);
+    final isLoading =
+        context.select((TvDetailsModel model) => model.tvData.isLoading);
     if (isLoading) {
       return const Center(child: LoadingIndicatorWidget());
     }
-    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData =
+        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
-    // final tvVideos = tvDetailsModel.videos.results
-    //     .where((video) => video.type == "Trailer" && video.site == 'YouTube');
-    // final tvTrailerKey =
-    //     tvVideos.isNotEmpty == true ? tvVideos.first.key : null;
-    String youtubeKey = tvTrailerKey.toString();
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+          splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back)),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
+        // shadowColor: Colors.white38,
+        // foregroundColor: Colors.transparent,
+      ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
@@ -44,8 +55,9 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
             Column(
               children: [
                 const TvTopPosterWidget(),
+                const TitleGenresRatingVoteAverageWidget(),
                 const TvDescriptionWidget(),
-                TvTrailerWidget(youtubeKey: youtubeKey),
+                TvTrailerWidget(youtubeKey: tvTrailerKey),
               ],
             ),
           ],
