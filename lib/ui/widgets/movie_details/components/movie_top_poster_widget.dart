@@ -38,21 +38,23 @@ class MovieTopPosterWidget extends StatelessWidget {
               children: [
                 SizedBox(
                   height: 25,
-                  child: Column(
-                    children: [
-                      // TODO: центрировать текст по высоте
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          movieData.title,
-                          maxLines: 3,
-                          style: const TextStyle(
-                            fontSize: 21,
-                            color: AppColors.titleText,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // TODO: центрировать текст по высоте
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            movieData.title,
+                            maxLines: 3,
+                            style: const TextStyle(
+                              fontSize: 21,
+                              color: AppColors.titleText,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -147,6 +149,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       color: AppColors.ratingThumb,
                       size: 14,
                     ),
+                    const SizedBox(width: 4),
                     Text(
                       movieData.popularity.toStringAsFixed(0),
                       style: const TextStyle(

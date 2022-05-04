@@ -130,7 +130,7 @@ class MovieDetailsModel extends ChangeNotifier {
     final duration = Duration(minutes: runtime);
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    texts.add('${hours}ч ${minutes}мин');
+    texts.add('$hoursч $minutesмин');
     return texts.join(' ');
   }
 
