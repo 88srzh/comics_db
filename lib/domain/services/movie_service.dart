@@ -16,4 +16,8 @@ class MovieService {
   Future<PopularAndTopRatedMovieResponse> searchMovie(
           int page, String locale, String query) async =>
       _movieApiClient.searchMovie(page, locale, query, Configuration.apiKey);
+
+  Future<PopularAndTopRatedMovieResponse> similarMovie(
+      int page, String locale) async => _movieApiClient.similarMovie(
+      movieId, page, locale, Configuration.apiKey);
 }
