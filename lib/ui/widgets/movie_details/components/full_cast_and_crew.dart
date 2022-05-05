@@ -12,20 +12,16 @@ class FullCastAndCrewWidget extends StatelessWidget {
     final model = context.read<MovieDetailsModel>();
     var cast = model.movieDetails?.credits.cast;
     if (cast == null || cast.isEmpty) return const SizedBox.shrink();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Полный актерский и съемочный состав'),
-        shadowColor: Colors.transparent,
-      ),
-      body: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4
-          ),
-          itemCount: cast.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _ActorListItemWidget(actorIndex: index);
-          },
-      ),
+      return SizedBox(
+        height: 250,
+        child: ListView.builder(
+              itemCount: ,
+            ),
+            itemCount: cast.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _ActorListItemWidget(actorIndex: index);
+            },
+        ),
     );
   }
 }
