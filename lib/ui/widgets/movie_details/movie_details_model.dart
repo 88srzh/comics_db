@@ -34,6 +34,16 @@ class MovieDetailsTrailerData {
   MovieDetailsTrailerData({this.trailerKey});
 }
 
+class MovieDetailsMoviePeopleData {
+  final String name;
+  final String job;
+
+  MovieDetailsMoviePeopleData({
+    required this.name,
+    required this.job,
+  });
+}
+
 class MovieDetailsData {
   String title = '';
   bool isLoading = true;
@@ -44,6 +54,8 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
+  List<List<MovieDetailsMoviePeopleData>> peopleData =
+      const <List<MovieDetailsMoviePeopleData>>[];
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -118,7 +130,22 @@ class MovieDetailsModel extends ChangeNotifier {
     data.summary = makeSummary(details);
     data.releaseDate = makeReleaseDate(details);
     data.genres = makeGenres(details);
+    data.peopleData = makePeopleData(details);
     notifyListeners();
+  }
+
+  List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
+    var crew = details.credits.crew
+        .map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job))
+        .toList();
+    crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
+    var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
+    for (var i = 0; i < crew.length; i += 2) {
+      crewChunks.add(
+        crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2),
+      );
+    }
+    return crewChunks;
   }
 
   String makeSummary(MovieDetails details) {

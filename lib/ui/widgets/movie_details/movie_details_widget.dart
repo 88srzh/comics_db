@@ -1,9 +1,10 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_description_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_similar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
@@ -49,7 +50,8 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                 const MovieTopPosterWidget(),
                 const DescriptionWidget(),
                 TrailerWidget(youtubeKey: trailerKey),
-                const FullCastAndCrewWidget(),
+                const _PeoplesWidget(),
+                // const FullCastAndCrewWidget(),
                 // const MovieSimilarWidget(),
               ],
             ),
@@ -65,18 +67,11 @@ class _PeoplesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = context.watch<MovieDetailsModel>();
-    var crew = context
-        .select((MovieDetailsModel model) => model.movieDetails?.credits.crew);
-    if (crew == null || crew.isEmpty) return const SizedBox.shrink();
-    crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
-    var crewChunks = <List<Employee>>[];
-    for (var i = 0; i < crew.length; i += 2) {
-      crewChunks
-          .add(crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2));
-    }
+    var crew =
+        context.select((MovieDetailsModel model) => model.data.peopleData);
+    if (crew.isEmpty) return const SizedBox.shrink();
     return Column(
-      children: crewChunks
+      children: crew
           .map(
             (chunk) => Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
@@ -94,7 +89,7 @@ class _PeoplesWidget extends StatelessWidget {
 }
 
 class _PeoplesWidgetRow extends StatelessWidget {
-  final List<Employee> employes;
+  final List<MovieDetailsMoviePeopleData> employes;
 
   const _PeoplesWidgetRow({Key? key, required this.employes}) : super(key: key);
 
@@ -111,7 +106,7 @@ class _PeoplesWidgetRow extends StatelessWidget {
 }
 
 class _PeopleWidgetRowItem extends StatelessWidget {
-  final Employee employee;
+  final MovieDetailsMoviePeopleData employee;
 
   const _PeopleWidgetRowItem({Key? key, required this.employee})
       : super(key: key);
@@ -190,8 +185,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.read<MovieDetailsModel>(context);
-    final actor = model!.movieDetails?.credits.cast[actorIndex];
+    final model = context.read<MovieDetailsModel>();
+    final actor = model.movieDetails?.credits.cast[actorIndex];
     final backdropPath = actor?.profilePath;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
@@ -215,7 +210,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
             children: [
               // TODO if image doesn't exist load 'no image'
               backdropPath != null
-                  ? Image.network(ApiClient.imageUrl(backdropPath))
+                  ? Image.network(ImageDownloader.imageUrl(backdropPath))
                   // : const SizedBox.shrink(),
                   : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
