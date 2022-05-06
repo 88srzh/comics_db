@@ -1,6 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew.dart';
@@ -163,11 +162,11 @@ class _MovieActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cast = context
-        .select((MovieDetailsModel model) => model.movieDetails?.credits.cast);
-    if (cast == null || cast.isEmpty) return const SizedBox.shrink();
+    var actorsData = context
+        .select((MovieDetailsModel model) => model.data.actorsData);
+    if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: 6,
+      itemCount: actorsData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -186,8 +185,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.read<MovieDetailsModel>();
-    final actor = model.movieDetails?.credits.cast[actorIndex];
-    final backdropPath = actor?.profilePath;
+    final actor = model.data.actorsData[actorIndex];
+    final profilePath = actor.profilePath;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
@@ -209,9 +208,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
           child: Column(
             children: [
               // TODO if image doesn't exist load 'no image'
-              backdropPath != null
-                  ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                  // : const SizedBox.shrink(),
+              profilePath != null
+                  ? Image.network(ImageDownloader.imageUrl(profilePath))
                   : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
                 child: Padding(

@@ -44,6 +44,18 @@ class MovieDetailsMoviePeopleData {
   });
 }
 
+class MovieDetailsMovieActorData {
+  final String name;
+  final String character;
+  final String? profilePath;
+
+  MovieDetailsMovieActorData({
+    required this.name,
+    required this.character,
+    required this.profilePath,
+  });
+}
+
 class MovieDetailsData {
   String title = '';
   bool isLoading = true;
@@ -56,6 +68,8 @@ class MovieDetailsData {
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData =
       const <List<MovieDetailsMoviePeopleData>>[];
+  List<MovieDetailsMovieActorData> actorsData =
+      const <MovieDetailsMovieActorData>[];
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -131,6 +145,15 @@ class MovieDetailsModel extends ChangeNotifier {
     data.releaseDate = makeReleaseDate(details);
     data.genres = makeGenres(details);
     data.peopleData = makePeopleData(details);
+    data.actorsData = details.credits.cast
+        .map(
+          (e) => MovieDetailsMovieActorData(
+            name: e.name,
+            character: e.character,
+            profilePath: e.profilePath,
+          ),
+        )
+        .toList();
     notifyListeners();
   }
 
