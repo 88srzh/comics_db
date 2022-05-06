@@ -7,7 +7,6 @@ import 'package:comics_db_app/domain/services/auth_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MovieDetailsPosterData {
   final String? posterPath;
@@ -232,11 +231,12 @@ class MovieDetailsModel extends ChangeNotifier {
     notifyListeners();
     try {
       await _accountApiClient.markAsFavorite(
-          accountId: accountId,
-          sessionId: sessionId,
-          mediaType: MediaType.movie,
-          mediaId: movieId,
-          isFavorite: _isFavoriteMovie);
+        accountId: accountId,
+        sessionId: sessionId,
+        mediaType: MediaType.movie,
+        mediaId: movieId,
+        isFavorite: data.posterData.isFavorite,
+      );
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }

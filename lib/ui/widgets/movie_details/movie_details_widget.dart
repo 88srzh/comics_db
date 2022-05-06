@@ -207,7 +207,6 @@ class _MovieActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              // TODO if image doesn't exist load 'no image'
               profilePath != null
                   ? Image.network(ImageDownloader.imageUrl(profilePath))
                   : const Image(image: AssetImage(AppImages.noImage)),
@@ -217,7 +216,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(actor!.name, maxLines: 1),
+                      Text(actor.name, maxLines: 1),
                       const SizedBox(height: 7),
                       Text(actor.character, maxLines: 2),
                     ],
