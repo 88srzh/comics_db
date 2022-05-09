@@ -13,8 +13,7 @@ class MovieDetailsPosterData {
   final String? backdropPath;
   final bool isFavorite;
 
-  IconData get favoriteIcon =>
-      isFavorite ? Icons.favorite : Icons.favorite_outline;
+  IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;
   final String title;
   final String? voteAverage;
   final int voteCount;
@@ -83,16 +82,13 @@ class MovieDetailsData {
   String title = '';
   bool isLoading = true;
   String overview = '';
-  MovieDetailsPosterData posterData =
-      MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
+  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
   String summary = '';
   String releaseDate = '';
   String genres = '';
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
-  List<List<MovieDetailsMoviePeopleData>> peopleData =
-      const <List<MovieDetailsMoviePeopleData>>[];
-  List<MovieDetailsMovieActorData> actorsData =
-      const <MovieDetailsMovieActorData>[];
+  List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
+  List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
 }
 
 class MovieDetailsModel extends ChangeNotifier {
@@ -121,13 +117,11 @@ class MovieDetailsModel extends ChangeNotifier {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      final movieDetails =
-          await _movieAndTvApiClient.movieDetails(movieId, _locale);
+      final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, _locale);
       final sessionId = await _sessionDataProvider.getSessionId();
       var isFavorite = false;
       if (sessionId != null) {
-        isFavorite =
-            await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
+        isFavorite = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
       }
       updateData(movieDetails, isFavorite);
     } on ApiClientException catch (e) {
@@ -153,8 +147,7 @@ class MovieDetailsModel extends ChangeNotifier {
         popularity: details.popularity);
     var year = details.releaseDate?.year.toString();
     year = year != null ? ' ($year)' : '';
-    final videos = details.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
     data.summary = makeSummary(details);
@@ -174,9 +167,7 @@ class MovieDetailsModel extends ChangeNotifier {
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
-    var crew = details.credits.crew
-        .map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job))
-        .toList();
+    var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {
@@ -196,7 +187,7 @@ class MovieDetailsModel extends ChangeNotifier {
     final duration = Duration(minutes: runtime);
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    texts.add('$hoursч $minutesмин');
+    texts.add('${hours}h ${minutes}min');
     return texts.join(' ');
   }
 
@@ -226,8 +217,7 @@ class MovieDetailsModel extends ChangeNotifier {
     final accountId = await _sessionDataProvider.getAccountId();
 
     if (sessionId == null || accountId == null) return;
-    data.posterData =
-        data.posterData.copyWith(isFavorite: !data.posterData.isFavorite);
+    data.posterData = data.posterData.copyWith(isFavorite: !data.posterData.isFavorite);
     notifyListeners();
     try {
       await _accountApiClient.markAsFavorite(
@@ -242,8 +232,7 @@ class MovieDetailsModel extends ChangeNotifier {
     }
   }
 
-  void _handleApiClientException(
-      ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         authService.logout();
