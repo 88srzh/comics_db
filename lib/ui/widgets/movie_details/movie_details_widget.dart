@@ -49,7 +49,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                 const MovieTopPosterWidget(),
                 const DescriptionWidget(),
                 TrailerWidget(youtubeKey: trailerKey),
-                const _PeoplesWidget(),
+                const PeoplesWidget(),
                 // const FullCastAndCrewWidget(),
                 // const MovieSimilarWidget(),
               ],
@@ -61,13 +61,14 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   }
 }
 
-class _PeoplesWidget extends StatelessWidget {
-  const _PeoplesWidget({Key? key}) : super(key: key);
+class PeoplesWidget extends StatelessWidget {
+  const PeoplesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var crew =
         context.select((MovieDetailsModel model) => model.data.peopleData);
+    // if (crew.isEmpty) print('Какая-то хуйня');
     if (crew.isEmpty) return const SizedBox.shrink();
     return Column(
       children: crew
@@ -90,7 +91,10 @@ class _PeoplesWidget extends StatelessWidget {
 class _PeoplesWidgetRow extends StatelessWidget {
   final List<MovieDetailsMoviePeopleData> employes;
 
-  const _PeoplesWidgetRow({Key? key, required this.employes}) : super(key: key);
+  const _PeoplesWidgetRow({
+    Key? key,
+    required this.employes,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +102,11 @@ class _PeoplesWidgetRow extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: employes
-          .map((employee) => _PeopleWidgetRowItem(employee: employee))
+          .map(
+            (employee) => _PeopleWidgetRowItem(
+              employee: employee,
+            ),
+          )
           .toList(),
     );
   }
@@ -112,12 +120,18 @@ class _PeopleWidgetRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: вынести в отдельный файл стили текста
+    const nameStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    );
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(employee.name),
-          Text(employee.job),
+          Text(employee.name, style: nameStyle),
+          Text(employee.job, style: nameStyle),
         ],
       ),
     );
@@ -162,8 +176,8 @@ class _MovieActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context
-        .select((MovieDetailsModel model) => model.data.actorsData);
+    var actorsData =
+        context.select((MovieDetailsModel model) => model.data.actorsData);
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: actorsData.length,

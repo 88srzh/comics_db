@@ -18,7 +18,7 @@ class DescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Описание',
+            'Description',
             style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w600,
