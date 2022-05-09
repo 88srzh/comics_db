@@ -7,16 +7,15 @@ part of 'popular_and_top_rated_movie_response.dart';
 // **************************************************************************
 
 PopularAndTopRatedMovieResponse _$PopularAndTopRatedMovieResponseFromJson(
-    Map<String, dynamic> json) {
-  return PopularAndTopRatedMovieResponse(
-    page: json['page'] as int,
-    movies: (json['results'] as List<dynamic>)
-        .map((e) => Movie.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    totalResults: json['total_results'] as int,
-    totalPages: json['total_pages'] as int,
-  );
-}
+        Map<String, dynamic> json) =>
+    PopularAndTopRatedMovieResponse(
+      page: json['page'] as int,
+      movies: (json['results'] as List<dynamic>)
+          .map((e) => Movie.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      totalResults: json['total_results'] as int,
+      totalPages: json['total_pages'] as int,
+    );
 
 Map<String, dynamic> _$PopularAndTopRatedMovieResponseToJson(
         PopularAndTopRatedMovieResponse instance) =>

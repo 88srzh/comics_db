@@ -6,16 +6,15 @@ part of 'trending_all_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TrendingAllResponse _$TrendingAllResponseFromJson(Map<String, dynamic> json) {
-  return TrendingAllResponse(
-    page: json['page'] as int,
-    trendingAll: (json['results'] as List<dynamic>)
-        .map((e) => TrendingAll.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    totalResults: json['total_results'] as int,
-    totalPages: json['total_pages'] as int,
-  );
-}
+TrendingAllResponse _$TrendingAllResponseFromJson(Map<String, dynamic> json) =>
+    TrendingAllResponse(
+      page: json['page'] as int,
+      trendingAll: (json['results'] as List<dynamic>)
+          .map((e) => TrendingAll.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      totalResults: json['total_results'] as int,
+      totalPages: json['total_pages'] as int,
+    );
 
 Map<String, dynamic> _$TrendingAllResponseToJson(
         TrendingAllResponse instance) =>

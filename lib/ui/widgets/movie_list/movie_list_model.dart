@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/library/paginator.dart';
@@ -32,6 +31,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
   late final Paginator<Movie> _topRatedMoviePaginator;
+  // late final Paginator<Movie> _similarMoviePaginator;
   Timer? searchDebounce;
   String _locale = '';
 
@@ -65,6 +65,16 @@ class MoviePopularListViewModel extends ChangeNotifier {
       );
     });
 
+    // _similarMoviePaginator = Paginator<Movie>((page) async {
+    //   final result = await _movieService.similarMovie(page, _locale);
+    //   return PaginatorLoadResult(
+    //     data: result.movies,
+    //     currentPage: result.page,
+    //     totalPage: result.totalPages,
+    //
+    //   );
+    // });
+
     _searchMoviePaginator = Paginator<Movie>((page) async {
       final result =
           await _movieService.searchMovie(page, _locale, _searchQuery ?? '');
@@ -92,6 +102,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
     await _popularMoviePaginator.reset();
     await _searchMoviePaginator.reset();
     await _topRatedMoviePaginator.reset();
+    // await _similarMoviePaginator.reset();
     _movies.clear();
     await _loadNextPopularMoviesPage();
   }
@@ -180,7 +191,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
   }
 
   void showedTopRatedMovieAtIndex(int index) {
-    if (index < _movies.length -1) return;
+    if (index < _movies.length - 1) return;
     _loadNextTopRatedMoviesPage();
   }
 }

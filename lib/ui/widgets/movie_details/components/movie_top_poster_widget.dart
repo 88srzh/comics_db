@@ -13,7 +13,7 @@ class MovieTopPosterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO add favorite icon button
     final movieData =
-        context.select((MovieDetailsModel model) => model.data.movieData);
+        context.select((MovieDetailsModel model) => model.data.posterData);
     final posterPath = movieData.posterPath;
     final backdropPath = movieData.backdropPath;
     // TODO поменять на модель

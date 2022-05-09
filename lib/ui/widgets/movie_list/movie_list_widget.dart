@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 class MovieWidget extends StatelessWidget {
   const MovieWidget({Key? key}) : super(key: key);
+
   @override
   //TODO не совсем понимаю зачем тут модель одна передается
   Widget build(BuildContext context) => ChangeNotifierProvider(
@@ -100,11 +101,14 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Популярные',
-                          style: TextStyle(
-                              color: AppColors.genresText,
-                              fontSize: 21,
-                              fontWeight: FontWeight.w600)),
+                      const Text(
+                        'Популярные',
+                        style: TextStyle(
+                          color: AppColors.genresText,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       InkWell(
                           onTap: () => Navigator.of(context)
                               .pushNamed(MainNavigationRouteNames.popularMovie),
@@ -229,8 +233,6 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final upcomingMovieModel =
-    //     Provider.of<UpcomingMovieModel>(context, listen: true);
     final upcomingMovieModel = context.watch<UpcomingMovieModel>();
 
     return Column(
@@ -398,6 +400,7 @@ class _PopularMovieListItemWidget extends StatelessWidget {
   }
 }
 
+// TODO: may be change to stateless widget
 class _TopRatedMovieWidget extends StatefulWidget {
   const _TopRatedMovieWidget({Key? key}) : super(key: key);
 

@@ -6,26 +6,24 @@ part of 'tv.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TV _$TVFromJson(Map<String, dynamic> json) {
-  return TV(
-    posterPath: json['poster_path'] as String?,
-    popularity: (json['popularity'] as num).toDouble(),
-    id: json['id'] as int,
-    backdropPath: json['backdrop_path'] as String?,
-    voteAverage: (json['vote_average'] as num).toDouble(),
-    overview: json['overview'] as String,
-    firstAirDate: TV.parseDateFromString(json['first_air_date'] as String?),
-    originCountry: (json['origin_country'] as List<dynamic>)
-        .map((e) => e as String)
-        .toList(),
-    genreIds:
-        (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
-    originalLanguage: json['original_language'] as String,
-    voteCount: (json['vote_count'] as num).toDouble(),
-    name: json['name'] as String,
-    originalName: json['original_name'] as String,
-  );
-}
+TV _$TVFromJson(Map<String, dynamic> json) => TV(
+      posterPath: json['poster_path'] as String?,
+      popularity: (json['popularity'] as num).toDouble(),
+      id: json['id'] as int,
+      backdropPath: json['backdrop_path'] as String?,
+      voteAverage: (json['vote_average'] as num).toDouble(),
+      overview: json['overview'] as String,
+      firstAirDate: TV.parseDateFromString(json['first_air_date'] as String?),
+      originCountry: (json['origin_country'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      genreIds:
+          (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
+      originalLanguage: json['original_language'] as String,
+      voteCount: (json['vote_count'] as num).toDouble(),
+      name: json['name'] as String,
+      originalName: json['original_name'] as String,
+    );
 
 Map<String, dynamic> _$TVToJson(TV instance) => <String, dynamic>{
       'poster_path': instance.posterPath,

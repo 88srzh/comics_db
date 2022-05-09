@@ -6,25 +6,23 @@ part of 'movie.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Movie _$MovieFromJson(Map<String, dynamic> json) {
-  return Movie(
-    posterPath: json['poster_path'] as String?,
-    adult: json['adult'] as bool,
-    overview: json['overview'] as String,
-    releaseDate: parseDateFromString(json['release_date'] as String?),
-    genreIds:
-        (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
-    id: json['id'] as int,
-    originalTitle: json['original_title'] as String,
-    originalLanguage: json['original_language'] as String,
-    title: json['title'] as String,
-    backdropPath: json['backdrop_path'] as String?,
-    popularity: (json['popularity'] as num).toDouble(),
-    voteCount: json['vote_count'] as int,
-    video: json['video'] as bool,
-    voteAverage: (json['vote_average'] as num).toDouble(),
-  );
-}
+Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
+      posterPath: json['poster_path'] as String?,
+      adult: json['adult'] as bool,
+      overview: json['overview'] as String,
+      releaseDate: parseDateFromString(json['release_date'] as String?),
+      genreIds:
+          (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
+      id: json['id'] as int,
+      originalTitle: json['original_title'] as String,
+      originalLanguage: json['original_language'] as String,
+      title: json['title'] as String,
+      backdropPath: json['backdrop_path'] as String?,
+      popularity: (json['popularity'] as num).toDouble(),
+      voteCount: json['vote_count'] as int,
+      video: json['video'] as bool,
+      voteAverage: (json['vote_average'] as num).toDouble(),
+    );
 
 Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{
       'poster_path': instance.posterPath,
