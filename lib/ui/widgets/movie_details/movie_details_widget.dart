@@ -28,15 +28,13 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading =
-        context.select((MovieDetailsModel model) => model.data.isLoading);
+    final isLoading = context.select((MovieDetailsModel model) => model.data.isLoading);
     if (isLoading) {
       return const Center(
         child: LoadingIndicatorWidget(),
       );
     }
-    var trailerData =
-        context.select((MovieDetailsModel model) => model.data.trailerData);
+    var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
     final trailerKey = trailerData.trailerKey;
 
     return Scaffold(
@@ -66,8 +64,7 @@ class PeoplesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var crew =
-        context.select((MovieDetailsModel model) => model.data.peopleData);
+    var crew = context.select((MovieDetailsModel model) => model.data.peopleData);
     // if (crew.isEmpty) print('Какая-то хуйня');
     if (crew.isEmpty) return const SizedBox.shrink();
     return Column(
@@ -115,8 +112,7 @@ class _PeoplesWidgetRow extends StatelessWidget {
 class _PeopleWidgetRowItem extends StatelessWidget {
   final MovieDetailsMoviePeopleData employee;
 
-  const _PeopleWidgetRowItem({Key? key, required this.employee})
-      : super(key: key);
+  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -176,8 +172,7 @@ class _MovieActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData =
-        context.select((MovieDetailsModel model) => model.data.actorsData);
+    var actorsData = context.select((MovieDetailsModel model) => model.data.actorsData);
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: actorsData.length,
@@ -193,8 +188,7 @@ class _MovieActorListWidget extends StatelessWidget {
 class _MovieActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _MovieActorListItemWidget({Key? key, required this.actorIndex})
-      : super(key: key);
+  const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -221,9 +215,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              profilePath != null
-                  ? Image.network(ImageDownloader.imageUrl(profilePath))
-                  : const Image(image: AssetImage(AppImages.noImage)),
+              profilePath != null ? Image.network(ImageDownloader.imageUrl(profilePath)) : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
