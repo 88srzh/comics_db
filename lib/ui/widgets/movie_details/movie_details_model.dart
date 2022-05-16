@@ -92,14 +92,9 @@ class MovieDetailsData {
 }
 
 class MovieDetailsModel extends ChangeNotifier {
-  final authService = AuthService();
-  final _sessionDataProvider = SessionDataProvider();
-  final _movieAndTvApiClient = MovieAndTvApiClient();
-  final _accountApiClient = AccountApiClient();
-
+  final _authService = AuthService();
   final int movieId;
   final data = MovieDetailsData();
-
   String _locale = '';
   late DateFormat _dateFormat;
   Future<void>? Function()? onSessionExpired;
@@ -113,20 +108,6 @@ class MovieDetailsModel extends ChangeNotifier {
     _dateFormat = DateFormat.yMMMd(locale);
     updateData(null, false);
     await loadMovieDetails(context);
-  }
-
-  Future<void> loadMovieDetails(BuildContext context) async {
-    try {
-      final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, _locale);
-      final sessionId = await _sessionDataProvider.getSessionId();
-      var isFavorite = false;
-      if (sessionId != null) {
-        isFavorite = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
-      }
-      updateData(movieDetails, isFavorite);
-    } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
-    }
   }
 
   void updateData(MovieDetails? details, bool isFavorite) {
@@ -164,6 +145,27 @@ class MovieDetailsModel extends ChangeNotifier {
         )
         .toList();
     notifyListeners();
+  }
+
+
+  Future<void> toggleFavoriteMovie(BuildContext context) async {
+    final sessionId = await _sessionDataProvider.getSessionId();
+    final accountId = await _sessionDataProvider.getAccountId();
+
+    if (sessionId == null || accountId == null) return;
+    data.posterData = data.posterData.copyWith(isFavorite: !data.posterData.isFavorite);
+    notifyListeners();
+    try {
+      await _accountApiClient.markAsFavorite(
+        accountId: accountId,
+        sessionId: sessionId,
+        mediaType: MediaType.movie,
+        mediaId: movieId,
+        isFavorite: data.posterData.isFavorite,
+      );
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
@@ -212,30 +214,10 @@ class MovieDetailsModel extends ChangeNotifier {
     return texts.join(' ');
   }
 
-  Future<void> toggleFavoriteMovie(BuildContext context) async {
-    final sessionId = await _sessionDataProvider.getSessionId();
-    final accountId = await _sessionDataProvider.getAccountId();
-
-    if (sessionId == null || accountId == null) return;
-    data.posterData = data.posterData.copyWith(isFavorite: !data.posterData.isFavorite);
-    notifyListeners();
-    try {
-      await _accountApiClient.markAsFavorite(
-        accountId: accountId,
-        sessionId: sessionId,
-        mediaType: MediaType.movie,
-        mediaId: movieId,
-        isFavorite: data.posterData.isFavorite,
-      );
-    } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
-    }
-  }
-
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
-        authService.logout();
+        _authService.logout();
         MainNavigation.resetNavigation(context);
         break;
       default:
