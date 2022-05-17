@@ -1,9 +1,7 @@
-import 'package:comics_db_app/domain/api_client/account_api_client.dart';
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
-import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/auth_service.dart';
+import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -93,6 +91,7 @@ class MovieDetailsData {
 
 class MovieDetailsModel extends ChangeNotifier {
   final _authService = AuthService();
+  final _movieService = MovieService();
   final int movieId;
   final data = MovieDetailsData();
   String _locale = '';
@@ -100,6 +99,15 @@ class MovieDetailsModel extends ChangeNotifier {
   Future<void>? Function()? onSessionExpired;
 
   MovieDetailsModel(this.movieId);
+
+  Future<void> loadMovieDetails(BuildContext context) async {
+    try {
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _locale);
+      updateData(details.details, details.isFavorite);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
+  }
 
   Future<void> setupLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();
@@ -147,22 +155,11 @@ class MovieDetailsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> toggleFavoriteMovie(BuildContext context) async {
-    final sessionId = await _sessionDataProvider.getSessionId();
-    final accountId = await _sessionDataProvider.getAccountId();
-
-    if (sessionId == null || accountId == null) return;
     data.posterData = data.posterData.copyWith(isFavorite: !data.posterData.isFavorite);
     notifyListeners();
     try {
-      await _accountApiClient.markAsFavorite(
-        accountId: accountId,
-        sessionId: sessionId,
-        mediaType: MediaType.movie,
-        mediaId: movieId,
-        isFavorite: data.posterData.isFavorite,
-      );
+      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.posterData.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
