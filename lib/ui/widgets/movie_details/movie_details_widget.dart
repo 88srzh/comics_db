@@ -2,7 +2,6 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
@@ -21,8 +20,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    final locale = Localizations.localeOf(context);
     Future.microtask(
-      () => context.read<MovieDetailsModel>().setupLocale(context),
+      () => context.read<MovieDetailsModel>().setupLocale(context, locale),
     );
   }
 

@@ -109,11 +109,11 @@ class MovieDetailsModel extends ChangeNotifier {
     }
   }
 
-  Future<void> setupLocale(BuildContext context) async {
-    final locale = Localizations.localeOf(context).toLanguageTag();
-    if (_locale == locale) return;
-    _locale = locale;
-    _dateFormat = DateFormat.yMMMd(locale);
+  Future<void> setupLocale(BuildContext context, Locale locale) async {
+    final localeTag = locale.toLanguageTag();
+    if (_locale == localeTag) return;
+    _locale = localeTag;
+    _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null, false);
     await loadMovieDetails(context);
   }
