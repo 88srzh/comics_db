@@ -28,8 +28,8 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    context.read<MoviePopularListViewModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<MoviePopularListViewModel>().setupLocale(locale);
   }
 
   @override
@@ -318,7 +318,8 @@ class _PopularMovieWidgetState extends State<_PopularMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<MoviePopularListViewModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<MoviePopularListViewModel>().setupLocale(locale);
   }
 
   @override
@@ -412,7 +413,8 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<MoviePopularListViewModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<MoviePopularListViewModel>().setupLocale(locale);
   }
 
   @override

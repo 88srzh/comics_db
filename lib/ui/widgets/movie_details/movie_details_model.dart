@@ -3,6 +3,7 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/auth_service.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -94,7 +95,7 @@ class MovieDetailsModel extends ChangeNotifier {
   final _movieService = MovieService();
   final int movieId;
   final data = MovieDetailsData();
-  String _locale = '';
+  final _localeStorage = LocalizedModelStorage();
   late DateFormat _dateFormat;
   Future<void>? Function()? onSessionExpired;
 
@@ -102,7 +103,7 @@ class MovieDetailsModel extends ChangeNotifier {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _locale);
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
       updateData(details.details, details.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
@@ -110,10 +111,8 @@ class MovieDetailsModel extends ChangeNotifier {
   }
 
   Future<void> setupLocale(BuildContext context, Locale locale) async {
-    final localeTag = locale.toLanguageTag();
-    if (_locale == localeTag) return;
-    _locale = localeTag;
-    _dateFormat = DateFormat.yMMMd(localeTag);
+    if (!_localeStorage.updateLocale(locale)) return;
+    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
     updateData(null, false);
     await loadMovieDetails(context);
   }

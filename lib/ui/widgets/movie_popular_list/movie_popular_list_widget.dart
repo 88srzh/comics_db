@@ -23,7 +23,8 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    context.read<MoviePopularListViewModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<MoviePopularListViewModel>().setupLocale(locale);
   }
 
   @override

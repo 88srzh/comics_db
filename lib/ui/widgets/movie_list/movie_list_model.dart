@@ -3,6 +3,7 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/library/paginator.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -31,10 +32,10 @@ class MoviePopularListViewModel extends ChangeNotifier {
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
   late final Paginator<Movie> _topRatedMoviePaginator;
+
   // late final Paginator<Movie> _similarMoviePaginator;
   Timer? searchDebounce;
-  String _locale = '';
-
+  final _localeStorage = LocalizedModelStorage();
   var _movies = <MovieListData>[];
   String? _searchQuery;
 
@@ -48,7 +49,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   MoviePopularListViewModel() {
     _popularMoviePaginator = Paginator<Movie>((page) async {
-      final result = await _movieService.popularMovie(page, _locale);
+      final result = await _movieService.popularMovie(page, _localeStorage.localeTag);
       return PaginatorLoadResult(
         data: result.movies,
         currentPage: result.page,
@@ -57,7 +58,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
     });
 
     _topRatedMoviePaginator = Paginator<Movie>((page) async {
-      final result = await _movieService.topRatedMovie(page, _locale);
+      final result = await _movieService.topRatedMovie(page, _localeStorage.localeTag);
       return PaginatorLoadResult(
         data: result.movies,
         currentPage: result.page,
@@ -76,8 +77,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
     // });
 
     _searchMoviePaginator = Paginator<Movie>((page) async {
-      final result =
-          await _movieService.searchMovie(page, _locale, _searchQuery ?? '');
+      final result = await _movieService.searchMovie(page, _localeStorage.localeTag, _searchQuery ?? '');
       return PaginatorLoadResult(
         data: result.movies,
         currentPage: result.page,
@@ -90,11 +90,9 @@ class MoviePopularListViewModel extends ChangeNotifier {
   //     date != null ? _dateFormat.format(date) : '';
 
 // ! - TODO: вынести в отдельный файл
-  Future<void> setupLocale(BuildContext context) async {
-    final locale = Localizations.localeOf(context).toLanguageTag();
-    if (_locale == locale) return;
-    _locale = locale;
-    _dateFormat = DateFormat.yMMMd(locale);
+  Future<void> setupLocale(Locale locale) async {
+    if (!_localeStorage.updateLocale(locale)) return;
+    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
     await _resetMovieList();
   }
 
@@ -109,8 +107,7 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
-    final releaseDateTitle =
-        releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
       title: movie.title,
       posterPath: movie.posterPath,
@@ -147,14 +144,12 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
   void onFullCastAndCrewTap(BuildContext context, int index) {
     final id = _movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.fullCastAndCrew, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.fullCastAndCrew, arguments: id);
   }
 
   Future<void> searchPopularMovie(String text) async {
