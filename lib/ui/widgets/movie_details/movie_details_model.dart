@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 class MovieDetailsPosterData {
   final String? posterPath;
+  final String? tagline;
   final String? backdropPath;
   final bool isFavorite;
 
@@ -23,6 +24,7 @@ class MovieDetailsPosterData {
     this.backdropPath,
     this.isFavorite = false,
     required this.title,
+    required this.tagline,
     this.voteAverage,
     required this.voteCount,
     required this.popularity,
@@ -33,6 +35,7 @@ class MovieDetailsPosterData {
     String? backdropPath,
     bool? isFavorite,
     String? title,
+    String? tagline,
     String? voteAverage,
     int? voteCount,
     double? popularity,
@@ -43,6 +46,7 @@ class MovieDetailsPosterData {
       isFavorite: isFavorite ?? this.isFavorite,
       voteAverage: voteAverage ?? this.voteAverage,
       title: title ?? this.title,
+      tagline: tagline ?? this.tagline,
       voteCount: voteCount ?? this.voteCount,
       popularity: popularity ?? this.popularity,
     );
@@ -79,9 +83,10 @@ class MovieDetailsMovieActorData {
 
 class MovieDetailsData {
   String title = '';
+  String tagline = '';
   bool isLoading = true;
   String overview = '';
-  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
+  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', tagline: '', voteCount: 0, popularity: 0);
   String summary = '';
   String releaseDate = '';
   String genres = '';
@@ -118,18 +123,20 @@ class MovieDetailsModel extends ChangeNotifier {
   }
 
   void updateData(MovieDetails? details, bool isFavorite) {
-    data.title = details?.title ?? 'Загрузка...';
+    data.title = details?.title ?? 'Loading...';
+    data.tagline = details?.tagline ?? 'No tagline';
     data.isLoading = details == null;
     if (details == null) {
       notifyListeners();
       return;
     }
-    data.overview = details.overview ?? 'Нет описания';
+    data.overview = details.overview ?? 'No description';
     data.posterData = MovieDetailsPosterData(
         posterPath: details.posterPath,
         backdropPath: details.backdropPath,
         isFavorite: isFavorite,
         title: details.title,
+        tagline: details.tagline,
         voteAverage: details.voteAverage.toString(),
         voteCount: details.voteCount,
         popularity: details.popularity);
