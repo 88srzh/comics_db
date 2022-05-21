@@ -12,11 +12,10 @@ class MovieWidget extends StatelessWidget {
 
   @override
   //TODO не совсем понимаю зачем тут модель одна передается
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => MoviePopularListViewModel(),
-      child: const MovieListWidget());
+  Widget build(BuildContext context) => ChangeNotifierProvider(create: (context) => MoviePopularListViewModel(), child: const MovieListWidget());
 }
 
+// TODO: maybe change to stateless
 class MovieListWidget extends StatefulWidget {
   const MovieListWidget({Key? key}) : super(key: key);
 
@@ -37,7 +36,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // TODO: перенести в каждую категорию
     AlertDialog dialog = const AlertDialog(
-      // TODO: после ре факторинга не работает поиск
+      // TODO: после рефакторинга не работает поиск
       content: _SearchWidget(),
     );
     return Scaffold(
@@ -102,7 +101,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Популярные',
+                        'Popular',
                         style: TextStyle(
                           color: AppColors.genresText,
                           fontSize: 21,
@@ -110,13 +109,12 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                         ),
                       ),
                       InkWell(
-                          onTap: () => Navigator.of(context)
-                              .pushNamed(MainNavigationRouteNames.popularMovie),
-                          child: const Text(
-                            'Все',
-                            style: TextStyle(
-                                color: AppColors.ratingText, fontSize: 15),
-                          )),
+                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                        child: const Text(
+                          'See All',
+                          style: TextStyle(color: AppColors.ratingText, fontSize: 15),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -132,11 +130,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Скоро',
-                          style: TextStyle(
-                              color: AppColors.genresText,
-                              fontSize: 21,
-                              fontWeight: FontWeight.w600)),
+                      Text('Coming Soon', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),
@@ -192,7 +186,7 @@ class _SearchWidget extends StatelessWidget {
       child: TextField(
         onChanged: model.searchPopularMovie,
         decoration: InputDecoration(
-          labelText: 'Поиск',
+          labelText: 'Search',
           labelStyle: const TextStyle(
             color: AppColors.kPrimaryColor,
           ),
@@ -262,12 +256,8 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
                       final upcomingMovie = upcomingMovieModel.movies[index];
                       final backdropPath = upcomingMovie.backdropPath;
                       return InkWell(
-                        onTap: () =>
-                            upcomingMovieModel.onMovieTap(context, index),
-                        child: backdropPath != null
-                            ? Image.network(
-                                ImageDownloader.imageUrl(backdropPath))
-                            : const SizedBox.shrink(),
+                        onTap: () => upcomingMovieModel.onMovieTap(context, index),
+                        child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
                       );
                     }),
               ),
@@ -281,8 +271,7 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
                   alignment: Alignment.bottomCenter,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(upcomingMovieModel.movies.length,
-                        (index) => buildDotNew(index: index)),
+                    children: List.generate(upcomingMovieModel.movies.length, (index) => buildDotNew(index: index)),
                   ),
                 ),
               ),
@@ -391,9 +380,7 @@ class _PopularMovieListItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
-          child: posterPath != null
-              ? Image.network(ImageDownloader.imageUrl(posterPath))
-              : const SizedBox.shrink(),
+          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
           fit: BoxFit.contain,
         ),
       ),
@@ -502,9 +489,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
         //     ],
         //   ),
         child: FittedBox(
-          child: backdropPath != null
-              ? Image.network(ImageDownloader.imageUrl(backdropPath))
-              : const SizedBox.shrink(),
+          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
           fit: BoxFit.fill,
         ),
       ),
