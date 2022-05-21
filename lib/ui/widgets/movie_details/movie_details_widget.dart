@@ -47,9 +47,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
             Column(
               children: [
                 const MovieTopPosterWidget(),
+                const PeoplesWidget(),
                 const DescriptionWidget(),
                 TrailerWidget(youtubeKey: trailerKey),
-                const PeoplesWidget(),
                 // const FullCastAndCrewWidget(),
                 // const MovieSimilarWidget(),
               ],
@@ -84,9 +84,10 @@ class _CastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-                onTap: () {},
-                // onTap: () async => showFullCastAndCrew(context),
-                child: const Text('Полный актерский состав')),
+              onTap: () {},
+              // onTap: () async => showFullCastAndCrew(context),
+              child: const Text('Полный актерский состав'),
+            ),
           ),
         ],
       ),

@@ -32,8 +32,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var trailerData =
-        context.select((MovieDetailsModel model) => model.data.trailerData);
+    var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
     final trailerKey = trailerData.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -41,7 +40,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Трейлер',
+            'Trailer',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 21,
