@@ -87,14 +87,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         backgroundColor: AppColors.bottomBarBackgroundColor,
         initialActiveIndex: 1,
         items: const [
-          TabItem<dynamic>(icon: Icons.home, title: 'Новости'),
-          TabItem<dynamic>(icon: Icons.movie, title: 'Фильмы'),
-          TabItem<dynamic>(icon: Icons.tv, title: 'Сериалы'),
-          TabItem<dynamic>(icon: Icons.settings, title: 'Настройки'),
+          TabItem<dynamic>(icon: Icons.home, title: 'News'),
+          TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
+          TabItem<dynamic>(icon: Icons.tv, title: 'Tv'),
+          TabItem<dynamic>(icon: Icons.settings, title: 'Settings'),
         ],
-        onTap: (int index) => setState(() {
-          _selectedTab = index;
-        }),
+        onTap: (int index) => setState(
+          () {
+            _selectedTab = index;
+          },
+        ),
         // onTap: onSelectTab,
       ),
     );

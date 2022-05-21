@@ -2,9 +2,10 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_description_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_top_poster_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_trailer_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,90 +47,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
             Column(
               children: [
                 const MovieTopPosterWidget(),
+                const PeoplesWidget(),
                 const DescriptionWidget(),
                 TrailerWidget(youtubeKey: trailerKey),
-                const PeoplesWidget(),
                 // const FullCastAndCrewWidget(),
                 // const MovieSimilarWidget(),
               ],
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class PeoplesWidget extends StatelessWidget {
-  const PeoplesWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var crew = context.select((MovieDetailsModel model) => model.data.peopleData);
-    // if (crew.isEmpty) print('Какая-то хуйня');
-    if (crew.isEmpty) return const SizedBox.shrink();
-    return Column(
-      children: crew
-          .map(
-            (chunk) => Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: _PeoplesWidgetRow(employes: chunk),
-            ),
-          )
-          .toList(),
-      // children: [
-      //   _PeoplesWidgetRow(employes: [],),
-      //   const SizedBox(height: 20),
-      //   _PeoplesWidgetRow(employes: [],),
-      // ],
-    );
-  }
-}
-
-class _PeoplesWidgetRow extends StatelessWidget {
-  final List<MovieDetailsMoviePeopleData> employes;
-
-  const _PeoplesWidgetRow({
-    Key? key,
-    required this.employes,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: employes
-          .map(
-            (employee) => _PeopleWidgetRowItem(
-              employee: employee,
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _PeopleWidgetRowItem extends StatelessWidget {
-  final MovieDetailsMoviePeopleData employee;
-
-  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: вынести в отдельный файл стили текста
-    const nameStyle = TextStyle(
-      color: Colors.white,
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-    );
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(employee.name, style: nameStyle),
-          Text(employee.job, style: nameStyle),
-        ],
       ),
     );
   }
@@ -158,9 +84,10 @@ class _CastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-                onTap: () {},
-                // onTap: () async => showFullCastAndCrew(context),
-                child: const Text('Полный актерский состав')),
+              onTap: () {},
+              // onTap: () async => showFullCastAndCrew(context),
+              child: const Text('Полный актерский состав'),
+            ),
           ),
         ],
       ),

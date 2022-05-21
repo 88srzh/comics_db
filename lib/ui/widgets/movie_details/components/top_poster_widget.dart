@@ -12,22 +12,18 @@ class MovieTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO add favorite icon button
-    final movieData =
-        context.select((MovieDetailsModel model) => model.data.posterData);
+    final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
     final posterPath = movieData.posterPath;
     final backdropPath = movieData.backdropPath;
     // TODO поменять на модель
-    final summary =
-        context.select((MovieDetailsModel model) => model.data.summary);
-    final releaseDateText =
-        context.select((MovieDetailsModel model) => model.data.releaseDate);
-    final genres =
-        context.select((MovieDetailsModel model) => model.data.genres);
+    final summary = context.select((MovieDetailsModel model) => model.data.summary);
+    final releaseDateText = context.select((MovieDetailsModel model) => model.data.releaseDate);
+    final genres = context.select((MovieDetailsModel model) => model.data.genres);
 
     return Stack(
       children: [
         Positioned(
-          top: 65,
+          top: 55,
           left: 10,
           child: SizedBox(
             height: 300,
@@ -41,7 +37,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // TODO: центрировать текст по высоте
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -57,7 +52,28 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                // const SizedBox(height: 5),
+                Row(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: SizedBox(
+                        width: 210,
+                        child: Text(
+                          movieData.tagline ?? 'No tagline',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 13,
+                            color: AppColors.titleText,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5.0,),
                 Row(
                   children: [
                     Align(
@@ -156,7 +172,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                         fontSize: 13,
                         color: AppColors.ratingText,
                       ),
-                    )
+                    ),
                   ],
                 )
               ],
@@ -195,9 +211,7 @@ class MovieTopPosterWidget extends StatelessWidget {
             width: 140.0,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: posterPath != null
-                  ? Image.network(ImageDownloader.imageUrl(posterPath))
-                  : Image.asset(AppImages.noImageBig),
+              child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
             ),
           ),
         ),
