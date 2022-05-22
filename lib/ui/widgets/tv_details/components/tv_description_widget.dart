@@ -8,15 +8,14 @@ class TvDescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final overview =
-        context.select((TvDetailsModel model) => model.tvData.overview);
+    final overview = context.select((TvDetailsModel model) => model.tvData.overview);
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Описание',
+            'Sinopsis',
             style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w600,

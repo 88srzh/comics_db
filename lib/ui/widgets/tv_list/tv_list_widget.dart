@@ -10,10 +10,12 @@ import 'package:provider/provider.dart';
 
 class TvWidget extends StatelessWidget {
   const TvWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => TvPopularModel(), child: const TvListWidget(),
-  );
+        create: (context) => TvPopularModel(),
+        child: const TvListWidget(),
+      );
 }
 
 class TvListWidget extends StatefulWidget {
@@ -45,26 +47,38 @@ class _TvListWidgetState extends State<TvListWidget> {
                 children: [
                   GestureDetector(
                     onTap: () {},
-                    child: const Icon(Icons.search, color: AppColors.searchIcon, size: 30,),
+                    child: const Icon(
+                      Icons.search,
+                      color: AppColors.searchIcon,
+                      size: 30,
+                    ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: GestureDetector(
                       onTap: () {},
-                      child: const Icon(Icons.filter_alt_outlined, color: AppColors.ratingThumb, size: 30,),
+                      child: const Icon(
+                        Icons.filter_alt_outlined,
+                        color: AppColors.ratingThumb,
+                        size: 30,
+                      ),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: const Icon(Icons.menu, color: AppColors.ratingThumb, size: 30,),
+                    child: const Icon(
+                      Icons.menu,
+                      color: AppColors.ratingThumb,
+                      size: 30,
+                    ),
                   ),
                 ],
               )
             ],
           ),
-          ),
-        backgroundColor: AppColors.kPrimaryColor,
         ),
+        backgroundColor: AppColors.kPrimaryColor,
+      ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
@@ -72,25 +86,29 @@ class _TvListWidgetState extends State<TvListWidget> {
             Column(
               children: [
                 const Padding(
-                    padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
                   child: SizedBox(
                     height: 180,
                     child: TopRatedTvWidget(),
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Популярные', style: TextStyle(color: AppColors.genresText,
-                      fontSize: 21, fontWeight: FontWeight.w600),
+                      const Text(
+                        'Popular',
+                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
                       ),
                       InkWell(
                         // TODO: Исправить переход на страницу
                         onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopular),
-                        child: const Text('Все', style: TextStyle(
-                          color: AppColors.ratingText, fontSize: 15,
+                        child: const Text(
+                          'See All',
+                          style: TextStyle(
+                            color: AppColors.ratingText,
+                            fontSize: 15,
                           ),
                         ),
                       ),
@@ -100,26 +118,31 @@ class _TvListWidgetState extends State<TvListWidget> {
                 const SizedBox(
                   height: 200,
                   child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: PopularTvWidget(),
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('В эфире сегодня', style: TextStyle(
-                        color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600,
-                      ),)
+                      Text(
+                        'Airing Today',
+                        style: TextStyle(
+                          color: AppColors.genresText,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
                     ],
                   ),
                 ),
                 const SizedBox(
                   height: 200,
                   child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: AiringTodayTvsWidget(),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: AiringTodayTvsWidget(),
                   ),
                 ),
               ],
@@ -127,9 +150,6 @@ class _TvListWidgetState extends State<TvListWidget> {
           ],
         ),
       ),
-      );
+    );
   }
 }
-
-
-

@@ -1,5 +1,4 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -35,8 +34,7 @@ class RatingsRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tvDetailsScoresData = context
-        .select((TvDetailsModel model) => model.tvData.tvDetailsScoresData);
+    var tvDetailsScoresData = context.select((TvDetailsModel model) => model.tvData.tvDetailsScoresData);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -55,7 +53,7 @@ class RatingsRowWidget extends StatelessWidget {
           ),
         ),
         const Text(
-          ' / 10 от themoviedb',
+          ' / 10',
           style: TextStyle(
             fontSize: 13,
             color: AppColors.ratingText,
@@ -121,20 +119,37 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tvNameData =
-        context.select((TvDetailsModel model) => model.tvData.tvNameData);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    final tvNameData = context.select((TvDetailsModel model) => model.tvData.tvNameData);
+    return Column(
       children: [
-        Text(
-          tvNameData.name,
-          style: const TextStyle(
-            fontSize: 21,
-            fontWeight: FontWeight.w600,
-            color: AppColors.titleText,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              tvNameData.name,
+              style: const TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.w600,
+                color: AppColors.titleText,
+              ),
+            ),
+            const SizedBox(width: 2),
+          ],
         ),
-        const SizedBox(width: 2),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              tvNameData.tagline,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: AppColors.genresText,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }

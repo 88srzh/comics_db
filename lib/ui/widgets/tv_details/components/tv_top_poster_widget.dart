@@ -9,8 +9,7 @@ class TvTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsPosterData = context
-        .select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
+    final tvDetailsPosterData = context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
     final posterPath = tvDetailsPosterData.posterPath;
     final backdropPath = tvDetailsPosterData.backdropPath;
     return Stack(
@@ -29,26 +28,24 @@ class TvTopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
-        // Positioned(
-        //   left: 10,
-        //   top: 10,
-        //   child: IconButton(
-        //     onPressed: () => Navigator.of(context).pop(),
-        //     icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
-        //   ),
-        // ),
+        Positioned(
+          left: 10,
+          top: 10,
+          child: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+          ),
+        ),
         Positioned(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 110.0),
+              padding: const EdgeInsets.only(top: 80.0),
               child: SizedBox(
                 height: 212.0,
                 width: 174.0,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: posterPath != null
-                      ? Image.network(ImageDownloader.imageUrl(posterPath))
-                      : Image.asset(AppImages.noImageBig),
+                  child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
                 ),
               ),
             ),
