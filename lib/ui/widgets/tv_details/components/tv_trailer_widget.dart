@@ -35,8 +35,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var tvTrailerData =
-        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -44,7 +43,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Трейлер',
+            'Trailer',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 21,
@@ -64,7 +63,8 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
                         player,
                       ],
                     );
-                  })
+                  },
+                )
               : Image.asset(AppImages.noImageBig),
         ],
       ),
