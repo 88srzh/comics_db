@@ -89,7 +89,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         items: const [
           TabItem<dynamic>(icon: Icons.home, title: 'News'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
-          TabItem<dynamic>(icon: Icons.tv, title: 'Tv'),
+          TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Settings'),
         ],
         onTap: (int index) => setState(

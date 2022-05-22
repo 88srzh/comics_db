@@ -26,28 +26,14 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading =
-        context.select((TvDetailsModel model) => model.tvData.isLoading);
+    final isLoading = context.select((TvDetailsModel model) => model.tvData.isLoading);
     if (isLoading) {
       return const Center(child: LoadingIndicatorWidget());
     }
-    var tvTrailerData =
-        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: IconButton(
-          splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.arrow_back)),
-        backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.white),
-        // shadowColor: Colors.white38,
-        // foregroundColor: Colors.transparent,
-      ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
