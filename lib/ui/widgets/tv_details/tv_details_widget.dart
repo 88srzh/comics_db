@@ -2,7 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/description_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_voteaverage_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_voteAverage_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -74,34 +74,3 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 //     );
 //   }
 // }
-
-class _DirectorWidget extends StatelessWidget {
-   const _DirectorWidget({
-     Key? key
-   }) : super(key: key);
-
-   @override
-   Widget build(BuildContext context) {
-     final model = Provider.of<TvDetailsModel>(context);
-    if (model == null) return const SizedBox.shrink();
-    var names = <String>[];
-    final createdBy = model.tvDetails?.createdBy;
-    if (createdBy != null && createdBy.isNotEmpty) {
-      var createdByNames = <String>[];
-      for (var create in createdBy) {
-        createdByNames.add(create.name);
-      }
-      names.add(createdByNames.join(', '));
-    }
-
-
-    return Row(
-      children: [
-        const Text('Режиссер: ', style: TextStyle(color: Colors.grey),),
-        Expanded(
-          child: Text(names.join(' '), style: const TextStyle(color: Colors.black87),),
-        ),
-      ],
-    );
-  }
-}
