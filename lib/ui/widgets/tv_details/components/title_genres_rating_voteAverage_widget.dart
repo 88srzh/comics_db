@@ -18,17 +18,17 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
           SizedBox(height: 12),
           _TitleWidget(),
           SizedBox(height: 8),
-          GenresWidget(),
+          _GenresWidget(),
           SizedBox(height: 4),
-          RatingsRowWidget(),
+          _RatingsRowWidget(),
         ],
       ),
     );
   }
 }
 
-class RatingsRowWidget extends StatelessWidget {
-  const RatingsRowWidget({
+class _RatingsRowWidget extends StatelessWidget {
+  const _RatingsRowWidget({
     Key? key,
   }) : super(key: key);
 
@@ -92,8 +92,8 @@ class RatingsRowWidget extends StatelessWidget {
   }
 }
 
-class GenresWidget extends StatelessWidget {
-  const GenresWidget({
+class _GenresWidget extends StatelessWidget {
+  const _GenresWidget({
     Key? key,
   }) : super(key: key);
 

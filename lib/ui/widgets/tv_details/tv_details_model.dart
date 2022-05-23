@@ -46,7 +46,7 @@ class TvDetailsScoresData {
 
 class TvDetailsData {
   String name = '';
-  String tagline = '';
+  // String tagline = '';
   bool isLoading = true;
   String overview = '';
   String genres = '';
@@ -102,7 +102,7 @@ class TvDetailsModel extends ChangeNotifier {
 
   void updateData(TVDetails? details, bool isFavorite) {
     tvData.name = details?.name ?? 'No name';
-    tvData.tagline = details?.tagline ?? 'No tagline';
+    // tvData.tagline = details?.tagline ?? 'No tagline';
     tvData.isLoading = details == null;
     if (details == null) {
       notifyListeners();
