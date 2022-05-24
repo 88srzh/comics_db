@@ -1,4 +1,3 @@
-import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +12,14 @@ class SettingsWidget extends StatefulWidget {
 class _SettingsWidgetState extends State<SettingsWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodySettingsWidget(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Settings',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: const BodySettingsWidget(),
     );
   }
 }
@@ -27,7 +32,7 @@ class BodySettingsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
-        HeadingCardWidget(headingText: 'Общее'),
+        // HeadingPersonalCardWidget(headingText: 'General'),
         CustomSettingDivider(),
         GeneralCard(),
         CustomSettingDivider(),
@@ -37,33 +42,6 @@ class BodySettingsWidget extends StatelessWidget {
 }
 
 
-class HeadingCardWidget extends StatelessWidget {
-  const HeadingCardWidget({Key? key, required this.headingText}) : super(key: key);
-  final String headingText;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 40,
-            color: Colors.grey[50],
-            child: ListTile(
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: Text(headingText, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class GeneralCard extends StatelessWidget {
   const GeneralCard({Key? key}) : super(key: key);
 
@@ -71,13 +49,10 @@ class GeneralCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        // SessionDataProvider().setSessionId(null);
         Navigator.pushNamed(context, MainNavigationRouteNames.auth);
       },
-      title: const Text('Выйти'),
+      title: const Text('Quit'),
       trailing: const Icon(Icons.logout),
     );
   }
 }
-
-
