@@ -1,3 +1,4 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/personal/components/heading_personal_card_widget.dart';
@@ -12,8 +13,9 @@ class PersonalWidget extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Personal',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
+        backgroundColor: AppColors.kPrimaryColor,
       ),
       body: const BodyPersonalWidget(),
     );
@@ -30,20 +32,23 @@ class BodyPersonalWidget extends StatefulWidget {
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        HeadingPersonalCardWidget(headingText: 'General'),
-        CustomSettingDivider(),
-        LogoutCardWidget(),
-        CustomSettingDivider(),
-        HeadingPersonalCardWidget(headingText: 'Settings'),
-        CustomSettingDivider(),
-        SettingsCardWidget(),
-        CustomSettingDivider(),
-        NotificationsCardWidget(),
-        CustomSettingDivider(),
-      ],
+    return ColoredBox(
+      color: AppColors.bottomBarBackgroundColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          HeadingPersonalCardWidget(headingText: 'General'),
+          CustomSettingDivider(),
+          LogoutCardWidget(),
+          CustomSettingDivider(),
+          HeadingPersonalCardWidget(headingText: 'Settings'),
+          CustomSettingDivider(),
+          SettingsCardWidget(),
+          CustomSettingDivider(),
+          NotificationsCardWidget(),
+          CustomSettingDivider(),
+        ],
+      ),
     );
   }
 }
@@ -57,8 +62,17 @@ class LogoutCardWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, MainNavigationRouteNames.auth);
       },
-      title: const Text('Logout'),
-      trailing: const Icon(Icons.logout),
+      title: const Text(
+        'Logout',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
+      ),
+      trailing: const Icon(
+        Icons.logout,
+        color: Colors.white,
+      ),
     );
   }
 }
@@ -76,9 +90,23 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      activeColor: Colors.pinkAccent,
+      inactiveThumbColor: Colors.grey,
       value: themeColor,
-      onChanged: (bool value) {},
-      title: const Text('Change color theme'),
+      onChanged: (bool value) {
+        setState(
+          () {
+            themeColor = value;
+          },
+        );
+      },
+      title: const Text(
+        'Change color theme',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
+      ),
     );
   }
 }
@@ -96,9 +124,23 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      activeColor: Colors.pinkAccent,
+      inactiveThumbColor: Colors.grey,
       value: notifications,
-      onChanged: (bool value) {},
-      title: const Text('Push notifications'),
+      onChanged: (bool value) {
+        setState(
+          () {
+            notifications = value;
+          },
+        );
+      },
+      title: const Text(
+        'Push notifications',
+        style: TextStyle(
+          fontSize: 14,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }
