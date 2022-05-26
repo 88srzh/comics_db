@@ -48,6 +48,7 @@ class ScreenFactory {
   Widget makePopularMovieList() {
     return ChangeNotifierProvider(
       create: (_) => MoviePopularListViewModel(),
+      // child: const PopularMovieWidgetProvider(),
       child: const MoviePopularListWidget(),
     );
   }

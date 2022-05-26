@@ -1,4 +1,7 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +14,14 @@ import 'package:provider/provider.dart';
 //       create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
 // }
 
+// class PopularMovieWidgetProvider extends StatelessWidget {
+//   const PopularMovieWidgetProvider({Key? key}) : super(key: key);
+//
+//   @override
+//   TODO не совсем понимаю зачем тут модель одна передается
+// Widget build(BuildContext context) =>
+//     ChangeNotifierProvider(create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
+// }
 class MoviePopularListWidget extends StatefulWidget {
   const MoviePopularListWidget({Key? key}) : super(key: key);
 
@@ -31,45 +42,50 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
   Widget build(BuildContext context) {
     final model = context.watch<MoviePopularListViewModel>();
     return Scaffold(
-      appBar: AppBar(),
-     body: Stack(
-        children: [
-          ListView.builder(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: const EdgeInsets.only(top: 70.0),
-            itemCount: model.movies.length,
-            itemExtent: 165,
-            itemBuilder: (BuildContext context, int index) {
-              model.showedPopularMovieAtIndex(index);
-              final movie = model.movies[index];
-              final posterPath = movie.posterPath;
-              return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
-            },
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.all(10.0),
-          //   child: TextField(
-          //     onChanged: model.searchMovie,
-          //     decoration: InputDecoration(
-          //       labelText: 'Поиск',
-          //       labelStyle: const TextStyle(
-          //         color: AppColors.kPrimaryColor,
-          //       ),
-          //       filled: true,
-          //       fillColor: Colors.white.withAlpha(235),
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(10.0),
-          //       ),
-          //       focusedBorder: const OutlineInputBorder(
-          //         borderSide: BorderSide(color: AppColors.kPrimaryColor),
-          //       ),
-          //       enabledBorder: const OutlineInputBorder(
-          //         borderSide: BorderSide(color: AppColors.kPrimaryColor),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      body: ColoredBox(
+        color: AppColors.kPrimaryColor,
+        child: Stack(
+          children: [
+            ListView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: const EdgeInsets.only(top: 70.0),
+              itemCount: model.movies.length,
+              itemExtent: 165,
+              itemBuilder: (BuildContext context, int index) {
+                model.showedPopularMovieAtIndex(index);
+                final movie = model.movies[index];
+                final posterPath = movie.posterPath;
+                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
+              },
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10.0),
+            //   child: TextField(
+            //     onChanged: model.searchMovie,
+            //     decoration: InputDecoration(
+            //       labelText: 'Поиск',
+            //       labelStyle: const TextStyle(
+            //         color: AppColors.kPrimaryColor,
+            //       ),
+            //       filled: true,
+            //       fillColor: Colors.white.withAlpha(235),
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //       ),
+            //       focusedBorder: const OutlineInputBorder(
+            //         borderSide: BorderSide(color: AppColors.kPrimaryColor),
+            //       ),
+            //       enabledBorder: const OutlineInputBorder(
+            //         borderSide: BorderSide(color: AppColors.kPrimaryColor),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
@@ -77,6 +93,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
 
 class _MoviePopularListRowWidget extends StatelessWidget {
   final int index;
+
   const _MoviePopularListRowWidget({
     Key? key,
     required this.posterPath,
@@ -97,12 +114,12 @@ class _MoviePopularListRowWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.black.withOpacity(0.2)),
+                color: AppColors.kPrimaryColor,
+                border: Border.all(color: Colors.white.withOpacity(0.2)),
                 borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.white.withOpacity(0.1),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   )
@@ -116,7 +133,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                         ImageDownloader.imageUrl(posterPath!),
                         width: 95,
                       )
-                    : const SizedBox.shrink(),
+                    : Image.asset(AppImages.noImage),
                 const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
@@ -128,22 +145,26 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 5.0),
-                      // Text(
-                      //   model.stringFromDate(movie.firstAirDate),
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      //   style: const TextStyle(color: Colors.grey),
-                      // ),
+                      Text(
+                       movie.releaseDate,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
                       const SizedBox(height: 20.0),
                       Text(
                         movie.overview,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
                         ),
+                      ),
                     ],
                   ),
                 ),
