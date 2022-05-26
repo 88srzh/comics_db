@@ -12,7 +12,8 @@ class MovieWidget extends StatelessWidget {
 
   @override
   //TODO не совсем понимаю зачем тут модель одна передается
-  Widget build(BuildContext context) => ChangeNotifierProvider(create: (context) => MoviePopularListViewModel(), child: const MovieListWidget());
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider(create: (context) => MoviePopularListViewModel(), child: const MovieListWidget());
 }
 
 // TODO: maybe change to stateless
@@ -36,7 +37,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // TODO: перенести в каждую категорию
     AlertDialog dialog = const AlertDialog(
-      // TODO: после рефакторинга не работает поиск
+      // TODO: after refactoring search doesn't work
       content: _SearchWidget(),
     );
     return Scaffold(
@@ -130,7 +131,8 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Coming Soon', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                      Text('Coming Soon',
+                          style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),
@@ -257,7 +259,9 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
                       final backdropPath = upcomingMovie.backdropPath;
                       return InkWell(
                         onTap: () => upcomingMovieModel.onMovieTap(context, index),
-                        child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
+                        child: backdropPath != null
+                            ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                            : const SizedBox.shrink(),
                       );
                     }),
               ),

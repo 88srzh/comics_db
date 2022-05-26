@@ -57,7 +57,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          // _screenFactory.makePopularMovieList(),
+          _screenFactory.makePopularMovieList(),
           MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => moviePopularListModel),
@@ -86,7 +86,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         backgroundColor: AppColors.bottomBarBackgroundColor,
         initialActiveIndex: 1,
         items: const [
-          // TabItem<dynamic>(icon: Icons.home, title: 'News'),
+          TabItem<dynamic>(icon: Icons.home, title: 'News'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),

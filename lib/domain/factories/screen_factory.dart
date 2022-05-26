@@ -45,15 +45,10 @@ class ScreenFactory {
     return TrailerWidget(youtubeKey: youtubeKey);
   }
 
-  // TODO: надо вообще от этой страницы отказаться, это первая вкладка
   Widget makePopularMovieList() {
     return ChangeNotifierProvider(
       create: (_) => MoviePopularListViewModel(),
       child: const MoviePopularListWidget(),
     );
   }
-
-  // Widget makeUpcomingMovieList() {
-  //   return ChangeNotifierProvider(create: (_) => UpcomingMovieModel());
-  // }
 }
