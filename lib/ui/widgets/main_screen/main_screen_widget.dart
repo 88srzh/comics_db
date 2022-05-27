@@ -1,9 +1,10 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/factoryes/screen_factory.dart';
+import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
+import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
-import 'package:comics_db_app/ui/widgets/settings/settings_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
@@ -24,7 +25,8 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
-  final moviePopularListModel = MoviePopularListViewModel();
+  final topRatedMovieModel = TopRatedMovieModel();
+  final movieListModel = MovieListViewModel();
   final upcomingMovieModel = UpcomingMovieModel();
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
@@ -43,11 +45,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    // moviePopularListModel.setupLocale(context);
     tvTopRatedModel.setupLocale(context);
     upcomingMovieModel.setupLocale(context);
     tvPopularModel.setupLocale(context);
-    // topRatedMovieModel.setupLocale(context);
     airingTodayModel.setupLocale(context);
     settingsModel.setupLocale(context);
     trendingAllModel.setupPage(context);
@@ -62,8 +62,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularMovieList(),
           MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => moviePopularListModel),
-              ChangeNotifierProvider(create: (_) => moviePopularListModel),
+              ChangeNotifierProvider(create: (_) => topRatedMovieModel),
+              ChangeNotifierProvider(create: (_) => movieListModel),
               ChangeNotifierProvider(create: (_) => upcomingMovieModel),
               // _screenFactory.makeUpcomingMovieList(),
             ],
@@ -78,8 +78,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             child: const TvListWidget(),
           ),
           ChangeNotifierProvider(
+            // TODO: model need only for hand over widget
             create: (_) => settingsModel,
-            child: const SettingsWidget(),
+            child: const PersonalWidget(),
           ),
         ],
       ),
@@ -90,7 +91,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.home, title: 'News'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
-          TabItem<dynamic>(icon: Icons.settings, title: 'Settings'),
+          TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
         ],
         onTap: (int index) => setState(
           () {

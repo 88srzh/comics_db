@@ -24,7 +24,7 @@ class MovieDetailsPosterData {
     this.backdropPath,
     this.isFavorite = false,
     required this.title,
-    required this.tagline,
+    this.tagline,
     this.voteAverage,
     required this.voteCount,
     required this.popularity,
@@ -83,10 +83,10 @@ class MovieDetailsMovieActorData {
 
 class MovieDetailsData {
   String title = '';
-  String tagline = '';
+  // String tagline = '';
   bool isLoading = true;
   String overview = '';
-  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', tagline: '', voteCount: 0, popularity: 0);
+  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
   String summary = '';
   String releaseDate = '';
   String genres = '';
@@ -124,7 +124,7 @@ class MovieDetailsModel extends ChangeNotifier {
 
   void updateData(MovieDetails? details, bool isFavorite) {
     data.title = details?.title ?? 'Loading...';
-    data.tagline = details?.tagline ?? 'No tagline';
+    // data.tagline = details?.tagline ?? 'No tagline';
     data.isLoading = details == null;
     if (details == null) {
       notifyListeners();

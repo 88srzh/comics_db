@@ -3,6 +3,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,8 @@ class MovieWidget extends StatelessWidget {
 
   @override
   //TODO не совсем понимаю зачем тут модель одна передается
-  Widget build(BuildContext context) => ChangeNotifierProvider(create: (context) => MoviePopularListViewModel(), child: const MovieListWidget());
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider(create: (context) => MovieListViewModel(), child: const MovieListWidget());
 }
 
 // TODO: maybe change to stateless
@@ -28,7 +30,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListViewModel>().setupLocale(locale);
+    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
   }
 
   @override
@@ -36,7 +38,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // TODO: перенести в каждую категорию
     AlertDialog dialog = const AlertDialog(
-      // TODO: после рефакторинга не работает поиск
+      // TODO: after refactoring search doesn't work
       content: _SearchWidget(),
     );
     return Scaffold(
@@ -130,7 +132,10 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Coming Soon', style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                      Text(
+                        'Coming Soon',
+                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                      ),
                     ],
                   ),
                 ),
@@ -175,12 +180,10 @@ class _SearchWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  // final TopRatedMovieModel topRatedMovieModel;
-
   @override
   Widget build(BuildContext context) {
     //TODO: поменять на модель поиска по всем фильмам
-    final model = context.read<MoviePopularListViewModel>();
+    final model = context.read<MovieListViewModel>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
@@ -257,7 +260,9 @@ class _UpcomingMovieWidgetState extends State<_UpcomingMovieWidget> {
                       final backdropPath = upcomingMovie.backdropPath;
                       return InkWell(
                         onTap: () => upcomingMovieModel.onMovieTap(context, index),
-                        child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
+                        child: backdropPath != null
+                            ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                            : const SizedBox.shrink(),
                       );
                     }),
               ),
@@ -308,12 +313,12 @@ class _PopularMovieWidgetState extends State<_PopularMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListViewModel>().setupLocale(locale);
+    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = context.watch<MoviePopularListViewModel>();
+    final popularMovieModel = context.watch<MovieListViewModel>();
     return PopularMovieListWidget(popularMovieModel: popularMovieModel);
   }
 }
@@ -324,7 +329,7 @@ class PopularMovieListWidget extends StatelessWidget {
     required this.popularMovieModel,
   }) : super(key: key);
 
-  final MoviePopularListViewModel popularMovieModel;
+  final MovieListViewModel popularMovieModel;
 
   @override
   Widget build(BuildContext context) {
@@ -362,11 +367,11 @@ class _PopularMovieListItemWidget extends StatelessWidget {
   final int index;
   final String? posterPath;
   final MovieListData movie;
-  final MoviePopularListViewModel? popularMovieModel;
+  final MovieListViewModel? popularMovieModel;
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieModel = context.watch<MoviePopularListViewModel>();
+    final popularMovieModel = context.watch<MovieListViewModel>();
     final popularMovie = popularMovieModel.movies[index];
     final posterPath = popularMovie.posterPath;
     return Padding(
@@ -400,99 +405,39 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListViewModel>().setupLocale(locale);
+    context.read<TopRatedMovieModel>().setupLocale(context);
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<MoviePopularListViewModel>();
-    return TopRatedMovieListWidget(topRatedMovieModel: topRatedMovieModel);
-  }
-}
-
-class TopRatedMovieListWidget extends StatelessWidget {
-  const TopRatedMovieListWidget({
-    Key? key,
-    required this.topRatedMovieModel,
-  }) : super(key: key);
-
-  final MoviePopularListViewModel topRatedMovieModel;
-
-  @override
-  Widget build(BuildContext context) {
+    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: topRatedMovieModel.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        topRatedMovieModel.showedTopRatedMovieAtIndex(index);
+        // topRatedMovieModel.searchTopRatedMovie();
         final topMovie = topRatedMovieModel.movies[index];
         final backdropPath = topMovie.backdropPath;
-        return InkWell(
-          onTap: () => topRatedMovieModel.onMovieTap(context, index),
-          child: _TopRatedMovieListItemWidget(
-            index: index,
-            backdropPath: backdropPath,
-            movie: topMovie,
-            topMovieModel: topRatedMovieModel,
+        return Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: Container(
+            width: 320,
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            child: InkWell(
+              onTap: () => topRatedMovieModel.onMovieTap(context, index),
+              child: backdropPath != null
+              // TODO: may be wrap in fitted box
+                  ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                  : const SizedBox.shrink(),
+            ),
           ),
         );
       },
-    );
-  }
-}
-
-class _TopRatedMovieListItemWidget extends StatelessWidget {
-  const _TopRatedMovieListItemWidget({
-    Key? key,
-    required this.index,
-    required this.backdropPath,
-    required this.movie,
-    required this.topMovieModel,
-  }) : super(key: key);
-
-  final int index;
-  final String? backdropPath;
-  final MovieListData movie;
-  final MoviePopularListViewModel? topMovieModel;
-
-  @override
-  Widget build(BuildContext context) {
-    // final topRatedMovieModel =
-    //     Provider.of<MoviePopularListViewModel>(context, listen: true);
-    final topRatedMovieModel = context.watch<MoviePopularListViewModel>();
-
-    final topMovie = topRatedMovieModel.movies[index];
-    final backdropPath = topMovie.backdropPath;
-    return Padding(
-      padding: const EdgeInsets.only(right: 15.0),
-      child: Container(
-        width: 320,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          // color: AppColors.movieBorderLine,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        // padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        // child: DecoratedBox(
-        //   decoration: BoxDecoration(
-        //     color: Colors.white,
-        //     border: Border.all(color: Colors.black.withOpacity(0.2)),
-        //     borderRadius: const BorderRadius.all(Radius.circular(28)),
-        //     boxShadow: [
-        //       BoxShadow(
-        //         color: Colors.purple.withOpacity(0.1),
-        //         blurRadius: 8,
-        //         offset: const Offset(0,2),
-        //       ),
-        //     ],
-        //   ),
-        child: FittedBox(
-          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
-          fit: BoxFit.fill,
-        ),
-      ),
     );
   }
 }

@@ -1,5 +1,7 @@
-import 'package:comics_db_app/domain/factoryes/screen_factory.dart';
+import 'package:comics_db_app/domain/factories/screen_factory.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -46,6 +48,7 @@ class MainNavigation {
     // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(
     //     create: (context) => MoviePopularListViewModel(),
     //     child: const MoviePopularListWidget()),
+    MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
     // MainNavigationRouteNames.upcomingMovie: (_) =>
@@ -70,6 +73,7 @@ class MainNavigation {
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeMovieTrailer(youtubeKey),
         );
+        // TODO: refactoring tv
       case MainNavigationRouteNames.tvDetails:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
@@ -86,7 +90,7 @@ class MainNavigation {
           builder: (context) => TvTrailerWidget(tvYoutubeKey: youtubeKey),
         );
       default:
-        const widget = Text('Ошибка навигации');
+        const widget = Text('Navigation error ');
         return MaterialPageRoute(builder: (_) => widget);
     }
   }

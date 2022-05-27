@@ -29,7 +29,7 @@ class ScreenFactory {
 
   Widget makeMainScreen() {
     return ChangeNotifierProvider(
-      create: (_) => MoviePopularListViewModel(),
+      create: (_) => MovieListViewModel(),
       child: const MainScreenWidget(),
     );
   }
@@ -45,15 +45,11 @@ class ScreenFactory {
     return TrailerWidget(youtubeKey: youtubeKey);
   }
 
-  // TODO: надо вообще от этой страницы отказаться, это первая вкладка
   Widget makePopularMovieList() {
     return ChangeNotifierProvider(
-      create: (_) => MoviePopularListViewModel(),
+      create: (_) => MovieListViewModel(),
+      // child: const PopularMovieWidgetProvider(),
       child: const MoviePopularListWidget(),
     );
   }
-
-  // Widget makeUpcomingMovieList() {
-  //   return ChangeNotifierProvider(create: (_) => UpcomingMovieModel());
-  // }
 }

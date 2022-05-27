@@ -23,7 +23,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          top: 55,
+          top: 45,
           left: 10,
           child: SizedBox(
             height: 300,
@@ -73,7 +73,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 5.0,),
+                const SizedBox(
+                  height: 5.0,
+                ),
                 Row(
                   children: [
                     Align(
@@ -194,8 +196,8 @@ class MovieTopPosterWidget extends StatelessWidget {
         ),
         // TODO: исправить стрелку, чтобы не съезжала
         Positioned(
-          left: 10,
-          top: 10,
+          left: 5,
+          // top: 5,
           child: IconButton(
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
@@ -211,7 +213,9 @@ class MovieTopPosterWidget extends StatelessWidget {
             width: 140.0,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+              child: posterPath != null
+                  ? Image.network(ImageDownloader.imageUrl(posterPath))
+                  : Image.asset(AppImages.noImageBig),
             ),
           ),
         ),
