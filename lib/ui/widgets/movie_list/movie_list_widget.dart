@@ -410,27 +410,27 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    final topRatedMovieModel = context.watch<MovieListViewModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: topRatedMovieModel.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        topRatedMovieModel.showedMovieAtIndex(index);
+        // topRatedMovieModel.searchTopRatedMovie();
         final topMovie = topRatedMovieModel.movies[index];
         final backdropPath = topMovie.backdropPath;
         return InkWell(
             onTap: ()
         =>
             topRatedMovieModel.onMovieTap(context, index),
-        // child: _TopRatedMovieListItemWidget(
-        // index: index,
-        // backdropPath: backdropPath,
-        // movie: topMovie,
-        // topMovieModel: topRatedMovieModel,
-        child: backdropPath != null
-        ? Image.network(ImageDownloader.imageUrl(backdropPath))
-            : const SizedBox.shrink(),
-        );
+        child: _TopRatedMovieListItemWidget(
+        index: index,
+        backdropPath: backdropPath,
+        movie: topMovie,
+        topMovieModel: topRatedMovieModel,
+        // child: backdropPath != null
+        // ? Image.network(ImageDownloader.imageUrl(backdropPath))
+        //     : const SizedBox.shrink(),
+        ),
       },
     );
   }
@@ -452,7 +452,7 @@ class _TopRatedMovieListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    final topRatedMovieModel = context.watch<MovieListViewModel>();
 
     final topMovie = topRatedMovieModel.movies[index];
     final backdropPath = topMovie.backdropPath;
