@@ -132,8 +132,10 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text('Coming Soon',
-                          style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600)),
+                      Text(
+                        'Coming Soon',
+                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                      ),
                     ],
                   ),
                 ),
@@ -177,8 +179,6 @@ class _SearchWidget extends StatelessWidget {
   const _SearchWidget({
     Key? key,
   }) : super(key: key);
-
-  // final TopRatedMovieModel topRatedMovieModel;
 
   @override
   Widget build(BuildContext context) {
@@ -410,7 +410,7 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<MovieListViewModel>();
+    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: topRatedMovieModel.movies.length,
@@ -418,72 +418,26 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
         // topRatedMovieModel.searchTopRatedMovie();
         final topMovie = topRatedMovieModel.movies[index];
         final backdropPath = topMovie.backdropPath;
-        return InkWell(
-            onTap: ()
-        =>
-            topRatedMovieModel.onMovieTap(context, index),
-        child: _TopRatedMovieListItemWidget(
-        index: index,
-        backdropPath: backdropPath,
-        movie: topMovie,
-        topMovieModel: topRatedMovieModel,
-        // child: backdropPath != null
-        // ? Image.network(ImageDownloader.imageUrl(backdropPath))
-        //     : const SizedBox.shrink(),
-        ),
+        return Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: Container(
+            width: 320,
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            child: InkWell(
+              onTap: () => topRatedMovieModel.onMovieTap(context, index),
+              child: backdropPath != null
+              // TODO: may be wrap in fitted box
+                  ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                  : const SizedBox.shrink(),
+            ),
+          ),
+        );
       },
-    );
-  }
-}
-
-class _TopRatedMovieListItemWidget extends StatelessWidget {
-  const _TopRatedMovieListItemWidget({
-    Key? key,
-    required this.index,
-    required this.backdropPath,
-    required this.movie,
-    required this.topMovieModel,
-  }) : super(key: key);
-
-  final int index;
-  final String? backdropPath;
-  final MovieListData movie;
-  final TopRatedMovieModel? topMovieModel;
-
-  @override
-  Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<MovieListViewModel>();
-
-    final topMovie = topRatedMovieModel.movies[index];
-    final backdropPath = topMovie.backdropPath;
-    return Padding(
-      padding: const EdgeInsets.only(right: 15.0),
-      child: Container(
-        width: 320,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          // color: AppColors.movieBorderLine,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        // padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        // child: DecoratedBox(
-        //   decoration: BoxDecoration(
-        //     color: Colors.white,
-        //     border: Border.all(color: Colors.black.withOpacity(0.2)),
-        //     borderRadius: const BorderRadius.all(Radius.circular(28)),
-        //     boxShadow: [
-        //       BoxShadow(
-        //         color: Colors.purple.withOpacity(0.1),
-        //         blurRadius: 8,
-        //         offset: const Offset(0,2),
-        //       ),
-        //     ],
-        //   ),
-        child: FittedBox(
-          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
-          fit: BoxFit.fill,
-        ),
-      ),
     );
   }
 }

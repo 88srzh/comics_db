@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
@@ -24,6 +25,7 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
+  final topRatedMovieModel = TopRatedMovieModel();
   final movieListModel = MovieListViewModel();
   final upcomingMovieModel = UpcomingMovieModel();
   final tvPopularModel = TvPopularModel();
@@ -60,7 +62,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularMovieList(),
           MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => movieListModel),
+              ChangeNotifierProvider(create: (_) => topRatedMovieModel),
               ChangeNotifierProvider(create: (_) => movieListModel),
               ChangeNotifierProvider(create: (_) => upcomingMovieModel),
               // _screenFactory.makeUpcomingMovieList(),
