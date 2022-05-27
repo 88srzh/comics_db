@@ -1,27 +1,10 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// class MoviePopularWidget extends StatelessWidget {
-//   const MoviePopularWidget({Key? key}) : super(key: key);
-//   @override
-//   // TODO возможно сделать виджет закрытым
-//   Widget build(BuildContext context) => ChangeNotifierProvider(
-//       create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
-// }
-
-// class PopularMovieWidgetProvider extends StatelessWidget {
-//   const PopularMovieWidgetProvider({Key? key}) : super(key: key);
-//
-//   @override
-//   TODO не совсем понимаю зачем тут модель одна передается
-// Widget build(BuildContext context) =>
-//     ChangeNotifierProvider(create: (context) => MoviePopularListViewModel(), child: const MoviePopularListWidget());
-// }
 class MoviePopularListWidget extends StatefulWidget {
   const MoviePopularListWidget({Key? key}) : super(key: key);
 
@@ -61,11 +44,10 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
               },
             ),
-            // TODO: that's search
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
-                // onChanged: model.searchPopularMovie(''),
+                onChanged: model.searchPopularMovie,
                 decoration: InputDecoration(
                   labelText: 'Поиск',
                   labelStyle: const TextStyle(

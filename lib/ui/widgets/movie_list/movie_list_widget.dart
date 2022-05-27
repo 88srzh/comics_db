@@ -35,7 +35,6 @@ class _MovieListWidgetState extends State<MovieListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final topRatedMovieModel = context.watch<TopRatedMovieModel>();
     // TODO: перенести в каждую категорию
     AlertDialog dialog = const AlertDialog(
       // TODO: after refactoring search doesn't work
