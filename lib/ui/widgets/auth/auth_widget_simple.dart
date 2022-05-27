@@ -69,9 +69,8 @@ class _FormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = NotifierProvider.read<AuthViewModel>(context);
-    // final model = context.read<AuthViewModel>();
-    final model = Provider.of<AuthViewModel>(context, listen: false);
+    final model = context.read<AuthViewModel>();
+    // final model = Provider.of<AuthViewModel>(context, listen: false);
     const textStyle = TextStyle(
       fontSize: 16,
       color: Color(0xFF212529),

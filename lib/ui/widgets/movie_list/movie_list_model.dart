@@ -27,7 +27,7 @@ class MovieListData {
   });
 }
 
-class MoviePopularListViewModel extends ChangeNotifier {
+class MovieListViewModel extends ChangeNotifier {
   final _movieService = MovieService();
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
@@ -47,24 +47,28 @@ class MoviePopularListViewModel extends ChangeNotifier {
   List<MovieListData> get movies => List.unmodifiable(_movies);
   late DateFormat _dateFormat;
 
-  MoviePopularListViewModel() {
-    _popularMoviePaginator = Paginator<Movie>((page) async {
-      final result = await _movieService.popularMovie(page, _localeStorage.localeTag);
-      return PaginatorLoadResult(
-        data: result.movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-    });
+  MovieListViewModel() {
+    _popularMoviePaginator = Paginator<Movie>(
+      (page) async {
+        final result = await _movieService.popularMovie(page, _localeStorage.localeTag);
+        return PaginatorLoadResult(
+          data: result.movies,
+          currentPage: result.page,
+          totalPage: result.totalPages,
+        );
+      },
+    );
 
-    _topRatedMoviePaginator = Paginator<Movie>((page) async {
-      final result = await _movieService.topRatedMovie(page, _localeStorage.localeTag);
-      return PaginatorLoadResult(
-        data: result.movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-    });
+    _topRatedMoviePaginator = Paginator<Movie>(
+      (page) async {
+        final result = await _movieService.topRatedMovie(page, _localeStorage.localeTag);
+        return PaginatorLoadResult(
+          data: result.movies,
+          currentPage: result.page,
+          totalPage: result.totalPages,
+        );
+      },
+    );
 
     // _similarMoviePaginator = Paginator<Movie>((page) async {
     //   final result = await _movieService.similarMovie(page, _locale);
@@ -76,33 +80,46 @@ class MoviePopularListViewModel extends ChangeNotifier {
     //   );
     // });
 
-    _searchMoviePaginator = Paginator<Movie>((page) async {
-      final result = await _movieService.searchMovie(page, _localeStorage.localeTag, _searchQuery ?? '');
-      return PaginatorLoadResult(
-        data: result.movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-    });
+    _searchMoviePaginator = Paginator<Movie>(
+      (page) async {
+        final result = await _movieService.searchMovie(page, _localeStorage.localeTag, _searchQuery ?? '');
+        return PaginatorLoadResult(
+          data: result.movies,
+          currentPage: result.page,
+          totalPage: result.totalPages,
+        );
+      },
+    );
   }
 
   // String stringFromDate(DateTime? date) =>
   //     date != null ? _dateFormat.format(date) : '';
 
 // ! - TODO: вынести в отдельный файл
-  Future<void> setupLocale(Locale locale) async {
+  Future<void> setupPopularMovieLocale(Locale locale) async {
     if (!_localeStorage.updateLocale(locale)) return;
     _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
-    await _resetMovieList();
+    await _resetPopularMovieList();
   }
 
-  Future<void> _resetMovieList() async {
+  Future<void> setupTopRatedMovieLocale(Locale locale) async {
+    if (!_localeStorage.updateLocale(locale)) return;
+    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
+    await _resetTopRatedMovieList();
+  }
+
+  Future<void> _resetPopularMovieList() async {
     await _popularMoviePaginator.reset();
     await _searchMoviePaginator.reset();
-    await _topRatedMoviePaginator.reset();
-    // await _similarMoviePaginator.reset();
     _movies.clear();
     await _loadNextPopularMoviesPage();
+  }
+
+  Future<void> _resetTopRatedMovieList() async {
+    await _topRatedMoviePaginator.reset();
+    await _searchMoviePaginator.reset();
+    _movies.clear();
+    await _loadNextTopRatedMoviesPage();
   }
 
   MovieListData _makeListData(Movie movie) {
@@ -121,10 +138,10 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   Future<void> _loadNextPopularMoviesPage() async {
     if (isSearchMode) {
-      await _searchMoviePaginator.loadNextPopularMoviesPage();
+      await _searchMoviePaginator.loadNextMoviesPage();
       _movies = _searchMoviePaginator.data.map(_makeListData).toList();
     } else {
-      await _popularMoviePaginator.loadNextPopularMoviesPage();
+      await _popularMoviePaginator.loadNextMoviesPage();
 
       _movies = _popularMoviePaginator.data.map(_makeListData).toList();
     }
@@ -133,10 +150,10 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   Future<void> _loadNextTopRatedMoviesPage() async {
     if (isSearchMode) {
-      await _searchMoviePaginator.loadNextPopularMoviesPage();
+      await _searchMoviePaginator.loadNextMoviesPage();
       _movies = _searchMoviePaginator.data.map(_makeListData).toList();
     } else {
-      await _topRatedMoviePaginator.loadNextPopularMoviesPage();
+      await _topRatedMoviePaginator.loadNextMoviesPage();
       _movies = _topRatedMoviePaginator.data.map(_makeListData).toList();
     }
     notifyListeners();
@@ -154,30 +171,36 @@ class MoviePopularListViewModel extends ChangeNotifier {
 
   Future<void> searchPopularMovie(String text) async {
     searchDebounce?.cancel();
-    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      final searchQuery = text.isNotEmpty ? text : null;
-      if (_searchQuery == searchQuery) return;
-      _searchQuery = searchQuery;
-      _movies.clear();
-      if (isSearchMode) {
-        await _searchMoviePaginator.reset();
-      }
-      _loadNextPopularMoviesPage();
-    });
+    searchDebounce = Timer(
+      const Duration(milliseconds: 300),
+      () async {
+        final searchQuery = text.isNotEmpty ? text : null;
+        if (_searchQuery == searchQuery) return;
+        _searchQuery = searchQuery;
+        _movies.clear();
+        if (isSearchMode) {
+          await _searchMoviePaginator.reset();
+        }
+        _loadNextPopularMoviesPage();
+      },
+    );
   }
 
   Future<void> searchTopRatedMovie(String text) async {
     searchDebounce?.cancel();
-    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      final searchQuery = text.isNotEmpty ? text : null;
-      if (_searchQuery == searchQuery) return;
-      _searchQuery = searchQuery;
-      _movies.clear();
-      if (isSearchMode) {
-        await _searchMoviePaginator.reset();
-      }
-      _loadNextTopRatedMoviesPage();
-    });
+    searchDebounce = Timer(
+      const Duration(milliseconds: 300),
+      () async {
+        final searchQuery = text.isNotEmpty ? text : null;
+        if (_searchQuery == searchQuery) return;
+        _searchQuery = searchQuery;
+        _movies.clear();
+        if (isSearchMode) {
+          await _searchMoviePaginator.reset();
+        }
+        _loadNextTopRatedMoviesPage();
+      },
+    );
   }
 
   void showedPopularMovieAtIndex(int index) {

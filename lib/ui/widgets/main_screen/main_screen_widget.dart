@@ -24,7 +24,7 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
-  final moviePopularListModel = MoviePopularListViewModel();
+  final movieListModel = MovieListViewModel();
   final upcomingMovieModel = UpcomingMovieModel();
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
@@ -60,8 +60,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularMovieList(),
           MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => moviePopularListModel),
-              ChangeNotifierProvider(create: (_) => moviePopularListModel),
+              ChangeNotifierProvider(create: (_) => movieListModel),
+              ChangeNotifierProvider(create: (_) => movieListModel),
               ChangeNotifierProvider(create: (_) => upcomingMovieModel),
               // _screenFactory.makeUpcomingMovieList(),
             ],

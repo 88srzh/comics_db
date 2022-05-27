@@ -29,7 +29,7 @@ class ScreenFactory {
 
   Widget makeMainScreen() {
     return ChangeNotifierProvider(
-      create: (_) => MoviePopularListViewModel(),
+      create: (_) => MovieListViewModel(),
       child: const MainScreenWidget(),
     );
   }
@@ -47,7 +47,7 @@ class ScreenFactory {
 
   Widget makePopularMovieList() {
     return ChangeNotifierProvider(
-      create: (_) => MoviePopularListViewModel(),
+      create: (_) => MovieListViewModel(),
       // child: const PopularMovieWidgetProvider(),
       child: const MoviePopularListWidget(),
     );

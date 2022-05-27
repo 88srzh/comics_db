@@ -63,7 +63,7 @@ class _SimilarListMovieWidgetState extends State<_SimilarListMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListViewModel>().setupLocale(locale);
+    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
   }
 
   @override

@@ -23,7 +23,7 @@ class Paginator<T> {
 
   Paginator(this.load);
 
-  Future<void> loadNextPopularMoviesPage() async {
+  Future<void> loadNextMoviesPage() async {
     if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
@@ -43,6 +43,6 @@ class Paginator<T> {
     _currentPage = 0;
     _totalPage = 1;
     _data.clear();
-    await loadNextPopularMoviesPage();
+    await loadNextMoviesPage();
   }
 }

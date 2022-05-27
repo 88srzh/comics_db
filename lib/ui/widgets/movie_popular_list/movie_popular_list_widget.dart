@@ -35,12 +35,12 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListViewModel>().setupLocale(locale);
+    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<MoviePopularListViewModel>();
+    final model = context.watch<MovieListViewModel>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -62,29 +62,29 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
               },
             ),
             // TODO: that's search
-            // Padding(
-            //   padding: const EdgeInsets.all(10.0),
-            //   child: TextField(
-            //     onChanged: model.searchMovie,
-            //     decoration: InputDecoration(
-            //       labelText: 'Поиск',
-            //       labelStyle: const TextStyle(
-            //         color: AppColors.kPrimaryColor,
-            //       ),
-            //       filled: true,
-            //       fillColor: Colors.white.withAlpha(235),
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(10.0),
-            //       ),
-            //       focusedBorder: const OutlineInputBorder(
-            //         borderSide: BorderSide(color: AppColors.kPrimaryColor),
-            //       ),
-            //       enabledBorder: const OutlineInputBorder(
-            //         borderSide: BorderSide(color: AppColors.kPrimaryColor),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextField(
+                // onChanged: model.searchPopularMovie(''),
+                decoration: InputDecoration(
+                  labelText: 'Поиск',
+                  labelStyle: const TextStyle(
+                    color: AppColors.kPrimaryColor,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white.withAlpha(235),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.kPrimaryColor),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.kPrimaryColor),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -105,7 +105,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
 
   final String? posterPath;
   final MovieListData movie;
-  final MoviePopularListViewModel model;
+  final MovieListViewModel model;
 
   @override
   Widget build(BuildContext context) {
