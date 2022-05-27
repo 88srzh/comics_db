@@ -61,6 +61,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
               },
             ),
+            // TODO: that's search
             // Padding(
             //   padding: const EdgeInsets.all(10.0),
             //   child: TextField(
@@ -108,6 +109,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final genres = context.select((MovieDetailsModel model) => model.data.genres);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
       child: Stack(
@@ -151,33 +153,34 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5.0),
                       Text(
-                       movie.releaseDate,
+                        movie.releaseDate,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.grey),
+                        style: const TextStyle(
+                          color: AppColors.genresText,
+                          fontSize: 13,
+                        ),
                       ),
                       const SizedBox(height: 20.0),
                       Text(
                         movie.overview,
-                        maxLines: 2,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.genresText,
+                          fontSize: 12,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 10.0),
+                const SizedBox(width: 5.0),
               ],
             ),
           ),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(20.0),
-              onTap: () => model.onMovieTap(context, index),
-            ),
+          InkWell(
+            borderRadius: BorderRadius.circular(20.0),
+            onTap: () => model.onMovieTap(context, index),
           ),
         ],
       ),
