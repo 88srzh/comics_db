@@ -41,17 +41,17 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    tvTopRatedModel.setupLocale(context);
-    upcomingMovieModel.setupLocale(context);
-    tvPopularModel.setupLocale(context);
-    airingTodayModel.setupLocale(context);
-    settingsModel.setupLocale(context);
-    trendingAllModel.setupPage(context);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //
+  //   tvTopRatedModel.setupLocale(context);
+  //   upcomingMovieModel.setupLocale(context);
+  //   tvPopularModel.setupLocale(context);
+  //   airingTodayModel.setupLocale(context);
+  //   settingsModel.setupLocale(context);
+  //   trendingAllModel.setupPage(context);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             _selectedTab = index;
           },
         ),
-        // onTap: onSelectTab,
       ),
     );
   }

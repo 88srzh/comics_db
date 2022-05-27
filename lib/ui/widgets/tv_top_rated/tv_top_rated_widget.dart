@@ -57,11 +57,9 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        child: FittedBox(
-          child: backdropPath != null
-              ? Image.network(ImageDownloader.imageUrl(backdropPath))
-              : Image.asset(AppImages.noImageBig),
-        ),
+        child: backdropPath != null
+            ? Image.network(ImageDownloader.imageUrl(backdropPath))
+            : Image.asset(AppImages.noImageBig),
       ),
     );
   }
