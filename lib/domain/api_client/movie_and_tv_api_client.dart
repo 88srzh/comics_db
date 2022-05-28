@@ -78,6 +78,29 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<PopularAndTopRatedMovieResponse> nowPlayingMovie (
+      int page,
+      String locale,
+      String apiKey,
+      ) {
+    PopularAndTopRatedMovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/movie/now_playing',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
   // Future<PopularAndTopRatedMovieResponse> similarMovie(
   //     int movieId, int page, String locale, String apiKey) {
   //   PopularAndTopRatedMovieResponse parser(dynamic json) {

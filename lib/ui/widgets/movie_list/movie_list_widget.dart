@@ -13,8 +13,10 @@ class MovieWidget extends StatelessWidget {
 
   @override
   //TODO не совсем понимаю зачем тут модель одна передается
-  Widget build(BuildContext context) =>
-      ChangeNotifierProvider(create: (context) => MovieListViewModel(), child: const MovieListWidget());
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => MovieListViewModel(),
+        child: const MovieListWidget(),
+      );
 }
 
 // TODO: maybe change to stateless
@@ -430,7 +432,7 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
             child: InkWell(
               onTap: () => topRatedMovieModel.onMovieTap(context, index),
               child: backdropPath != null
-              // TODO: may be wrap in fitted box
+                  // TODO: may be wrap in fitted box
                   ? Image.network(ImageDownloader.imageUrl(backdropPath))
                   : const SizedBox.shrink(),
             ),

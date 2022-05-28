@@ -41,17 +41,17 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     });
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   //
-  //   tvTopRatedModel.setupLocale(context);
+    tvTopRatedModel.setupLocale(context);
   //   upcomingMovieModel.setupLocale(context);
-  //   tvPopularModel.setupLocale(context);
-  //   airingTodayModel.setupLocale(context);
+    tvPopularModel.setupLocale(context);
+    airingTodayModel.setupLocale(context);
   //   settingsModel.setupLocale(context);
-  //   trendingAllModel.setupPage(context);
-  // }
+    trendingAllModel.setupPage(context);
+  }
 
   @override
   Widget build(BuildContext context) {
