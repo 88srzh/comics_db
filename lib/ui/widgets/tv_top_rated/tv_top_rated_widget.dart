@@ -1,5 +1,6 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ class TopRatedTvWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final topRatedTvModel = Provider.of<TvTopRatedModel>(context, listen: true);
     return ListView.builder(
-      scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.horizontal,
         itemCount: topRatedTvModel.tvs.length,
         itemBuilder: (BuildContext context, int index) {
           topRatedTvModel.showedTVAtIndex(index);
@@ -26,8 +27,7 @@ class TopRatedTvWidget extends StatelessWidget {
               topTvModel: topRatedTvModel,
             ),
           );
-        }
-    );
+        });
   }
 }
 
@@ -38,12 +38,11 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
     required this.backdropPath,
     required this.tv,
     required this.topTvModel,
-
   }) : super(key: key);
-    final int index;
-    final String? backdropPath;
-    final TV tv;
-    final TvTopRatedModel? topTvModel;
+  final int index;
+  final String? backdropPath;
+  final TV tv;
+  final TvTopRatedModel? topTvModel;
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +50,17 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
     final topTv = topRatedTvModel.tvs[index];
     final backdropPath = topTv.backdropPath;
     return Padding(
-        padding: const EdgeInsets.only(right: 15.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: Container(
         width: 320,
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        child: FittedBox(
-          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)): const SizedBox.shrink(),
-        ),
+        child: backdropPath != null
+            ? Image.network(ImageDownloader.imageUrl(backdropPath))
+            : Image.asset(AppImages.noImageBig),
       ),
     );
   }
 }
-

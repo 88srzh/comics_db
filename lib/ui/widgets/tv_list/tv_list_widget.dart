@@ -73,7 +73,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
