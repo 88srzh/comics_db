@@ -26,7 +26,15 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     final model = context.watch<MovieListViewModel>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: const Text(
+          'Popular Movies',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        foregroundColor: Colors.white,
+        backgroundColor: AppColors.kPrimaryColor,
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
@@ -45,24 +53,27 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: TextField(
+                style: const TextStyle(
+                  color: AppColors.genresText,
+                ),
                 onChanged: model.searchPopularMovie,
                 decoration: InputDecoration(
-                  labelText: 'Поиск',
+                  labelText: 'Search',
                   labelStyle: const TextStyle(
-                    color: AppColors.kPrimaryColor,
+                    color: AppColors.genresText,
                   ),
                   filled: true,
-                  fillColor: Colors.white.withAlpha(235),
+                  fillColor: AppColors.kPrimaryColor,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.kPrimaryColor),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
                   ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.kPrimaryColor),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
                   ),
                 ),
               ),
@@ -91,23 +102,23 @@ class _MoviePopularListRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final genres = context.select((MovieDetailsModel model) => model.data.genres);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
       child: Stack(
         children: [
           Container(
             decoration: BoxDecoration(
-                color: AppColors.kPrimaryColor,
-                border: Border.all(color: Colors.white.withOpacity(0.2)),
-                borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  )
-                ]),
+              color: AppColors.kPrimaryColor,
+              border: Border.all(color: Colors.white.withOpacity(0.2)),
+              borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.white.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                )
+              ],
+            ),
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
@@ -146,7 +157,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                       const SizedBox(height: 20.0),
                       Text(
                         movie.overview,
-                        maxLines: 4,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: AppColors.genresText,
