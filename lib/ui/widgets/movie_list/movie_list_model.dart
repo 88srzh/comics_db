@@ -27,11 +27,14 @@ class MovieListData {
   });
 }
 
+// TODO: may be divide paginator, because it doesn't work
 class MovieListViewModel extends ChangeNotifier {
   final _movieService = MovieService();
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
   late final Paginator<Movie> _topRatedMoviePaginator;
+
+  // late final Paginator<Movie> _nowPlayingMoviePaginator;
 
   // late final Paginator<Movie> _similarMoviePaginator;
   Timer? searchDebounce;
@@ -70,6 +73,17 @@ class MovieListViewModel extends ChangeNotifier {
       },
     );
 
+    // _nowPlayingMoviePaginator = Paginator<Movie>(
+    //   (page) async {
+    //     final result = await _movieService.nowPlayingMovie(page, _localeStorage.localeTag);
+    //     return PaginatorLoadResult(
+    //       data: result.movies,
+    //       currentPage: result.page,
+    //       totalPage: result.totalPages,
+    //     );
+    //   },
+    // );
+
     // _similarMoviePaginator = Paginator<Movie>((page) async {
     //   final result = await _movieService.similarMovie(page, _locale);
     //   return PaginatorLoadResult(
@@ -102,6 +116,12 @@ class MovieListViewModel extends ChangeNotifier {
     await _resetPopularMovieList();
   }
 
+  Future<void> setupNowPlayingMovieLocale(Locale locale) async {
+    if (!_localeStorage.updateLocale(locale)) return;
+    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
+    await _resetNowPlayingMovieList();
+  }
+
   Future<void> setupTopRatedMovieLocale(Locale locale) async {
     if (!_localeStorage.updateLocale(locale)) return;
     _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
@@ -109,6 +129,13 @@ class MovieListViewModel extends ChangeNotifier {
   }
 
   Future<void> _resetPopularMovieList() async {
+    await _popularMoviePaginator.reset();
+    await _searchMoviePaginator.reset();
+    _movies.clear();
+    await _loadNextPopularMoviesPage();
+  }
+
+  Future<void> _resetNowPlayingMovieList() async {
     await _popularMoviePaginator.reset();
     await _searchMoviePaginator.reset();
     _movies.clear();
@@ -159,6 +186,17 @@ class MovieListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Future<void> _loadNextNowPlayingMoviesPage() async {
+  //   if (isSearchMode) {
+  //     await _searchMoviePaginator.loadNextMoviesPage();
+  //     _movies = _searchMoviePaginator.data.map(_makeListData).toList();
+  //   } else {
+  // await _nowPlayingMoviePaginator.loadNextMoviesPage();
+  // _movies = _nowPlayingMoviePaginator.data.map(_makeListData).toList();
+  // }
+  // notifyListeners();
+  // }
+
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
@@ -203,6 +241,8 @@ class MovieListViewModel extends ChangeNotifier {
     );
   }
 
+// TODO: add now playing movie search
+
   void showedPopularMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
     _loadNextPopularMoviesPage();
@@ -212,4 +252,9 @@ class MovieListViewModel extends ChangeNotifier {
     if (index < _movies.length - 1) return;
     _loadNextTopRatedMoviesPage();
   }
+
+// void showedNowPlayingMovieAtIndex(int index) {
+//   if (index < _movies.length - 1) return;
+//   _loadNextNowPlayingMoviesPage();
+// }
 }

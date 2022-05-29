@@ -3,6 +3,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing/now_playing_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
@@ -145,6 +146,36 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                   child: _UpcomingMovieWidget(),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Now playing',
+                    style: TextStyle(
+                      color: AppColors.genresText,
+                      fontSize: 21,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                    child: const Text(
+                      'See All',
+                      style: TextStyle(color: AppColors.ratingText, fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 200,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: NowPlayingMovieWidget(),
+              ),
             ),
           ],
         ),
@@ -442,3 +473,82 @@ class _TopRatedMovieWidgetState extends State<_TopRatedMovieWidget> {
     );
   }
 }
+
+class NowPlayingMovieWidget extends StatefulWidget {
+  const NowPlayingMovieWidget({Key? key}) : super(key: key);
+
+  @override
+  State<NowPlayingMovieWidget> createState() => _NowPlayingMovieWidgetState();
+}
+
+class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<NowPlayingMovieModel>().setupLocale(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final nowPlayingMovieModel = context.watch<NowPlayingMovieModel>();
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: nowPlayingMovieModel.movies.length,
+      itemBuilder: (BuildContext context, int index) {
+        nowPlayingMovieModel.showedMovieAtIndex(index);
+        final nowPlayingMovie = nowPlayingMovieModel.movies[index];
+        final posterPath = nowPlayingMovie.posterPath;
+        // TODO: вынести в отдельный виджет?
+        return InkWell(
+          onTap: () => nowPlayingMovieModel.onMovieTap(context, index),
+          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+          // child: _NowPlayingMovieListItemWidget(
+          //   index: index,
+          //   posterPath: posterPath,
+          //   movie: nowPlayingMovie,
+          //   movieModel: movieModel,
+          // ),
+        );
+      },
+    );
+  }
+}
+
+// class _NowPlayingMovieListItemWidget extends StatelessWidget {
+//   const _NowPlayingMovieListItemWidget({
+//     Key? key,
+//     required this.index,
+//     required this.posterPath,
+//     required this.movie,
+//     required this.movieModel,
+//   }) : super(key: key);
+//
+//   final int index;
+//   final String? posterPath;
+//   final MovieListData movie;
+//   final NowPlayingMovieModel movieModel;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final popularMovieModel = context.watch<MovieListViewModel>();
+//     final popularMovie = popularMovieModel.movies[index];
+//     final posterPath = popularMovie.posterPath;
+//     return Padding(
+//       padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
+//       child: Container(
+//         height: 200,
+//         width: 114,
+//         clipBehavior: Clip.antiAlias,
+//         decoration: const BoxDecoration(
+//           color: AppColors.movieBorderLine,
+          // borderRadius: BorderRadius.all(Radius.circular(12)),
+        // ),
+        // child: FittedBox(
+        //   child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+        //   fit: BoxFit.contain,
+        // ),
+      // ),
+    // );
+  // }
+// }

@@ -35,7 +35,7 @@ class MovieAndTvApiClient {
   Future<PopularAndTopRatedMovieResponse> topRatedMovie(
     int page,
     String locale,
-    String apiKey,
+    // String apiKey,
   ) {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -78,11 +78,11 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularAndTopRatedMovieResponse> nowPlayingMovie (
-      int page,
-      String locale,
-      String apiKey,
-      ) {
+  Future<PopularAndTopRatedMovieResponse> nowPlayingMovie(
+    int page,
+    String locale,
+    String apiKey,
+  ) {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
@@ -121,44 +121,6 @@ class MovieAndTvApiClient {
   //   );
   //   return result;
   // }
-
-  Future<PopularTVResponse> topRatedTvs(int page, String locale) {
-    PopularTVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = PopularTVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/tv/top_rated',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
-    return result;
-  }
-
-  Future<PopularTVResponse> airingTodayTvs(int page, String locale) {
-    PopularTVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = PopularTVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/tv/airing_today',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
-    return result;
-  }
 
   Future<PopularAndTopRatedMovieResponse> searchMovie(
     int page,
@@ -247,6 +209,44 @@ class MovieAndTvApiClient {
       <String, dynamic>{
         'api_key': Configuration.apiKey,
         'session_id': sessionId,
+      },
+    );
+    return result;
+  }
+
+  Future<PopularTVResponse> topRatedTvs(int page, String locale) {
+    PopularTVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/tv/top_rated',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
+  Future<PopularTVResponse> airingTodayTvs(int page, String locale) {
+    PopularTVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/tv/airing_today',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'page': page.toString(),
+        'language': locale,
       },
     );
     return result;
