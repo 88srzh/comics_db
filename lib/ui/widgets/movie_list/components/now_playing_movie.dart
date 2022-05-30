@@ -31,20 +31,21 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
         return InkWell(
           onTap: () => nowPlayingMovieModel.onMovieTap(context, index),
           child: Padding(
-            padding: const EdgeInsets.only(right: 15.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: Container(
-                clipBehavior: Clip.antiAlias,
-                height: 200,
-                width: 114,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                // clipBehavior: Clip.antiAlias,
-                child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: posterPath != null
-                        ? Image.network(ImageDownloader.imageUrl(posterPath))
-                        : const SizedBox.shrink())),
+              clipBehavior: Clip.antiAlias,
+              height: 200,
+              width: 114,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              // clipBehavior: Clip.antiAlias,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child:
+                    posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+              ),
+            ),
           ),
         );
       },

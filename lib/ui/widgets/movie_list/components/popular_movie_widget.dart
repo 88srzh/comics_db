@@ -18,6 +18,7 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
     context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
   }
 
+// TODO: упростить? убрать
   @override
   Widget build(BuildContext context) {
     final popularMovieModel = context.watch<MovieListViewModel>();
@@ -42,7 +43,6 @@ class PopularMovieListWidget extends StatelessWidget {
         popularMovieModel.showedPopularMovieAtIndex(index);
         final popularMovie = popularMovieModel.movies[index];
         final posterPath = popularMovie.posterPath;
-        // TODO: вынести в отдельный виджет?
         return InkWell(
           onTap: () => popularMovieModel.onMovieTap(context, index),
           child: _PopularMovieListItemWidget(

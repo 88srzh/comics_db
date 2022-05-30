@@ -2,7 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/popular_,movie_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/upcoming_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
