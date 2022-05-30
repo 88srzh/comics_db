@@ -2,7 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_now_playing/now_playing_movie_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,13 +17,13 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    context.read<NowPlayingMovieModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<NowPlayingMovieListModel>().setupNowPlayingMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<NowPlayingMovieModel>();
+    final model = context.watch<NowPlayingMovieListModel>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -46,7 +46,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
               itemCount: model.movies.length,
               itemExtent: 165,
               itemBuilder: (BuildContext context, int index) {
-                model.showedMovieAtIndex(index);
+                model.showedNowPlayingMovieAtIndex(index);
                 final movie = model.movies[index];
                 final posterPath = movie.posterPath;
                 return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
@@ -58,7 +58,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                 style: const TextStyle(
                   color: AppColors.genresText,
                 ),
-                onChanged: model.searchMovie,
+                onChanged: model.searchNowPlayingMovie,
                 decoration: InputDecoration(
                   labelText: 'Search',
                   labelStyle: const TextStyle(
@@ -98,7 +98,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
 
   final String? posterPath;
   final MovieListData movie;
-  final NowPlayingMovieModel model;
+  final NowPlayingMovieListModel model;
 
   @override
   Widget build(BuildContext context) {

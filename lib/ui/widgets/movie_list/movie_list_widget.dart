@@ -150,7 +150,8 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                     ),
                   ),
                   InkWell(
-                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                    // TODO fix nowPlayingMove
+                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                     child: const Text(
                       'See All',
                       style: TextStyle(color: AppColors.ratingText, fontSize: 15),

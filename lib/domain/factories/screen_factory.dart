@@ -7,7 +7,8 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_now_playing/now_playing_movie_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,10 +57,8 @@ class ScreenFactory {
 
   Widget makeNowPlayingMovieList() {
     return ChangeNotifierProvider(
-      create: (_) => NowPlayingMovieModel(),
-      // child: const PopularMovieWidgetProvider(),
-      child: const MoviePopularListWidget(),
+      create: (_) => NowPlayingMovieListModel(),
+      child: const MovieNowPlayingListWidget(),
     );
   }
-}
 }

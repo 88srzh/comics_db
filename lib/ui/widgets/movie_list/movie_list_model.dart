@@ -84,16 +84,6 @@ class MovieListViewModel extends ChangeNotifier {
     //   },
     // );
 
-    // _similarMoviePaginator = Paginator<Movie>((page) async {
-    //   final result = await _movieService.similarMovie(page, _locale);
-    //   return PaginatorLoadResult(
-    //     data: result.movies,
-    //     currentPage: result.page,
-    //     totalPage: result.totalPages,
-    //
-    //   );
-    // });
-
     _searchMoviePaginator = Paginator<Movie>(
       (page) async {
         final result = await _movieService.searchMovie(page, _localeStorage.localeTag, _searchQuery ?? '');
@@ -106,20 +96,11 @@ class MovieListViewModel extends ChangeNotifier {
     );
   }
 
-  // String stringFromDate(DateTime? date) =>
-  //     date != null ? _dateFormat.format(date) : '';
-
 // ! - TODO: вынести в отдельный файл
   Future<void> setupPopularMovieLocale(Locale locale) async {
     if (!_localeStorage.updateLocale(locale)) return;
     _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
     await _resetPopularMovieList();
-  }
-
-  Future<void> setupNowPlayingMovieLocale(Locale locale) async {
-    if (!_localeStorage.updateLocale(locale)) return;
-    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
-    await _resetNowPlayingMovieList();
   }
 
   Future<void> setupTopRatedMovieLocale(Locale locale) async {
@@ -135,12 +116,6 @@ class MovieListViewModel extends ChangeNotifier {
     await _loadNextPopularMoviesPage();
   }
 
-  Future<void> _resetNowPlayingMovieList() async {
-    await _popularMoviePaginator.reset();
-    await _searchMoviePaginator.reset();
-    _movies.clear();
-    await _loadNextPopularMoviesPage();
-  }
 
   Future<void> _resetTopRatedMovieList() async {
     await _topRatedMoviePaginator.reset();
@@ -186,16 +161,6 @@ class MovieListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> _loadNextNowPlayingMoviesPage() async {
-  //   if (isSearchMode) {
-  //     await _searchMoviePaginator.loadNextMoviesPage();
-  //     _movies = _searchMoviePaginator.data.map(_makeListData).toList();
-  //   } else {
-  // await _nowPlayingMoviePaginator.loadNextMoviesPage();
-  // _movies = _nowPlayingMoviePaginator.data.map(_makeListData).toList();
-  // }
-  // notifyListeners();
-  // }
 
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
@@ -253,8 +218,4 @@ class MovieListViewModel extends ChangeNotifier {
     _loadNextTopRatedMoviesPage();
   }
 
-// void showedNowPlayingMovieAtIndex(int index) {
-//   if (index < _movies.length - 1) return;
-//   _loadNextNowPlayingMoviesPage();
-// }
 }
