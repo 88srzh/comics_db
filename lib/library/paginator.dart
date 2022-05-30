@@ -29,7 +29,7 @@ class Paginator<T> {
     final nextPage = _currentPage + 1;
 
     try {
-      final result = await load(nextPage); // _loadPopularMovies(nextPage, "_locale");
+      final result = await load(nextPage);
       _data.addAll(result.data);
       _currentPage = result.currentPage;
       _totalPage = result.totalPage;

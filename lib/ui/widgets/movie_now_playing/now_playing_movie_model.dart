@@ -7,10 +7,9 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-class TopRatedMovieModel extends ChangeNotifier {
+class NowPlayingMovieModel extends ChangeNotifier {
   final _apiClient = MovieAndTvApiClient();
   final _movies = <Movie>[];
-
   // final _dates = <MovieDates>[];
   late int _currentPage;
   late int _totalPage;
@@ -22,9 +21,8 @@ class TopRatedMovieModel extends ChangeNotifier {
   List<Movie> get movies => List.unmodifiable(_movies);
   late DateFormat _dateFormat;
 
-  // List<MovieDates> get dates => List.unmodifiable(_dates);
-
-  String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
+  String stringFromDate(DateTime? date) =>
+      date != null ? _dateFormat.format(date) : '';
 
 // ! - TODO: вынести в отдельный файл
   Future<void> setupLocale(BuildContext context) async {
@@ -32,37 +30,38 @@ class TopRatedMovieModel extends ChangeNotifier {
     if (_locale == locale) return;
     _locale = locale;
     _dateFormat = DateFormat.yMMMd(locale);
-    await _resetTopRatedMovieList();
+    await _resetNowPlayingMovieList();
   }
 
-  Future<void> _resetTopRatedMovieList() async {
+  Future<void> _resetNowPlayingMovieList() async {
     _currentPage = 0;
     _totalPage = 1;
     _movies.clear();
-    await _loadNextTopRatedMoviesPage();
+    await _loadNextNowPlayingMoviesPage();
   }
 
-  Future<PopularAndTopRatedMovieResponse> _loadTopRatedMovies(int nextPage, String locale) async {
+  Future<PopularAndTopRatedMovieResponse> _loadNowPlayingMovies(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
-      return await _apiClient.topRatedMovie(nextPage, _locale);
+      return await _apiClient.nowPlayingMovie(nextPage, _locale, Configuration.apiKey);
     } else {
       // return await _apiClient.searchUpcomingMovie(nextPage, _locale, query);
       return await _apiClient.searchMovie(nextPage, _locale, query, Configuration.apiKey);
     }
+
   }
 
-  Future<void> _loadNextTopRatedMoviesPage() async {
+  Future<void> _loadNextNowPlayingMoviesPage() async {
     if (_isLoadingInProgress || _currentPage >= _totalPage) return;
     _isLoadingInProgress = true;
     final nextPage = _currentPage + 1;
 
     try {
-      final topRatedMoviesResponse = await _loadTopRatedMovies(nextPage, _locale);
-      _movies.addAll(topRatedMoviesResponse.movies);
+      final nowPlayingMoviesResponse = await _loadNowPlayingMovies(nextPage, _locale);
+      _movies.addAll(nowPlayingMoviesResponse.movies);
       // _dates.addAll(upcomingMoviesResponse.dates);
-      _currentPage = topRatedMoviesResponse.page;
-      _totalPage = topRatedMoviesResponse.totalPages;
+      _currentPage = nowPlayingMoviesResponse.page;
+      _totalPage = nowPlayingMoviesResponse.totalPages;
       _isLoadingInProgress = false;
       notifyListeners();
     } catch (e) {
@@ -72,7 +71,8 @@ class TopRatedMovieModel extends ChangeNotifier {
 
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
   void onFullCastAndCrewTap(BuildContext context, int index) {
@@ -82,19 +82,16 @@ class TopRatedMovieModel extends ChangeNotifier {
 
   Future<void> searchMovie(String text) async {
     searchDebounce?.cancel();
-    searchDebounce = Timer(
-      const Duration(milliseconds: 300),
-      () async {
-        final searchQuery = text.isNotEmpty ? text : null;
-        if (_searchQuery == searchQuery) return;
-        _searchQuery = searchQuery;
-        await _resetTopRatedMovieList();
-      },
-    );
+    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
+      final searchQuery = text.isNotEmpty ? text : null;
+      if(_searchQuery == searchQuery) return;
+      _searchQuery = searchQuery;
+      await _resetNowPlayingMovieList();
+    });
   }
 
   void showedMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
-    _loadNextTopRatedMoviesPage();
+    _loadNextNowPlayingMoviesPage();
   }
 }

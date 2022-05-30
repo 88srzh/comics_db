@@ -1,7 +1,5 @@
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -29,6 +27,7 @@ abstract class MainNavigationRouteNames {
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/main_screen/popularMovie';
+  static const nowPlayingMovie = '/main_screen/nowPlayingMovie';
   static const networkConnectionError = '/errors/network_connection';
   static const movieTrailer = '/main_screen/movie_details/trailer';
   static const topRatedMovie = '/main_screen/topRatedMovie';
@@ -45,17 +44,13 @@ class MainNavigation {
         ChangeNotifierProvider(
             create: (_) => SplashscreenModel(),
             child: const SplashscreenWidget()),
-    // MainNavigationRouteNames.popularMovie: (context) => ChangeNotifierProvider(
-    //     create: (context) => MoviePopularListViewModel(),
-    //     child: const MoviePopularListWidget()),
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
+    MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
-    // MainNavigationRouteNames.upcomingMovie: (_) =>
-    //     _screenFactory.makeUpcomingMovieList(),
     MainNavigationRouteNames.upcomingMovie: (context) =>
         ChangeNotifierProvider(
-          create: (_) => UpcomingMovieModel(), child: const MovieWidget(),
+          create: (_) => UpcomingMovieModel(), child: const MovieListWidget(),
         ),
   };
 

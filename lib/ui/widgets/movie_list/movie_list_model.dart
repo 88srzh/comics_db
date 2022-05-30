@@ -27,11 +27,14 @@ class MovieListData {
   });
 }
 
+// TODO: may be divide paginator, because it doesn't work
 class MovieListViewModel extends ChangeNotifier {
   final _movieService = MovieService();
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
   late final Paginator<Movie> _topRatedMoviePaginator;
+
+  // late final Paginator<Movie> _nowPlayingMoviePaginator;
 
   // late final Paginator<Movie> _similarMoviePaginator;
   Timer? searchDebounce;
@@ -70,15 +73,16 @@ class MovieListViewModel extends ChangeNotifier {
       },
     );
 
-    // _similarMoviePaginator = Paginator<Movie>((page) async {
-    //   final result = await _movieService.similarMovie(page, _locale);
-    //   return PaginatorLoadResult(
-    //     data: result.movies,
-    //     currentPage: result.page,
-    //     totalPage: result.totalPages,
-    //
-    //   );
-    // });
+    // _nowPlayingMoviePaginator = Paginator<Movie>(
+    //   (page) async {
+    //     final result = await _movieService.nowPlayingMovie(page, _localeStorage.localeTag);
+    //     return PaginatorLoadResult(
+    //       data: result.movies,
+    //       currentPage: result.page,
+    //       totalPage: result.totalPages,
+    //     );
+    //   },
+    // );
 
     _searchMoviePaginator = Paginator<Movie>(
       (page) async {
@@ -91,9 +95,6 @@ class MovieListViewModel extends ChangeNotifier {
       },
     );
   }
-
-  // String stringFromDate(DateTime? date) =>
-  //     date != null ? _dateFormat.format(date) : '';
 
 // ! - TODO: вынести в отдельный файл
   Future<void> setupPopularMovieLocale(Locale locale) async {
@@ -114,6 +115,7 @@ class MovieListViewModel extends ChangeNotifier {
     _movies.clear();
     await _loadNextPopularMoviesPage();
   }
+
 
   Future<void> _resetTopRatedMovieList() async {
     await _topRatedMoviePaginator.reset();
@@ -159,6 +161,7 @@ class MovieListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
@@ -203,6 +206,8 @@ class MovieListViewModel extends ChangeNotifier {
     );
   }
 
+// TODO: add now playing movie search
+
   void showedPopularMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
     _loadNextPopularMoviesPage();
@@ -212,4 +217,5 @@ class MovieListViewModel extends ChangeNotifier {
     if (index < _movies.length - 1) return;
     _loadNextTopRatedMoviesPage();
   }
+
 }
