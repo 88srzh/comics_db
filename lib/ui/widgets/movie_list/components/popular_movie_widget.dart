@@ -36,8 +36,8 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
           child: Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
             child: Container(
-              width: 114,
               height: 200,
+              width: 114,
               clipBehavior: Clip.antiAlias,
               decoration: const BoxDecoration(
                 color: AppColors.movieBorderLine,
