@@ -60,17 +60,6 @@ class MovieListViewModel extends ChangeNotifier {
       },
     );
 
-    // _nowPlayingMoviePaginator = Paginator<Movie>(
-    //   (page) async {
-    //     final result = await _movieService.nowPlayingMovie(page, _localeStorage.localeTag);
-    //     return PaginatorLoadResult(
-    //       data: result.movies,
-    //       currentPage: result.page,
-    //       totalPage: result.totalPages,
-    //     );
-    //   },
-    // );
-
     _searchMoviePaginator = Paginator<Movie>(
       (page) async {
         final result = await _movieService.searchMovie(page, _localeStorage.localeTag, _searchQuery ?? '');

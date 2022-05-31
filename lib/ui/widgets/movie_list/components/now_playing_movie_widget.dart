@@ -16,8 +16,8 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final locale = Localizations.localeOf(context);
-    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
+    // final locale = Localizations.localeOf(context);
+    context.read<NowPlayingMovieModel>().setupLocale(context);
   }
 
   @override

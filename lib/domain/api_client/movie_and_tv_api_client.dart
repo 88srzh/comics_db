@@ -35,7 +35,7 @@ class MovieAndTvApiClient {
   Future<PopularAndTopRatedMovieResponse> topRatedMovie(
     int page,
     String locale,
-    // String apiKey,
+    String apiKey,
   ) {
     PopularAndTopRatedMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
