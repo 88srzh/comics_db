@@ -14,18 +14,19 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<TopRatedMovieModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<TopRatedMovieViewModel>().setupTopRatedMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    final topRatedMovieModel = context.watch<TopRatedMovieViewModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: topRatedMovieModel.movies.length,
+      itemCount: topRatedMovieModel.topRatedMovies.length,
       itemBuilder: (BuildContext context, int index) {
         // topRatedMovieModel.searchTopRatedMovie();
-        final topMovie = topRatedMovieModel.movies[index];
+        final topMovie = topRatedMovieModel.topRatedMovies[index];
         final backdropPath = topMovie.backdropPath;
         return Padding(
           padding: const EdgeInsets.only(right: 15.0),

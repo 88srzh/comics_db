@@ -39,6 +39,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final trailerKey = trailerData.trailerKey;
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Movie Details'),
+      ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(

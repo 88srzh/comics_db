@@ -27,12 +27,10 @@ class MovieListData {
   });
 }
 
-// TODO: may be divide paginator, because it doesn't work
 class MovieListViewModel extends ChangeNotifier {
   final _movieService = MovieService();
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
-  late final Paginator<Movie> _topRatedMoviePaginator;
 
   // late final Paginator<Movie> _nowPlayingMoviePaginator;
 
@@ -62,28 +60,6 @@ class MovieListViewModel extends ChangeNotifier {
       },
     );
 
-    _topRatedMoviePaginator = Paginator<Movie>(
-      (page) async {
-        final result = await _movieService.topRatedMovie(page, _localeStorage.localeTag);
-        return PaginatorLoadResult(
-          data: result.movies,
-          currentPage: result.page,
-          totalPage: result.totalPages,
-        );
-      },
-    );
-
-    // _nowPlayingMoviePaginator = Paginator<Movie>(
-    //   (page) async {
-    //     final result = await _movieService.nowPlayingMovie(page, _localeStorage.localeTag);
-    //     return PaginatorLoadResult(
-    //       data: result.movies,
-    //       currentPage: result.page,
-    //       totalPage: result.totalPages,
-    //     );
-    //   },
-    // );
-
     _searchMoviePaginator = Paginator<Movie>(
       (page) async {
         final result = await _movieService.searchMovie(page, _localeStorage.localeTag, _searchQuery ?? '');
@@ -103,12 +79,6 @@ class MovieListViewModel extends ChangeNotifier {
     await _resetPopularMovieList();
   }
 
-  Future<void> setupTopRatedMovieLocale(Locale locale) async {
-    if (!_localeStorage.updateLocale(locale)) return;
-    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
-    await _resetTopRatedMovieList();
-  }
-
   Future<void> _resetPopularMovieList() async {
     await _popularMoviePaginator.reset();
     await _searchMoviePaginator.reset();
@@ -116,14 +86,7 @@ class MovieListViewModel extends ChangeNotifier {
     await _loadNextPopularMoviesPage();
   }
 
-
-  Future<void> _resetTopRatedMovieList() async {
-    await _topRatedMoviePaginator.reset();
-    await _searchMoviePaginator.reset();
-    _movies.clear();
-    await _loadNextTopRatedMoviesPage();
-  }
-
+// TODO: move to a separate file
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
@@ -144,23 +107,10 @@ class MovieListViewModel extends ChangeNotifier {
       _movies = _searchMoviePaginator.data.map(_makeListData).toList();
     } else {
       await _popularMoviePaginator.loadNextMoviesPage();
-
       _movies = _popularMoviePaginator.data.map(_makeListData).toList();
     }
     notifyListeners();
   }
-
-  Future<void> _loadNextTopRatedMoviesPage() async {
-    if (isSearchMode) {
-      await _searchMoviePaginator.loadNextMoviesPage();
-      _movies = _searchMoviePaginator.data.map(_makeListData).toList();
-    } else {
-      await _topRatedMoviePaginator.loadNextMoviesPage();
-      _movies = _topRatedMoviePaginator.data.map(_makeListData).toList();
-    }
-    notifyListeners();
-  }
-
 
   void onMovieTap(BuildContext context, int index) {
     final id = _movies[index].id;
@@ -189,33 +139,10 @@ class MovieListViewModel extends ChangeNotifier {
     );
   }
 
-  Future<void> searchTopRatedMovie(String text) async {
-    searchDebounce?.cancel();
-    searchDebounce = Timer(
-      const Duration(milliseconds: 300),
-      () async {
-        final searchQuery = text.isNotEmpty ? text : null;
-        if (_searchQuery == searchQuery) return;
-        _searchQuery = searchQuery;
-        _movies.clear();
-        if (isSearchMode) {
-          await _searchMoviePaginator.reset();
-        }
-        _loadNextTopRatedMoviesPage();
-      },
-    );
-  }
-
 // TODO: add now playing movie search
 
   void showedPopularMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;
     _loadNextPopularMoviesPage();
   }
-
-  void showedTopRatedMovieAtIndex(int index) {
-    if (index < _movies.length - 1) return;
-    _loadNextTopRatedMoviesPage();
-  }
-
 }
