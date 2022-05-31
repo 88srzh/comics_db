@@ -26,10 +26,11 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
-  final topRatedMovieModel = TopRatedMovieModel();
+  final topRatedMovieModel = TopRatedMovieViewModel();
   final nowPlayingMovieModel = NowPlayingMovieModel();
   final movieListModel = MovieListViewModel();
   final upcomingMovieModel = UpcomingMovieModel();
+
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
   final airingTodayModel = AiringTodayTvsModel();
@@ -50,10 +51,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     super.didChangeDependencies();
     //
     tvTopRatedModel.setupLocale(context);
-    //   upcomingMovieModel.setupLocale(context);
     tvPopularModel.setupLocale(context);
     airingTodayModel.setupLocale(context);
-    //   settingsModel.setupLocale(context);
     trendingAllModel.setupPage(context);
   }
 

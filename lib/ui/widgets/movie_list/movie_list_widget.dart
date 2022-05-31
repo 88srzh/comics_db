@@ -18,12 +18,12 @@ class MovieListWidget extends StatefulWidget {
 }
 
 class _MovieListWidgetState extends State<MovieListWidget> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final locale = Localizations.localeOf(context);
-    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   final locale = Localizations.localeOf(context);
+  //   context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
+  // }
 
   @override
   Widget build(BuildContext context) {

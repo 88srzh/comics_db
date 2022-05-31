@@ -1,4 +1,5 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,12 +15,13 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<TopRatedMovieModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieModel>();
+    final topRatedMovieModel = context.watch<TopRatedMovieViewModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: topRatedMovieModel.movies.length,
