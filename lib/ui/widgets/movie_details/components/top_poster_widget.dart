@@ -23,6 +23,19 @@ class MovieTopPosterWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
+          child: Opacity(
+            opacity: 0.25,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: backdropPath != null
+                  ? Image.network(
+                      ImageDownloader.imageUrl(backdropPath),
+                    )
+                  : Image.asset(AppImages.noImageBig),
+            ),
+          ),
+        ),
+        Positioned(
           top: 45,
           left: 10,
           child: SizedBox(
@@ -52,7 +65,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // const SizedBox(height: 5),
                 Row(
                   children: [
                     Align(
@@ -181,28 +193,15 @@ class MovieTopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          child: Opacity(
-            opacity: 0.25,
-            child: AspectRatio(
-              aspectRatio: 390 / 220,
-              child: backdropPath != null
-                  ? Image.network(
-                      ImageDownloader.imageUrl(backdropPath),
-                    )
-                  : Image.asset(AppImages.noImageBig),
-            ),
-          ),
-        ),
         // TODO: исправить стрелку, чтобы не съезжала
-        Positioned(
-          left: 5,
-          // top: 5,
-          child: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
-          ),
-        ),
+        // Positioned(
+        //   left: 5,
+        //   top: 5,
+        // child: IconButton(
+        //   onPressed: () => Navigator.of(context).pop(),
+        //   icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+        // ),
+        // ),
         Positioned(
           top: 55,
           left: 240,
