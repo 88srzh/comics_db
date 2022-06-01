@@ -18,7 +18,8 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<UpcomingMovieModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<UpcomingMovieModel>().setupUpcomingMovieLocale(locale);
   }
 
   @override
@@ -48,7 +49,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                     // TODO: уменьшить кол-во фильмов либо исправить ползунок
                     itemCount: upcomingMovieModel.movies.length,
                     itemBuilder: (BuildContext context, int index) {
-                      upcomingMovieModel.showedMovieAtIndex(index);
+                      upcomingMovieModel.showedNowPlayingMovieAtIndex(index);
                       final upcomingMovie = upcomingMovieModel.movies[index];
                       final backdropPath = upcomingMovie.backdropPath;
                       return InkWell(
@@ -69,7 +70,12 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                   alignment: Alignment.bottomCenter,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(upcomingMovieModel.movies.length, (index) => buildDotNew(index: index)),
+                    // TODO: fix endless list
+                    children: List.generate(
+                      20,
+                      (index) => buildDotNew(index: index),
+                      growable: false,
+                    ),
                   ),
                 ),
               ),
@@ -79,7 +85,6 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
       ],
     );
   }
-
 
   AnimatedContainer buildDotNew({int? index}) {
     return AnimatedContainer(

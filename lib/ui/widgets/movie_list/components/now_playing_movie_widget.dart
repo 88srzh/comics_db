@@ -1,7 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_now_playing/now_playing_movie_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,18 +15,18 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // final locale = Localizations.localeOf(context);
-    context.read<NowPlayingMovieModel>().setupLocale(context);
+    final locale = Localizations.localeOf(context);
+    context.read<NowPlayingMovieListModel>().setupNowPlayingMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final nowPlayingMovieModel = context.watch<NowPlayingMovieModel>();
+    final nowPlayingMovieModel = context.watch<NowPlayingMovieListModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: nowPlayingMovieModel.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        nowPlayingMovieModel.showedMovieAtIndex(index);
+        nowPlayingMovieModel.showedNowPlayingMovieAtIndex(index);
         final nowPlayingMovie = nowPlayingMovieModel.movies[index];
         final posterPath = nowPlayingMovie.posterPath;
         return InkWell(

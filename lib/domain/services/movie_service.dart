@@ -19,6 +19,10 @@ class MovieService {
   Future<PopularAndTopRatedMovieResponse> nowPlayingMovie(int page, String locale) async =>
       _movieAndTvApiClient.nowPlayingMovie(page, locale, Configuration.apiKey);
 
+  Future<PopularAndTopRatedMovieResponse> upcomingMovie(int page, String locale) async =>
+      _movieAndTvApiClient.upcomingMovie(page, locale, Configuration.apiKey);
+
+
   Future<PopularAndTopRatedMovieResponse> searchMovie(int page, String locale, String query) async =>
       _movieAndTvApiClient.searchMovie(page, locale, query, Configuration.apiKey);
 

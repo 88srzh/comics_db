@@ -70,4 +70,11 @@ class ScreenFactory {
       child: const MovieNowPlayingListWidget(),
     );
   }
+
+  Widget makeUpcomingMovieList() {
+    return ChangeNotifierProvider(
+      create: (_) => NowPlayingMovieListModel(),
+      child: const MovieNowPlayingListWidget(),
+    );
+  }
 }
