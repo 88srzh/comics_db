@@ -4,7 +4,7 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/library/paginator.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
