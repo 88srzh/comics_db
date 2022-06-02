@@ -8,15 +8,11 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class MovieListViewModel extends ChangeNotifier {
   final _movieService = MovieService();
   late final Paginator<Movie> _popularMoviePaginator;
   late final Paginator<Movie> _searchMoviePaginator;
 
-  // late final Paginator<Movie> _nowPlayingMoviePaginator;
-
-  // late final Paginator<Movie> _similarMoviePaginator;
   Timer? searchDebounce;
   final _localeStorage = LocalizedModelStorage();
   var _movies = <MovieListData>[];
@@ -54,7 +50,6 @@ class MovieListViewModel extends ChangeNotifier {
     );
   }
 
-// ! - TODO: вынести в отдельный файл
   Future<void> setupPopularMovieLocale(Locale locale) async {
     if (!_localeStorage.updateLocale(locale)) return;
     _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
@@ -68,7 +63,6 @@ class MovieListViewModel extends ChangeNotifier {
     await _loadNextPopularMoviesPage();
   }
 
-// TODO: move to a separate file
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
@@ -120,8 +114,6 @@ class MovieListViewModel extends ChangeNotifier {
       },
     );
   }
-
-// TODO: add now playing movie search
 
   void showedPopularMovieAtIndex(int index) {
     if (index < _movies.length - 1) return;

@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -5,25 +5,12 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie
 import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/upcoming_movie_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// TODO: maybe change to stateless
-class MovieListWidget extends StatefulWidget {
+class MovieListWidget extends StatelessWidget {
   const MovieListWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MovieListWidget> createState() => _MovieListWidgetState();
-}
-
-class _MovieListWidgetState extends State<MovieListWidget> {
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   final locale = Localizations.localeOf(context);
-  //   context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
-  // }
 
   @override
   Widget build(BuildContext context) {
