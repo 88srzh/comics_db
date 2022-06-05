@@ -3,6 +3,7 @@ import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 
 class AuthService {
+  // TODO: if token expired do logout and redirect to some screen that will say that token expired
   final _sessionDataProvider = SessionDataProvider();
   final _authApiClient = AuthApiClient();
   final _accountApiClient = AccountApiClient();
