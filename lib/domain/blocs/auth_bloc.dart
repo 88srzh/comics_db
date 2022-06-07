@@ -86,23 +86,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(AuthState initialState) : super(initialState) {
     on<AuthEvent>(((event, emit) async {
       if (event is AuthCheckStatusEvent) {
-        onAuthCheckStatusEvent(event, emit);
+        await onAuthCheckStatusEvent(event, emit);
       } else if (event is AuthLoginEvent) {
-        onAuthLogInEvent(event, emit);
+        await onAuthLogInEvent(event, emit);
       } else if (event is AuthLogOutEvent) {
-        onAuthLogoutEvent(event, emit);
+        await onAuthLogoutEvent(event, emit);
       }
     }), transformer: sequential());
     add(AuthCheckStatusEvent());
   }
 
-  void onAuthCheckStatusEvent(AuthCheckStatusEvent event, Emitter<AuthState> emitter) async {
+  Future<void> onAuthCheckStatusEvent(AuthCheckStatusEvent event, Emitter<AuthState> emitter) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final newState = sessionId != null ? AuthAuthorizedState() : AuthUnauthorizedState();
     emit(newState);
   }
 
-  void onAuthLogInEvent(AuthLoginEvent event, Emitter<AuthState> emitter) async {
+  Future<void> onAuthLogInEvent(AuthLoginEvent event, Emitter<AuthState> emitter) async {
     try {
       final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
       final accountId = await _accountApiClient.getAccountInfo(sessionId);
@@ -114,7 +114,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  void onAuthLogoutEvent(AuthLogOutEvent event, Emitter<AuthState> emitter) async {
+  Future<void> onAuthLogoutEvent(AuthLogOutEvent event, Emitter<AuthState> emitter) async {
     try {
       await _sessionDataProvider.deleteSessionId();
       await _sessionDataProvider.deleteAccountId();
