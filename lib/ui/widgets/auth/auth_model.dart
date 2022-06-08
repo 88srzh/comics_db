@@ -1,8 +1,20 @@
 import 'dart:async';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
+import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
+import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/auth_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class AuthViewCubit extends Cubit<AuthViewCubitState> {
+  final AuthBloc authBloc;
+  late final StreamSubscription<AuthState> authBlocSubscription;
+
+  AuthViewCubit(AuthViewCubitState initialState, this.authBloc) : super(initialState);
+
+  bool _isValid(String login, String password) => login.isNotEmpty && password.isNotEmpty;
+}
 
 class AuthViewModel extends ChangeNotifier {
   final _authService = AuthService();
@@ -13,14 +25,13 @@ class AuthViewModel extends ChangeNotifier {
 
   String? get errorMessage => _errorMessage;
 
-  bool _isAuthProgress = false;
+  // bool _isAuthProgress = false;
+  //
+  // bool get canStartAuth => !_isAuthProgress;
+  //
+  // bool get isAuthProgress => _isAuthProgress;
 
-  bool get canStartAuth => !_isAuthProgress;
-
-  bool get isAuthProgress => _isAuthProgress;
-
-  bool _isValid(String login, String password) =>
-      login.isNotEmpty && password.isNotEmpty;
+  bool _isValid(String login, String password) => login.isNotEmpty && password.isNotEmpty;
 
   Future<String?> _login(String login, String password) async {
     try {

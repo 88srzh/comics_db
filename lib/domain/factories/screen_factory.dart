@@ -1,7 +1,7 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
-import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_model.dart';
+import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
