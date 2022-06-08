@@ -11,11 +11,11 @@ class LoaderViewCubit extends Cubit<LoaderViewCubitState> {
 
   LoaderViewCubit(LoaderViewCubitState initialState, this.authBloc) : super(initialState) {
     authBloc.add(AuthCheckStatusEvent());
-    onState(authBloc.state);
-    authBlocSubscription = authBloc.stream.listen(onState);
+    _onState(authBloc.state);
+    authBlocSubscription = authBloc.stream.listen(_onState);
   }
 
-  void onState(AuthState state) {
+  void _onState(AuthState state) {
     if (state is AuthAuthorizedState) {
       emit(LoaderViewCubitState.authorized);
     } else if (state is AuthUnauthorizedState) {

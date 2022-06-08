@@ -4,6 +4,7 @@ import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/auth_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,50 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
   AuthViewCubit(AuthViewCubitState initialState, this.authBloc) : super(initialState);
 
   bool _isValid(String login, String password) => login.isNotEmpty && password.isNotEmpty;
+
+  void auth({required String login, required String password}) {
+    if (!_isValid(login, password)) {
+      final state = AuthViewCubitErrorState('Fill your login and password');
+      emit(state);
+      return;
+    }
+    authBloc.add(AuthLoginEvent(login: login, password: password));
+  }
+
+  void _onState(AuthState state) {
+    if (state is AuthUnauthorizedState) {
+      emit(AuthViewCubitFormFillInProgressState());
+    } else if (state is AuthAuthorizedState) {
+      emit(AuthViewCubitSuccessAuthState());
+    } else if (state is AuthFailureState) {
+      final message = _mapErrorToMessage(state.error);
+      final newState = AuthViewCubitErrorState(message);
+      emit(newState);
+    }
+  }
+
+  String _mapErrorToMessage(Object error) {
+    if (error is! ApiClientException) {
+      return 'Unknown error, please try again later';
+    }
+    switch (error.type) {
+      case ApiClientExceptionType.network:
+        return 'Server is not available. Check your internet connection';
+      // Navigator.of(context).pushReplacementNamed(
+      //     MainNavigationRouteNames.networkConnectionError);
+      case ApiClientExceptionType.auth:
+        return 'Incorrect login or password';
+      case ApiClientExceptionType.sessionExpired:
+      case ApiClientExceptionType.other:
+        return 'An error has occurred, try again later';
+    }
+  }
+
+  @override
+  Future<void> close() {
+    authBlocSubscription.cancel();
+    return super.close();
+  }
 }
 
 class AuthViewModel extends ChangeNotifier {

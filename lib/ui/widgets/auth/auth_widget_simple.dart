@@ -167,8 +167,7 @@ class _ErrorMessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final errorMessage =
     //     NotifierProvider.watch<AuthViewModel>(context)?.errorMessage;
-    final errorMessage =
-        context.select((AuthViewModel model) => model.errorMessage);
+    final errorMessage = context.select((AuthViewModel model) => model.errorMessage);
     if (errorMessage == null) return const SizedBox.shrink();
 
     return Padding(
