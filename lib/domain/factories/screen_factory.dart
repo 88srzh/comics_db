@@ -1,4 +1,5 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
+import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
@@ -24,18 +25,22 @@ class ScreenFactory {
     final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
     _authBloc = authBloc;
     return BlocProvider<LoaderViewCubit>(
-      // create: (context) => LoaderViewModel(context),
-      create: (context) => LoaderViewCubit(LoaderViewCubitState.unknown, authBloc),
+      create: (_) => LoaderViewCubit(LoaderViewCubitState.unknown, authBloc),
       child: const LoaderWidget(),
       lazy: false,
     );
   }
 
   Widget makeAuth() {
-    return ChangeNotifierProvider(
-      create: (_) => AuthViewModel(),
-      child: const AuthWidget(),
+    final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+    _authBloc = authBloc;
+    return BlocProvider<AuthViewCubit>(
+      create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
     );
+    // return ChangeNotifierProvider(
+    //   create: (_) => AuthViewModel(),
+    //   child: const AuthWidget(),
+    // );
   }
 
 // TODO: may be delete provider

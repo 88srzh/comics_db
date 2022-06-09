@@ -3,7 +3,7 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
-import 'package:comics_db_app/domain/services/auth_service.dart';
+import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
