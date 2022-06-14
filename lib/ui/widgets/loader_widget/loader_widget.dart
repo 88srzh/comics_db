@@ -4,13 +4,24 @@ import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoaderWidget extends StatelessWidget {
+class LoaderWidget extends StatefulWidget {
   const LoaderWidget({Key? key}) : super(key: key);
 
   @override
+  State<LoaderWidget> createState() => _LoaderWidgetState();
+}
+
+class _LoaderWidgetState extends State<LoaderWidget> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final cubit = context.read<LoaderViewCubit>();
+    onLoaderViewCubitStateChange(context, cubit.state);
+  }
+  @override
   Widget build(BuildContext context) {
     return BlocListener<LoaderViewCubit, LoaderViewCubitState>(
-      listenWhen: (previous, current) => current != LoaderViewCubitState.unknown,
+      // listenWhen: (previous, current) => current != LoaderViewCubitState.unknown,
       listener: onLoaderViewCubitStateChange,
       child: const Scaffold(
         body: Center(

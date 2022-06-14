@@ -1,6 +1,6 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_model.dart';
+import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
@@ -27,7 +27,6 @@ class ScreenFactory {
     return BlocProvider<LoaderViewCubit>(
       create: (_) => LoaderViewCubit(LoaderViewCubitState.unknown, authBloc),
       child: const LoaderWidget(),
-      lazy: false,
     );
   }
 
@@ -36,6 +35,7 @@ class ScreenFactory {
     _authBloc = authBloc;
     return BlocProvider<AuthViewCubit>(
       create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
+      child: const AuthWidget(),
     );
     // return ChangeNotifierProvider(
     //   create: (_) => AuthViewModel(),
