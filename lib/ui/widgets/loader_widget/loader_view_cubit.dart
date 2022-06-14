@@ -9,12 +9,13 @@ class LoaderViewCubit extends Cubit<LoaderViewCubitState> {
   late final StreamSubscription<AuthState> authBlocSubscription;
 
   LoaderViewCubit(LoaderViewCubitState initialState, this.authBloc) : super(initialState) {
-    // if (authBloc.state is AuthAuthorizedState) {
-    //   emit(LoaderViewCubitState.authorized);
-    // } else {
-    _onState(authBloc.state);
-    authBlocSubscription = authBloc.stream.listen(_onState);
-    authBloc.add(AuthCheckStatusEvent());
+    Future.microtask(
+      () {
+        _onState(authBloc.state);
+        authBlocSubscription = authBloc.stream.listen(_onState);
+        authBloc.add(AuthCheckStatusEvent());
+      },
+    );
   }
 
   // }
