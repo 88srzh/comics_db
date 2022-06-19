@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
@@ -113,7 +114,7 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }), transformer: sequential());
   }
 
-  Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emitter) async {
+  Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
       _loadNextPage(state.searchMovieContainer, (nextPage) async {
         final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -148,8 +149,8 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }
   }
 
-  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, NextPageLoader loader) async {
-    // if /**/(container.isComplete) return null;
+  Future<MovieListContainer?> _loadNextPage(
+      MovieListContainer container, Future<PopularAndTopRatedMovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.popularMovieContainer.currentPage + 1;
     final result = await loader(nextPage);
@@ -163,12 +164,14 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     return newContainer;
   }
 
-  Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emitter) async {
+  Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
     emit(MovieListState.initial());
-    // add(MovieListEventLoadNextPage());
+    // add(MovieListEventLoadNextPage(event.locale));
   }
 
-  Future<void> onMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emitter) async {}
+  Future<void> onMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
+    if (state.searchQuery == event.query) return;
+    final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
+    emit(newState);
+  }
 }
-
-typedef NextPageLoader = Future<PopularAndTopRatedMovieResponse> Function(int);
