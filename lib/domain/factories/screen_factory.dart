@@ -1,5 +1,6 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
+import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
@@ -9,7 +10,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
@@ -62,9 +63,12 @@ class ScreenFactory {
   }
 
   Widget makePopularMovieList() {
-    return ChangeNotifierProvider(
-      create: (_) => MovieListViewModel(),
-      // child: const PopularMovieWidgetProvider(),
+    return BlocProvider(
+      create: (_) => MovieListCubit(
+        movieListBloc: MovieListBloc(
+          MovieListState.initial(),
+        ),
+      ),
       child: const MoviePopularListWidget(),
     );
   }
