@@ -62,7 +62,7 @@ class MovieListState {
   final MovieListContainer searchMovieContainer;
   final String searchQuery;
 
-  List<Movie> get movies => isSearchMode ? searchMovieContainer.movies : popularMovieContainer.movies;
+  List<Movie> get popularMovies => isSearchMode ? searchMovieContainer.movies : popularMovieContainer.movies;
 
   MovieListState.initial()
       : popularMovieContainer = const MovieListContainer.initial(),
@@ -126,9 +126,7 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       if (state.searchMovieContainer.isComplete) return;
       final nextPage = state.searchMovieContainer.currentPage + 1;
       final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
-      // final movies = state.popularMovieContainer.movies;
       final movies = List<Movie>.from(state.popularMovieContainer.movies)..addAll(result.movies);
-      // movies.addAll(result.movies);
       final container = state.searchMovieContainer.copyWith(
         movies: movies,
         currentPage: result.page,
@@ -140,9 +138,7 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       if (state.popularMovieContainer.isComplete) return;
       final nextPage = state.popularMovieContainer.currentPage + 1;
       final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
-      // final movies = state.popularMovieContainer.movies;
       final movies = List<Movie>.from(state.popularMovieContainer.movies)..addAll(result.movies);
-      // movies.addAll(result.movies);
       final container = state.popularMovieContainer.copyWith(
         movies: movies,
         currentPage: result.page,
@@ -159,8 +155,6 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     final nextPage = state.popularMovieContainer.currentPage + 1;
     final result = await loader(nextPage);
     final movies = List<Movie>.from(container.movies)..addAll(result.movies);
-    // final movies = container.movies;
-    // movies.addAll(result.movies);
     final newContainer = container.copyWith(
       movies: movies,
       currentPage: result.page,

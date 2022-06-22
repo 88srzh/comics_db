@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MovieListCubitState {
@@ -52,7 +51,7 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   }
 
   void _onState(MovieListState state) {
-    final movies = state.movies.map(_makeListData).toList();
+    final movies = state.popularMovies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
     emit(newState);
   }
