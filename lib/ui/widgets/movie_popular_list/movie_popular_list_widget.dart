@@ -51,7 +51,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 cubit.showedPopularMovieAtIndex(index);
                 final movie = cubit.state.movies[index];
                 final posterPath = movie.posterPath;
-                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
+                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index);
               },
             ),
             Padding(
@@ -94,7 +94,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
     Key? key,
     required this.posterPath,
     required this.movie,
-    required this.model,
+    required this.cubit,
     required this.index,
   }) : super(key: key);
 

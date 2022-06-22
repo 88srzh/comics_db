@@ -1,6 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
@@ -14,6 +15,7 @@ import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -28,7 +30,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   final _screenFactory = ScreenFactory();
   final topRatedMovieModel = TopRatedMovieViewModel();
   final nowPlayingMovieModel = NowPlayingMovieListModel();
-  final movieListModel = MovieListViewModel();
   final upcomingMovieModel = UpcomingMovieModel();
 
   final tvPopularModel = TvPopularModel();
@@ -66,7 +67,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => topRatedMovieModel),
-              ChangeNotifierProvider(create: (_) => movieListModel),
+              // ChangeNotifierProvider(create: (_) => movieListModel),
+              BlocProvider(create: (_) => MovieListCubit(movieListBloc: MovieListBloc(MovieListState.initial()))),
               ChangeNotifierProvider(create: (_) => upcomingMovieModel),
               ChangeNotifierProvider(create: (_) => nowPlayingMovieModel),
               // _screenFactory.makeUpcomingMovieList(),

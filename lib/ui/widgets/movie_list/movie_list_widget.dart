@@ -5,7 +5,7 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie
 import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/upcoming_movie_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -192,11 +192,11 @@ class _SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //TODO: поменять на модель поиска по всем фильмам
-    final model = context.read<MovieListViewModel>();
+    final cubit = context.read<MovieListCubit>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
-        onChanged: model.searchPopularMovie,
+        onChanged: cubit.searchPopularMovie,
         decoration: InputDecoration(
           labelText: 'Search',
           labelStyle: const TextStyle(
