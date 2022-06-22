@@ -120,4 +120,4 @@ class MovieListViewModel extends ChangeNotifier {
     _loadNextPopularMoviesPage();
   }
 }
- */
+*/

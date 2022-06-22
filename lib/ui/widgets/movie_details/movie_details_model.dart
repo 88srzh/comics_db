@@ -4,85 +4,15 @@ import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MovieDetailsPosterData {
-  final String? posterPath;
-  final String? tagline;
-  final String? backdropPath;
-  final bool isFavorite;
-
-  IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;
-  final String title;
-  final String? voteAverage;
-  final int voteCount;
-  final double popularity;
-
-  MovieDetailsPosterData({
-    this.posterPath,
-    this.backdropPath,
-    this.isFavorite = false,
-    required this.title,
-    this.tagline,
-    this.voteAverage,
-    required this.voteCount,
-    required this.popularity,
-  });
-
-  MovieDetailsPosterData copyWith({
-    String? posterPath,
-    String? backdropPath,
-    bool? isFavorite,
-    String? title,
-    String? tagline,
-    String? voteAverage,
-    int? voteCount,
-    double? popularity,
-  }) {
-    return MovieDetailsPosterData(
-      posterPath: posterPath ?? this.posterPath,
-      backdropPath: backdropPath ?? this.backdropPath,
-      isFavorite: isFavorite ?? this.isFavorite,
-      voteAverage: voteAverage ?? this.voteAverage,
-      title: title ?? this.title,
-      tagline: tagline ?? this.tagline,
-      voteCount: voteCount ?? this.voteCount,
-      popularity: popularity ?? this.popularity,
-    );
-  }
-}
-
-class MovieDetailsTrailerData {
-  final String? trailerKey;
-
-  MovieDetailsTrailerData({this.trailerKey});
-}
-
-class MovieDetailsMoviePeopleData {
-  final String name;
-  final String job;
-
-  MovieDetailsMoviePeopleData({
-    required this.name,
-    required this.job,
-  });
-}
-
-class MovieDetailsMovieActorData {
-  final String name;
-  final String character;
-  final String? profilePath;
-
-  MovieDetailsMovieActorData({
-    required this.name,
-    required this.character,
-    required this.profilePath,
-  });
-}
-
 class MovieDetailsData {
   String title = '';
+
   // String tagline = '';
   bool isLoading = true;
   String overview = '';
@@ -102,6 +32,8 @@ class MovieDetailsModel extends ChangeNotifier {
   final data = MovieDetailsData();
   final _localeStorage = LocalizedModelStorage();
   late DateFormat _dateFormat;
+
+  // this function isn't used
   Future<void>? Function()? onSessionExpired;
 
   MovieDetailsModel(this.movieId);
