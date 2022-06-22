@@ -22,14 +22,10 @@ class MovieService {
   Future<PopularAndTopRatedMovieResponse> upcomingMovie(int page, String locale) async =>
       _movieAndTvApiClient.upcomingMovie(page, locale, Configuration.apiKey);
 
-
   Future<PopularAndTopRatedMovieResponse> searchMovie(int page, String locale, String query) async =>
       _movieAndTvApiClient.searchMovie(page, locale, query, Configuration.apiKey);
 
-  Future<MovieDetailsLocal> loadMovieDetails({
-    required int movieId,
-    required String locale,
-  }) async {
+  Future<MovieDetailsLocal> loadMovieDetails({required int movieId, required String locale}) async {
     final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
@@ -40,18 +36,17 @@ class MovieService {
     return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
   }
 
-
   Future<void> updateFavoriteMovie({required int movieId, required bool isFavorite}) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
 
     if (sessionId == null || accountId == null) return;
-      await _accountApiClient.markAsFavorite(
-        accountId: accountId,
-        sessionId: sessionId,
-        mediaType: MediaType.movie,
-        mediaId: movieId,
-        isFavorite: isFavorite,
-      );
-    }
+    await _accountApiClient.markAsFavorite(
+      accountId: accountId,
+      sessionId: sessionId,
+      mediaType: MediaType.movie,
+      mediaId: movieId,
+      isFavorite: isFavorite,
+    );
   }
+}
