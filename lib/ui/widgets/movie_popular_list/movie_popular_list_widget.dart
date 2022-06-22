@@ -1,8 +1,9 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,12 +20,12 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MovieListViewModel>().setupPopularMovieLocale(locale);
+    context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<MovieListViewModel>();
+    final cubit = context.watch<MovieListCubit>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,13 +45,13 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
             ListView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.only(top: 70.0),
-              itemCount: model.movies.length,
+              itemCount: cubit.state.movies.length,
               itemExtent: 165,
               itemBuilder: (BuildContext context, int index) {
-                model.showedPopularMovieAtIndex(index);
-                final movie = model.movies[index];
+                cubit.showedPopularMovieAtIndex(index);
+                final movie = cubit.state.movies[index];
                 final posterPath = movie.posterPath;
-                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
+                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index);
               },
             ),
             Padding(
@@ -59,7 +60,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 style: const TextStyle(
                   color: AppColors.genresText,
                 ),
-                onChanged: model.searchPopularMovie,
+                onChanged: cubit.searchPopularMovie,
                 decoration: InputDecoration(
                   labelText: 'Search',
                   labelStyle: const TextStyle(
@@ -93,13 +94,13 @@ class _MoviePopularListRowWidget extends StatelessWidget {
     Key? key,
     required this.posterPath,
     required this.movie,
-    required this.model,
+    required this.cubit,
     required this.index,
   }) : super(key: key);
 
   final String? posterPath;
   final MovieListData movie;
-  final MovieListViewModel model;
+  final MovieListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +175,14 @@ class _MoviePopularListRowWidget extends StatelessWidget {
           ),
           InkWell(
             borderRadius: BorderRadius.circular(20.0),
-            onTap: () => model.onMovieTap(context, index),
+            onTap: () => _onMovieTap(context, movie.id),
           ),
         ],
       ),
     );
+  }
+
+  void _onMovieTap(BuildContext context, int movieId) {
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

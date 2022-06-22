@@ -1,4 +1,4 @@
-import 'dart:async';
+/* import 'dart:async';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/library/paginator.dart';
@@ -120,3 +120,4 @@ class MovieListViewModel extends ChangeNotifier {
     _loadNextPopularMoviesPage();
   }
 }
+ */
