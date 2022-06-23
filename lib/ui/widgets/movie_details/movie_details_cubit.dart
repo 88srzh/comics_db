@@ -1,64 +1,58 @@
-import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie_details_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
-import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
-import 'package:comics_db_app/domain/services/movie_service.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
-import 'package:flutter/material.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:intl/intl.dart';
 
-class MovieDetailsData {
-  String title = '';
-  String tagline = '';
-  bool isLoading = true;
-  String overview = '';
-  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
-  String summary = '';
-  String releaseDate = '';
-  String genres = '';
-  MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
-  List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
-  List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
+class MovieDetailsCubitState {
+  final String localeTag;
+
+  MovieDetailsCubitState({required this.localeTag});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MovieDetailsCubitState && runtimeType == other.runtimeType && localeTag == other.localeTag;
+
+  @override
+  int get hashCode => localeTag.hashCode;
+
+  MovieDetailsCubitState copyWith({
+    String? localeTag,
+  }) {
+    return MovieDetailsCubitState(
+      localeTag: localeTag ?? this.localeTag,
+    );
+  }
 }
 
-class MovieDetailsModel extends ChangeNotifier {
-  final _authService = AuthService();
-  final _movieService = MovieService();
-  final int movieId;
-  final data = MovieDetailsData();
-  final _localeStorage = LocalizedModelStorage();
+class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
+  final MovieDetailsBloc movieDetailsBloc;
+  late final StreamSubscription<MovieDetailsState> movieDetailsBlocSubscription;
   late DateFormat _dateFormat;
 
-  //TODO: this function isn't used
-  Future<void>? Function()? onSessionExpired;
-
-  MovieDetailsModel(this.movieId);
-
-  Future<void> loadMovieDetails(BuildContext context) async {
-    try {
-      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
-      updateData(details.details, details.isFavorite);
-    } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
-    }
+  MovieDetailsCubit({required this.movieDetailsBloc}) : super(MovieDetailsCubitState(localeTag: '')) {
+    Future.microtask(
+      () {
+        _onState();
+      },
+    );
   }
 
-  Future<void> setupLocale(BuildContext context, Locale locale) async {
-    if (!_localeStorage.updateLocale(locale)) return;
-    _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
-    updateData(null, false);
-    await loadMovieDetails(context);
+  void _onState(MovieDetailsState state) {
   }
 
-  void updateData(MovieDetails? details, bool isFavorite) {
+  void updateData(MovieDetails? details, bool isFavorite, MovieDetailsData data) {
     data.title = details?.title ?? 'Loading...';
-    // data.tagline = details?.tagline ?? 'No tagline';
+    data.tagline = details?.tagline ?? 'No tagline';
     data.isLoading = details == null;
     if (details == null) {
-      notifyListeners();
+      // notifyListeners();
       return;
     }
     data.overview = details.overview ?? 'No description';
@@ -82,11 +76,7 @@ class MovieDetailsModel extends ChangeNotifier {
     data.peopleData = makePeopleData(details);
     data.actorsData = details.credits.cast
         .map(
-          (e) => MovieDetailsMovieActorData(
-            name: e.name,
-            character: e.character,
-            profilePath: e.profilePath,
-          ),
+          (e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath),
         )
         .toList();
     notifyListeners();
@@ -101,7 +91,6 @@ class MovieDetailsModel extends ChangeNotifier {
       _handleApiClientException(e, context);
     }
   }
-
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
     var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
@@ -146,16 +135,5 @@ class MovieDetailsModel extends ChangeNotifier {
       texts.add(_dateFormat.format(releaseDate));
     }
     return texts.join(' ');
-  }
-
-  void _handleApiClientException(ApiClientException exception, BuildContext context) {
-    switch (exception.type) {
-      case ApiClientExceptionType.sessionExpired:
-        _authService.logout();
-        MainNavigation.resetNavigation(context);
-        break;
-      default:
-        print(exception);
-    }
   }
 }
