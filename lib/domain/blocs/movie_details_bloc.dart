@@ -1,7 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/configuration/configuration.dart';
+import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 
 abstract class MovieDetailsEvent {}
 
@@ -12,24 +17,52 @@ class MovieDetailsEventLoadPage extends MovieDetailsEvent {
 }
 
 class MovieDetailsContainer {
+  final List<MovieDetailsPosterData> posterData;
+  final List<MovieDetailsTrailerData> trailerData;
+  final List<MovieDetailsMovieActorData> actorData;
   final int movieId;
 
   bool get isComplete => true;
 
-  MovieDetailsContainer({required this.movieId});
+  const MovieDetailsContainer.initial()
+      : posterData = const <MovieDetailsPosterData>[],
+        trailerData = const <MovieDetailsTrailerData>[],
+        actorData = const <MovieDetailsMovieActorData>[],
+        movieId = 0;
+
+  const MovieDetailsContainer({
+    required this.posterData,
+    required this.trailerData,
+    required this.actorData,
+    required this.movieId,
+  });
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MovieDetailsContainer && runtimeType == other.runtimeType && movieId == other.movieId;
+      other is MovieDetailsContainer &&
+          runtimeType == other.runtimeType &&
+          posterData == other.posterData &&
+          trailerData == other.trailerData &&
+          actorData == other.actorData &&
+          movieId == other.movieId;
 
   @override
-  int get hashCode => movieId.hashCode;
+  int get hashCode => posterData.hashCode ^ trailerData.hashCode ^ actorData.hashCode ^ movieId.hashCode;
 
-  MovieDetailsContainer copyWith({int? movieId}) {
-    return MovieDetailsContainer(movieId: movieId ?? this.movieId);
+  MovieDetailsContainer copyWith({
+    List<MovieDetailsPosterData>? posterData,
+    List<MovieDetailsTrailerData>? trailerData,
+    List<MovieDetailsMovieActorData>? actorData,
+    int? movieId,
+  }) {
+    return MovieDetailsContainer(
+      posterData: posterData ?? this.posterData,
+      trailerData: trailerData ?? this.trailerData,
+      actorData: actorData ?? this.actorData,
+      movieId: movieId ?? this.movieId,
+    );
   }
-
 }
 
 class MovieDetailsState {
@@ -37,10 +70,14 @@ class MovieDetailsState {
 
   MovieDetailsState({required this.movieDetailsContainer});
 
+  MovieDetailsState.initial() : movieDetailsContainer = const MovieDetailsContainer.initial();
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MovieDetailsState && runtimeType == other.runtimeType && movieDetailsContainer == other.movieDetailsContainer;
+      other is MovieDetailsState &&
+          runtimeType == other.runtimeType &&
+          movieDetailsContainer == other.movieDetailsContainer;
 
   @override
   int get hashCode => movieDetailsContainer.hashCode;
@@ -48,14 +85,16 @@ class MovieDetailsState {
   MovieDetailsState copyWith({
     MovieDetailsContainer? movieDetailsContainer,
   }) {
-    return MovieDetailsState(movieDetailsContainer: movieDetailsContainer ?? this.movieDetailsContainer)
+    return MovieDetailsState(
+      movieDetailsContainer: movieDetailsContainer ?? this.movieDetailsContainer,
+    );
   }
 }
-
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   final _movieApiClient = MovieAndTvApiClient();
   final _movieService = MovieService();
+  final _authService = AuthService();
 
   MovieDetailsBloc(MovieDetailsState initialState) : super(initialState) {
     on<MovieDetailsEvent>(((event, emit) async {
@@ -68,8 +107,27 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   Future<void> onMovieDetailsLoadPage(MovieDetailsEventLoadPage event, Emitter<MovieDetailsState> emit) async {
     if (state.movieDetailsContainer.isComplete) return;
     final movieId = state.movieDetailsContainer.movieId;
-    final details = await _movieService.loadMovieDetails(movieId: movieId,locale: event.locale);
-    // updateData(details.details, details.isFavorite);
+    try {
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: event.locale);
+      // updateData(details.details, details.isFavorite);
+    } on ApiClientException catch (e) {
+      // _handleApiClientException(e, context);
+      _handleApiClientException(e /* context */);
+    }
+  }
+
+  void _handleApiClientException(
+    ApiClientException exception,
+    // BuildContext context
+  ) {
+    switch (exception.type) {
+      case ApiClientExceptionType.sessionExpired:
+        _authService.logout();
+        // MainNavigation.resetNavigation(context);
+        break;
+      default:
+        print(exception);
+    }
   }
 }
 
@@ -131,4 +189,3 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
 //     default:
 //       print(exception);
 //   }
-}}
