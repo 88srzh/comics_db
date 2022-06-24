@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dar
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:intl/intl.dart';
 
 class MovieDetailsCubitState {
@@ -17,7 +18,7 @@ class MovieDetailsCubitState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieDetailsCubitState && runtimeType == other.runtimeType && localeTag == other.localeTag;
+          other is MovieDetailsCubitState && runtimeType == other.runtimeType && localeTag == other.localeTag;
 
   @override
   int get hashCode => localeTag.hashCode;
@@ -33,18 +34,26 @@ class MovieDetailsCubitState {
 
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   final MovieDetailsBloc movieDetailsBloc;
+  final MovieDetailsData movieDetailsData;
   late final StreamSubscription<MovieDetailsState> movieDetailsBlocSubscription;
   late DateFormat _dateFormat;
 
   MovieDetailsCubit({required this.movieDetailsBloc}) : super(MovieDetailsCubitState(localeTag: '')) {
     Future.microtask(
-      () {
+          () {
         _onState();
       },
     );
   }
 
   void _onState(MovieDetailsState state) {
+    final detailsData = state.
+  }
+
+
+  MovieDetailsPosterData _makeDetailsPosterData(MovieDetails details) {
+    return MovieDetailsPosterData(
+        title: details.title, voteCount: details.voteCount, popularity: details.popularity);
   }
 
   void updateData(MovieDetails? details, bool isFavorite, MovieDetailsData data) {
@@ -77,9 +86,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.actorsData = details.credits.cast
         .map(
           (e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath),
-        )
+    )
         .toList();
-    notifyListeners();
+    // notifyListeners();
+    emit(state)
   }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
@@ -91,6 +101,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       _handleApiClientException(e, context);
     }
   }
+
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
     var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
