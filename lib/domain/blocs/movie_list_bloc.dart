@@ -119,7 +119,8 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
       _loadNextPage(state.searchMovieContainer, (nextPage) async {
-        final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+        final result =
+            await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
         return result;
       });
 
