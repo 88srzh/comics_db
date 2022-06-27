@@ -54,8 +54,16 @@ class ScreenFactory {
   }
 
   Widget makeMovieDetails(int movieId) {
+    // return BlocProvider(
+    //   create: (_) =>MovieDetailsCubit(movieDetailsBloc: MovieDetailState.initial()),
+    //   child: const MovieDetailsWidget(),
+    // TODO: should fix
     return BlocProvider(
-      create: (_) =>MovieDetailsCubit(movieDetailsBloc: MovieDetailState.initial()),
+      create: (_) => MovieListCubit(
+        movieListBloc: MovieListBloc(
+          MovieListState.initial(),
+        ),
+      ),
       child: const MovieDetailsWidget(),
     );
   }
