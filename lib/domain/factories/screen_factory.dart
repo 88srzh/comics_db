@@ -1,6 +1,5 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
-import 'package:comics_db_app/domain/blocs/movie_details_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
@@ -8,7 +7,6 @@ import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
@@ -54,16 +52,13 @@ class ScreenFactory {
   }
 
   Widget makeMovieDetails(int movieId) {
-    // return BlocProvider(
-    //   create: (_) =>MovieDetailsCubit(movieDetailsBloc: MovieDetailState.initial()),
-    //   child: const MovieDetailsWidget(),
     // TODO: should fix
-    return BlocProvider(
-      create: (_) => MovieListCubit(
-        movieListBloc: MovieListBloc(
-          MovieListState.initial(),
-        ),
-      ),
+    return ChangeNotifierProvider(
+      // create: (_) => MovieListCubit(
+      //   movieListBloc: MovieListBloc(
+      //     MovieListState.initial(),
+      //   ),
+      create: (_) => MovieDetailsModel(movieId),
       child: const MovieDetailsWidget(),
     );
   }
