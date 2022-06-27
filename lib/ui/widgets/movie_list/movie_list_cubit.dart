@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MovieListCubitState {
@@ -99,5 +101,11 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
         movieListBloc.add(MovieListEventLoadNextPage(state.localeTag));
       },
     );
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    var movies = <MovieListData>[];
+    final id = movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

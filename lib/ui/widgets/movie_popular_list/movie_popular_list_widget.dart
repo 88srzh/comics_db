@@ -175,7 +175,8 @@ class _MoviePopularListRowWidget extends StatelessWidget {
           ),
           InkWell(
             borderRadius: BorderRadius.circular(20.0),
-            onTap: () => _onMovieTap(context, movie.id),
+            // onTap: () => _onMovieTap(context, movie.id),
+            onTap: () => cubit.onMovieTap(context, index),
           ),
         ],
       ),
