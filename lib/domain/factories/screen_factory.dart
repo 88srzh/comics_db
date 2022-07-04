@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
@@ -53,14 +54,17 @@ class ScreenFactory {
 
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
-    return ChangeNotifierProvider(
-      // create: (_) => MovieListCubit(
-      //   movieListBloc: MovieListBloc(
-      //     MovieListState.initial(),
-      //   ),
-      create: (_) => MovieDetailsModel(movieId),
-      child: const MovieDetailsWidget(),
+    return BlocProvider(
+      create: (_) => MovieDetailsCubit(movieDetailsData, movieDetailsBloc, movieId),
     );
+    // return ChangeNotifierProvider(
+    // create: (_) => MovieListCubit(
+    //   movieListBloc: MovieListBloc(
+    //     MovieListState.initial(),
+    //   ),
+    // create: (_) => MovieDetailsModel(movieId),
+    // child: const MovieDetailsWidget(),
+    // );
   }
 
   Widget makeMovieTrailer(String youtubeKey) {
