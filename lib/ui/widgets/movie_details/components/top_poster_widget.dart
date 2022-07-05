@@ -1,7 +1,9 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +14,14 @@ class MovieTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO add favorite icon button
-    final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
-    final mov
-    final posterPath = movieData.posterPath;
-    final backdropPath = movieData.backdropPath;
+    // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
+    final posterData = context.select((MovieDetailsCubit cubit) => cubit.posterData);
+    final posterPath = posterData.posterPath;
+    final backdropPath = posterData.backdropPath;
     // TODO поменять на модель
-    final summary = context.select((MovieDetailsModel model) => model.data.summary);
-    final releaseDateText = context.select((MovieDetailsModel model) => model.data.releaseDate);
-    final genres = context.select((MovieDetailsModel model) => model.data.genres);
+    // final summary = context.select((MovieDetailsModel model) => model.data.summary);
+    // final releaseDateText = context.select((MovieDetailsModel model) => model.data.releaseDate);
+    // final genres = context.select((MovieDetailsModel model) => model.data.genres);
 
     return Stack(
       children: [
@@ -54,7 +56,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            movieData.title,
+                            // movieData.title,
+                            '123',
                             maxLines: 3,
                             style: const TextStyle(
                               fontSize: 21,
@@ -73,7 +76,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                       child: SizedBox(
                         width: 210,
                         child: Text(
-                          movieData.tagline ?? 'No tagline',
+                          // movieData.tagline ?? 'No tagline',
+                          '123',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(
@@ -94,7 +98,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        releaseDateText,
+                        // releaseDateText,
+                        '123',
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -109,7 +114,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        summary,
+                        // summary,
+                        '123',
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -121,7 +127,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    genres,
+                    // genres,
+                    '123',
                     maxLines: 3,
                     style: const TextStyle(
                       fontSize: 13,
@@ -139,7 +146,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      movieData.voteAverage ?? '0',
+                      // movieData.voteAverage ?? '0',
+                      '123',
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,
@@ -164,7 +172,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      movieData.voteCount.toStringAsFixed(0),
+                      // movieData.voteCount.toStringAsFixed(0),
+                      '123',
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,
@@ -182,7 +191,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      movieData.popularity.toStringAsFixed(0),
+                      // movieData.popularity.toStringAsFixed(0),
+                      '123',
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,

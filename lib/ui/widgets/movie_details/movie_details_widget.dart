@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_wid
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,15 +24,17 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    Future.microtask(
-      () => context.read<MovieDetailsModel>().setupLocale(context, locale),
-    );
+    // Future.microtask(
+    //   () => context.read<MovieDetailsCubit>().setupLocale(context, locale),
+    // );
+    context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final isLoading = context.select((MovieDetailsModel model) => model.data.isLoading);a
+    // final isLoading = context.select((MovieDetailsModel model) => model.data.isLoading);
     final cubit = context.watch<MovieDetailsCubit>();
+
     // if (isLoading) {
     //   return const Center(
     //     child: LoadingIndicatorWidget(),

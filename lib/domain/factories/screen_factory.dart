@@ -1,5 +1,6 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
-import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
+import 'package:comics_db_app/domain/blocs/auth_view_cubit_state.dart';
+import 'package:comics_db_app/domain/blocs/movie_details_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
@@ -52,10 +53,22 @@ class ScreenFactory {
     return const MainScreenWidget();
   }
 
+  Widget makePopularMovieList() {
+    return BlocProvider(
+      create: (_) => MovieListCubit(
+        movieListBloc: MovieListBloc(
+          MovieListState.initial(),
+        ),
+      ),
+      child: const MoviePopularListWidget(),
+    );
+  }
+
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
     return BlocProvider(
-      create: (_) => MovieDetailsCubit(movieDetailsData, movieDetailsBloc, movieId),
+      create: (_) => MovieDetailsCubit(movieDetailsBloc: MovieDetailsBloc(), movieId),
+      child: const MovieDetailsWidget(),
     );
     // return ChangeNotifierProvider(
     // create: (_) => MovieListCubit(
@@ -69,17 +82,6 @@ class ScreenFactory {
 
   Widget makeMovieTrailer(String youtubeKey) {
     return TrailerWidget(youtubeKey: youtubeKey);
-  }
-
-  Widget makePopularMovieList() {
-    return BlocProvider(
-      create: (_) => MovieListCubit(
-        movieListBloc: MovieListBloc(
-          MovieListState.initial(),
-        ),
-      ),
-      child: const MoviePopularListWidget(),
-    );
   }
 
   Widget makeTopRatedMovieList() {
