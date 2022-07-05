@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/blocs/auth_view_cubit.dart';
+import 'package:comics_db_app/domain/blocs/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';

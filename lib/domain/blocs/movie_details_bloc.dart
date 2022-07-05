@@ -37,7 +37,8 @@ class MovieDetailsContainer {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is MovieDetailsContainer && runtimeType == other.runtimeType && movieId == other.movieId;
+      identical(this, other) ||
+      other is MovieDetailsContainer && runtimeType == other.runtimeType && movieId == other.movieId;
 
   @override
   int get hashCode => movieId.hashCode;
@@ -57,7 +58,9 @@ class MovieDetailsState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieDetailsState && runtimeType == other.runtimeType && movieDetailsContainer == other.movieDetailsContainer;
+      other is MovieDetailsState &&
+          runtimeType == other.runtimeType &&
+          movieDetailsContainer == other.movieDetailsContainer;
 
   @override
   int get hashCode => movieDetailsContainer.hashCode;
@@ -77,7 +80,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   final _movieService = MovieService();
   final data = MovieDetailsData();
   final int movieId;
-  DateFormat _dateFormat;
+  late DateFormat _dateFormat;
 
   MovieDetailsBloc(MovieDetailsState initialState, this.movieId, this._dateFormat) : super(initialState) {
     on<MovieDetailsEvent>(((event, emit) async {
