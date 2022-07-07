@@ -67,12 +67,7 @@ class ScreenFactory {
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
     return BlocProvider(
-      create: (_) => MovieDetailsCubit(
-        movieDetailsBloc: MovieDetailsBloc(
-          MovieDetailsState.initial(),
-          movieId,
-        ),
-      ),
+      create: (_) => MovieDetailsCubit(MovieDetailsCubitState.authorized, movieId),
       child: const MovieDetailsWidget(),
     );
     // return ChangeNotifierProvider(
@@ -85,9 +80,9 @@ class ScreenFactory {
     // );
   }
 
-  // Widget makeMovieTrailer(String youtubeKey) {
-  //   return TrailerWidget(youtubeKey: youtubeKey);
-  // }
+  Widget makeMovieTrailer(String youtubeKey) {
+    return TrailerWidget(youtubeKey: youtubeKey);
+  }
 
   Widget makeTopRatedMovieList() {
     return ChangeNotifierProvider(
