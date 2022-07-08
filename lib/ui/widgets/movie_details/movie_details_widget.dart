@@ -9,6 +9,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart'
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
@@ -43,28 +44,34 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
     // final trailerKey = trailerData.trailerKey;
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Movie Details'),
-      ),
-      body: ColoredBox(
-        color: AppColors.kPrimaryColor,
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                const MovieTopPosterWidget(),
-                // const PeoplesWidget(),
-                // const DescriptionWidget(),
-                // TrailerWidget(youtubeKey: trailerKey),
-                // const CastWidget(),
-                // const MovieSimilarWidget(),
-              ],
-            ),
-          ],
+    return BlocListener<MovieDetailsCubit, MovieDetailsCubitState>(
+      listener: onMovieDetailsStateChange,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Movie Details'),
+        ),
+        body: ColoredBox(
+          color: AppColors.kPrimaryColor,
+          child: ListView(
+            children: [
+              Column(
+                children: [
+                  const MovieTopPosterWidget(),
+                  // const PeoplesWidget(),
+                  // const DescriptionWidget(),
+                  // TrailerWidget(youtubeKey: trailerKey),
+                  // const CastWidget(),
+                  // const MovieSimilarWidget(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+  void onMovieDetailsStateChange(BuildContext context, MovieDetailsCubitState state) {
+
   }
 }
