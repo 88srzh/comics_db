@@ -6,10 +6,12 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+
+// import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -20,22 +22,32 @@ enum MovieDetailsCubitState { authorized }
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   // final MovieDetailsBloc movieDetailsBloc;
   final data = MovieDetailsData();
+  final _movieService = MovieService();
   MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
   final int movieId;
   late final StreamSubscription<MovieDetailsState> movieDetailsBlocSubscription;
   var movies = <MovieListData>[];
   late DateFormat _dateFormat;
+  final _localStorage = LocalizedModelStorage();
 
   MovieDetailsCubit(MovieDetailsCubitState initialState, this.movieId) : super(initialState) {
-    // Future.microtask(
-    //       () {
-    //     _onState(movieDetailsBloc.state);
-    //     movieDetailsBlocSubscription = movieDetailsBloc.stream.listen(_onState);
-    //   },
-    // );
+    Future.microtask(
+          () {
+        _onState(movieDetailsBloc.state);
+        movieDetailsBlocSubscription = movieDetailsBloc.stream.listen(_onState);
+      },
+    );
   }
 
-  void _onState(MovieDetailsState state) {}
+  void _onState(MovieDetailsState state) {
+    // final movieId = state.movieDetailsContainer.movieId;
+    // updateData(null, false);
+  }
+
+  void _updateDetails(MovieDetails details) async {
+    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localStorage.localeTag);
+    updateData(details.details, details.isFavorite);
+  }
 
   void onMovieTap(BuildContext context, int index) {
     final id = movies[index].id;
@@ -72,7 +84,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.actorsData = details.credits.cast
         .map(
           (e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath),
-        )
+    )
         .toList();
     // notifyListeners();
 

@@ -28,7 +28,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // Future.microtask(
     //   () => context.read<MovieDetailsCubit>().setupLocale(context, locale),
     // );
-    context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
+    // context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
