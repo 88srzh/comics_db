@@ -20,7 +20,7 @@ import 'package:intl/intl.dart';
 enum MovieDetailsCubitState { authorized }
 
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
-  // final MovieDetailsBloc movieDetailsBloc;
+  final MovieDetailsBloc movieDetailsBloc;
   final data = MovieDetailsData();
   final _movieService = MovieService();
   MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
@@ -30,7 +30,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final _localStorage = LocalizedModelStorage();
 
-  MovieDetailsCubit(MovieDetailsCubitState initialState, this.movieId) : super(initialState) {
+  MovieDetailsCubit(MovieDetailsCubitState initialState, this.movieId, this.movieDetailsBloc) : super(initialState) {
     Future.microtask(
           () {
         _onState(movieDetailsBloc.state);
