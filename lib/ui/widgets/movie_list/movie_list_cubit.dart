@@ -52,6 +52,7 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
     );
   }
 
+
   void _onState(MovieListState state) {
     final movies = state.popularMovies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
@@ -104,6 +105,7 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   }
 
   void onMovieTap(BuildContext context, int index) {
+    addError(Exception('tap error'), StackTrace.current);
     var movies = <MovieListData>[];
     final id = movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
