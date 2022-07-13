@@ -20,6 +20,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   final _movieService = MovieService();
   MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
   final int movieId;
+
   // late final StreamSubscription<MovieDetailsState> movieDetailsBlocSubscription;
   late final StreamSubscription<MovieDetailsCubitState> movieDetailsCubitSubscription;
   var movies = <MovieListData>[];
@@ -38,18 +39,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   // void _onState(MovieDetailsState state) {
-    // final movieId = state.movieDetailsContainer.movieId;
-    // updateData(null, false);
+  // final movieId = state.movieDetailsContainer.movieId;
+  // updateData(null, false);
   // }
 // context for adding api client exception
-  Future<void> movieDetailsLoadPage(BuildContext context) async {
-    // final movieId = state.movieDetailsContainer.movieId;
-    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
+//   Future<void> movieDetailsLoadPage(BuildContext context) async {
+//     final movieId = state.movieDetailsContainer.movieId;
+    // final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
     // final result = await _movieApiClient.movieDetails(movieId, event.locale);
     // final container = state.movieDetailsContainer.copyWith(movieId: result.id);
     // final newState = state.copyWith(movieDetailsContainer: container);
     // emit(newState);
-    updateData(details.details, details.isFavorite);
+    // updateData(details.details, details.isFavorite);
   }
 
   Future<void> setupLocale(BuildContext context, Locale locale) async {
