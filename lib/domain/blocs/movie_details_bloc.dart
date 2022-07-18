@@ -1,19 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/entity/movie_details.dart';
-import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
-//
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
-
-//
 abstract class MovieDetailsEvent {}
 
 class MovieDetailsEventLoadPage extends MovieDetailsEvent {
@@ -78,28 +69,33 @@ class MovieDetailsState {
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   final _movieApiClient = MovieAndTvApiClient();
-  final _authService = AuthService();
+
+  // final _authService = AuthService();
   final _movieService = MovieService();
   final _localeStorage = LocalizedModelStorage();
   final int movieId;
+  final data = MovieDetailsData();
 
   MovieDetailsBloc(MovieDetailsState initialState, this.movieId) : super(initialState) {
     on<MovieDetailsEvent>(
       ((event, emit) async {
         if (event is MovieDetailsEventLoadPage) {
-          await movieDetailsLoadPage();
+          await movieDetailsLoadPage(event, emit);
         }
       }),
     );
+  }
 
-    Future<void> movieDetailsLoadPage(BuildContext context) async {
-      // final movieId = state.movieDetailsContainer.movieId;
-      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
-      // final result = await _movieApiClient.movieDetails(movieId, event.locale);
-      // final container = state.movieDetailsContainer.copyWith(movieId: result.id);
-      // final newState = state.copyWith(movieDetailsContainer: container);
-      // emit(newState);
-      updateData(details.details, details.isFavorite);
-    }
+  Future<void> movieDetailsLoadPage(MovieDetailsEventLoadPage event, Emitter<MovieDetailsState> emit) async {
+    // final movieId = state.movieDetailsContainer.movieId;
+    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
+    // if (state.details != null) {
+    //   final result = await _movieApiClient.movieDetails(movieId, event.locale);
+    //   return result;
+    // }
+    // final container = state.movieDetailsContainer.copyWith(movieId: result.id);
+    // final newState = state.copyWith(movieDetailsContainer: container);
+    // emit(newState);
+    updateData(details.details, details.isFavorite, data);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:comics_db_app/domain/api_client/account_api_client.dart';
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/blocs/movie_details_bloc.dart';
@@ -67,7 +68,11 @@ class ScreenFactory {
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
     return BlocProvider(
-      create: (_) => MovieDetailsCubit(MovieDetailsCubitState.authorized, movieId),
+      create: (_) => MovieDetailsCubit(
+        movieDetailsBloc: MovieDetailsBloc(
+          MovieDetailsState.initial(), movieId,
+        ),
+      ),
       child: const MovieDetailsWidget(),
     );
     // return ChangeNotifierProvider(
