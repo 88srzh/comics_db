@@ -87,12 +87,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
+    updateData(null, false,MovieDetailsData());
 
     // when add bloc catch apiException
     // movieDetailsBloc.add(MovieDetailsEventLoadPage(localeTag));
 
     // if (!_localeStorage.updateLocale(locale)) return;
     // _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
+  }
+  @override
+  Future<void> close() {
+    movieDetailsCubitSubscription.cancel();
+    return super.close();
   }
 
 // void onMovieTap(BuildContext context, int index) {
@@ -193,12 +199,3 @@ MovieDetailsPosterData _makeDetailsPosterData(MovieDetails details) {
   );
 }
 
-// void _handleApiClientException(ApiClientException exception, BuildContext context) {
-//   switch (exception.type) {
-//     case ApiClientExceptionType.sessionExpired:
-//       _authService.logout();
-//       MainNavigation.resetNavigation(context);
-//       break;
-//     default:
-//       print(exception);
-//   }
