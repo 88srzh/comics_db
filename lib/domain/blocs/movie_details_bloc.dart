@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/local_entity/movie_details_local.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
+import 'package:flutter/material.dart';
 
 abstract class MovieDetailsEvent {}
 
@@ -68,7 +71,7 @@ class MovieDetailsState {
 }
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
-  final _movieApiClient = MovieAndTvApiClient();
+  // final _movieApiClient = MovieAndTvApiClient();
 
   // final _authService = AuthService();
   final _movieService = MovieService();
@@ -86,9 +89,14 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
     );
   }
 
-  Future<void> movieDetailsLoadPage(MovieDetailsEventLoadPage event, Emitter<MovieDetailsState> emit) async {
+  Future<MovieDetailsState> movieDetailsLoadPage(
+      MovieDetailsEventLoadPage event, Emitter<MovieDetailsState> emit) async {
     // final movieId = state.movieDetailsContainer.movieId;
-    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
+    try {
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: _localeStorage.localeTag);
+    } on ApiClientException catch (e) {}
+    ;
+    // _handleApiClientException(e, context);
     // if (state.details != null) {
     //   final result = await _movieApiClient.movieDetails(movieId, event.locale);
     //   return result;
@@ -96,6 +104,24 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
     // final container = state.movieDetailsContainer.copyWith(movieId: result.id);
     // final newState = state.copyWith(movieDetailsContainer: container);
     // emit(newState);
-    updateData(details.details, details.isFavorite, data);
+    // updateData(details.details, details.isFavorite, data);
+    // return details;
+    final container = state.movieDetailsContainer.copyWith(
+      movieId: movieId,
+    );
+    final newState = state.copyWith(movieDetailsContainer: container);
+    emit(newState);
+    return newState;
+  }
+
+  void _handleApiClientException(ApiClientException exception, BuildContext context) {
+    switch (exception.type) {
+      case ApiClientExceptionType.sessionExpired:
+        // _authService.logout();
+        // MainNavigation.resetNavigation(context);
+        break;
+      default:
+        print(exception);
+    }
   }
 }
