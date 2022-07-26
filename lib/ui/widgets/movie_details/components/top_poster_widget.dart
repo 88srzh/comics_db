@@ -14,8 +14,10 @@ class MovieTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO add favorite icon button
+    final cubit = context.watch<MovieDetailsCubit>();
+    var posterData = cubit.posterData;
     // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
-    final posterData = context.select((MovieDetailsCubit cubit) => cubit.posterData);
+    // final posterData = context.select((MovieDetailsCubit cubit) => cubit.posterData);
     final posterPath = posterData.posterPath;
     final backdropPath = posterData.backdropPath;
     // TODO поменять на модель

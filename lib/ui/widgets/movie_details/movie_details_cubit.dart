@@ -21,7 +21,7 @@ class MovieDetailsCubitState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MovieDetailsCubitState && runtimeType == other.runtimeType && localeTag == other.localeTag;
+      other is MovieDetailsCubitState && runtimeType == other.runtimeType && localeTag == other.localeTag;
 
   @override
   int get hashCode => localeTag.hashCode;
@@ -33,7 +33,6 @@ class MovieDetailsCubitState {
       localeTag: localeTag ?? this.localeTag,
     );
   }
-
 }
 
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
@@ -53,7 +52,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   MovieDetailsCubit({required this.movieDetailsBloc}) : super(MovieDetailsCubitState(localeTag: '')) {
     Future.microtask(
-          () {
+      () {
         // movieDetailsBlocSubscription = movieDetailsBloc.stream.listen(_onState);
         // final cubit = MovieDetailsCubit(movieDetailsBloc: movieId, movieDetailsCubitSubscription, movieId);
         // final movieDetailsCubitSubscription = cubit.stream.listen(print);
@@ -66,6 +65,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   void _onState(MovieDetailsState state) {
     // final details = state.details.movieId;
     // emit(details);
+    // updateData(details.movieDetails, details.isFavorite);
   }
 
 // void _onState(MovieDetailsState state) {
@@ -87,7 +87,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    updateData(null, false,MovieDetailsData());
+    updateData(null, false, MovieDetailsData());
 
     // when add bloc catch apiException
     // movieDetailsBloc.add(MovieDetailsEventLoadPage(localeTag));
@@ -95,6 +95,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // if (!_localeStorage.updateLocale(locale)) return;
     // _dateFormat = DateFormat.yMMMd(_localeStorage.localeTag);
   }
+
   @override
   Future<void> close() {
     movieDetailsCubitSubscription.cancel();
@@ -106,6 +107,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 //   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
 // }
 }
+
 void updateData(MovieDetails? details, bool isFavorite, MovieDetailsData data) {
   data.title = details?.title ?? 'Loading...';
   data.tagline = details?.tagline ?? 'No tagline';
@@ -136,7 +138,7 @@ void updateData(MovieDetails? details, bool isFavorite, MovieDetailsData data) {
   data.actorsData = details.credits.cast
       .map(
         (e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath),
-  )
+      )
       .toList();
   // notifyListeners();
 
@@ -198,4 +200,3 @@ MovieDetailsPosterData _makeDetailsPosterData(MovieDetails details) {
     popularity: details.popularity,
   );
 }
-

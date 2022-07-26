@@ -70,7 +70,8 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MovieDetailsCubit(
         movieDetailsBloc: MovieDetailsBloc(
-          MovieDetailsState.initial(), movieId,
+          MovieDetailsState.initial(),
+          movieId,
         ),
       ),
       child: const MovieDetailsWidget(),

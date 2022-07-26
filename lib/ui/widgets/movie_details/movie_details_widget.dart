@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +50,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           children: [
             Column(
               children: [
-                const MovieTopPosterWidget(),
+                // const MovieTopPosterWidget(),
                 // const PeoplesWidget(),
-                // const DescriptionWidget(),
+                const DescriptionWidget(),
                 // TrailerWidget(youtubeKey: trailerKey),
                 // const CastWidget(),
                 // const MovieSimilarWidget(),
