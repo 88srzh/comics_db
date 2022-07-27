@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/local_entity/movie_details_local.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
@@ -32,15 +33,15 @@ class MovieDetailsBlocData {
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   // List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
 
-  MovieDetailsBlocData.initial()
-      : title = '',
-        tagline = '',
-        isLoading = true,
-        overview = '',
+  // MovieDetailsBlocData.initial()
+  //     : title = '',
+  //       tagline = '',
+  //       isLoading = true,
+  //       overview = '',
   // posterData = const List<MovieDetailsPosterData>[],
-        summary = '',
-        releaseDate = '',
-        genres = '';
+  //       summary = '',
+  //       releaseDate = '',
+  //       genres = '';
 
   // trailerData = '', '';
 

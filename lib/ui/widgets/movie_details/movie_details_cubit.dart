@@ -63,6 +63,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   void _onState(MovieDetailsState state) {
+    // final movies = state
     // final details = state.details.movieId;
     // emit(details);
     // updateData(details.movieDetails, details.isFavorite);

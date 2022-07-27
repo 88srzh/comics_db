@@ -41,6 +41,7 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   late final StreamSubscription<MovieListState> movieListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
+  var mov = <Movie>[];
 
   MovieListCubit({required this.movieListBloc})
       : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
@@ -106,8 +107,9 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
 
   void onMovieTap(BuildContext context, int index) {
     addError(Exception('tap error'), StackTrace.current);
-    var movies = <MovieListData>[];
-    final id = movies[index].id;
+    // var movies = <MovieListData>[];
+    // final id = movies[index].id;
+    final id = mov[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }
