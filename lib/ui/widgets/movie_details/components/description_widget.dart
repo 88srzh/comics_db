@@ -15,7 +15,7 @@ class DescriptionWidget extends StatelessWidget {
     //     context.select((MovieDetailsModel model) => model.data.overview);
     var cubit = context.watch<MovieDetailsCubit>();
     var overview = cubit.movieDetailsBloc.state.movieDetailsBlocData.overview;
-    cubit.state
+    // cubit.state
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
