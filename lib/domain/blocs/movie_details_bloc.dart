@@ -56,20 +56,30 @@ class MovieDetailsBlocData {
     required this.genres,
     // required this.trailerData,
     // required this.peopleData,
-
   });
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MovieDetailsBlocData && runtimeType == other.runtimeType && title == other.title &&
-              tagline == other.tagline && isLoading == other.isLoading && overview == other.overview &&
-              summary == other.summary && releaseDate == other.releaseDate && genres == other.genres;
+      other is MovieDetailsBlocData &&
+          runtimeType == other.runtimeType &&
+          title == other.title &&
+          tagline == other.tagline &&
+          isLoading == other.isLoading &&
+          overview == other.overview &&
+          summary == other.summary &&
+          releaseDate == other.releaseDate &&
+          genres == other.genres;
 
   @override
   int get hashCode =>
-      title.hashCode ^ tagline.hashCode ^ isLoading.hashCode ^ overview.hashCode ^ summary.hashCode ^ releaseDate
-          .hashCode ^ genres.hashCode;
+      title.hashCode ^
+      tagline.hashCode ^
+      isLoading.hashCode ^
+      overview.hashCode ^
+      summary.hashCode ^
+      releaseDate.hashCode ^
+      genres.hashCode;
 
   MovieDetailsBlocData copyWith({
     String? title,
@@ -90,33 +100,33 @@ class MovieDetailsBlocData {
       genres: genres ?? this.genres,
     );
   }
-
 }
 
 class MovieDetailsState {
   final MovieDetailsBlocData movieDetailsBlocData;
 
-  MovieDetailsState.initial() : movieDetailsBlocData = MovieDetailsBlocData(
-    title: '',
-    tagline: '',
-    isLoading: true,
-    overview: '',
-    // posterData
-    summary: '',
-    releaseDate: '',
-    genres: '',
-    // trailerData: '',
-    // peopleData: '',
-  );
+  MovieDetailsState.initial()
+      : movieDetailsBlocData = MovieDetailsBlocData(
+          title: '',
+          tagline: '',
+          isLoading: true,
+          overview: '',
+          // posterData
+          summary: '',
+          releaseDate: '',
+          genres: '',
+          // trailerData: '',
+          // peopleData: '',
+        );
 
   MovieDetailsState({required this.movieDetailsBlocData});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MovieDetailsState &&
-              runtimeType == other.runtimeType &&
-              movieDetailsBlocData == other.movieDetailsBlocData;
+      other is MovieDetailsState &&
+          runtimeType == other.runtimeType &&
+          movieDetailsBlocData == other.movieDetailsBlocData;
 
   @override
   int get hashCode => movieDetailsBlocData.hashCode;
@@ -182,8 +192,11 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
-      // _authService.logout();
-      // MainNavigation.resetNavigation(context);
+        // _authService.logout();
+        // MainNavigation.resetNavigation(context);
+        break;
+      case ApiClientExceptionType.other:
+        print('other error');
         break;
       default:
         print(exception);

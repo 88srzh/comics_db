@@ -89,6 +89,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null, false, MovieDetailsData());
+    movieDetailsBloc.add(MovieDetailsEventLoadPage(localeTag));
 
     // when add bloc catch apiException
     // movieDetailsBloc.add(MovieDetailsEventLoadPage(localeTag));
