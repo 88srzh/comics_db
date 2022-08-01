@@ -106,7 +106,6 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   }
 
   void onMovieTap(BuildContext context, int index) {
-    addError(Exception('tap error'), StackTrace.current);
     var movies = <MovieListData>[];
     final id = movies[index].id;
     // final id = mov[index].id;

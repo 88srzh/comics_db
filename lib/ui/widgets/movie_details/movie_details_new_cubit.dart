@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_details_new_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 part 'movie_details_new_state.dart';
@@ -56,5 +58,12 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
       overview: movie.overview,
       releaseDate: releaseDateTitle,
     );
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    var movies = <MovieListData>[];
+    final id = movies[index].id;
+    // final id = mov[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }
