@@ -157,7 +157,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 20.0),
                       Text(
-                        movie.overview,
+                        movie.overview ?? '',
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(

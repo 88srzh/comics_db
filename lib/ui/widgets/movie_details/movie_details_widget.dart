@@ -47,21 +47,18 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            final movie = cubit.state.movies[index];
-            return Column(
+        child: ListView(children: [
+          Column(
             children: [
-            // const MovieTopPosterWidget(),
-            // const PeoplesWidget(),
-            DescriptionWidget(movieListData: movie, cubit: cubit, index: index),
-            // TrailerWidget(youtubeKey: trailerKey),
-            // const CastWidget(),
-            // const MovieSimilarWidget(),
+              // const MovieTopPosterWidget(),
+              // const PeoplesWidget(),
+              DescriptionWidget(),
+              // TrailerWidget(youtubeKey: trailerKey),
+              // const CastWidget(),
+              // const MovieSimilarWidget(),
             ],
-            );
-          },
-        ),
+          ),
+        ]),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +50,9 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 cubit.showedPopularMovieAtIndex(index);
                 final movie = cubit.state.movies[index];
                 final posterPath = movie.posterPath;
-                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index);
+                return InkWell(
+                  onTap: () => cubit.onMovieTap(context, index),
+                    child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index));
               },
             ),
             Padding(
@@ -158,7 +159,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 20.0),
                       Text(
-                        movie.overview,
+                        movie.overview ?? '',
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -173,17 +174,17 @@ class _MoviePopularListRowWidget extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            borderRadius: BorderRadius.circular(20.0),
-            // onTap: () => _onMovieTap(context, movie.id),
-            onTap: () => _onMovieTap(context, index),
-          ),
+          // InkWell(
+          //   borderRadius: BorderRadius.circular(20.0),
+          //   onTap: () => _onMovieTap(context, movie.id),
+            // onTap: () => _onMovieTap(context, index),
+          // ),
         ],
       ),
     );
   }
 
-  void _onMovieTap(BuildContext context, int movieId) {
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
-  }
+  // void _onMovieTap(BuildContext context, int movieId) {
+  //   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+  // }
 }

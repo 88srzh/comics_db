@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_details_new_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
   late final StreamSubscription<MovieDetailsNewState> movieDetailsBlocSubscription;
   late DateFormat _dateFormat;
   var mov = <Movie>[];
+  // final overview = '';
 
   MovieDetailsNewCubit({required this.movieDetailsNewBloc})
       : super(MovieDetailsCubitNewState(movies: const <MovieListData>[], localeTag: '')) {
@@ -26,7 +28,8 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
 
 
   void _onState(MovieDetailsNewState state) {
-    final movies = state.detailsMovie.map(_makeDetailsListData).toList();
+    // final movies = state.detailsMovie.map(_makeDetailsListData).toList();
+    final movies = state.detailsMovie.map(updateData).toList();
     final newState = this.state.copyWith(movies: movies);
     emit(newState);
   }
@@ -37,7 +40,7 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
     // не уверен, что first правильно передаст id
-    movieDetailsNewBloc.add(MovieDetailsNewEventLoadDetailsPage(localeTag, state.movies.first.id));
+    // movieDetailsNewBloc.add(MovieDetailsNewEventLoadDetailsPage(localeTag, state.movies[index].id));
   }
 
   @override
@@ -65,5 +68,18 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     final id = movies[index].id;
     // final id = mov[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+  }
+
+  MovieListData updateData(Movie movie) {
+    final releaseDate = movie.releaseDate;
+    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    return MovieListData(
+        title: movie.title,
+        posterPath: movie.posterPath,
+        backdropPath: movie.backdropPath,
+        id: movie.id,
+        originalTitle: movie.originalTitle,
+        overview: movie.overview,
+        releaseDate: releaseDateTitle,);
   }
 }
