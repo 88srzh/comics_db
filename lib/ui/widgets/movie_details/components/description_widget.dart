@@ -7,17 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionWidget extends StatelessWidget {
-  final int index;
 
   const DescriptionWidget({
-    required this.movieListData,
-    required this.cubit,
-    required this.index,
     Key? key,
   }) : super(key: key);
-
-  final MovieListData? movieListData;
-  final MovieDetailsNewCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +21,9 @@ class DescriptionWidget extends StatelessWidget {
     var newCubit = context.watch<MovieDetailsNewCubit>();
     // var overview = newCubit.state.movies[index].overview;
     // cubit.state
-    var overview = movieListData?.overview;
+    // var overview = newCubit.state.movies[index].overview;
+    // final overview = context.select((MovieDetailsNewCubit cubit) => cubit.overview);
+
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -49,9 +44,9 @@ class DescriptionWidget extends StatelessWidget {
             children: [
               Expanded(
                 // TODO: Добавить расстояние между строками
-
                 child: Text(
-                  overview != null ? overview : '',
+                  // overview,
+                  '123',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   style: const TextStyle(

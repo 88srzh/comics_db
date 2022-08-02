@@ -4,7 +4,7 @@ class MovieListData {
   final String? posterPath;
   final String? backdropPath;
   final String originalTitle;
-  final String overview;
+  final String? overview;
   final String releaseDate;
 
   MovieListData({
