@@ -12,27 +12,27 @@ part 'movie_details_new_event.dart';
 part 'movie_details_new_state.dart';
 
 class MovieDetailsContainer {
-  final List<Movie> movies;
+  final String overview;
 
-  const MovieDetailsContainer.initial() : movies = const <Movie>[];
+  const MovieDetailsContainer.initial() : overview = '';
 
   const MovieDetailsContainer({
-    required this.movies,
+    required this.overview,
   });
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieDetailsContainer && runtimeType == other.runtimeType && movies == other.movies;
+      other is MovieDetailsContainer && runtimeType == other.runtimeType && overview == other.overview;
 
   @override
-  int get hashCode => movies.hashCode;
+  int get hashCode => overview.hashCode;
 
   MovieDetailsContainer copyWith({
-    List<Movie>? movies,
+    String? overview,
   }) {
     return MovieDetailsContainer(
-      movies: movies ?? this.movies,
+      overview: overview ?? this.overview,
     );
   }
 }
@@ -49,14 +49,13 @@ class MovieDetailsNewBloc extends Bloc<MovieDetailsNewEvent, MovieDetailsNewStat
   }
 
   Future<void> onMovieDetailsNewEventLoadDetailsPage(MovieDetailsNewEventLoadDetailsPage event, Emitter<MovieDetailsNewState> emit) async {
-    // не уверен, что верно так добавлять nextPage
-    final nextPage = 0;
-    final movieResult = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
-    // скорее всего надо будет расписать переменные для details
     final result = await _movieApiClient.movieDetails(event.movieId, event.locale);
-    final movies = List<Movie>.from(state.movieDetailsContainer.movies)..addAll(movieResult.movies);
-    final container =state.movieDetailsContainer.copyWith(
-      movies: movies,
+    final overview = result.overview;
+    // скорее всего надо будет расписать переменные для details
+    // final result = await _movieApiClient.movieDetails(event.movieId, event.locale);
+    // final movies = List<Movie>.from(state.movieDetailsContainer.movies)..addAll(movieResult.movies);
+    final container = state.movieDetailsContainer.copyWith(
+      overview: overview
     );
     final newState = state.copyWith(movieDetailsContainer: container);
     emit(newState);

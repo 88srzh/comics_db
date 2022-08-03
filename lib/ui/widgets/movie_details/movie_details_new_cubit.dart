@@ -16,21 +16,23 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
   late final StreamSubscription<MovieDetailsNewState> movieDetailsBlocSubscription;
   late DateFormat _dateFormat;
   var mov = <Movie>[];
+  final String overview = '';
+
   // final overview = '';
 
   MovieDetailsNewCubit({required this.movieDetailsNewBloc})
-      : super(MovieDetailsCubitNewState(movies: const <MovieListData>[], localeTag: '')) {
+      : super(const MovieDetailsCubitNewState(overview: '', localeTag: '')) {
     Future.microtask(() {
       _onState(movieDetailsNewBloc.state);
       movieDetailsBlocSubscription = movieDetailsNewBloc.stream.listen(_onState);
     });
   }
 
-
   void _onState(MovieDetailsNewState state) {
     // final movies = state.detailsMovie.map(_makeDetailsListData).toList();
-    final movies = state.detailsMovie.map(updateData).toList();
-    final newState = this.state.copyWith(movies: movies);
+    // final movies = state.detailsMovie.map(updateData).toList();
+    final overview = state.movieDetailsContainer.overview;
+    final newState = this.state.copyWith(overview: overview);
     emit(newState);
   }
 
@@ -39,6 +41,7 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
+    updateData;
     // не уверен, что first правильно передаст id
     // movieDetailsNewBloc.add(MovieDetailsNewEventLoadDetailsPage(localeTag, state.movies[index].id));
   }
@@ -49,16 +52,16 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     return super.close();
   }
 
-  MovieListData _makeDetailsListData(Movie movie) {
-    final releaseDate = movie.releaseDate;
+  MovieListData _makeDetailsListData(MovieDetails details) {
+    final releaseDate = details.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
-      title: movie.title,
-      posterPath: movie.posterPath,
-      backdropPath: movie.backdropPath,
-      id: movie.id,
-      originalTitle: movie.originalTitle,
-      overview: movie.overview,
+      title: details.title,
+      posterPath: details.posterPath,
+      backdropPath: details.backdropPath,
+      id: details.id,
+      originalTitle: details.originalTitle,
+      overview: details.overview,
       releaseDate: releaseDateTitle,
     );
   }
@@ -70,16 +73,17 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
-  MovieListData updateData(Movie movie) {
-    final releaseDate = movie.releaseDate;
+  MovieListData updateData(MovieDetails details) {
+    final releaseDate = details.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
-        title: movie.title,
-        posterPath: movie.posterPath,
-        backdropPath: movie.backdropPath,
-        id: movie.id,
-        originalTitle: movie.originalTitle,
-        overview: movie.overview,
-        releaseDate: releaseDateTitle,);
+      title: details.title,
+      posterPath: details.posterPath,
+      backdropPath: details.backdropPath,
+      id: details.id,
+      originalTitle: details.originalTitle,
+      overview: details.overview,
+      releaseDate: releaseDateTitle,
+    );
   }
 }

@@ -23,6 +23,7 @@ class DescriptionWidget extends StatelessWidget {
     // cubit.state
     // var overview = newCubit.state.movies[index].overview;
     // final overview = context.select((MovieDetailsNewCubit cubit) => cubit.overview);
+    final overview = context.select((MovieDetailsNewCubit cubit) => cubit.overview);
 
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -46,7 +47,7 @@ class DescriptionWidget extends StatelessWidget {
                 // TODO: Добавить расстояние между строками
                 child: Text(
                   // overview,
-                  '123',
+                  overview,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   style: const TextStyle(
