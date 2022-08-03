@@ -2,11 +2,11 @@ part of 'movie_details_new_cubit.dart';
 
 // @immutable
 class MovieDetailsCubitNewState {
-  final List<MovieListData> movies;
+  final String overview;
   final String localeTag;
 
   const MovieDetailsCubitNewState({
-    required this.movies,
+    required this.overview,
     required this.localeTag,
   });
 
@@ -15,18 +15,18 @@ class MovieDetailsCubitNewState {
       identical(this, other) ||
       other is MovieDetailsCubitNewState &&
           runtimeType == other.runtimeType &&
-          movies == other.movies &&
+          overview == other.overview &&
           localeTag == other.localeTag;
 
   @override
-  int get hashCode => movies.hashCode ^ localeTag.hashCode;
+  int get hashCode => overview.hashCode ^ localeTag.hashCode;
 
   MovieDetailsCubitNewState copyWith({
-    List<MovieListData>? movies,
+    String? overview,
     String? localeTag,
   }) {
     return MovieDetailsCubitNewState(
-      movies: movies ?? this.movies,
+      overview: overview ?? this.overview,
       localeTag: localeTag ?? this.localeTag,
     );
   }

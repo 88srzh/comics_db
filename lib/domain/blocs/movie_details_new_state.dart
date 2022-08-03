@@ -4,7 +4,7 @@ part of 'movie_details_new_bloc.dart';
 class MovieDetailsNewState {
   final MovieDetailsContainer movieDetailsContainer;
 
-  List<Movie> get detailsMovie => movieDetailsContainer.movies;
+  String get detailsOverview => movieDetailsContainer.overview;
 
   MovieDetailsNewState.initial() : movieDetailsContainer = const MovieDetailsContainer.initial();
 
