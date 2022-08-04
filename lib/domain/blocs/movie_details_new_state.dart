@@ -12,6 +12,15 @@ class MovieDetailsNewState {
     required this.movieDetailsContainer,
   });
 
+  MovieDetailsNewState copyWith({
+    MovieDetailsContainer? movieDetailsContainer,
+    int? movieId,
+  }) {
+    return MovieDetailsNewState(
+      movieDetailsContainer: movieDetailsContainer ?? this.movieDetailsContainer,
+    );
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -21,12 +30,4 @@ class MovieDetailsNewState {
 
   @override
   int get hashCode => movieDetailsContainer.hashCode;
-
-  MovieDetailsNewState copyWith({
-    MovieDetailsContainer? movieDetailsContainer,
-  }) {
-    return MovieDetailsNewState(
-      movieDetailsContainer: movieDetailsContainer ?? this.movieDetailsContainer,
-    );
-  }
 }

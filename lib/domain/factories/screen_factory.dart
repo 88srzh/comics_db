@@ -70,7 +70,7 @@ class ScreenFactory {
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
     return BlocProvider(
-      create: (BuildContext context) => MovieDetailsNewCubit(
+      create: (BuildContext context) => MovieDetailsNewCubit(movieId,
         movieDetailsNewBloc: MovieDetailsNewBloc(
           MovieDetailsNewState.initial(),
         ),

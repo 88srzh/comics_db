@@ -18,7 +18,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     final locale = Localizations.localeOf(context);
     // context.read<MovieDetailsCubit>().setupLocale(locale.languageCode);
-    context.read<MovieDetailsNewCubit>().setupMovieDetailsLocale(locale.languageCode);
+    context.read<MovieDetailsNewCubit>().setupMovieDetailsLocale(context, locale.languageCode);
     // Future.microtask(
     //   () => context.read<MovieDetailsCubit>().setupLocale(context, locale),
     // );
@@ -39,7 +39,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // final trailerKey = trailerData.trailerKey;
 
     // final cubit = context.watch<MovieDetailsCubit>();
-    final cubit = context.watch<MovieDetailsNewCubit>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
