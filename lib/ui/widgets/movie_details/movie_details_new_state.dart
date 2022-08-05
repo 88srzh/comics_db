@@ -31,5 +31,3 @@ class MovieDetailsCubitNewState {
     );
   }
 }
-
-// class MovieDetailsNewInitial extends MovieDetailsNewState {}

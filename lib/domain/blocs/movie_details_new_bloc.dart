@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -54,17 +55,18 @@ class MovieDetailsNewBloc extends Bloc<MovieDetailsNewEvent, MovieDetailsNewStat
 
   Future<void> onMovieDetailsNewEventLoadDetailsPage(MovieDetailsNewEventLoadDetailsPage event, Emitter<MovieDetailsNewState> emit) async {
     // final result = await _movieApiClient.movieDetails(event.movieId, event.locale);
-    final result = await _movieService.loadMovieDetails(movieId: event.movieId, locale: event.locale);
+    // final result = await _movieService.loadMovieDetails(movieId: event.movieId, locale: event.locale);
     // updateData();
     // final overview = result.overview;
-    final overview = result.details.overview;
+    // final overview = result.details.overview;
     // скорее всего надо будет расписать переменные для details
     // final result = await _movieApiClient.movieDetails(event.movieId, event.locale);
     // final movies = List<Movie>.from(state.movieDetailsContainer.movies)..addAll(movieResult.movies);
-    final container = state.movieDetailsContainer.copyWith(
-      overview: overview
-    );
-    final newState = state.copyWith(movieDetailsContainer: container);
-    emit(newState);
+    // final container = state.movieDetailsContainer.copyWith(
+    //   overview: overview
+    // );
+    // final newState = state.copyWith(movieDetailsContainer: container);
+    // emit(newState);
   }
 }
+*/
