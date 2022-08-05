@@ -1,3 +1,4 @@
+/*
 part of 'movie_details_new_bloc.dart';
 
 // @immutable
@@ -31,3 +32,4 @@ class MovieDetailsNewState {
   @override
   int get hashCode => movieDetailsContainer.hashCode;
 }
+*/

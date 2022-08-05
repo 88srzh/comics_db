@@ -1,6 +1,6 @@
 part of 'movie_details_new_bloc.dart';
 
-@immutable
+// @immutable
 abstract class MovieDetailsNewEvent {}
 
 class MovieDetailsNewEventLoadDetailsPage extends MovieDetailsNewEvent {

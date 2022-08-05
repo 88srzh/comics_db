@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/movie_details_new_bloc.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -16,37 +13,20 @@ import 'package:intl/intl.dart';
 part 'movie_details_new_state.dart';
 
 class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
-  final MovieDetailsNewBloc movieDetailsNewBloc;
-  late final StreamSubscription<MovieDetailsNewState> movieDetailsBlocSubscription;
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
   final String overview = '';
   final _movieService = MovieService();
-
-  // final _movieApiClient = MovieAndTvApiClient();
   final int movieId;
 
-  // final overview = '';
-
-  MovieDetailsNewCubit(this.movieId, {required this.movieDetailsNewBloc})
-      : super(const MovieDetailsCubitNewState(overview: '', localeTag: '')) {
-    Future.microtask(() {
-      _onState(movieDetailsNewBloc.state);
-      movieDetailsBlocSubscription = movieDetailsNewBloc.stream.listen(_onState);
-    });
-  }
-
-  void _onState(MovieDetailsNewState state) {
-    // final movies = state.detailsMovie.map(_makeDetailsListData).toList();
-    // final movies = state.detailsMovie.map(updateData).toList();
-    final overview = state.movieDetailsContainer.overview;
-    final newState = this.state.copyWith(overview: overview);
-    emit(newState);
-  }
+  MovieDetailsNewCubit(this.movieId)
+      // TODO should fix
+      : super(const MovieDetailsCubitNewState(overview: '', localeTag: '')) {}
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
       final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      emit(MovieDetailsCubitNewState(overview: state.overview, localeTag: state.localeTag));
       // final details = await _movieApiClient.movieDetails(movieId, state.localeTag);
       updateData(details.details, details.isFavorite);
     } on ApiClientException catch (e) {
@@ -81,11 +61,11 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     // movieDetailsNewBloc.add(MovieDetailsNewEventLoadDetailsPage(localeTag, state.movies[index].id));
   }
 
-  @override
+  /*@override
   Future<void> close() {
     movieDetailsBlocSubscription.cancel();
     return super.close();
-  }
+  }*/
 
   MovieListData _makeDetailsListData(MovieDetails details) {
     final releaseDate = details.releaseDate;

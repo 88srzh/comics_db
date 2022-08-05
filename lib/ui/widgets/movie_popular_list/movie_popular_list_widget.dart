@@ -52,7 +52,8 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 final posterPath = movie.posterPath;
                 return InkWell(
                   onTap: () => cubit.onMovieTap(context, index),
-                    child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index));
+                  child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                );
               },
             ),
             Padding(
@@ -177,14 +178,14 @@ class _MoviePopularListRowWidget extends StatelessWidget {
           // InkWell(
           //   borderRadius: BorderRadius.circular(20.0),
           //   onTap: () => _onMovieTap(context, movie.id),
-            // onTap: () => _onMovieTap(context, index),
+          // onTap: () => _onMovieTap(context, index),
           // ),
         ],
       ),
     );
   }
 
-  // void _onMovieTap(BuildContext context, int movieId) {
-  //   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
-  // }
+// void _onMovieTap(BuildContext context, int movieId) {
+//   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+// }
 }
