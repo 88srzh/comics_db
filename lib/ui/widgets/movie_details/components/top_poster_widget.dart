@@ -15,11 +15,14 @@ class MovieTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<MovieDetailsNewCubit>();
-    final posterData = context.select((MovieDetailsNewCubit cubit) => cubit.posterData);
-    final title = posterData.title;
+    // final posterData = context.select((MovieDetailsNewCubit cubit) => cubit.posterData);
+    // final title = posterData.title;
+    // final backdropPath = posterData.backdropPath;
+    final title = cubit.state.title;
+    var posterPath = cubit.posterData.posterPath;
+    var posterData = cubit.posterData;
     final backdropPath = posterData.backdropPath;
-    // var posterData = cubit.posterData;
-    final posterPath = posterData.posterPath;
+    // final posterPath = posterData.posterPath;
     // TODO add favorite icon button
     // final cubit = context.watch<MovieDetailsCubit>();
     // var posterData = cubit.posterData;
@@ -65,8 +68,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            // title,
-                            '123',
+                            title,
+                            // '123',
                             maxLines: 3,
                             style: const TextStyle(
                               fontSize: 21,

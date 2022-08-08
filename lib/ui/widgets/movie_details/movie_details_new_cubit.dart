@@ -25,6 +25,7 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
   );
   final String overview = '';
   final String posterPath = '';
+  final String title = '';
   String _locale = '';
   final _movieService = MovieService();
   final int movieId;
@@ -36,11 +37,17 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
 
   MovieDetailsNewCubit(this.movieId)
       // TODO should fix
-      : super(const MovieDetailsCubitNewState(overview: '', localeTag: '', posterPath: '')) {
+      : super(const MovieDetailsCubitNewState(
+          overview: '',
+          localeTag: '',
+          posterPath: '',
+          title: '',
+        )) {
     emit(MovieDetailsCubitNewState(
       overview: state.overview,
       localeTag: state.localeTag,
       posterPath: state.posterPath,
+      title: state.title,
     ));
   }
 
@@ -89,12 +96,6 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     // movieDetailsNewBloc.add(MovieDetailsNewEventLoadDetailsPage(localeTag, state.movies[index].id));
   }
 
-  /*@override
-  Future<void> close() {
-    movieDetailsBlocSubscription.cancel();
-    return super.close();
-  }*/
-
   MovieListData _makeDetailsListData(MovieDetails details) {
     final releaseDate = details.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
@@ -119,24 +120,18 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
   void updateData(MovieDetails? details /* bool isFavorite*/) {
     // final releaseDate = details?.releaseDate;
     // final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
-    data.overview = details?.overview ?? 'No description';
-    data.posterData = MovieDetailsPosterData(
-      title: details?.title ?? '',
-      voteCount: details?.voteCount ?? 0,
-      popularity: details?.popularity ?? 0,
-      posterPath: details?.posterPath ?? '',
-    );
+    data.overview = details?.overview ?? 'Loading description...';
+    // TODO: title twice in posterData
+    data.title = details?.title ?? 'Loading title..';
+    // data.posterData = MovieDetailsPosterData(
+    //   title: details?.title ?? '',
+    //   voteCount: details?.voteCount ?? 0,
+    //   popularity: details?.popularity ?? 0,
+    //   posterPath: details?.posterPath ?? '',
+    // );
     var overview = data.overview;
-    final newState = state.copyWith(overview: overview);
+    var title = data.title;
+    final newState = state.copyWith(overview: overview, title: title);
     emit(newState);
-
-    // return MovieListData(
-    //   title: details.title,
-    //   posterPath: details.posterPath,
-    //   backdropPath: details.backdropPath,
-    //   id: details.id,
-    //   originalTitle: details.originalTitle,
-    //   overview: details.overview,
-    //   releaseDate: releaseDateTitle,
   }
 }
