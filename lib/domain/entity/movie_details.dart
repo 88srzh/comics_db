@@ -11,30 +11,30 @@ class MovieDetails {
   final String? backdropPath;
   final BelongsToCollection? belongsToCollection;
   final int budget;
-  final List<Genre> genres;
+  final List<Genre>? genres;
   final String? homepage;
   final int id;
   final String? imdbId;
   final String originalLanguage;
   final String originalTitle;
   final String? overview;
-  final double popularity;
+  final double? popularity;
   final String? posterPath;
-  final List<ProductionCompany> productionCompanies;
-  final List<ProductionCountry> productionCountries;
+  final List<ProductionCompany>? productionCompanies;
+  final List<ProductionCountry>? productionCountries;
   @JsonKey(fromJson: parseDateFromString)
   final DateTime? releaseDate;
   final int revenue;
   final int? runtime;
-  final List<SpokenLanguage> spokenLanguages;
+  final List<SpokenLanguage>? spokenLanguages;
   final String status;
   final String? tagline;
   final String title;
   final bool video;
-  final double voteAverage;
+  final double? voteAverage;
   final int voteCount;
-  final MovieDetailsCredits credits;
-  final MovieDetailsVideos videos;
+  // final MovieDetailsCredits credits;
+  // final MovieDetailsVideos videos;
   MovieDetails({
     required this.adult,
     required this.backdropPath,
@@ -61,8 +61,8 @@ class MovieDetails {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
-    required this.credits,
-    required this.videos,
+    // required this.credits,
+    // required this.videos,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) => _$MovieDetailsFromJson(json);

@@ -14,12 +14,12 @@ class MovieTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO add favorite icon button
-    final cubit = context.watch<MovieDetailsCubit>();
-    var posterData = cubit.posterData;
+    // final cubit = context.watch<MovieDetailsCubit>();
+    // var posterData = cubit.posterData;
     // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
     // final posterData = context.select((MovieDetailsCubit cubit) => cubit.posterData);
-    final posterPath = posterData.posterPath;
-    final backdropPath = posterData.backdropPath;
+    // final posterPath = posterData.posterPath;
+    // final backdropPath = posterData.backdropPath;
     // TODO поменять на модель
     // final summary = context.select((MovieDetailsModel model) => model.data.summary);
     // final releaseDateText = context.select((MovieDetailsModel model) => model.data.releaseDate);
@@ -27,19 +27,19 @@ class MovieTopPosterWidget extends StatelessWidget {
 
     return Stack(
       children: [
-        Positioned(
-          child: Opacity(
-            opacity: 0.25,
-            child: AspectRatio(
-              aspectRatio: 390 / 220,
-              child: backdropPath != null
-                  ? Image.network(
-                      ImageDownloader.imageUrl(backdropPath),
-                    )
-                  : Image.asset(AppImages.noImageBig),
-            ),
-          ),
-        ),
+        // Positioned(
+        //   child: Opacity(
+        //     opacity: 0.25,
+        //     child: AspectRatio(
+        //       aspectRatio: 390 / 220,
+        //       child: backdropPath != null
+        //           ? Image.network(
+        //               ImageDownloader.imageUrl(backdropPath),
+        //             )
+        //           : Image.asset(AppImages.noImageBig),
+        //     ),
+        //   ),
+        // ),
         Positioned(
           top: 45,
           left: 10,
@@ -215,22 +215,22 @@ class MovieTopPosterWidget extends StatelessWidget {
         //   icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
         // ),
         // ),
-        Positioned(
-          top: 55,
-          left: 240,
-          child: SizedBox(
-            // clipBehavior: Clip.antiAlias,
-            // TODO: не закругляются края
-            height: 170.0,
-            width: 140.0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: posterPath != null
-                  ? Image.network(ImageDownloader.imageUrl(posterPath))
-                  : Image.asset(AppImages.noImageBig),
-            ),
-          ),
-        ),
+        // Positioned(
+        //   top: 55,
+        //   left: 240,
+        //   child: SizedBox(
+        //     // clipBehavior: Clip.antiAlias,
+        //     // TODO: не закругляются края
+        //     height: 170.0,
+        //     width: 140.0,
+        //     child: ClipRRect(
+        //       borderRadius: const BorderRadius.all(Radius.circular(10)),
+        //       child: posterPath != null
+        //           ? Image.network(ImageDownloader.imageUrl(posterPath))
+        //           : Image.asset(AppImages.noImageBig),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

@@ -15,10 +15,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    Future.microtask(() =>
 
-    final locale = Localizations.localeOf(context);
+    // final locale = Localizations.localeOf(context);
     // context.read<MovieDetailsCubit>().setupLocale(locale.languageCode);
-    context.read<MovieDetailsNewCubit>().setupMovieDetailsLocale(context, locale.languageCode);
+    context.read<MovieDetailsNewCubit>().setupMovieDetailsLocale(context),
+    );
     // Future.microtask(
     //   () => context.read<MovieDetailsCubit>().setupLocale(context, locale),
     // );
