@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
@@ -349,6 +352,15 @@ class MovieAndTvApiClient {
       },
     );
     return result;
+  }
+}
+
+extension HttpClientResponseJsonDecode on HttpClientResponse {
+  Future<dynamic> jsonDecode() async {
+    return transform(utf8.decoder).toList().then((value) {
+      final result = value.join();
+      return result;
+    }).then<dynamic>((v) => json.decode(v));
   }
 }
 

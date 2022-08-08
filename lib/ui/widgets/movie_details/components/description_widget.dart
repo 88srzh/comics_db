@@ -47,7 +47,7 @@ class DescriptionWidget extends StatelessWidget {
                 // TODO: Добавить расстояние между строками
                 child: Text(
                   // overview,
-                  overview,
+                  overview != null ? overview : 'no description',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   style: const TextStyle(

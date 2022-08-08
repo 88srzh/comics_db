@@ -21,22 +21,31 @@ class NetworkClient {
     Map<String, dynamic>? parameters,
   ]) async {
     final url = _makeUri(path, parameters);
-    try {
+    // try {
       final request = await _client.getUrl(url);
       final response = await request.close();
       final dynamic json = (await response.jsonDecode());
+      if (response.statusCode == 401) {
+        final dynamic status = json['status_code'];
+        final code = status is int ? status : 0;
+        if (code == 30) {
+          throw ApiClientException(ApiClientExceptionType.auth);
+        } else {
+          throw ApiClientException(ApiClientExceptionType.other);
+        }
+      }
       _validateResponse(response, json);
       final result = parser(json);
       return result;
-    } on SocketException {
-      throw ApiClientException(ApiClientExceptionType.network);
-    } on ApiClientException {
-      rethrow;
-    } catch (_) {
-      throw ApiClientException(ApiClientExceptionType.other);
+    // } on SocketException {
+    //   throw ApiClientException(ApiClientExceptionType.network);
+    // } on ApiClientException {
+    //   rethrow;
+    // } catch (_) {
+    //   throw ApiClientException(ApiClientExceptionType.other);
       // if (ApiClientExceptionType.other == ApiClientExceptionType.other)
       //   => Navigator.pushReplacementNamed(context, MainNavigationRouteNames.networkConnectionError);
-    }
+    // }
   }
 
   Future<T> post<T>(
@@ -87,10 +96,10 @@ extension HttpClientResponseJsonDecode on HttpClientResponse {
     return transform(utf8.decoder)
         .toList()
         .then((value) => value.join())
-    // .then((value) {
-    //   final result = value.join();
-    //   return result;
-    // })
+        // .then((value) {
+        //   final result = value.join();
+        //   return result;
+        // })
         .then<dynamic>((v) => json.decode(v));
   }
 }

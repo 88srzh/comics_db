@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie_details_bloc.dart';
@@ -202,3 +203,4 @@ MovieDetailsPosterData _makeDetailsPosterData(MovieDetails details) {
     popularity: details.popularity,
   );
 }
+*/
