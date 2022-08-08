@@ -108,8 +108,8 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   void onMovieTap(BuildContext context, int index) {
     // var movies = <MovieListData>[];
     // final id = movies[index].id;
-    final id = mov[index].id;
     // final id = mov[index].id;
+    final id = mov[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

@@ -3,6 +3,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_new_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,12 @@ class MovieTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<MovieDetailsNewCubit>();
+    final posterData = context.select((MovieDetailsNewCubit cubit) => cubit.posterData);
+    final title = posterData.title;
+    final backdropPath = posterData.backdropPath;
+    // var posterData = cubit.posterData;
+    final posterPath = posterData.posterPath;
     // TODO add favorite icon button
     // final cubit = context.watch<MovieDetailsCubit>();
     // var posterData = cubit.posterData;
@@ -27,19 +34,19 @@ class MovieTopPosterWidget extends StatelessWidget {
 
     return Stack(
       children: [
-        // Positioned(
-        //   child: Opacity(
-        //     opacity: 0.25,
-        //     child: AspectRatio(
-        //       aspectRatio: 390 / 220,
-        //       child: backdropPath != null
-        //           ? Image.network(
-        //               ImageDownloader.imageUrl(backdropPath),
-        //             )
-        //           : Image.asset(AppImages.noImageBig),
-        //     ),
-        //   ),
-        // ),
+        Positioned(
+          child: Opacity(
+            opacity: 0.25,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: backdropPath != null
+                  ? Image.network(
+                      ImageDownloader.imageUrl(backdropPath),
+                    )
+                  : Image.asset(AppImages.noImageBig),
+            ),
+          ),
+        ),
         Positioned(
           top: 45,
           left: 10,
@@ -58,7 +65,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            // movieData.title,
+                            // title,
                             '123',
                             maxLines: 3,
                             style: const TextStyle(
@@ -206,31 +213,31 @@ class MovieTopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
-        // TODO: исправить стрелку, чтобы не съезжала
-        // Positioned(
-        //   left: 5,
-        //   top: 5,
-        // child: IconButton(
-        //   onPressed: () => Navigator.of(context).pop(),
-        //   icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
-        // ),
-        // ),
-        // Positioned(
-        //   top: 55,
-        //   left: 240,
-        //   child: SizedBox(
-        //     // clipBehavior: Clip.antiAlias,
-        //     // TODO: не закругляются края
-        //     height: 170.0,
-        //     width: 140.0,
-        //     child: ClipRRect(
-        //       borderRadius: const BorderRadius.all(Radius.circular(10)),
-        //       child: posterPath != null
-        //           ? Image.network(ImageDownloader.imageUrl(posterPath))
-        //           : Image.asset(AppImages.noImageBig),
-        //     ),
-        //   ),
-        // ),
+        // TODO: fix arrow
+        Positioned(
+          left: 5,
+          top: 5,
+        child: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+        ),
+        ),
+        Positioned(
+          top: 55,
+          left: 240,
+          child: SizedBox(
+            // clipBehavior: Clip.antiAlias,
+            // TODO: не закругляются края
+            height: 170.0,
+            width: 140.0,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: posterPath != null
+                  ? Image.network(ImageDownloader.imageUrl(posterPath))
+                  : Image.asset(AppImages.noImageBig),
+            ),
+          ),
+        ),
       ],
     );
   }

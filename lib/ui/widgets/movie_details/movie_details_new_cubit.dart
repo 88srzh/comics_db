@@ -8,6 +8,7 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +18,13 @@ part 'movie_details_new_state.dart';
 class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
+  final posterData = MovieDetailsPosterData(
+    title: '',
+    voteCount: 0,
+    popularity: 0,
+  );
   final String overview = '';
+  final String posterPath = '';
   String _locale = '';
   final _movieService = MovieService();
   final int movieId;
@@ -29,17 +36,21 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
 
   MovieDetailsNewCubit(this.movieId)
       // TODO should fix
-      : super(const MovieDetailsCubitNewState(overview: '', localeTag: '')) {
-    emit(MovieDetailsCubitNewState(overview: state.overview, localeTag: state.localeTag));
+      : super(const MovieDetailsCubitNewState(overview: '', localeTag: '', posterPath: '')) {
+    emit(MovieDetailsCubitNewState(
+      overview: state.overview,
+      localeTag: state.localeTag,
+      posterPath: state.posterPath,
+    ));
   }
 
   Future<void> loadMovieDetails(BuildContext context) async {
     // try {
-      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
     //   final details = await _movieApiClient.movieDetails(movieId, _locale);
-      // emit(MovieDetailsCubitNewState(overview: state.overview, localeTag: state.localeTag));
-      // updateData(details.details, details.isFavorite);
-      updateData(details.details);
+    // emit(MovieDetailsCubitNewState(overview: state.overview, localeTag: state.localeTag));
+    // updateData(details.details, details.isFavorite);
+    updateData(details.details);
     // }
     // on ApiClientException catch (e) {
     //   _handleApiClientException(e, context);
@@ -109,6 +120,12 @@ class MovieDetailsNewCubit extends Cubit<MovieDetailsCubitNewState> {
     // final releaseDate = details?.releaseDate;
     // final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     data.overview = details?.overview ?? 'No description';
+    data.posterData = MovieDetailsPosterData(
+      title: details?.title ?? '',
+      voteCount: details?.voteCount ?? 0,
+      popularity: details?.popularity ?? 0,
+      posterPath: details?.posterPath ?? '',
+    );
     var overview = data.overview;
     final newState = state.copyWith(overview: overview);
     emit(newState);
