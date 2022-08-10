@@ -1,10 +1,10 @@
-part of 'movie_details_new_cubit.dart';
+part of 'movie_details_cubit.dart';
 
 @immutable
-class MovieDetailsCubitNewState {
+class MovieDetailsCubitState {
   final String overview;
   final String localeTag;
-  final String posterPath;
+  final String? posterPath;
   final String title;
   final String tagline;
   final int voteCount;
@@ -12,8 +12,9 @@ class MovieDetailsCubitNewState {
   final String? releaseDate;
   final String? summary;
   final double? voteAverage;
+  final String? backdropPath;
 
-  const MovieDetailsCubitNewState({
+  const MovieDetailsCubitState({
     required this.overview,
     required this.localeTag,
     required this.posterPath,
@@ -24,12 +25,13 @@ class MovieDetailsCubitNewState {
     required this.releaseDate,
     required this.summary,
     required this.voteAverage,
+    required this.backdropPath,
   });
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieDetailsCubitNewState &&
+      other is MovieDetailsCubitState &&
           runtimeType == other.runtimeType &&
           overview == other.overview &&
           localeTag == other.localeTag &&
@@ -40,12 +42,13 @@ class MovieDetailsCubitNewState {
           popularity == other.popularity &&
           releaseDate == other.releaseDate &&
           summary == other.summary &&
-          voteAverage == other.voteAverage;
+          voteAverage == other.voteAverage &&
+          backdropPath == other.backdropPath;
 
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
 
-  MovieDetailsCubitNewState copyWith({
+  MovieDetailsCubitState copyWith({
     String? overview,
     String? localeTag,
     String? posterPath,
@@ -56,17 +59,20 @@ class MovieDetailsCubitNewState {
     String? releaseDate,
     String? summary,
     double? voteAverage,
+    String? backdropPath,
   }) {
-    return MovieDetailsCubitNewState(
-        overview: overview ?? this.overview,
-        localeTag: localeTag ?? this.localeTag,
-        posterPath: posterPath ?? this.posterPath,
-        title: title ?? this.title,
-        tagline: tagline ?? this.tagline,
-        voteCount: voteCount ?? this.voteCount,
-        popularity: popularity ?? this.popularity,
-        releaseDate: releaseDate ?? this.releaseDate,
-        summary: summary ?? this.summary,
-        voteAverage: voteAverage ?? this.voteAverage);
+    return MovieDetailsCubitState(
+      overview: overview ?? this.overview,
+      localeTag: localeTag ?? this.localeTag,
+      posterPath: posterPath ?? this.posterPath,
+      title: title ?? this.title,
+      tagline: tagline ?? this.tagline,
+      voteCount: voteCount ?? this.voteCount,
+      popularity: popularity ?? this.popularity,
+      releaseDate: releaseDate ?? this.releaseDate,
+      summary: summary ?? this.summary,
+      voteAverage: voteAverage ?? this.voteAverage,
+      backdropPath: backdropPath ?? this.backdropPath,
+    );
   }
 }

@@ -12,7 +12,7 @@ import 'package:meta/meta.dart';
 
 part 'movie_details_new_event.dart';
 
-part 'movie_details_new_state.dart';
+part 'movie_details_state.dart';
 
 class MovieDetailsContainer {
   final String overview;

@@ -1,7 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_new_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,7 @@ class MovieTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<MovieDetailsNewCubit>();
+    final cubit = context.watch<MovieDetailsCubit>();
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
     var posterPath = cubit.state.posterPath;
@@ -20,7 +20,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     var releaseDate = cubit.state.releaseDate;
     var voteAverage = cubit.state.voteAverage?.toStringAsFixed(1).toString();
     // var posterData = cubit.posterData;
-    final backdropPath = '';
+    final backdropPath = cubit.state.backdropPath;
     final summary = cubit.state.summary;
     // final posterPath = posterData.posterPath;
     // TODO add favorite icon button
