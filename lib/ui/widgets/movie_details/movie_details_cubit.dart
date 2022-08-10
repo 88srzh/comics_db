@@ -7,6 +7,7 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,13 +22,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   String _locale = '';
   final _movieService = MovieService();
   final int movieId;
+  final String? trailerData = MovieDetailsTrailerData().trailerKey;
 
   MovieDetails? _movieDetails;
 
   MovieDetails? get movieDetails => _movieDetails;
 
   MovieDetailsCubit(this.movieId)
-      // TODO should fix
       : super(const MovieDetailsCubitState(
           overview: '',
           localeTag: '',
@@ -40,6 +41,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           summary: '',
           voteAverage: 0,
           backdropPath: '',
+          trailerData: '',
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
@@ -53,20 +55,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       summary: state.summary,
       voteAverage: state.voteAverage,
       backdropPath: state.backdropPath,
+      trailerData: state.trailerData,
     ));
   }
 
   Future<void> loadMovieDetails(BuildContext context) async {
-    // try {
-    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-    //   final details = await _movieApiClient.movieDetails(movieId, _locale);
-    // emit(MovieDetailsCubitNewState(overview: state.overview, localeTag: state.localeTag));
-    // updateData(details.details, details.isFavorite);
-    updateData(details.details);
-    // }
-    // on ApiClientException catch (e) {
-    //   _handleApiClientException(e, context);
-    // }
+    try {
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      // updateData(details.details, details.isFavorite);
+      updateData(details.details);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
   }
 
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
@@ -113,6 +113,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // TODO: title twice in posterData
     data.title = details?.title ?? 'Loading title..';
     data.tagline = details?.tagline ?? 'Loading tagline..';
+    final videos = details!.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
     data.posterData = MovieDetailsPosterData(
       title: details?.title ?? '',
       voteCount: details?.voteCount ?? 0,
@@ -131,6 +134,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     double? voteAverage = data.posterData.voteAverage;
     var backdropPath = data.posterData.backdropPath;
     var posterPath = data.posterData.posterPath;
+    var trailerData = data.trailerData.toString();
     final newState = state.copyWith(
       overview: overview,
       posterPath: posterPath,
@@ -142,6 +146,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       summary: summary,
       voteAverage: voteAverage,
       backdropPath: backdropPath,
+      trailerData: trailerData,
     );
     emit(newState);
   }

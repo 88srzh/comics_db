@@ -1,4 +1,3 @@
-/*
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_details_videos.g.dart';
@@ -45,4 +44,4 @@ class MovieDetailsVideosResult {
   factory MovieDetailsVideosResult.fromJson(Map<String, dynamic> json) => _$MovieDetailsVideosResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsVideosResultToJson(this);
-}*/
+}

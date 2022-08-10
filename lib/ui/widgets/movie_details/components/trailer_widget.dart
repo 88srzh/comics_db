@@ -1,6 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -33,7 +33,9 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   @override
   Widget build(BuildContext context) {
     // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
-    // final trailerKey = trailerData.trailerKey;
+    var cubit = context.watch<MovieDetailsCubit>();
+    var trailerData = cubit.data.trailerData;
+    final trailerKey = trailerData.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -48,21 +50,21 @@ class _TrailerWidgetState extends State<TrailerWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          // trailerKey != null
-          //     ? YoutubePlayerBuilder(
-          //         player: YoutubePlayer(
-          //           controller: _controller,
-          //           showVideoProgressIndicator: true,
-          //         ),
-          //         builder: (context, player) {
-          //           return Column(
-          //             children: [
-          //               player,
-          //             ],
-          //           );
-          //         },
-          //       )
-          //     : Image.asset(AppImages.noImageBig),
+          trailerKey != null
+              ? YoutubePlayerBuilder(
+                  player: YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                  ),
+                  builder: (context, player) {
+                    return Column(
+                      children: [
+                        player,
+                      ],
+                    );
+                  },
+                )
+              : Image.asset(AppImages.noImageBig),
         ],
       ),
     );

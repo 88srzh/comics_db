@@ -13,6 +13,7 @@ class MovieDetailsCubitState {
   final String? summary;
   final double? voteAverage;
   final String? backdropPath;
+  final String? trailerData;
 
   const MovieDetailsCubitState({
     required this.overview,
@@ -26,6 +27,7 @@ class MovieDetailsCubitState {
     required this.summary,
     required this.voteAverage,
     required this.backdropPath,
+    required this.trailerData,
   });
 
   @override
@@ -43,7 +45,8 @@ class MovieDetailsCubitState {
           releaseDate == other.releaseDate &&
           summary == other.summary &&
           voteAverage == other.voteAverage &&
-          backdropPath == other.backdropPath;
+          backdropPath == other.backdropPath &&
+          trailerData == other.trailerData;
 
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
@@ -60,6 +63,7 @@ class MovieDetailsCubitState {
     String? summary,
     double? voteAverage,
     String? backdropPath,
+    String? trailerData,
   }) {
     return MovieDetailsCubitState(
       overview: overview ?? this.overview,
@@ -73,6 +77,7 @@ class MovieDetailsCubitState {
       summary: summary ?? this.summary,
       voteAverage: voteAverage ?? this.voteAverage,
       backdropPath: backdropPath ?? this.backdropPath,
+      trailerData: trailerData ?? this.trailerData,
     );
   }
 }
