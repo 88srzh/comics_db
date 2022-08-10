@@ -20,8 +20,8 @@ class MovieDetails {
   final String? overview;
   final double? popularity;
   final String? posterPath;
-  final List<ProductionCompany>? productionCompanies;
-  final List<ProductionCountry>? productionCountries;
+  final List<ProductionCompany> productionCompanies;
+  final List<ProductionCountry> productionCountries;
   @JsonKey(fromJson: parseDateFromString)
   final DateTime? releaseDate;
   final int revenue;

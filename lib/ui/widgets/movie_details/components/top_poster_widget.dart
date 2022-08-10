@@ -1,10 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_new_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +18,10 @@ class MovieTopPosterWidget extends StatelessWidget {
     var voteCount = cubit.state.voteCount;
     var popularity = cubit.state.popularity;
     var releaseDate = cubit.state.releaseDate;
+    var voteAverage = cubit.state.voteAverage?.toStringAsFixed(1).toString();
     // var posterData = cubit.posterData;
     final backdropPath = '';
+    final summary = cubit.state.summary;
     // final posterPath = posterData.posterPath;
     // TODO add favorite icon button
     // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
@@ -106,7 +105,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: Text(
                         releaseDate ?? '',
-                        // '123',
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -121,7 +119,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        // summary,
+                        // summary ?? '',
                         '123',
                         style: const TextStyle(
                           fontSize: 13,
@@ -153,8 +151,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      // movieData.voteAverage ?? '0',
-                      '123',
+                      voteAverage ?? '',
+                      // '123',
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,

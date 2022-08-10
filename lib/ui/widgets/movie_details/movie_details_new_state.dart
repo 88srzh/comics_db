@@ -10,6 +10,8 @@ class MovieDetailsCubitNewState {
   final int voteCount;
   final double popularity;
   final String? releaseDate;
+  final String? summary;
+  final double? voteAverage;
 
   const MovieDetailsCubitNewState({
     required this.overview,
@@ -20,6 +22,8 @@ class MovieDetailsCubitNewState {
     required this.voteCount,
     required this.popularity,
     required this.releaseDate,
+    required this.summary,
+    required this.voteAverage,
   });
 
   @override
@@ -34,7 +38,9 @@ class MovieDetailsCubitNewState {
           tagline == other.tagline &&
           voteCount == other.voteCount &&
           popularity == other.popularity &&
-          releaseDate == other.releaseDate;
+          releaseDate == other.releaseDate &&
+          summary == other.summary &&
+          voteAverage == other.voteAverage;
 
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
@@ -48,16 +54,19 @@ class MovieDetailsCubitNewState {
     int? voteCount,
     double? popularity,
     String? releaseDate,
+    String? summary,
+    double? voteAverage,
   }) {
     return MovieDetailsCubitNewState(
-      overview: overview ?? this.overview,
-      localeTag: localeTag ?? this.localeTag,
-      posterPath: posterPath ?? this.posterPath,
-      title: title ?? this.title,
-      tagline: tagline ?? this.tagline,
-      voteCount: voteCount ?? this.voteCount,
-      popularity: popularity ?? this.popularity,
-      releaseDate: releaseDate ?? this.releaseDate,
-    );
+        overview: overview ?? this.overview,
+        localeTag: localeTag ?? this.localeTag,
+        posterPath: posterPath ?? this.posterPath,
+        title: title ?? this.title,
+        tagline: tagline ?? this.tagline,
+        voteCount: voteCount ?? this.voteCount,
+        popularity: popularity ?? this.popularity,
+        releaseDate: releaseDate ?? this.releaseDate,
+        summary: summary ?? this.summary,
+        voteAverage: voteAverage ?? this.voteAverage);
   }
 }
