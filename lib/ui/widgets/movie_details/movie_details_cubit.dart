@@ -12,19 +12,20 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-part 'movie_details_new_state.dart';
+part 'movie_details_state.dart';
 
-class MovieDetailsCubit extends Cubit<MovieDetailsCubitNewState> {
+class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
   final posterData = MovieDetailsPosterData(
     title: '',
+    tagline: '',
     voteCount: 0,
     popularity: 0,
   );
-  final String overview = '';
+  // final String overview = '';
   final String posterPath = '';
-  final String title = '';
+  // final String title = '';
   String _locale = '';
   final _movieService = MovieService();
   final int movieId;
@@ -35,13 +36,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitNewState> {
 
   MovieDetailsCubit(this.movieId)
       // TODO should fix
-      : super(const MovieDetailsCubitNewState(
+      : super(const MovieDetailsCubitState(
           overview: '',
           localeTag: '',
           posterPath: '',
           title: '',
         )) {
-    emit(MovieDetailsCubitNewState(
+    emit(MovieDetailsCubitState(
       overview: state.overview,
       localeTag: state.localeTag,
       posterPath: state.posterPath,

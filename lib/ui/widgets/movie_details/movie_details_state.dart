@@ -1,13 +1,13 @@
 part of 'movie_details_cubit.dart';
 
 // @immutable
-class MovieDetailsCubitNewState {
+class MovieDetailsCubitState {
   final String overview;
   final String localeTag;
   final String posterPath;
   final String title;
 
-  const MovieDetailsCubitNewState({
+  const MovieDetailsCubitState({
     required this.overview,
     required this.localeTag,
     required this.posterPath,
@@ -17,7 +17,7 @@ class MovieDetailsCubitNewState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MovieDetailsCubitNewState &&
+          other is MovieDetailsCubitState &&
               runtimeType == other.runtimeType &&
               overview == other.overview &&
               localeTag == other.localeTag &&
@@ -27,13 +27,13 @@ class MovieDetailsCubitNewState {
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
 
-  MovieDetailsCubitNewState copyWith({
+  MovieDetailsCubitState copyWith({
     String? overview,
     String? localeTag,
     String? posterPath,
     String? title,
   }) {
-    return MovieDetailsCubitNewState(
+    return MovieDetailsCubitState(
       overview: overview ?? this.overview,
       localeTag: localeTag ?? this.localeTag,
       posterPath: posterPath ?? this.posterPath,
