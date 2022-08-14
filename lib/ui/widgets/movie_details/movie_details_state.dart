@@ -9,6 +9,7 @@ class MovieDetailsCubitState {
   final String? tagline;
   final double? voteAverage;
   final int voteCount;
+  final double? popularity;
 
   const MovieDetailsCubitState({
     required this.overview,
@@ -18,6 +19,7 @@ class MovieDetailsCubitState {
     required this.tagline,
     required this.voteAverage,
     required this.voteCount,
+    required this.popularity,
   });
 
   @override
@@ -31,7 +33,8 @@ class MovieDetailsCubitState {
           title == other.title &&
           tagline == other.tagline &&
           voteAverage == other.voteAverage &&
-          voteCount == other.voteCount;
+          voteCount == other.voteCount &&
+          popularity == other.popularity;
 
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
@@ -44,6 +47,7 @@ class MovieDetailsCubitState {
     String? tagline,
     double? voteAverage,
     int? voteCount,
+    double? popularity,
   }) {
     return MovieDetailsCubitState(
       overview: overview ?? this.overview,
@@ -53,6 +57,7 @@ class MovieDetailsCubitState {
       tagline: tagline ?? this.tagline,
       voteAverage: voteAverage ?? this.voteAverage,
       voteCount: voteCount ?? this.voteCount,
+      popularity: popularity ?? this.popularity,
     );
   }
 }

@@ -25,6 +25,8 @@ class MovieTopPosterWidget extends StatelessWidget {
     final backdropPath = posterData.backdropPath;
     final voteAverage = cubit.state.voteAverage;
     final voteCount = cubit.state.voteCount;
+    final popularity = cubit.state.popularity;
+    int? popularityInt = popularity?.toInt();
     // final posterPath = posterData.posterPath;
     // TODO add favorite icon button
     // final cubit = context.watch<MovieDetailsCubit>();
@@ -204,8 +206,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      // movieData.popularity.toStringAsFixed(0),
-                      '123',
+                      popularityInt.toString(),
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,
@@ -228,9 +229,7 @@ class MovieTopPosterWidget extends StatelessWidget {
             width: 140.0,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: posterPath != null
-                  ? Image.network(ImageDownloader.imageUrl(posterPath))
-                  : Image.asset(AppImages.noImageBig),
+              child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
             ),
           ),
         ),

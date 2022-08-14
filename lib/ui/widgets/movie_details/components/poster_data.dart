@@ -7,10 +7,10 @@ class MovieDetailsPosterData {
   final bool isFavorite;
 
   IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;
-  final String title;
+  String title;
   final double? voteAverage;
   int voteCount;
-  final double popularity;
+  double popularity;
 
   MovieDetailsPosterData({
     this.posterPath,
