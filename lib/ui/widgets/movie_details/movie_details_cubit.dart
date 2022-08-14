@@ -22,6 +22,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     tagline: '',
     voteCount: 0,
     popularity: 0,
+    voteAverage: 0,
   );
 
   // final String overview = '';
@@ -44,6 +45,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           posterPath: '',
           title: '',
           tagline: '',
+          voteAverage: 0,
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
@@ -51,6 +53,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       posterPath: state.posterPath,
       title: state.title,
       tagline: state.tagline,
+      voteAverage: state.voteAverage,
     ));
   }
 
@@ -123,6 +126,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // TODO: title twice in posterData
     data.title = details?.title ?? 'Loading title..';
     data.tagline = details?.tagline ?? 'Loading tagline..';
+    data.voteAverage = details?.voteAverage ?? 0;
     // data.posterData = MovieDetailsPosterData(
     //   title: details?.title ?? '',
     //   voteCount: details?.voteCount ?? 0,
@@ -132,10 +136,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var title = data.title;
     var tagline = data.tagline;
     var overview = data.overview;
+    var voteAverage = data.voteAverage;
     final newState = state.copyWith(
       overview: overview,
       title: title,
       tagline: tagline,
+      voteAverage: voteAverage,
     );
     emit(newState);
   }
