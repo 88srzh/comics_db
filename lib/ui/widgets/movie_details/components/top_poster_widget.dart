@@ -19,6 +19,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     // final title = posterData.title;
     // final backdropPath = posterData.backdropPath;
     final title = cubit.state.title;
+    final tagline = cubit.state.tagline;
     var posterPath = cubit.posterData.posterPath;
     var posterData = cubit.posterData;
     final backdropPath = posterData.backdropPath;
@@ -88,8 +89,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       child: SizedBox(
                         width: 210,
                         child: Text(
-                          // movieData.tagline ?? 'No tagline',
-                          '123',
+                          tagline ?? 'No tagline',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(

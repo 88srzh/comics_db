@@ -23,8 +23,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     voteCount: 0,
     popularity: 0,
   );
+
   // final String overview = '';
   final String posterPath = '';
+
   // final String title = '';
   String _locale = '';
   final _movieService = MovieService();
@@ -41,12 +43,14 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           localeTag: '',
           posterPath: '',
           title: '',
+          tagline: '',
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
       localeTag: state.localeTag,
       posterPath: state.posterPath,
       title: state.title,
+      tagline: state.tagline,
     ));
   }
 
@@ -89,6 +93,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     await loadMovieDetails(context);
   }
 
+/*
   MovieListData _makeDetailsListData(MovieDetails details) {
     final releaseDate = details.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
@@ -102,6 +107,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: releaseDateTitle,
     );
   }
+*/
 
   // void onMovieTap(BuildContext context, int index) {
   //   var movies = <MovieListData>[];
@@ -116,15 +122,21 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.overview = details?.overview ?? 'Loading description...';
     // TODO: title twice in posterData
     data.title = details?.title ?? 'Loading title..';
+    data.tagline = details?.tagline ?? 'Loading tagline..';
     // data.posterData = MovieDetailsPosterData(
     //   title: details?.title ?? '',
     //   voteCount: details?.voteCount ?? 0,
     //   popularity: details?.popularity ?? 0,
     //   posterPath: details?.posterPath ?? '',
     // );
-    var overview = data.overview;
     var title = data.title;
-    final newState = state.copyWith(overview: overview, title: title);
+    var tagline = data.tagline;
+    var overview = data.overview;
+    final newState = state.copyWith(
+      overview: overview,
+      title: title,
+      tagline: tagline,
+    );
     emit(newState);
   }
 }
