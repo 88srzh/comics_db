@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_new_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MovieDetailsNewCubit>();
+    var cubit = context.watch<MovieDetailsCubit>();
     var overview = cubit.state.overview;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),

@@ -1,4 +1,4 @@
-part of 'movie_details_new_cubit.dart';
+part of 'movie_details_cubit.dart';
 
 // @immutable
 class MovieDetailsCubitNewState {

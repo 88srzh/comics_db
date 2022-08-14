@@ -3,7 +3,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_new_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class MovieTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<MovieDetailsNewCubit>();
+    final cubit = context.watch<MovieDetailsCubit>();
     // final posterData = context.select((MovieDetailsNewCubit cubit) => cubit.posterData);
     // final title = posterData.title;
     // final backdropPath = posterData.backdropPath;
