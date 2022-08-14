@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -30,7 +29,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitNewState> {
   final _movieService = MovieService();
   final int movieId;
   final _localeStorage = LocalizedModelStorage();
-  final _movieApiClient = MovieAndTvApiClient();
   MovieDetails? _movieDetails;
 
   MovieDetails? get movieDetails => _movieDetails;
@@ -54,9 +52,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitNewState> {
   Future<void> loadMovieDetails(BuildContext context) async {
     // try {
     final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-    //   final details = await _movieApiClient.movieDetails(movieId, _locale);
-    // emit(MovieDetailsCubitNewState(overview: state.overview, localeTag: state.localeTag));
-    // updateData(details.details, details.isFavorite);
+    // TODO: add isFavorite to update
     updateData(details.details);
     // }
     // on ApiClientException catch (e) {
@@ -90,10 +86,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitNewState> {
     // _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null);
     await loadMovieDetails(context);
-    // loadMovieDetails(context);
-    // loadMovieDetails();
-    // не уверен, что first правильно передаст id
-    // movieDetailsNewBloc.add(MovieDetailsNewEventLoadDetailsPage(localeTag, state.movies[index].id));
   }
 
   MovieListData _makeDetailsListData(MovieDetails details) {
