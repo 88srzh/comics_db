@@ -8,7 +8,6 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -46,6 +45,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           title: '',
           tagline: '',
           voteAverage: 0,
+          voteCount: 0,
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
@@ -54,6 +54,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       title: state.title,
       tagline: state.tagline,
       voteAverage: state.voteAverage,
+      voteCount: state.voteCount,
     ));
   }
 
@@ -127,6 +128,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.title = details?.title ?? 'Loading title..';
     data.tagline = details?.tagline ?? 'Loading tagline..';
     data.voteAverage = details?.voteAverage ?? 0;
+    posterData.voteCount = details?.voteCount ?? 0;
+
     // data.posterData = MovieDetailsPosterData(
     //   title: details?.title ?? '',
     //   voteCount: details?.voteCount ?? 0,
@@ -137,11 +140,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var tagline = data.tagline;
     var overview = data.overview;
     var voteAverage = data.voteAverage;
+    var voteCount = posterData.voteCount;
     final newState = state.copyWith(
       overview: overview,
       title: title,
       tagline: tagline,
       voteAverage: voteAverage,
+      voteCount: voteCount,
     );
     emit(newState);
   }
