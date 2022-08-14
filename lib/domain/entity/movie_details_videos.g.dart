@@ -1,3 +1,4 @@
+/*
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'movie_details_videos.dart';
@@ -48,3 +49,4 @@ Map<String, dynamic> _$MovieDetailsVideosResultToJson(
       'published_at': instance.publishedAt,
       'id': instance.id,
     };
+*/

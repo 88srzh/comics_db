@@ -1,3 +1,4 @@
+/*
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_details_credits.g.dart';
@@ -82,4 +83,8 @@ class Employee {
       _$EmployeeFromJson(json);
 
   Map<String, dynamic> toJson() => _$EmployeeToJson(this);
+<<<<<<< HEAD
 }
+=======
+}*/
+>>>>>>> main

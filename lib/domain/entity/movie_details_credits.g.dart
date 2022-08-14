@@ -1,3 +1,4 @@
+/*
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'movie_details_credits.dart';
@@ -80,3 +81,4 @@ Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'department': instance.department,
       'job': instance.job,
     };
+*/

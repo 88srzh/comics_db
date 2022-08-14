@@ -8,7 +8,11 @@ class MovieDetailsPosterData {
 
   IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;
   final String title;
+<<<<<<< HEAD
   final double? voteAverage;
+=======
+  final String? voteAverage;
+>>>>>>> main
   final int voteCount;
   final double popularity;
 
@@ -29,7 +33,11 @@ class MovieDetailsPosterData {
     bool? isFavorite,
     String? title,
     String? tagline,
+<<<<<<< HEAD
     double? voteAverage,
+=======
+    String? voteAverage,
+>>>>>>> main
     int? voteCount,
     double? popularity,
   }) {

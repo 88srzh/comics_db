@@ -12,7 +12,11 @@ import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
+<<<<<<< HEAD
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
+=======
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_new_cubit.dart';
+>>>>>>> main
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
@@ -70,7 +74,11 @@ class ScreenFactory {
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
     return BlocProvider(
+<<<<<<< HEAD
       create: (_) => MovieDetailsCubit(movieId),
+=======
+      create: (_) => MovieDetailsNewCubit(movieId),
+>>>>>>> main
       child: const MovieDetailsWidget(),
     );
 

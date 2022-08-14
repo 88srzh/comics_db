@@ -33,9 +33,13 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   @override
   Widget build(BuildContext context) {
     // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
+<<<<<<< HEAD
     var cubit = context.watch<MovieDetailsCubit>();
     var trailerData = cubit.data.trailerData;
     final trailerKey = trailerData.trailerKey;
+=======
+    // final trailerKey = trailerData.trailerKey;
+>>>>>>> main
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -50,21 +54,21 @@ class _TrailerWidgetState extends State<TrailerWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          trailerKey != null
-              ? YoutubePlayerBuilder(
-                  player: YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                  ),
-                  builder: (context, player) {
-                    return Column(
-                      children: [
-                        player,
-                      ],
-                    );
-                  },
-                )
-              : Image.asset(AppImages.noImageBig),
+          // trailerKey != null
+          //     ? YoutubePlayerBuilder(
+          //         player: YoutubePlayer(
+          //           controller: _controller,
+          //           showVideoProgressIndicator: true,
+          //         ),
+          //         builder: (context, player) {
+          //           return Column(
+          //             children: [
+          //               player,
+          //             ],
+          //           );
+          //         },
+          //       )
+          //     : Image.asset(AppImages.noImageBig),
         ],
       ),
     );
