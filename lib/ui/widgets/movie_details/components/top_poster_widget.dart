@@ -14,19 +14,24 @@ class MovieTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<MovieDetailsCubit>();
     // final posterData = context.select((MovieDetailsNewCubit cubit) => cubit.posterData);
     // final title = posterData.title;
-    // final backdropPath = posterData.backdropPath;
+    // final backdropPath = posterData.backdropPath;a
+    final cubit = context.watch<MovieDetailsCubit>();
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
-    var posterPath = cubit.posterData.posterPath;
     var posterData = cubit.posterData;
-    final backdropPath = posterData.backdropPath;
     final voteAverage = cubit.state.voteAverage;
     final voteCount = cubit.state.voteCount;
     final popularity = cubit.state.popularity;
     int? popularityInt = popularity?.toInt();
+
+    // TODO must fix: cache image error
+    final backdropPath = posterData.backdropPath;
+    final posterPath = posterData.posterPath;
+
+    // final posterPath = cubit.state.posterPath;
+    // final posterPath = cubit.posterData.posterPath;
     // final posterPath = posterData.posterPath;
     // TODO add favorite icon button
     // final cubit = context.watch<MovieDetailsCubit>();

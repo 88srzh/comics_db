@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MovieDetailsPosterData {
-  final String? posterPath;
+  String? posterPath;
+  String? backdropPath;
   final String? tagline;
-  final String? backdropPath;
   final bool isFavorite;
 
   IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;

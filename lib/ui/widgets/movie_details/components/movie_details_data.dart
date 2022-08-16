@@ -12,6 +12,8 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
+  // String? posterPath = '';
+  // String? backdropPath = '';
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];

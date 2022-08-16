@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+
+// import 'package:com_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
@@ -22,12 +24,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     voteCount: 0,
     popularity: 0,
     voteAverage: 0,
+    // backdropPath: '',
+    // posterPath: '',
   );
 
-  // final String overview = '';
-  final String posterPath = '';
-
-  // final String title = '';
   String _locale = '';
   final _movieService = MovieService();
   final int movieId;
@@ -41,22 +41,24 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       : super(const MovieDetailsCubitState(
           overview: '',
           localeTag: '',
-          posterPath: '',
+          // posterPath: '',
           title: '',
           tagline: '',
           voteAverage: 0,
           voteCount: 0,
           popularity: 0,
+          // backdropPath: '',
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
       localeTag: state.localeTag,
-      posterPath: state.posterPath,
+      // posterPath: state.posterPath,
       title: state.title,
       tagline: state.tagline,
       voteAverage: state.voteAverage,
       voteCount: state.voteCount,
       popularity: state.popularity,
+      // backdropPath: state.backdropPath,
     ));
   }
 
@@ -99,22 +101,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     await loadMovieDetails(context);
   }
 
-/*
-  MovieListData _makeDetailsListData(MovieDetails details) {
-    final releaseDate = details.releaseDate;
-    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
-    return MovieListData(
-      title: details.title,
-      posterPath: details.posterPath,
-      backdropPath: details.backdropPath,
-      id: details.id,
-      originalTitle: details.originalTitle,
-      overview: details.overview,
-      releaseDate: releaseDateTitle,
-    );
-  }
-*/
-
   // void onMovieTap(BuildContext context, int index) {
   //   var movies = <MovieListData>[];
   //   final id = movies[index].id;
@@ -132,7 +118,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.voteAverage = details?.voteAverage ?? 0;
     posterData.voteCount = details?.voteCount ?? 0;
     posterData.popularity = details?.popularity ?? 0;
-
+    // posterData.backdropPath = details?.backdropPath ?? '';
+    // posterData.posterPath = details?.posterPath.toString();
+    // data.posterData.posterPath = details?.posterPath ?? '';
+    // data.posterPath = details?.posterPath ?? '';
     // data.posterData = MovieDetailsPosterData(
     //   title: details?.title ?? '',
     //   voteCount: details?.voteCount ?? 0,
@@ -145,6 +134,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var voteAverage = data.voteAverage;
     var voteCount = posterData.voteCount;
     var popularity = posterData.popularity;
+    // var posterPath = posterData.posterPath;
+    // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
       overview: overview,
       title: title,
@@ -152,6 +143,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       voteAverage: voteAverage,
       voteCount: voteCount,
       popularity: popularity,
+      // backdropPath: backdropPath,
+      // posterPath: posterPath,
     );
     emit(newState);
   }
