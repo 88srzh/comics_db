@@ -10,21 +10,24 @@ class MovieDetailsCubitState {
   final int voteCount;
   final double? popularity;
   final String releaseDate;
+  final String summary;
 
   // final String? posterPath;
   // final String? backdropPath;
-  const MovieDetailsCubitState(
-      {required this.overview,
-      required this.localeTag,
-      required this.title,
-      required this.tagline,
-      required this.voteAverage,
-      required this.voteCount,
-      required this.popularity,
-      required this.releaseDate
-      // required this.posterPath,
-      // required this.backdropPath,
-      });
+  const MovieDetailsCubitState({
+    required this.overview,
+    required this.localeTag,
+    required this.title,
+    required this.tagline,
+    required this.voteAverage,
+    required this.voteCount,
+    required this.popularity,
+    required this.releaseDate,
+    required this.summary,
+
+    // required this.posterPath,
+    // required this.backdropPath,
+  });
 
   @override
   bool operator ==(Object other) =>
@@ -38,7 +41,9 @@ class MovieDetailsCubitState {
           voteAverage == other.voteAverage &&
           voteCount == other.voteCount &&
           popularity == other.popularity &&
-          releaseDate == other.releaseDate;
+          releaseDate == other.releaseDate &&
+          summary == other.summary;
+
   // posterPath == other.posterPath &&
   // backdropPath == other.backdropPath;
 
@@ -54,6 +59,7 @@ class MovieDetailsCubitState {
     int? voteCount,
     double? popularity,
     String? releaseDate,
+    String? summary,
     // String? posterPath,
     // String? backdropPath,
   }) {
@@ -66,6 +72,7 @@ class MovieDetailsCubitState {
       voteCount: voteCount ?? this.voteCount,
       popularity: popularity ?? this.popularity,
       releaseDate: releaseDate ?? this.releaseDate,
+      summary: summary ?? this.summary,
       // posterPath: posterPath ?? this.posterPath,
       // backdropPath: backdropPath ?? this.backdropPath,
     );

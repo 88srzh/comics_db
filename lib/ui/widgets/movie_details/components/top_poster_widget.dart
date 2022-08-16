@@ -23,6 +23,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     final popularity = cubit.state.popularity;
     int? popularityInt = popularity?.toInt();
     final releaseDate = cubit.state.releaseDate;
+    final summary = cubit.state.summary;
 
     // TODO must fix: cache image error
     final backdropPath = posterData.backdropPath;
@@ -132,8 +133,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        // summary,
-                        '123',
+                        summary,
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,

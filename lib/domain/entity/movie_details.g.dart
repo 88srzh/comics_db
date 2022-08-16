@@ -25,11 +25,11 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       overview: json['overview'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
       posterPath: json['poster_path'] as String?,
-      productionCompanies: (json['production_companies'] as List<dynamic>?)
-          ?.map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
+      productionCompanies: (json['production_companies'] as List<dynamic>)
+          .map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
           .toList(),
-      productionCountries: (json['production_countries'] as List<dynamic>?)
-          ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
+      productionCountries: (json['production_countries'] as List<dynamic>)
+          .map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
           .toList(),
       releaseDate: parseDateFromString(json['release_date'] as String?),
       revenue: json['revenue'] as int,
@@ -43,10 +43,6 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       video: json['video'] as bool,
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int,
-      // credits:
-      //     MovieDetailsCredits.fromJson(json['credits'] as Map<String, dynamic>),
-      // videos:
-      //     MovieDetailsVideos.fromJson(json['videos'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
@@ -65,9 +61,9 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'popularity': instance.popularity,
       'poster_path': instance.posterPath,
       'production_companies':
-          instance.productionCompanies?.map((e) => e.toJson()).toList(),
+          instance.productionCompanies.map((e) => e.toJson()).toList(),
       'production_countries':
-          instance.productionCountries?.map((e) => e.toJson()).toList(),
+          instance.productionCountries.map((e) => e.toJson()).toList(),
       'release_date': instance.releaseDate?.toIso8601String(),
       'revenue': instance.revenue,
       'runtime': instance.runtime,
@@ -79,8 +75,6 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'video': instance.video,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
-      // 'credits': instance.credits.toJson(),
-      // 'videos': instance.videos.toJson(),
     };
 
 BelongsToCollection _$BelongsToCollectionFromJson(Map<String, dynamic> json) =>

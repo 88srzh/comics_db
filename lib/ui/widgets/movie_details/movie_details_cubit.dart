@@ -45,6 +45,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           voteCount: 0,
           popularity: 0,
           releaseDate: '',
+          summary: '',
           // posterPath: '',
           // backdropPath: '',
         )) {
@@ -57,6 +58,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       voteCount: state.voteCount,
       popularity: state.popularity,
       releaseDate: state.releaseDate,
+      summary: state.summary,
       // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
     ));
@@ -109,8 +111,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   // }
 
   void updateData(MovieDetails? details /* bool isFavorite*/) {
-    // final releaseDate = details?.releaseDate;
-    // final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     data.overview = details?.overview ?? 'Loading description...';
     // TODO: title twice in posterData
     data.title = details?.title ?? 'Loading title..';
@@ -119,6 +119,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     posterData.voteCount = details?.voteCount ?? 0;
     posterData.popularity = details?.popularity ?? 0;
     data.releaseDate = makeReleaseDate(details);
+    data.summary = makeSummary(details);
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
     // data.posterData.posterPath = details?.posterPath ?? '';
@@ -136,6 +137,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var voteCount = posterData.voteCount;
     var popularity = posterData.popularity;
     var releaseDate = data.releaseDate;
+    var summary = data.summary;
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
@@ -146,6 +148,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       voteCount: voteCount,
       popularity: popularity,
       releaseDate: releaseDate,
+      summary: summary,
       // backdropPath: backdropPath,
       // posterPath: posterPath,
     );
@@ -158,6 +161,20 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     if (releaseDate != null) {
       texts.add(_dateFormat.format(releaseDate));
     }
+    return texts.join(' ');
+  }
+
+  String makeSummary(MovieDetails? details) {
+    var texts = <String>[];
+    // TODO may be delete production countries
+      if (details?.productionCountries != null) {
+      texts.add('(${details?.productionCountries.first.iso})');
+    }
+    final runtime = details?.runtime ?? 0;
+    final duration = Duration(minutes: runtime);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+    texts.add('${hours}h ${minutes}min');
     return texts.join(' ');
   }
 }
