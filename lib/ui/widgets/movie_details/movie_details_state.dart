@@ -12,6 +12,7 @@ class MovieDetailsCubitState {
   final String releaseDate;
   final String summary;
   final String genres;
+  final String? trailerKey;
 
   // final String? posterPath;
   // final String? backdropPath;
@@ -26,6 +27,7 @@ class MovieDetailsCubitState {
     required this.releaseDate,
     required this.summary,
     required this.genres,
+    required this.trailerKey,
 
     // required this.posterPath,
     // required this.backdropPath,
@@ -45,7 +47,8 @@ class MovieDetailsCubitState {
           popularity == other.popularity &&
           releaseDate == other.releaseDate &&
           summary == other.summary &&
-          genres == other.genres;
+          genres == other.genres &&
+          trailerKey == other.trailerKey;
 
   // posterPath == other.posterPath &&
   // backdropPath == other.backdropPath;
@@ -64,6 +67,7 @@ class MovieDetailsCubitState {
     String? releaseDate,
     String? summary,
     String? genres,
+    String? trailerKey,
 
     // String? posterPath,
     // String? backdropPath,
@@ -79,6 +83,7 @@ class MovieDetailsCubitState {
       releaseDate: releaseDate ?? this.releaseDate,
       summary: summary ?? this.summary,
       genres: genres ?? this.genres,
+      trailerKey: trailerKey ?? this.trailerKey,
 
       // posterPath: posterPath ?? this.posterPath,
       // backdropPath: backdropPath ?? this.backdropPath,

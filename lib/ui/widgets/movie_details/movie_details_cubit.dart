@@ -8,6 +8,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -25,6 +26,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // backdropPath: '',
     // posterPath: '',
   );
+  MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
   String _locale = '';
   final _movieService = MovieService();
@@ -47,6 +49,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           releaseDate: '',
           summary: '',
           genres: '',
+          trailerKey: '',
 
           // posterPath: '',
           // backdropPath: '',
@@ -62,6 +65,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: state.releaseDate,
       summary: state.summary,
       genres: state.genres,
+      trailerKey: state.trailerKey,
 
       // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
@@ -114,6 +118,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   // Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   // }
 
+  String? trailerKey(MovieDetails? details) {
+    var keys = <String>[];
+    final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    if (videos != null) {
+      keys.add(videos.first.key);
+    }
+    return keys.join();
+  }
+
   void updateData(MovieDetails? details /* bool isFavorite*/) {
     data.overview = details?.overview ?? 'Loading description...';
     // TODO: title twice in posterData
@@ -125,6 +138,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
+
+    // final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    // final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    final key = trailerKey(details);
+    data.trailerData = MovieDetailsTrailerData(trailerKey: key);
+
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
     // data.posterData.posterPath = details?.posterPath ?? '';
@@ -144,6 +163,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
+    var trailerKeys = data.trailerData.trailerKey;
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
@@ -156,6 +176,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: releaseDate,
       summary: summary,
       genres: genres,
+      trailerKey: trailerKeys,
+
       // backdropPath: backdropPath,
       // posterPath: posterPath,
     );
