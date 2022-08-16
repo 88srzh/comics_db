@@ -2,9 +2,6 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +22,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     final voteCount = cubit.state.voteCount;
     final popularity = cubit.state.popularity;
     int? popularityInt = popularity?.toInt();
+    final releaseDate = cubit.state.releaseDate;
 
     // TODO must fix: cache image error
     final backdropPath = posterData.backdropPath;
@@ -119,8 +117,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        // releaseDateText,
-                        '123',
+                        releaseDate,
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,

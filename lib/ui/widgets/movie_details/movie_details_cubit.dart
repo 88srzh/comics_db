@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-
-// import 'package:com_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
@@ -41,23 +39,25 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       : super(const MovieDetailsCubitState(
           overview: '',
           localeTag: '',
-          // posterPath: '',
           title: '',
           tagline: '',
           voteAverage: 0,
           voteCount: 0,
           popularity: 0,
+          releaseDate: '',
+          // posterPath: '',
           // backdropPath: '',
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
       localeTag: state.localeTag,
-      // posterPath: state.posterPath,
       title: state.title,
       tagline: state.tagline,
       voteAverage: state.voteAverage,
       voteCount: state.voteCount,
       popularity: state.popularity,
+      releaseDate: state.releaseDate,
+      // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
     ));
   }
@@ -118,6 +118,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.voteAverage = details?.voteAverage ?? 0;
     posterData.voteCount = details?.voteCount ?? 0;
     posterData.popularity = details?.popularity ?? 0;
+    data.releaseDate = makeReleaseDate(details);
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
     // data.posterData.posterPath = details?.posterPath ?? '';
@@ -134,6 +135,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var voteAverage = data.voteAverage;
     var voteCount = posterData.voteCount;
     var popularity = posterData.popularity;
+    var releaseDate = data.releaseDate;
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
@@ -143,9 +145,19 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       voteAverage: voteAverage,
       voteCount: voteCount,
       popularity: popularity,
+      releaseDate: releaseDate,
       // backdropPath: backdropPath,
       // posterPath: posterPath,
     );
     emit(newState);
+  }
+
+  String makeReleaseDate(MovieDetails? details) {
+    var texts = <String>[];
+    final releaseDate = details?.releaseDate;
+    if (releaseDate != null) {
+      texts.add(_dateFormat.format(releaseDate));
+    }
+    return texts.join(' ');
   }
 }
