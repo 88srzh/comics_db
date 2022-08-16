@@ -46,6 +46,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           popularity: 0,
           releaseDate: '',
           summary: '',
+          genres: '',
+
           // posterPath: '',
           // backdropPath: '',
         )) {
@@ -59,6 +61,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       popularity: state.popularity,
       releaseDate: state.releaseDate,
       summary: state.summary,
+      genres: state.genres,
+
       // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
     ));
@@ -120,6 +124,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     posterData.popularity = details?.popularity ?? 0;
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
+    data.genres = makeGenres(details);
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
     // data.posterData.posterPath = details?.posterPath ?? '';
@@ -138,6 +143,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var popularity = posterData.popularity;
     var releaseDate = data.releaseDate;
     var summary = data.summary;
+    var genres = data.genres;
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
@@ -149,6 +155,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       popularity: popularity,
       releaseDate: releaseDate,
       summary: summary,
+      genres: genres,
       // backdropPath: backdropPath,
       // posterPath: posterPath,
     );
@@ -167,7 +174,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   String makeSummary(MovieDetails? details) {
     var texts = <String>[];
     // TODO may be delete production countries
-      if (details?.productionCountries != null) {
+    if (details?.productionCountries != null) {
       texts.add('(${details?.productionCountries.first.iso})');
     }
     final runtime = details?.runtime ?? 0;
@@ -175,6 +182,19 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
     texts.add('${hours}h ${minutes}min');
+    return texts.join(' ');
+  }
+
+  String makeGenres(MovieDetails? details) {
+    var texts = <String>[];
+    var genres = details?.genres;
+    if (genres != null) {
+      var genresNames = <String>[];
+      for (var genr in genres) {
+        genresNames.add(genr.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
     return texts.join(' ');
   }
 }
