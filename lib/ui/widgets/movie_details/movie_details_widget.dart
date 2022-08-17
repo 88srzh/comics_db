@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';

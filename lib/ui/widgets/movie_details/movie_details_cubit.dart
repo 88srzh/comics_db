@@ -50,6 +50,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           summary: '',
           genres: '',
           trailerKey: '',
+          peopleData: [],
 
           // posterPath: '',
           // backdropPath: '',
@@ -66,6 +67,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       summary: state.summary,
       genres: state.genres,
       trailerKey: state.trailerKey,
+      peopleData: state.peopleData,
 
       // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
@@ -118,26 +120,22 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   // Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   // }
 
-  String? trailerKey(MovieDetails? details) {
-    var keys = <String>[];
-    final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    if (videos != null) {
-      keys.add(videos.first.key);
-    }
-    return keys.join();
-  }
-
   void updateData(MovieDetails? details /* bool isFavorite*/) {
-    data.overview = details?.overview ?? 'Loading description...';
+    data.isLoading = details == null;
+    if (details == null) {
+      return;
+    }
+    data.overview = details.overview ?? 'Loading description...';
     // TODO: title twice in posterData
-    data.title = details?.title ?? 'Loading title..';
-    data.tagline = details?.tagline ?? 'Loading tagline..';
-    data.voteAverage = details?.voteAverage ?? 0;
-    posterData.voteCount = details?.voteCount ?? 0;
-    posterData.popularity = details?.popularity ?? 0;
+    data.title = details.title ?? 'Loading title..';
+    data.tagline = details.tagline ?? 'Loading tagline..';
+    data.voteAverage = details.voteAverage ?? 0;
+    posterData.voteCount = details.voteCount ?? 0;
+    posterData.popularity = details.popularity ?? 0;
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
+    // data.peopleData = makePeopleData(details);
 
     // final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     // final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
@@ -164,6 +162,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var summary = data.summary;
     var genres = data.genres;
     var trailerKeys = data.trailerData.trailerKey;
+    // var peopleData = data.peopleData;
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
@@ -177,6 +176,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       summary: summary,
       genres: genres,
       trailerKey: trailerKeys,
+      // TODO trouble in that peopleData
+      // peopleData: peopleData,
 
       // backdropPath: backdropPath,
       // posterPath: posterPath,
@@ -184,22 +185,23 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     emit(newState);
   }
 
-  String makeReleaseDate(MovieDetails? details) {
+  String makeReleaseDate(MovieDetails details) {
     var texts = <String>[];
-    final releaseDate = details?.releaseDate;
+    final releaseDate = details.releaseDate;
     if (releaseDate != null) {
       texts.add(_dateFormat.format(releaseDate));
     }
     return texts.join(' ');
   }
 
-  String makeSummary(MovieDetails? details) {
+  String makeSummary(MovieDetails details) {
     var texts = <String>[];
     // TODO may be delete production countries
-    if (details?.productionCountries != null) {
-      texts.add('(${details?.productionCountries.first.iso})');
+    // if (details?.productionCountries != null) {
+    if (details.productionCountries.isNotEmpty) {
+      texts.add('(${details.productionCountries.first.iso})');
     }
-    final runtime = details?.runtime ?? 0;
+    final runtime = details.runtime ?? 0;
     final duration = Duration(minutes: runtime);
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
@@ -207,9 +209,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return texts.join(' ');
   }
 
-  String makeGenres(MovieDetails? details) {
+  String makeGenres(MovieDetails details) {
     var texts = <String>[];
-    var genres = details?.genres;
+    var genres = details.genres;
     if (genres != null) {
       var genresNames = <String>[];
       for (var genr in genres) {
@@ -218,5 +220,35 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       texts.add(genresNames.join(', '));
     }
     return texts.join(' ');
+  }
+
+  // TODO doesnt work
+  String? trailerKey(MovieDetails? details) {
+    var keys = <String>[];
+    final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    if (videos != null) {
+      keys.add(videos.first.key);
+    }
+    return keys.join();
+  }
+
+  List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails? details) {
+    var crew = details?.credits.crew?.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
+    // crew = crew!.length > 4 ? crew.sublist(0, 4) : crew;
+    var crewLength = crew?.length;
+    if (crewLength != null) {
+      if (crewLength > 4) {
+        crew?.sublist(0, 4);
+      } else {
+        crew;
+      }
+    }
+    var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
+    for (var i = 0; i < crewLength!.toInt(); i += 2) {
+      crewChunks.add(
+        crew!.sublist(i, i + 2 > crewLength ? crewLength : i + 2),
+      );
+    }
+    return crewChunks;
   }
 }

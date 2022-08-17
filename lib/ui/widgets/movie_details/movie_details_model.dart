@@ -1,4 +1,5 @@
-/* import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
+/*
+import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
