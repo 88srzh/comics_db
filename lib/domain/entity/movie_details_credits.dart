@@ -4,8 +4,8 @@ part 'movie_details_credits.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class MovieDetailsCredits {
-  final List<Actor>? cast;
-  final List<Employee>? crew;
+  final List<Actor> cast;
+  final List<Employee> crew;
   MovieDetailsCredits({
     required this.cast,
     required this.crew,

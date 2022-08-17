@@ -135,7 +135,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
-    // data.peopleData = makePeopleData(details);
+    data.peopleData = makePeopleData(details);
 
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
@@ -162,7 +162,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var summary = data.summary;
     var genres = data.genres;
     var trailerKeys = data.trailerData.trailerKey;
-    // var peopleData = data.peopleData;
+    var peopleData = data.peopleData;
+
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
     final newState = state.copyWith(
@@ -177,7 +178,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       genres: genres,
       trailerKey: trailerKeys,
       // TODO trouble in that peopleData
-      // peopleData: peopleData,
+      peopleData: peopleData,
 
       // backdropPath: backdropPath,
       // posterPath: posterPath,
@@ -245,7 +246,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 */
 // TODO fix map
-/*  List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
+  List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
     var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
@@ -255,7 +256,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       );
     }
     return crewChunks;
-  }*/
+  }
 
   /*List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails? details) {
     var crew = details?.credits.crew?.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();

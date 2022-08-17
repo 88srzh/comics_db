@@ -14,6 +14,7 @@ class MovieDetailsData {
   double? voteAverage = 0;
   // String? posterPath = '';
   // String? backdropPath = '';
+  // TODO may be decpmpose trailerData
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];

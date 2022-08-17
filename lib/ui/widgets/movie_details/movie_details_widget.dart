@@ -56,7 +56,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
           Column(
             children: [
               const MovieTopPosterWidget(),
-              // const PeoplesWidget(),
+              const PeoplesWidget(),
               const DescriptionWidget(),
               // TrailerWidget(youtubeKey: trailerKey),
               // const CastWidget(),
