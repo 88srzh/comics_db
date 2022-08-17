@@ -209,7 +209,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return texts.join(' ');
   }
 
-  String makeGenres(MovieDetails details) {
+/*  String makeGenres(MovieDetails details) {
     var texts = <String>[];
     var genres = details.genres;
     if (genres != null) {
@@ -220,8 +220,19 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       texts.add(genresNames.join(', '));
     }
     return texts.join(' ');
-  }
+  }*/
 
+  String makeGenres(MovieDetails details) {
+    var texts = <String>[];
+    if (details.genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genr in details.genres) {
+        genresNames.add(genr.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
   // TODO doesnt work
   /*String? trailerKey(MovieDetails? details) {
     var keys = <String>[];
@@ -233,7 +244,20 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return keys.join();
   }
 */
-  List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails? details) {
+// TODO fix map
+/*  List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
+    var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
+    crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
+    var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
+    for (var i = 0; i < crew.length; i += 2) {
+      crewChunks.add(
+        crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2),
+      );
+    }
+    return crewChunks;
+  }*/
+
+  /*List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails? details) {
     var crew = details?.credits.crew?.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     // crew = crew!.length > 4 ? crew.sublist(0, 4) : crew;
     var crewLength = crew?.length;
@@ -251,5 +275,5 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       );
     }
     return crewChunks;
-  }
+  }*/
 }

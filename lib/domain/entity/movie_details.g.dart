@@ -14,8 +14,8 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
           : BelongsToCollection.fromJson(
               json['belongs_to_collection'] as Map<String, dynamic>),
       budget: json['budget'] as int,
-      genres: (json['genres'] as List<dynamic>?)
-          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
+      genres: (json['genres'] as List<dynamic>)
+          .map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
       homepage: json['homepage'] as String?,
       id: json['id'] as int,
@@ -23,7 +23,7 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       originalLanguage: json['original_language'] as String,
       originalTitle: json['original_title'] as String,
       overview: json['overview'] as String?,
-      popularity: (json['popularity'] as num?)?.toDouble(),
+      popularity: (json['popularity'] as num).toDouble(),
       posterPath: json['poster_path'] as String?,
       productionCompanies: (json['production_companies'] as List<dynamic>)
           .map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
@@ -34,14 +34,14 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       releaseDate: parseDateFromString(json['release_date'] as String?),
       revenue: json['revenue'] as int,
       runtime: json['runtime'] as int?,
-      spokenLanguages: (json['spoken_languages'] as List<dynamic>?)
-          ?.map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
+      spokenLanguages: (json['spoken_languages'] as List<dynamic>)
+          .map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as String,
       tagline: json['tagline'] as String?,
       title: json['title'] as String,
       video: json['video'] as bool,
-      voteAverage: (json['vote_average'] as num?)?.toDouble(),
+      voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
       credits:
           MovieDetailsCredits.fromJson(json['credits'] as Map<String, dynamic>),
@@ -55,7 +55,7 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'backdrop_path': instance.backdropPath,
       'belongs_to_collection': instance.belongsToCollection?.toJson(),
       'budget': instance.budget,
-      'genres': instance.genres?.map((e) => e.toJson()).toList(),
+      'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
       'id': instance.id,
       'imdb_id': instance.imdbId,
@@ -72,7 +72,7 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'revenue': instance.revenue,
       'runtime': instance.runtime,
       'spoken_languages':
-          instance.spokenLanguages?.map((e) => e.toJson()).toList(),
+          instance.spokenLanguages.map((e) => e.toJson()).toList(),
       'status': instance.status,
       'tagline': instance.tagline,
       'title': instance.title,
