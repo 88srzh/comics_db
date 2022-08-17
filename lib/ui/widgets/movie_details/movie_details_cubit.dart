@@ -137,10 +137,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.genres = makeGenres(details);
     // data.peopleData = makePeopleData(details);
 
-    // final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    // final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    final key = trailerKey(details);
-    data.trailerData = MovieDetailsTrailerData(trailerKey: key);
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    // final key = trailerKey(details);
+    data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
 
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
@@ -223,15 +223,16 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   // TODO doesnt work
-  String? trailerKey(MovieDetails? details) {
+  /*String? trailerKey(MovieDetails? details) {
     var keys = <String>[];
     final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+
     if (videos != null) {
       keys.add(videos.first.key);
     }
     return keys.join();
   }
-
+*/
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails? details) {
     var crew = details?.credits.crew?.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     // crew = crew!.length > 4 ? crew.sublist(0, 4) : crew;
