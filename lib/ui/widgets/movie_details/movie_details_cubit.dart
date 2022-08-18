@@ -127,11 +127,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
     data.overview = details.overview ?? 'Loading description...';
     // TODO: title twice in posterData
-    data.title = details.title ?? 'Loading title..';
+    data.title = details.title;
+    // TODO should fix: loadint title remove
     data.tagline = details.tagline ?? 'Loading tagline..';
-    data.voteAverage = details.voteAverage ?? 0;
-    posterData.voteCount = details.voteCount ?? 0;
-    posterData.popularity = details.popularity ?? 0;
+    data.voteAverage = details.voteAverage;
+    posterData.voteCount = details.voteCount;
+    posterData.popularity = details.popularity;
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
