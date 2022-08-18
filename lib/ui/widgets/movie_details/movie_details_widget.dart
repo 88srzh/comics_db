@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
@@ -43,8 +44,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // }
     // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
     // final trailerKey = trailerData.trailerKey;
+    var cubit = context.read<MovieDetailsCubit>();
+    final isLoading = cubit.state.isLoading;
+    if (isLoading) {
+      return const Center(child: LoadingIndicatorWidget());
+    }
 
-    final cubit = context.watch<MovieDetailsCubit>();
     final trailerKey = cubit.state.trailerKey;
     return Scaffold(
       appBar: AppBar(

@@ -34,29 +34,32 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   final int movieId;
   final _localeStorage = LocalizedModelStorage();
   MovieDetails? _movieDetails;
+  // TODO may be delete isLoading, because it's unnecessary
+  bool isLoading = true;
 
   MovieDetails? get movieDetails => _movieDetails;
 
   MovieDetailsCubit(this.movieId)
-  // TODO should fix
+      // TODO should fix
       : super(const MovieDetailsCubitState(
-    overview: '',
-    localeTag: '',
-    title: '',
-    tagline: '',
-    voteAverage: 0,
-    voteCount: 0,
-    popularity: 0,
-    releaseDate: '',
-    summary: '',
-    genres: '',
-    trailerKey: '',
-    peopleData: [],
-    actorsData: [],
+          overview: '',
+          localeTag: '',
+          title: '',
+          tagline: '',
+          voteAverage: 0,
+          voteCount: 0,
+          popularity: 0,
+          releaseDate: '',
+          summary: '',
+          genres: '',
+          trailerKey: '',
+          peopleData: [],
+          actorsData: [],
+          isLoading: false,
 
-    // posterPath: '',
-    // backdropPath: '',
-  )) {
+          // posterPath: '',
+          // backdropPath: '',
+        )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
       localeTag: state.localeTag,
@@ -71,6 +74,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       trailerKey: state.trailerKey,
       peopleData: state.peopleData,
       actorsData: state.actorsData,
+      isLoading: state.isLoading,
 
       // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
@@ -91,7 +95,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
-      // _authService.logout();
+        // _authService.logout();
         MainNavigation.resetNavigation(context);
         break;
       case ApiClientExceptionType.other:
@@ -146,10 +150,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // final key = trailerKey(details);
     // data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
 
-    data.actorsData = details.credits.cast.map((e) =>
-        MovieDetailsMovieActorData(
-            name: e.name, character: e.character, profilePath: e.profilePath)).toList();
-
+    data.actorsData = details.credits.cast
+        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
+        .toList();
+    data.isLoading = true;
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
     // data.posterData.posterPath = details?.posterPath ?? '';
@@ -172,6 +176,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var trailerKeys = data.trailerKey;
     var peopleData = data.peopleData;
     var actorsData = data.actorsData;
+    var isLoading = data.isLoading;
 
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
@@ -189,6 +194,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       // TODO trouble in that peopleData
       peopleData: peopleData,
       actorsData: actorsData,
+      isLoading: isLoading,
 
       // backdropPath: backdropPath,
       // posterPath: posterPath,

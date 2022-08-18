@@ -15,6 +15,7 @@ class MovieDetailsCubitState {
   final String? trailerKey;
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
+  final bool isLoading;
 
   // final String? posterPath;
   // final String? backdropPath;
@@ -32,6 +33,7 @@ class MovieDetailsCubitState {
     required this.trailerKey,
     required this.peopleData,
     required this.actorsData,
+    required this.isLoading,
 
     // required this.posterPath,
     // required this.backdropPath,
@@ -54,7 +56,8 @@ class MovieDetailsCubitState {
           genres == other.genres &&
           trailerKey == other.trailerKey &&
           peopleData == other.peopleData &&
-          actorsData == other.actorsData;
+          actorsData == other.actorsData &&
+          isLoading == other.isLoading;
 
   // posterPath == other.posterPath &&
   // backdropPath == other.backdropPath;
@@ -76,7 +79,7 @@ class MovieDetailsCubitState {
     String? trailerKey,
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
-
+    bool? isLoading,
 
     // String? posterPath,
     // String? backdropPath,
@@ -95,6 +98,7 @@ class MovieDetailsCubitState {
       trailerKey: trailerKey ?? this.trailerKey,
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
+      isLoading: isLoading ?? this.isLoading,
 
       // posterPath: posterPath ?? this.posterPath,
       // backdropPath: backdropPath ?? this.backdropPath,
