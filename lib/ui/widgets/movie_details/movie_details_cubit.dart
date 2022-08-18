@@ -6,6 +6,7 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
@@ -37,24 +38,25 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   MovieDetails? get movieDetails => _movieDetails;
 
   MovieDetailsCubit(this.movieId)
-      // TODO should fix
+  // TODO should fix
       : super(const MovieDetailsCubitState(
-          overview: '',
-          localeTag: '',
-          title: '',
-          tagline: '',
-          voteAverage: 0,
-          voteCount: 0,
-          popularity: 0,
-          releaseDate: '',
-          summary: '',
-          genres: '',
-          trailerKey: '',
-          peopleData: [],
+    overview: '',
+    localeTag: '',
+    title: '',
+    tagline: '',
+    voteAverage: 0,
+    voteCount: 0,
+    popularity: 0,
+    releaseDate: '',
+    summary: '',
+    genres: '',
+    trailerKey: '',
+    peopleData: [],
+    actorsData: [],
 
-          // posterPath: '',
-          // backdropPath: '',
-        )) {
+    // posterPath: '',
+    // backdropPath: '',
+  )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
       localeTag: state.localeTag,
@@ -68,6 +70,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       genres: state.genres,
       trailerKey: state.trailerKey,
       peopleData: state.peopleData,
+      actorsData: state.actorsData,
 
       // posterPath: state.posterPath,
       // backdropPath: state.backdropPath,
@@ -88,7 +91,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
-        // _authService.logout();
+      // _authService.logout();
         MainNavigation.resetNavigation(context);
         break;
       case ApiClientExceptionType.other:
@@ -141,7 +144,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     // final key = trailerKey(details);
-    data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
+    // data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
+
+    data.actorsData = details.credits.cast.map((e) =>
+        MovieDetailsMovieActorData(
+            name: e.name, character: e.character, profilePath: e.profilePath)).toList();
 
     // posterData.backdropPath = details?.backdropPath ?? '';
     // posterData.posterPath = details?.posterPath.toString();
@@ -162,8 +169,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
-    var trailerKeys = data.trailerData.trailerKey;
+    var trailerKeys = data.trailerKey;
     var peopleData = data.peopleData;
+    var actorsData = data.actorsData;
 
     // var posterPath = posterData.posterPath;
     // var backdropPath = posterData.backdropPath;
@@ -180,6 +188,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       trailerKey: trailerKeys,
       // TODO trouble in that peopleData
       peopleData: peopleData,
+      actorsData: actorsData,
 
       // backdropPath: backdropPath,
       // posterPath: posterPath,
@@ -211,19 +220,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return texts.join(' ');
   }
 
-/*  String makeGenres(MovieDetails details) {
-    var texts = <String>[];
-    var genres = details.genres;
-    if (genres != null) {
-      var genresNames = <String>[];
-      for (var genr in genres) {
-        genresNames.add(genr.name);
-      }
-      texts.add(genresNames.join(', '));
-    }
-    return texts.join(' ');
-  }*/
-
   String makeGenres(MovieDetails details) {
     var texts = <String>[];
     if (details.genres.isNotEmpty) {
@@ -235,18 +231,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
     return texts.join(' ');
   }
-  // TODO doesnt work
-  /*String? trailerKey(MovieDetails? details) {
-    var keys = <String>[];
-    final videos = details?.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
 
-    if (videos != null) {
-      keys.add(videos.first.key);
-    }
-    return keys.join();
-  }
-*/
-// TODO fix map
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
     var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
@@ -258,24 +243,4 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
     return crewChunks;
   }
-
-  /*List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails? details) {
-    var crew = details?.credits.crew?.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
-    // crew = crew!.length > 4 ? crew.sublist(0, 4) : crew;
-    var crewLength = crew?.length;
-    if (crewLength != null) {
-      if (crewLength > 4) {
-        crew?.sublist(0, 4);
-      } else {
-        crew;
-      }
-    }
-    var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
-    for (var i = 0; i < crewLength!.toInt(); i += 2) {
-      crewChunks.add(
-        crew!.sublist(i, i + 2 > crewLength ? crewLength : i + 2),
-      );
-    }
-    return crewChunks;
-  }*/
 }

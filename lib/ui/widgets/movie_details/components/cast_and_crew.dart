@@ -1,6 +1,7 @@
-/* import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,8 @@ class _MovieActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context.select((MovieDetailsModel model) => model.data.actorsData);
+    // var actorsData = context.select((MovieDetailsModel model) => model.data.actorsData);
+    var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: actorsData.length,
@@ -66,7 +68,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<MovieDetailsModel>();
+    // final model = context.read<MovieDetailsModel>();
+    final model = context.read<MovieDetailsCubit>();
     final actor = model.data.actorsData[actorIndex];
     final profilePath = actor.profilePath;
     return Padding(
@@ -89,7 +92,9 @@ class _MovieActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              profilePath != null ? Image.network(ImageDownloader.imageUrl(profilePath)) : const Image(image: AssetImage(AppImages.noImage)),
+              profilePath != null
+                  ? Image.network(ImageDownloader.imageUrl(profilePath))
+                  : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -110,4 +115,3 @@ class _MovieActorListItemWidget extends StatelessWidget {
     );
   }
 }
-*/

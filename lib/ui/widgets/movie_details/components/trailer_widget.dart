@@ -21,6 +21,10 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   void initState() {
     super.initState();
 
+    // Future.microtask(
+    //   () => context.watch<MovieDetailsCubit>(),
+    // );
+
     _controller = YoutubePlayerController(
       initialVideoId: widget.youtubeKey ?? '',
       flags: const YoutubePlayerFlags(

@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
@@ -58,8 +59,11 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const MovieTopPosterWidget(),
               const PeoplesWidget(),
               const DescriptionWidget(),
+
+              // TODO doesnt work, the request contains an invalid parameter value, need microtask
               // TrailerWidget(youtubeKey: trailerKey),
-              // const CastWidget(),
+
+              const CastWidget(),
               // const MovieSimilarWidget(),
             ],
           ),

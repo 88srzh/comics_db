@@ -20,6 +20,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     Future.microtask(
       () => context.read<TvDetailsModel>().setupLocale(context),
     );

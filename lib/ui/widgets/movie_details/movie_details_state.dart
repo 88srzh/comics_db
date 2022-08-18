@@ -14,6 +14,7 @@ class MovieDetailsCubitState {
   final String genres;
   final String? trailerKey;
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
+  final List<MovieDetailsMovieActorData> actorsData;
 
   // final String? posterPath;
   // final String? backdropPath;
@@ -30,6 +31,7 @@ class MovieDetailsCubitState {
     required this.genres,
     required this.trailerKey,
     required this.peopleData,
+    required this.actorsData,
 
     // required this.posterPath,
     // required this.backdropPath,
@@ -51,7 +53,8 @@ class MovieDetailsCubitState {
           summary == other.summary &&
           genres == other.genres &&
           trailerKey == other.trailerKey &&
-          peopleData == other.peopleData;
+          peopleData == other.peopleData &&
+          actorsData == other.actorsData;
 
   // posterPath == other.posterPath &&
   // backdropPath == other.backdropPath;
@@ -72,6 +75,8 @@ class MovieDetailsCubitState {
     String? genres,
     String? trailerKey,
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
+    List<MovieDetailsMovieActorData>? actorsData,
+
 
     // String? posterPath,
     // String? backdropPath,
@@ -89,6 +94,7 @@ class MovieDetailsCubitState {
       genres: genres ?? this.genres,
       trailerKey: trailerKey ?? this.trailerKey,
       peopleData: peopleData ?? this.peopleData,
+      actorsData: actorsData ?? this.actorsData,
 
       // posterPath: posterPath ?? this.posterPath,
       // backdropPath: backdropPath ?? this.backdropPath,
