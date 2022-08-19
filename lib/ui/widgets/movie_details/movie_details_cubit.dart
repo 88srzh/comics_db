@@ -34,6 +34,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   final int movieId;
   final _localeStorage = LocalizedModelStorage();
   MovieDetails? _movieDetails;
+
   // TODO may be delete isLoading, because it's unnecessary
   bool isLoading = true;
 
@@ -147,23 +148,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    // final key = trailerKey(details);
-    // data.trailerData = MovieDetailsTrailerData(trailerKey: trailerKey);
 
     data.actorsData = details.credits.cast
         .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
     data.isLoading = true;
-    // posterData.backdropPath = details?.backdropPath ?? '';
-    // posterData.posterPath = details?.posterPath.toString();
-    // data.posterData.posterPath = details?.posterPath ?? '';
-    // data.posterPath = details?.posterPath ?? '';
-    // data.posterData = MovieDetailsPosterData(
-    //   title: details?.title ?? '',
-    //   voteCount: details?.voteCount ?? 0,
-    //   popularity: details?.popularity ?? 0,
-    //   posterPath: details?.posterPath ?? '',
-    // );
+
     var title = data.title;
     var tagline = data.tagline;
     var overview = data.overview;
@@ -213,8 +203,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   String makeSummary(MovieDetails details) {
     var texts = <String>[];
-    // TODO may be delete production countries
-    // if (details?.productionCountries != null) {
     if (details.productionCountries.isNotEmpty) {
       texts.add('(${details.productionCountries.first.iso})');
     }

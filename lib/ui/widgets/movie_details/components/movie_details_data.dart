@@ -1,4 +1,5 @@
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/image_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 
@@ -19,4 +20,5 @@ class MovieDetailsData {
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
+  List<MovieDetailsImagesData> imagesPath = const <MovieDetailsImagesData>[];
 }
