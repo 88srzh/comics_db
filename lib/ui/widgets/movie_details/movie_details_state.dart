@@ -1,6 +1,6 @@
 part of 'movie_details_cubit.dart';
 
-@immutable
+// @immutable
 class MovieDetailsCubitState {
   final String overview;
   final String localeTag;
@@ -16,9 +16,9 @@ class MovieDetailsCubitState {
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
+  final String? posterPath;
+  final String? backdropPath;
 
-  // final String? posterPath;
-  // final String? backdropPath;
   const MovieDetailsCubitState({
     required this.overview,
     required this.localeTag,
@@ -34,9 +34,8 @@ class MovieDetailsCubitState {
     required this.peopleData,
     required this.actorsData,
     required this.isLoading,
-
-    // required this.posterPath,
-    // required this.backdropPath,
+    required this.posterPath,
+    required this.backdropPath,
   });
 
   @override
@@ -57,10 +56,9 @@ class MovieDetailsCubitState {
           trailerKey == other.trailerKey &&
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
-          isLoading == other.isLoading;
-
-  // posterPath == other.posterPath &&
-  // backdropPath == other.backdropPath;
+          isLoading == other.isLoading &&
+          posterPath == other.posterPath &&
+          backdropPath == other.backdropPath;
 
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
@@ -80,9 +78,8 @@ class MovieDetailsCubitState {
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
-
-    // String? posterPath,
-    // String? backdropPath,
+    String? posterPath,
+    String? backdropPath,
   }) {
     return MovieDetailsCubitState(
       overview: overview ?? this.overview,
@@ -99,9 +96,8 @@ class MovieDetailsCubitState {
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
-
-      // posterPath: posterPath ?? this.posterPath,
-      // backdropPath: backdropPath ?? this.backdropPath,
+      posterPath: posterPath ?? this.posterPath,
+      backdropPath: backdropPath ?? this.backdropPath,
     );
   }
 }

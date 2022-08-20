@@ -61,7 +61,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         child: ListView(children: [
           Column(
             children: [
-              const MovieTopPosterWidget(),
+              MovieTopPosterWidget(),
               const PeoplesWidget(),
               const DescriptionWidget(),
 

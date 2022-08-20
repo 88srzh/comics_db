@@ -24,8 +24,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     voteCount: 0,
     popularity: 0,
     voteAverage: 0,
-    // backdropPath: '',
-    // posterPath: '',
+    backdropPath: '',
+    posterPath: '',
   );
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
@@ -58,8 +58,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           actorsData: [],
           isLoading: false,
 
-          // posterPath: '',
-          // backdropPath: '',
+          posterPath: '',
+          backdropPath: '',
         )) {
     emit(MovieDetailsCubitState(
       overview: state.overview,
@@ -77,20 +77,20 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: state.actorsData,
       isLoading: state.isLoading,
 
-      // posterPath: state.posterPath,
-      // backdropPath: state.backdropPath,
+      posterPath: state.posterPath,
+      backdropPath: state.backdropPath,
     ));
   }
 
   Future<void> loadMovieDetails(BuildContext context) async {
-    // try {
+    try {
     final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
     // TODO: add isFavorite to update
     updateData(details.details);
-    // }
-    // on ApiClientException catch (e) {
-    //   _handleApiClientException(e, context);
-    // }
+    }
+    on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
   }
 
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
@@ -168,8 +168,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
 
-    // var posterPath = posterData.posterPath;
-    // var backdropPath = posterData.backdropPath;
+    var posterPath = posterData.posterPath;
+    var backdropPath = posterData.backdropPath;
+
     final newState = state.copyWith(
       overview: overview,
       title: title,
@@ -181,13 +182,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       summary: summary,
       genres: genres,
       trailerKey: trailerKeys,
-      // TODO trouble in that peopleData
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
 
-      // backdropPath: backdropPath,
-      // posterPath: posterPath,
+      backdropPath: backdropPath,
+      posterPath: posterPath,
     );
     emit(newState);
   }
