@@ -17,6 +17,8 @@ class MovieTopPosterWidget extends StatelessWidget {
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
     final voteAverage = cubit.state.voteAverage;
+    // TODO crutches for voteAvetage and popularity, may need fix
+    final voteAverageString = voteAverage!.toStringAsFixed(1);
     final voteCount = cubit.state.voteCount;
     final popularity = cubit.state.popularity;
     int? popularityInt = popularity?.toInt();
@@ -160,7 +162,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       // TODO: fix, may be change double to string
-                      voteAverage.toString(),
+                      voteAverageString,
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,

@@ -12,7 +12,7 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
-  String? trailerKey;
+  String? trailerKey = '';
   // String? posterPath = '';
   // String? backdropPath = '';
   // TODO may be decpmpose trailerData

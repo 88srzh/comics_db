@@ -25,6 +25,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     tagline: '',
     voteCount: 0,
     popularity: 0,
+    // TODO voteAverage duplicated
     voteAverage: 0,
   );
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
