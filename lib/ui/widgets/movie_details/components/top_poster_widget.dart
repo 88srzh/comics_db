@@ -13,8 +13,6 @@ class MovieTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final title = posterData.title;
-    // final backdropPath = posterData.backdropPath;a
     final cubit = context.watch<MovieDetailsCubit>();
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
@@ -27,8 +25,9 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
 
     // TODO must fix: cache image error
-    final posterPath = cubit.state.posterPath;
-    final backdropPath = cubit.state.backdropPath;
+    final posterPath = cubit.posterData.posterPath;
+    // final backdropPath = cubit.state.backdropPath;
+    final backdropPath = cubit.posterData.backdropPath;
 
     // TODO add favorite icon button
     // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
@@ -41,17 +40,21 @@ class MovieTopPosterWidget extends StatelessWidget {
               aspectRatio: 390 / 220,
               // child: backdropPath != null
               child: CachedNetworkImage(
-                  imageUrl: ImageDownloader.imageUrl(backdropPath!),
-                progressIndicatorBuilder: (context, url, progress) => const LoadingIndicatorWidget(),
+                imageUrl: ImageDownloader.imageUrl(backdropPath!),
+                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               ),
-              //     errorWidget: ,
-              //     ? Image.network(
-              //         ImageDownloader.imageUrl(backdropPath),
-                    )
-                  // : Image.asset(AppImages.noImageBig),
+              // ? Image.network(
+              //     ImageDownloader.imageUrl(backdropPath),
+              //     fit: BoxFit.cover,
+              // errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+              //         return const Text('image error');
+              // },
+              //     )
+              //   : Image.asset(AppImages.noImageBig),
             ),
           ),
-        // ),
+        ),
         Positioned(
           top: 45,
           left: 10,
@@ -212,21 +215,20 @@ class MovieTopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
-        // TODO: fix arrow
-        // Positioned(
-        //   top: 55,
-        //   left: 240,
-        //   child: SizedBox(
-        //     clipBehavior: Clip.antiAlias,
-        //     TODO: не закругляются края
-            // height: 170.0,
-            // width: 140.0,
-            // child: ClipRRect(
-            //   borderRadius: const BorderRadius.all(Radius.circular(10)),
-            //   child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
-            // ),
-          // ),
-        // ),
+        Positioned(
+          top: 55,
+          left: 240,
+          child: SizedBox(
+            // clipBehavior: Clip.antiAlias,
+            //     TODO: не закругляются края
+            height: 170.0,
+            width: 140.0,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class MovieDetailsPosterData {
-  String? posterPath;
-  String? backdropPath;
+  final String? posterPath;
+  final String? backdropPath;
   final String? tagline;
   final bool isFavorite;
 
   IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;
-  String title;
+  final String title;
   final double? voteAverage;
-  int voteCount;
-  double popularity;
+  final int voteCount;
+  final double popularity;
 
-  MovieDetailsPosterData({
+  const MovieDetailsPosterData({
     this.posterPath,
     this.backdropPath,
     this.isFavorite = false,
@@ -23,6 +23,7 @@ class MovieDetailsPosterData {
     required this.popularity,
   });
 
+/*
   MovieDetailsPosterData copyWith({
     String? posterPath,
     String? backdropPath,
@@ -44,4 +45,5 @@ class MovieDetailsPosterData {
       popularity: popularity ?? this.popularity,
     );
   }
+*/
 }

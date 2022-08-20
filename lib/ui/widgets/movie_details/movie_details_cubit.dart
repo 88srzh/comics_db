@@ -18,14 +18,14 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
-  final posterData = MovieDetailsPosterData(
+  final posterData = const MovieDetailsPosterData(
+    backdropPath: '',
+    posterPath: '',
     title: '',
     tagline: '',
     voteCount: 0,
     popularity: 0,
     voteAverage: 0,
-    backdropPath: '',
-    posterPath: '',
   );
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
@@ -43,6 +43,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   MovieDetailsCubit(this.movieId)
       // TODO should fix
       : super(const MovieDetailsCubitState(
+          posterPath: '',
+          backdropPath: '',
           overview: '',
           localeTag: '',
           title: '',
@@ -57,11 +59,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           peopleData: [],
           actorsData: [],
           isLoading: false,
-
-          posterPath: '',
-          backdropPath: '',
         )) {
     emit(MovieDetailsCubitState(
+      posterPath: state.posterPath,
+      backdropPath: state.backdropPath,
       overview: state.overview,
       localeTag: state.localeTag,
       title: state.title,
@@ -76,19 +77,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
-
-      posterPath: state.posterPath,
-      backdropPath: state.backdropPath,
     ));
   }
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-    final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-    // TODO: add isFavorite to update
-    updateData(details.details);
-    }
-    on ApiClientException catch (e) {
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      // TODO: add isFavorite to update
+      updateData(details.details);
+    } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
   }
@@ -136,11 +133,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.overview = details.overview ?? 'Loading description...';
     // TODO: title twice in posterData
     data.title = details.title;
-    // TODO should fix: loadint title remove
+    // TODO should fix: loading title remove
     data.tagline = details.tagline ?? 'Loading tagline..';
     data.voteAverage = details.voteAverage;
-    posterData.voteCount = details.voteCount;
-    posterData.popularity = details.popularity;
+    data.posterData = MovieDetailsPosterData(
+      title: details.title,
+      voteCount: details.voteCount,
+      popularity: details.popularity,
+      posterPath: details.posterPath,
+      backdropPath: details.backdropPath,
+    );
+    // posterData.voteCount = details.voteCount;
+    // posterData.popularity = details.popularity;
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
@@ -158,8 +162,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var tagline = data.tagline;
     var overview = data.overview;
     var voteAverage = data.voteAverage;
-    var voteCount = posterData.voteCount;
-    var popularity = posterData.popularity;
+    var voteCount = data.posterData.voteCount;
+    var popularity = data.posterData.popularity;
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
@@ -168,10 +172,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
 
-    var posterPath = posterData.posterPath;
-    var backdropPath = posterData.backdropPath;
+    var posterPath = data.posterData.posterPath;
+    var backdropPath = data.posterData.backdropPath;
 
     final newState = state.copyWith(
+      backdropPath: backdropPath,
+      posterPath: posterPath,
       overview: overview,
       title: title,
       tagline: tagline,
@@ -185,9 +191,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-
-      backdropPath: backdropPath,
-      posterPath: posterPath,
     );
     emit(newState);
   }

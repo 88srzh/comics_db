@@ -2,6 +2,8 @@ part of 'movie_details_cubit.dart';
 
 // @immutable
 class MovieDetailsCubitState {
+  final String? posterPath;
+  final String? backdropPath;
   final String overview;
   final String localeTag;
   final String title;
@@ -16,10 +18,10 @@ class MovieDetailsCubitState {
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
-  final String? posterPath;
-  final String? backdropPath;
 
   const MovieDetailsCubitState({
+    required this.posterPath,
+    required this.backdropPath,
     required this.overview,
     required this.localeTag,
     required this.title,
@@ -34,14 +36,14 @@ class MovieDetailsCubitState {
     required this.peopleData,
     required this.actorsData,
     required this.isLoading,
-    required this.posterPath,
-    required this.backdropPath,
   });
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is MovieDetailsCubitState &&
+          posterPath == other.posterPath &&
+          backdropPath == other.backdropPath &&
           runtimeType == other.runtimeType &&
           overview == other.overview &&
           localeTag == other.localeTag &&
@@ -56,14 +58,14 @@ class MovieDetailsCubitState {
           trailerKey == other.trailerKey &&
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
-          isLoading == other.isLoading &&
-          posterPath == other.posterPath &&
-          backdropPath == other.backdropPath;
+          isLoading == other.isLoading;
 
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
 
   MovieDetailsCubitState copyWith({
+    String? posterPath,
+    String? backdropPath,
     String? overview,
     String? localeTag,
     String? title,
@@ -78,10 +80,10 @@ class MovieDetailsCubitState {
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
-    String? posterPath,
-    String? backdropPath,
   }) {
     return MovieDetailsCubitState(
+      posterPath: posterPath ?? this.posterPath,
+      backdropPath: backdropPath ?? this.backdropPath,
       overview: overview ?? this.overview,
       localeTag: localeTag ?? this.localeTag,
       title: title ?? this.title,
@@ -96,8 +98,6 @@ class MovieDetailsCubitState {
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
-      posterPath: posterPath ?? this.posterPath,
-      backdropPath: backdropPath ?? this.backdropPath,
     );
   }
 }
