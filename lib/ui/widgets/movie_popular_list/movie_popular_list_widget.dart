@@ -25,7 +25,10 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<MovieListCubit>();
+    var cubit = context.watch<MovieListCubit>();
+    if (cubit.state == null) {
+      return Text('123');
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

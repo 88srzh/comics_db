@@ -20,11 +20,12 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.microtask(() =>
+    Future.microtask(
+      () =>
 
-    // final locale = Localizations.localeOf(context);
-    // context.read<MovieDetailsCubit>().setupLocale(locale.languageCode);
-    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context),
+          // final locale = Localizations.localeOf(context);
+          // context.read<MovieDetailsCubit>().setupLocale(locale.languageCode);
+          context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context),
     );
     // Future.microtask(
     //   () => context.read<MovieDetailsCubit>().setupLocale(context, locale),
@@ -60,15 +61,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         color: AppColors.kPrimaryColor,
         child: ListView(children: [
           Column(
-            children: [
+            children: const [
               MovieTopPosterWidget(),
-              const PeoplesWidget(),
-              const DescriptionWidget(),
+              PeoplesWidget(),
+              DescriptionWidget(),
 
               // TODO doesnt work, the request contains an invalid parameter value, need microtask
               // TrailerWidget(youtubeKey: trailerKey),
 
-              const CastWidget(),
+              CastWidget(),
               // const MovieSimilarWidget(),
             ],
           ),

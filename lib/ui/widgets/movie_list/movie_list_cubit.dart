@@ -17,10 +17,7 @@ class MovieListCubitState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieListCubitState &&
-          runtimeType == other.runtimeType &&
-          movies == other.movies &&
-          localeTag == other.localeTag;
+      other is MovieListCubitState && runtimeType == other.runtimeType && movies == other.movies && localeTag == other.localeTag;
 
   @override
   int get hashCode => movies.hashCode ^ localeTag.hashCode;
@@ -42,9 +39,17 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var mov = <Movie>[];
+  // final movieData = MovieListData(
+  //   title: '',
+  //   posterPath: '',
+  //   backdropPath: '',
+  //   id: 0,
+  //   originalTitle: '',
+  //   overview: '',
+  //   releaseDate: '',
+  // );
 
-  MovieListCubit({required this.movieListBloc})
-      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
+  MovieListCubit({required this.movieListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
       () {
         _onState(movieListBloc.state);
@@ -52,7 +57,6 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
       },
     );
   }
-
 
   void _onState(MovieListState state) {
     final movies = state.popularMovies.map(_makeListData).toList();
