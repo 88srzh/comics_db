@@ -89,8 +89,14 @@ class ScreenFactory {
   }
 
   Widget makeTopRatedMovieList() {
-    return ChangeNotifierProvider(
-      create: (_) => TopRatedMovieViewModel(),
+    // return ChangeNotifierProvider(
+    //   create: (_) => TopRatedMovieViewModel(),
+    return BlocProvider(
+      create: (_) => MovieListCubit(
+        movieListBloc: MovieListBloc(
+          MovieListState.initial(),
+        ),
+      ),
       child: const TopRatedMovieWidget(),
     );
   }

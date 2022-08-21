@@ -28,7 +28,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            selectedItemColor: AppColors.bottomBarBackgroundColor, unselectedItemColor: AppColors.bottomBarIconColor),
+          selectedItemColor: AppColors.bottomBarBackgroundColor,
+          unselectedItemColor: AppColors.bottomBarIconColor,
+        ),
       ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

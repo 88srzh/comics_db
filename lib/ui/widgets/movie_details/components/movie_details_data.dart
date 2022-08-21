@@ -7,7 +7,7 @@ class MovieDetailsData {
   String tagline = '';
   bool isLoading = true;
   String overview = '';
-  MovieDetailsPosterData posterData = MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
+  MovieDetailsPosterData posterData = const MovieDetailsPosterData(title: '', voteCount: 0, popularity: 0);
   String summary = '';
   String releaseDate = '';
   String genres = '';
