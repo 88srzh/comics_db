@@ -1,5 +1,4 @@
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -7,7 +6,6 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
-import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,10 +46,7 @@ class MainNavigation {
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
-    MainNavigationRouteNames.upcomingMovie: (context) =>
-        ChangeNotifierProvider(
-          create: (_) => UpcomingMovieModel(), child: const MovieListWidget(),
-        ),
+    MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
