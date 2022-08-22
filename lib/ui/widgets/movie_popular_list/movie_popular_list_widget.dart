@@ -27,7 +27,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieListCubit>();
     if (cubit.state == null) {
-      return Text('123');
+      return const Text('123');
     }
     return Scaffold(
       appBar: AppBar(

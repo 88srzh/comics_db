@@ -73,15 +73,6 @@ class ScreenFactory {
       create: (_) => MovieDetailsCubit(movieId),
       child: const MovieDetailsWidget(),
     );
-
-    // return ChangeNotifierProvider(
-    // create: (_) => MovieListCubit(
-    //   movieListBloc: MovieListBloc(
-    //     MovieListState.initial(),
-    //   ),
-    // create: (_) => MovieDetailsModel(movieId),
-    // child: const MovieDetailsWidget(),
-    // );
   }
 
   Widget makeMovieTrailer(String youtubeKey) {
