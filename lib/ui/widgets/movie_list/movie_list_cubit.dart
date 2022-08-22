@@ -59,7 +59,7 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   }
 
   void _onState(MovieListState state) {
-    final movies = state.popularMovies.map(_makeListData).toList();
+    final movies = state.movies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
     emit(newState);
   }

@@ -62,7 +62,7 @@ class MovieListState {
   final MovieListContainer searchMovieContainer;
   final String searchQuery;
 
-  List<Movie> get popularMovies => isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
+  List<Movie> get movies => isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
 
   MovieListState.initial()
       : movieContainer = const MovieListContainer.initial(),
