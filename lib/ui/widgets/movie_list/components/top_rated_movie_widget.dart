@@ -1,5 +1,6 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,19 +16,22 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<TopRatedMovieViewModel>().setupTopRatedMovieLocale(locale);
+    context.read<TopRatedMovieListCubit>().setupTopRatedMovieLocale(locale.languageCode);
+    // context.read<TopRatedMovieViewModel>().setupTopRatedMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    final topRatedMovieModel = context.watch<TopRatedMovieViewModel>();
+    // final topRatedMovieModel = context.watch<TopRatedMovieViewModel>();
+    var cubit = context.watch<TopRatedMovieListCubit>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: topRatedMovieModel.topRatedMovies.length,
+      itemCount: cubit.state.movies.length,
       itemBuilder: (BuildContext context, int index) {
         // topRatedMovieModel.searchTopRatedMovie();
-        final topMovie = topRatedMovieModel.topRatedMovies[index];
-        final backdropPath = topMovie.backdropPath;
+        cubit.showedTopRatedMovieAtIndex(index);
+        final movie = cubit.state.movies[index];
+        final backdropPath = movie.backdropPath;
         return Padding(
           padding: const EdgeInsets.only(right: 15.0),
           child: Container(
@@ -39,7 +43,7 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
               ),
             ),
             child: InkWell(
-              onTap: () => topRatedMovieModel.onMovieTap(context, index),
+              onTap: () => onMovieTap(context, index),
               child: backdropPath != null
               // TODO: may be wrap in fitted box
                   ? Image.network(ImageDownloader.imageUrl(backdropPath))
@@ -49,5 +53,12 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
         );
       },
     );
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    // TODO may be change to watch to display images
+    final cubit = context.read<TopRatedMovieListCubit>();
+    final movieId = cubit.state.movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

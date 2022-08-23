@@ -4,6 +4,7 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,12 +20,14 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<NowPlayingMovieListModel>().setupNowPlayingMovieLocale(locale);
+    // context.read<NowPlayingMovieListModel>().setupNowPlayingMovieLocale(locale);
+    context.read<NowPlayingMovieListCubit>().setupNowPlayingMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<NowPlayingMovieListModel>();
+    // final model = context.watch<NowPlayingMovieListModel>();
+    var cubit = context.watch<NowPlayingMovieListCubit>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,13 +47,15 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
             ListView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.only(top: 70.0),
-              itemCount: model.movies.length,
+              itemCount: cubit.state.movies.length,
               itemExtent: 165,
               itemBuilder: (BuildContext context, int index) {
-                model.showedNowPlayingMovieAtIndex(index);
-                final movie = model.movies[index];
+                // model.showedNowPlayingMovieAtIndex(index);
+                cubit.showedNowPlayingMovieAtIndex(index);
+                // final movie = model.movies[index];
+                final movie = cubit.state.movies[index];
                 final posterPath = movie.posterPath;
-                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, model: model, index: index);
+                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index);
               },
             ),
             Padding(
@@ -59,7 +64,8 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                 style: const TextStyle(
                   color: AppColors.genresText,
                 ),
-                onChanged: model.searchNowPlayingMovie,
+                // onChanged: model.searchNowPlayingMovie,
+                onChanged: cubit.searchNowPlayingMovie,
                 decoration: InputDecoration(
                   labelText: 'Search',
                   labelStyle: const TextStyle(
@@ -93,13 +99,13 @@ class _MoviePopularListRowWidget extends StatelessWidget {
     Key? key,
     required this.posterPath,
     required this.movie,
-    required this.model,
+    required this.cubit,
     required this.index,
   }) : super(key: key);
 
   final String? posterPath;
   final MovieListData movie;
-  final NowPlayingMovieListModel model;
+  final NowPlayingMovieListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -172,10 +178,10 @@ class _MoviePopularListRowWidget extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            borderRadius: BorderRadius.circular(20.0),
-            onTap: () => model.onMovieTap(context, index),
-          ),
+          // InkWell(
+          //   borderRadius: BorderRadius.circular(20.0),
+          //   onTap: () => model.onMovieTap(context, index),
+          // ),
         ],
       ),
     );
