@@ -68,13 +68,13 @@ class MovieListWidget extends StatelessWidget {
           children: [
             Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
-                  child: SizedBox(
-                    height: 180,
-                    child: TopRatedMovieWidget(),
-                  ),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                //   child: SizedBox(
+                //     height: 180,
+                //     child: TopRatedMovieWidget(),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
@@ -117,10 +117,10 @@ class MovieListWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: UpcomingMovieWidget(),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 20.0),
+                //   child: UpcomingMovieWidget(),
+                // ),
               ],
             ),
             Padding(
@@ -137,7 +137,7 @@ class MovieListWidget extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    // TODO fix nowPlayingMove
+                    // TODO fix nowPlayingMovie
                     onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                     child: const Text(
                       'See All',

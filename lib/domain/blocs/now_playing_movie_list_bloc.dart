@@ -40,6 +40,18 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       );
       final newState = state.copyWith(searchMovieContainer: container);
       emit(newState);
+    } else {
+      if (state.movieContainer.isComplete) return;
+      final nextPage = state.movieContainer.currentPage + 1;
+      final result = await _movieApiClient.nowPlayingMovie(nextPage, event.locale, Configuration.apiKey);
+      final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
+      final container = state.movieContainer.copyWith(
+        movies: movies,
+        currentPage: result.page,
+        totalPage: result.totalPages,
+      );
+      final newState = state.copyWith(movieContainer: container);
+      emit(newState);
     }
   }
 

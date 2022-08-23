@@ -1,9 +1,11 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
@@ -64,13 +66,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         index: _selectedTab,
         children: [
           _screenFactory.makePopularMovieList(),
-          MultiProvider(
+          MultiBlocProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => topRatedMovieModel),
+              // ChangeNotifierProvider(create: (_) => topRatedMovieModel),
               // ChangeNotifierProvider(create: (_) => movieListModel),
               BlocProvider(create: (_) => MovieListCubit(movieListBloc: MovieListBloc(MovieListState.initial()))),
-              ChangeNotifierProvider(create: (_) => upcomingMovieModel),
-              ChangeNotifierProvider(create: (_) => nowPlayingMovieModel),
+              // ChangeNotifierProvider(create: (_) => upcomingMovieModel),
+              // ChangeNotifierProvider(create: (_) => nowPlayingMovieModel),
+              BlocProvider(create: (_) => NowPlayingMovieListCubit(nowPlayingMovieListBloc: NowPlayingMovieListBloc(MovieListState.initial()))),
               // _screenFactory.makeUpcomingMovieList(),
             ],
             child: const MovieListWidget(),
