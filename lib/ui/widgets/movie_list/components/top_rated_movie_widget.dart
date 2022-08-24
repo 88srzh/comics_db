@@ -17,18 +17,15 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
     context.read<TopRatedMovieListCubit>().setupTopRatedMovieLocale(locale.languageCode);
-    // context.read<TopRatedMovieViewModel>().setupTopRatedMovieLocale(locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final topRatedMovieModel = context.watch<TopRatedMovieViewModel>();
     var cubit = context.watch<TopRatedMovieListCubit>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: cubit.state.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        // topRatedMovieModel.searchTopRatedMovie();
         cubit.showedTopRatedMovieAtIndex(index);
         final movie = cubit.state.movies[index];
         final backdropPath = movie.backdropPath;
