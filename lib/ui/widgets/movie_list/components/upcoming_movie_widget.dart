@@ -25,7 +25,6 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final upcomingMovieModel = context.watch<UpcomingMovieModel>();
     var cubit = context.watch<UpcomingMovieListCubit>();
 
     return Column(
@@ -39,7 +38,6 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                 width: 350,
                 clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(
-                  // color: AppColors.movieBorderLine,
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 child: PageView.builder(
@@ -51,9 +49,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                     // TODO: уменьшить кол-во фильмов либо исправить ползунок
                     itemCount: cubit.state.movies.length,
                     itemBuilder: (BuildContext context, int index) {
-                      // upcomingMovieModel.showedNowPlayingMovieAtIndex(index);
                       cubit.showedUpcomingMovieAtIndex(index);
-                      // final upcomingMovie = upcomingMovieModel.movies[index];
                       final movie = cubit.state.movies[index];
                       final backdropPath = movie.backdropPath;
                       return InkWell(
