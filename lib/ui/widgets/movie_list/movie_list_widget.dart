@@ -117,10 +117,10 @@ class MovieListWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                // const Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 20.0),
-                //   child: UpcomingMovieWidget(),
-                // ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: UpcomingMovieWidget(),
+                ),
               ],
             ),
             Padding(

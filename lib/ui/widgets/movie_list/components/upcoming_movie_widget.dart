@@ -1,5 +1,6 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,12 +20,13 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<UpcomingMovieModel>().setupUpcomingMovieLocale(locale);
+    context.read<UpcomingMovieListCubit>().setupUpcomingMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    final upcomingMovieModel = context.watch<UpcomingMovieModel>();
+    // final upcomingMovieModel = context.watch<UpcomingMovieModel>();
+    var cubit = context.watch<UpcomingMovieListCubit>();
 
     return Column(
       children: [
@@ -47,20 +49,22 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                       });
                     },
                     // TODO: уменьшить кол-во фильмов либо исправить ползунок
-                    itemCount: upcomingMovieModel.movies.length,
+                    itemCount: cubit.state.movies.length,
                     itemBuilder: (BuildContext context, int index) {
-                      upcomingMovieModel.showedNowPlayingMovieAtIndex(index);
-                      final upcomingMovie = upcomingMovieModel.movies[index];
-                      final backdropPath = upcomingMovie.backdropPath;
+                      // upcomingMovieModel.showedNowPlayingMovieAtIndex(index);
+                      cubit.showedUpcomingMovieAtIndex(index);
+                      // final upcomingMovie = upcomingMovieModel.movies[index];
+                      final movie = cubit.state.movies[index];
+                      final backdropPath = movie.backdropPath;
                       return InkWell(
-                        onTap: () => upcomingMovieModel.onMovieTap(context, index),
+                        onTap: () => onMovieTap(context, index),
                         child: backdropPath != null
                             ? Image.network(ImageDownloader.imageUrl(backdropPath))
                             : const SizedBox.shrink(),
                       );
                     }),
               ),
-              // TODO: сделать в отдельный виджет
+              // TODO: add to separate widget
               Positioned(
                 left: 50,
                 top: 40,
@@ -84,6 +88,12 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
         ),
       ],
     );
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    final cubit = context.read<UpcomingMovieListCubit>();
+    final movieId = cubit.state.movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 
   AnimatedContainer buildDotNew({int? index}) {
