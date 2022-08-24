@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/popular_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/top_rated_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';

@@ -30,7 +30,7 @@ class MovieService {
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
     if (sessionId != null) {
-      // TODO: вытащить isFavorite
+      // TODO: pull out isFavorite
       isFavorite = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
     }
     return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
