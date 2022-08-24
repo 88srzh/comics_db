@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
-import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
+import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
@@ -12,14 +12,14 @@ import 'package:comics_db_app/domain/entity/tv_details.dart';
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
 
-  Future<PopularAndTopRatedMovieResponse> popularMovie(
+  Future<MovieResponse> popularMovie(
     int page,
     String locale,
     String apiKey,
   ) async {
-    PopularAndTopRatedMovieResponse parser(dynamic json) {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 
@@ -35,14 +35,14 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularAndTopRatedMovieResponse> topRatedMovie(
+  Future<MovieResponse> topRatedMovie(
     int page,
     String locale,
     String apiKey,
   ) {
-    PopularAndTopRatedMovieResponse parser(dynamic json) {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 
@@ -59,14 +59,14 @@ class MovieAndTvApiClient {
   }
 
   // TODO: без apiKey, почему?
-  Future<PopularAndTopRatedMovieResponse> upcomingMovie(
+  Future<MovieResponse> upcomingMovie(
     int page,
     String locale,
     String apiKey,
   ) {
-    PopularAndTopRatedMovieResponse parser(dynamic json) {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 
@@ -82,14 +82,14 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularAndTopRatedMovieResponse> nowPlayingMovie(
+  Future<MovieResponse> nowPlayingMovie(
     int page,
     String locale,
     String apiKey,
   ) {
-    PopularAndTopRatedMovieResponse parser(dynamic json) {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 
@@ -126,15 +126,15 @@ class MovieAndTvApiClient {
   //   return result;
   // }
 
-  Future<PopularAndTopRatedMovieResponse> searchMovie(
+  Future<MovieResponse> searchMovie(
     int page,
     String locale,
     String query,
     String apiKey,
   ) async {
-    PopularAndTopRatedMovieResponse parser(dynamic json) {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 
@@ -153,14 +153,14 @@ class MovieAndTvApiClient {
   }
 
 // TODO: for what is this? may be delete, seriously
-  Future<PopularAndTopRatedMovieResponse> searchUpcomingMovie(
+  Future<MovieResponse> searchUpcomingMovie(
     int page,
     String locale,
     String query,
   ) async {
-    PopularAndTopRatedMovieResponse parser(dynamic json) {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = PopularAndTopRatedMovieResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 

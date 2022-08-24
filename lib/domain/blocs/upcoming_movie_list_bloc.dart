@@ -4,7 +4,7 @@ import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/popular_and_top_rated_movie_response.dart';
+import 'package:comics_db_app/domain/entity/movie_response.dart';
 
 class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -54,7 +54,7 @@ class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }
   }
 
-  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<PopularAndTopRatedMovieResponse> Function(int) loader) async {
+  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.movieContainer.currentPage + 1;
     final result = await loader(nextPage);
