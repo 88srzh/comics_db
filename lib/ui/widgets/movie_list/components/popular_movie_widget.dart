@@ -24,18 +24,17 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final popularMovieCubit = context.watch<MovieListCubit>();
+    final cubit = context.watch<MovieListCubit>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: popularMovieCubit.state.movies.length,
+      itemCount: cubit.state.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        // popularMovieCubit.state.showedPopularMovieAtIndex(index);
-        popularMovieCubit.showedPopularMovieAtIndex(index);
-        final popularMovie = popularMovieCubit.state.movies[index];
-        final posterPath = popularMovie.posterPath;
+        cubit.showedPopularMovieAtIndex(index);
+        final movie = cubit.state.movies[index];
+        final posterPath = movie.posterPath;
         return InkWell(
           // TODO: не уверен, что индекс вместо movieId
-            onTap: () => _onMovieTap(context, index),
+            onTap: () => onMovieTap(context, index),
             child: Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
         child: Container(
@@ -60,7 +59,9 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
     );
   }
 
-  void _onMovieTap(BuildContext context, int movieId) {
+  void onMovieTap(BuildContext context, int index) {
+    final cubit = context.read<MovieListCubit>();
+    final movieId = cubit.state.movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

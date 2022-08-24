@@ -72,15 +72,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularMovieList(),
           MultiBlocProvider(
             providers: [
-              // ChangeNotifierProvider(create: (_) => topRatedMovieModel),
               BlocProvider(create: (_) => TopRatedMovieListCubit(topRatedMovieListBloc: TopRatedMovieListBloc(MovieListState.initial()))),
-              // ChangeNotifierProvider(create: (_) => movieListModel),
               BlocProvider(create: (_) => MovieListCubit(movieListBloc: MovieListBloc(MovieListState.initial()))),
               BlocProvider(create: (_) => UpcomingMovieListCubit(upcomingMovieListBloc: UpcomingMovieListBloc(MovieListState.initial()))),
-              // ChangeNotifierProvider(create: (_) => upcomingMovieModel),
-              // ChangeNotifierProvider(create: (_) => nowPlayingMovieModel),
               BlocProvider(create: (_) => NowPlayingMovieListCubit(nowPlayingMovieListBloc: NowPlayingMovieListBloc(MovieListState.initial()))),
-              // _screenFactory.makeUpcomingMovieList(),
             ],
             child: const MovieListWidget(),
           ),
