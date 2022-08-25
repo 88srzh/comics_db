@@ -68,7 +68,6 @@ class _MovieActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = context.read<MovieDetailsModel>();
     final model = context.read<MovieDetailsCubit>();
     final actor = model.data.actorsData[actorIndex];
     final profilePath = actor.profilePath;
@@ -76,8 +75,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black.withOpacity(0.2)),
+          color: AppColors.kPrimaryColor,
+          border: Border.all(color: Colors.white.withOpacity(0.2)),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [
             BoxShadow(
@@ -92,18 +91,24 @@ class _MovieActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              profilePath != null
-                  ? Image.network(ImageDownloader.imageUrl(profilePath))
-                  : const Image(image: AssetImage(AppImages.noImage)),
+              profilePath != null ? Image.network(ImageDownloader.imageUrl(profilePath)) : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(actor.name, maxLines: 1),
+                      Text(
+                        actor.name,
+                        maxLines: 1,
+                        style: const TextStyle(color: AppColors.genresText),
+                      ),
                       const SizedBox(height: 7),
-                      Text(actor.character, maxLines: 2),
+                      Text(
+                        actor.character,
+                        maxLines: 2,
+                        style: const TextStyle(color: AppColors.genresText),
+                      ),
                     ],
                   ),
                 ),
