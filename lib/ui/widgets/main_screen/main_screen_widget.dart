@@ -6,10 +6,8 @@ import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_model.dart';
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
@@ -18,7 +16,6 @@ import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_cubit.dart';
-import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_model.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,9 +31,6 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
-  final topRatedMovieModel = TopRatedMovieViewModel();
-  final nowPlayingMovieModel = NowPlayingMovieListModel();
-  final upcomingMovieModel = UpcomingMovieModel();
 
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
