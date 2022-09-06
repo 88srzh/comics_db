@@ -8,7 +8,6 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,16 +17,6 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
-  final posterData = const MovieDetailsPosterData(
-    backdropPath: '',
-    posterPath: '',
-    title: '',
-    tagline: '',
-    voteCount: 0,
-    popularity: 0,
-    // TODO voteAverage duplicated
-    voteAverage: 0,
-  );
   MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
   String _locale = '';
@@ -83,7 +72,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      final details = await _movieService.loadMovieDetails(
+          movieId: movieId, locale: state.localeTag);
       // TODO: add isFavorite to update
       updateData(details.details);
     } on ApiClientException catch (e) {
@@ -91,7 +81,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  void _handleApiClientException(ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(
+      ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
@@ -137,25 +128,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // TODO should fix: loading title remove
     data.tagline = details.tagline ?? 'Loading tagline..';
     data.voteAverage = details.voteAverage;
-    data.posterData = MovieDetailsPosterData(
-      title: details.title,
-      voteCount: details.voteCount,
-      popularity: details.popularity,
-      posterPath: details.posterPath,
-      backdropPath: details.backdropPath,
-    );
-    // posterData.voteCount = details.voteCount;
-    // posterData.popularity = details.popularity;
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
     data.peopleData = makePeopleData(details);
 
-    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final videos = details.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
 
     data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => MovieDetailsMovieActorData(
+            name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
     data.isLoading = true;
 
@@ -163,8 +147,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var tagline = data.tagline;
     var overview = data.overview;
     var voteAverage = data.voteAverage;
-    var voteCount = data.posterData.voteCount;
-    var popularity = data.posterData.popularity;
+    var voteCount = data.voteCount;
+    var popularity = data.popularity;
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
@@ -173,8 +157,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
 
-    var posterPath = data.posterData.posterPath;
-    var backdropPath = data.posterData.backdropPath;
+    var posterPath = data.posterPath;
+    var backdropPath = data.backdropPath;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -231,7 +215,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
-    var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
+    var crew = details.credits.crew
+        .map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job))
+        .toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {

@@ -27,9 +27,9 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
 
     // TODO must fix: cache image error
-    final posterPath = cubit.posterData.posterPath;
+    final posterPath = cubit.state.posterPath;
     // final backdropPath = cubit.state.backdropPath;
-    final backdropPath = cubit.posterData.backdropPath;
+    final backdropPath = cubit.state.backdropPath;
 
     // TODO add favorite icon button
     // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
