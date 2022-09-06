@@ -15,7 +15,7 @@ import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.d
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
-import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_cubit.dart';
+import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

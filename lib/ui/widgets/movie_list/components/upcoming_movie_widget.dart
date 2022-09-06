@@ -1,6 +1,6 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/upcoming_movie/upcoming_movie_cubit.dart';
+import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,11 +52,14 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                       cubit.showedUpcomingMovieAtIndex(index);
                       final movie = cubit.state.movies[index];
                       final backdropPath = movie.backdropPath;
-                      return InkWell(
-                        onTap: () => onMovieTap(context, index),
-                        child: backdropPath != null
-                            ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                            : const SizedBox.shrink(),
+                      return Container(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: InkWell(
+                          onTap: () => onMovieTap(context, index),
+                          child: backdropPath != null
+                              ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                              : const SizedBox.shrink(),
+                        ),
                       );
                     }),
               ),
