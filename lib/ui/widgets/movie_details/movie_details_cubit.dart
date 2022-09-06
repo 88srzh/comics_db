@@ -23,12 +23,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   final _movieService = MovieService();
   final int movieId;
   final _localeStorage = LocalizedModelStorage();
-  MovieDetails? _movieDetails;
+  // MovieDetails? _movieDetails;
 
   // TODO may be delete isLoading, because it's unnecessary
   bool isLoading = true;
 
-  MovieDetails? get movieDetails => _movieDetails;
+  // MovieDetails? get movieDetails => _movieDetails;
 
   MovieDetailsCubit(this.movieId)
       // TODO should fix
@@ -72,8 +72,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      final details = await _movieService.loadMovieDetails(
-          movieId: movieId, locale: state.localeTag);
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
       // TODO: add isFavorite to update
       updateData(details.details);
     } on ApiClientException catch (e) {
@@ -81,8 +80,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  void _handleApiClientException(
-      ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
@@ -133,13 +131,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.genres = makeGenres(details);
     data.peopleData = makePeopleData(details);
 
-    final videos = details.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
 
     data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(
-            name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
     data.isLoading = true;
 
@@ -215,9 +211,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
-    var crew = details.credits.crew
-        .map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job))
-        .toList();
+    var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {
