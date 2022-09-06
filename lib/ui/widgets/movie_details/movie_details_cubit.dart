@@ -126,6 +126,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // TODO should fix: loading title remove
     data.tagline = details.tagline ?? 'Loading tagline..';
     data.voteAverage = details.voteAverage;
+    data.voteCount = details.voteCount;
+    data.popularity = details.popularity;
     data.releaseDate = makeReleaseDate(details);
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);

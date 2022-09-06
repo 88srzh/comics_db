@@ -17,7 +17,6 @@ class MovieTopPosterWidget extends StatelessWidget {
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
     final voteAverage = cubit.state.voteAverage;
-    // TODO crutches for voteAvetage and popularity, may need fix
     final voteAverageString = voteAverage!.toStringAsFixed(1);
     final voteCount = cubit.state.voteCount;
     final popularity = cubit.state.popularity;
@@ -225,9 +224,14 @@ class MovieTopPosterWidget extends StatelessWidget {
             //     TODO: не закругляются края
             height: 170.0,
             width: 140.0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+            child: CachedNetworkImage(
+              imageUrl: ImageDownloader.imageUrl(posterPath!),
+              placeholder: (context, url) => const LoadingIndicatorWidget(),
+              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+              // child: ClipRRect(
+              //   borderRadius: const BorderRadius.all(Radius.circular(10)),
+              //   child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+              // ),
             ),
           ),
         ),
