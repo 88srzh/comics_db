@@ -1,5 +1,5 @@
 /*
-part of 'movie_details_new_bloc.dart';
+part of 'movie_details_bloc.dart';
 
 // @immutable
 class MovieDetailsNewState {
