@@ -1,7 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +25,6 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieListCubit>();
-    if (cubit.state == null) {
-      return const Text('123');
-    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -56,7 +52,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 final posterPath = movie.posterPath;
                 return InkWell(
                   // onTap: () => cubit.onMovieTap(context, index),
-                  onTap: () => onMovieTap(context, index),
+                  onTap: () => cubit.onMovieTap(context, index),
                   child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
                 );
               },
@@ -91,11 +87,6 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
         ),
       ),
     );
-  }
-  void onMovieTap(BuildContext context, int index) {
-    final cubit = context.read<MovieListCubit>();
-    final movieId = cubit.state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }
 
@@ -194,5 +185,4 @@ class _MoviePopularListRowWidget extends StatelessWidget {
       ),
     );
   }
-
 }

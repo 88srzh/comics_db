@@ -43,16 +43,6 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   Timer? searchDebounce;
   var mov = <Movie>[];
 
-  // final movieData = MovieListData(
-  //   title: '',
-  //   posterPath: '',
-  //   backdropPath: '',
-  //   id: 0,
-  //   originalTitle: '',
-  //   overview: '',
-  //   releaseDate: '',
-  // );
-
   MovieListCubit({required this.movieListBloc})
       : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
@@ -115,10 +105,7 @@ class MovieListCubit extends Cubit<MovieListCubitState> {
   }
 
   void onMovieTap(BuildContext context, int index) {
-    // var movies = <MovieListData>[];
-    // final id = movies[index].id;
-    // final id = mov[index].id;
-    final id = mov[index].id;
+    final id = state.movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

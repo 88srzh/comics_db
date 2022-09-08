@@ -94,7 +94,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  Future<void> setupMovieDetailsLocale(BuildContext context) async {
+  void setupMovieDetailsLocale(BuildContext context) {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
@@ -105,7 +105,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // emit(newState);
     // _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null);
-    await loadMovieDetails(context);
+    loadMovieDetails(context);
   }
 
   // void onMovieTap(BuildContext context, int index) {
