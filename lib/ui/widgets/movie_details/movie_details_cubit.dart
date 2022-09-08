@@ -132,6 +132,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.summary = makeSummary(details);
     data.genres = makeGenres(details);
     data.peopleData = makePeopleData(details);
+    data.posterPath = details.posterPath;
+    data.backdropPath = details.backdropPath;
 
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
