@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
@@ -107,13 +107,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     updateData(null);
     loadMovieDetails(context);
   }
-
-  // void onMovieTap(BuildContext context, int index) {
-  //   var movies = <MovieListData>[];
-  //   final id = movies[index].id;
-  // final id = mov[index].id;
-  // Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
-  // }
 
   void updateData(MovieDetails? details /* bool isFavorite*/) {
     data.isLoading = details == null;
