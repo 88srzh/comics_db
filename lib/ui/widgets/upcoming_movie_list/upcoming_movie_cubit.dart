@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_db_app/domain/blocs/popular_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
@@ -15,7 +15,6 @@ class UpcomingMovieListCubit extends Cubit<MovieListCubitState> {
   late final StreamSubscription<MovieListState> upcomingMovieListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
-  var movie = <Movie>[];
 
   UpcomingMovieListCubit({required this.upcomingMovieListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(() {
