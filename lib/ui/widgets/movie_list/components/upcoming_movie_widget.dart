@@ -62,7 +62,6 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                       );
                     }),
               ),
-              // TODO: add to separate widget
               Positioned(
                 left: 50,
                 top: 40,

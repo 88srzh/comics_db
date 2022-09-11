@@ -32,7 +32,6 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
         final movie = cubit.state.movies[index];
         final posterPath = movie.posterPath;
         return InkWell(
-          // TODO: не уверен, что индекс вместо movieId
           onTap: () => cubit.onMovieTap(context, index),
           child: Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
