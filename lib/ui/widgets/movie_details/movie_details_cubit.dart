@@ -74,7 +74,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     try {
       final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
       // TODO: add isFavorite to update
-      updateData(details.details);
+      await updateData(details.details);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
@@ -94,7 +94,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  void setupMovieDetailsLocale(BuildContext context) {
+  Future<void> setupMovieDetailsLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();
     if (_locale == locale) return;
     _locale = locale;
@@ -105,10 +105,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // emit(newState);
     // _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null);
-    loadMovieDetails(context);
+    await loadMovieDetails(context);
   }
 
-  void updateData(MovieDetails? details /* bool isFavorite*/) {
+  Future<void> updateData(MovieDetails? details /* bool isFavorite*/) async {
     data.isLoading = details == null;
     if (details == null) {
       return;

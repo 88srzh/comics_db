@@ -1,6 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,34 +33,26 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
         final posterPath = movie.posterPath;
         return InkWell(
           // TODO: не уверен, что индекс вместо movieId
-            onTap: () => onMovieTap(context, index),
-            child: Padding(
+          onTap: () => cubit.onMovieTap(context, index),
+          child: Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
-        child: Container(
-        height: 200,
-        width: 114,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-        color: AppColors.movieBorderLine,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        child: FittedBox(
-        fit: BoxFit.contain,
-        child: posterPath != null
-        ? Image.network(ImageDownloader.imageUrl(posterPath))
-            : const SizedBox.shrink()),
-        )
-        ,
-        )
-        ,
+            child: Container(
+              height: 200,
+              width: 114,
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                color: AppColors.movieBorderLine,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child:
+                    posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+              ),
+            ),
+          ),
         );
       },
     );
-  }
-
-  void onMovieTap(BuildContext context, int index) {
-    final cubit = context.read<MovieListCubit>();
-    final movieId = cubit.state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

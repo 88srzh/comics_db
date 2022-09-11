@@ -31,7 +31,6 @@ class MovieTopPosterWidget extends StatelessWidget {
     final backdropPath = cubit.state.backdropPath;
 
     // TODO add favorite icon button
-    // final movieData = context.select((MovieDetailsModel model) => model.data.posterData);
     return Stack(
       children: [
         Positioned(
@@ -229,8 +228,8 @@ class MovieTopPosterWidget extends StatelessWidget {
               placeholder: (context, url) => const LoadingIndicatorWidget(),
               errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               // child: ClipRRect(
-              //   borderRadius: const BorderRadius.all(Radius.circular(10)),
-              //   child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+            //     borderRadius: const BorderRadius.all(Radius.circular(10)),
+            //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
               // ),
             ),
           ),
