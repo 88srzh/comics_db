@@ -50,7 +50,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    //
     tvTopRatedModel.setupLocale(context);
     tvPopularModel.setupLocale(context);
     airingTodayModel.setupLocale(context);

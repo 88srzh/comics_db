@@ -1,5 +1,4 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +54,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                       return Container(
                         padding: const EdgeInsets.only(right: 10),
                         child: InkWell(
-                          onTap: () => onMovieTap(context, index),
+                          onTap: () => cubit.onMovieTap(context, index),
                           child: backdropPath != null
                               ? Image.network(ImageDownloader.imageUrl(backdropPath))
                               : const SizedBox.shrink(),
@@ -87,12 +86,6 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
         ),
       ],
     );
-  }
-
-  void onMovieTap(BuildContext context, int index) {
-    final cubit = context.read<UpcomingMovieListCubit>();
-    final movieId = cubit.state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 
   AnimatedContainer buildDotNew({int? index}) {

@@ -76,7 +76,7 @@ class UpcomingMovieListCubit extends Cubit<MovieListCubitState> {
   }
 
   void onMovieTap(BuildContext context, int index) {
-    final id = movie[index].id;
+    final id = state.movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

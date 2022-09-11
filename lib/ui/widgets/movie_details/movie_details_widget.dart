@@ -13,7 +13,7 @@ class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
+  State<MovieDetailsWidget> createState() => _MovieDetailsWidgetState();
 }
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
