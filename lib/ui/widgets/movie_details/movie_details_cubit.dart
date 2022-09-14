@@ -94,7 +94,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  void setupMovieDetailsLocale(BuildContext context, String localeTag) {
+  Future<void> setupMovieDetailsLocale(BuildContext context, String localeTag) async {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -104,7 +104,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     _dateFormat = DateFormat.yMMMd(localeTag);
     // if (!_localeStorage.updateLocale(locale)) return;
     updateData(null);
-     loadMovieDetails(context);
+    await loadMovieDetails(context);
   }
 
   Future<void> updateData(MovieDetails? details /* bool isFavorite*/) async {
@@ -113,9 +113,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       return;
     }
     data.overview = details.overview ?? 'Loading description...';
-    // TODO: title twice in posterData
     data.title = details.title;
-    // TODO should fix: loading title remove
     data.tagline = details.tagline ?? 'Loading tagline..';
     data.voteAverage = details.voteAverage;
     data.voteCount = details.voteCount;
@@ -133,6 +131,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.actorsData = details.credits.cast
         .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
+
     data.isLoading = true;
 
     var title = data.title;
@@ -144,7 +143,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
-    var trailerKeys = data.trailerKey;
+    var trailerKeys = trailerKey;
     var peopleData = data.peopleData;
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
@@ -168,6 +167,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
+
     );
     emit(newState);
   }

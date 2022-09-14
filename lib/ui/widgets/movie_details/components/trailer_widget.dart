@@ -37,7 +37,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   @override
   Widget build(BuildContext context) {
     // var cubitTrailerData = context.watch<MovieDetailsCubit>().trailerData;
-    var cubit = context.watch<MovieDetailsCubit>();
+    var cubit = context.read<MovieDetailsCubit>();
     // final trailerKey = cubitTrailerData.trailerKey;
     final trailerKey = cubit.state.trailerKey;
     // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);

@@ -42,6 +42,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
     // final trailerKey = trailerData.trailerKey;
     var cubit = context.read<MovieDetailsCubit>();
+    // String? trailerKey = cubit.state.trailerKey;
     final isLoading = cubit.state.isLoading;
     if (isLoading) {
       return const Center(child: LoadingIndicatorWidget());
@@ -57,15 +58,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         color: AppColors.kPrimaryColor,
         child: ListView(children: [
           Column(
-            children: const [
-              MovieTopPosterWidget(),
-              PeoplesWidget(),
-              DescriptionWidget(),
+            children: [
+              const MovieTopPosterWidget(),
+              const PeoplesWidget(),
+              const DescriptionWidget(),
 
               // TODO doesnt work, the request contains an invalid parameter value, need microtask
-              // TrailerWidget(youtubeKey: trailerKey),
+              TrailerWidget(youtubeKey: trailerKey),
 
-              CastWidget(),
+              const CastWidget(),
               // const MovieSimilarWidget(),
             ],
           ),
