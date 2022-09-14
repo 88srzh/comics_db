@@ -94,18 +94,17 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  Future<void> setupMovieDetailsLocale(BuildContext context) async {
-    final locale = Localizations.localeOf(context).toLanguageTag();
-    if (_locale == locale) return;
-    _locale = locale;
-    _dateFormat = DateFormat.yMMMd(locale);
-    // if (state.localeTag == localeTag) return;
+  void setupMovieDetailsLocale(BuildContext context, String localeTag) {
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
+    // final locale = Localizations.localeOf(context).toLanguageTag();
+    // if (_locale == locale) return;
+    // _locale = locale;
+    _dateFormat = DateFormat.yMMMd(localeTag);
     // if (!_localeStorage.updateLocale(locale)) return;
-    // final newState = state.copyWith(localeTag: localeTag);
-    // emit(newState);
-    // _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null);
-    await loadMovieDetails(context);
+     loadMovieDetails(context);
   }
 
   Future<void> updateData(MovieDetails? details /* bool isFavorite*/) async {

@@ -51,7 +51,6 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 final movie = cubit.state.movies[index];
                 final posterPath = movie.posterPath;
                 return InkWell(
-                  // onTap: () => cubit.onMovieTap(context, index),
                   onTap: () => cubit.onMovieTap(context, index),
                   child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
                 );

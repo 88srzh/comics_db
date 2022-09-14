@@ -1,6 +1,5 @@
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +8,6 @@ class PeoplesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var crew = context.select((MovieDetailsModel model) => model.data.peopleData);
     var cubit = context.watch<MovieDetailsCubit>();
     var crew = cubit.state.peopleData;
     if (crew.isEmpty) return const SizedBox.shrink();
