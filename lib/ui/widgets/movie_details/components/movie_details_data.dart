@@ -17,7 +17,7 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
-  String? trailerKey = '';
+  String trailerKey = '';
   // TODO may be decompose trailerData
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];

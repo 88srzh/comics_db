@@ -17,12 +17,13 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
-  MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
+  // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
   String _locale = '';
   final _movieService = MovieService();
   final int movieId;
   final _localeStorage = LocalizedModelStorage();
+
   // MovieDetails? _movieDetails;
 
   // TODO may be delete isLoading, because it's unnecessary
@@ -124,13 +125,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.peopleData = makePeopleData(details);
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
+    final trailerKey = makeTrailerKey(details);
 
-    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-
-    data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
-        .toList();
+    data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath)).toList();
 
     data.isLoading = true;
 
@@ -143,11 +140,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
-    var trailerKeys = trailerKey;
+    // var trailerKeys = data.trailerKey;
     var peopleData = data.peopleData;
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
-
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
 
@@ -163,13 +159,22 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: releaseDate,
       summary: summary,
       genres: genres,
-      trailerKey: trailerKeys,
+      trailerKey: trailerKey,
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-
     );
     emit(newState);
+  }
+
+  String? makeTrailerKey(MovieDetails details) {
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    if (trailerKey != null) {
+      return trailerKey;
+    } else {
+      return 'no trailer key';
+    }
   }
 
   String makeReleaseDate(MovieDetails details) {

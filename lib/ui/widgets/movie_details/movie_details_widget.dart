@@ -1,5 +1,4 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
@@ -22,33 +21,13 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     super.didChangeDependencies();
           final locale = Localizations.localeOf(context);
           context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
-          // context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context),
-    // Future.microtask(
-    //   () => context.read<MovieDetailsCubit>().setupLocale(context, locale),
-    // );
-    // context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final isLoading = context.select((MovieDetailsModel model) => model.data.isLoading);
-    // final cubit = context.watch<MovieDetailsCubit>();
-
-    // if (isLoading) {
-    //   return const Center(
-    //     child: LoadingIndicatorWidget(),
-    //   );
-    // }
-    // var trailerData = context.select((MovieDetailsModel model) => model.data.trailerData);
-    // final trailerKey = trailerData.trailerKey;
-    var cubit = context.read<MovieDetailsCubit>();
-    // String? trailerKey = cubit.state.trailerKey;
-    final isLoading = cubit.state.isLoading;
-    if (isLoading) {
-      return const Center(child: LoadingIndicatorWidget());
-    }
-
+    var cubit = context.watch<MovieDetailsCubit>();
     final trailerKey = cubit.state.trailerKey;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -63,7 +42,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const PeoplesWidget(),
               const DescriptionWidget(),
 
-              // TODO doesnt work, the request contains an invalid parameter value, need microtask
+              // TODO doesn't work, the request contains an invalid parameter value, need microtask
               TrailerWidget(youtubeKey: trailerKey),
 
               const CastWidget(),
