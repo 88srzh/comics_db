@@ -1,5 +1,5 @@
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsData {
@@ -17,7 +17,7 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
-  String trailerKey = '';
+  String? trailerKey = '';
   // TODO may be decompose trailerData
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];

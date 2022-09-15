@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -14,7 +14,7 @@ class MovieDetailsCubitState {
   final String releaseDate;
   final String summary;
   final String genres;
-  final String trailerKey;
+  final String? trailerKey;
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;

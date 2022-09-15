@@ -8,7 +8,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -125,7 +125,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.peopleData = makePeopleData(details);
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
-    final trailerKey = makeTrailerKey(details);
+    data.trailerKey = makeTrailerKey(details);
 
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath)).toList();
 
@@ -140,7 +140,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
-    // var trailerKeys = data.trailerKey;
+    var trailerKeys = data.trailerKey;
     var peopleData = data.peopleData;
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
@@ -159,7 +159,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: releaseDate,
       summary: summary,
       genres: genres,
-      trailerKey: trailerKey,
+      trailerKey: trailerKeys,
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
@@ -167,9 +167,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     emit(newState);
   }
 
-  String? makeTrailerKey(MovieDetails details) {
+  String makeTrailerKey(MovieDetails details) {
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    // final trailerKey = videos.first.key;
+    // return trailerKey;
     if (trailerKey != null) {
       return trailerKey;
     } else {
