@@ -40,7 +40,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            trailerKey!,
+            widget.youtubeKey ?? '',
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 21,
@@ -49,21 +49,20 @@ class _TrailerWidgetState extends State<TrailerWidget> {
           ),
           const SizedBox(height: 8.0),
           trailerKey != null
-              ?
-          YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-            ),
-            builder: (context, player) {
-              return Column(
-                children: [
-                  player,
-                ],
-              );
-            },
-          )
-          : Image.asset(AppImages.noImageBig),
+              ? YoutubePlayerBuilder(
+                  player: YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                  ),
+                  builder: (context, player) {
+                    return Column(
+                      children: [
+                        player,
+                      ],
+                    );
+                  },
+                )
+              : Image.asset(AppImages.noImageBig),
         ],
       ),
     );
