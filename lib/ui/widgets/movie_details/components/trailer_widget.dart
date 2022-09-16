@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerWidget extends StatefulWidget {
-  final String youtubeKey;
+  final String? youtubeKey;
 
   const TrailerWidget({Key? key, required this.youtubeKey}) : super(key: key);
 
@@ -22,7 +22,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.youtubeKey,
+      initialVideoId: widget.youtubeKey ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: true,
@@ -39,9 +39,9 @@ class _TrailerWidgetState extends State<TrailerWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Trailer',
-            style: TextStyle(
+          Text(
+            trailerKey!,
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 21,
               color: AppColors.genresText,

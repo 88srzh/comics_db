@@ -31,7 +31,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(trailerKey!),
+        title: const Text('Movie Details'),
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
