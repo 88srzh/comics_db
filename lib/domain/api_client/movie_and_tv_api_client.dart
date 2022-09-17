@@ -5,6 +5,8 @@ import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
+import 'package:comics_db_app/domain/entity/people_details.dart';
+import 'package:comics_db_app/domain/entity/people_response.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
@@ -28,6 +30,47 @@ class MovieAndTvApiClient {
       parser,
       <String, dynamic>{
         'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
+  Future<PeopleDetails> popularPeopleDetails(int personId, String locale) {
+    PeopleDetails parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PeopleDetails.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/person/$personId',
+      parser,
+      <String, dynamic>{
+        'apo_key': Configuration.apiKey,
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
+  Future<PeopleResponse> popularPeople(
+    int page,
+    String locale,
+    String apiKey,
+  ) {
+    PeopleResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PeopleResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/person/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
         'page': page.toString(),
         'language': locale,
       },

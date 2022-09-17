@@ -52,6 +52,17 @@ class ScreenFactory {
     return const MainScreenWidget();
   }
 
+  Widget makePopularPeopleList() {
+    return BlocProvider(
+        create: (_) => PopularPeopleListCubit(
+          popularPeopleListBloc: PopularPeopleListBloc(
+            PopularPeopleListState.initial(),
+          ),
+        ),
+      child: const PopularPeopleListWidget(),
+    );
+  }
+
   Widget makePopularMovieList() {
     return BlocProvider(
       create: (_) => MovieListCubit(
