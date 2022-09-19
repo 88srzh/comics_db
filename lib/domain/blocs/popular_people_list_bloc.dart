@@ -62,7 +62,7 @@ class PeopleListState {
   final PeopleListContainer searchPeopleContainer;
   final String searchQuery;
 
-  List<People> get movies => isSearchMode ? searchPeopleContainer.people : peopleContainer.people;
+  List<People> get people => isSearchMode ? searchPeopleContainer.people : peopleContainer.people;
 
   PeopleListState.initial()
       : peopleContainer = const PeopleListContainer.initial(),

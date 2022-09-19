@@ -3,6 +3,8 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
+import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,17 +21,17 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context.read<PeopleListCubit>().setupPopularPeopleLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MovieListCubit>();
+    var cubit = context.watch<PeopleListCubit>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Popular Movies',
+          'Popular People',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -44,15 +46,15 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
             ListView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.movies.length,
+              itemCount: cubit.state.people.length,
               itemExtent: 165,
               itemBuilder: (BuildContext context, int index) {
-                cubit.showedPopularMovieAtIndex(index);
-                final movie = cubit.state.movies[index];
-                final posterPath = movie.posterPath;
+                cubit.showedPopularPeopleAtIndex(index);
+                final people = cubit.state.people[index];
+                final profilePath = people.profilePath;
                 return InkWell(
-                  onTap: () => cubit.onMovieTap(context, index),
-                  child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                  onTap: () => cubit.onPeopleTap(context, index),
+                  child: _PeoplePopularListRowWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
                 );
               },
             ),
@@ -62,7 +64,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
                 style: const TextStyle(
                   color: AppColors.genresText,
                 ),
-                onChanged: cubit.searchPopularMovie,
+                onChanged: cubit.searchPopularPeople,
                 decoration: InputDecoration(
                   labelText: 'Search',
                   labelStyle: const TextStyle(
@@ -89,20 +91,20 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
   }
 }
 
-class _MoviePopularListRowWidget extends StatelessWidget {
+class _PeoplePopularListRowWidget extends StatelessWidget {
   final int index;
 
-  const _MoviePopularListRowWidget({
+  const _PeoplePopularListRowWidget({
     Key? key,
-    required this.posterPath,
-    required this.movie,
+    required this.profilePath,
+    required this.people,
     required this.cubit,
     required this.index,
   }) : super(key: key);
 
-  final String? posterPath;
-  final MovieListData movie;
-  final MovieListCubit cubit;
+  final String profilePath;
+  final PeopleListData people;
+  final PeopleListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -126,13 +128,10 @@ class _MoviePopularListRowWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
-                posterPath != null
-                    ? Image.network(
-                        // TODO: fix posterPath not null
-                        ImageDownloader.imageUrl(posterPath!),
-                        width: 95,
-                      )
-                    : Image.asset(AppImages.noImage),
+                Image.network(
+                  ImageDownloader.imageUrl(profilePath),
+                  width: 95,
+                ),
                 const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
@@ -140,7 +139,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20.0),
                       Text(
-                        movie.originalTitle,
+                        people.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -149,25 +148,25 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5.0),
-                      Text(
-                        movie.releaseDate,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppColors.genresText,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      Text(
-                        movie.overview ?? '',
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppColors.genresText,
-                          fontSize: 12,
-                        ),
-                      ),
+                      // Text(
+                      //   movie.releaseDate,
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: const TextStyle(
+                      //     color: AppColors.genresText,
+                      //     fontSize: 13,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 20.0),
+                      // Text(
+                      //   movie.overview ?? '',
+                      //   maxLines: 3,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: const TextStyle(
+                      //     color: AppColors.genresText,
+                      //     fontSize: 12,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
