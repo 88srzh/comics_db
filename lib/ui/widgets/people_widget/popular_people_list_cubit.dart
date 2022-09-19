@@ -6,7 +6,6 @@ import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PeopleListCubitState {
   final List<PeopleListData> people;
