@@ -169,6 +169,28 @@ class MovieAndTvApiClient {
   //   return result;
   // }
 
+  Future<PeopleResponse> searchPeople(
+    int page,
+    String locale,
+    String query,
+    String apiKey,
+  ) async {
+    PeopleResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PeopleResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get('/search/person', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'page': page.toString(),
+      'language': locale,
+      'query': query,
+      'include_adult': true.toString(),
+    });
+    return result;
+  }
+
   Future<MovieResponse> searchMovie(
     int page,
     String locale,

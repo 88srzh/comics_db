@@ -36,6 +36,7 @@ class MovieListCubitState {
   }
 }
 
+// TODO refactoring title
 class MovieListCubit extends Cubit<MovieListCubitState> {
   final MovieListBloc movieListBloc;
   late final StreamSubscription<MovieListState> movieListBlocSubscription;
