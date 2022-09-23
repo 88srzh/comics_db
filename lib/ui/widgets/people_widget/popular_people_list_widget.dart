@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -38,56 +41,27 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
-        child: Stack(
-          children: [
-            GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 100,
-                // childAspectRatio: 4,
-                // crossAxisSpacing: 5,
-                // mainAxisSpacing: 5,
-              ),
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              // padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.people.length,
-              itemBuilder: (BuildContext context, int index) {
-                cubit.showedPopularPeopleAtIndex(index);
-                final people = cubit.state.people[index];
-                final profilePath = people.profilePath;
-                return InkWell(
-                  onTap: () => cubit.onPeopleTap(context, index),
-                  child: _PeoplePopularListColumnWidget(
-                      profilePath: profilePath, people: people, cubit: cubit, index: index),
-                );
-              },
-            ),
-            /*Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-              child: TextField(
-                style: const TextStyle(
-                  color: AppColors.genresText,
-                ),
-                onChanged: cubit.searchPopularPeople,
-                decoration: InputDecoration(
-                  labelText: 'Search',
-                  labelStyle: const TextStyle(
-                    color: AppColors.genresText,
-                  ),
-                  filled: true,
-                  fillColor: AppColors.kPrimaryColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
-                  ),
-                ),
-              ),
-            ),*/
-          ],
+        child: GridView.builder(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 5,
+            crossAxisCount: 3,
+            childAspectRatio: 1 / 1.65,
+          ),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          itemCount: cubit.state.people.length,
+          itemBuilder: (BuildContext context, int index) {
+            cubit.showedPopularPeopleAtIndex(index);
+            final people = cubit.state.people[index];
+            final profilePath = people.profilePath;
+            return InkWell(
+              // TODO fix tap
+              onTap: () => cubit.onPeopleTap(context, index),
+              child:
+                  _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
+            );
+          },
         ),
       ),
     );
@@ -129,22 +103,17 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                clipBehavior: Clip.hardEdge,
-                child: Image.network(
-                  ImageDownloader.imageUrl(profilePath),
-                  width: 50,
-                  height: 100,
-                  // width: 95,
-                ),
+              CachedNetworkImage(
+                imageUrl: ImageDownloader.imageUrl(profilePath),
+                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               ),
-              const SizedBox(width: 5.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // const SizedBox(height: .0),
+                    // TODO need to fix space between photo and text
                     Text(
                       people.name,
                       maxLines: 1,
@@ -154,38 +123,12 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 5.0),
-                    /*Text(
-                      movie.releaseDate,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AppColors.genresText,
-                        fontSize: 13,
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    Text(
-                      movie.overview ?? '',
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AppColors.genresText,
-                        fontSize: 12,
-                      ),
-                    ),*/
                   ],
                 ),
               ),
-              // const SizedBox(width: 5.0),
             ],
           ),
         ),
-        // InkWell(
-        //   borderRadius: BorderRadius.circular(20.0),
-        //   onTap: () => _onMovieTap(context, movie.id),
-        // onTap: () => _onMovieTap(context, index),
-        // ),
       ],
     );
   }
