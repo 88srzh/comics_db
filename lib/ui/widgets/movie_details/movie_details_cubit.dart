@@ -29,8 +29,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   // TODO may be delete isLoading, because it's unnecessary
   bool isLoading = true;
 
-  // MovieDetails? get movieDetails => _movieDetails;
-
   MovieDetailsCubit(this.movieId)
       // TODO should fix
       : super(const MovieDetailsCubitState(

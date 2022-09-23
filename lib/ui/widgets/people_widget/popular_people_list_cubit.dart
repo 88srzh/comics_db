@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:flutter/material.dart';
 
+// TODO replace cubit state
 class PeopleListCubitState {
   final List<PeopleListData> people;
   final String localeTag;

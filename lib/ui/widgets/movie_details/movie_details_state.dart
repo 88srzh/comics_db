@@ -60,6 +60,7 @@ class MovieDetailsCubitState {
           actorsData == other.actorsData &&
           isLoading == other.isLoading;
 
+  // TODO fix hashCode
   @override
   int get hashCode => overview.hashCode ^ localeTag.hashCode;
 
