@@ -42,10 +42,10 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
           children: [
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 100,
+                maxCrossAxisExtent: 100,
                 // childAspectRatio: 4,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
+                // crossAxisSpacing: 5,
+                // mainAxisSpacing: 5,
               ),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               // padding: const EdgeInsets.only(top: 70.0),
@@ -56,7 +56,8 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
                 final profilePath = people.profilePath;
                 return InkWell(
                   onTap: () => cubit.onPeopleTap(context, index),
-                  child: _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
+                  child: _PeoplePopularListColumnWidget(
+                      profilePath: profilePath, people: people, cubit: cubit, index: index),
                 );
               },
             ),
@@ -128,11 +129,17 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              Image.network(
-                ImageDownloader.imageUrl(profilePath),
-                width: 95,
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                clipBehavior: Clip.hardEdge,
+                child: Image.network(
+                  ImageDownloader.imageUrl(profilePath),
+                  width: 50,
+                  height: 100,
+                  // width: 95,
+                ),
               ),
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,29 +155,29 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 5.0),
-                    // Text(
-                    //   movie.releaseDate,
-                    //   maxLines: 1,
-                    //   overflow: TextOverflow.ellipsis,
-                    //   style: const TextStyle(
-                    //     color: AppColors.genresText,
-                    //     fontSize: 13,
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 20.0),
-                    // Text(
-                    //   movie.overview ?? '',
-                    //   maxLines: 3,
-                    //   overflow: TextOverflow.ellipsis,
-                    //   style: const TextStyle(
-                    //     color: AppColors.genresText,
-                    //     fontSize: 12,
-                    //   ),
-                    // ),
+                    /*Text(
+                      movie.releaseDate,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: AppColors.genresText,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Text(
+                      movie.overview ?? '',
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: AppColors.genresText,
+                        fontSize: 12,
+                      ),
+                    ),*/
                   ],
                 ),
               ),
-              const SizedBox(width: 5.0),
+              // const SizedBox(width: 5.0),
             ],
           ),
         ),
