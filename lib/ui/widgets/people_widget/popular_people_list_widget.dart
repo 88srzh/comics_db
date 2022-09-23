@@ -60,7 +60,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
                 );
               },
             ),
-            Padding(
+            /*Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: TextField(
                 style: const TextStyle(
@@ -85,7 +85,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
                   ),
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),
