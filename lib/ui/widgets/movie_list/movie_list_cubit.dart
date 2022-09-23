@@ -8,6 +8,7 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// TODO replace cubit state
 class MovieListCubitState {
   final List<MovieListData> movies;
   final String localeTag;

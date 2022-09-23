@@ -1,4 +1,4 @@
-part of 'people_details_dart_cubit.dart';
+part of 'people_details_cubit.dart';
 
 // @immutable
 // abstract class PeopleDetailsState {}
@@ -20,6 +20,7 @@ class PeopleDetailsCubitState {
   final bool adult;
   final String imdbId;
   final String? homepage;
+  final String localeTag;
 
   PeopleDetailsCubitState({
     required this.birthday,
@@ -36,6 +37,7 @@ class PeopleDetailsCubitState {
     required this.adult,
     required this.imdbId,
     required this.homepage,
+    required this.localeTag,
   });
 
   @override
@@ -56,7 +58,8 @@ class PeopleDetailsCubitState {
           profilePath == other.profilePath &&
           adult == other.adult &&
           imdbId == other.imdbId &&
-          homepage == other.homepage;
+          homepage == other.homepage &&
+          localeTag == other.localeTag;
 
   @override
   int get hashCode =>
@@ -73,7 +76,8 @@ class PeopleDetailsCubitState {
       profilePath.hashCode ^
       adult.hashCode ^
       imdbId.hashCode ^
-      homepage.hashCode;
+      homepage.hashCode ^
+      localeTag.hashCode;
 
   PeopleDetailsCubitState copyWith({
     String? birthday,
@@ -90,6 +94,7 @@ class PeopleDetailsCubitState {
     bool? adult,
     String? imdbId,
     String? homepage,
+    String? localeTag,
   }) {
     return PeopleDetailsCubitState(
       birthday: birthday ?? this.birthday,
@@ -106,6 +111,7 @@ class PeopleDetailsCubitState {
       adult: adult ?? this.adult,
       imdbId: imdbId ?? this.imdbId,
       homepage: homepage ?? this.homepage,
+      localeTag: localeTag ?? this.localeTag,
     );
   }
 }

@@ -17,6 +17,7 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
+
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
   String _locale = '';
@@ -107,6 +108,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   Future<void> updateData(MovieDetails? details /* bool isFavorite*/) async {
+    // may ba i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
       return;
@@ -125,7 +127,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.backdropPath = details.backdropPath;
     data.trailerKey = makeTrailerKey(details);
 
-    data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath)).toList();
+    data.actorsData = details.credits.cast
+        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
+        .toList();
 
     data.isLoading = true;
 
