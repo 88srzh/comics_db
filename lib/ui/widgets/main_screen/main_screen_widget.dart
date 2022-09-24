@@ -92,7 +92,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         backgroundColor: AppColors.bottomBarBackgroundColor,
         initialActiveIndex: 1,
         items: const [
-          TabItem<dynamic>(icon: Icons.home, title: 'News'),
+          TabItem<dynamic>(icon: Icons.people, title: 'People'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
