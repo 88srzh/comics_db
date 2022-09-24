@@ -18,16 +18,38 @@ class PeopleTopPosterWidget extends StatelessWidget {
     final name = cubit.state.name;
     final knownFor = cubit.state.knownForDepartment;
     final gender = cubit.state.gender;
+    final birthday = cubit.state.birthday;
+    final placeOfBirth = cubit.state.placeOfBirth;
+    // TODO whether it is necessary
+    // final alsoKnownAs = cubit.state.alsoKnownAs;
     final popularity = cubit.state.popularity;
 
     return Stack(
       children: [
         Positioned(
+          // top: 55,
+          left: 122,
+          child: SizedBox(
+            // clipBehavior: Clip.antiAlias,
+            // edges a not rounded
+            height: 220.0,
+            width: 390.0,
+            child: CachedNetworkImage(
+              imageUrl: ImageDownloader.imageUrl(profilePath!),
+              placeholder: (context, url) => const LoadingIndicatorWidget(),
+              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+              // child: ClipRRect(
+              //     borderRadius: const BorderRadius.all(Radius.circular(10)),
+              //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+              // ),
+            ),
+          ),
+        ),
+        Positioned(
           child: Opacity(
             opacity: 0.25,
             child: AspectRatio(
               aspectRatio: 390 / 220,
-              // child: backdropPath != null
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(profilePath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
@@ -95,8 +117,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        // gender,
-                        '123',
+                        'gender String',
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -111,8 +132,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        // summary,
-                        '123',
+                        birthday ?? 'no birthday',
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -124,8 +144,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    // genres,
-                    '123',
+                    placeOfBirth ?? 'no place of birth',
                     maxLines: 3,
                     style: const TextStyle(
                       fontSize: 13,
@@ -143,8 +162,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      // TODO: fix, may be change double to string
-                      // voteAverageString,
+                      // popularity.toString(),
                       '123',
                       style: const TextStyle(
                         fontSize: 13,
@@ -190,7 +208,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       // popularityInt.toString(),
-                      '123',
+                      popularity.toInt().toString(),
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,
@@ -203,20 +221,20 @@ class PeopleTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 55,
-          left: 240,
+          // top: 55,
+          left: 122,
           child: SizedBox(
             // clipBehavior: Clip.antiAlias,
             //     TODO: не закругляются края
-            height: 170.0,
-            width: 140.0,
+            height: 220.0,
+            width: 390.0,
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(profilePath!),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
               errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               // child: ClipRRect(
-            //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-            //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+              //     borderRadius: const BorderRadius.all(Radius.circular(10)),
+              //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
               // ),
             ),
           ),
