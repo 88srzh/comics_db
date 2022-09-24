@@ -98,6 +98,6 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
 
   void onPeopleTap(BuildContext context, int index) {
     final id = state.people[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: id);
   }
 }

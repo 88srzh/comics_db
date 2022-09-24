@@ -17,6 +17,8 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
@@ -82,6 +84,13 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MovieDetailsCubit(movieId),
       child: const MovieDetailsWidget(),
+    );
+  }
+
+  Widget makePeopleDetails(int id) {
+    return BlocProvider(
+        create: (_) => PeopleDetailsCubit(id),
+      child: const PeopleDetailsWidget(),
     );
   }
 

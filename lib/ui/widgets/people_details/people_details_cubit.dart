@@ -15,7 +15,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   final _peopleDetailsService = MovieService();
   String locale = '';
 
-  PeopleDetailsCubit(this.id, this.locale)
+  PeopleDetailsCubit(this.id)
       : super(PeopleDetailsCubitState(
           birthday: '',
           knownForDepartment: '',

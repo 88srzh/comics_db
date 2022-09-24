@@ -30,6 +30,7 @@ abstract class MainNavigationRouteNames {
   static const movieTrailer = '/main_screen/movie_details/trailer';
   static const topRatedMovie = '/main_screen/topRatedMovie';
   static const upcomingMovie = '/main_screen/upcomingMovie';
+  static const peopleDetails = '/main_screen/peopleDetails';
 }
 
 class MainNavigation {
@@ -62,6 +63,12 @@ class MainNavigation {
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeMovieTrailer(youtubeKey),
+        );
+      case MainNavigationRouteNames.peopleDetails:
+        final arguments = settings.arguments;
+        final peopleId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+            builder: (_) => _screenFactory.makePeopleDetails(peopleId),
         );
         // TODO: refactoring tv
       case MainNavigationRouteNames.tvDetails:
