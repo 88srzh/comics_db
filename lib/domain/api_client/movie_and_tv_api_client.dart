@@ -48,7 +48,7 @@ class MovieAndTvApiClient {
       '/person/$personId',
       parser,
       <String, dynamic>{
-        'apo_key': Configuration.apiKey,
+        'api_key': Configuration.apiKey,
         'language': locale,
       },
     );

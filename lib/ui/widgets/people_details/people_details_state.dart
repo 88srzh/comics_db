@@ -9,7 +9,7 @@ class PeopleDetailsCubitState {
   final String? birthday;
   final String knownForDepartment;
   final String? deathday;
-  final int id;
+  // final int id;
   final String name;
   final List<String> alsoKnownAs;
   final int gender;
@@ -26,7 +26,7 @@ class PeopleDetailsCubitState {
     required this.birthday,
     required this.knownForDepartment,
     required this.deathday,
-    required this.id,
+    // required this.id,
     required this.name,
     required this.alsoKnownAs,
     required this.gender,
@@ -48,7 +48,7 @@ class PeopleDetailsCubitState {
           birthday == other.birthday &&
           knownForDepartment == other.knownForDepartment &&
           deathday == other.deathday &&
-          id == other.id &&
+          // id == other.id &&
           name == other.name &&
           alsoKnownAs == other.alsoKnownAs &&
           gender == other.gender &&
@@ -66,7 +66,7 @@ class PeopleDetailsCubitState {
       birthday.hashCode ^
       knownForDepartment.hashCode ^
       deathday.hashCode ^
-      id.hashCode ^
+      // id.hashCode ^
       name.hashCode ^
       alsoKnownAs.hashCode ^
       gender.hashCode ^
@@ -83,7 +83,7 @@ class PeopleDetailsCubitState {
     String? birthday,
     String? knownForDepartment,
     String? deathday,
-    int? id,
+    // int? id,
     String? name,
     List<String>? alsoKnownAs,
     int? gender,
@@ -100,7 +100,7 @@ class PeopleDetailsCubitState {
       birthday: birthday ?? this.birthday,
       knownForDepartment: knownForDepartment ?? this.knownForDepartment,
       deathday: deathday ?? this.deathday,
-      id: id ?? this.id,
+      // id: id ?? this.id,
       name: name ?? this.name,
       alsoKnownAs: alsoKnownAs ?? this.alsoKnownAs,
       gender: gender ?? this.gender,

@@ -9,8 +9,6 @@ part 'people_details_state.dart';
 
 class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   final data = PeopleDetailsData();
-
-  // movieService until we do
   final int id;
   final _peopleDetailsService = MovieService();
   String locale = '';
@@ -21,7 +19,6 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
           knownForDepartment: '',
           deathday: '',
           // may be don't need id
-          id: 0,
           name: '',
           alsoKnownAs: [],
           gender: 0,
@@ -39,7 +36,6 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       knownForDepartment: state.knownForDepartment,
       deathday: state.deathday,
       // may be delete id
-      id: state.id,
       name: state.name,
       alsoKnownAs: state.alsoKnownAs,
       gender: state.gender,
@@ -125,14 +121,4 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     );
     emit(newState);
   }
-
-// String makeAlsoKnownAs(PeopleDetails details) {
-//   var texts = <String>[];
-//   if (details.alsoKnownAs.isNotEmpty) {
-//     var alsoKnowAsNames = <String>[];
-//     for (var alsoKnownAs in details.alsoKnownAs) {
-//       alsoKnowAsNames.add(alsoKnownAs.)
-//     }
-//   }
-// }
 }
