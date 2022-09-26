@@ -1,3 +1,4 @@
+import 'package:comics_db_app/domain/entity/people_known_for.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'people_details.g.dart';
@@ -9,7 +10,7 @@ class PeopleDetails {
   final String? deathday;
   final int id;
   final String name;
-  List<String> alsoKnownAs;
+  final List<String> alsoKnownAs;
 
   // TODO default: 0, minimum 0, maximum 3
   final int gender;
@@ -20,6 +21,7 @@ class PeopleDetails {
   final bool adult;
   final String imdbId;
   final String? homepage;
+  final PeopleKnownForResult knownFor;
 
   PeopleDetails({
     required this.birthday,
@@ -36,6 +38,7 @@ class PeopleDetails {
     required this.adult,
     required this.imdbId,
     required this.homepage,
+    required this.knownFor,
   });
 
   factory PeopleDetails.fromJson(Map<String, dynamic> json) => _$PeopleDetailsFromJson(json);

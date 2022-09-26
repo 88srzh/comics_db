@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
+import 'package:comics_db_app/domain/entity/people_known_for.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +31,12 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
           imdbId: '',
           homepage: '',
           localeTag: '',
+          knownFor: [],
         )) {
     emit(PeopleDetailsCubitState(
       birthday: state.birthday,
       knownForDepartment: state.knownForDepartment,
       deathday: state.deathday,
-      // may be delete id
       name: state.name,
       alsoKnownAs: state.alsoKnownAs,
       gender: state.gender,
@@ -47,6 +48,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       imdbId: state.imdbId,
       homepage: state.homepage,
       localeTag: state.localeTag,
+      knownFor: state.knownFor,
     ));
   }
 
@@ -121,4 +123,10 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     );
     emit(newState);
   }
+
+  // String makeVideoKey (PeopleDetails details) {
+  //   final videos = details.knownFor.result.where((type) => type.mediaType == 'movie');
+    // final key = videos.isNotEmpty == true ? videos.first.video : null;
+    // return videos;
+  // }
 }

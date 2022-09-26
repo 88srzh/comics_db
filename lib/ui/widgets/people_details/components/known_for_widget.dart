@@ -1,12 +1,12 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CastWidget extends StatelessWidget {
-  const CastWidget({Key? key}) : super(key: key);
+class KnowForWidget extends StatelessWidget {
+  const KnowForWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CastWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Full Cast & Crew',
+                'Known For',
                 style: TextStyle(
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
@@ -47,29 +47,29 @@ class _MovieActorListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // var actorsData = context.select((MovieDetailsModel model) => model.data.actorsData);
-    var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
-    if (actorsData.isEmpty) return const SizedBox.shrink();
+    var peopleData = context.watch<PeopleDetailsCubit>().data.knownFor;
+    if (peopleData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: actorsData.length,
+      itemCount: peopleData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
-        return _MovieActorListItemWidget(actorIndex: index);
+        return _MovieActorListItemWidget(peopleIndex: index);
       },
     );
   }
 }
 
 class _MovieActorListItemWidget extends StatelessWidget {
-  final int actorIndex;
+  final int peopleIndex;
 
-  const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _MovieActorListItemWidget({Key? key, required this.peopleIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<MovieDetailsCubit>();
-    final actor = model.data.actorsData[actorIndex];
-    final profilePath = actor.profilePath;
+    final cubit = context.read<PeopleDetailsCubit>();
+    final people = cubit.data.knownFor[peopleIndex];
+    final profilePath = people.posterPath;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
@@ -98,16 +98,16 @@ class _MovieActorListItemWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        actor.name,
+                        people.title,
                         maxLines: 1,
                         style: const TextStyle(color: AppColors.genresText),
                       ),
                       const SizedBox(height: 7),
-                      Text(
-                        actor.character,
-                        maxLines: 2,
-                        style: const TextStyle(color: AppColors.genresText),
-                      ),
+                      // Text(
+                      //   actor.character,
+                      //   maxLines: 2,
+                      //   style: const TextStyle(color: AppColors.genresText),
+                      // ),
                     ],
                   ),
                 ),
