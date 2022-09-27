@@ -9,6 +9,7 @@ class PeopleDetailsCubitState {
   final String? birthday;
   final String knownForDepartment;
   final String? deathday;
+
   // final int id;
   final String name;
   final List<String> alsoKnownAs;
@@ -62,7 +63,7 @@ class PeopleDetailsCubitState {
           imdbId == other.imdbId &&
           homepage == other.homepage &&
           localeTag == other.localeTag &&
-  knownFor == other.knownFor;
+          knownFor == other.knownFor;
 
   @override
   int get hashCode =>

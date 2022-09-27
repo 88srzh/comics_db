@@ -91,6 +91,25 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.adult = details.adult;
     data.imdbId = details.imdbId;
     data.homepage = details.homepage;
+    data.knownFor = details.knownFor.result
+        .map((e) => PeopleKnownForResult(
+              posterPath: e.posterPath,
+              adult: e.adult,
+              overview: e.overview,
+              releaseDate: e.releaseDate,
+              originalTitle: e.originalTitle,
+              genreIds: e.genreIds,
+              id: e.id,
+              mediaType: e.mediaType,
+              originalLanguage: e.originalLanguage,
+              title: e.title,
+              backdropPath: e.backdropPath,
+              popularity: e.popularity,
+              voteCount: e.voteCount,
+              video: e.video,
+              voteAverage: e.voteAverage,
+            ))
+        .toList();
 
     var birthday = data.birthday;
     var knownForDepartment = data.knownForDepartment;
@@ -105,6 +124,8 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     var adult = data.adult;
     var imdbId = data.imdbId;
     var homepage = data.homepage;
+    var knownFor = data.knownFor;
+    // data.knownFor = details.knownFor
 
     final newState = state.copyWith(
       birthday: birthday,
@@ -120,13 +141,17 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       adult: adult,
       imdbId: imdbId,
       homepage: homepage,
+      knownFor: knownFor,
     );
     emit(newState);
   }
 
-  // String makeVideoKey (PeopleDetails details) {
-  //   final videos = details.knownFor.result.where((type) => type.mediaType == 'movie');
-    // final key = videos.isNotEmpty == true ? videos.first.video : null;
-    // return videos;
-  // }
+// String makeKnownFor(PeopleDetails details) {
+//
+// }
+// String makeVideoKey (PeopleDetails details) {
+//   final videos = details.knownFor.result.where((type) => type.mediaType == 'movie');
+// final key = videos.isNotEmpty == true ? videos.first.video : null;
+// return videos;
+// }
 }

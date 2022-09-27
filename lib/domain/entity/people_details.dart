@@ -21,7 +21,7 @@ class PeopleDetails {
   final bool adult;
   final String imdbId;
   final String? homepage;
-  final PeopleKnownForResult knownFor;
+  final PeopleKnownFor knownFor;
 
   PeopleDetails({
     required this.birthday,

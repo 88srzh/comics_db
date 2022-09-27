@@ -2,17 +2,17 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'people_known_for.g.dart';
 
-// @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-// class PeopleKnownFor {
-//   final List<PeopleKnownForResult> result;
-//   PeopleKnownFor({
-//     required this.result,
-//   });
-//
-//   factory PeopleKnownFor.fromJson(Map<String, dynamic> json) => _$PeopleKnownForFromJson(json);
-//
-//   Map<String, dynamic> toJson() => _$PeopleKnownForToJson(this);
-// }
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+class PeopleKnownFor {
+  final List<PeopleKnownForResult> result;
+  PeopleKnownFor({
+    required this.result,
+  });
+
+  factory PeopleKnownFor.fromJson(Map<String, dynamic> json) => _$PeopleKnownForFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PeopleKnownForToJson(this);
+}
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class PeopleKnownForResult {
@@ -21,7 +21,7 @@ class PeopleKnownForResult {
   final String overview;
   final String releaseDate;
   final String originalTitle;
-  List<int> genreIds;
+  final List<int> genreIds;
   final int id;
   final String mediaType;
   final String originalLanguage;
@@ -51,5 +51,6 @@ class PeopleKnownForResult {
   });
 
   factory PeopleKnownForResult.fromJson(Map<String, dynamic> json) => _$PeopleKnownForResultFromJson(json);
+
   Map<String, dynamic> toJson() => _$PeopleKnownForResultToJson(this);
 }

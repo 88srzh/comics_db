@@ -6,6 +6,18 @@ part of 'people_known_for.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+PeopleKnownFor _$PeopleKnownForFromJson(Map<String, dynamic> json) =>
+    PeopleKnownFor(
+      result: (json['result'] as List<dynamic>)
+          .map((e) => PeopleKnownForResult.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$PeopleKnownForToJson(PeopleKnownFor instance) =>
+    <String, dynamic>{
+      'result': instance.result.map((e) => e.toJson()).toList(),
+    };
+
 PeopleKnownForResult _$PeopleKnownForResultFromJson(
         Map<String, dynamic> json) =>
     PeopleKnownForResult(
