@@ -1,3 +1,4 @@
+/*
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
@@ -119,3 +120,4 @@ class _MovieActorListItemWidget extends StatelessWidget {
     );
   }
 }
+*/

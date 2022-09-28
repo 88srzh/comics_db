@@ -21,7 +21,7 @@ class PeopleDetails {
   final bool adult;
   final String imdbId;
   final String? homepage;
-  final PeopleKnownFor knownFor;
+  // final PeopleKnownFor knownFor;
 
   PeopleDetails({
     required this.birthday,
@@ -38,7 +38,7 @@ class PeopleDetails {
     required this.adult,
     required this.imdbId,
     required this.homepage,
-    required this.knownFor,
+    // required this.knownFor,
   });
 
   factory PeopleDetails.fromJson(Map<String, dynamic> json) => _$PeopleDetailsFromJson(json);

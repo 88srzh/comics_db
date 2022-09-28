@@ -62,7 +62,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          // _screenFactory.makePopularMovieList(),
           _screenFactory.makePopularPeopleList(),
           MultiBlocProvider(
             providers: [

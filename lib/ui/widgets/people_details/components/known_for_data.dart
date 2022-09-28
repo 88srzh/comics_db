@@ -1,6 +1,6 @@
 class KnownForData {
-  String? posterPath;
-  String title;
+  final String? posterPath;
+  final String title;
 
   KnownForData({required this.posterPath,required this.title});
 }

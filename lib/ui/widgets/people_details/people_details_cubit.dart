@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
-import 'package:comics_db_app/domain/entity/people_known_for.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
           imdbId: '',
           homepage: '',
           localeTag: '',
-          knownFor: [],
+          // knownFor: [],
         )) {
     emit(PeopleDetailsCubitState(
       birthday: state.birthday,
@@ -48,7 +47,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       imdbId: state.imdbId,
       homepage: state.homepage,
       localeTag: state.localeTag,
-      knownFor: state.knownFor,
+      // knownFor: state.knownFor,
     ));
   }
 
@@ -91,25 +90,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.adult = details.adult;
     data.imdbId = details.imdbId;
     data.homepage = details.homepage;
-    data.knownFor = details.knownFor.result
-        .map((e) => PeopleKnownForResult(
-              posterPath: e.posterPath,
-              adult: e.adult,
-              overview: e.overview,
-              releaseDate: e.releaseDate,
-              originalTitle: e.originalTitle,
-              genreIds: e.genreIds,
-              id: e.id,
-              mediaType: e.mediaType,
-              originalLanguage: e.originalLanguage,
-              title: e.title,
-              backdropPath: e.backdropPath,
-              popularity: e.popularity,
-              voteCount: e.voteCount,
-              video: e.video,
-              voteAverage: e.voteAverage,
-            ))
-        .toList();
+    // data.knownFor = details.knownFor.result.map((e) => KnownForData(posterPath: e.posterPath, title: e.title)).toList();
 
     var birthday = data.birthday;
     var knownForDepartment = data.knownForDepartment;
@@ -124,8 +105,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     var adult = data.adult;
     var imdbId = data.imdbId;
     var homepage = data.homepage;
-    var knownFor = data.knownFor;
-    // data.knownFor = details.knownFor
+    // var knownFor = data.knownFor;
 
     final newState = state.copyWith(
       birthday: birthday,
@@ -141,7 +121,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       adult: adult,
       imdbId: imdbId,
       homepage: homepage,
-      knownFor: knownFor,
+      // knownFor: knownFor,
     );
     emit(newState);
   }
