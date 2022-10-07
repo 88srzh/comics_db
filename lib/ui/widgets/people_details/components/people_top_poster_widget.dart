@@ -26,7 +26,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
 
     return Stack(
       children: [
-        Positioned(
+/*        Positioned(
           // top: 55,
           left: 122,
           child: SizedBox(
@@ -44,20 +44,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
               // ),
             ),
           ),
-        ),
-        Positioned(
-          child: Opacity(
-            opacity: 0.25,
-            child: AspectRatio(
-              aspectRatio: 390 / 220,
-              child: CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(profilePath!),
-                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
-              ),
-            ),
-          ),
-        ),
+        ),*/
+
         Positioned(
           top: 45,
           left: 10,
@@ -113,12 +101,12 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   height: 5.0,
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         'gender String',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
                         ),
@@ -153,7 +141,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 2),
-                Row(
+/*                Row(
                   children: [
                     const Icon(
                       MdiIcons.starOutline,
@@ -196,7 +184,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
+                ),*/
                 const SizedBox(height: 2),
                 Row(
                   children: [
@@ -221,6 +209,19 @@ class PeopleTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
+          left: 122,
+          top: 55,
+          child: SizedBox(
+            height: 220,
+            width: 390.0,
+            child: CachedNetworkImage(
+              imageUrl: ImageDownloader.imageUrl(profilePath!),
+              placeholder: (context, url) => const LoadingIndicatorWidget(),
+              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+            ),
+          ),
+        ),
+/*        Positioned(
           // top: 55,
           left: 122,
           child: SizedBox(
@@ -238,7 +239,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
               // ),
             ),
           ),
-        ),
+        ),*/
       ],
     );
   }
