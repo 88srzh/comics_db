@@ -26,26 +26,20 @@ class PeopleTopPosterWidget extends StatelessWidget {
 
     return Stack(
       children: [
-/*        Positioned(
-          // top: 55,
-          left: 122,
-          child: SizedBox(
-            // clipBehavior: Clip.antiAlias,
-            // edges a not rounded
-            height: 220.0,
-            width: 390.0,
-            child: CachedNetworkImage(
-              imageUrl: ImageDownloader.imageUrl(profilePath!),
-              placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
-              // child: ClipRRect(
-              //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-              //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
-              // ),
+      // TODO delete this pic
+        Positioned(
+          child: Opacity(
+            opacity: 0.01,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: CachedNetworkImage(
+                imageUrl: ImageDownloader.imageUrl(profilePath!),
+                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+              ),
             ),
           ),
-        ),*/
-
+        ),
         Positioned(
           top: 45,
           left: 10,
@@ -100,20 +94,6 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 const SizedBox(
                   height: 5.0,
                 ),
-                Row(
-                  children: const [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'gender String',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 2),
                 Row(
                   children: [
@@ -141,7 +121,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 2),
-/*                Row(
+                Row(
                   children: [
                     const Icon(
                       MdiIcons.starOutline,
@@ -151,15 +131,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       // popularity.toString(),
-                      '123',
+                      popularity.toInt().toString(),
                       style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
-                    const Text(
-                      ' от IMDB',
-                      style: TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,
                       ),
@@ -170,32 +143,12 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(
-                      MdiIcons.accountOutline,
-                      color: AppColors.ratingThumb,
-                      size: 14,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      // voteCount.toStringAsFixed(0),
-                      '123',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
-                  ],
-                ),*/
-                const SizedBox(height: 2),
-                Row(
-                  children: [
-                    const Icon(
                       MdiIcons.heartOutline,
                       color: AppColors.ratingThumb,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      // popularityInt.toString(),
                       popularity.toInt().toString(),
                       style: const TextStyle(
                         fontSize: 13,
@@ -209,10 +162,11 @@ class PeopleTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
+          // top: 55,
           left: 122,
-          top: 55,
           child: SizedBox(
-            height: 220,
+            //     TODO: не закругляются края
+            height: 220.0,
             width: 390.0,
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(profilePath!),
@@ -221,25 +175,6 @@ class PeopleTopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
-/*        Positioned(
-          // top: 55,
-          left: 122,
-          child: SizedBox(
-            // clipBehavior: Clip.antiAlias,
-            //     TODO: не закругляются края
-            height: 220.0,
-            width: 390.0,
-            child: CachedNetworkImage(
-              imageUrl: ImageDownloader.imageUrl(profilePath!),
-              placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
-              // child: ClipRRect(
-              //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-              //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
-              // ),
-            ),
-          ),
-        ),*/
       ],
     );
   }
