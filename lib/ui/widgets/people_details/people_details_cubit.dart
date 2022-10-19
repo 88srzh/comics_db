@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
+import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
           imdbId: '',
           homepage: '',
           localeTag: '',
+          charactersData: [],
           // knownFor: [],
         )) {
     emit(PeopleDetailsCubitState(
@@ -47,6 +49,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       imdbId: state.imdbId,
       homepage: state.homepage,
       localeTag: state.localeTag,
+      charactersData: state.charactersData,
       // knownFor: state.knownFor,
     ));
   }
@@ -90,6 +93,9 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.adult = details.adult;
     data.imdbId = details.imdbId;
     data.homepage = details.homepage;
+    data.characterData = details.credits.cast
+        .map((e) => PeopleDetailsCharacterData(character: e.character, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
     // data.knownFor = details.knownFor.result.map((e) => KnownForData(posterPath: e.posterPath, title: e.title)).toList();
 
     var birthday = data.birthday;
@@ -105,6 +111,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     var adult = data.adult;
     var imdbId = data.imdbId;
     var homepage = data.homepage;
+    var charactersData = data.characterData;
     // var knownFor = data.knownFor;
 
     final newState = state.copyWith(
@@ -121,6 +128,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       adult: adult,
       imdbId: imdbId,
       homepage: homepage,
+      charactersData: charactersData,
       // knownFor: knownFor,
     );
     emit(newState);

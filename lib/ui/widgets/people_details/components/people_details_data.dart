@@ -1,3 +1,5 @@
+import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
+
 class PeopleDetailsData {
   String? birthday = '';
   String knownForDepartment = '';
@@ -13,5 +15,6 @@ class PeopleDetailsData {
   bool adult = true;
   String imdbId = '';
   String? homepage = '';
+  List<PeopleDetailsCharacterData> characterData = const <PeopleDetailsCharacterData>[];
   // List<KnownForData> knownFor = const <KnownForData>[];
 }

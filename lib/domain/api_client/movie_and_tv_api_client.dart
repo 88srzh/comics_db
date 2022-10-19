@@ -37,7 +37,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PeopleDetails> popularPeopleDetails(int personId, String locale) {
+  Future<PeopleDetails> popularPeopleDetails(int personId, String locale) async {
     PeopleDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PeopleDetails.fromJson(jsonMap);
