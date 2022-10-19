@@ -93,7 +93,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.adult = details.adult;
     data.imdbId = details.imdbId;
     data.homepage = details.homepage;
-    data.characterData = details.credits.cast
+    data.charactersData = details.credits.cast
         .map((e) => PeopleDetailsCharacterData(character: e.character, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
     // data.knownFor = details.knownFor.result.map((e) => KnownForData(posterPath: e.posterPath, title: e.title)).toList();
@@ -111,7 +111,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     var adult = data.adult;
     var imdbId = data.imdbId;
     var homepage = data.homepage;
-    var charactersData = data.characterData;
+    var charactersData = data.charactersData;
     // var knownFor = data.knownFor;
 
     final newState = state.copyWith(
