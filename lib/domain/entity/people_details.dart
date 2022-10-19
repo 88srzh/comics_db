@@ -1,3 +1,4 @@
+import 'package:comics_db_app/domain/entity/people_details_credits.dart';
 import 'package:comics_db_app/domain/entity/people_known_for.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -21,6 +22,8 @@ class PeopleDetails {
   final bool adult;
   final String imdbId;
   final String? homepage;
+  final PeopleDetailsCredits credits;
+
   // final PeopleKnownFor knownFor;
 
   PeopleDetails({
@@ -38,6 +41,7 @@ class PeopleDetails {
     required this.adult,
     required this.imdbId,
     required this.homepage,
+    required this.credits,
     // required this.knownFor,
   });
 

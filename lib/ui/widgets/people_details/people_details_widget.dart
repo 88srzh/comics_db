@@ -34,7 +34,7 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
             children: const [
               PeopleTopPosterWidget(),
               DescriptionWidget(),
-              KnowForWidget(),
+              // KnowForWidget(),
               // const DescriptionWidget(),
             ],
           ),

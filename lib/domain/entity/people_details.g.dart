@@ -24,6 +24,8 @@ PeopleDetails _$PeopleDetailsFromJson(Map<String, dynamic> json) =>
       adult: json['adult'] as bool,
       imdbId: json['imdb_id'] as String,
       homepage: json['homepage'] as String?,
+      credits: PeopleDetailsCredits.fromJson(
+          json['credits'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PeopleDetailsToJson(PeopleDetails instance) =>
@@ -42,4 +44,5 @@ Map<String, dynamic> _$PeopleDetailsToJson(PeopleDetails instance) =>
       'adult': instance.adult,
       'imdb_id': instance.imdbId,
       'homepage': instance.homepage,
+      'credits': instance.credits.toJson(),
     };
