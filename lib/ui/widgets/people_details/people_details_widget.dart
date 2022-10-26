@@ -26,21 +26,23 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Movie Details'),
+        title: const Text('People Details'),
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
-        child: ListView(children: [
-          Column(
-            children: const [
-              PeopleTopPosterWidget(),
-              DescriptionWidget(),
-              CastWidget(),
-              // KnowForWidget(),
-              // const DescriptionWidget(),
-            ],
-          ),
-        ]),
+        child: ListView(
+          children: [
+            Column(
+              children: const [
+                PeopleTopPosterWidget(),
+                DescriptionWidget(),
+                CastWidget(),
+                // KnowForWidget(),
+                // const DescriptionWidget(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

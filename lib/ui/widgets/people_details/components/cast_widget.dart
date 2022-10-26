@@ -20,7 +20,7 @@ class CastWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Characters',
+                'Known For',
                 style: TextStyle(
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
@@ -89,7 +89,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const Image(image: AssetImage(AppImages.noImage)),
+              posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const Image(image: AssetImage(AppImages.noImage)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

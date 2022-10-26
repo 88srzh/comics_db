@@ -169,7 +169,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
             height: 220.0,
             width: 390.0,
             child: CachedNetworkImage(
-              imageUrl: ImageDownloader.imageUrl(profilePath!),
+              imageUrl: ImageDownloader.imageUrl(profilePath),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
               errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
             ),
