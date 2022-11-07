@@ -27,7 +27,6 @@ class MovieTopPosterWidget extends StatelessWidget {
 
     // TODO must fix: cache image error
     final posterPath = cubit.state.posterPath;
-    // final backdropPath = cubit.state.backdropPath;
     final backdropPath = cubit.state.backdropPath;
 
     // TODO add favorite icon button
@@ -44,14 +43,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
                 errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               ),
-              // ? Image.network(
-              //     ImageDownloader.imageUrl(backdropPath),
-              //     fit: BoxFit.cover,
-              // errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-              //         return const Text('image error');
-              // },
-              //     )
-              //   : Image.asset(AppImages.noImageBig),
             ),
           ),
         ),
@@ -74,7 +65,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           child: Text(
                             title,
-                            // '123',
                             maxLines: 3,
                             style: const TextStyle(
                               fontSize: 21,
@@ -167,7 +157,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      ' от IMDB',
+                      ' from IMDB',
                       style: TextStyle(
                         fontSize: 13,
                         color: AppColors.ratingText,
@@ -219,18 +209,13 @@ class MovieTopPosterWidget extends StatelessWidget {
           top: 55,
           left: 240,
           child: SizedBox(
-            // clipBehavior: Clip.antiAlias,
             //     TODO: не закругляются края
-            height: 170.0,
+            height: 180.0,
             width: 140.0,
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(posterPath!),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
               errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
-              // child: ClipRRect(
-            //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-            //     child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
-              // ),
             ),
           ),
         ),
