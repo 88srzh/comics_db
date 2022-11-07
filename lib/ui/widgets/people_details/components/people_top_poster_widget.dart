@@ -26,7 +26,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
 
     return Stack(
       children: [
-      // TODO delete this pic
+        // TODO delete this pic
         Positioned(
           child: Opacity(
             opacity: 0.01,
@@ -35,7 +35,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(profilePath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+                errorWidget: (context, url, dynamic error) =>
+                    Image.asset(AppImages.noImageBig),
               ),
             ),
           ),
@@ -59,7 +60,6 @@ class PeopleTopPosterWidget extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           child: Text(
                             name,
-                            // '123',
                             maxLines: 3,
                             style: const TextStyle(
                               fontSize: 21,
@@ -91,9 +91,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 5.0,
-                ),
+                const SizedBox(height: 5.0),
                 const SizedBox(height: 2),
                 Row(
                   children: [
@@ -171,7 +169,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(profilePath),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+              errorWidget: (context, url, dynamic error) =>
+                  Image.asset(AppImages.noImageBig),
             ),
           ),
         ),

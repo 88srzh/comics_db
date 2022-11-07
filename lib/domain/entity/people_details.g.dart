@@ -8,7 +8,7 @@ part of 'people_details.dart';
 
 PeopleDetails _$PeopleDetailsFromJson(Map<String, dynamic> json) =>
     PeopleDetails(
-      birthday: json['birthday'] as String?,
+      birthday: parseDateFromString(json['birthday'] as String?),
       knownForDepartment: json['known_for_department'] as String,
       deathday: json['deathday'] as String?,
       id: json['id'] as int,
@@ -30,7 +30,7 @@ PeopleDetails _$PeopleDetailsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PeopleDetailsToJson(PeopleDetails instance) =>
     <String, dynamic>{
-      'birthday': instance.birthday,
+      'birthday': instance.birthday?.toIso8601String(),
       'known_for_department': instance.knownForDepartment,
       'deathday': instance.deathday,
       'id': instance.id,

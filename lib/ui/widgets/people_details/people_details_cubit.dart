@@ -5,10 +5,12 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 part 'people_details_state.dart';
 
 class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
+  late DateFormat _dateFormat;
   final data = PeopleDetailsData();
   final int id;
   final _peopleDetailsService = MovieService();
@@ -71,6 +73,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     // if (_locale == locale) return;
     // _locale = locale;
     // if (!_localeStorage.updateLocale(locale)) return;
+    _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null);
     await loadPeopleDetails(context);
   }
@@ -79,7 +82,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     if (details == null) {
       return;
     }
-    data.birthday = details.birthday ?? 'Loading birthday...';
+    data.birthday = makeBirthday(details);
     data.knownForDepartment = details.knownForDepartment;
     data.deathday = details.deathday;
     // until not use id
@@ -132,6 +135,15 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       // knownFor: knownFor,
     );
     emit(newState);
+  }
+
+  String makeBirthday(PeopleDetails details) {
+    var texts = <String>[];
+    final birthday = details.birthday;
+    if (birthday != null) {
+      texts.add(_dateFormat.format(birthday));
+    }
+    return texts.join();
   }
 
 // String makeKnownFor(PeopleDetails details) {
