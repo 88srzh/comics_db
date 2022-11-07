@@ -2,8 +2,15 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 class ConnectionFailedScreen extends StatelessWidget {
+  const ConnectionFailedScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // TODO may be endure it
+    final ButtonStyle style = ElevatedButton.styleFrom(
+      backgroundColor: const Color(0xFF68C581),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+    );
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -26,10 +33,8 @@ class ConnectionFailedScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              child: FlatButton(
-                color: const Color(0xFF68C581),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
+              child: ElevatedButton(
+                style: style,
                 onPressed: () {},
                 child: Text(
                   "retry".toUpperCase(),
@@ -37,7 +42,7 @@ class ConnectionFailedScreen extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

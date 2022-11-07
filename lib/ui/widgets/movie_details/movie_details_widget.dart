@@ -20,7 +20,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
+    context
+        .read<MovieDetailsCubit>()
+        .setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override
@@ -35,21 +37,23 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
-        child: ListView(children: [
-          Column(
-            children: [
-              const MovieTopPosterWidget(),
-              const PeoplesWidget(),
-              const DescriptionWidget(),
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                const MovieTopPosterWidget(),
+                const PeoplesWidget(),
+                const DescriptionWidget(),
 
-              // TODO doesn't work, the request contains an invalid parameter value, need microtask
-              TrailerWidget(youtubeKey: trailerKey),
+                // TODO doesn't work, the request contains an invalid parameter value, need microtask
+                TrailerWidget(youtubeKey: trailerKey),
 
-              const CastWidget(),
-              // const MovieSimilarWidget(),
-            ],
-          ),
-        ]),
+                const CastWidget(),
+                // const MovieSimilarWidget(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

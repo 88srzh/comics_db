@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/widgets/people_details/components/cast_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
@@ -25,20 +26,23 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Movie Details'),
+        title: const Text('People Details'),
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
-        child: ListView(children: [
-          Column(
-            children: const [
-              PeopleTopPosterWidget(),
-              DescriptionWidget(),
-              KnowForWidget(),
-              // const DescriptionWidget(),
-            ],
-          ),
-        ]),
+        child: ListView(
+          children: [
+            Column(
+              children: const [
+                PeopleTopPosterWidget(),
+                DescriptionWidget(),
+                CastWidget(),
+                // KnowForWidget(),
+                // const DescriptionWidget(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

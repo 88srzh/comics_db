@@ -8,7 +8,7 @@ part of 'people_details.dart';
 
 PeopleDetails _$PeopleDetailsFromJson(Map<String, dynamic> json) =>
     PeopleDetails(
-      birthday: json['birthday'] as String?,
+      birthday: parseDateFromString(json['birthday'] as String?),
       knownForDepartment: json['known_for_department'] as String,
       deathday: json['deathday'] as String?,
       id: json['id'] as int,
@@ -24,11 +24,13 @@ PeopleDetails _$PeopleDetailsFromJson(Map<String, dynamic> json) =>
       adult: json['adult'] as bool,
       imdbId: json['imdb_id'] as String,
       homepage: json['homepage'] as String?,
+      credits: PeopleDetailsCredits.fromJson(
+          json['credits'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PeopleDetailsToJson(PeopleDetails instance) =>
     <String, dynamic>{
-      'birthday': instance.birthday,
+      'birthday': instance.birthday?.toIso8601String(),
       'known_for_department': instance.knownForDepartment,
       'deathday': instance.deathday,
       'id': instance.id,
@@ -42,4 +44,5 @@ Map<String, dynamic> _$PeopleDetailsToJson(PeopleDetails instance) =>
       'adult': instance.adult,
       'imdb_id': instance.imdbId,
       'homepage': instance.homepage,
+      'credits': instance.credits.toJson(),
     };

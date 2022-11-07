@@ -5,7 +5,6 @@ import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
@@ -20,10 +19,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
-  String _locale = '';
+  // String _locale = '';
   final _movieService = MovieService();
   final int movieId;
-  final _localeStorage = LocalizedModelStorage();
+  // final _localeStorage = LocalizedModelStorage();
 
   // MovieDetails? _movieDetails;
 

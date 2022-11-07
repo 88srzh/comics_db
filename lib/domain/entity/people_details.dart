@@ -1,3 +1,5 @@
+import 'package:comics_db_app/domain/entity/data_parser.dart';
+import 'package:comics_db_app/domain/entity/people_details_credits.dart';
 import 'package:comics_db_app/domain/entity/people_known_for.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -5,7 +7,8 @@ part 'people_details.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class PeopleDetails {
-  final String? birthday;
+  @JsonKey(fromJson: parseDateFromString)
+  final DateTime? birthday;
   final String knownForDepartment;
   final String? deathday;
   final int id;
@@ -21,6 +24,8 @@ class PeopleDetails {
   final bool adult;
   final String imdbId;
   final String? homepage;
+  final PeopleDetailsCredits credits;
+
   // final PeopleKnownFor knownFor;
 
   PeopleDetails({
@@ -38,9 +43,11 @@ class PeopleDetails {
     required this.adult,
     required this.imdbId,
     required this.homepage,
+    required this.credits,
     // required this.knownFor,
   });
 
   factory PeopleDetails.fromJson(Map<String, dynamic> json) => _$PeopleDetailsFromJson(json);
+
   Map<String, dynamic> toJson() => _$PeopleDetailsToJson(this);
 }
