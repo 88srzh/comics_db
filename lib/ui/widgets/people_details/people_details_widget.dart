@@ -26,7 +26,10 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('People Details'),
+        title: const Text(
+          'People Details',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
