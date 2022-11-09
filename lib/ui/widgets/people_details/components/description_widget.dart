@@ -13,6 +13,7 @@ class DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleDetailsCubit>();
     var biography = cubit.state.biography;
+    if (biography.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -27,6 +28,7 @@ class DescriptionWidget extends StatelessWidget {
               color: AppColors.genresText,
             ),
           ),
+          // if i have empty biography i will have extra sizedbox
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
