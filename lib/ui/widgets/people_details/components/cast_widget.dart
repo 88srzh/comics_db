@@ -1,6 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,15 +11,17 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var charactersData = context.watch<PeopleDetailsCubit>().data.charactersData;
+    if (charactersData.isEmpty) return const SizedBox.shrink();
     return ColoredBox(
       color: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Padding(
-              padding: EdgeInsets.all(8.0),
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 'Known For',
                 style: TextStyle(
@@ -31,7 +34,7 @@ class CastWidget extends StatelessWidget {
             SizedBox(
               height: 250.0,
               child: Scrollbar(
-                child: _PeopleActorListWidget(),
+                child: _PeopleActorListWidget(charactersData: charactersData),
               ),
             ),
           ],
@@ -42,12 +45,11 @@ class CastWidget extends StatelessWidget {
 }
 
 class _PeopleActorListWidget extends StatelessWidget {
-  const _PeopleActorListWidget({Key? key}) : super(key: key);
+  final List<PeopleDetailsCharacterData> charactersData;
+  const _PeopleActorListWidget({Key? key, required this.charactersData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var charactersData = context.watch<PeopleDetailsCubit>().data.charactersData;
-    if (charactersData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: charactersData.length,
       itemExtent: 120,
