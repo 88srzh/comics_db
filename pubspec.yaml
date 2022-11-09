@@ -43,6 +43,7 @@ dependencies:
   bloc_concurrency: ^0.2.0
   cached_network_image: ^3.2.1
   dart_code_metrics: ^4.21.2
+  expandable_text: 2.3.0
 
 dev_dependencies:
   flutter_test:
