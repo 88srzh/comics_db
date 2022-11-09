@@ -70,7 +70,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
     final character = model.data.charactersData[characterIndex];
     final posterPath = character.posterPath;
     return Padding(
-      padding: const EdgeInsets.only(right: 10.0),
+      padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppColors.kPrimaryColor,
