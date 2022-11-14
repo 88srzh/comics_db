@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/components/custom_appbar.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/cast_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_top_poster_widget.dart';
@@ -24,13 +25,14 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'People Details',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Text(
+      //     'People Details',
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      // ),
+      appBar: const CustomAppBar(title: 'People Details'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(

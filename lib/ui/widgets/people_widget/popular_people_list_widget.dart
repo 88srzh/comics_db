@@ -40,7 +40,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
       //   foregroundColor: Colors.white,
       //   backgroundColor: AppColors.kPrimaryColor,
       // ),
-      appBar: CustomAppBar(title: 'Popular People'),
+      appBar: const CustomAppBar(title: 'Popular People'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: GridView.builder(
