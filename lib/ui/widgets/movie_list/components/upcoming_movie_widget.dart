@@ -55,9 +55,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                         padding: const EdgeInsets.only(right: 10),
                         child: InkWell(
                           onTap: () => cubit.onMovieTap(context, index),
-                          child: backdropPath != null
-                              ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                              : const SizedBox.shrink(),
+                          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
                         ),
                       );
                     }),
@@ -94,6 +92,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
       height: 6,
       width: _currentMovie == index ? 20 : 6,
       decoration: BoxDecoration(
+        // refactoring color
         color: _currentMovie == index ? Colors.white : const Color(0xFFD8D8D8),
         borderRadius: BorderRadius.circular(3),
       ),

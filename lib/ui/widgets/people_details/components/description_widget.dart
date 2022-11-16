@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleDetailsCubit>();
     var biography = cubit.state.biography;
+    if (biography.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -26,16 +28,22 @@ class DescriptionWidget extends StatelessWidget {
               color: AppColors.genresText,
             ),
           ),
+          // if i have empty biography i will have extra sizedbox
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
                 // TODO: Добавить расстояние между строками
-                child: Text(
+                child: ExpandableText(
                   biography,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 15,
+                  expandText: '',
+                  maxLines: 5,
+                  linkColor: Colors.deepOrangeAccent,
+                  animation: true,
+                  expandOnTextTap: true,
+                  prefixText: ' ',
+                  linkEllipsis: false,
                   style: const TextStyle(
                     color: AppColors.genresText,
                     fontSize: 12,

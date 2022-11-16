@@ -20,12 +20,11 @@ class MyApp extends StatelessWidget {
         );
       },
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.kPrimaryColor,
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
+          scrolledUnderElevation: 0.0,
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           selectedItemColor: AppColors.bottomBarBackgroundColor,
