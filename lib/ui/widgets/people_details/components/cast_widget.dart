@@ -32,7 +32,7 @@ class CastWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 258.0,
+              height: 260.0,
               child: Scrollbar(
                 child: _PeopleActorListWidget(charactersData: charactersData),
               ),

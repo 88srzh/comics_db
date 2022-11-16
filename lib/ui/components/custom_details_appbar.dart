@@ -19,8 +19,6 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).maybePop()),
       );
-      // foregroundColor: Colors.white,
-      // backgroundColor: AppColors.kPrimaryColor,
   }
 
   @override
