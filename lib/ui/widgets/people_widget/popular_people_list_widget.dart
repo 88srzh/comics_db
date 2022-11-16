@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/custom_details_appbar.dart';
+import 'package:comics_db_app/ui/components/custom_appbar.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
@@ -40,7 +40,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
       //   foregroundColor: Colors.white,
       //   backgroundColor: AppColors.kPrimaryColor,
       // ),
-      appBar: const CustomDetailsAppBar(title: 'Popular People'),
+      appBar: const CustomAppBar(title: 'Popular People'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: GridView.builder(
