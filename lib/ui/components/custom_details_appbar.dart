@@ -1,10 +1,9 @@
-import 'package:comics_db_app/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
 
-  const CustomAppBar({Key? key, required this.title}) : super(key: key);
+  const CustomDetailsAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +13,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         style: const TextStyle(color: Colors.white, fontSize: 22),
       ),
       centerTitle: true,
-      // iconTheme: const IconThemeData(color: Colors.white),
+      iconTheme: const IconThemeData(color: Colors.white),
+      leading: IconButton(
+          color: Theme.of(context).colorScheme.onBackground,
+          icon: const Icon(Icons.close_rounded),
+          onPressed: () => Navigator.of(context).maybePop()),
+      );
       // foregroundColor: Colors.white,
       // backgroundColor: AppColors.kPrimaryColor,
-    );
   }
 
   @override
