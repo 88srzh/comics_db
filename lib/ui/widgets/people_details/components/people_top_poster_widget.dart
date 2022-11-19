@@ -43,7 +43,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
         ),
         Positioned(
           top: 45,
-          left: 10,
+          left: 20,
           child: SizedBox(
             height: 300,
             width: 230,
@@ -91,8 +91,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 5.0),
-                const SizedBox(height: 2),
+                const SizedBox(height: 7.0),
                 Row(
                   children: [
                     Align(
@@ -137,7 +136,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
+/*                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -154,7 +153,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                )*/
               ],
             ),
           ),
