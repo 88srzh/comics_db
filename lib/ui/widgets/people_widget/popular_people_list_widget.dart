@@ -47,7 +47,6 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
             final people = cubit.state.people[index];
             final profilePath = people.profilePath;
             return InkWell(
-              // TODO fix tap
               onTap: () => cubit.onPeopleTap(context, index),
               child: _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
             );
