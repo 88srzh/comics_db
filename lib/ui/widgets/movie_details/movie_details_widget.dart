@@ -1,4 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/components/custom_appbar.dart';
+import 'package:comics_db_app/ui/components/custom_details_appbar.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
@@ -31,10 +33,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final trailerKey = cubit.state.trailerKey;
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Movie Details'),
-      ),
+      appBar: const CustomDetailsAppBar(title: 'Movie Details'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
