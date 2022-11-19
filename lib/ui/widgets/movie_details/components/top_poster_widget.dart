@@ -46,7 +46,7 @@ class MovieTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 45,
+          top: 30,
           left: 20,
           child: SizedBox(
             height: 300,
