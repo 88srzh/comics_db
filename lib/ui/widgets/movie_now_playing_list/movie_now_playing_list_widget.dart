@@ -40,7 +40,10 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                 cubit.showedNowPlayingMovieAtIndex(index);
                 final movie = cubit.state.movies[index];
                 final posterPath = movie.posterPath;
-                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index);
+                return InkWell(
+                  onTap: () => cubit.onMovieTap(context, index),
+                  child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                );
               },
             ),
             Padding(

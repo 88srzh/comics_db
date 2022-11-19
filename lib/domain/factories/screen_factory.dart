@@ -44,10 +44,6 @@ class ScreenFactory {
       create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
       child: const AuthWidget(),
     );
-    // return ChangeNotifierProvider(
-    //   create: (_) => AuthViewModel(),
-    //   child: const AuthWidget(),
-    // );
   }
 
 // TODO: may be delete provider
@@ -59,11 +55,11 @@ class ScreenFactory {
 
   Widget makePopularPeopleList() {
     return BlocProvider(
-        create: (_) => PeopleListCubit(
-          peopleListBloc: PeopleListBloc(
-            PeopleListState.initial(),
-          ),
+      create: (_) => PeopleListCubit(
+        peopleListBloc: PeopleListBloc(
+          PeopleListState.initial(),
         ),
+      ),
       child: const PopularPeopleListWidget(),
     );
   }
@@ -89,7 +85,7 @@ class ScreenFactory {
 
   Widget makePeopleDetails(int id) {
     return BlocProvider(
-        create: (_) => PeopleDetailsCubit(id),
+      create: (_) => PeopleDetailsCubit(id),
       child: const PeopleDetailsWidget(),
     );
   }
@@ -99,8 +95,6 @@ class ScreenFactory {
   }
 
   Widget makeTopRatedMovieList() {
-    // return ChangeNotifierProvider(
-    //   create: (_) => TopRatedMovieViewModel(),
     return BlocProvider(
       create: (_) => MovieListCubit(
         movieListBloc: MovieListBloc(
@@ -121,10 +115,10 @@ class ScreenFactory {
   }
 
   Widget makeUpcomingMovieList() {
-    // return ChangeNotifierProvider(
-    //   create: (_) => NowPlayingMovieListModel(),
     return BlocProvider(
-      create: (_) => UpcomingMovieListCubit(upcomingMovieListBloc: UpcomingMovieListBloc(MovieListState.initial())),
+      create: (_) => UpcomingMovieListCubit(
+        upcomingMovieListBloc: UpcomingMovieListBloc(MovieListState.initial()),
+      ),
       child: const MovieNowPlayingListWidget(),
     );
   }
