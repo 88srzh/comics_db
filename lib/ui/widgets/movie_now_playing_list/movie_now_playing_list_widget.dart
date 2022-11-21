@@ -31,8 +31,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
         color: AppColors.kPrimaryColor,
         child: Stack(
           children: [
-            cubit.state.movies.isNotEmpty
-                ? ListView.builder(
+                ListView.builder(
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                     padding: const EdgeInsets.only(top: 70.0),
                     itemCount: cubit.state.movies.length,
@@ -43,11 +42,10 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                       final posterPath = movie.posterPath;
                       return InkWell(
                         onTap: () => cubit.onMovieTap(context, index),
-                        child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                        child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
                       );
                     },
-                  )
-                : const CircularProgressIndicator(),
+                  ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: TextField(
@@ -81,10 +79,10 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   }
 }
 
-class _MoviePopularListRowWidget extends StatelessWidget {
+class _MovieNowPlayingListRowWidget extends StatelessWidget {
   final int index;
 
-  const _MoviePopularListRowWidget({
+  const _MovieNowPlayingListRowWidget({
     Key? key,
     required this.posterPath,
     required this.movie,
