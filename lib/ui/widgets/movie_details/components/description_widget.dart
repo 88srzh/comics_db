@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -32,10 +33,12 @@ class DescriptionWidget extends StatelessWidget {
             children: [
               Expanded(
                 // TODO: Добавить расстояние между строками
-                child: Text(
+                child: ExpandableText(
                   overview,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 4,
+                  expandText: '',
+                  maxLines: 5,
+                  linkColor: Colors.deepOrangeAccent,
+
                   style: const TextStyle(
                     color: AppColors.genresText,
                     fontSize: 12,
