@@ -9,9 +9,6 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart'
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-// TODO replace cubit state
-
-
 // TODO refactoring title
 class MovieListCubit extends Cubit<MovieListCubitState> {
   final MovieListBloc movieListBloc;
