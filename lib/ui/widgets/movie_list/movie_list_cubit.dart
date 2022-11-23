@@ -5,37 +5,9 @@ import 'package:comics_db_app/domain/blocs/popular_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-// TODO replace cubit state
-class MovieListCubitState {
-  final List<MovieListData> movies;
-  final String localeTag;
-
-  MovieListCubitState({required this.movies, required this.localeTag});
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is MovieListCubitState &&
-          runtimeType == other.runtimeType &&
-          movies == other.movies &&
-          localeTag == other.localeTag;
-
-  @override
-  int get hashCode => movies.hashCode ^ localeTag.hashCode;
-
-  MovieListCubitState copyWith({
-    List<MovieListData>? movies,
-    String? localeTag,
-  }) {
-    return MovieListCubitState(
-      movies: movies ?? this.movies,
-      localeTag: localeTag ?? this.localeTag,
-    );
-  }
-}
 
 // TODO refactoring title
 class MovieListCubit extends Cubit<MovieListCubitState> {
