@@ -1,6 +1,7 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_details_appbar.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -26,17 +27,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieListCubit>();
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Popular Movies',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        foregroundColor: Colors.white,
-        backgroundColor: AppColors.kPrimaryColor,
-      ),
+      appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: Stack(

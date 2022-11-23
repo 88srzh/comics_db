@@ -29,17 +29,6 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleListCubit>();
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text(
-      //     'Popular People',
-      //     style: TextStyle(
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      //   foregroundColor: Colors.white,
-      //   backgroundColor: AppColors.kPrimaryColor,
-      // ),
       appBar: const CustomAppBar(title: 'Popular People'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
@@ -58,10 +47,8 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
             final people = cubit.state.people[index];
             final profilePath = people.profilePath;
             return InkWell(
-              // TODO fix tap
               onTap: () => cubit.onPeopleTap(context, index),
-              child:
-                  _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
+              child: _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
             );
           },
         ),
@@ -114,7 +101,6 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // const SizedBox(height: .0),
                     // TODO need to fix space between photo and text
                     Text(
                       people.name,

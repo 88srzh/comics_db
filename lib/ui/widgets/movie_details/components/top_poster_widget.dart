@@ -37,7 +37,6 @@ class MovieTopPosterWidget extends StatelessWidget {
             opacity: 0.25,
             child: AspectRatio(
               aspectRatio: 390 / 220,
-              // child: backdropPath != null
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(backdropPath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
@@ -47,8 +46,8 @@ class MovieTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 45,
-          left: 10,
+          top: 30,
+          left: 20,
           child: SizedBox(
             height: 300,
             width: 230,

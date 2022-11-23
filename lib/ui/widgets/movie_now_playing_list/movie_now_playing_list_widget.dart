@@ -1,9 +1,8 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_details_appbar.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/popular_movie_list_model.dart';
-import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_model.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,51 +19,39 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    // context.read<NowPlayingMovieListModel>().setupNowPlayingMovieLocale(locale);
     context.read<NowPlayingMovieListCubit>().setupNowPlayingMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final model = context.watch<NowPlayingMovieListModel>();
     var cubit = context.watch<NowPlayingMovieListCubit>();
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Now Playing Movies',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        foregroundColor: Colors.white,
-        backgroundColor: AppColors.kPrimaryColor,
-      ),
+      appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: Stack(
           children: [
-            ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.movies.length,
-              itemExtent: 165,
-              itemBuilder: (BuildContext context, int index) {
-                // model.showedNowPlayingMovieAtIndex(index);
-                cubit.showedNowPlayingMovieAtIndex(index);
-                // final movie = model.movies[index];
-                final movie = cubit.state.movies[index];
-                final posterPath = movie.posterPath;
-                return _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index);
-              },
-            ),
+                ListView.builder(
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    padding: const EdgeInsets.only(top: 70.0),
+                    itemCount: cubit.state.movies.length,
+                    itemExtent: 165,
+                    itemBuilder: (BuildContext context, int index) {
+                      cubit.showedNowPlayingMovieAtIndex(index);
+                      final movie = cubit.state.movies[index];
+                      final posterPath = movie.posterPath;
+                      return InkWell(
+                        onTap: () => cubit.onMovieTap(context, index),
+                        child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                      );
+                    },
+                  ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: TextField(
                 style: const TextStyle(
                   color: AppColors.genresText,
                 ),
-                // onChanged: model.searchNowPlayingMovie,
                 onChanged: cubit.searchNowPlayingMovie,
                 decoration: InputDecoration(
                   labelText: 'Search',
@@ -92,10 +79,10 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   }
 }
 
-class _MoviePopularListRowWidget extends StatelessWidget {
+class _MovieNowPlayingListRowWidget extends StatelessWidget {
   final int index;
 
-  const _MoviePopularListRowWidget({
+  const _MovieNowPlayingListRowWidget({
     Key? key,
     required this.posterPath,
     required this.movie,
