@@ -44,6 +44,7 @@ dependencies:
   cached_network_image: ^3.2.1
   dart_code_metrics: ^4.21.2
   expandable_text: 2.3.0
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:
