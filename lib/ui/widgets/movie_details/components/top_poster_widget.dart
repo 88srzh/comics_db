@@ -3,6 +3,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_poster_top_left_text.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text_rating.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
@@ -57,7 +58,7 @@ class MovieTopPosterWidget extends StatelessWidget {
           left: 20,
           child: SizedBox(
             height: 300,
-            width: 300,
+            width: 265,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -94,16 +95,21 @@ class MovieTopPosterWidget extends StatelessWidget {
                     CustomPosterTopLeftAlignText(text: summary),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    genres,
-                    maxLines: 3,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.genresText,
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        genres,
+                        maxLines: 2,
+                        // softWrap: true,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppColors.genresText,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(height: 2),
                 Row(
@@ -114,21 +120,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      // TODO: fix, may be change double to string
-                      voteAverageString,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
-                    const Text(
-                      ' from IMDB',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    CustomPosterTopLeftTextRating(text: '$voteAverageString from IMDB'),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -140,13 +132,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      voteCount.toStringAsFixed(0),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    CustomPosterTopLeftTextRating(text: voteCount.toStringAsFixed(0)),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -158,13 +144,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      popularityInt.toString(),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    CustomPosterTopLeftTextRating(text: popularityInt.toString()),
                   ],
                 )
               ],
