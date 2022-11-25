@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
@@ -84,31 +85,13 @@ class MovieTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 5.0),
                 Row(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        releaseDate,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignText(text: releaseDate),
                   ],
                 ),
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        summary,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignText(text: summary),
                   ],
                 ),
                 Align(
