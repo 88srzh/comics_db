@@ -3,6 +3,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -48,23 +49,7 @@ class MovieTopPosterWidget extends StatelessWidget {
         Positioned(
           top: 15,
           left: 20,
-          child: Row(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  title,
-                  softWrap: true,
-                  maxLines: 3,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: AppColors.titleText,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          child: MovieDetailsTitle(title: title),
         ),
         Positioned(
           top: 50,
