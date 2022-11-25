@@ -58,26 +58,23 @@ class MovieTopPosterWidget extends StatelessWidget {
           left: 20,
           child: SizedBox(
             height: 300,
-            width: 265,
+            width: 230,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
+                Column(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: SizedBox(
-                        width: 265,
-                        child: Text(
-                          tagline ?? 'No tagline',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 13,
-                            color: AppColors.titleText,
-                          ),
+                      child: Text(
+                        tagline ?? 'No tagline',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 13,
+                          color: AppColors.titleText,
                         ),
                       ),
                     ),
@@ -89,7 +86,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     CustomPosterTopLeftAlignText(text: releaseDate),
                   ],
                 ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     CustomPosterTopLeftAlignText(text: summary),
@@ -102,7 +98,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                       child: Text(
                         genres,
                         maxLines: 2,
-                        // softWrap: true,
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -111,7 +106,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -123,7 +117,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     CustomPosterTopLeftAlignTextRating(text: '$voteAverageString from IMDB'),
                   ],
                 ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -135,7 +128,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     CustomPosterTopLeftAlignTextRating(text: voteCount.toStringAsFixed(0)),
                   ],
                 ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -146,7 +138,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     const SizedBox(width: 4),
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
                   ],
-                )
+                ),
               ],
             ),
           ),
