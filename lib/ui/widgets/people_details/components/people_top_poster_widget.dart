@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -23,6 +24,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
     // TODO whether it is necessary
     // final alsoKnownAs = cubit.state.alsoKnownAs;
     final popularity = cubit.state.popularity;
+    const String female = 'Female';
+    const String male = 'Male';
 
     return Stack(
       children: [
@@ -35,8 +38,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(profilePath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) =>
-                    Image.asset(AppImages.noImageBig),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               ),
             ),
           ),
@@ -94,6 +96,12 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 7.0),
                 Row(
                   children: [
+                    CustomPosterTopLeftAlignText(text: gender == 1 ? female : male),
+                  ],
+                ),
+                const SizedBox(height: 2.0),
+                Row(
+                  children: [
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -136,24 +144,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-/*                const SizedBox(height: 2),
-                Row(
-                  children: [
-                    const Icon(
-                      MdiIcons.heartOutline,
-                      color: AppColors.ratingThumb,
-                      size: 14,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      popularity.toInt().toString(),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
-                  ],
-                )*/
+                const SizedBox(height: 2),
               ],
             ),
           ),
@@ -168,8 +159,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(profilePath),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) =>
-                  Image.asset(AppImages.noImageBig),
+              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
             ),
           ),
         ),

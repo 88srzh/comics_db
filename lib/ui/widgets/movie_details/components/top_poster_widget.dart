@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text_rating.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +49,12 @@ class MovieTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 30,
+          top: 15,
+          left: 20,
+          child: MovieDetailsTitle(title: title),
+        ),
+        Positioned(
+          top: 50,
           left: 20,
           child: SizedBox(
             height: 300,
@@ -55,55 +63,41 @@ class MovieTopPosterWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 25,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            title,
-                            maxLines: 3,
-                            style: const TextStyle(
-                              fontSize: 21,
-                              color: AppColors.titleText,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Row(
+                Column(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: SizedBox(
-                        width: 210,
-                        child: Text(
-                          tagline ?? 'No tagline',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 13,
-                            color: AppColors.titleText,
-                          ),
+                      child: Text(
+                        tagline ?? 'No tagline',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 13,
+                          color: AppColors.titleText,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 5.0,
+                const SizedBox(height: 5.0),
+                Row(
+                  children: [
+                    CustomPosterTopLeftAlignText(text: releaseDate),
+                  ],
                 ),
                 Row(
+                  children: [
+                    CustomPosterTopLeftAlignText(text: summary),
+                  ],
+                ),
+                Column(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        releaseDate,
+                        genres,
+                        maxLines: 2,
                         style: const TextStyle(
                           fontSize: 13,
                           color: AppColors.genresText,
@@ -112,33 +106,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
-                Row(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        summary,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    genres,
-                    maxLines: 3,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.genresText,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -147,24 +114,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      // TODO: fix, may be change double to string
-                      voteAverageString,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
-                    const Text(
-                      ' from IMDB',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignTextRating(text: '$voteAverageString from IMDB'),
                   ],
                 ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -173,16 +125,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      voteCount.toStringAsFixed(0),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignTextRating(text: voteCount.toStringAsFixed(0)),
                   ],
                 ),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -191,22 +136,16 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      popularityInt.toString(),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
                   ],
-                )
+                ),
               ],
             ),
           ),
         ),
         Positioned(
           top: 55,
-          left: 240,
+          right: 15,
           child: SizedBox(
             //     TODO: не закругляются края
             height: 180.0,
