@@ -46,41 +46,42 @@ class MovieTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 30,
+          top: 15,
+          left: 20,
+          child: Row(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  title,
+                  softWrap: true,
+                  maxLines: 3,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: AppColors.titleText,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          top: 50,
           left: 20,
           child: SizedBox(
             height: 300,
-            width: 230,
+            width: 300,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 25,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            title,
-                            maxLines: 3,
-                            style: const TextStyle(
-                              fontSize: 21,
-                              color: AppColors.titleText,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 Row(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
                       child: SizedBox(
-                        width: 210,
+                        width: 265,
                         child: Text(
                           tagline ?? 'No tagline',
                           overflow: TextOverflow.ellipsis,
@@ -95,9 +96,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 5.0,
-                ),
+                const SizedBox(height: 5.0),
                 Row(
                   children: [
                     Align(
