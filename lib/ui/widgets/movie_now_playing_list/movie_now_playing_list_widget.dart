@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                       final movie = cubit.state.movies[index];
                       final posterPath = movie.posterPath;
                       return InkWell(
-                        onTap: () => cubit.onMovieTap(context, index),
+                        onTap: () => onMovieTap(context, index),
                         child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
                       );
                     },
@@ -76,6 +77,12 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
         ),
       ),
     );
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    final cubit = context.read<NowPlayingMovieListCubit>();
+    final movieId = cubit.state.movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }
 

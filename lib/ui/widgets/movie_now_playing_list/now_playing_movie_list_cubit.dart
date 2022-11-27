@@ -79,8 +79,8 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
     );
   }
 
-  void onMovieTap(BuildContext context, int index) {
+/*  void onMovieTap(BuildContext context, int index) {
       final id = movie[index].id;
       Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
-  }
+  }*/
 }
