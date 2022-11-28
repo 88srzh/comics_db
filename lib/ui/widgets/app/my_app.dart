@@ -3,6 +3,7 @@ import 'package:comics_db_app/ui/components/custom_behavior.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatelessWidget {
   // TODO: нужно отказаться от mainNavigation
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
         useMaterial3: true,
+        textTheme: GoogleFonts.signikaNegativeTextTheme(),
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.kPrimaryColor,
