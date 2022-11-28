@@ -25,7 +25,6 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<UpcomingMovieListCubit>();
-
     return Column(
       children: [
         Padding(
