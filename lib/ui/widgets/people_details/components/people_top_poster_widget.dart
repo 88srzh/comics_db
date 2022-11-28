@@ -32,7 +32,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
         // TODO delete this pic
         Positioned(
           child: Opacity(
-            opacity: 0.01,
+            opacity: 0.001,
             child: AspectRatio(
               aspectRatio: 390 / 220,
               child: CachedNetworkImage(
