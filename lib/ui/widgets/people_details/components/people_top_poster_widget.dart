@@ -102,29 +102,10 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 2.0),
                 Row(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        birthday ?? 'no birthday',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignText(text: birthday ?? 'no birthday'),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    placeOfBirth ?? 'no place of birth',
-                    maxLines: 3,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.genresText,
-                    ),
-                  ),
-                ),
+                CustomPosterTopLeftAlignText(text: placeOfBirth ?? 'no place of birth'),
                 const SizedBox(height: 2),
                 Row(
                   children: [
