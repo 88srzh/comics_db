@@ -68,8 +68,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<PeopleDetailsCubit>();
-    final character = model.data.charactersData[characterIndex];
+    final cubit = context.read<PeopleDetailsCubit>();
+    final character = cubit.data.charactersData[characterIndex];
     final posterPath = character.posterPath;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
