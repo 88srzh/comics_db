@@ -3,7 +3,7 @@ import 'package:comics_db_app/ui/widgets/people_details/components/character_dat
 class PeopleDetailsData {
   String? birthday = '';
   String knownForDepartment = '';
-  String? deathday = '';
+  String? dateOfDeath = '';
   int id = 0;
   String name = '';
   List<String> alsoKnownAs = [];

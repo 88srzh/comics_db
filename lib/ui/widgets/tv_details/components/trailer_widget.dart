@@ -65,7 +65,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
                     );
                   },
                 )
-              : Image.asset(AppImages.noImageBig),
+              : Image.asset(AppImages.noImageAvailable),
         ],
       ),
     );

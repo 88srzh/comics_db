@@ -1,6 +1,5 @@
 import 'package:comics_db_app/domain/entity/data_parser.dart';
 import 'package:comics_db_app/domain/entity/people_details_credits.dart';
-import 'package:comics_db_app/domain/entity/people_known_for.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'people_details.g.dart';
@@ -10,12 +9,12 @@ class PeopleDetails {
   @JsonKey(fromJson: parseDateFromString)
   final DateTime? birthday;
   final String knownForDepartment;
-  final String? deathday;
+  final String? dateOfDeath;
   final int id;
   final String name;
   final List<String> alsoKnownAs;
 
-  // TODO default: 0, minimum 0, maximum 3
+  // default: 0, minimum 0, maximum 3
   final int gender;
   final String biography;
   final double popularity;
@@ -31,7 +30,7 @@ class PeopleDetails {
   PeopleDetails({
     required this.birthday,
     required this.knownForDepartment,
-    required this.deathday,
+    required this.dateOfDeath,
     required this.id,
     required this.name,
     required this.alsoKnownAs,

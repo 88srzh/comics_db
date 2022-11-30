@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,7 @@ class CastWidget extends StatelessWidget {
 
 class _PeopleActorListWidget extends StatelessWidget {
   final List<PeopleDetailsCharacterData> charactersData;
+
   const _PeopleActorListWidget({Key? key, required this.charactersData}) : super(key: key);
 
   @override
@@ -68,8 +71,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<PeopleDetailsCubit>();
-    final character = model.data.charactersData[characterIndex];
+    final cubit = context.read<PeopleDetailsCubit>();
+    final character = cubit.data.charactersData[characterIndex];
     final posterPath = character.posterPath;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
@@ -91,7 +94,14 @@ class _MovieActorListItemWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const Image(image: AssetImage(AppImages.noImage)),
+              posterPath != null
+                  ? CachedNetworkImage(
+                      imageUrl: ImageDownloader.imageUrl(posterPath),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                    )
+                  : const Image(image: AssetImage(AppImages.noImageAvailable)),
+              // : const SizedBox.shrink(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -103,7 +113,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
                         maxLines: 1,
                         style: const TextStyle(color: AppColors.genresText),
                       ),
-                      const SizedBox(height: 7),
+                      const SizedBox(height: 3),
                       Text(
                         character.character,
                         maxLines: 2,

@@ -43,7 +43,7 @@ class MovieTopPosterWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(backdropPath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
               ),
             ),
           ),
@@ -153,7 +153,7 @@ class MovieTopPosterWidget extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(posterPath!),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
             ),
           ),
         ),

@@ -24,7 +24,7 @@ class TvTopPosterWidget extends StatelessWidget {
                       ImageDownloader.imageUrl(backdropPath),
                       fit: BoxFit.cover,
                     )
-                  : Image.asset(AppImages.noImageBig),
+                  : Image.asset(AppImages.noImageAvailable),
             ),
           ),
         ),
@@ -45,7 +45,7 @@ class TvTopPosterWidget extends StatelessWidget {
                 width: 174.0,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageBig),
+                  child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageAvailable),
                 ),
               ),
             ),
