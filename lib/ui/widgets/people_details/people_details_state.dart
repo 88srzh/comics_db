@@ -8,7 +8,7 @@ part of 'people_details_cubit.dart';
 class PeopleDetailsCubitState {
   final String? birthday;
   final String knownForDepartment;
-  final String? deathday;
+  final String? dateOfDeath;
 
   // final int id;
   final String name;
@@ -28,7 +28,7 @@ class PeopleDetailsCubitState {
   PeopleDetailsCubitState({
     required this.birthday,
     required this.knownForDepartment,
-    required this.deathday,
+    required this.dateOfDeath,
     // required this.id,
     required this.name,
     required this.alsoKnownAs,
@@ -52,7 +52,7 @@ class PeopleDetailsCubitState {
           runtimeType == other.runtimeType &&
           birthday == other.birthday &&
           knownForDepartment == other.knownForDepartment &&
-          deathday == other.deathday &&
+          dateOfDeath == other.dateOfDeath &&
           // id == other.id &&
           name == other.name &&
           alsoKnownAs == other.alsoKnownAs &&
@@ -72,7 +72,7 @@ class PeopleDetailsCubitState {
   int get hashCode =>
       birthday.hashCode ^
       knownForDepartment.hashCode ^
-      deathday.hashCode ^
+      dateOfDeath.hashCode ^
       // id.hashCode ^
       name.hashCode ^
       alsoKnownAs.hashCode ^
@@ -91,7 +91,7 @@ class PeopleDetailsCubitState {
   PeopleDetailsCubitState copyWith({
     String? birthday,
     String? knownForDepartment,
-    String? deathday,
+    String? dateOfDeath,
     // int? id,
     String? name,
     List<String>? alsoKnownAs,
@@ -110,7 +110,7 @@ class PeopleDetailsCubitState {
     return PeopleDetailsCubitState(
       birthday: birthday ?? this.birthday,
       knownForDepartment: knownForDepartment ?? this.knownForDepartment,
-      deathday: deathday ?? this.deathday,
+      dateOfDeath: dateOfDeath ?? this.dateOfDeath,
       // id: id ?? this.id,
       name: name ?? this.name,
       alsoKnownAs: alsoKnownAs ?? this.alsoKnownAs,

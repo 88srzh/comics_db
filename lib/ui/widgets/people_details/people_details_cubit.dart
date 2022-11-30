@@ -20,7 +20,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       : super(PeopleDetailsCubitState(
           birthday: '',
           knownForDepartment: '',
-          deathday: '',
+          dateOfDeath: '',
           // may be don't need id
           name: '',
           alsoKnownAs: [],
@@ -39,7 +39,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     emit(PeopleDetailsCubitState(
       birthday: state.birthday,
       knownForDepartment: state.knownForDepartment,
-      deathday: state.deathday,
+      dateOfDeath: state.dateOfDeath,
       name: state.name,
       alsoKnownAs: state.alsoKnownAs,
       gender: state.gender,
@@ -84,7 +84,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     }
     data.birthday = makeBirthday(details);
     data.knownForDepartment = details.knownForDepartment;
-    data.deathday = details.deathday;
+    data.dateOfDeath = details.dateOfDeath;
     // until not use id
     data.name = details.name;
     data.alsoKnownAs = details.alsoKnownAs;
@@ -103,7 +103,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
 
     var birthday = data.birthday;
     var knownForDepartment = data.knownForDepartment;
-    var deathday = data.deathday;
+    var dateOfDeath = data.dateOfDeath;
     var name = data.name;
     var alsoKnownAs = data.alsoKnownAs;
     var gender = data.gender;
@@ -120,7 +120,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     final newState = state.copyWith(
       birthday: birthday,
       knownForDepartment: knownForDepartment,
-      deathday: deathday,
+      dateOfDeath: dateOfDeath,
       name: name,
       alsoKnownAs: alsoKnownAs,
       gender: gender,
