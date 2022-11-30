@@ -3,6 +3,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_poster_top_left_text.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text_rating.dart';
 import 'package:comics_db_app/ui/components/loading_indicator.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -43,7 +44,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
               ),
             ),
           ),
-        ) : Image.asset(AppImages.noImageBig),
+        ) : const SizedBox.shrink(),
         Positioned(
           top: 45,
           left: 20,
@@ -97,17 +98,15 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 7.0),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: gender == 1 ? female : male),
+                    CustomPosterTopLeftAlignText(text: gender == 1 ? female : male)
                   ],
                 ),
-                const SizedBox(height: 2.0),
                 Row(
                   children: [
                     CustomPosterTopLeftAlignText(text: birthday ?? 'no birthday'),
                   ],
                 ),
                 CustomPosterTopLeftAlignText(text: placeOfBirth ?? 'no place of birth'),
-                const SizedBox(height: 2),
                 Row(
                   children: [
                     const Icon(
@@ -115,15 +114,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                       color: AppColors.ratingStar,
                       size: 14,
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      // popularity.toString(),
-                      popularity.toInt().toString(),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.ratingText,
-                      ),
-                    ),
+                    const SizedBox(width: 4.0),
+                    CustomPosterTopLeftAlignTextRating(text: popularity.toInt().toString()),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -133,7 +125,6 @@ class PeopleTopPosterWidget extends StatelessWidget {
         ),
         profilePath != null ?
         Positioned(
-          // top: 55,
           left: 122,
           child: SizedBox(
             //     TODO: не закругляются края
