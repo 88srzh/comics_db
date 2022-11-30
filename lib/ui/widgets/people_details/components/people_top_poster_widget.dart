@@ -30,19 +30,20 @@ class PeopleTopPosterWidget extends StatelessWidget {
     return Stack(
       children: [
         // TODO delete this pic
+        profilePath != null ?
         Positioned(
           child: Opacity(
             opacity: 0.001,
             child: AspectRatio(
               aspectRatio: 390 / 220,
               child: CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(profilePath!),
+                imageUrl: ImageDownloader.imageUrl(profilePath),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
                 errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
               ),
             ),
           ),
-        ),
+        ) : Image.asset(AppImages.noImageBig),
         Positioned(
           top: 45,
           left: 20,
@@ -130,6 +131,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
             ),
           ),
         ),
+        profilePath != null ?
         Positioned(
           // top: 55,
           left: 122,
@@ -143,7 +145,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
               errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
             ),
           ),
-        ),
+        ) : const SizedBox.shrink(),
       ],
     );
   }
