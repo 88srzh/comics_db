@@ -40,7 +40,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(profilePath),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
               ),
             ),
           ),
@@ -133,7 +133,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(profilePath),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
             ),
           ),
         ) : const SizedBox.shrink(),

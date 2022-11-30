@@ -62,7 +62,7 @@ class _TrailerWidgetState extends State<TrailerWidget> {
                     );
                   },
                 )
-              : Image.asset(AppImages.noImageBig),
+              : Image.asset(AppImages.noImageAvailable),
         ],
       ),
     );

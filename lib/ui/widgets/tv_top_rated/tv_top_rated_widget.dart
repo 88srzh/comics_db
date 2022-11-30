@@ -59,7 +59,7 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
         ),
         child: backdropPath != null
             ? Image.network(ImageDownloader.imageUrl(backdropPath))
-            : Image.asset(AppImages.noImageBig),
+            : Image.asset(AppImages.noImageAvailable),
       ),
     );
   }

@@ -95,7 +95,7 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
               CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(profilePath),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageBig),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
               ),
               Expanded(
                 child: Column(
