@@ -7,7 +7,6 @@ import 'package:comics_db_app/ui/widgets/people_details/components/character_dat
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 class CastWidget extends StatelessWidget {
   const CastWidget({Key? key}) : super(key: key);
@@ -99,9 +98,10 @@ class _MovieActorListItemWidget extends StatelessWidget {
                   ? CachedNetworkImage(
                       imageUrl: ImageDownloader.imageUrl(posterPath),
                       placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImage),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                     )
-                  : const Image(image: AssetImage(AppImages.noImage)),
+                  : const Image(image: AssetImage(AppImages.noImageAvailable)),
+              // : const SizedBox.shrink(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

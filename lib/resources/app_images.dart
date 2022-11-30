@@ -14,4 +14,5 @@ class AppImages {
   static const String ellipseDot = 'images/components/Ellipse@1x.png';
   static const String movieAppBarLogo = 'images/components/movie_logo@1x.png';
   static const String noImageBig = 'images/no-image-big.png';
+  static const String noImageAvailable = 'images/no-image-available.jpg';
 }
