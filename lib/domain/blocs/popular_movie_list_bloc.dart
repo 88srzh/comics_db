@@ -62,14 +62,14 @@ class MovieListState {
   final MovieListContainer searchMovieContainer;
   final String searchQuery;
 
+  bool get isSearchMode => searchQuery.isNotEmpty;
+
   List<Movie> get movies => isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
 
   MovieListState.initial()
       : movieContainer = const MovieListContainer.initial(),
         searchMovieContainer = const MovieListContainer.initial(),
         searchQuery = '';
-
-  bool get isSearchMode => searchQuery.isNotEmpty;
 
   MovieListState({
     required this.movieContainer,
@@ -118,40 +118,53 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
-      _loadNextPage(state.searchMovieContainer, (nextPage) async {
-        final result =
-            await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+      final container = await _loadNextPage(
+        state.searchMovieContainer,
+        (nextPage) async {
+          final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+          return result;
+        },
+      );
+      if (container != null) {
+        final newState = state.copyWith(searchMovieContainer: container);
+        emit(newState);
+      }
+
+      // if (state.searchMovieContainer.isComplete) return;
+      // final nextPage = state.searchMovieContainer.currentPage + 1;
+      // final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+      // final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
+      // final container = state.searchMovieContainer.copyWith(
+      //   movies: movies,
+      //   currentPage: result.page,
+      //   totalPage: result.totalPages,
+      // );
+      // final newState = state.copyWith(searchMovieContainer: container);
+      // emit(newState);
+    } else {
+      final container = await _loadNextPage(state.movieContainer, (nextPage) async {
+        final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
         return result;
       });
-
-      if (state.searchMovieContainer.isComplete) return;
-      final nextPage = state.searchMovieContainer.currentPage + 1;
-      final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
-      final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
-      final container = state.searchMovieContainer.copyWith(
-        movies: movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-      final newState = state.copyWith(searchMovieContainer: container);
-      emit(newState);
-    } else {
-      if (state.movieContainer.isComplete) return;
-      final nextPage = state.movieContainer.currentPage + 1;
-      final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
-      final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
-      final container = state.movieContainer.copyWith(
-        movies: movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-      final newState = state.copyWith(movieContainer: container);
-      emit(newState);
+      if (container != null) {
+        final newState = state.copyWith(movieContainer: container);
+        emit(newState);
+      }
+      // if (state.movieContainer.isComplete) return;
+      // final nextPage = state.movieContainer.currentPage + 1;
+      // final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
+      // final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
+      // final container = state.movieContainer.copyWith(
+      //   movies: movies,
+      //   currentPage: result.page,
+      //   totalPage: result.totalPages,
+      // );
+      // final newState = state.copyWith(movieContainer: container);
+      // emit(newState);
     }
   }
 
-  Future<MovieListContainer?> _loadNextPage(
-      MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
+  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.movieContainer.currentPage + 1;
     final result = await loader(nextPage);
