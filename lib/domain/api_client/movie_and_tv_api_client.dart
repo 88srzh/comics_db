@@ -218,32 +218,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-// TODO: for what is this? may be delete, seriously
-  Future<MovieResponse> searchUpcomingMovie(
-    int page,
-    String locale,
-    String query,
-  ) async {
-    MovieResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/search/movie',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-        'query': query,
-        'include_adult': true.toString(),
-      },
-    );
-    return result;
-  }
-
   Future<MovieDetails> movieDetails(int movieId, String locale) async {
     MovieDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
