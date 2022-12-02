@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
@@ -33,24 +34,24 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
         color: AppColors.kPrimaryColor,
         child: Stack(
           children: [
-                ListView.builder(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: const EdgeInsets.only(top: 70.0),
-                    itemCount: cubit.state.movies.length,
-                    itemExtent: 165,
-                    itemBuilder: (BuildContext context, int index) {
-                      cubit.showedNowPlayingMovieAtIndex(index);
-                      final movie = cubit.state.movies[index];
-                      final posterPath = movie.posterPath;
-                      return InkWell(
-                        onTap: () => onMovieTap(context, index),
-                        child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
-                      );
-                    },
-                  ),
+            ListView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: const EdgeInsets.only(top: 70.0),
+              itemCount: cubit.state.movies.length,
+              itemExtent: 165,
+              itemBuilder: (BuildContext context, int index) {
+                cubit.showedNowPlayingMovieAtIndex(index);
+                final movie = cubit.state.movies[index];
+                final posterPath = movie.posterPath;
+                return InkWell(
+                  onTap: () => onMovieTap(context, index),
+                  child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                );
+              },
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
+              child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
             ),
           ],
         ),
@@ -87,18 +88,7 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: AppColors.kPrimaryColor,
-              border: Border.all(color: Colors.white.withOpacity(0.2)),
-              borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.white.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                )
-              ],
-            ),
+            decoration: customMovieListBoxDecoration,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
@@ -150,10 +140,6 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
               ],
             ),
           ),
-          // InkWell(
-          //   borderRadius: BorderRadius.circular(20.0),
-          //   onTap: () => model.onMovieTap(context, index),
-          // ),
         ],
       ),
     );

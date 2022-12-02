@@ -7,6 +7,7 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widget.dart';
 
 class MoviePopularListWidget extends StatefulWidget {
   const MoviePopularListWidget({Key? key}) : super(key: key);
@@ -81,18 +82,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: AppColors.kPrimaryColor,
-              border: Border.all(color: Colors.white.withOpacity(0.2)),
-              borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.white.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                )
-              ],
-            ),
+            decoration: customMovieListBoxDecoration,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
