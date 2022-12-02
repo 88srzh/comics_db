@@ -129,18 +129,6 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
         final newState = state.copyWith(searchMovieContainer: container);
         emit(newState);
       }
-
-      // if (state.searchMovieContainer.isComplete) return;
-      // final nextPage = state.searchMovieContainer.currentPage + 1;
-      // final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
-      // final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
-      // final container = state.searchMovieContainer.copyWith(
-      //   movies: movies,
-      //   currentPage: result.page,
-      //   totalPage: result.totalPages,
-      // );
-      // final newState = state.copyWith(searchMovieContainer: container);
-      // emit(newState);
     } else {
       final container = await _loadNextPage(state.movieContainer, (nextPage) async {
         final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
@@ -150,17 +138,6 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
         final newState = state.copyWith(movieContainer: container);
         emit(newState);
       }
-      // if (state.movieContainer.isComplete) return;
-      // final nextPage = state.movieContainer.currentPage + 1;
-      // final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
-      // final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
-      // final container = state.movieContainer.copyWith(
-      //   movies: movies,
-      //   currentPage: result.page,
-      //   totalPage: result.totalPages,
-      // );
-      // final newState = state.copyWith(movieContainer: container);
-      // emit(newState);
     }
   }
 
