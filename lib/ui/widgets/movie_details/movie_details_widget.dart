@@ -20,9 +20,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<MovieDetailsCubit>()
-        .setupMovieDetailsLocale(context, locale.languageCode);
+    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override

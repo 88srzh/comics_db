@@ -98,11 +98,10 @@ class _MoviePopularListRowWidget extends StatelessWidget {
               children: [
                 posterPath != null
                     ? Image.network(
-                        // TODO: fix posterPath not null
                         ImageDownloader.imageUrl(posterPath!),
                         width: 95,
                       )
-                    : Image.asset(AppImages.noImage),
+                    : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
