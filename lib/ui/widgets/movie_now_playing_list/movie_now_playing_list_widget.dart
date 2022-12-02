@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
@@ -49,29 +50,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                   ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-              child: TextField(
-                style: const TextStyle(
-                  color: AppColors.genresText,
-                ),
-                onChanged: cubit.searchNowPlayingMovie,
-                decoration: InputDecoration(
-                  labelText: 'Search',
-                  labelStyle: const TextStyle(
-                    color: AppColors.genresText,
-                  ),
-                  filled: true,
-                  fillColor: AppColors.kPrimaryColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
-                  ),
-                ),
-              ),
+                child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
             ),
           ],
         ),
