@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/custom_appbar.dart';
-import 'package:comics_db_app/ui/components/loading_indicator.dart';
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-  final String profilePath;
+  final String? profilePath;
   final PeopleListData people;
   final PeopleListCubit cubit;
 
@@ -92,11 +92,12 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
+              profilePath != null ?
               CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(profilePath),
+                imageUrl: ImageDownloader.imageUrl(profilePath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
                 errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-              ),
+              ) : Image.asset(AppImages.noImageAvailable),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

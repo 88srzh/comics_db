@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/components/loading_indicator.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:flutter/material.dart';

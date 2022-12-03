@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/blocs/popular_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/top_rated_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
@@ -66,7 +66,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => TopRatedMovieListCubit(topRatedMovieListBloc: TopRatedMovieListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => MovieListCubit(movieListBloc: MovieListBloc(MovieListState.initial()))),
+              BlocProvider(create: (_) => MoviePopularListCubit(movieListBloc: MoviePopularListBloc(MovieListState.initial()))),
               BlocProvider(create: (_) => UpcomingMovieListCubit(upcomingMovieListBloc: UpcomingMovieListBloc(MovieListState.initial()))),
               BlocProvider(create: (_) => NowPlayingMovieListCubit(nowPlayingMovieListBloc: NowPlayingMovieListBloc(MovieListState.initial()))),
             ],

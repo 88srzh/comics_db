@@ -18,12 +18,12 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<MovieListCubit>();
+    final cubit = context.watch<MoviePopularListCubit>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: cubit.state.movies.length,
