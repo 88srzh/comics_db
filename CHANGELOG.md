@@ -1,3 +1,9 @@
+0.0.3
+--------------------
+- Fixed search at popular and now playing movie screens
+- Fixed image if image not available
+
+
 0.0.2
 --------------------
 - Added google fonts.
