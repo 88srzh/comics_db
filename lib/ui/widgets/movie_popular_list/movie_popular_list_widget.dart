@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
@@ -98,35 +99,11 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        movie.originalTitle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      CustomMovieListTextWidget(text: movie.originalTitle, maxLines: 1, fontSize: null, color: Colors.white, fontWeight: FontWeight.bold),
                       const SizedBox(height: 5.0),
-                      Text(
-                        movie.releaseDate,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppColors.genresText,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      Text(
-                        movie.overview ?? '',
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppColors.genresText,
-                          fontSize: 12,
-                        ),
-                      ),
+                      CustomMovieListTextWidget(text: movie.releaseDate, maxLines: 1, fontSize: 13, color: AppColors.genresText, fontWeight: null),
+                      const SizedBox(height: 15.0),
+                      CustomMovieListTextWidget(text: movie.overview ?? '', maxLines: 3, fontSize: 12, color: AppColors.genresText, fontWeight: null),
                     ],
                   ),
                 ),
@@ -134,11 +111,6 @@ class _MoviePopularListRowWidget extends StatelessWidget {
               ],
             ),
           ),
-          // InkWell(
-          //   borderRadius: BorderRadius.circular(20.0),
-          //   onTap: () => _onMovieTap(context, movie.id),
-          // onTap: () => _onMovieTap(context, index),
-          // ),
         ],
       ),
     );
