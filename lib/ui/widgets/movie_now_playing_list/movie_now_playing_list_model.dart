@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 
 import 'package:comics_db_app/domain/entity/movie.dart';
@@ -114,3 +115,4 @@ class NowPlayingMovieListModel extends ChangeNotifier {
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }
+*/

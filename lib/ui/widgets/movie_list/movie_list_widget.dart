@@ -195,7 +195,7 @@ class _SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //TODO: поменять на модель поиска по всем фильмам
-    final cubit = context.read<MovieListCubit>();
+    final cubit = context.read<MoviePopularListCubit>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(

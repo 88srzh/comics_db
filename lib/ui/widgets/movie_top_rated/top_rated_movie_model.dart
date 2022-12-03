@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
@@ -124,3 +125,4 @@ class TopRatedMovieViewModel extends ChangeNotifier {
     _loadNextTopRatedMoviesPage();
   }
 }
+*/

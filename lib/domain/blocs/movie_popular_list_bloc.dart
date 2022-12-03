@@ -101,10 +101,10 @@ class MovieListState {
   }
 }
 
-class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
+class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
 
-  MovieListBloc(MovieListState initialState) : super(initialState) {
+  MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);

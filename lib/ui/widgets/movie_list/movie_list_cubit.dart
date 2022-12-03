@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/blocs/popular_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // TODO refactoring title
-class MovieListCubit extends Cubit<MovieListCubitState> {
-  final MovieListBloc movieListBloc;
+class MoviePopularListCubit extends Cubit<MovieListCubitState> {
+  final MoviePopularListBloc movieListBloc;
   late final StreamSubscription<MovieListState> movieListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var mov = <Movie>[];
 
-  MovieListCubit({required this.movieListBloc})
+  MoviePopularListCubit({required this.movieListBloc})
       : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
       () {

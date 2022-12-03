@@ -23,12 +23,12 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MovieListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MovieListCubit>();
+    var cubit = context.watch<MoviePopularListCubit>();
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
       body: ColoredBox(
@@ -74,7 +74,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
 
   final String? posterPath;
   final MovieListData movie;
-  final MovieListCubit cubit;
+  final MoviePopularListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
