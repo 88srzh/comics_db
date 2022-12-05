@@ -27,27 +27,26 @@ class MovieTopPosterWidget extends StatelessWidget {
     final releaseDate = cubit.state.releaseDate;
     final summary = cubit.state.summary;
     final genres = cubit.state.genres;
-
-    // TODO must fix: cache image error
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
 
     // TODO add favorite icon button
     return Stack(
       children: [
+        backdropPath != null ?
         Positioned(
           child: Opacity(
             opacity: 0.25,
             child: AspectRatio(
               aspectRatio: 390 / 220,
               child: CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(backdropPath!),
+                imageUrl: ImageDownloader.imageUrl(backdropPath),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
                 errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
               ),
             ),
           ),
-        ),
+        ) : Image.asset(AppImages.noImageAvailable),
         Positioned(
           top: 15,
           left: 20,
@@ -83,27 +82,17 @@ class MovieTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 5.0),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: releaseDate),
+                    CustomPosterTopLeftAlignText(text: releaseDate, maxLines: null),
                   ],
                 ),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: summary),
+                    CustomPosterTopLeftAlignText(text: summary, maxLines: null),
                   ],
                 ),
                 Column(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        genres,
-                        maxLines: 2,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppColors.genresText,
-                        ),
-                      ),
-                    ),
+                    CustomPosterTopLeftAlignText(text: genres, maxLines: 2),
                   ],
                 ),
                 Row(
