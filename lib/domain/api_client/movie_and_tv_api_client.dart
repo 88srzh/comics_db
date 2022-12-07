@@ -333,7 +333,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> popularTV(int page, String locale) async {
+  Future<PopularTVResponse> popularTV(int page, String locale, String apiKey) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -352,7 +352,7 @@ class MovieAndTvApiClient {
     return tvResult;
   }
 
-  Future<PopularTVResponse> searchTV(int page, String locale, String query) async {
+  Future<PopularTVResponse> searchTV(int page, String locale, String query, String apiKey) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
