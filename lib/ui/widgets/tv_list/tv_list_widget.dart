@@ -102,7 +102,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                         style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
                       ),
                       InkWell(
-                        // TODO: Исправить переход на страницу
+                        // TODO: wrong way
                         onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopular),
                         child: const Text(
                           'See All',
