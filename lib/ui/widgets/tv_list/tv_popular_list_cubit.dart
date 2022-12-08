@@ -63,7 +63,7 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
     });
   }
 
-  void onTvRap(BuildContext context, int index) {
+  void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
