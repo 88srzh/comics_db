@@ -26,7 +26,7 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
   }
 
   void _onState(TvListState state) {
-    final tvs = state.tvs.map((_makeListData).toList());
+    final tvs = state.tvs.map(_makeListData).toList();
     final newState = this.state.copyWith(tvs: tvs);
     emit(newState);
   }
