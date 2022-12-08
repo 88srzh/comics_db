@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
@@ -45,7 +46,7 @@ class AiringTodayTvsModel extends ChangeNotifier {
     if (query == null) {
       return await _apiClient.airingTodayTvs(nextPage, _locale);
     } else {
-      return await _apiClient.searchTV(nextPage, _locale, query);
+      return await _apiClient.searchTV(nextPage, _locale, query, Configuration.apiKey);
     }
 
   }
