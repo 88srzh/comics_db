@@ -22,7 +22,7 @@ class TvListWidget extends StatefulWidget {
   const TvListWidget({Key? key}) : super(key: key);
 
   @override
-  _TvListWidgetState createState() => _TvListWidgetState();
+  State<TvListWidget> createState() => _TvListWidgetState();
 }
 
 class _TvListWidgetState extends State<TvListWidget> {
@@ -85,13 +85,13 @@ class _TvListWidgetState extends State<TvListWidget> {
           children: [
             Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
-                  child: SizedBox(
-                    height: 180,
-                    child: TopRatedTvWidget(),
-                  ),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                //   child: SizedBox(
+                //     height: 180,
+                //     child: TopRatedTvWidget(),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
@@ -138,13 +138,13 @@ class _TvListWidgetState extends State<TvListWidget> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: AiringTodayTvsWidget(),
-                  ),
-                ),
+                // const SizedBox(
+                //   height: 200,
+                //   child: Padding(
+                //     padding: EdgeInsets.symmetric(horizontal: 20.0),
+                //     child: AiringTodayTvsWidget(),
+                //   ),
+                // ),
               ],
             ),
           ],
