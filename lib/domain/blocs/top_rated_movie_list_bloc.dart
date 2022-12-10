@@ -23,34 +23,26 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onTopRatedMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
-      _loadNextPage(state.searchMovieContainer, (nextPage) async {
-        final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+      final container = await _loadNextPage(
+        state.searchMovieContainer,
+        (nextPage) async {
+          final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+          return result;
+        },
+      );
+      if (container != null) {
+        final newState = state.copyWith(searchMovieContainer: container);
+        emit(newState);
+      }
+    } else {
+      final container = await _loadNextPage(state.movieContainer, (nextPage) async {
+        final result = await _movieApiClient.topRatedMovie(nextPage, event.locale, Configuration.apiKey);
         return result;
       });
-
-      if (state.searchMovieContainer.isComplete) return;
-      final nextPage = state.searchMovieContainer.currentPage + 1;
-      final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
-      final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
-      final container = state.searchMovieContainer.copyWith(
-        movies: movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-      final newState = state.copyWith(searchMovieContainer: container);
-      emit(newState);
-    } else {
-      if (state.movieContainer.isComplete) return;
-      final nextPage = state.movieContainer.currentPage + 1;
-      final result = await _movieApiClient.topRatedMovie(nextPage, event.locale, Configuration.apiKey);
-      final movies = List<Movie>.from(state.movieContainer.movies)..addAll(result.movies);
-      final container = state.movieContainer.copyWith(
-        movies: movies,
-        currentPage: result.page,
-        totalPage: result.totalPages,
-      );
-      final newState = state.copyWith(movieContainer: container);
-      emit(newState);
+      if (container != null) {
+        final newState = state.copyWith(movieContainer: container);
+        emit(newState);
+      }
     }
   }
 
