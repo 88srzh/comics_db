@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 
 class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   final TvAiringTodayListBloc tvAiringTodayListBloc;
-  late final StreamSubscription<TvListState> tvListBlocSubscription;
+  late final StreamSubscription<TvListState> tvAiringTodayListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var tv = <TV>[];
@@ -22,7 +22,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
       : super(TvListCubitState(tvs: const <TvListData>[], localeTag: '')) {
     Future.microtask(() {
       _onState(tvAiringTodayListBloc.state);
-      tvListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);
+      tvAiringTodayListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);
     });
   }
 
@@ -43,7 +43,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
 
   @override
   Future<void> close() {
-    tvListBlocSubscription.cancel();
+    tvAiringTodayListBlocSubscription.cancel();
     return super.close();
   }
 

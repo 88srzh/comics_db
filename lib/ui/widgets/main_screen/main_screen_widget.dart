@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/top_rated_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
@@ -13,11 +14,10 @@ import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cu
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
-import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_model.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -38,7 +38,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   final tvPopularModel = TvPopularModel();
   final tvTopRatedModel = TvTopRatedModel();
-  final airingTodayModel = AiringTodayTvsModel();
+  // final airingTodayModel = AiringTodayTvsModel();
   final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
@@ -56,7 +56,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     super.didChangeDependencies();
     tvTopRatedModel.setupLocale(context);
     // tvPopularModel.setupLocale(context);
-    airingTodayModel.setupLocale(context);
+    // airingTodayModel.setupLocale(context);
     trendingAllModel.setupPage(context);
   }
 
@@ -81,6 +81,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               // ChangeNotifierProvider(create: (_) => tvTopRatedModel),
               // ChangeNotifierProvider(create: (_) => tvPopularModel),
               BlocProvider(create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial()))),
+              BlocProvider(create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial()))),
               // ChangeNotifierProvider(create: (_) => airingTodayModel),
             ],
             child: const TvListWidget(),

@@ -9,7 +9,6 @@ import 'package:comics_db_app/domain/entity/tv.dart';
 
 class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
-  final tvBloc = TvPopularListBloc(TvListState.initial());
 
   TvAiringTodayListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
