@@ -52,7 +52,7 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
         id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
   }
 
-  void showedPopularTvAtIndex(int index) {
+  void showedTopRatedTvAtIndex(int index) {
     if (index < state.tvs.length - 1) return;
     tvTopRatedListBloc.add(TvListEventLoadNextPage(state.localeTag));
   }
