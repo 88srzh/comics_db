@@ -44,7 +44,7 @@ class TvTopRatedModel extends ChangeNotifier {
   Future<PopularTVResponse> _loadTVs(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
-      return await _apiClient.topRatedTvs(nextPage, _locale);
+      return await _apiClient.topRatedTvs(nextPage, _locale, Configuration.apiKey);
     } else {
       return await _apiClient.searchTV(nextPage, _locale, query, Configuration.apiKey);
     }
