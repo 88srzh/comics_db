@@ -2,6 +2,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
 import 'package:flutter/material.dart';
@@ -131,6 +132,13 @@ class _TvListWidgetState extends State<TvListWidget> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: AiringTodayTvsWidget(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 200,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: OnTheAirTvsWidget(),
                   ),
                 ),
               ],
