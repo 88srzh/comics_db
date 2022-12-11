@@ -7,15 +7,15 @@ import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TvWidget extends StatelessWidget {
-  const TvWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => TvPopularModel(),
-        child: const TvListWidget(),
-      );
-}
+// class TvWidget extends StatelessWidget {
+//   const TvWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) => ChangeNotifierProvider(
+//         create: (context) => TvPopularModel(),
+//         child: const TvListWidget(),
+//       );
+// }
 
 class TvListWidget extends StatefulWidget {
   const TvListWidget({Key? key}) : super(key: key);

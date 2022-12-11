@@ -48,7 +48,7 @@ class MainNavigation {
     MainNavigationRouteNames.tvPopular: (_) => _screenFactory.makePopularTvList(),
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
     // MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
-    MainNavigationRouteNames.tv: (context) => const TvWidget(),
+    MainNavigationRouteNames.tv: (context) => const TvListWidget(),
     MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
   };
 
