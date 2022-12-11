@@ -1,41 +1,41 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AiringTodayTvsWidget extends StatefulWidget {
-  const AiringTodayTvsWidget({Key? key}) : super(key: key);
+class OnTheAirTvsWidget extends StatefulWidget {
+  const OnTheAirTvsWidget({Key? key}) : super(key: key);
 
   @override
-  State<AiringTodayTvsWidget> createState() => _AiringTodayTvsWidgetState();
+  State<OnTheAirTvsWidget> createState() => _OnTheAirTvsWidgetState();
 }
 
-class _AiringTodayTvsWidgetState extends State<AiringTodayTvsWidget> {
+class _OnTheAirTvsWidgetState extends State<OnTheAirTvsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
   final locale = Localizations.localeOf(context);
-  context.read<TvAiringTodayListCubit>().setupAiringTodayTvLocale(locale.languageCode);
+  context.read<TvOnTheAirListCubit>().setupOnTheAirTvLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<TvAiringTodayListCubit>();
+    final cubit = context.watch<TvOnTheAirListCubit>();
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: cubit.state.tvs.length,
         itemBuilder: (BuildContext context, int index) {
-          cubit.showedAiringTodayTvAtIndex(index);
-          final airingTodayTv = cubit.state.tvs[index];
-          final posterPath = airingTodayTv.posterPath;
+          cubit.showedOnTheAirTvAtIndex(index);
+          final onTheAirTv = cubit.state.tvs[index];
+          final posterPath = onTheAirTv.posterPath;
           return InkWell(
             onTap: () => cubit.onTvTap(context, index),
             child: _AiringTodayTvsListItemWidget(
               index: index,
               posterPath: posterPath,
-              tv: airingTodayTv,
+              tv: onTheAirTv,
               cubit: cubit,
             ),
           );
@@ -55,7 +55,7 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
   final int index;
   final String? posterPath;
   final TvListData tv;
-  final TvAiringTodayListCubit cubit;
+  final TvOnTheAirListCubit cubit;
 
   @override
   Widget build(BuildContext context) {

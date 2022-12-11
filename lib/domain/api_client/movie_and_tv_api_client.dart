@@ -258,7 +258,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> topRatedTvs(int page, String locale) {
+  Future<PopularTVResponse> topRatedTvs(int page, String locale, String apiKey) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -277,7 +277,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> airingTodayTvs(int page, String locale) {
+  Future<PopularTVResponse> airingTodayTvs(int page, String locale, String apiKey) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -293,6 +293,21 @@ class MovieAndTvApiClient {
         'language': locale,
       },
     );
+    return result;
+  }
+
+  Future<PopularTVResponse> onTheAirTvs(int page, String locale, String apiKey) {
+    PopularTVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'page': page.toString(),
+      'language': locale,
+    });
     return result;
   }
 
@@ -333,7 +348,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> popularTV(int page, String locale) async {
+  Future<PopularTVResponse> popularTV(int page, String locale, String apiKey) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -352,7 +367,7 @@ class MovieAndTvApiClient {
     return tvResult;
   }
 
-  Future<PopularTVResponse> searchTV(int page, String locale, String query) async {
+  Future<PopularTVResponse> searchTV(int page, String locale, String query, String apiKey) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
@@ -43,9 +44,9 @@ class TvTopRatedModel extends ChangeNotifier {
   Future<PopularTVResponse> _loadTVs(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
-      return await _apiClient.topRatedTvs(nextPage, _locale);
+      return await _apiClient.topRatedTvs(nextPage, _locale, Configuration.apiKey);
     } else {
-      return await _apiClient.searchTV(nextPage, _locale, query);
+      return await _apiClient.searchTV(nextPage, _locale, query, Configuration.apiKey);
     }
 
   }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class CustomPosterTopLeftAlignText extends StatelessWidget {
   final String text;
-  const CustomPosterTopLeftAlignText({Key? key, required this.text}) : super(key: key);
+  final int? maxLines;
+  const CustomPosterTopLeftAlignText({Key? key, required this.text, required this.maxLines}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

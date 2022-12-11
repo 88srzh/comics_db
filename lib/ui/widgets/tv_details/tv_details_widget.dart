@@ -13,7 +13,7 @@ class TvDetailsWidget extends StatefulWidget {
   const TvDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _TvDetailsWidgetState createState() => _TvDetailsWidgetState();
+  State<TvDetailsWidget> createState() => _TvDetailsWidgetState();
 }
 
 class _TvDetailsWidgetState extends State<TvDetailsWidget> {

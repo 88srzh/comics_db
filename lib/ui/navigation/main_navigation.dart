@@ -4,7 +4,6 @@ import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +21,7 @@ abstract class MainNavigationRouteNames {
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
   static const tvPopular = '/main_screen/tvPopular';
+  static const tvAiringToday = '/main_screen/tvAiringToday';
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/main_screen/popularMovie';
@@ -45,8 +45,10 @@ class MainNavigation {
             child: const SplashscreenWidget()),
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
-    MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
-    MainNavigationRouteNames.tv: (context) => const TvWidget(),
+    MainNavigationRouteNames.tvPopular: (_) => _screenFactory.makePopularTvList(),
+    MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
+    // MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
+    MainNavigationRouteNames.tv: (context) => const TvListWidget(),
     MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
   };
 

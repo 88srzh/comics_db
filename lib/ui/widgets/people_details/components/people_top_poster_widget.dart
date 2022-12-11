@@ -98,15 +98,15 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 7.0),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: gender == 1 ? female : male)
+                    CustomPosterTopLeftAlignText(text: gender == 1 ? female : male, maxLines: null)
                   ],
                 ),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: birthday ?? 'no birthday'),
+                    CustomPosterTopLeftAlignText(text: birthday ?? 'no birthday', maxLines: null),
                   ],
                 ),
-                CustomPosterTopLeftAlignText(text: placeOfBirth ?? 'no place of birth'),
+                CustomPosterTopLeftAlignText(text: placeOfBirth ?? 'no place of birth', maxLines: null),
                 Row(
                   children: [
                     const Icon(
