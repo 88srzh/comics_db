@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/blocs/tv_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 
 class TvListState {

@@ -1,33 +1,45 @@
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/domain/entity/tv.dart';
-import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_model.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AiringTodayTvsWidget extends StatelessWidget {
+class AiringTodayTvsWidget extends StatefulWidget {
   const AiringTodayTvsWidget({Key? key}) : super(key: key);
 
   @override
+  State<AiringTodayTvsWidget> createState() => _AiringTodayTvsWidgetState();
+}
+
+class _AiringTodayTvsWidgetState extends State<AiringTodayTvsWidget> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+  final locale = Localizations.localeOf(context);
+  context.read<TvAiringTodayListCubit>().setupAiringTodayTvLocale(locale.languageCode);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final airingTodayTvsTvModel = Provider.of<AiringTodayTvsModel>(context, listen: true);
+    final cubit = context.watch<TvAiringTodayListCubit>();
     return ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: airingTodayTvsTvModel.tvs.length,
+        itemCount: cubit.state.tvs.length,
         itemBuilder: (BuildContext context, int index) {
-          airingTodayTvsTvModel.showedTVAtIndex(index);
-          final airingTodayTv = airingTodayTvsTvModel.tvs[index];
+          cubit.showedAiringTodayTvAtIndex(index);
+          final airingTodayTv = cubit.state.tvs[index];
           final posterPath = airingTodayTv.posterPath;
           return InkWell(
-            onTap: () => airingTodayTvsTvModel.onTVTap(context, index),
+            onTap: () => cubit.onTvTap(context, index),
             child: _AiringTodayTvsListItemWidget(
               index: index,
               posterPath: posterPath,
               tv: airingTodayTv,
-              airingTodayTvsModel: airingTodayTvsTvModel,
+              cubit: cubit,
             ),
           );
-        }
-    );
+        });
   }
 }
 
@@ -37,19 +49,16 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
     required this.index,
     required this.posterPath,
     required this.tv,
-    required this.airingTodayTvsModel,
+    required this.cubit,
   }) : super(key: key);
 
   final int index;
   final String? posterPath;
-  final TV tv;
-  final AiringTodayTvsModel? airingTodayTvsModel;
+  final TvListData tv;
+  final TvAiringTodayListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
-    final airingTodayTvsTvModel = Provider.of<AiringTodayTvsModel>(context, listen: true);
-    final airingTodayTv = airingTodayTvsTvModel.tvs[index];
-    final posterPath = airingTodayTv.posterPath;
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
       child: Container(
@@ -60,9 +69,8 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: FittedBox(
-          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath))
-              : const SizedBox.shrink(),
           fit: BoxFit.contain,
+          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const SizedBox.shrink(),
         ),
       ),
     );

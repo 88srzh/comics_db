@@ -21,6 +21,7 @@ abstract class MainNavigationRouteNames {
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
   static const tvPopular = '/main_screen/tvPopular';
+  static const tvAiringToday = '/main_screen/tvAiringToday';
   static const news = '/news';
   static const trending = 'trending';
   static const popularMovie = '/main_screen/popularMovie';
@@ -45,6 +46,7 @@ class MainNavigation {
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopular: (_) => _screenFactory.makePopularTvList(),
+    MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
     // MainNavigationRouteNames.tvPopular: (context) => const PopularTvWidget(),
     MainNavigationRouteNames.tv: (context) => const TvWidget(),
     MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),

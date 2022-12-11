@@ -4,7 +4,6 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -138,13 +137,13 @@ class _TvListWidgetState extends State<TvListWidget> {
                     ],
                   ),
                 ),
-                // const SizedBox(
-                //   height: 200,
-                //   child: Padding(
-                //     padding: EdgeInsets.symmetric(horizontal: 20.0),
-                //     child: AiringTodayTvsWidget(),
-                //   ),
-                // ),
+                const SizedBox(
+                  height: 200,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: AiringTodayTvsWidget(),
+                  ),
+                ),
               ],
             ),
           ],

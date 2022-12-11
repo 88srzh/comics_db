@@ -80,8 +80,8 @@ class TvPopularListBloc extends Bloc<TvListEvent, TvListState> {
         return result;
       });
       if (container != null) {
-        final newSate = state.copyWith(searchTvContainer: container);
-        emit(newSate);
+        final newState = state.copyWith(searchTvContainer: container);
+        emit(newState);
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
