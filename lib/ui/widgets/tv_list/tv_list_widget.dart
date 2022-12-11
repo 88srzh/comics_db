@@ -118,11 +118,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                     children: const [
                       Text(
                         'Airing Today',
-                        style: TextStyle(
-                          color: AppColors.genresText,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
@@ -132,6 +128,18 @@ class _TvListWidgetState extends State<TvListWidget> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: AiringTodayTvsWidget(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'On The Air',
+                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                      )
+                    ],
                   ),
                 ),
                 const SizedBox(
