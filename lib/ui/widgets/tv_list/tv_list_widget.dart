@@ -2,20 +2,9 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-// class TvWidget extends StatelessWidget {
-//   const TvWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) => ChangeNotifierProvider(
-//         create: (context) => TvPopularModel(),
-//         child: const TvListWidget(),
-//       );
-// }
 
 class TvListWidget extends StatefulWidget {
   const TvListWidget({Key? key}) : super(key: key);
@@ -84,13 +73,13 @@ class _TvListWidgetState extends State<TvListWidget> {
           children: [
             Column(
               children: [
-                // const Padding(
-                //   padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
-                //   child: SizedBox(
-                //     height: 180,
-                //     child: TopRatedTvWidget(),
-                //   ),
-                // ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                  child: SizedBox(
+                    height: 180,
+                    child: TopRatedTvWidget(),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
