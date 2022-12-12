@@ -20,104 +20,101 @@ class MovieListWidget extends StatelessWidget {
       // TODO: after refactoring search doesn't work
       content: _SearchWidget(),
     );
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(60),
-      child: Scaffold(
-        appBar: const CustomMainAppBarWidget(),
-        body: ColoredBox(
-          color: AppColors.kPrimaryColor,
-          child: ListView(
-            children: [
-              Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
-                    child: SizedBox(
-                      height: 180,
-                      child: TopRatedMovieWidget(),
-                    ),
+    return Scaffold(
+      appBar: const CustomMainAppBarWidget(),
+      body: ColoredBox(
+        color: AppColors.kPrimaryColor,
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                  child: SizedBox(
+                    height: 180,
+                    child: TopRatedMovieWidget(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Popular',
-                          style: TextStyle(
-                            color: AppColors.genresText,
-                            fontSize: 21,
-                            fontWeight: FontWeight.w600,
-                          ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Popular',
+                        style: TextStyle(
+                          color: AppColors.genresText,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w600,
                         ),
-                        InkWell(
-                          onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
-                          child: const Text(
-                            'See All',
-                            style: TextStyle(color: AppColors.ratingText, fontSize: 15),
-                          ),
+                      ),
+                      InkWell(
+                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                        child: const Text(
+                          'See All',
+                          style: TextStyle(color: AppColors.ratingText, fontSize: 15),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 200,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: PopularMovieWidget(),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'Coming Soon',
-                          style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Padding(
+                ),
+                const SizedBox(
+                  height: 200,
+                  child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: UpcomingMovieWidget(),
+                    child: PopularMovieWidget(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'Coming Soon',
+                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: UpcomingMovieWidget(),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Now playing',
+                    style: TextStyle(
+                      color: AppColors.genresText,
+                      fontSize: 21,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  InkWell(
+                    // TODO fix nowPlayingMovie
+                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
+                    child: const Text(
+                      'See All',
+                      style: TextStyle(color: AppColors.ratingText, fontSize: 15),
+                    ),
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Now playing',
-                      style: TextStyle(
-                        color: AppColors.genresText,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    InkWell(
-                      // TODO fix nowPlayingMovie
-                      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
-                      child: const Text(
-                        'See All',
-                        style: TextStyle(color: AppColors.ratingText, fontSize: 15),
-                      ),
-                    ),
-                  ],
-                ),
+            ),
+            const SizedBox(
+              height: 200,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: NowPlayingMovieWidget(),
               ),
-              const SizedBox(
-                height: 200,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: NowPlayingMovieWidget(),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
