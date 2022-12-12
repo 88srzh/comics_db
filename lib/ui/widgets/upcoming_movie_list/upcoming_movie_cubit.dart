@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:comics_db_app/domain/blocs/movie_list_event.dart';
-import 'package:comics_db_app/domain/blocs/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_event.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';

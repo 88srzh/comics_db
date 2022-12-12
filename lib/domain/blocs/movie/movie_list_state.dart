@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 
 class MovieListState {

@@ -1,13 +1,13 @@
 import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth_view_cubit_state.dart';
-import 'package:comics_db_app/domain/blocs/movie_list_state.dart';
-import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/now_playing_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
-import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
