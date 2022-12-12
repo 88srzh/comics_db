@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_widget.dart';
@@ -18,56 +19,7 @@ class _TvListWidgetState extends State<TvListWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0.0,
-        title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(AppImages.movieAppBarLogo),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.search,
-                      color: AppColors.searchIcon,
-                      size: 30,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.filter_alt_outlined,
-                        color: AppColors.ratingThumb,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.menu,
-                      color: AppColors.ratingThumb,
-                      size: 30,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: AppColors.kPrimaryColor,
-      ),
+      appBar: const CustomMainAppBarWidget(),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
