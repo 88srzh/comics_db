@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
-import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_top_rated_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
