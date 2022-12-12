@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie_list_event.dart';
+import 'package:comics_db_app/domain/blocs/movie_list_state.dart';
 import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
