@@ -3,25 +3,10 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/movie_list_event.dart';
 import 'package:comics_db_app/domain/blocs/movie_list_state.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
-
-abstract class MovieListEvent {}
-
-class MovieListEventLoadNextPage extends MovieListEvent {
-  final String locale;
-
-  MovieListEventLoadNextPage(this.locale);
-}
-
-class MovieListEventLoadReset extends MovieListEvent {}
-
-class MovieListEventSearchMovie extends MovieListEvent {
-  final String query;
-
-  MovieListEventSearchMovie(this.query);
-}
 
 class MovieListContainer {
   final List<Movie> movies;
