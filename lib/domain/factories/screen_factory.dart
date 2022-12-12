@@ -3,7 +3,7 @@ import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
-im'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart'dart';
+import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
