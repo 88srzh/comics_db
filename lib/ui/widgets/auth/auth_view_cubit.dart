@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
-import 'package:comics_db_app/domain/blocs/auth_bloc.dart';
-import 'package:comics_db_app/domain/blocs/auth_view_cubit_state.dart';
+import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
+import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthViewCubit extends Cubit<AuthViewCubitState> {
