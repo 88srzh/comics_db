@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
@@ -22,48 +23,7 @@ class MovieListWidget extends StatelessWidget {
     return PreferredSize(
       preferredSize: const Size.fromHeight(60),
       child: Scaffold(
-        appBar: AppBar(
-          titleSpacing: 0.0,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [Image.asset(AppImages.movieAppBarLogo)],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // TODO оптимизировать значки
-                    _SearchIconWidget(dialog: dialog),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.filter_alt_outlined,
-                          color: AppColors.ratingThumb,
-                          size: 25,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.menu,
-                        color: AppColors.ratingThumb,
-                        size: 25,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: AppColors.kPrimaryColor,
-        ),
+        appBar: const CustomMainAppBarWidget(),
         body: ColoredBox(
           color: AppColors.kPrimaryColor,
           child: ListView(
