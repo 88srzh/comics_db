@@ -102,7 +102,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  // TODO: без apiKey, почему?
   Future<MovieResponse> upcomingMovie(
     int page,
     String locale,

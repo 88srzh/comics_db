@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UpcomingMovieWidget extends StatefulWidget {
-  const UpcomingMovieWidget({
-    Key? key,
-  }) : super(key: key);
+  const UpcomingMovieWidget({Key? key}) : super(key: key);
 
   @override
   State<UpcomingMovieWidget> createState() => _UpcomingMovieWidgetState();
@@ -54,7 +55,11 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                         padding: const EdgeInsets.only(right: 10),
                         child: InkWell(
                           onTap: () => cubit.onMovieTap(context, index),
-                          child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath)) : const SizedBox.shrink(),
+                          child: CachedNetworkImage(
+                            imageUrl: ImageDownloader.imageUrl(backdropPath!),
+                            placeholder: (context, url) => const LoadingIndicatorWidget(),
+                            errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                          ),
                         ),
                       );
                     }),
