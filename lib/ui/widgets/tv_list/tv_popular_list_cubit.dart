@@ -47,8 +47,16 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
   }
 
   TvListData _makeListData(TV tv) {
+    final firstAirDate = tv.firstAirDate;
+    final firstAirDateTitle = firstAirDate != null ? _dateFormat.format(firstAirDate) : '';
     return TvListData(
-        id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
+      id: tv.id,
+      name: tv.name,
+      overview: tv.overview,
+      posterPath: tv.posterPath,
+      backdropPath: tv.backdropPath,
+      firstAirDate: firstAirDateTitle,
+    );
   }
 
   void showedPopularTvAtIndex(int index) {

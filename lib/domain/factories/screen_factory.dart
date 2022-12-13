@@ -29,7 +29,7 @@ import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widge
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
-import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -143,7 +143,7 @@ class ScreenFactory {
           TvListState.initial(),
         ),
       ),
-      child: const PopularTvWidget(),
+      child: const TvPopularListWidget(),
     );
   }
 

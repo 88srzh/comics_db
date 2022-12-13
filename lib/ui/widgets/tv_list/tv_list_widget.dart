@@ -1,5 +1,4 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
@@ -44,7 +43,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                       ),
                       InkWell(
                         // TODO: wrong way
-                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopular),
+                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopularList),
                         child: const Text(
                           'See All',
                           style: TextStyle(

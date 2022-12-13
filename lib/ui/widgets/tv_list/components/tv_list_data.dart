@@ -4,6 +4,7 @@ class TvListData {
   final String? posterPath;
   final String? backdropPath;
   final String overview;
+  final String? firstAirDate;
 
   const TvListData({
     required this.id,
@@ -11,5 +12,6 @@ class TvListData {
     this.posterPath,
     this.backdropPath,
     required this.overview,
+    this.firstAirDate,
   });
 }
