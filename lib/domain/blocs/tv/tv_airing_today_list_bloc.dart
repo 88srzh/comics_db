@@ -2,15 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
-import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 
-class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
+class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
 
-  TvOnTheAirListBloc(TvListState initialState) : super(initialState) {
+  TvAiringTodayListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
         await onTvListEventLoadNextPage(event, emit);
@@ -34,12 +34,12 @@ class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.onTheAirTvs(nextPage, event.locale, Configuration.apiKey);
+        final result = await _tvApiClient.airingTodayTvs(nextPage, event.locale, Configuration.apiKey);
         return result;
       });
       if (container != null) {
-        final newSate = state.copyWith(tvContainer: container);
-        emit(newSate);
+        final newState = state.copyWith(tvContainer: container);
+        emit(newState);
       }
     }
   }

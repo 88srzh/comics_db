@@ -2,15 +2,66 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
-import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 
-class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
+abstract class TvListEvent {}
+
+class TvListEventLoadNextPage extends TvListEvent {
+  final String locale;
+
+  TvListEventLoadNextPage(this.locale);
+}
+
+class TvListEventLoadReset extends TvListEvent {}
+
+class TvListEventSearchTv extends TvListEvent {
+  final String query;
+
+  TvListEventSearchTv(this.query);
+}
+
+class TvListContainer {
+  final List<TV> tvs;
+  final int currentPage;
+  final int totalPage;
+
+  bool get isComplete => currentPage >= totalPage;
+
+  const TvListContainer.initial()
+      : tvs = const <TV>[],
+        currentPage = 0,
+        totalPage = 1;
+
+  TvListContainer({required this.tvs, required this.currentPage, required this.totalPage});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TvListContainer && runtimeType == other.runtimeType && tvs == other.tvs && currentPage == other.currentPage && totalPage == other.totalPage;
+
+  @override
+  int get hashCode => tvs.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
+
+  TvListContainer copyWith({
+    List<TV>? tvs,
+    int? currentPage,
+    int? totalPage,
+  }) {
+    return TvListContainer(
+      tvs: tvs ?? this.tvs,
+      currentPage: currentPage ?? this.currentPage,
+      totalPage: totalPage ?? this.totalPage,
+    );
+  }
+}
+
+
+class TvPopularListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
 
-  TvTopRatedListBloc(TvListState initialState) : super(initialState) {
+  TvPopularListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
         await onTvListEventLoadNextPage(event, emit);
@@ -34,7 +85,7 @@ class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.topRatedTvs(nextPage, event.locale, Configuration.apiKey);
+        final result = await _tvApiClient.popularTV(nextPage, event.locale, Configuration.apiKey);
         return result;
       });
       if (container != null) {

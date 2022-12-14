@@ -2,7 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_event.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 

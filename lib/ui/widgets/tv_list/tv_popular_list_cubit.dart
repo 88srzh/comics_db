@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
@@ -47,8 +47,16 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
   }
 
   TvListData _makeListData(TV tv) {
+    final firstAirDate = tv.firstAirDate;
+    final firstAirDateTitle = firstAirDate != null ? _dateFormat.format(firstAirDate) : '';
     return TvListData(
-        id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
+      id: tv.id,
+      name: tv.name,
+      overview: tv.overview,
+      posterPath: tv.posterPath,
+      backdropPath: tv.backdropPath,
+      firstAirDate: firstAirDateTitle,
+    );
   }
 
   void showedPopularTvAtIndex(int index) {

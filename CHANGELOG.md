@@ -1,8 +1,7 @@
 0.0.3
 --------------------
-- Fixed search at popular and now playing movie screens
-- Fixed image if image not available
-
+- Added tv popular list widget at 'see all' popular tv. 
+- Fixed tv top rated movie not available image.
 
 0.0.2
 --------------------
@@ -14,7 +13,6 @@
 - Fixed people details `dateOfDeath` json.
 - Fixed `rendeflex` error at People cast widget.
 - Updated secure storage package.
-
 
 ## 0.0.1
 ______________________

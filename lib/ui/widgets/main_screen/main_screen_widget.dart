@@ -1,13 +1,14 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/blocs/movie_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/now_playing_movie_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/top_rated_movie_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_airing_today_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_on_the_air_bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/tv_list_state.dart';
-import 'package:comics_db_app/domain/blocs/tv_top_rated_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/upcoming_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/top_rated_movie_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_airing_today_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_on_the_air_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
@@ -15,11 +16,9 @@ import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movi
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
-import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_cubit.dart';
-import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
@@ -39,10 +38,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
 
-  final tvPopularModel = TvPopularModel();
-  // final tvTopRatedModel = TvTopRatedModel();
-  // final airingTodayModel = AiringTodayTvsModel();
-  final trendingAllModel = TrendingAllModel();
   final settingsModel = SettingsModel();
 
   void onSelectTab(int index) {
@@ -57,10 +52,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // tvTopRatedModel.setupLocale(context);
-    // tvPopularModel.setupLocale(context);
-    // airingTodayModel.setupLocale(context);
-    trendingAllModel.setupPage(context);
   }
 
   @override
@@ -81,8 +72,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ),
           MultiBlocProvider(
             providers: [
-              // ChangeNotifierProvider(create: (_) => tvTopRatedModel),
-              // ChangeNotifierProvider(create: (_) => tvPopularModel),
               BlocProvider(create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial()))),
               BlocProvider(create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial()))),
               BlocProvider(create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial()))),

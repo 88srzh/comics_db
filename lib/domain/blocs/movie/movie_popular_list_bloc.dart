@@ -3,24 +3,10 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_event.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
-
-abstract class MovieListEvent {}
-
-class MovieListEventLoadNextPage extends MovieListEvent {
-  final String locale;
-
-  MovieListEventLoadNextPage(this.locale);
-}
-
-class MovieListEventLoadReset extends MovieListEvent {}
-
-class MovieListEventSearchMovie extends MovieListEvent {
-  final String query;
-
-  MovieListEventSearchMovie(this.query);
-}
 
 class MovieListContainer {
   final List<Movie> movies;
@@ -57,49 +43,7 @@ class MovieListContainer {
   }
 }
 
-class MovieListState {
-  final MovieListContainer movieContainer;
-  final MovieListContainer searchMovieContainer;
-  final String searchQuery;
 
-  bool get isSearchMode => searchQuery.isNotEmpty;
-
-  List<Movie> get movies => isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
-
-  MovieListState.initial()
-      : movieContainer = const MovieListContainer.initial(),
-        searchMovieContainer = const MovieListContainer.initial(),
-        searchQuery = '';
-
-  MovieListState({
-    required this.movieContainer,
-    required this.searchMovieContainer,
-    required this.searchQuery,
-  });
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is MovieListState &&
-          runtimeType == other.runtimeType &&
-          movieContainer == other.movieContainer &&
-          searchMovieContainer == other.searchMovieContainer &&
-          searchQuery == other.searchQuery;
-
-  @override
-  int get hashCode => movieContainer.hashCode ^ searchMovieContainer.hashCode ^ searchQuery.hashCode;
-
-  MovieListState copyWith({
-    MovieListContainer? movieContainer,
-    MovieListContainer? searchMovieContainer,
-    String? searchQuery,
-  }) {
-    return MovieListState(
-        movieContainer: movieContainer ?? this.movieContainer,
-        searchMovieContainer: searchMovieContainer ?? this.searchMovieContainer,
-        searchQuery: searchQuery ?? this.searchQuery);
-  }
-}
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();

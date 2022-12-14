@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
@@ -113,3 +114,4 @@ class UpcomingMovieModel extends ChangeNotifier {
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }
+*/
