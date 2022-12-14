@@ -14,7 +14,6 @@
 - Fixed `rendeflex` error at People cast widget.
 - Updated secure storage package.
 
-
 ## 0.0.1
 ______________________
 - Initial release.
