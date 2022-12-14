@@ -1,3 +1,8 @@
+0.0.3
+--------------------
+- Added tv popular list widget at 'see all' popular tv. 
+- Fixed tv top rated movie not available image.
+
 0.0.2
 --------------------
 - Added google fonts.
