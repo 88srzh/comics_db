@@ -5,7 +5,10 @@ analyzer:
     implicit-casts: false
     implicit-dynamic: false
   exclude:
-     - '**/*.g.dart'
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+  errors:
+      invalid_annotation_target: ignore
 
 linter:
   rules:
