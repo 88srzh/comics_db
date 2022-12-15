@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_event.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
@@ -37,8 +36,8 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    nowPlayingMovieListBloc.add(MovieListEventLoadReset());
-    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(localeTag));
+    nowPlayingMovieListBloc.add(const MovieListEventLoadReset());
+    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -64,7 +63,7 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
 
   void showedNowPlayingMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(state.localeTag));
+    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchNowPlayingMovie(String text) {
@@ -72,8 +71,8 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
     searchDebounce = Timer(
       const Duration(milliseconds: 300),
         () async {
-        nowPlayingMovieListBloc.add(MovieListEventSearchMovie(text));
-        nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(state.localeTag));
+        nowPlayingMovieListBloc.add(MovieListEventSearchMovie(query: text));
+        nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
         }
     );
   }
