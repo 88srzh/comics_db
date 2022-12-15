@@ -12,7 +12,7 @@ part 'movie_popular_list_bloc.freezed.dart';
 part 'movie_list_event.dart';
 part 'movie_list_state.dart';
 
-class MovieListContainer {
+class MovieListContainer extends Equatable{
   final List<Movie> movies;
   final int currentPage;
   final int totalPage;
@@ -24,19 +24,22 @@ class MovieListContainer {
         currentPage = 0,
         totalPage = 1;
 
-  MovieListContainer({required this.movies, required this.currentPage, required this.totalPage});
+  const MovieListContainer({required this.movies, required this.currentPage, required this.totalPage});
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is MovieListContainer &&
-          runtimeType == other.runtimeType &&
-          movies == other.movies &&
-          currentPage == other.currentPage &&
-          totalPage == other.totalPage;
+  List<Object> get props => [movies, currentPage, totalPage];
 
-  @override
-  int get hashCode => movies.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
+  // @override
+  // bool operator ==(Object other) =>
+  //     identical(this, other) ||
+  //     other is MovieListContainer &&
+  //         runtimeType == other.runtimeType &&
+  //         movies == other.movies &&
+  //         currentPage == other.currentPage &&
+  //         totalPage == other.totalPage;
+  //
+  // @override
+  // int get hashCode => movies.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
 
   MovieListContainer copyWith({List<Movie>? movies, int? currentPage, int? totalPage}) {
     return MovieListContainer(
@@ -103,7 +106,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   }
 
   Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
-    emit(MovieListState.initial());
+    emit(const MovieListState.initial());
     // add(MovieListEventLoadNextPage(event.locale));
   }
 
