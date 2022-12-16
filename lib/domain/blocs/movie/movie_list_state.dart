@@ -23,18 +23,6 @@ class MovieListState extends Equatable {
     required this.searchQuery,
   });
 
- // @override
- //  bool operator ==(Object other) =>
- //      identical(this, other) ||
- //          other is MovieListState &&
- //              runtimeType == other.runtimeType &&
- //              movieContainer == other.movieContainer &&
- //              searchMovieContainer == other.searchMovieContainer &&
- //              searchQuery == other.searchQuery;
-
-  // @override
-  // int get hashCode => movieContainer.hashCode ^ searchMovieContainer.hashCode ^ searchQuery.hashCode;
-
   MovieListState copyWith({
     MovieListContainer? movieContainer,
     MovieListContainer? searchMovieContainer,

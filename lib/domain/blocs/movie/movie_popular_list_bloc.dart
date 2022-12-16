@@ -9,10 +9,12 @@ import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'movie_popular_list_bloc.freezed.dart';
+
 part 'movie_list_event.dart';
+
 part 'movie_list_state.dart';
 
-class MovieListContainer extends Equatable{
+class MovieListContainer extends Equatable {
   final List<Movie> movies;
   final int currentPage;
   final int totalPage;
@@ -29,18 +31,6 @@ class MovieListContainer extends Equatable{
   @override
   List<Object> get props => [movies, currentPage, totalPage];
 
-  // @override
-  // bool operator ==(Object other) =>
-  //     identical(this, other) ||
-  //     other is MovieListContainer &&
-  //         runtimeType == other.runtimeType &&
-  //         movies == other.movies &&
-  //         currentPage == other.currentPage &&
-  //         totalPage == other.totalPage;
-  //
-  // @override
-  // int get hashCode => movies.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
-
   MovieListContainer copyWith({List<Movie>? movies, int? currentPage, int? totalPage}) {
     return MovieListContainer(
       movies: movies ?? this.movies,
@@ -49,8 +39,6 @@ class MovieListContainer extends Equatable{
     );
   }
 }
-
-
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
