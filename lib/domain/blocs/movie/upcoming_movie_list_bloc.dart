@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
@@ -61,7 +62,7 @@ Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<M
 }
 
 Future<void> onUpcomingMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
-  emit(MovieListState.initial());
+  emit(const MovieListState.initial());
 }
 
 Future<void> onUpcomingMovieListEventLoadSearch(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {

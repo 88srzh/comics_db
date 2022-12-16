@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:equatable/equatable.dart';
@@ -13,32 +14,6 @@ part 'movie_popular_list_bloc.freezed.dart';
 part 'movie_list_event.dart';
 
 part 'movie_list_state.dart';
-
-class MovieListContainer extends Equatable {
-  final List<Movie> movies;
-  final int currentPage;
-  final int totalPage;
-
-  bool get isComplete => currentPage >= totalPage;
-
-  const MovieListContainer.initial()
-      : movies = const <Movie>[],
-        currentPage = 0,
-        totalPage = 1;
-
-  const MovieListContainer({required this.movies, required this.currentPage, required this.totalPage});
-
-  @override
-  List<Object> get props => [movies, currentPage, totalPage];
-
-  MovieListContainer copyWith({List<Movie>? movies, int? currentPage, int? totalPage}) {
-    return MovieListContainer(
-      movies: movies ?? this.movies,
-      currentPage: currentPage ?? this.currentPage,
-      totalPage: totalPage ?? this.totalPage,
-    );
-  }
-}
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
