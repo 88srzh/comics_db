@@ -1,4 +1,6 @@
-abstract class AuthViewCubitState {}
+import 'package:equatable/equatable.dart';
+
+abstract class AuthViewCubitState extends Equatable {}
 
 class AuthViewCubitErrorState extends AuthViewCubitState {
   final String errorMessage;
@@ -6,37 +8,20 @@ class AuthViewCubitErrorState extends AuthViewCubitState {
   AuthViewCubitErrorState(this.errorMessage);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is AuthViewCubitErrorState && runtimeType == other.runtimeType && errorMessage == other.errorMessage;
-
-  @override
-  int get hashCode => errorMessage.hashCode;
+  List<Object> get props => [errorMessage];
 }
 
 class AuthViewCubitAuthProgressState extends AuthViewCubitState {
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is AuthViewCubitAuthProgressState && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => 0;
+  List<Object> get props => [];
 }
 
 class AuthViewCubitSuccessAuthState extends AuthViewCubitState {
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is AuthViewCubitSuccessAuthState && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => 0;
+  List<Object> get props => [];
 }
 
 class AuthViewCubitFormFillInProgressState extends AuthViewCubitState {
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is AuthViewCubitFormFillInProgressState && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => 0;
+  List<Object> get props => [];
 }
