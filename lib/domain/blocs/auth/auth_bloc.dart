@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/domain/api_client/account_api_client.dart';
 import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
-import 'package:comics_db_app/domain/blocs/auth/auth_state.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_bloc.freezed.dart';
