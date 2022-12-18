@@ -1,3 +1,4 @@
+import 'package:comics_db_app/ui/components/custom_people_text_style.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -52,25 +53,15 @@ class _PeopleWidgetRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: вынести в отдельный файл стили текста
-    const nameStyle = TextStyle(
-      color: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w700,
-    );
-    const jobStyle = TextStyle(
-      color: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-    );
+    var customPeopleTextStyle = CustomPeopleTextStyle();
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(employee.name, style: nameStyle),
-            Text(employee.job, style: jobStyle),
+            Text(employee.name, style: customPeopleTextStyle.nameStyle),
+            Text(employee.job, style: customPeopleTextStyle.jobStyle),
           ],
         ),
       ),
