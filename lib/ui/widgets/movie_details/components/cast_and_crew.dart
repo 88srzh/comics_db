@@ -47,7 +47,6 @@ class _MovieActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var actorsData = context.select((MovieDetailsModel model) => model.data.actorsData);
     var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
