@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:comics_db_app/domain/blocs/people/people_list_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
@@ -12,40 +13,6 @@ part 'popular_people_list_bloc.freezed.dart';
 part 'popular_people_list_event.dart';
 
 
-class PeopleListContainer {
-  final List<People> people;
-  final int currentPage;
-  final int totalPage;
-
-  bool get isComplete => currentPage >= totalPage;
-
-  const PeopleListContainer.initial()
-      : people = const <People>[],
-        currentPage = 0,
-        totalPage = 1;
-
-  PeopleListContainer({required this.people, required this.currentPage, required this.totalPage});
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PeopleListContainer &&
-          runtimeType == other.runtimeType &&
-          people == other.people &&
-          currentPage == other.currentPage &&
-          totalPage == other.totalPage;
-
-  @override
-  int get hashCode => people.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
-
-  PeopleListContainer copyWith({List<People>? people, int? currentPage, int? totalPage}) {
-    return PeopleListContainer(
-      people: people ?? this.people,
-      currentPage: currentPage ?? this.currentPage,
-      totalPage: totalPage ?? this.totalPage,
-    );
-  }
-}
 
 class PeopleListState {
   final PeopleListContainer peopleContainer;
