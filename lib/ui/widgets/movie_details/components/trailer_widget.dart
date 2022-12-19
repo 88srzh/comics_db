@@ -32,8 +32,8 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MovieDetailsCubit>();
-    final trailerKey = cubit.state.trailerKey;
+    var data = context.watch<MovieDetailsCubit>().data;
+    final trailerKey = data.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(

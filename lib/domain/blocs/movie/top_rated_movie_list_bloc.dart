@@ -1,24 +1,24 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_event.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 
 class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
+  final bloc = MoviePopularListBloc(const MovieListState.initial());
 
   TopRatedMovieListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onTopRatedMovieListEventLoadNextPage(event, emit);
       } else if (event is MovieListEventLoadReset) {
-        await onTopRatedMovieListEventLoadReset(event, emit);
+        await bloc.onMovieListEventLoadReset(event, emit);
       } else if (event is MovieListEventSearchMovie) {
-        await onTopRatedMovieListEventLoadSearch(event, emit);
+        await bloc.onMovieListEventLoadSearchMovie(event, emit);
       }
     }), transformer: sequential());
   }
@@ -59,15 +59,5 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       totalPage: result.totalPages,
     );
     return newContainer;
-  }
-
-  Future<void> onTopRatedMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
-    emit(MovieListState.initial());
-  }
-
-  Future<void> onTopRatedMovieListEventLoadSearch(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
-    if (state.searchQuery == event.query) return;
-    final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
-    emit(newState);
   }
 }

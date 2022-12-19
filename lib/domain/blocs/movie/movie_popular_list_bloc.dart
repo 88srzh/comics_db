@@ -1,49 +1,19 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_event.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
+import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class MovieListContainer {
-  final List<Movie> movies;
-  final int currentPage;
-  final int totalPage;
+part 'movie_popular_list_bloc.freezed.dart';
 
-  bool get isComplete => currentPage >= totalPage;
+part 'movie_list_event.dart';
 
-  const MovieListContainer.initial()
-      : movies = const <Movie>[],
-        currentPage = 0,
-        totalPage = 1;
-
-  MovieListContainer({required this.movies, required this.currentPage, required this.totalPage});
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is MovieListContainer &&
-          runtimeType == other.runtimeType &&
-          movies == other.movies &&
-          currentPage == other.currentPage &&
-          totalPage == other.totalPage;
-
-  @override
-  int get hashCode => movies.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
-
-  MovieListContainer copyWith({List<Movie>? movies, int? currentPage, int? totalPage}) {
-    return MovieListContainer(
-      movies: movies ?? this.movies,
-      currentPage: currentPage ?? this.currentPage,
-      totalPage: totalPage ?? this.totalPage,
-    );
-  }
-}
-
-
+part 'movie_list_state.dart';
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -99,7 +69,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   }
 
   Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
-    emit(MovieListState.initial());
+    emit(const MovieListState.initial());
     // add(MovieListEventLoadNextPage(event.locale));
   }
 
