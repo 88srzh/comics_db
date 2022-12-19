@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:comics_db_app/domain/blocs/people/people_list_container.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
@@ -8,55 +9,11 @@ import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/people_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'popular_people_list_bloc.freezed.dart';
+
 part 'popular_people_list_event.dart';
 
-
-
-class PeopleListState {
-  final PeopleListContainer peopleContainer;
-  final PeopleListContainer searchPeopleContainer;
-  final String searchQuery;
-
-  List<People> get people => isSearchMode ? searchPeopleContainer.people : peopleContainer.people;
-
-  PeopleListState.initial()
-      : peopleContainer = const PeopleListContainer.initial(),
-        searchPeopleContainer = const PeopleListContainer.initial(),
-        searchQuery = '';
-
-  bool get isSearchMode => searchQuery.isNotEmpty;
-
-  PeopleListState({
-    required this.peopleContainer,
-    required this.searchPeopleContainer,
-    required this.searchQuery,
-  });
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PeopleListState &&
-          runtimeType == other.runtimeType &&
-          peopleContainer == other.peopleContainer &&
-          searchPeopleContainer == other.searchPeopleContainer &&
-          searchQuery == other.searchQuery;
-
-  @override
-  int get hashCode => peopleContainer.hashCode ^ searchPeopleContainer.hashCode ^ searchQuery.hashCode;
-
-  PeopleListState copyWith({
-    PeopleListContainer? peopleContainer,
-    PeopleListContainer? searchPeopleContainer,
-    String? searchQuery,
-  }) {
-    return PeopleListState(
-        peopleContainer: peopleContainer ?? this.peopleContainer,
-        searchPeopleContainer: searchPeopleContainer ?? this.searchPeopleContainer,
-        searchQuery: searchQuery ?? this.searchQuery);
-  }
-}
+part 'popular_people_list_state.dart';
 
 class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -77,7 +34,7 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
     if (state.isSearchMode) {
       _loadNextPage(state.searchPeopleContainer, (nextPage) async {
         final result =
-        // TODO may be add separate search
+            // TODO may be add separate search
             await _movieApiClient.searchPeople(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
         return result;
       });
@@ -108,8 +65,7 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
     }
   }
 
-  Future<PeopleListContainer?> _loadNextPage(
-      PeopleListContainer container, Future<PeopleResponse> Function(int) loader) async {
+  Future<PeopleListContainer?> _loadNextPage(PeopleListContainer container, Future<PeopleResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.peopleContainer.currentPage + 1;
     final result = await loader(nextPage);
