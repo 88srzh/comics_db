@@ -2,10 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/movie_response.dart';
 
 class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -25,7 +22,7 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onTopRatedMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
-      final container = await _loadNextPage(
+      final container = await bloc.loadNextPage(
         state.searchMovieContainer,
         (nextPage) async {
           final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -37,7 +34,7 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
         emit(newState);
       }
     } else {
-      final container = await _loadNextPage(state.movieContainer, (nextPage) async {
+      final container = await bloc.loadNextPage(state.movieContainer, (nextPage) async {
         final result = await _movieApiClient.topRatedMovie(nextPage, event.locale, Configuration.apiKey);
         return result;
       });
@@ -46,18 +43,5 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
         emit(newState);
       }
     }
-  }
-
-  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
-    if (container.isComplete) return null;
-    final nextPage = state.movieContainer.currentPage + 1;
-    final result = await loader(nextPage);
-    final movies = List<Movie>.from(container.movies)..addAll(result.movies);
-    final newContainer = container.copyWith(
-      movies: movies,
-      currentPage: result.page,
-      totalPage: result.totalPages,
-    );
-    return newContainer;
   }
 }

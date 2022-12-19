@@ -32,7 +32,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
-      final container = await _loadNextPage(
+      final container = await loadNextPage(
         state.searchMovieContainer,
         (nextPage) async {
           final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -44,7 +44,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         emit(newState);
       }
     } else {
-      final container = await _loadNextPage(state.movieContainer, (nextPage) async {
+      final container = await loadNextPage(state.movieContainer, (nextPage) async {
         final result = await _movieApiClient.popularMovie(nextPage, event.locale, Configuration.apiKey);
         return result;
       });
@@ -55,7 +55,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     }
   }
 
-  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
+  Future<MovieListContainer?> loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.movieContainer.currentPage + 1;
     final result = await loader(nextPage);
