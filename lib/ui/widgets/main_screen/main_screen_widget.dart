@@ -1,4 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
+import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/top_rated_movie_list_bloc.dart';
@@ -9,6 +11,7 @@ import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
+import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
@@ -78,10 +81,13 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ],
             child: const TvListWidget(),
           ),
-          ChangeNotifierProvider(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => AuthViewCubit(authBloc: AuthBloc(AuthState.initial()))),
+            ], child: const PersonalWidget(),
             // TODO: model need only for hand over widget
-            create: (_) => settingsModel,
-            child: const PersonalWidget(),
+            // create: (_) => settingsModel,
+            // child: const PersonalWidget(),
           ),
         ],
       ),
