@@ -1,26 +1,16 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/people_response.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class PeopleListEvent {}
 
-class PeopleListEventLoadNextPage extends PeopleListEvent {
-  final String locale;
+part 'popular_people_list_bloc.freezed.dart';
+part 'popular_people_list_event.dart';
 
-  PeopleListEventLoadNextPage(this.locale);
-}
-
-class PeopleListEventLoadReset extends PeopleListEvent {}
-
-class PeopleListEventSearchMovie extends PeopleListEvent {
-  final String query;
-
-  PeopleListEventSearchMovie(this.query);
-}
 
 class PeopleListContainer {
   final List<People> people;

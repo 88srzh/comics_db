@@ -63,7 +63,7 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     peopleListBloc.add(PeopleListEventLoadReset());
-    peopleListBloc.add(PeopleListEventLoadNextPage(localeTag));
+    peopleListBloc.add(PeopleListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -82,7 +82,7 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
 
   void showedPopularPeopleAtIndex(int index) {
     if (index < state.people.length - 1) return;
-    peopleListBloc.add(PeopleListEventLoadNextPage(state.localeTag));
+    peopleListBloc.add(PeopleListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchPopularPeople(String text) {
@@ -90,8 +90,8 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
     searchDebounce = Timer(
       const Duration(milliseconds: 300),
       () async {
-        peopleListBloc.add(PeopleListEventSearchMovie(text));
-        peopleListBloc.add(PeopleListEventLoadNextPage(state.localeTag));
+        peopleListBloc.add(PeopleListEventSearchMovie(query: text));
+        peopleListBloc.add(PeopleListEventLoadNextPage(locale: state.localeTag));
       },
     );
   }
