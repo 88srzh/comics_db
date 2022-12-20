@@ -45,7 +45,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
     setState(
-      () {
+          () {
         _selectedTab = index;
       },
     );
@@ -65,26 +65,53 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularPeopleList(),
           MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => TopRatedMovieListCubit(topRatedMovieListBloc: TopRatedMovieListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => MoviePopularListCubit(movieListBloc: MoviePopularListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => UpcomingMovieListCubit(upcomingMovieListBloc: UpcomingMovieListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => NowPlayingMovieListCubit(nowPlayingMovieListBloc: NowPlayingMovieListBloc(MovieListState.initial()))),
+              BlocProvider(
+                create: (_) =>
+                    TopRatedMovieListCubit(
+                      topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
+                    ),
+              ),
+              BlocProvider(
+                create: (_) =>
+                    MoviePopularListCubit(
+                      movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
+                    ),
+              ),
+              BlocProvider(
+                create: (_) =>
+                    UpcomingMovieListCubit(
+                      upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
+                    ),
+              ),
+              BlocProvider(
+                create: (_) =>
+                    NowPlayingMovieListCubit(
+                      nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
+                    ),
+              ),
             ],
             child: const MovieListWidget(),
           ),
           MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial()))),
-              BlocProvider(create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial()))),
-              BlocProvider(create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial()))),
-              BlocProvider(create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial()))),
+              BlocProvider(
+                create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) =>
+                    TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial())),
+              ),
             ],
             child: const TvListWidget(),
           ),
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (_) => AuthViewCubit(authBloc: AuthBloc(AuthState.initial()))),
-            ], child: const PersonalWidget(),
+          BlocProvider(create: (_) => AuthViewCubit(initialState, authBloc),
+            child: const PersonalWidget(),
             // TODO: model need only for hand over widget
             // create: (_) => settingsModel,
             // child: const PersonalWidget(),
@@ -100,11 +127,12 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
         ],
-        onTap: (int index) => setState(
-          () {
-            _selectedTab = index;
-          },
-        ),
+        onTap: (int index) =>
+            setState(
+                  () {
+                _selectedTab = index;
+              },
+            ),
       ),
     );
   }

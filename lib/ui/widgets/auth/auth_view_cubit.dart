@@ -9,7 +9,7 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
   final AuthBloc authBloc;
   late final StreamSubscription<AuthState> authBlocSubscription;
 
-  AuthViewCubit(AuthViewCubitState initialState, {required this.authBloc}) : super(initialState) {
+  AuthViewCubit(AuthViewCubitState initialState, this.authBloc) : super(initialState) {
     _onState(authBloc.state);
     authBlocSubscription = authBloc.stream.listen(_onState);
   }
