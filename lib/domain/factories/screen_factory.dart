@@ -25,6 +25,7 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dar
 import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
@@ -51,6 +52,14 @@ class ScreenFactory {
     return BlocProvider<AuthViewCubit>(
       create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
       child: const AuthWidget(),
+    );
+  }
+
+  Widget makePersonalScreen() {
+    final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+    _authBloc = authBloc;
+    return BlocProvider(create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
+    child: const PersonalWidget(),
     );
   }
 
