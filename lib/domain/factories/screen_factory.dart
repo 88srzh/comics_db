@@ -65,7 +65,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => PeopleListCubit(
         peopleListBloc: PeopleListBloc(
-          PeopleListState.initial(),
+          const PeopleListState.initial(),
         ),
       ),
       child: const PopularPeopleListWidget(),
@@ -76,7 +76,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MoviePopularListCubit(
         movieListBloc: MoviePopularListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const MoviePopularListWidget(),
@@ -106,7 +106,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MoviePopularListCubit(
         movieListBloc: MoviePopularListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const TopRatedMovieWidget(),
@@ -117,7 +117,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => NowPlayingMovieListCubit(
         nowPlayingMovieListBloc: NowPlayingMovieListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const MovieNowPlayingListWidget(),
@@ -128,7 +128,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => UpcomingMovieListCubit(
         upcomingMovieListBloc: UpcomingMovieListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const UpcomingMovieWidget(),

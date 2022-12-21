@@ -45,7 +45,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
     setState(
-          () {
+      () {
         _selectedTab = index;
       },
     );
@@ -66,32 +66,29 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (_) =>
-                    TopRatedMovieListCubit(
-                      topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
-                    ),
+                create: (_) => TopRatedMovieListCubit(
+                  topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
+                ),
               ),
               BlocProvider(
-                create: (_) =>
-                    MoviePopularListCubit(
-                      movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
-                    ),
+                create: (_) => MoviePopularListCubit(
+                  movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
+                ),
               ),
               BlocProvider(
-                create: (_) =>
-                    UpcomingMovieListCubit(
-                      upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
-                    ),
+                create: (_) => UpcomingMovieListCubit(
+                  upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
+                ),
               ),
               BlocProvider(
-                create: (_) =>
-                    NowPlayingMovieListCubit(
-                      nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
-                    ),
+                create: (_) => NowPlayingMovieListCubit(
+                  nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
+                ),
               ),
             ],
             child: const MovieListWidget(),
           ),
+          // TODO may be change all to screenfactory screen
           MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -110,12 +107,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ],
             child: const TvListWidget(),
           ),
-          BlocProvider(create: (_) => AuthViewCubit(initialState, authBloc),
-            child: const PersonalWidget(),
-            // TODO: model need only for hand over widget
-            // create: (_) => settingsModel,
-            // child: const PersonalWidget(),
-          ),
+          _screenFactory.makeAuth(),
+          // TODO: model need only for hand over widget
+          // create: (_) => settingsModel,
+          // child: const PersonalWidget(),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
@@ -127,12 +122,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
         ],
-        onTap: (int index) =>
-            setState(
-                  () {
-                _selectedTab = index;
-              },
-            ),
+        onTap: (int index) => setState(
+          () {
+            _selectedTab = index;
+          },
+        ),
       ),
     );
   }
