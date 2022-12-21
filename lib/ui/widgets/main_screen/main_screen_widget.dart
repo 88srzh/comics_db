@@ -13,7 +13,6 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
-import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
@@ -24,7 +23,6 @@ import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubi
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -62,27 +60,52 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           _screenFactory.makePopularPeopleList(),
           MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => TopRatedMovieListCubit(topRatedMovieListBloc: TopRatedMovieListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => MoviePopularListCubit(movieListBloc: MoviePopularListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => UpcomingMovieListCubit(upcomingMovieListBloc: UpcomingMovieListBloc(MovieListState.initial()))),
-              BlocProvider(create: (_) => NowPlayingMovieListCubit(nowPlayingMovieListBloc: NowPlayingMovieListBloc(MovieListState.initial()))),
+              BlocProvider(
+                create: (_) => TopRatedMovieListCubit(
+                  topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
+                ),
+              ),
+              BlocProvider(
+                create: (_) => MoviePopularListCubit(
+                  movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
+                ),
+              ),
+              BlocProvider(
+                create: (_) => UpcomingMovieListCubit(
+                  upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
+                ),
+              ),
+              BlocProvider(
+                create: (_) => NowPlayingMovieListCubit(
+                  nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
+                ),
+              ),
             ],
             child: const MovieListWidget(),
           ),
+          // TODO may be change all to screenfactory screen
           MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial()))),
-              BlocProvider(create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial()))),
-              BlocProvider(create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial()))),
-              BlocProvider(create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial()))),
+              BlocProvider(
+                create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) =>
+                    TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial())),
+              ),
             ],
             child: const TvListWidget(),
           ),
-          ChangeNotifierProvider(
-            // TODO: model need only for hand over widget
-            create: (_) => settingsModel,
-            child: const PersonalWidget(),
-          ),
+          _screenFactory.makePersonalScreen(),
+          // TODO: model need only for hand over widget
+          // create: (_) => settingsModel,
+          // child: const PersonalWidget(),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(

@@ -25,6 +25,7 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dar
 import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
@@ -54,6 +55,14 @@ class ScreenFactory {
     );
   }
 
+  Widget makePersonalScreen() {
+    final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+    _authBloc = authBloc;
+    return BlocProvider(create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
+    child: const PersonalWidget(),
+    );
+  }
+
 // TODO: may be delete provider
   Widget makeMainScreen() {
     _authBloc?.close();
@@ -65,7 +74,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => PeopleListCubit(
         peopleListBloc: PeopleListBloc(
-          PeopleListState.initial(),
+          const PeopleListState.initial(),
         ),
       ),
       child: const PopularPeopleListWidget(),
@@ -76,7 +85,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MoviePopularListCubit(
         movieListBloc: MoviePopularListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const MoviePopularListWidget(),
@@ -106,7 +115,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MoviePopularListCubit(
         movieListBloc: MoviePopularListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const TopRatedMovieWidget(),
@@ -117,7 +126,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => NowPlayingMovieListCubit(
         nowPlayingMovieListBloc: NowPlayingMovieListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const MovieNowPlayingListWidget(),
@@ -128,7 +137,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => UpcomingMovieListCubit(
         upcomingMovieListBloc: UpcomingMovieListBloc(
-          MovieListState.initial(),
+          const MovieListState.initial(),
         ),
       ),
       child: const UpcomingMovieWidget(),

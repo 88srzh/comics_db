@@ -3,6 +3,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
@@ -102,16 +103,7 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // TODO need to fix space between photo and text
-                    Text(
-                      people.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    CustomMovieListTextWidget(text: people.name, maxLines: 1, color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
                   ],
                 ),
               ),

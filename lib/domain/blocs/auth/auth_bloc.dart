@@ -22,7 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event is AuthCheckStatusEvent) {
         await onAuthCheckStatusEvent(event, emit);
       } else if (event is AuthLoginEvent) {
-        await onAuthLogInEvent(event, emit);
+        await onAuthLoginEvent(event, emit);
       } else if (event is AuthLogOutEvent) {
         await onAuthLogoutEvent(event, emit);
       }
@@ -37,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(newState);
   }
 
-  Future<void> onAuthLogInEvent(AuthLoginEvent event, Emitter<AuthState> emit) async {
+  Future<void> onAuthLoginEvent(AuthLoginEvent event, Emitter<AuthState> emit) async {
     try {
       emit(AuthInProgressState());
       final sessionId = await _authApiClient.auth(username: event.login, password: event.password);

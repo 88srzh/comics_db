@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
@@ -58,16 +59,16 @@ class _PeopleActorListWidget extends StatelessWidget {
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
-        return _MovieActorListItemWidget(characterIndex: index);
+        return _PeopleActorListItemWidget(characterIndex: index);
       },
     );
   }
 }
 
-class _MovieActorListItemWidget extends StatelessWidget {
+class _PeopleActorListItemWidget extends StatelessWidget {
   final int characterIndex;
 
-  const _MovieActorListItemWidget({Key? key, required this.characterIndex}) : super(key: key);
+  const _PeopleActorListItemWidget({Key? key, required this.characterIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,17 +109,9 @@ class _MovieActorListItemWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        character.title,
-                        maxLines: 1,
-                        style: const TextStyle(color: AppColors.genresText),
-                      ),
+                      CustomMovieListTextWidget(text: character.title, maxLines: 1, fontSize: 13, color: AppColors.genresText, fontWeight: null),
                       const SizedBox(height: 3),
-                      Text(
-                        character.character,
-                        maxLines: 2,
-                        style: const TextStyle(color: AppColors.genresText),
-                      ),
+                      CustomMovieListTextWidget(text: character.character, maxLines: 2, fontSize: 12, color: AppColors.genresText, fontWeight: null),
                     ],
                   ),
                 ),

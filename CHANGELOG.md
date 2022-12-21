@@ -1,10 +1,14 @@
-0.0.3
---------------------
+## 0.0.4
+_________________
+ - Fixed logout button
+
+## 0.0.3
+_______
 - Added tv popular list widget at 'see all' popular tv. 
 - Fixed tv top rated movie not available image.
 
-0.0.2
---------------------
+## 0.0.2
+_______
 - Added google fonts.
 - Fixed upcoming movies in navigation.
 - Changed "no image available" pic.

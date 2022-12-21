@@ -31,6 +31,7 @@ abstract class MainNavigationRouteNames {
   static const topRatedMovie = '/main_screen/topRatedMovie';
   static const upcomingMovie = '/main_screen/upcomingMovie';
   static const peopleDetails = '/main_screen/peopleDetails';
+  static const settings = '/personal_widget';
 }
 
 class MainNavigation {

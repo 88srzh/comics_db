@@ -25,6 +25,10 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
     authBloc.add(AuthLoginEvent(login: login, password: password));
   }
 
+  void logout() {
+    authBloc.add(const AuthLogOutEvent());
+  }
+
   void _onState(AuthState state) {
     if (state is AuthUnauthorizedState) {
       emit(AuthViewCubitFormFillInProgressState());
