@@ -58,7 +58,7 @@ class ScreenFactory {
   Widget makePersonalScreen() {
     final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
     _authBloc = authBloc;
-    return BlocProvider(create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
+    return BlocProvider(create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
     child: const PersonalWidget(),
     );
   }
@@ -111,7 +111,7 @@ class ScreenFactory {
     return TrailerWidget(youtubeKey: youtubeKey);
   }
 
-  Widget makeTopRatedMovieList() {
+/*  Widget makeTopRatedMovieList() {
     return BlocProvider(
       create: (_) => MoviePopularListCubit(
         movieListBloc: MoviePopularListBloc(
@@ -120,9 +120,9 @@ class ScreenFactory {
       ),
       child: const TopRatedMovieWidget(),
     );
-  }
+  }*/
 
-  Widget makeNowPlayingMovieList() {
+/*  Widget makeNowPlayingMovieList() {
     return BlocProvider(
       create: (_) => NowPlayingMovieListCubit(
         nowPlayingMovieListBloc: NowPlayingMovieListBloc(
@@ -142,7 +142,7 @@ class ScreenFactory {
       ),
       child: const UpcomingMovieWidget(),
     );
-  }
+  }*/
 
   Widget makePopularTvList() {
     return BlocProvider(

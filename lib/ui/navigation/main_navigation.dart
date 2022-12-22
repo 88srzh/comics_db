@@ -45,11 +45,11 @@ class MainNavigation {
             create: (_) => SplashscreenModel(),
             child: const SplashscreenWidget()),
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
-    MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
+    // MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
-    MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
+    // MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
