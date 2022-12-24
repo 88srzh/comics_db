@@ -29,14 +29,6 @@ class TvTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 10,
-          top: 10,
-          child: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
-          ),
-        ),
-        Positioned(
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 80.0),

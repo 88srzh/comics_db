@@ -96,7 +96,6 @@ class MovieListWidget extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    // TODO fix nowPlayingMovie
                     onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                     child: const Text(
                       'See All',
