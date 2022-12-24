@@ -40,16 +40,9 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (context) =>
-        ChangeNotifierProvider(
-            create: (_) => SplashscreenModel(),
-            child: const SplashscreenWidget()),
+    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
-    // MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
-    // MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
-    // MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
-    // MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -70,9 +63,9 @@ class MainNavigation {
         final arguments = settings.arguments;
         final peopleId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
-            builder: (_) => _screenFactory.makePeopleDetails(peopleId),
+          builder: (_) => _screenFactory.makePeopleDetails(peopleId),
         );
-        // TODO: refactoring tv
+      // TODO: refactoring tv
       case MainNavigationRouteNames.tvDetails:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
@@ -97,7 +90,6 @@ class MainNavigation {
   }
 
   static void resetNavigation(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        MainNavigationRouteNames.loaderWidget, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(MainNavigationRouteNames.loaderWidget, (route) => false);
   }
 }
