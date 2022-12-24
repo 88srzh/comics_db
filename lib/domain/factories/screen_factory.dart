@@ -17,6 +17,7 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.da
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,8 +45,9 @@ class ScreenFactory {
   Widget makePersonalScreen() {
     final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
     _authBloc = authBloc;
-    return BlocProvider(create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
-    child: const PersonalWidget(),
+    return BlocProvider(
+      create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
+      child: const PersonalWidget(),
     );
   }
 
@@ -96,6 +98,13 @@ class ScreenFactory {
   Widget makeMovieTrailer(String youtubeKey) {
     return TrailerWidget(youtubeKey: youtubeKey);
   }
+
+  // Widget makeTvDetails(int tvId) {
+  //   return BlocProvider(
+  //     create: (_) => TvDetailsCubit(tvId),
+  //     child: TvDetailsWidget(),
+  //   );
+  // }
 
 /*  Widget makeTopRatedMovieList() {
     return BlocProvider(

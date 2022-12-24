@@ -46,8 +46,8 @@ class MainNavigation {
             child: const SplashscreenWidget()),
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     // MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
-    MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
-    MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
+    // MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
+    // MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeTvAiringTodayList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
     // MainNavigationRouteNames.upcomingMovie: (_) => _screenFactory.makeUpcomingMovieList(),
   };
@@ -77,6 +77,8 @@ class MainNavigation {
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
+          // builder: (_) => _screenFactory.makeTvDetails(tvId),
+          // TODO remove changenotifier
           builder: (context) => ChangeNotifierProvider(
             create: (context) => TvDetailsModel(tvId),
             child: const TvDetailsWidget(),
