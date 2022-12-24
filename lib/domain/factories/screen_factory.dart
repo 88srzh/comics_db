@@ -1,7 +1,10 @@
 import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
@@ -11,13 +14,16 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,7 +52,7 @@ class ScreenFactory {
     final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
     _authBloc = authBloc;
     return BlocProvider(
-      create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
+      create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
       child: const PersonalWidget(),
     );
   }
@@ -117,7 +123,7 @@ class ScreenFactory {
     );
   }*/
 
-/*  Widget makeNowPlayingMovieList() {
+  Widget makeNowPlayingMovieList() {
     return BlocProvider(
       create: (_) => NowPlayingMovieListCubit(
         nowPlayingMovieListBloc: NowPlayingMovieListBloc(
@@ -128,18 +134,18 @@ class ScreenFactory {
     );
   }
 
-  Widget makeUpcomingMovieList() {
-    return BlocProvider(
-      create: (_) => UpcomingMovieListCubit(
-        upcomingMovieListBloc: UpcomingMovieListBloc(
-          const MovieListState.initial(),
-        ),
-      ),
-      child: const UpcomingMovieWidget(),
-    );
-  }*/
+  // Widget makeUpcomingMovieList() {
+  //   return BlocProvider(
+  //     create: (_) => UpcomingMovieListCubit(
+  //       upcomingMovieListBloc: UpcomingMovieListBloc(
+  //         const MovieListState.initial(),
+  //       ),
+  //     ),
+  //     child: const UpcomingMovieWidget(),
+  //   );
+  // }
 
-/*  Widget makePopularTvList() {
+  Widget makePopularTvList() {
     return BlocProvider(
       create: (_) => TvPopularListCubit(
         tvPopularListBloc: TvPopularListBloc(
@@ -150,14 +156,14 @@ class ScreenFactory {
     );
   }
 
-  Widget makeTvAiringTodayList() {
-    return BlocProvider(
-      create: (_) => TvAiringTodayListCubit(
-        tvAiringTodayListBloc: TvAiringTodayListBloc(
-          TvListState.initial(),
-        ),
-      ),
-      child: const AiringTodayTvsWidget(),
-    );
-  }*/
+  // Widget makeTvAiringTodayList() {
+  //   return BlocProvider(
+  //     create: (_) => TvAiringTodayListCubit(
+  //       tvAiringTodayListBloc: TvAiringTodayListBloc(
+  //         TvListState.initial(),
+  //       ),
+  //     ),
+  //     child: const AiringTodayTvsWidget(),
+  //   );
+  // }*/
 }
