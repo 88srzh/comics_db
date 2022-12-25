@@ -9,7 +9,6 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_cubit_state.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   final TvAiringTodayListBloc tvAiringTodayListBloc;
