@@ -20,14 +20,15 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     final locale = Localizations.localeOf(context);
     context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MovieDetailsCubit>();
-    final trailerKey = cubit.state.trailerKey;
+    var cubit = context.watch<MovieDetailsCubit>().data;
+    final trailerKey = cubit.trailerKey;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Movie Details'),

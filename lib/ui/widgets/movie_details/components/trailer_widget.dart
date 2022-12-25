@@ -48,10 +48,10 @@ class _TrailerWidgetState extends State<TrailerWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          // trailerKey != null
-          widget.youtubeKey != null
+          trailerKey != null
               ? YoutubePlayerBuilder(
                   player: YoutubePlayer(
+                    thumbnail: 'https://img.youtube.com/vi/${widget.youtubeKey}/hqdefault.jpg',
                     controller: _controller,
                     showVideoProgressIndicator: true,
                   ),
