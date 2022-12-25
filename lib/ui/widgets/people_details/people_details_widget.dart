@@ -25,7 +25,7 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'People Details'),
+      appBar: const CustomDetailsAppBar(title: ''),
       body: ColoredBox(
         color: AppColors.kPrimaryColor,
         child: ListView(
