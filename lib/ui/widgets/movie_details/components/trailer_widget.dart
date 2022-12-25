@@ -48,7 +48,8 @@ class _TrailerWidgetState extends State<TrailerWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          trailerKey != null
+          // trailerKey != null
+          widget.youtubeKey != null
               ? YoutubePlayerBuilder(
                   player: YoutubePlayer(
                     controller: _controller,
