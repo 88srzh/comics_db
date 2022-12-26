@@ -2,6 +2,7 @@ import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
+import 'package:comics_db_app/ui/widgets/auth/components/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
