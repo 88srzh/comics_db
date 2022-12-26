@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
-  final String title;
+  final String? title;
 
   const CustomDetailsAppBar({Key? key, required this.title}) : super(key: key);
 
@@ -9,7 +9,7 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        title,
+        title!,
         style: const TextStyle(color: Colors.white, fontSize: 22),
       ),
       centerTitle: true,

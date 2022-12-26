@@ -1,5 +1,4 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie_widget.dart';
@@ -97,7 +96,6 @@ class MovieListWidget extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    // TODO fix nowPlayingMovie
                     onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                     child: const Text(
                       'See All',

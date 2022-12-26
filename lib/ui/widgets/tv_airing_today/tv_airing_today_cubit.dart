@@ -9,17 +9,15 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_cubit_state.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   final TvAiringTodayListBloc tvAiringTodayListBloc;
   late final StreamSubscription<TvListState> tvAiringTodayListBlocSubscription;
-  late DateFormat _dateFormat;
   Timer? searchDebounce;
   var tv = <TV>[];
 
   TvAiringTodayListCubit({required this.tvAiringTodayListBloc})
-      : super(TvListCubitState(tvs: const <TvListData>[], localeTag: '')) {
+      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
     Future.microtask(() {
       _onState(tvAiringTodayListBloc.state);
       tvAiringTodayListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);
@@ -36,7 +34,6 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
     tvAiringTodayListBloc.add(TvListEventLoadReset());
     tvAiringTodayListBloc.add(TvListEventLoadNextPage(localeTag));
   }

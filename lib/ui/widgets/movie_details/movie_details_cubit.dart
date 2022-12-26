@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
@@ -16,12 +17,15 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
+  // MovieDetails? details;
 
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
 
   // String _locale = '';
   final _movieService = MovieService();
+  final movieAndTvApiClient = MovieAndTvApiClient();
   final int movieId;
+
   // final _localeStorage = LocalizedModelStorage();
 
   // MovieDetails? _movieDetails;
@@ -71,9 +75,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      // final _details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
       // TODO: add isFavorite to update
-      await updateData(details.details);
+      updateData(details);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
@@ -106,7 +111,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     await loadMovieDetails(context);
   }
 
-  Future<void> updateData(MovieDetails? details /* bool isFavorite*/) async {
+  void updateData(MovieDetails? details /* bool isFavorite*/) {
     // may ba i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
@@ -126,9 +131,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.backdropPath = details.backdropPath;
     data.trailerKey = makeTrailerKey(details);
 
-    data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
-        .toList();
+    data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath)).toList();
 
     data.isLoading = true;
 

@@ -14,7 +14,7 @@ class TvTrailerWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TvTrailerWidgetState createState() => _TvTrailerWidgetState();
+  State<TvTrailerWidget> createState() => _TvTrailerWidgetState();
 }
 
 class _TvTrailerWidgetState extends State<TvTrailerWidget> {
