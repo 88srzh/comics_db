@@ -1,4 +1,6 @@
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
+import 'package:comics_db_app/ui/widgets/auth/components/auth_button_widget.dart';
+import 'package:comics_db_app/ui/widgets/auth/components/error_message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +28,7 @@ class FormWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _ErrorMessageWidget(),
+        const ErrorMessageWidget(),
         const Text(
           'Username',
           style: textStyle,
@@ -50,7 +52,7 @@ class FormWidget extends StatelessWidget {
         const SizedBox(height: 25),
         Row(
           children: [
-            const _AuthButtonWidget(),
+            const AuthButtonWidget(),
             const SizedBox(width: 30),
             TextButton(
               onPressed: () {},
