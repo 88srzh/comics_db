@@ -1,3 +1,4 @@
+import 'package:comics_db_app/ui/widgets/auth/components/form_widget.dart';
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class HeaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 25),
-          _FormWidget(),
+          FormWidget(),
           const SizedBox(height: 25),
           const Text(
             'In order to use the editing and rating capabilities of TMDb, as well as get personal recommendations you will need to login to your account. If you do not have an account, registering for an account is free and simple.',
