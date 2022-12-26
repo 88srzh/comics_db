@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
+import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/auth_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/error_message_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +19,14 @@ class FormWidget extends StatelessWidget {
       fontSize: 16,
       color: AppColors.genresText,
     );
-    const textFieldDecorator = InputDecoration(
+    /*const textFieldDecorator = InputDecoration(
       border: OutlineInputBorder(),
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       isCollapsed: true,
       fillColor: Colors.red,
       focusColor: Colors.red,
       hoverColor: Colors.red,
-    );
+    );*/
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,7 +37,8 @@ class FormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextField(
-          decoration: textFieldDecorator,
+          style: const TextStyle(color: AppColors.genresText),
+          decoration: customSearchInputDecoration(text: ''),
           onChanged: (text) => authDataStorage.login = text,
         ),
         const SizedBox(height: 20),
@@ -46,7 +48,8 @@ class FormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextField(
-          decoration: textFieldDecorator,
+          style: const TextStyle(color: AppColors.genresText),
+          decoration: customSearchInputDecoration(text: ''),
           onChanged: (text) => authDataStorage.password = text,
           obscureText: true,
         ),
