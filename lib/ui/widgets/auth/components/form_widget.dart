@@ -1,5 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
+import 'package:comics_db_app/ui/components/custom_auth_text_style.dart';
 import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/auth_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/error_message_widget.dart';
@@ -15,17 +16,13 @@ class FormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authDataStorage = context.read<AuthDataStorage>();
-    const textStyle = TextStyle(
-      fontSize: 16,
-      color: AppColors.genresText,
-    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const ErrorMessageWidget(),
-        const Text(
+        Text(
           'Username',
-          style: textStyle,
+          style: customAuthTextStyle(),
         ),
         const SizedBox(height: 5),
         // TODO need refactoring
@@ -35,9 +32,9 @@ class FormWidget extends StatelessWidget {
           onChanged: (text) => authDataStorage.login = text,
         ),
         const SizedBox(height: 20),
-        const Text(
+        Text(
           'Password',
-          style: textStyle,
+          style: customAuthTextStyle(),
         ),
         const SizedBox(height: 5),
         TextField(
