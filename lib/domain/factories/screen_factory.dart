@@ -6,7 +6,7 @@ import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart'
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_widget_simple.dart';
+import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';

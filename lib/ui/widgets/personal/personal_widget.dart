@@ -69,7 +69,6 @@ class LogoutCardWidget extends StatelessWidget {
       onTap: () {
         cubit.logout();
         Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
-        // Navigator.pushNamed(context, MainNavigationRouteNames.auth);
       },
       title: const Text(
         'Logout',
