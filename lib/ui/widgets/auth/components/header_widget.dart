@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/ui/components/custom_auth_text_style.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/form_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,10 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(
-      fontSize: 16,
-      color: AppColors.genresText,
-    );
+    // const textStyle = TextStyle(
+    //   fontSize: 16,
+    //   color: AppColors.genresText,
+    // );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -19,9 +20,9 @@ class HeaderWidget extends StatelessWidget {
           const SizedBox(height: 25),
           FormWidget(),
           const SizedBox(height: 25),
-          const Text(
+          Text(
             'In order to use the editing and rating capabilities of TMDb, as well as get personal recommendations you will need to login to your account. If you do not have an account, registering for an account is free and simple.',
-            style: textStyle,
+            style: customAuthTextStyle(),
           ),
           const SizedBox(height: 5),
           TextButton(
@@ -30,9 +31,9 @@ class HeaderWidget extends StatelessWidget {
             child: const Text('Register'),
           ),
           const SizedBox(height: 25),
-          const Text(
+          Text(
             'If you signed up but did not get your verification email.',
-            style: textStyle,
+            style: customAuthTextStyle(),
           ),
           const SizedBox(height: 5),
           TextButton(
