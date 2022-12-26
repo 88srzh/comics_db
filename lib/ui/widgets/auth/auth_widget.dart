@@ -19,7 +19,10 @@ class AuthWidget extends StatelessWidget {
         create: (_) => AuthDataStorage(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Login to your account'),
+            title: const Text(
+              'Login to your account',
+              style: TextStyle(color: AppColors.genresText),
+            ),
           ),
           body: ColoredBox(
             color: AppColors.kPrimaryColor,
@@ -40,11 +43,3 @@ class AuthWidget extends StatelessWidget {
     }
   }
 }
-
-
-
-
-
-
-
-

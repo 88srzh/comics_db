@@ -19,14 +19,6 @@ class FormWidget extends StatelessWidget {
       fontSize: 16,
       color: AppColors.genresText,
     );
-    /*const textFieldDecorator = InputDecoration(
-      border: OutlineInputBorder(),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      isCollapsed: true,
-      fillColor: Colors.red,
-      focusColor: Colors.red,
-      hoverColor: Colors.red,
-    );*/
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,6 +28,7 @@ class FormWidget extends StatelessWidget {
           style: textStyle,
         ),
         const SizedBox(height: 5),
+        // TODO need refactoring
         TextField(
           style: const TextStyle(color: AppColors.genresText),
           decoration: customSearchInputDecoration(text: ''),
