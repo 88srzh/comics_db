@@ -13,21 +13,19 @@ class AuthButtonWidget extends StatelessWidget {
     final cubit = context.watch<AuthViewCubit>();
     final authDataStorage = context.read<AuthDataStorage>();
     final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState || cubit.state is AuthViewCubitErrorState;
-    // const color = Color(0xFF01B4E4);
-    const color = Colors.white;
     final onPressed =
-    canStartAuth ? () => cubit.auth(login: authDataStorage.login, password: authDataStorage.password) : null;
+        canStartAuth ? () => cubit.auth(login: authDataStorage.login, password: authDataStorage.password) : null;
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
-      width: 15,
-      height: 15,
-      child: CircularProgressIndicator(strokeWidth: 2),
-    )
+            width: 15,
+            height: 15,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          )
         : const Text('Login');
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(color),
+        backgroundColor: MaterialStateProperty.all(Colors.white),
         foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
         textStyle: MaterialStateProperty.all(
           const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
