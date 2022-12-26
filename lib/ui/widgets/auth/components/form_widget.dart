@@ -1,3 +1,4 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/auth_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/error_message_widget.dart';
@@ -15,7 +16,7 @@ class FormWidget extends StatelessWidget {
     final authDataStorage = context.read<AuthDataStorage>();
     const textStyle = TextStyle(
       fontSize: 16,
-      color: Color(0xFF212529),
+      color: AppColors.genresText,
     );
     const textFieldDecorator = InputDecoration(
       border: OutlineInputBorder(),

@@ -1,3 +1,4 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -20,10 +21,13 @@ class AuthWidget extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Login to your account'),
           ),
-          body: ListView(
-            children: const [
-              HeaderWidget(),
-            ],
+          body: ColoredBox(
+            color: AppColors.kPrimaryColor,
+            child: ListView(
+              children: const [
+                HeaderWidget(),
+              ],
+            ),
           ),
         ),
       ),

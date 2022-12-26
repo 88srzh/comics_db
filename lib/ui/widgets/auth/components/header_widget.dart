@@ -1,3 +1,4 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/form_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const textStyle = TextStyle(
       fontSize: 16,
-      color: Colors.black,
+      color: AppColors.genresText,
     );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
