@@ -46,8 +46,9 @@ class FormWidget extends StatelessWidget {
         const SizedBox(height: 25),
         Row(
           children: [
+            const SizedBox(width: 5.0),
             const AuthButtonWidget(),
-            const SizedBox(width: 30),
+            const SizedBox(width: 10.0),
             TextButton(
               onPressed: () {},
               // style: AppButtonStyle.linkButton,
