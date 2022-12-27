@@ -51,7 +51,10 @@ class FormWidget extends StatelessWidget {
             TextButton(
               onPressed: () {},
               // style: AppButtonStyle.linkButton,
-              child: const Text('Reset password'),
+              child: const Text(
+                'Reset password',
+                style: TextStyle(color: AppColors.selectedText),
+              ),
             ),
           ],
         )
