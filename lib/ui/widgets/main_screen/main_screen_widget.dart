@@ -35,8 +35,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   final _screenFactory = ScreenFactory();
 
-  final settingsModel = SettingsModel();
-
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
     setState(
@@ -83,7 +81,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ],
             child: const MovieListWidget(),
           ),
-          // TODO may be change all to screenfactory screen
           MultiBlocProvider(
             providers: [
               BlocProvider(
