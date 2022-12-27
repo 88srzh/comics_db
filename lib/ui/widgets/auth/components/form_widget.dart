@@ -54,7 +54,7 @@ class FormWidget extends StatelessWidget {
               // style: AppButtonStyle.linkButton,
               child: const Text(
                 'Reset password',
-                style: TextStyle(color: AppColors.selectedText),
+                style: TextStyle(color: AppColors.selectedText, fontSize: 16),
               ),
             ),
           ],

@@ -5,6 +5,7 @@ abstract class AppColors {
   static const kSecondaryColor = Colors.purple;
 
   static const selectedText = Color.fromRGBO(91,234,240, 1.0);
+  static const buttonFont = Color.fromRGBO(1,168,210, 1.0);
   static const kPrimaryColor = Color.fromRGBO(28, 26, 41, 1.0);
   static const titleText = Color.fromRGBO(255, 255, 255, 1.0);
   static const genresText = Color.fromRGBO(222, 221, 223, 1.0);

@@ -24,18 +24,24 @@ class AuthButtonWidget extends StatelessWidget {
         : const Text('Login');
     return ElevatedButton(
       onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.white),
-        foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
-        textStyle: MaterialStateProperty.all(
-          const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 8,
-          ),
-        ),
+        backgroundColor: AppColors.buttonFont,
+        foregroundColor: Colors.white,
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)
+        // backgroundColor: MaterialStateProperty.all(Colors.white),
+        // foregroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
+        // textStyle: MaterialStateProperty.all(
+        //   const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+        // ),
+        // padding: MaterialStateProperty.all(
+        //   const EdgeInsets.symmetric(
+        //     horizontal: 15,
+        //     vertical: 8,
+        //   ),
+        // ),
       ),
       child: child,
     );
