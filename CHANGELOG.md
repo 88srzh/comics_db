@@ -1,5 +1,9 @@
+## 0.0.5
+ - Refactoring authorization screen
+________
+
 ## 0.0.4
-_________________
+________
  - Fixed logout button
 
 ## 0.0.3
@@ -19,5 +23,5 @@ _______
 - Updated secure storage package.
 
 ## 0.0.1
-______________________
+________
 - Initial release.
