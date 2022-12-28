@@ -49,13 +49,6 @@ class FormWidget extends StatelessWidget {
              SizedBox(width: 5.0),
              AuthButtonWidget(),
              SizedBox(width: 10.0),
-            // TextButton(
-            //   onPressed: () {},
-            //   child: const Text(
-            //     'Reset password',
-            //     style: TextStyle(color: AppColors.selectedText, fontSize: 16),
-            //   ),
-            // ),
           ],
         )
       ],
