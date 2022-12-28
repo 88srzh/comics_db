@@ -45,18 +45,17 @@ class FormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 25),
         Row(
-          children: [
-            const SizedBox(width: 5.0),
-            const AuthButtonWidget(),
-            const SizedBox(width: 10.0),
-            TextButton(
-              onPressed: () {},
-              // style: AppButtonStyle.linkButton,
-              child: const Text(
-                'Reset password',
-                style: TextStyle(color: AppColors.selectedText, fontSize: 16),
-              ),
-            ),
+          children: const [
+             SizedBox(width: 5.0),
+             AuthButtonWidget(),
+             SizedBox(width: 10.0),
+            // TextButton(
+            //   onPressed: () {},
+            //   child: const Text(
+            //     'Reset password',
+            //     style: TextStyle(color: AppColors.selectedText, fontSize: 16),
+            //   ),
+            // ),
           ],
         )
       ],
