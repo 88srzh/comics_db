@@ -21,14 +21,7 @@ AccountDetailsResponse _$AccountDetailsResponseFromJson(
 
 /// @nodoc
 mixin _$AccountDetailsResponse {
-  int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'iso_693_1')
-  String get iso6391 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'iso_3166_1')
-  String get iso31661 => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  bool get includeAdult => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
+  List<AccountDetails> get accountDetails => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,13 +35,7 @@ abstract class $AccountDetailsResponseCopyWith<$Res> {
           $Res Function(AccountDetailsResponse) then) =
       _$AccountDetailsResponseCopyWithImpl<$Res, AccountDetailsResponse>;
   @useResult
-  $Res call(
-      {int id,
-      @JsonKey(name: 'iso_693_1') String iso6391,
-      @JsonKey(name: 'iso_3166_1') String iso31661,
-      String name,
-      bool includeAdult,
-      String username});
+  $Res call({List<AccountDetails> accountDetails});
 }
 
 /// @nodoc
@@ -65,38 +52,13 @@ class _$AccountDetailsResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? iso6391 = null,
-    Object? iso31661 = null,
-    Object? name = null,
-    Object? includeAdult = null,
-    Object? username = null,
+    Object? accountDetails = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      iso6391: null == iso6391
-          ? _value.iso6391
-          : iso6391 // ignore: cast_nullable_to_non_nullable
-              as String,
-      iso31661: null == iso31661
-          ? _value.iso31661
-          : iso31661 // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      includeAdult: null == includeAdult
-          ? _value.includeAdult
-          : includeAdult // ignore: cast_nullable_to_non_nullable
-              as bool,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
+      accountDetails: null == accountDetails
+          ? _value.accountDetails
+          : accountDetails // ignore: cast_nullable_to_non_nullable
+              as List<AccountDetails>,
     ) as $Val);
   }
 }
@@ -109,13 +71,7 @@ abstract class _$$_AccountDetailsResponseCopyWith<$Res>
       __$$_AccountDetailsResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      @JsonKey(name: 'iso_693_1') String iso6391,
-      @JsonKey(name: 'iso_3166_1') String iso31661,
-      String name,
-      bool includeAdult,
-      String username});
+  $Res call({List<AccountDetails> accountDetails});
 }
 
 /// @nodoc
@@ -130,75 +86,38 @@ class __$$_AccountDetailsResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? iso6391 = null,
-    Object? iso31661 = null,
-    Object? name = null,
-    Object? includeAdult = null,
-    Object? username = null,
+    Object? accountDetails = null,
   }) {
     return _then(_$_AccountDetailsResponse(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      iso6391: null == iso6391
-          ? _value.iso6391
-          : iso6391 // ignore: cast_nullable_to_non_nullable
-              as String,
-      iso31661: null == iso31661
-          ? _value.iso31661
-          : iso31661 // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      includeAdult: null == includeAdult
-          ? _value.includeAdult
-          : includeAdult // ignore: cast_nullable_to_non_nullable
-              as bool,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
+      accountDetails: null == accountDetails
+          ? _value._accountDetails
+          : accountDetails // ignore: cast_nullable_to_non_nullable
+              as List<AccountDetails>,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_AccountDetailsResponse implements _AccountDetailsResponse {
   _$_AccountDetailsResponse(
-      {required this.id,
-      @JsonKey(name: 'iso_693_1') required this.iso6391,
-      @JsonKey(name: 'iso_3166_1') required this.iso31661,
-      required this.name,
-      required this.includeAdult,
-      required this.username});
+      {required final List<AccountDetails> accountDetails})
+      : _accountDetails = accountDetails;
 
   factory _$_AccountDetailsResponse.fromJson(Map<String, dynamic> json) =>
       _$$_AccountDetailsResponseFromJson(json);
 
+  final List<AccountDetails> _accountDetails;
   @override
-  final int id;
-  @override
-  @JsonKey(name: 'iso_693_1')
-  final String iso6391;
-  @override
-  @JsonKey(name: 'iso_3166_1')
-  final String iso31661;
-  @override
-  final String name;
-  @override
-  final bool includeAdult;
-  @override
-  final String username;
+  List<AccountDetails> get accountDetails {
+    if (_accountDetails is EqualUnmodifiableListView) return _accountDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_accountDetails);
+  }
 
   @override
   String toString() {
-    return 'AccountDetailsResponse(id: $id, iso6391: $iso6391, iso31661: $iso31661, name: $name, includeAdult: $includeAdult, username: $username)';
+    return 'AccountDetailsResponse(accountDetails: $accountDetails)';
   }
 
   @override
@@ -206,21 +125,14 @@ class _$_AccountDetailsResponse implements _AccountDetailsResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountDetailsResponse &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.iso6391, iso6391) || other.iso6391 == iso6391) &&
-            (identical(other.iso31661, iso31661) ||
-                other.iso31661 == iso31661) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.includeAdult, includeAdult) ||
-                other.includeAdult == includeAdult) &&
-            (identical(other.username, username) ||
-                other.username == username));
+            const DeepCollectionEquality()
+                .equals(other._accountDetails, _accountDetails));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, iso6391, iso31661, name, includeAdult, username);
+      runtimeType, const DeepCollectionEquality().hash(_accountDetails));
 
   @JsonKey(ignore: true)
   @override
@@ -239,30 +151,14 @@ class _$_AccountDetailsResponse implements _AccountDetailsResponse {
 
 abstract class _AccountDetailsResponse implements AccountDetailsResponse {
   factory _AccountDetailsResponse(
-      {required final int id,
-      @JsonKey(name: 'iso_693_1') required final String iso6391,
-      @JsonKey(name: 'iso_3166_1') required final String iso31661,
-      required final String name,
-      required final bool includeAdult,
-      required final String username}) = _$_AccountDetailsResponse;
+          {required final List<AccountDetails> accountDetails}) =
+      _$_AccountDetailsResponse;
 
   factory _AccountDetailsResponse.fromJson(Map<String, dynamic> json) =
       _$_AccountDetailsResponse.fromJson;
 
   @override
-  int get id;
-  @override
-  @JsonKey(name: 'iso_693_1')
-  String get iso6391;
-  @override
-  @JsonKey(name: 'iso_3166_1')
-  String get iso31661;
-  @override
-  String get name;
-  @override
-  bool get includeAdult;
-  @override
-  String get username;
+  List<AccountDetails> get accountDetails;
   @override
   @JsonKey(ignore: true)
   _$$_AccountDetailsResponseCopyWith<_$_AccountDetailsResponse> get copyWith =>

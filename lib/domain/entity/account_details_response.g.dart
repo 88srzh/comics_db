@@ -9,21 +9,13 @@ part of 'account_details_response.dart';
 _$_AccountDetailsResponse _$$_AccountDetailsResponseFromJson(
         Map<String, dynamic> json) =>
     _$_AccountDetailsResponse(
-      id: json['id'] as int,
-      iso6391: json['iso_693_1'] as String,
-      iso31661: json['iso_3166_1'] as String,
-      name: json['name'] as String,
-      includeAdult: json['include_adult'] as bool,
-      username: json['username'] as String,
+      accountDetails: (json['accountDetails'] as List<dynamic>)
+          .map((e) => AccountDetails.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_AccountDetailsResponseToJson(
         _$_AccountDetailsResponse instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'iso_693_1': instance.iso6391,
-      'iso_3166_1': instance.iso31661,
-      'name': instance.name,
-      'include_adult': instance.includeAdult,
-      'username': instance.username,
+      'accountDetails': instance.accountDetails,
     };

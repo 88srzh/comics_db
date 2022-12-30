@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/entity/account_details_response.dart';
+import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:equatable/equatable.dart';
 
 class AccountDetailsContainer extends Equatable {
