@@ -5,7 +5,7 @@ class AccountDetailsCubitState extends Equatable{
   final List<AccountDetailsData> accountDetails;
   final String localeTag;
 
-  AccountDetailsCubitState({required this.accountDetails, required this.localeTag});
+  const AccountDetailsCubitState({required this.accountDetails, required this.localeTag});
 
   @override
   List<Object> get props => [accountDetails, localeTag];

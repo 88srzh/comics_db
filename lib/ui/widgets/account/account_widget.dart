@@ -1,6 +1,6 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/account_widget_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,8 @@ class AccountWidget extends StatefulWidget {
 class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
-    var bloc = context.watch<AccountDetailsBloc>();
+    var cubit = context.watch<AccountDetailsCubit>();
+    final name =  cubit.state.accountDetails;
     return Scaffold(
       appBar: AppBar(
         title: const Text(

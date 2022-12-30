@@ -14,16 +14,25 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   var accountDetails = <AccountDetails>[];
 
   AccountDetailsCubit({required this.accountDetailsBloc})
-      : super(AccountDetailsCubitState(accountDetails: const <AccountDetailsData>[], localeTag: '')) {
+      : super(const AccountDetailsCubitState(accountDetails: <AccountDetailsData>[], localeTag: '')) {
     Future.microtask(() {
       _onState(accountDetailsBloc.state);
       accountDetailsSubscription = accountDetailsBloc.stream.listen(_onState);
     };
+    }
+
+  void _onState(AccountDetailsState state) {
+    final accountDetails = state.details.map(_makeListData).toList();
+    final newState = this.state.copyWith(accountDetails: accountDetails);
+    emit(newState);
   }
 }
 
-void _onState(AccountDetailsState state) {
-  final accountDetails = state.details.map(_makeListData).toList();
-  final newState = this.state.copyWith(accountDetailsContainer: accountDetails);
-  emit(newState);
+
+AccountDetailsData _makeListData(AccountDetails accountDetails) {
+  return AccountDetailsData(
+    id: accountDetails.id,
+    name: accountDetails.name,
+    userName: accountDetails.username,
+  );
 }
