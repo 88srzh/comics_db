@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/widgets/personal/components/account_details_data.dart';
+import 'package:comics_db_app/ui/widgets/account/components/account_details_data.dart';
 import 'package:equatable/equatable.dart';
 
 class AccountDetailsCubitState extends Equatable{
