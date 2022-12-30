@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'personal_bloc.dart';
+part of 'account_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PersonalDetailsEvent {
+mixin _$AccountDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String locale) loadDetails,
@@ -37,38 +37,36 @@ mixin _$PersonalDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PersonalDetailsEventLoadDetails value)
-        loadDetails,
-    required TResult Function(PersonalDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
+    required TResult Function(AccountDetailsEventLoadReset value) loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PersonalDetailsEventLoadDetails value)? loadDetails,
-    TResult? Function(PersonalDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PersonalDetailsEventLoadDetails value)? loadDetails,
-    TResult Function(PersonalDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult Function(AccountDetailsEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PersonalDetailsEventCopyWith<$Res> {
-  factory $PersonalDetailsEventCopyWith(PersonalDetailsEvent value,
-          $Res Function(PersonalDetailsEvent) then) =
-      _$PersonalDetailsEventCopyWithImpl<$Res, PersonalDetailsEvent>;
+abstract class $AccountDetailsEventCopyWith<$Res> {
+  factory $AccountDetailsEventCopyWith(
+          AccountDetailsEvent value, $Res Function(AccountDetailsEvent) then) =
+      _$AccountDetailsEventCopyWithImpl<$Res, AccountDetailsEvent>;
 }
 
 /// @nodoc
-class _$PersonalDetailsEventCopyWithImpl<$Res,
-        $Val extends PersonalDetailsEvent>
-    implements $PersonalDetailsEventCopyWith<$Res> {
-  _$PersonalDetailsEventCopyWithImpl(this._value, this._then);
+class _$AccountDetailsEventCopyWithImpl<$Res, $Val extends AccountDetailsEvent>
+    implements $AccountDetailsEventCopyWith<$Res> {
+  _$AccountDetailsEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -77,23 +75,23 @@ class _$PersonalDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$PersonalDetailsEventLoadDetailsCopyWith<$Res> {
-  factory _$$PersonalDetailsEventLoadDetailsCopyWith(
-          _$PersonalDetailsEventLoadDetails value,
-          $Res Function(_$PersonalDetailsEventLoadDetails) then) =
-      __$$PersonalDetailsEventLoadDetailsCopyWithImpl<$Res>;
+abstract class _$$AccountDetailsEventLoadDetailsCopyWith<$Res> {
+  factory _$$AccountDetailsEventLoadDetailsCopyWith(
+          _$AccountDetailsEventLoadDetails value,
+          $Res Function(_$AccountDetailsEventLoadDetails) then) =
+      __$$AccountDetailsEventLoadDetailsCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$PersonalDetailsEventLoadDetailsCopyWithImpl<$Res>
-    extends _$PersonalDetailsEventCopyWithImpl<$Res,
-        _$PersonalDetailsEventLoadDetails>
-    implements _$$PersonalDetailsEventLoadDetailsCopyWith<$Res> {
-  __$$PersonalDetailsEventLoadDetailsCopyWithImpl(
-      _$PersonalDetailsEventLoadDetails _value,
-      $Res Function(_$PersonalDetailsEventLoadDetails) _then)
+class __$$AccountDetailsEventLoadDetailsCopyWithImpl<$Res>
+    extends _$AccountDetailsEventCopyWithImpl<$Res,
+        _$AccountDetailsEventLoadDetails>
+    implements _$$AccountDetailsEventLoadDetailsCopyWith<$Res> {
+  __$$AccountDetailsEventLoadDetailsCopyWithImpl(
+      _$AccountDetailsEventLoadDetails _value,
+      $Res Function(_$AccountDetailsEventLoadDetails) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +99,7 @@ class __$$PersonalDetailsEventLoadDetailsCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$PersonalDetailsEventLoadDetails(
+    return _then(_$AccountDetailsEventLoadDetails(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -112,23 +110,23 @@ class __$$PersonalDetailsEventLoadDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PersonalDetailsEventLoadDetails
-    implements PersonalDetailsEventLoadDetails {
-  _$PersonalDetailsEventLoadDetails({required this.locale});
+class _$AccountDetailsEventLoadDetails
+    implements AccountDetailsEventLoadDetails {
+  _$AccountDetailsEventLoadDetails({required this.locale});
 
   @override
   final String locale;
 
   @override
   String toString() {
-    return 'PersonalDetailsEvent.loadDetails(locale: $locale)';
+    return 'AccountDetailsEvent.loadDetails(locale: $locale)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonalDetailsEventLoadDetails &&
+            other is _$AccountDetailsEventLoadDetails &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -138,9 +136,9 @@ class _$PersonalDetailsEventLoadDetails
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PersonalDetailsEventLoadDetailsCopyWith<_$PersonalDetailsEventLoadDetails>
-      get copyWith => __$$PersonalDetailsEventLoadDetailsCopyWithImpl<
-          _$PersonalDetailsEventLoadDetails>(this, _$identity);
+  _$$AccountDetailsEventLoadDetailsCopyWith<_$AccountDetailsEventLoadDetails>
+      get copyWith => __$$AccountDetailsEventLoadDetailsCopyWithImpl<
+          _$AccountDetailsEventLoadDetails>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -176,9 +174,8 @@ class _$PersonalDetailsEventLoadDetails
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PersonalDetailsEventLoadDetails value)
-        loadDetails,
-    required TResult Function(PersonalDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
+    required TResult Function(AccountDetailsEventLoadReset value) loadReset,
   }) {
     return loadDetails(this);
   }
@@ -186,8 +183,8 @@ class _$PersonalDetailsEventLoadDetails
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PersonalDetailsEventLoadDetails value)? loadDetails,
-    TResult? Function(PersonalDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
   }) {
     return loadDetails?.call(this);
   }
@@ -195,8 +192,8 @@ class _$PersonalDetailsEventLoadDetails
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PersonalDetailsEventLoadDetails value)? loadDetails,
-    TResult Function(PersonalDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult Function(AccountDetailsEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
     if (loadDetails != null) {
@@ -206,50 +203,50 @@ class _$PersonalDetailsEventLoadDetails
   }
 }
 
-abstract class PersonalDetailsEventLoadDetails implements PersonalDetailsEvent {
-  factory PersonalDetailsEventLoadDetails({required final String locale}) =
-      _$PersonalDetailsEventLoadDetails;
+abstract class AccountDetailsEventLoadDetails implements AccountDetailsEvent {
+  factory AccountDetailsEventLoadDetails({required final String locale}) =
+      _$AccountDetailsEventLoadDetails;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$PersonalDetailsEventLoadDetailsCopyWith<_$PersonalDetailsEventLoadDetails>
+  _$$AccountDetailsEventLoadDetailsCopyWith<_$AccountDetailsEventLoadDetails>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PersonalDetailsEventLoadResetCopyWith<$Res> {
-  factory _$$PersonalDetailsEventLoadResetCopyWith(
-          _$PersonalDetailsEventLoadReset value,
-          $Res Function(_$PersonalDetailsEventLoadReset) then) =
-      __$$PersonalDetailsEventLoadResetCopyWithImpl<$Res>;
+abstract class _$$AccountDetailsEventLoadResetCopyWith<$Res> {
+  factory _$$AccountDetailsEventLoadResetCopyWith(
+          _$AccountDetailsEventLoadReset value,
+          $Res Function(_$AccountDetailsEventLoadReset) then) =
+      __$$AccountDetailsEventLoadResetCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PersonalDetailsEventLoadResetCopyWithImpl<$Res>
-    extends _$PersonalDetailsEventCopyWithImpl<$Res,
-        _$PersonalDetailsEventLoadReset>
-    implements _$$PersonalDetailsEventLoadResetCopyWith<$Res> {
-  __$$PersonalDetailsEventLoadResetCopyWithImpl(
-      _$PersonalDetailsEventLoadReset _value,
-      $Res Function(_$PersonalDetailsEventLoadReset) _then)
+class __$$AccountDetailsEventLoadResetCopyWithImpl<$Res>
+    extends _$AccountDetailsEventCopyWithImpl<$Res,
+        _$AccountDetailsEventLoadReset>
+    implements _$$AccountDetailsEventLoadResetCopyWith<$Res> {
+  __$$AccountDetailsEventLoadResetCopyWithImpl(
+      _$AccountDetailsEventLoadReset _value,
+      $Res Function(_$AccountDetailsEventLoadReset) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PersonalDetailsEventLoadReset implements PersonalDetailsEventLoadReset {
-  _$PersonalDetailsEventLoadReset();
+class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
+  _$AccountDetailsEventLoadReset();
 
   @override
   String toString() {
-    return 'PersonalDetailsEvent.loadReset()';
+    return 'AccountDetailsEvent.loadReset()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonalDetailsEventLoadReset);
+            other is _$AccountDetailsEventLoadReset);
   }
 
   @override
@@ -289,9 +286,8 @@ class _$PersonalDetailsEventLoadReset implements PersonalDetailsEventLoadReset {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PersonalDetailsEventLoadDetails value)
-        loadDetails,
-    required TResult Function(PersonalDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
+    required TResult Function(AccountDetailsEventLoadReset value) loadReset,
   }) {
     return loadReset(this);
   }
@@ -299,8 +295,8 @@ class _$PersonalDetailsEventLoadReset implements PersonalDetailsEventLoadReset {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PersonalDetailsEventLoadDetails value)? loadDetails,
-    TResult? Function(PersonalDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
   }) {
     return loadReset?.call(this);
   }
@@ -308,8 +304,8 @@ class _$PersonalDetailsEventLoadReset implements PersonalDetailsEventLoadReset {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PersonalDetailsEventLoadDetails value)? loadDetails,
-    TResult Function(PersonalDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult Function(AccountDetailsEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
     if (loadReset != null) {
@@ -319,6 +315,6 @@ class _$PersonalDetailsEventLoadReset implements PersonalDetailsEventLoadReset {
   }
 }
 
-abstract class PersonalDetailsEventLoadReset implements PersonalDetailsEvent {
-  factory PersonalDetailsEventLoadReset() = _$PersonalDetailsEventLoadReset;
+abstract class AccountDetailsEventLoadReset implements AccountDetailsEvent {
+  factory AccountDetailsEventLoadReset() = _$AccountDetailsEventLoadReset;
 }

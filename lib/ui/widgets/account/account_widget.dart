@@ -1,5 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/blocs/personal/personal_bloc.dart';
+import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
@@ -16,7 +16,7 @@ class AccountWidget extends StatefulWidget {
 class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
-    var bloc = context.watch<PersonalDetailsBloc>();
+    var bloc = context.watch<AccountDetailsBloc>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
