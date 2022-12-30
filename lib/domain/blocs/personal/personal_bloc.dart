@@ -6,6 +6,7 @@ import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'personal_state.dart';
 
@@ -36,5 +37,9 @@ class PersonalDetailsBloc extends Bloc<PersonalDetailsEvent, PersonalDetailsStat
     );
     final newState = state.copyWith(accountDetailsContainer: container);
     emit(newState);
+  }
+
+  Future<void> onPersonalDetailsEventLoadReset(PersonalDetailsEvent event, Emitter<PersonalDetailsState> emit) async {
+    emit(const PersonalDetailsState.initial());
   }
 }
