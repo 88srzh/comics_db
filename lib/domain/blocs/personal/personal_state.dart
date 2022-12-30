@@ -1,4 +1,5 @@
-part of 'personal_cubit.dart';
+part of 'personal_bloc.dart';
+
 
 class PersonalDetailsState extends Equatable {
   final AccountDetailsContainer accountDetailsContainer;

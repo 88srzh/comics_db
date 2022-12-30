@@ -79,7 +79,7 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
   }
 
   Future<void> onPeopleListEventLoadReset(PeopleListEventLoadReset event, Emitter<PeopleListState> emit) async {
-    emit(PeopleListState.initial());
+    emit(const PeopleListState.initial());
     // add(MovieListEventLoadNextPage(event.locale));
   }
 
