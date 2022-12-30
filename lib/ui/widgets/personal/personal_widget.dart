@@ -1,4 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/domain/blocs/personal/personal_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/personal/components/heading_personal_card_widget.dart';
@@ -15,6 +16,7 @@ class PersonalWidget extends StatefulWidget {
 class _PersonalWidgetState extends State<PersonalWidget> {
   @override
   Widget build(BuildContext context) {
+    var bloc = context.watch<PersonalDetailsBloc>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
