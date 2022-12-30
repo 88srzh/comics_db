@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'personal_response.dart';
+part of 'account_details_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PersonalResponse _$$_PersonalResponseFromJson(Map<String, dynamic> json) =>
-    _$_PersonalResponse(
+_$_AccountDetailsResponse _$$_AccountDetailsResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_AccountDetailsResponse(
       id: json['id'] as int,
       iso6391: json['iso_693_1'] as String,
       iso31661: json['iso_3166_1'] as String,
@@ -16,7 +17,8 @@ _$_PersonalResponse _$$_PersonalResponseFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String,
     );
 
-Map<String, dynamic> _$$_PersonalResponseToJson(_$_PersonalResponse instance) =>
+Map<String, dynamic> _$$_AccountDetailsResponseToJson(
+        _$_AccountDetailsResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'iso_693_1': instance.iso6391,

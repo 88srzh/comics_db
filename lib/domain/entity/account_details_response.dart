@@ -1,15 +1,12 @@
-
-
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'personal_response.freezed.dart';
-part 'personal_response.g.dart';
+part 'account_details_response.freezed.dart';
+part 'account_details_response.g.dart';
 
 @freezed
-class PersonalResponse with _$PersonalResponse {
+class AccountDetailsResponse with _$AccountDetailsResponse {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-  factory PersonalResponse({
+  factory AccountDetailsResponse({
   required int id,
   @JsonKey(name: 'iso_693_1')
   required String iso6391,
@@ -18,8 +15,8 @@ class PersonalResponse with _$PersonalResponse {
   required String name,
   required bool includeAdult,
   required String username,
-}) = _PersonalResponse;
+}) = _AccountDetailsResponse;
 
-  factory PersonalResponse.fromJson(Map<String, dynamic> json) => _$PersonalResponseFromJson(json);
+  factory AccountDetailsResponse.fromJson(Map<String, dynamic> json) => _$AccountDetailsResponseFromJson(json);
 
 }

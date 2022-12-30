@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'personal_response.dart';
+part of 'account_details_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PersonalResponse _$PersonalResponseFromJson(Map<String, dynamic> json) {
-  return _PersonalResponse.fromJson(json);
+AccountDetailsResponse _$AccountDetailsResponseFromJson(
+    Map<String, dynamic> json) {
+  return _AccountDetailsResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PersonalResponse {
+mixin _$AccountDetailsResponse {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'iso_693_1')
   String get iso6391 => throw _privateConstructorUsedError;
@@ -31,15 +32,15 @@ mixin _$PersonalResponse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PersonalResponseCopyWith<PersonalResponse> get copyWith =>
+  $AccountDetailsResponseCopyWith<AccountDetailsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PersonalResponseCopyWith<$Res> {
-  factory $PersonalResponseCopyWith(
-          PersonalResponse value, $Res Function(PersonalResponse) then) =
-      _$PersonalResponseCopyWithImpl<$Res, PersonalResponse>;
+abstract class $AccountDetailsResponseCopyWith<$Res> {
+  factory $AccountDetailsResponseCopyWith(AccountDetailsResponse value,
+          $Res Function(AccountDetailsResponse) then) =
+      _$AccountDetailsResponseCopyWithImpl<$Res, AccountDetailsResponse>;
   @useResult
   $Res call(
       {int id,
@@ -51,9 +52,10 @@ abstract class $PersonalResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PersonalResponseCopyWithImpl<$Res, $Val extends PersonalResponse>
-    implements $PersonalResponseCopyWith<$Res> {
-  _$PersonalResponseCopyWithImpl(this._value, this._then);
+class _$AccountDetailsResponseCopyWithImpl<$Res,
+        $Val extends AccountDetailsResponse>
+    implements $AccountDetailsResponseCopyWith<$Res> {
+  _$AccountDetailsResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -100,11 +102,11 @@ class _$PersonalResponseCopyWithImpl<$Res, $Val extends PersonalResponse>
 }
 
 /// @nodoc
-abstract class _$$_PersonalResponseCopyWith<$Res>
-    implements $PersonalResponseCopyWith<$Res> {
-  factory _$$_PersonalResponseCopyWith(
-          _$_PersonalResponse value, $Res Function(_$_PersonalResponse) then) =
-      __$$_PersonalResponseCopyWithImpl<$Res>;
+abstract class _$$_AccountDetailsResponseCopyWith<$Res>
+    implements $AccountDetailsResponseCopyWith<$Res> {
+  factory _$$_AccountDetailsResponseCopyWith(_$_AccountDetailsResponse value,
+          $Res Function(_$_AccountDetailsResponse) then) =
+      __$$_AccountDetailsResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -117,11 +119,12 @@ abstract class _$$_PersonalResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PersonalResponseCopyWithImpl<$Res>
-    extends _$PersonalResponseCopyWithImpl<$Res, _$_PersonalResponse>
-    implements _$$_PersonalResponseCopyWith<$Res> {
-  __$$_PersonalResponseCopyWithImpl(
-      _$_PersonalResponse _value, $Res Function(_$_PersonalResponse) _then)
+class __$$_AccountDetailsResponseCopyWithImpl<$Res>
+    extends _$AccountDetailsResponseCopyWithImpl<$Res,
+        _$_AccountDetailsResponse>
+    implements _$$_AccountDetailsResponseCopyWith<$Res> {
+  __$$_AccountDetailsResponseCopyWithImpl(_$_AccountDetailsResponse _value,
+      $Res Function(_$_AccountDetailsResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +137,7 @@ class __$$_PersonalResponseCopyWithImpl<$Res>
     Object? includeAdult = null,
     Object? username = null,
   }) {
-    return _then(_$_PersonalResponse(
+    return _then(_$_AccountDetailsResponse(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -166,8 +169,8 @@ class __$$_PersonalResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$_PersonalResponse implements _PersonalResponse {
-  _$_PersonalResponse(
+class _$_AccountDetailsResponse implements _AccountDetailsResponse {
+  _$_AccountDetailsResponse(
       {required this.id,
       @JsonKey(name: 'iso_693_1') required this.iso6391,
       @JsonKey(name: 'iso_3166_1') required this.iso31661,
@@ -175,8 +178,8 @@ class _$_PersonalResponse implements _PersonalResponse {
       required this.includeAdult,
       required this.username});
 
-  factory _$_PersonalResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonalResponseFromJson(json);
+  factory _$_AccountDetailsResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_AccountDetailsResponseFromJson(json);
 
   @override
   final int id;
@@ -195,14 +198,14 @@ class _$_PersonalResponse implements _PersonalResponse {
 
   @override
   String toString() {
-    return 'PersonalResponse(id: $id, iso6391: $iso6391, iso31661: $iso31661, name: $name, includeAdult: $includeAdult, username: $username)';
+    return 'AccountDetailsResponse(id: $id, iso6391: $iso6391, iso31661: $iso31661, name: $name, includeAdult: $includeAdult, username: $username)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PersonalResponse &&
+            other is _$_AccountDetailsResponse &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.iso6391, iso6391) || other.iso6391 == iso6391) &&
             (identical(other.iso31661, iso31661) ||
@@ -222,28 +225,29 @@ class _$_PersonalResponse implements _PersonalResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PersonalResponseCopyWith<_$_PersonalResponse> get copyWith =>
-      __$$_PersonalResponseCopyWithImpl<_$_PersonalResponse>(this, _$identity);
+  _$$_AccountDetailsResponseCopyWith<_$_AccountDetailsResponse> get copyWith =>
+      __$$_AccountDetailsResponseCopyWithImpl<_$_AccountDetailsResponse>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonalResponseToJson(
+    return _$$_AccountDetailsResponseToJson(
       this,
     );
   }
 }
 
-abstract class _PersonalResponse implements PersonalResponse {
-  factory _PersonalResponse(
+abstract class _AccountDetailsResponse implements AccountDetailsResponse {
+  factory _AccountDetailsResponse(
       {required final int id,
       @JsonKey(name: 'iso_693_1') required final String iso6391,
       @JsonKey(name: 'iso_3166_1') required final String iso31661,
       required final String name,
       required final bool includeAdult,
-      required final String username}) = _$_PersonalResponse;
+      required final String username}) = _$_AccountDetailsResponse;
 
-  factory _PersonalResponse.fromJson(Map<String, dynamic> json) =
-      _$_PersonalResponse.fromJson;
+  factory _AccountDetailsResponse.fromJson(Map<String, dynamic> json) =
+      _$_AccountDetailsResponse.fromJson;
 
   @override
   int get id;
@@ -261,6 +265,6 @@ abstract class _PersonalResponse implements PersonalResponse {
   String get username;
   @override
   @JsonKey(ignore: true)
-  _$$_PersonalResponseCopyWith<_$_PersonalResponse> get copyWith =>
+  _$$_AccountDetailsResponseCopyWith<_$_AccountDetailsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
