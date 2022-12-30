@@ -1,5 +1,5 @@
 ## 0.0.5
- - Refactoring authorization screen
+ - Refactored authorization screen
 ________
 
 ## 0.0.4
