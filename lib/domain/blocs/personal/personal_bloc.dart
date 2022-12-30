@@ -30,8 +30,11 @@ class PersonalDetailsBloc extends Bloc<PersonalDetailsEvent, PersonalDetailsStat
   Future<void> onPersonalDetailsEventLoadDetails(PersonalDetailsEvent event, Emitter<PersonalDetailsState> emit) async {
     final sessionId = await _sessionDataProvider.getAccountId();
     final result = await _personalApiClient.accountDetails(sessionId, Configuration.apiKey);
+    final details = List<AccountDetails>.from(state.accountDetailsContainer.accountDetails)..addAll(result.accountDetails);
     final container = state.accountDetailsContainer.copyWith(
-      accountDetails: result,
+      accountDetails: details,
     );
+    final newState = state.copyWith(accountDetailsContainer: container);
+    emit(newState);
   }
 }
