@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/account_api_client.dart';
 import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
@@ -41,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthInProgressState());
       final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
-      final accountId = await _accountApiClient.getAccountInfo(sessionId);
+      final accountId = await _accountApiClient.getAccountInfo(sessionId, Configuration.apiKey);
       await _sessionDataProvider.setSessionId(sessionId);
       await _sessionDataProvider.setAccountId(accountId);
       emit(AuthAuthorizedState());

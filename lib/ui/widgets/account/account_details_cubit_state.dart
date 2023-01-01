@@ -1,22 +1,28 @@
-import 'package:comics_db_app/ui/widgets/account/components/account_details_data.dart';
 import 'package:equatable/equatable.dart';
 
-class AccountDetailsCubitState extends Equatable{
-  final List<AccountDetailsData> accountDetails;
-  final String localeTag;
+class AccountDetailsCubitState extends Equatable {
+  final int id;
+  final String name;
+  final String username;
 
-  const AccountDetailsCubitState({required this.accountDetails, required this.localeTag});
+  const AccountDetailsCubitState({
+    required this.id,
+    required this.name,
+    required this.username,
+  });
 
   @override
-  List<Object> get props => [accountDetails, localeTag];
+  List<Object> get props => [id, name, username];
 
   AccountDetailsCubitState copyWith({
-    List<AccountDetailsData>? accountDetails,
-    String? localeTag,
+    int? id,
+    String? name,
+    String? username,
   }) {
     return AccountDetailsCubitState(
-      accountDetails: accountDetails ?? this.accountDetails,
-      localeTag: localeTag ?? this.localeTag,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      username: username ?? this.username,
     );
   }
 }
