@@ -31,15 +31,15 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
   }
 
   Future<void> onAccountDetailsEventLoadDetails(AccountDetailsEvent event, Emitter<AccountDetailsState> emit) async {
-    final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
-    final sessionId = await _sessionDataProvider.getAccountId();
-    final result = await _personalApiClient.accountDetails(sessionId, Configuration.apiKey);
-    final details = List<AccountDetails>.from(state.accountDetailsContainer.accountDetails)..addAll(result.accountDetails);
-    final container = state.accountDetailsContainer.copyWith(
-      accountDetails: details,
-    );
-    final newState = state.copyWith(accountDetailsContainer: container);
-    emit(newState);
+    // final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
+    // final sessionId = await _sessionDataProvider.getAccountId();
+    // final result = await _personalApiClient.accountDetails(sessionId, Configuration.apiKey);
+    // final details = List<AccountDetails>.from(state.accountDetailsContainer.accountDetails)..addAll(result.accountDetails);
+    // final container = state.accountDetailsContainer.copyWith(
+    //   accountDetails: details,
+    // );
+    // final newState = state.copyWith(accountDetailsContainer: container);
+    // emit(newState);
   }
 
   Future<void> onAccountDetailsEventLoadReset(AccountDetailsEvent event, Emitter<AccountDetailsState> emit) async {

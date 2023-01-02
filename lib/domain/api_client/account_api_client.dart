@@ -17,7 +17,7 @@ extension MediaTypeAsString on MediaType {
 class AccountApiClient {
   final _networkClient = NetworkClient();
 
-  Future<int> getAccountInfo(String sessionId, String apiKey) async {
+  Future<int> getAccountInfo(String sessionId) async {
     int parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final result = jsonMap['id'] as int;

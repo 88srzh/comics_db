@@ -42,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthInProgressState());
       final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
-      final accountId = await _accountApiClient.getAccountInfo(sessionId, Configuration.apiKey);
+      final accountId = await _accountApiClient.getAccountInfo(sessionId);
       await _sessionDataProvider.setSessionId(sessionId);
       await _sessionDataProvider.setAccountId(accountId);
       emit(AuthAuthorizedState());
