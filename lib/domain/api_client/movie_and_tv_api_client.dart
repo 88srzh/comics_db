@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
-import 'package:comics_db_app/domain/entity/account_details_response.dart';
+import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
@@ -409,10 +409,10 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<AccountDetailsResponse> accountDetails(String sessionId, String apiKey) async {
-    AccountDetailsResponse parser(dynamic json) {
+  Future<AccountDetails> accountDetails(String sessionId, String apiKey) async {
+    AccountDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = AccountDetailsResponse.fromJson(jsonMap);
+      final response = AccountDetails.fromJson(jsonMap);
       return response;
     }
 
