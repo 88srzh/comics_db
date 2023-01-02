@@ -36,6 +36,20 @@ class AccountApiClient {
     return result;
   }
 
+  Future<String> getAccountUsername(String sessionId, String apiKey) async {
+    String parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['username'] as String;
+      return result;
+    }
+
+    final result = _networkClient.get('/account', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'session_id': sessionId,
+    });
+    return result;
+  }
+
   Future<int> markAsFavorite({
     required int accountId,
     required String sessionId,
@@ -56,10 +70,7 @@ class AccountApiClient {
       '/account/$accountId/favorite',
       parameters,
       parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'session_id': sessionId
-      },
+      <String, dynamic>{'api_key': Configuration.apiKey, 'session_id': sessionId},
     );
     return result;
   }

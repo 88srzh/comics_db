@@ -1,4 +1,3 @@
-import 'package:comics_db_app/domain/entity/data_parser.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_dates.g.dart';

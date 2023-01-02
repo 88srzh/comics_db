@@ -1,20 +1,23 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
-import 'package:comics_db_app/ui/widgets/personal/components/heading_personal_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PersonalWidget extends StatefulWidget {
-  const PersonalWidget({Key? key}) : super(key: key);
+class AccountWidget extends StatefulWidget {
+  const AccountWidget({Key? key}) : super(key: key);
 
   @override
-  State<PersonalWidget> createState() => _PersonalWidgetState();
+  State<AccountWidget> createState() => _AccountWidgetState();
 }
 
-class _PersonalWidgetState extends State<PersonalWidget> {
+class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
+    // var cubit = context.watch<AccountDetailsCubit>();
+    // final name =  cubit.state.accountDetails;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -43,11 +46,11 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          HeadingPersonalCardWidget(headingText: 'General'),
+          HeadingAccountCardWidget(headingText: 'General'),
           CustomSettingDivider(),
           LogoutCardWidget(),
           CustomSettingDivider(),
-          HeadingPersonalCardWidget(headingText: 'Settings'),
+          HeadingAccountCardWidget(headingText: 'Settings'),
           CustomSettingDivider(),
           SettingsCardWidget(),
           CustomSettingDivider(),

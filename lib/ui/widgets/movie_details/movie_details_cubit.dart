@@ -112,7 +112,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   void updateData(MovieDetails? details /* bool isFavorite*/) {
-    // may ba i need await somewhere here
+    // may be i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
       return;

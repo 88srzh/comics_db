@@ -5,6 +5,7 @@ import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dar
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
@@ -21,7 +22,6 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dar
 import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/personal/personal_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class ScreenFactory {
     _authBloc = authBloc;
     return BlocProvider(
       create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
-      child: const PersonalWidget(),
+      child: const AccountWidget(),
     );
   }
 

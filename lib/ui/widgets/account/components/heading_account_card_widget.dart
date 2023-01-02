@@ -1,8 +1,8 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class HeadingPersonalCardWidget extends StatelessWidget {
-  const HeadingPersonalCardWidget({Key? key, required this.headingText}) : super(key: key);
+class HeadingAccountCardWidget extends StatelessWidget {
+  const HeadingAccountCardWidget({Key? key, required this.headingText}) : super(key: key);
   final String headingText;
 
   @override
