@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/account_api_client.dart';
 import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
