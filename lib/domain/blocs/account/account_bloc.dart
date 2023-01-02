@@ -1,5 +1,6 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
+import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/account/account_container.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
@@ -17,6 +18,7 @@ part 'account_bloc.freezed.dart';
 class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> {
   final _personalApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
+  final _authApiClient = AuthApiClient();
 
   AccountDetailsBloc(AccountDetailsState initialState) : super(initialState) {
     on<AccountDetailsEvent>(((event, emit) async {
@@ -29,6 +31,7 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
   }
 
   Future<void> onAccountDetailsEventLoadDetails(AccountDetailsEvent event, Emitter<AccountDetailsState> emit) async {
+    final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
     final sessionId = await _sessionDataProvider.getAccountId();
     final result = await _personalApiClient.accountDetails(sessionId, Configuration.apiKey);
     final details = List<AccountDetails>.from(state.accountDetailsContainer.accountDetails)..addAll(result.accountDetails);
