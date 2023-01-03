@@ -11,6 +11,7 @@ import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
@@ -108,6 +109,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                 create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc!),
                 child: const LogoutCardWidget(),
               ),
+              BlocProvider(create: (_) => AccountDetailsCubit(sessionId)),
             ],
             child: const AccountWidget(),
           ),

@@ -16,13 +16,14 @@ class AccountWidget extends StatefulWidget {
 class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
-    // var cubit = context.watch<AccountDetailsCubit>();
-    // final name =  cubit.state.accountDetails;
+    var cubit = context.watch<AccountDetailsCubit>();
+    final name =  cubit.state.name;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Personal',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          // 'Personal',
+          name,
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.kPrimaryColor,
       ),

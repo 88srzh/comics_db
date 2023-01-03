@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit_state.dart';
@@ -27,7 +26,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   }
 
   Future<void> loadAccountDetails(BuildContext context) async {
-    final details = await movieAndTvApiClient.accountDetails(sessionId, Configuration.apiKey);
+    final details = await movieAndTvApiClient.accountDetails(sessionId);
     updateData(details);
   }
 
