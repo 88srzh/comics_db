@@ -109,7 +109,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               BlocProvider(
                 // create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
                 create: (_) => AccountDetailsCubit(accountBloc: AccountDetailsBloc(const AccountDetailsState.initial()), sessionId: ''),
-                child: const LogoutCardWidget(),
+                // child: const LogoutCardWidget(),
               ),
             ],
             child: const AccountWidget(),

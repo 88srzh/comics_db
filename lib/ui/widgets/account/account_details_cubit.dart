@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
+import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit_state.dart';
 import 'package:comics_db_app/ui/widgets/account/components/account_details_data.dart';
@@ -13,6 +14,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final movieAndTvApiClient = MovieAndTvApiClient();
   final String sessionId;
   final AccountDetailsBloc accountBloc;
+  final _sessionDataProvider = SessionDataProvider();
   // late final StreamSubscription<AccountDetailsState> accountDetailsBlocSubscription;
 
   AccountDetailsCubit({required this.accountBloc, required this.sessionId})
@@ -43,13 +45,15 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
     emit(newState);
   }
 
-  void logout() {
-    accountBloc.add(AccountLogoutEvent());
+  Future<void> logout() async {
+    // accountBloc.add(AccountLogoutEvent());
+    await _sessionDataProvider.deleteSessionId();
+    await _sessionDataProvider.deleteAccountId();
+
   }
 
   // @override
   // Future<void> close() {
   //   accountDetailsBlocSubscription.cancel();
   //   return super.close();
-  // }
-}
+  }

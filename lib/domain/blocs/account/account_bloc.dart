@@ -19,6 +19,7 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
   final _personalApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
   final _authApiClient = AuthApiClient();
+  // String sessionId;
 
   AccountDetailsBloc(AccountDetailsState initialState) : super(initialState) {
     on<AccountDetailsEvent>(((event, emit) async {
@@ -31,6 +32,10 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
   }
 
   Future<void> onAccountDetailsEventLoadDetails(AccountDetailsEvent event, Emitter<AccountDetailsState> emit) async {
+    try {
+      final sessionId = await _sessionDataProvider.getSessionId();
+      final details = await _personalApiClient.accountDetails(sessionId!);
+    } catch (e) {}
     // final sessionId = await _authApiClient.auth(username: event.login, password: event.password);
     // final sessionId = await _sessionDataProvider.getAccountId();
     // final result = await _personalApiClient.accountDetails(sessionId, Configuration.apiKey);

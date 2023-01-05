@@ -41,12 +41,14 @@ class BodyPersonalWidget extends StatefulWidget {
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AccountDetailsCubit>();
+    final name = cubit.state.name;
     return ColoredBox(
       color: AppColors.bottomBarBackgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          HeadingAccountCardWidget(headingText: 'General'),
+        children: [
+          HeadingAccountCardWidget(headingText: name),
           CustomSettingDivider(),
           LogoutCardWidget(),
           CustomSettingDivider(),
