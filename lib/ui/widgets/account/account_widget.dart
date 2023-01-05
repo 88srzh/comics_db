@@ -14,15 +14,21 @@ class AccountWidget extends StatefulWidget {
 
 class _AccountWidgetState extends State<AccountWidget> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<AccountDetailsCubit>().setupAccountDetails(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // var cubit = context.watch<AccountDetailsCubit>();
-    // final name =  cubit.state.name;
+    var cubit = context.watch<AccountDetailsCubit>();
+    final name = cubit.state.name;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Personal',
-          // name,
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          // 'Personal',
+          name,
+          style: const  TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.kPrimaryColor,
       ),
@@ -108,7 +114,7 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
       value: themeColor,
       onChanged: (bool value) {
         setState(
-              () {
+          () {
             themeColor = value;
           },
         );
@@ -142,7 +148,7 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
       value: notifications,
       onChanged: (bool value) {
         setState(
-              () {
+          () {
             notifications = value;
           },
         );

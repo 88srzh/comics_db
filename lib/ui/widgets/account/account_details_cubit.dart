@@ -19,7 +19,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
 
   Future<void> loadAccountDetails(BuildContext context) async {
     final sessionId = await _sessionDataProvider.getSessionId();
-    final details = await movieAndTvApiClient.accountDetails(sessionId!);
+    final details = await movieAndTvApiClient.accountDetails(sessionId ?? '');
     updateData(details);
   }
 
@@ -41,6 +41,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
     emit(newState);
   }
 
+  // TODO must delete because it's copy from authBloc
   Future<void> logout() async {
     await _sessionDataProvider.deleteSessionId();
     await _sessionDataProvider.deleteAccountId();
