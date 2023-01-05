@@ -13,19 +13,11 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final movieAndTvApiClient = MovieAndTvApiClient();
   final String sessionId;
   final AccountDetailsBloc accountBloc;
-  late final StreamSubscription<AccountDetailsState> accountDetailsBlocSubscription;
+  // late final StreamSubscription<AccountDetailsState> accountDetailsBlocSubscription;
 
-  AccountDetailsCubit(AccountDetailsState initialState, this.sessionId, this.accountBloc)
-      : super(const AccountDetailsCubitState(
-    id: 0,
-    name: '',
-    username: '',
-  )) {
-    emit(AccountDetailsCubitState(
-      id: state.id,
-      name: state.name,
-      username: state.username,
-    ));
+  AccountDetailsCubit({required this.accountBloc, required this.sessionId})
+      : super(const AccountDetailsCubitState(id: 0, name: '', username: '')) {
+    emit(AccountDetailsCubitState(id: state.id, name: state.name, username: state.username));
   }
 
   Future<void> loadAccountDetails(BuildContext context) async {
@@ -55,9 +47,9 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
     accountBloc.add(AccountLogoutEvent());
   }
 
-  @override
-  Future<void> close() {
-    accountDetailsBlocSubscription.cancel();
-    return super.close();
-  }
+  // @override
+  // Future<void> close() {
+  //   accountDetailsBlocSubscription.cancel();
+  //   return super.close();
+  // }
 }

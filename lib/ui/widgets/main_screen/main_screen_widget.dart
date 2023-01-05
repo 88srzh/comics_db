@@ -1,7 +1,5 @@
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
-import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
-import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/top_rated_movie_list_bloc.dart';
@@ -14,7 +12,6 @@ import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
@@ -56,9 +53,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    AuthBloc? _authBloc;
-    final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
-    _authBloc = authBloc;
+    // AuthBloc? _authBloc;
+    // final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+    // _authBloc = authBloc;
     return Scaffold(
       body: IndexedStack(
         index: _selectedTab,
@@ -106,15 +103,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ],
             child: const TvListWidget(),
           ),
-          _screenFactory.makePersonalScreen(),
+          // _screenFactory.makePersonalScreen(),
           MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
-                create: (_) => AccountDetailsCubit(initialState, sessionId, authBloc),
+                // create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
+                create: (_) => AccountDetailsCubit(accountBloc: AccountDetailsBloc(const AccountDetailsState.initial()), sessionId: ''),
                 child: const LogoutCardWidget(),
               ),
-              // BlocProvider(create: (_) => AccountDetailsBloc(accountDetailsBloc: AccountDetailsBloc(AccountDetailsState.initial())),
             ],
             child: const AccountWidget(),
           ),

@@ -2,7 +2,6 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,10 +19,10 @@ class _AccountWidgetState extends State<AccountWidget> {
     // final name =  cubit.state.name;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Personal',
           // name,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.kPrimaryColor,
       ),
@@ -68,7 +67,6 @@ class LogoutCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.watch<AuthViewCubit>();
     final cubit = context.watch<AccountDetailsCubit>();
     return ListTile(
       onTap: () {
