@@ -1,5 +1,4 @@
 import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/top_rated_movie_list_bloc.dart';
@@ -107,14 +106,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           MultiBlocProvider(
             providers: [
               BlocProvider(
-                // create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
-                create: (_) => AccountDetailsCubit(accountBloc: AccountDetailsBloc(const AccountDetailsState.initial()), sessionId: ''),
-                // child: const LogoutCardWidget(),
+                create: (_) => AccountDetailsCubit(sessionId: ''),
               ),
             ],
             child: const AccountWidget(),
           ),
-          // _screenFactory.makePersonalScreen(),
           // TODO: model need only for hand over widget
           // create: (_) => settingsModel,
           // child: const PersonalWidget(),
