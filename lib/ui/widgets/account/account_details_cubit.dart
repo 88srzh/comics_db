@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
 import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit_state.dart';
 import 'package:comics_db_app/ui/widgets/account/components/account_details_data.dart';
@@ -11,13 +12,15 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final accountDetailsData = AccountDetailsData();
   final movieAndTvApiClient = MovieAndTvApiClient();
   final String sessionId;
+  final AccountDetailsBloc accountBloc;
+  late final StreamSubscription<AccountDetailsState> accountDetailsBlocSubscription;
 
-  AccountDetailsCubit(this.sessionId)
+  AccountDetailsCubit(AccountDetailsState initialState, this.sessionId, this.accountBloc)
       : super(const AccountDetailsCubitState(
-          id: 0,
-          name: '',
-          username: '',
-        )) {
+    id: 0,
+    name: '',
+    username: '',
+  )) {
     emit(AccountDetailsCubitState(
       id: state.id,
       name: state.name,
@@ -46,5 +49,15 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
 
     final newState = state.copyWith(id: id, name: name, username: username);
     emit(newState);
+  }
+
+  void logout() {
+    accountBloc.add(AccountLogoutEvent());
+  }
+
+  @override
+  Future<void> close() {
+    accountDetailsBlocSubscription.cancel();
+    return super.close();
   }
 }

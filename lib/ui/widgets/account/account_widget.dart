@@ -16,13 +16,13 @@ class AccountWidget extends StatefulWidget {
 class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<AccountDetailsCubit>();
-    final name =  cubit.state.name;
+    // var cubit = context.watch<AccountDetailsCubit>();
+    // final name =  cubit.state.name;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          // 'Personal',
-          name,
+          'Personal',
+          // name,
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.kPrimaryColor,
@@ -68,7 +68,8 @@ class LogoutCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthViewCubit>();
+    // final cubit = context.watch<AuthViewCubit>();
+    final cubit = context.watch<AccountDetailsCubit>();
     return ListTile(
       onTap: () {
         cubit.logout();

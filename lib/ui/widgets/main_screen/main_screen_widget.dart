@@ -43,7 +43,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
     setState(
-          () {
+      () {
         _selectedTab = index;
       },
     );
@@ -56,91 +56,89 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    AuthBloc? authBloc;
+    AuthBloc? _authBloc;
+    final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+    _authBloc = authBloc;
     return Scaffold(
-        body: IndexedStack(
-            index: _selectedTab,
-            children: [
-            _screenFactory.makePopularPeopleList(),
-        MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (_) =>
-                  TopRatedMovieListCubit(
-                    topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
-                  ),
-            ),
-            BlocProvider(
-              create: (_) =>
-                  MoviePopularListCubit(
-                    movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
-                  ),
-            ),
-            BlocProvider(
-              create: (_) =>
-                  UpcomingMovieListCubit(
-                    upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
-                  ),
-            ),
-            BlocProvider(
-              create: (_) =>
-                  NowPlayingMovieListCubit(
-                    nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
-                  ),
-            ),
-          ],
-          child: const MovieListWidget(),
-        ),
-        MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
-            ),
-            BlocProvider(
-              create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
-            ),
-            BlocProvider(
-              create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
-            ),
-            BlocProvider(
-              create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial())),
-            ),
-          ],
-          child: const TvListWidget(),
-        ),
-        MultiBlocProvider(
+      body: IndexedStack(
+        index: _selectedTab,
+        children: [
+          _screenFactory.makePopularPeopleList(),
+          MultiBlocProvider(
             providers: [
-            BlocProvider(
-            create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc!),
-    child: const LogoutCardWidget(),
-    ),
-    BlocProvider(create: (_) => AccountDetailsBloc(accountDetailsBloc: AccountDetailsBloc(AccountDetailsState.initial())),
-    ],
-    child: const AccountWidget(),
-    ),
-    // _screenFactory.makePersonalScreen(),
-    // TODO: model need only for hand over widget
-    // create: (_) => settingsModel,
-    // child: const PersonalWidget(),
-    ],
-    ),
-    bottomNavigationBar: ConvexAppBar(
-    backgroundColor: AppColors.bottomBarBackgroundColor,
-    initialActiveIndex: 1,
-    items: const [
-    TabItem<dynamic>(icon: Icons.people, title: 'People'),
-    TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
-    TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
-    TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
-    ],
-    onTap: (int index) => setState(
-    () {
-    _selectedTab = index;
-    },
-    )
-    ,
-    )
-    ,
+              BlocProvider(
+                create: (_) => TopRatedMovieListCubit(
+                  topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
+                ),
+              ),
+              BlocProvider(
+                create: (_) => MoviePopularListCubit(
+                  movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
+                ),
+              ),
+              BlocProvider(
+                create: (_) => UpcomingMovieListCubit(
+                  upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
+                ),
+              ),
+              BlocProvider(
+                create: (_) => NowPlayingMovieListCubit(
+                  nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
+                ),
+              ),
+            ],
+            child: const MovieListWidget(),
+          ),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
+              ),
+              BlocProvider(
+                create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial())),
+              ),
+            ],
+            child: const TvListWidget(),
+          ),
+          _screenFactory.makePersonalScreen(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
+                create: (_) => AccountDetailsCubit(initialState, sessionId, authBloc),
+                child: const LogoutCardWidget(),
+              ),
+              // BlocProvider(create: (_) => AccountDetailsBloc(accountDetailsBloc: AccountDetailsBloc(AccountDetailsState.initial())),
+            ],
+            child: const AccountWidget(),
+          ),
+          // _screenFactory.makePersonalScreen(),
+          // TODO: model need only for hand over widget
+          // create: (_) => settingsModel,
+          // child: const PersonalWidget(),
+        ],
+      ),
+      bottomNavigationBar: ConvexAppBar(
+        backgroundColor: AppColors.bottomBarBackgroundColor,
+        initialActiveIndex: 1,
+        items: const [
+          TabItem<dynamic>(icon: Icons.people, title: 'People'),
+          TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
+          TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
+          TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
+        ],
+        onTap: (int index) => setState(
+          () {
+            _selectedTab = index;
+          },
+        ),
+      ),
     );
   }
 }
