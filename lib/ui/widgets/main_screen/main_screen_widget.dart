@@ -106,7 +106,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (_) => AccountDetailsCubit(sessionId: ''),
+                create: (_) => AccountDetailsCubit(),
               ),
             ],
             child: const AccountWidget(),
