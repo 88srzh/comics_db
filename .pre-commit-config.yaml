@@ -43,4 +43,8 @@ repos:
     hooks:
       - id: dart-format
         files: lib/*
-        exclude: lib/src/utils.dart #
+        exclude: lib/src/utils.dart
+  - repo: https://github.com/dluksza/flutter-analyze-pre-commit
+    rev: "0bfdb7415bb2d02794a884bf2b763a92772001eb"
+    hooks:
+      - id: flutter-analyze
