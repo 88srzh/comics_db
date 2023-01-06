@@ -409,7 +409,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<AccountDetails> accountDetails(String sessionId, String apiKey) async {
+  Future<AccountDetails> accountDetails(String sessionId) async {
     AccountDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = AccountDetails.fromJson(jsonMap);

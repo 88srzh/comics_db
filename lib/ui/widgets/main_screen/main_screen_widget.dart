@@ -9,11 +9,12 @@ import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
-import 'package:comics_db_app/ui/widgets/settings/settings_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_cubit.dart';
@@ -51,6 +52,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // AuthBloc? _authBloc;
+    // final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+    // _authBloc = authBloc;
     return Scaffold(
       body: IndexedStack(
         index: _selectedTab,
@@ -87,8 +91,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                 create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
               ),
               BlocProvider(
-                create: (_) =>
-                    TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
+                create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
               ),
               BlocProvider(
                 create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
@@ -99,7 +102,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ],
             child: const TvListWidget(),
           ),
-          _screenFactory.makePersonalScreen(),
+          // _screenFactory.makePersonalScreen(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => AccountDetailsCubit(),
+              ),
+            ],
+            child: const AccountWidget(),
+          ),
           // TODO: model need only for hand over widget
           // create: (_) => settingsModel,
           // child: const PersonalWidget(),

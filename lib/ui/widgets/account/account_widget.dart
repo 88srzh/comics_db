@@ -2,7 +2,6 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,14 +14,21 @@ class AccountWidget extends StatefulWidget {
 
 class _AccountWidgetState extends State<AccountWidget> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<AccountDetailsCubit>().setupAccountDetails(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // var cubit = context.watch<AccountDetailsCubit>();
-    // final name =  cubit.state.accountDetails;
+    var cubit = context.watch<AccountDetailsCubit>();
+    final name = cubit.state.name;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Personal',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          // 'Personal',
+          name,
+          style: const  TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.kPrimaryColor,
       ),
@@ -41,12 +47,14 @@ class BodyPersonalWidget extends StatefulWidget {
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AccountDetailsCubit>();
+    final name = cubit.state.name;
     return ColoredBox(
       color: AppColors.bottomBarBackgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          HeadingAccountCardWidget(headingText: 'General'),
+        children: [
+          HeadingAccountCardWidget(headingText: name),
           CustomSettingDivider(),
           LogoutCardWidget(),
           CustomSettingDivider(),
@@ -67,7 +75,7 @@ class LogoutCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthViewCubit>();
+    final cubit = context.watch<AccountDetailsCubit>();
     return ListTile(
       onTap: () {
         cubit.logout();
@@ -106,7 +114,7 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
       value: themeColor,
       onChanged: (bool value) {
         setState(
-              () {
+          () {
             themeColor = value;
           },
         );
@@ -140,7 +148,7 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
       value: notifications,
       onChanged: (bool value) {
         setState(
-              () {
+          () {
             notifications = value;
           },
         );

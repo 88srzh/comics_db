@@ -20,18 +20,21 @@ mixin _$AccountDetailsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String locale) loadDetails,
     required TResult Function() loadReset,
+    required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String locale)? loadDetails,
     TResult? Function()? loadReset,
+    TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String locale)? loadDetails,
     TResult Function()? loadReset,
+    TResult Function()? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$AccountDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
     required TResult Function(AccountDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountLogoutEvent value) logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
     TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountLogoutEvent value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
     TResult Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountLogoutEvent value)? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -145,6 +151,7 @@ class _$AccountDetailsEventLoadDetails
   TResult when<TResult extends Object?>({
     required TResult Function(String locale) loadDetails,
     required TResult Function() loadReset,
+    required TResult Function() logout,
   }) {
     return loadDetails(locale);
   }
@@ -154,6 +161,7 @@ class _$AccountDetailsEventLoadDetails
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String locale)? loadDetails,
     TResult? Function()? loadReset,
+    TResult? Function()? logout,
   }) {
     return loadDetails?.call(locale);
   }
@@ -163,6 +171,7 @@ class _$AccountDetailsEventLoadDetails
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String locale)? loadDetails,
     TResult Function()? loadReset,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (loadDetails != null) {
@@ -176,6 +185,7 @@ class _$AccountDetailsEventLoadDetails
   TResult map<TResult extends Object?>({
     required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
     required TResult Function(AccountDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountLogoutEvent value) logout,
   }) {
     return loadDetails(this);
   }
@@ -185,6 +195,7 @@ class _$AccountDetailsEventLoadDetails
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
     TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountLogoutEvent value)? logout,
   }) {
     return loadDetails?.call(this);
   }
@@ -194,6 +205,7 @@ class _$AccountDetailsEventLoadDetails
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
     TResult Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountLogoutEvent value)? logout,
     required TResult orElse(),
   }) {
     if (loadDetails != null) {
@@ -257,6 +269,7 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
   TResult when<TResult extends Object?>({
     required TResult Function(String locale) loadDetails,
     required TResult Function() loadReset,
+    required TResult Function() logout,
   }) {
     return loadReset();
   }
@@ -266,6 +279,7 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String locale)? loadDetails,
     TResult? Function()? loadReset,
+    TResult? Function()? logout,
   }) {
     return loadReset?.call();
   }
@@ -275,6 +289,7 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String locale)? loadDetails,
     TResult Function()? loadReset,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (loadReset != null) {
@@ -288,6 +303,7 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
   TResult map<TResult extends Object?>({
     required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
     required TResult Function(AccountDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountLogoutEvent value) logout,
   }) {
     return loadReset(this);
   }
@@ -297,6 +313,7 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
     TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountLogoutEvent value)? logout,
   }) {
     return loadReset?.call(this);
   }
@@ -306,6 +323,7 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
     TResult Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountLogoutEvent value)? logout,
     required TResult orElse(),
   }) {
     if (loadReset != null) {
@@ -317,4 +335,112 @@ class _$AccountDetailsEventLoadReset implements AccountDetailsEventLoadReset {
 
 abstract class AccountDetailsEventLoadReset implements AccountDetailsEvent {
   factory AccountDetailsEventLoadReset() = _$AccountDetailsEventLoadReset;
+}
+
+/// @nodoc
+abstract class _$$AccountLogoutEventCopyWith<$Res> {
+  factory _$$AccountLogoutEventCopyWith(_$AccountLogoutEvent value,
+          $Res Function(_$AccountLogoutEvent) then) =
+      __$$AccountLogoutEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AccountLogoutEventCopyWithImpl<$Res>
+    extends _$AccountDetailsEventCopyWithImpl<$Res, _$AccountLogoutEvent>
+    implements _$$AccountLogoutEventCopyWith<$Res> {
+  __$$AccountLogoutEventCopyWithImpl(
+      _$AccountLogoutEvent _value, $Res Function(_$AccountLogoutEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AccountLogoutEvent implements AccountLogoutEvent {
+  _$AccountLogoutEvent();
+
+  @override
+  String toString() {
+    return 'AccountDetailsEvent.logout()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AccountLogoutEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String locale) loadDetails,
+    required TResult Function() loadReset,
+    required TResult Function() logout,
+  }) {
+    return logout();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String locale)? loadDetails,
+    TResult? Function()? loadReset,
+    TResult? Function()? logout,
+  }) {
+    return logout?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String locale)? loadDetails,
+    TResult Function()? loadReset,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AccountDetailsEventLoadDetails value) loadDetails,
+    required TResult Function(AccountDetailsEventLoadReset value) loadReset,
+    required TResult Function(AccountLogoutEvent value) logout,
+  }) {
+    return logout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult? Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult? Function(AccountLogoutEvent value)? logout,
+  }) {
+    return logout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AccountDetailsEventLoadDetails value)? loadDetails,
+    TResult Function(AccountDetailsEventLoadReset value)? loadReset,
+    TResult Function(AccountLogoutEvent value)? logout,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AccountLogoutEvent implements AccountDetailsEvent {
+  factory AccountLogoutEvent() = _$AccountLogoutEvent;
 }
