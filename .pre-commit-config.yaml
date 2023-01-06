@@ -37,3 +37,9 @@ repos:
     rev: "v2.2.2"
     hooks:
       - id: codespell
+  - repo: https://github.com/Cretezy/flutter-format-pre-commit
+    rev: "4a1df675bb74dea371c17934933e257e46f8dd98"
+    hooks:
+      - id: flutter-format
+        files: lib/*
+        exclude: lib/src/avatar.dart
