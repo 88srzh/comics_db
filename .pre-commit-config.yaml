@@ -27,3 +27,9 @@ repos:
     rev: "v1.3.1"
     hooks:
       - id: remove-crlf
+  - repo: https://github.com/awebdeveloper/pre-commit-stylelint
+    rev: "0.0.2"
+    hooks:
+      - id: stylelint
+        additional_dependencies:
+          ["stylelint@13.2.1", "stylelint-config-standard@20.0.0"]
