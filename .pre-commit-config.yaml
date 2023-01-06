@@ -48,3 +48,8 @@ repos:
     rev: "0bfdb7415bb2d02794a884bf2b763a92772001eb"
     hooks:
       - id: flutter-analyze
+  - repo: https://github.com/fluttercommunity/import_sorter
+    rev: "f350497a11b1285c695595049e95a420068e7a9f"
+    hooks:
+      - id: dart-import-sorter
+      - id: flutter-import-sorter
