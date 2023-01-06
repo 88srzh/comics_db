@@ -43,3 +43,9 @@ repos:
       - id: flutter-format
         files: lib/*
         exclude: lib/src/avatar.dart
+  - repo: https://github.com/Cretezy/dart-format-pre-commit
+    rev: "fa83c73f40014f9e268bd0e62374eaa581fe3540"
+    hooks:
+      - id: dart-format
+        files: lib/*
+        exclude: lib/src/utils.dart #
