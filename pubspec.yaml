@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -23,12 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.5
-  flutter_lints: ^2.0.1
   flutter_secure_storage: ^6.1.0
   json_annotation: ^4.6.0
   material_design_icons_flutter: ^5.0.6996
-  flutter_svg: ^1.1.4
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
@@ -36,32 +33,31 @@ dependencies:
   youtube_player_flutter: ^8.1.0
   loading_indicator: ^3.1.0
   flutter_native_splash: ^2.2.8
-  carousel_slider: ^4.1.1
   provider: ^6.0.3
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   bloc_concurrency: ^0.2.0
   cached_network_image: ^3.2.1
-#  dart_code_metrics: ^4.21.2
   expandable_text: 2.3.0
   google_fonts: ^3.0.1
   freezed: ^2.3.2
   freezed_annotation: ^2.2.0
   equatable: ^2.0.5
-#  analyzer: ^5.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   json_serializable: ^6.5.4
   build_runner: ^2.3.2
+  dependency_validator: ^3.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -69,10 +65,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - images/
-     - images/splashscreen/
-     - images/errors/
-     - images/components/
+    - images/
+    - images/splashscreen/
+    - images/errors/
+    - images/components/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
