@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tv.g.dart';
@@ -20,20 +21,20 @@ class TV {
   final String originalName;
 
   TV({
-      required this.posterPath,
-      required this.popularity,
-      required this.id,
-      required this.backdropPath,
-      required this.voteAverage,
-      required this.overview,
-      required this.firstAirDate,
-      required this.originCountry,
-      required this.genreIds,
-      required this.originalLanguage,
-      required this.voteCount,
-      required this.name,
-      required this.originalName,
-      });
+    required this.posterPath,
+    required this.popularity,
+    required this.id,
+    required this.backdropPath,
+    required this.voteAverage,
+    required this.overview,
+    required this.firstAirDate,
+    required this.originCountry,
+    required this.genreIds,
+    required this.originalLanguage,
+    required this.voteCount,
+    required this.name,
+    required this.originalName,
+  });
 
   factory TV.fromJson(Map<String, dynamic> json) => _$TVFromJson(json);
 

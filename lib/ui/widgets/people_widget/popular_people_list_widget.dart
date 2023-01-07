@@ -1,4 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
@@ -7,14 +14,13 @@ import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PopularPeopleListWidget extends StatefulWidget {
   const PopularPeopleListWidget({Key? key}) : super(key: key);
 
   @override
-  State<PopularPeopleListWidget> createState() => _PopularPeopleListWidgetState();
+  State<PopularPeopleListWidget> createState() =>
+      _PopularPeopleListWidgetState();
 }
 
 class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
@@ -23,7 +29,9 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<PeopleListCubit>().setupPopularPeopleLocale(locale.languageCode);
+    context
+        .read<PeopleListCubit>()
+        .setupPopularPeopleLocale(locale.languageCode);
   }
 
   @override
@@ -49,7 +57,11 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
             final profilePath = people.profilePath;
             return InkWell(
               onTap: () => cubit.onPeopleTap(context, index),
-              child: _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
+              child: _PeoplePopularListColumnWidget(
+                  profilePath: profilePath,
+                  people: people,
+                  cubit: cubit,
+                  index: index),
             );
           },
         ),
@@ -93,17 +105,25 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: Column(
             children: [
-              profilePath != null ?
-              CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(profilePath!),
-                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-              ) : Image.asset(AppImages.noImageAvailable),
+              profilePath != null
+                  ? CachedNetworkImage(
+                      imageUrl: ImageDownloader.imageUrl(profilePath!),
+                      placeholder: (context, url) =>
+                          const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) =>
+                          Image.asset(AppImages.noImageAvailable),
+                    )
+                  : Image.asset(AppImages.noImageAvailable),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomMovieListTextWidget(text: people.name, maxLines: 1, color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                    CustomMovieListTextWidget(
+                        text: people.name,
+                        maxLines: 1,
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
                   ],
                 ),
               ),

@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+// Dart imports:
 import 'dart:math';
+
+// Flutter imports:
+import 'package:flutter/material.dart';
 
 class RadialPercentWidget extends StatelessWidget {
   final Widget child;
@@ -26,13 +29,14 @@ class RadialPercentWidget extends StatelessWidget {
       children: [
         CustomPaint(
             painter: MyPainter(
-              percent: percent,
-              fillColor: fillColor,
-              lineColor: lineColor,
-              freeColor: freeColor,
-              lineWidth: lineWidth,
-            )),
-        Center(child: Padding(
+          percent: percent,
+          fillColor: fillColor,
+          lineColor: lineColor,
+          freeColor: freeColor,
+          lineWidth: lineWidth,
+        )),
+        Center(
+            child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: child,
         )),
@@ -54,10 +58,9 @@ class MyPainter extends CustomPainter {
     required this.lineColor,
     required this.freeColor,
     required this.lineWidth,
-      });
+  });
   @override
   void paint(Canvas canvas, Size size) {
-
     Rect arcRect = calculateArcsRect(size);
 
     drawBackground(canvas, size);
@@ -73,13 +76,7 @@ class MyPainter extends CustomPainter {
     feelPaint.style = PaintingStyle.stroke;
     feelPaint.strokeWidth = lineWidth;
     feelPaint.strokeCap = StrokeCap.round;
-    canvas.drawArc(
-        arcRect,
-        -pi / 2,
-        pi * 2 * percent,
-        false,
-        feelPaint
-    );
+    canvas.drawArc(arcRect, -pi / 2, pi * 2 * percent, false, feelPaint);
   }
 
   void drawFreeArc(Canvas canvas, Rect arcRect) {
@@ -87,13 +84,8 @@ class MyPainter extends CustomPainter {
     freePaint.color = freeColor;
     freePaint.style = PaintingStyle.stroke;
     freePaint.strokeWidth = lineWidth;
-    canvas.drawArc(
-        arcRect,
-        pi * 2 * percent - (pi / 2),
-        pi * 2 * (1.0 - percent),
-        false,
-        freePaint
-    );
+    canvas.drawArc(arcRect, pi * 2 * percent - (pi / 2),
+        pi * 2 * (1.0 - percent), false, freePaint);
   }
 
   void drawBackground(Canvas canvas, Size size) {
@@ -106,7 +98,8 @@ class MyPainter extends CustomPainter {
   Rect calculateArcsRect(Size size) {
     const linesMargin = 3;
     final offset = lineWidth / 2 + linesMargin;
-    final arcRect = Offset(offset, offset) & Size(size.width - offset * 2, size.height - offset * 2);
+    final arcRect = Offset(offset, offset) &
+        Size(size.width - offset * 2, size.height - offset * 2);
     return arcRect;
   }
 
@@ -114,5 +107,4 @@ class MyPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
-
 }

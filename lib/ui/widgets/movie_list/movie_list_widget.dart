@@ -1,3 +1,7 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -5,9 +9,8 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie
 import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/upcoming_movie_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+// Package imports:
 
 class MovieListWidget extends StatelessWidget {
   const MovieListWidget({Key? key}) : super(key: key);
@@ -15,10 +18,10 @@ class MovieListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: перенести в каждую категорию
-    AlertDialog dialog = const AlertDialog(
-      // TODO: after refactoring search doesn't work
-      content: _SearchWidget(),
-    );
+    // AlertDialog dialog = const AlertDialog(
+    // TODO: after refactoring search doesn't work
+    // content: _SearchWidget(),
+    // );
     return Scaffold(
       appBar: const CustomMainAppBarWidget(),
       body: ColoredBox(
@@ -48,10 +51,12 @@ class MovieListWidget extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                        onTap: () => Navigator.of(context)
+                            .pushNamed(MainNavigationRouteNames.popularMovie),
                         child: const Text(
                           'See All',
-                          style: TextStyle(color: AppColors.ratingText, fontSize: 15),
+                          style: TextStyle(
+                              color: AppColors.ratingText, fontSize: 15),
                         ),
                       ),
                     ],
@@ -71,7 +76,10 @@ class MovieListWidget extends StatelessWidget {
                     children: const [
                       Text(
                         'Coming Soon',
-                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: AppColors.genresText,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -96,10 +104,12 @@ class MovieListWidget extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                     child: const Text(
                       'See All',
-                      style: TextStyle(color: AppColors.ratingText, fontSize: 15),
+                      style:
+                          TextStyle(color: AppColors.ratingText, fontSize: 15),
                     ),
                   ),
                 ],
@@ -119,7 +129,7 @@ class MovieListWidget extends StatelessWidget {
   }
 }
 
-class _SearchIconWidget extends StatelessWidget {
+/*class _SearchIconWidget extends StatelessWidget {
   const _SearchIconWidget({
     Key? key,
     required this.dialog,
@@ -140,9 +150,9 @@ class _SearchIconWidget extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
-class _SearchWidget extends StatelessWidget {
+/*class _SearchWidget extends StatelessWidget {
   const _SearchWidget({
     Key? key,
   }) : super(key: key);
@@ -175,7 +185,7 @@ class _SearchWidget extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 // class _NowPlayingMovieListItemWidget extends StatelessWidget {
 //   const _NowPlayingMovieListItemWidget({

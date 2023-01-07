@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/ui/components/custom_people_text_style.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PeoplesWidget extends StatelessWidget {
   const PeoplesWidget({Key? key}) : super(key: key);
@@ -49,7 +54,8 @@ class _PeoplesWidgetRow extends StatelessWidget {
 class _PeopleWidgetRowItem extends StatelessWidget {
   final MovieDetailsMoviePeopleData employee;
 
-  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
+  const _PeopleWidgetRowItem({Key? key, required this.employee})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

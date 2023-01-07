@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 
 class MovieListCubitState {

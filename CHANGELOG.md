@@ -1,18 +1,26 @@
 ## 0.0.5
- - Refactoring authorization screen
-________
+
+- Refactoring authorization screen
+
+---
 
 ## 0.0.4
-________
- - Fixed logout button
+
+---
+
+- Fixed logout button
 
 ## 0.0.3
-_______
-- Added tv popular list widget at 'see all' popular tv. 
+
+---
+
+- Added tv popular list widget at 'see all' popular tv.
 - Fixed tv top rated movie not available image.
 
 ## 0.0.2
-_______
+
+---
+
 - Added google fonts.
 - Fixed upcoming movies in navigation.
 - Changed "no image available" pic.
@@ -23,5 +31,7 @@ _______
 - Updated secure storage package.
 
 ## 0.0.1
-________
+
+---
+
 - Initial release.

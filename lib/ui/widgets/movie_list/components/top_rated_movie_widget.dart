@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TopRatedMovieWidget extends StatefulWidget {
   const TopRatedMovieWidget({Key? key}) : super(key: key);
@@ -16,7 +21,9 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<TopRatedMovieListCubit>().setupTopRatedMovieLocale(locale.languageCode);
+    context
+        .read<TopRatedMovieListCubit>()
+        .setupTopRatedMovieLocale(locale.languageCode);
   }
 
   @override
@@ -42,7 +49,7 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
             child: InkWell(
               onTap: () => onMovieTap(context, index),
               child: backdropPath != null
-              // TODO: may be wrap in fitted box
+                  // TODO: may be wrap in fitted box
                   ? Image.network(ImageDownloader.imageUrl(backdropPath))
                   : const SizedBox.shrink(),
             ),
@@ -56,6 +63,7 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
     // TODO may be change to watch to display images
     final cubit = context.read<TopRatedMovieListCubit>();
     final movieId = cubit.state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

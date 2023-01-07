@@ -5,7 +5,8 @@ class PeopleListState extends Equatable {
   final PeopleListContainer searchPeopleContainer;
   final String searchQuery;
 
-  List<People> get people => isSearchMode ? searchPeopleContainer.people : peopleContainer.people;
+  List<People> get people =>
+      isSearchMode ? searchPeopleContainer.people : peopleContainer.people;
 
   const PeopleListState.initial()
       : peopleContainer = const PeopleListContainer.initial(),
@@ -21,7 +22,8 @@ class PeopleListState extends Equatable {
   });
 
   @override
-  List<Object> get props => [peopleContainer, searchPeopleContainer, searchQuery];
+  List<Object> get props =>
+      [peopleContainer, searchPeopleContainer, searchQuery];
 
   PeopleListState copyWith({
     PeopleListContainer? peopleContainer,
@@ -30,7 +32,8 @@ class PeopleListState extends Equatable {
   }) {
     return PeopleListState(
         peopleContainer: peopleContainer ?? this.peopleContainer,
-        searchPeopleContainer: searchPeopleContainer ?? this.searchPeopleContainer,
+        searchPeopleContainer:
+            searchPeopleContainer ?? this.searchPeopleContainer,
         searchQuery: searchQuery ?? this.searchQuery);
   }
 }

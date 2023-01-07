@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/data_parser.dart';
 import 'package:comics_db_app/domain/entity/people_details_credits.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'people_details.g.dart';
 
@@ -46,7 +49,8 @@ class PeopleDetails {
     // required this.knownFor,
   });
 
-  factory PeopleDetails.fromJson(Map<String, dynamic> json) => _$PeopleDetailsFromJson(json);
+  factory PeopleDetails.fromJson(Map<String, dynamic> json) =>
+      _$PeopleDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$PeopleDetailsToJson(this);
 }

@@ -1,13 +1,19 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 // TODO refactoring title
 class MoviePopularListCubit extends Cubit<MovieListCubitState> {
@@ -18,7 +24,8 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
   var mov = <Movie>[];
 
   MoviePopularListCubit({required this.movieListBloc})
-      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
+      : super(MovieListCubitState(
+            movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
       () {
         _onState(movieListBloc.state);
@@ -50,7 +57,8 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
 
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
-    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    final releaseDateTitle =
+        releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
       title: movie.title,
       posterPath: movie.posterPath,
@@ -80,6 +88,7 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
 
   void onMovieTap(BuildContext context, int index) {
     final id = state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

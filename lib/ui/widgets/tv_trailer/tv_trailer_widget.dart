@@ -1,15 +1,19 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TvTrailerWidget extends StatefulWidget {
   final String tvYoutubeKey;
-  const TvTrailerWidget({Key? key, required this.tvYoutubeKey}) : super(key: key);
+  const TvTrailerWidget({Key? key, required this.tvYoutubeKey})
+      : super(key: key);
 
   @override
-  _MovieTrailerWidgetState createState() => _MovieTrailerWidgetState();
+  State<TvTrailerWidget> createState() => _TvTrailerWidgetState();
 }
 
-class _MovieTrailerWidgetState extends State<TvTrailerWidget> {
+class _TvTrailerWidgetState extends State<TvTrailerWidget> {
   late final YoutubePlayerController _controller;
 
   @override
@@ -24,6 +28,7 @@ class _MovieTrailerWidgetState extends State<TvTrailerWidget> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
@@ -40,7 +45,6 @@ class _MovieTrailerWidgetState extends State<TvTrailerWidget> {
               ],
             ),
           );
-        }
-    );
+        });
   }
 }

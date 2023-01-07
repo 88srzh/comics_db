@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+
+// Package imports:
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class TrendingAllModel extends ChangeNotifier {
   final _apiClient = MovieAndTvApiClient();

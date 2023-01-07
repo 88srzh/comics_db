@@ -1,13 +1,18 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_all_model.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
 
 class NewsWidgetTrending extends StatefulWidget {
   const NewsWidgetTrending({Key? key}) : super(key: key);
 
   @override
-  _NewsWidgetTrendingState createState() => _NewsWidgetTrendingState();
+  State<NewsWidgetTrending> createState() => _NewsWidgetTrendingState();
 }
 
 class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
@@ -31,11 +36,9 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
                 value: _category,
                 onChanged: (category) {},
                 items: const [
-                  DropdownMenuItem(
-                      value: 'movies', child: Text('Фильмы')),
+                  DropdownMenuItem(value: 'movies', child: Text('Фильмы')),
                   DropdownMenuItem(value: 'tv', child: Text('Сериалы')),
-                  DropdownMenuItem(
-                      value: 'tvShows', child: Text('TVShows')),
+                  DropdownMenuItem(value: 'tvShows', child: Text('TVShows')),
                 ],
               ),
             ],
@@ -60,11 +63,11 @@ class _NewsWidgetTrendingState extends State<NewsWidgetTrending> {
                     Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: posterPath != null ? Image.network(
-                            ImageDownloader.imageUrl(posterPath)
-                          ) : const SizedBox.shrink()
-                        ),
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: posterPath != null
+                                ? Image.network(
+                                    ImageDownloader.imageUrl(posterPath))
+                                : const SizedBox.shrink()),
                         Positioned(
                           top: 15,
                           right: 15,

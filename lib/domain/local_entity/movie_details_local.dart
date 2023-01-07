@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 
 class MovieDetailsLocal {

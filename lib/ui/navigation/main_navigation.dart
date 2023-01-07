@@ -1,3 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
@@ -5,8 +12,6 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 abstract class MainNavigationRouteNames {
   static const splashScreen = 'splashscreen';
@@ -40,11 +45,15 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-    MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
+    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(
+        create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    MainNavigationRouteNames.popularMovie: (_) =>
+        _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
-    MainNavigationRouteNames.nowPlayingMovie: (context) => _screenFactory.makeNowPlayingMovieList(),
-    MainNavigationRouteNames.tvPopularList: (context) => _screenFactory.makePopularTvList(),
+    MainNavigationRouteNames.nowPlayingMovie: (context) =>
+        _screenFactory.makeNowPlayingMovieList(),
+    MainNavigationRouteNames.tvPopularList: (context) =>
+        _screenFactory.makePopularTvList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -92,6 +101,7 @@ class MainNavigation {
   }
 
   static void resetNavigation(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(MainNavigationRouteNames.loaderWidget, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        MainNavigationRouteNames.loaderWidget, (route) => false);
   }
 }

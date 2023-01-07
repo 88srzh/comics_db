@@ -1,5 +1,8 @@
-import 'package:comics_db_app/domain/entity/data_parser.dart';
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/entity/data_parser.dart';
 
 part 'movie.freezed.dart';
 

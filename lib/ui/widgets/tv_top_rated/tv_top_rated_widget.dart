@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TopRatedTvWidget extends StatefulWidget {
   const TopRatedTvWidget({Key? key}) : super(key: key);
@@ -18,7 +23,9 @@ class _TopRatedTvWidgetState extends State<TopRatedTvWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<TvTopRatedListCubit>().setupTopRatedTvLocale(locale.languageCode);
+    context
+        .read<TvTopRatedListCubit>()
+        .setupTopRatedTvLocale(locale.languageCode);
   }
 
   @override
@@ -67,7 +74,9 @@ class _TopRatedTvListItemWidget extends StatelessWidget {
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        child: backdropPath != null ? Image.network(ImageDownloader.imageUrl(backdropPath!)) : Image.asset(AppImages.imageNotAvailableHorizontal),
+        child: backdropPath != null
+            ? Image.network(ImageDownloader.imageUrl(backdropPath!))
+            : Image.asset(AppImages.imageNotAvailableHorizontal),
       ),
     );
   }

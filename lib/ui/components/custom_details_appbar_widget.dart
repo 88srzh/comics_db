@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -18,7 +19,7 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
           color: Theme.of(context).colorScheme.onBackground,
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).maybePop()),
-      );
+    );
   }
 
   @override

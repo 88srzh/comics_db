@@ -1,12 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/material.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({Key? key}) : super(key: key);
 
   @override
-  _SettingsWidgetState createState() => _SettingsWidgetState();
+  State<SettingsWidget> createState() => _SettingsWidgetState();
 }
 
 class _SettingsWidgetState extends State<SettingsWidget> {
@@ -40,7 +43,6 @@ class BodySettingsWidget extends StatelessWidget {
     );
   }
 }
-
 
 class GeneralCard extends StatelessWidget {
   const GeneralCard({Key? key}) : super(key: key);

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tv_details_videos.g.dart';
@@ -5,11 +6,10 @@ part 'tv_details_videos.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TvDetailsVideos {
   final List<TvDetailsVideosResult> results;
-  TvDetailsVideos({
-    required this.results
-  });
+  TvDetailsVideos({required this.results});
 
-  factory TvDetailsVideos.fromJson(Map<String, dynamic> json) => _$TvDetailsVideosFromJson(json);
+  factory TvDetailsVideos.fromJson(Map<String, dynamic> json) =>
+      _$TvDetailsVideosFromJson(json);
 
   Map<String, dynamic> toJson() => _$TvDetailsVideosToJson(this);
 }
@@ -29,21 +29,20 @@ class TvDetailsVideosResult {
   final String publishedAt;
   final String id;
 
-  TvDetailsVideosResult({
-    required this.iso6391,
-    required this.iso31661,
-    required this.name,
-    required this.key,
-    required this.site,
-    required this.size,
-    required this.type,
-    required this.official,
-    required this.publishedAt,
-    required this.id
-  });
+  TvDetailsVideosResult(
+      {required this.iso6391,
+      required this.iso31661,
+      required this.name,
+      required this.key,
+      required this.site,
+      required this.size,
+      required this.type,
+      required this.official,
+      required this.publishedAt,
+      required this.id});
 
-  factory TvDetailsVideosResult.fromJson(Map<String, dynamic> json) => _$TvDetailsVideosResultFromJson(json);
+  factory TvDetailsVideosResult.fromJson(Map<String, dynamic> json) =>
+      _$TvDetailsVideosResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$TvDetailsVideosResultToJson(this);
 }
-

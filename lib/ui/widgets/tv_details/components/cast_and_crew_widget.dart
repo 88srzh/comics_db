@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
 
 class TvCastWidget extends StatelessWidget {
   const TvCastWidget({Key? key}) : super(key: key);
@@ -61,7 +66,8 @@ class _TvActorListWidget extends StatelessWidget {
 class _TvActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _TvActorListItemWidget({Key? key, required this.actorIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,19 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widget.dart';
 
 class MoviePopularListWidget extends StatefulWidget {
   const MoviePopularListWidget({Key? key}) : super(key: key);
@@ -23,7 +28,9 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context
+        .read<MoviePopularListCubit>()
+        .setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -46,12 +53,17 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                 final posterPath = movie.posterPath;
                 return InkWell(
                   onTap: () => cubit.onMovieTap(context, index),
-                  child: _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                  child: _MoviePopularListRowWidget(
+                      posterPath: posterPath,
+                      movie: movie,
+                      cubit: cubit,
+                      index: index),
                 );
               },
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
             ),
           ],

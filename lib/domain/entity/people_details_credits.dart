@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'people_details_credits.g.dart';
@@ -9,7 +10,8 @@ class PeopleDetailsCredits {
 
   PeopleDetailsCredits({required this.cast, required this.crew});
 
-  factory PeopleDetailsCredits.fromJson(Map<String, dynamic> json) => _$PeopleDetailsCreditsFromJson(json);
+  factory PeopleDetailsCredits.fromJson(Map<String, dynamic> json) =>
+      _$PeopleDetailsCreditsFromJson(json);
 
   Map<String, dynamic> toJson() => _$PeopleDetailsCreditsToJson(this);
 }

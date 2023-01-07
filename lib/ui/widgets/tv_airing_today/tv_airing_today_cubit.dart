@@ -1,6 +1,13 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/tv/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
@@ -8,7 +15,6 @@ import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_cubit_state.dart';
-import 'package:flutter/material.dart';
 
 class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   final TvAiringTodayListBloc tvAiringTodayListBloc;
@@ -20,7 +26,8 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
       : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
     Future.microtask(() {
       _onState(tvAiringTodayListBloc.state);
-      tvAiringTodayListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);
+      tvAiringTodayListBlocSubscription =
+          tvAiringTodayListBloc.stream.listen(_onState);
     });
   }
 
@@ -46,7 +53,11 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
 
   TvListData _makeListData(TV tv) {
     return TvListData(
-        id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
+        id: tv.id,
+        name: tv.name,
+        overview: tv.overview,
+        posterPath: tv.posterPath,
+        backdropPath: tv.backdropPath);
   }
 
   void showedAiringTodayTvAtIndex(int index) {
@@ -64,6 +75,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
 
   void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 }

@@ -1,6 +1,11 @@
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:provider/provider.dart';
+
+// Project imports:
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 
 class DirectorWidget extends StatelessWidget {
   const DirectorWidget({Key? key}) : super(key: key);
@@ -8,7 +13,6 @@ class DirectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<TvDetailsModel>(context);
-    if (model == null) return const SizedBox.shrink();
     var names = <String>[];
     final createdBy = model.tvDetails?.createdBy;
     if (createdBy != null && createdBy.isNotEmpty) {

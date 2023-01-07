@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 
 class PeopleDetailsData {
@@ -15,6 +16,7 @@ class PeopleDetailsData {
   bool adult = true;
   String imdbId = '';
   String? homepage = '';
-  List<PeopleDetailsCharacterData> charactersData = const <PeopleDetailsCharacterData>[];
+  List<PeopleDetailsCharacterData> charactersData =
+      const <PeopleDetailsCharacterData>[];
   // List<KnownForData> knownFor = const <KnownForData>[];
 }

@@ -1,6 +1,10 @@
 // @dart=2.9
-import 'package:comics_db_app/ui/widgets/app/my_app.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:comics_db_app/ui/widgets/app/my_app.dart';
 
 void main() {
   const app = MyApp();

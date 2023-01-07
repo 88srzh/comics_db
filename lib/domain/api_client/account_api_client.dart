@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
 
@@ -70,7 +71,10 @@ class AccountApiClient {
       '/account/$accountId/favorite',
       parameters,
       parser,
-      <String, dynamic>{'api_key': Configuration.apiKey, 'session_id': sessionId},
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId
+      },
     );
     return result;
   }

@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class CustomMovieListTextWidget extends StatelessWidget {
@@ -7,7 +8,14 @@ class CustomMovieListTextWidget extends StatelessWidget {
   final Color? color;
   final FontWeight? fontWeight;
 
-  const CustomMovieListTextWidget({Key? key, required this.text, required this.maxLines, required this.fontSize, required this.color, required this.fontWeight}) : super(key: key);
+  const CustomMovieListTextWidget(
+      {Key? key,
+      required this.text,
+      required this.maxLines,
+      required this.fontSize,
+      required this.color,
+      required this.fontWeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

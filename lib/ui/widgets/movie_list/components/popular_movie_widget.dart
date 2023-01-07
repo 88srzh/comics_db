@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PopularMovieWidget extends StatefulWidget {
   const PopularMovieWidget({
@@ -18,7 +23,9 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context
+        .read<MoviePopularListCubit>()
+        .setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -34,7 +41,8 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
         return InkWell(
           onTap: () => cubit.onMovieTap(context, index),
           child: Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
+            padding:
+                const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
             child: Container(
               height: 200,
               width: 114,
@@ -45,8 +53,9 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
               ),
               child: FittedBox(
                 fit: BoxFit.contain,
-                child:
-                    posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+                child: posterPath != null
+                    ? Image.network(ImageDownloader.imageUrl(posterPath))
+                    : const SizedBox.shrink(),
               ),
             ),
           ),

@@ -1,6 +1,14 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
@@ -8,18 +16,16 @@ import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_cubit_state.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TvTopRatedListCubit extends Cubit<TvListCubitState> {
   final TvTopRatedListBloc tvTopRatedListBloc;
   late final StreamSubscription<TvListState> tvListBlocSubscription;
-  late DateFormat _dateFormat;
+  late DateFormat dateFormat;
   Timer? searchDebounce;
   var tv = <TV>[];
 
   TvTopRatedListCubit({required this.tvTopRatedListBloc})
-      : super(TvListCubitState(tvs: const <TvListData>[], localeTag: '')) {
+      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
     Future.microtask(() {
       _onState(tvTopRatedListBloc.state);
       tvListBlocSubscription = tvTopRatedListBloc.stream.listen(_onState);
@@ -36,7 +42,7 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
+    dateFormat = DateFormat.yMMMd(localeTag);
     tvTopRatedListBloc.add(TvListEventLoadReset());
     tvTopRatedListBloc.add(TvListEventLoadNextPage(localeTag));
   }
@@ -49,7 +55,11 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
 
   TvListData _makeListData(TV tv) {
     return TvListData(
-        id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
+        id: tv.id,
+        name: tv.name,
+        overview: tv.overview,
+        posterPath: tv.posterPath,
+        backdropPath: tv.backdropPath);
   }
 
   void showedTopRatedTvAtIndex(int index) {
@@ -67,6 +77,7 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
 
   void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 }

@@ -1,3 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
@@ -24,8 +31,6 @@ import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_list_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenFactory {
   AuthBloc? _authBloc;
@@ -43,7 +48,8 @@ class ScreenFactory {
     final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
     _authBloc = authBloc;
     return BlocProvider<AuthViewCubit>(
-      create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
+      create: (_) =>
+          AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
       child: const AuthWidget(),
     );
   }

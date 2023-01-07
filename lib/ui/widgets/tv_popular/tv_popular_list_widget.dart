@@ -1,3 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
@@ -7,8 +14,6 @@ import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TvPopularListWidget extends StatefulWidget {
   const TvPopularListWidget({Key? key}) : super(key: key);
@@ -23,7 +28,9 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<TvPopularListCubit>().setupPopularTvLocale(locale.languageCode);
+    context
+        .read<TvPopularListCubit>()
+        .setupPopularTvLocale(locale.languageCode);
   }
 
   @override
@@ -36,7 +43,8 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
         child: Stack(
           children: [
             ListView.builder(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 padding: const EdgeInsets.only(top: 70.0),
                 itemCount: cubit.state.tvs.length,
                 itemExtent: 165,
@@ -46,11 +54,16 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
                   final posterPath = tv.posterPath;
                   return InkWell(
                     onTap: () => cubit.onTvTap(context, index),
-                    child: _TvPopularListRowWidget(posterPath: posterPath, tv: tv, cubit: cubit, index: index),
+                    child: _TvPopularListRowWidget(
+                        posterPath: posterPath,
+                        tv: tv,
+                        cubit: cubit,
+                        index: index),
                   );
                 }),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: CustomSearchBar(onChanged: cubit.searchPopularTv),
             ),
           ],

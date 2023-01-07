@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'tv_details.g.dart';
 
@@ -76,11 +79,11 @@ class TVDetails {
     required this.credits,
   });
 
-  factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);
+  factory TVDetails.fromJson(Map<String, dynamic> json) =>
+      _$TVDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TVDetailsToJson(this);
-
-  }
+}
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class CreatedBy {
@@ -98,7 +101,8 @@ class CreatedBy {
     required this.profilePath,
   });
 
-  factory CreatedBy.fromJson(Map<String, dynamic> json) => _$CreatedByFromJson(json);
+  factory CreatedBy.fromJson(Map<String, dynamic> json) =>
+      _$CreatedByFromJson(json);
 
   Map<String, dynamic> toJson() => _$CreatedByToJson(this);
 }
@@ -143,7 +147,8 @@ class LastEpisodeToAir {
     required this.voteCount,
   });
 
-  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => _$LastEpisodeToAirFromJson(json);
+  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) =>
+      _$LastEpisodeToAirFromJson(json);
 
   Map<String, dynamic> toJson() => _$LastEpisodeToAirToJson(this);
 }
@@ -152,7 +157,8 @@ class LastEpisodeToAir {
 class NextEpisodeToAir {
   const NextEpisodeToAir();
 
-  factory NextEpisodeToAir.fromJson(Map<String, dynamic> json) => _$NextEpisodeToAirFromJson(json);
+  factory NextEpisodeToAir.fromJson(Map<String, dynamic> json) =>
+      _$NextEpisodeToAirFromJson(json);
 
   Map<String, dynamic> toJson() => _$NextEpisodeToAirToJson(this);
 }
@@ -171,7 +177,8 @@ class Network {
     required this.originCountry,
   });
 
-  factory Network.fromJson(Map<String, dynamic> json) => _$NetworkFromJson(json);
+  factory Network.fromJson(Map<String, dynamic> json) =>
+      _$NetworkFromJson(json);
 
   Map<String, dynamic> toJson() => _$NetworkToJson(this);
 }
@@ -190,10 +197,10 @@ class ProductionCompany {
     required this.originCountry,
   });
 
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) => _$ProductionCompanyFromJson(json);
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCompanyFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCompanyToJson(this);
-
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
@@ -207,7 +214,8 @@ class ProductionCountry {
     required this.name,
   });
 
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) => _$ProductionCountryFromJson(json);
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCountryFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCountryToJson(this);
 }
@@ -250,7 +258,8 @@ class SpokenLanguage {
     required this.name,
   });
 
-  factory SpokenLanguage.fromJson(Map<String, dynamic> json) => _$SpokenLanguageFromJson(json);
+  factory SpokenLanguage.fromJson(Map<String, dynamic> json) =>
+      _$SpokenLanguageFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpokenLanguageToJson(this);
 }

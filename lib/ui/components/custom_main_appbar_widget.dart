@@ -1,6 +1,9 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:flutter/material.dart';
 
 class CustomMainAppBarWidget extends StatelessWidget with PreferredSizeWidget {
   const CustomMainAppBarWidget({Key? key}) : super(key: key);

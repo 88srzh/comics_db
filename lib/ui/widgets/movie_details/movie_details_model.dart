@@ -1,4 +1,12 @@
 /*
+
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
@@ -6,10 +14,8 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 
 // TODO: delete when end with cubit
 class MovieDetailsData {

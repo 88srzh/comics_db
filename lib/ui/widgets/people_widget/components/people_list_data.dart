@@ -3,5 +3,6 @@ class PeopleListData {
   final String name;
   final String profilePath;
 
-  PeopleListData({required this.id, required this.name, required this.profilePath});
+  PeopleListData(
+      {required this.id, required this.name, required this.profilePath});
 }
