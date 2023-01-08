@@ -55,7 +55,3 @@ repos:
     rev: "4663b743f807eaa0ee1309016f5a6d20b9bb1b13"
     hooks:
       - id: flutter-dependency-validation
-        #  - repo: https://github.com/zricethezav/gitleaks
-        #    rev: v8.12.0
-        #    hooks:
-        #      - id: gitleaks
