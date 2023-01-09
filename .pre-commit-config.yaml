@@ -16,12 +16,12 @@ repos:
     rev: "v1.3.1"
     hooks:
       - id: remove-crlf
-        #  - repo: https://github.com/codespell-project/codespell
-        #    rev: "v2.2.2"
-        #    hooks:
-        #      - id: codespell
-        #        files: ^.*\.(py|c|h|md|rst|yml|dart)$
-        #        args: ["--ignore-words-list"]
+  - repo: https://github.com/codespell-project/codespell
+    rev: "v2.2.2"
+    hooks:
+      - id: codespell
+        files: ^.*\.(yml|dart)$
+        args: ["--ignore-words-list"]
   - repo: https://github.com/Cretezy/flutter-format-pre-commit
     rev: "4a1df675bb74dea371c17934933e257e46f8dd98"
     hooks:
