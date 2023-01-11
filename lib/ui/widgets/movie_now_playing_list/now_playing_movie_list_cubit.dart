@@ -1,26 +1,33 @@
+// Dart imports:
 import 'dart:async';
 
+// Package imports:
 import 'package:bloc/bloc.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
-import 'package:intl/intl.dart';
 
 class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
   final NowPlayingMovieListBloc nowPlayingMovieListBloc;
-  late final StreamSubscription<MovieListState> nowPlayingMoveListBlocSubscription;
+  late final StreamSubscription<MovieListState>
+      nowPlayingMoveListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var movie = <Movie>[];
 
-  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc}) : super(MovieListCubitState(
-      movies: const <MovieListData>[], localeTag: '')) {
+  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc})
+      : super(MovieListCubitState(
+            movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
-          () {
-      _onState(nowPlayingMovieListBloc.state);
-      nowPlayingMoveListBlocSubscription = nowPlayingMovieListBloc.stream.listen(_onState);
+      () {
+        _onState(nowPlayingMovieListBloc.state);
+        nowPlayingMoveListBlocSubscription =
+            nowPlayingMovieListBloc.stream.listen(_onState);
       },
     );
   }
@@ -49,7 +56,8 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
   // TODO may be unite in one class
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
-    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    final releaseDateTitle =
+        releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
       title: movie.title,
       posterPath: movie.posterPath,
@@ -63,18 +71,17 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
 
   void showedNowPlayingMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
+    nowPlayingMovieListBloc
+        .add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchNowPlayingMovie(String text) {
     searchDebounce?.cancel();
-    searchDebounce = Timer(
-      const Duration(milliseconds: 300),
-        () async {
-        nowPlayingMovieListBloc.add(MovieListEventSearchMovie(query: text));
-        nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
-        }
-    );
+    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
+      nowPlayingMovieListBloc.add(MovieListEventSearchMovie(query: text));
+      nowPlayingMovieListBloc
+          .add(MovieListEventLoadNextPage(locale: state.localeTag));
+    });
   }
 
 /*  void onMovieTap(BuildContext context, int index) {

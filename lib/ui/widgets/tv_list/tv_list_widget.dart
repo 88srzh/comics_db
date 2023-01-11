@@ -1,3 +1,7 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -5,7 +9,6 @@ import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
-import 'package:flutter/material.dart';
 
 class TvListWidget extends StatefulWidget {
   const TvListWidget({Key? key}) : super(key: key);
@@ -39,10 +42,14 @@ class _TvListWidgetState extends State<TvListWidget> {
                     children: [
                       const Text(
                         'Popular',
-                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: AppColors.genresText,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600),
                       ),
                       InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopularList),
+                        onTap: () => Navigator.of(context)
+                            .pushNamed(MainNavigationRouteNames.tvPopularList),
                         child: const Text(
                           'See All',
                           style: TextStyle(
@@ -68,7 +75,10 @@ class _TvListWidgetState extends State<TvListWidget> {
                     children: const [
                       Text(
                         'Airing Today',
-                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: AppColors.genresText,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
@@ -87,7 +97,10 @@ class _TvListWidgetState extends State<TvListWidget> {
                     children: const [
                       Text(
                         'On The Air',
-                        style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: AppColors.genresText,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600),
                       )
                     ],
                   ),

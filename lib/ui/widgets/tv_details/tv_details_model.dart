@@ -1,11 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/account_api_client.dart';
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TvDetailsPosterData {
   final String? posterPath;
@@ -53,7 +58,8 @@ class TvDetailsData {
   TvDetailsPosterData tvDetailsPosterData = TvDetailsPosterData();
   TvDetailsNameData tvNameData = TvDetailsNameData(name: '', tagline: '');
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
-  TvDetailsScoresData tvDetailsScoresData = TvDetailsScoresData(voteCount: 0, popularity: 0);
+  TvDetailsScoresData tvDetailsScoresData =
+      TvDetailsScoresData(voteCount: 0, popularity: 0);
 }
 
 class TvDetailsModel extends ChangeNotifier {
@@ -76,7 +82,8 @@ class TvDetailsModel extends ChangeNotifier {
 
   TvDetailsModel(this.tvId);
 
-  String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
+  String stringFromDate(DateTime? date) =>
+      date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupLocale(BuildContext context) async {
     final locale = Localizations.localeOf(context).toLanguageTag();
@@ -92,7 +99,8 @@ class TvDetailsModel extends ChangeNotifier {
       _tvDetails = await _movieAndTvApiClient.tvDetails(tvId, _locale);
       final sessionId = await _sessionDataProvider.getSessionId();
       if (sessionId != null) {
-        _isFavoriteTV = await _movieAndTvApiClient.isFavoriteTV(tvId, sessionId);
+        _isFavoriteTV =
+            await _movieAndTvApiClient.isFavoriteTV(tvId, sessionId);
       }
       updateData(_tvDetails, isFavoriteTV);
     } on ApiClientException catch (e) {
@@ -116,8 +124,10 @@ class TvDetailsModel extends ChangeNotifier {
       posterPath: details.posterPath,
       favoriteIcon: iconData,
     );
-    tvData.tvNameData = TvDetailsNameData(name: details.name, tagline: details.tagline);
-    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    tvData.tvNameData =
+        TvDetailsNameData(name: details.name, tagline: details.tagline);
+    final videos = details.videos.results
+        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     tvData.tvTrailedData = TvDetailsTrailerData(trailerKey: trailerKey);
     tvData.tvDetailsScoresData = TvDetailsScoresData(
@@ -152,7 +162,11 @@ class TvDetailsModel extends ChangeNotifier {
     notifyListeners();
     try {
       await _accountApiClient.markAsFavorite(
-          accountId: accountId, sessionId: sessionId, mediaType: MediaType.tv, mediaId: tvId, isFavorite: _isFavoriteTV);
+          accountId: accountId,
+          sessionId: sessionId,
+          mediaType: MediaType.tv,
+          mediaId: tvId,
+          isFavorite: _isFavoriteTV);
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }
@@ -164,7 +178,7 @@ class TvDetailsModel extends ChangeNotifier {
         onSessionExpired?.call();
         break;
       default:
-        print(exception);
+      // print(exception);
     }
   }
 }

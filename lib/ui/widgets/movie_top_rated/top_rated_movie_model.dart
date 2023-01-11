@@ -1,13 +1,21 @@
 /*
+
+// Dart imports:
 import 'dart:async';
+
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+
+// Package imports:
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/library/paginator.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/localized_model_storage.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class TopRatedMovieViewModel extends ChangeNotifier {
   final _movieService = MovieService();

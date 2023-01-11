@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tv_details_credits.g.dart';
@@ -7,12 +8,10 @@ class TvDetailsCredits {
   List<TvActor> cast;
   List<TvEmployee> crew;
 
-  TvDetailsCredits({
-    required this.cast,
-    required this.crew
-  });
+  TvDetailsCredits({required this.cast, required this.crew});
 
-  factory TvDetailsCredits.fromJson(Map<String, dynamic> json) => _$TvDetailsCreditsFromJson(json);
+  factory TvDetailsCredits.fromJson(Map<String, dynamic> json) =>
+      _$TvDetailsCreditsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TvDetailsCreditsToJson(this);
 }
@@ -31,21 +30,21 @@ class TvActor {
   final String creditId;
   final int order;
 
-  TvActor({
-    required this.adult,
-    required this.gender,
-    required this.id,
-    required this.knownForDepartment,
-    required this.name,
-    required this.originalName,
-    required this.popularity,
-    required this.profilePath,
-    required this.character,
-    required this.creditId,
-    required this.order
-  });
+  TvActor(
+      {required this.adult,
+      required this.gender,
+      required this.id,
+      required this.knownForDepartment,
+      required this.name,
+      required this.originalName,
+      required this.popularity,
+      required this.profilePath,
+      required this.character,
+      required this.creditId,
+      required this.order});
 
-  factory TvActor.fromJson(Map<String, dynamic> json) => _$TvActorFromJson(json);
+  factory TvActor.fromJson(Map<String, dynamic> json) =>
+      _$TvActorFromJson(json);
 
   Map<String, dynamic> toJson() => _$TvActorToJson(this);
 }
@@ -64,22 +63,21 @@ class TvEmployee {
   final String department;
   final String job;
 
-  TvEmployee({
-    required this.adult,
-    required this.gender,
-    required this.id,
-    required this.knownForDepartment,
-    required this.name,
-    required this.originalName,
-    required this.popularity,
-    required this.profilePath,
-    required this.creditId,
-    required this.department,
-    required this.job
-  });
+  TvEmployee(
+      {required this.adult,
+      required this.gender,
+      required this.id,
+      required this.knownForDepartment,
+      required this.name,
+      required this.originalName,
+      required this.popularity,
+      required this.profilePath,
+      required this.creditId,
+      required this.department,
+      required this.job});
 
-  factory TvEmployee.fromJson(Map<String, dynamic> json) => _$TvEmployeeFromJson(json);
+  factory TvEmployee.fromJson(Map<String, dynamic> json) =>
+      _$TvEmployeeFromJson(json);
 
   Map<String, dynamic> toJson() => _$TvEmployeeToJson(this);
 }
-

@@ -8,12 +8,6 @@ repos:
     rev: "v3.0.0-alpha.4"
     hooks:
       - id: prettier
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v8.31.0"
-    hooks:
-      - id: eslint
-        files: \.dart
-        types: [file]
   - repo: https://github.com/asottile/add-trailing-comma
     rev: v2.4.0
     hooks:
@@ -22,17 +16,11 @@ repos:
     rev: "v1.3.1"
     hooks:
       - id: remove-crlf
-  - repo: https://github.com/awebdeveloper/pre-commit-stylelint
-    rev: "0.0.2"
-    hooks:
-      - id: stylelint
-        additional_dependencies:
-          ["stylelint@13.2.1", "stylelint-config-standard@20.0.0"]
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.2.2"
     hooks:
       - id: codespell
-        files: ^.*\.(py|c|h|md|rst|yml|dart)$
+        files: ^.*\.(yml|dart)$
         args: ["--ignore-words-list"]
   - repo: https://github.com/Cretezy/flutter-format-pre-commit
     rev: "4a1df675bb74dea371c17934933e257e46f8dd98"
@@ -59,12 +47,3 @@ repos:
     rev: "4663b743f807eaa0ee1309016f5a6d20b9bb1b13"
     hooks:
       - id: flutter-dependency-validation
-        #  - repo: https://github.com/zricethezav/gitleaks
-        # rev: v8.12.0
-        # hooks:
-        # - id: gitleaks
-        #        name: Detect hardcoded secrets
-        # description: Detect hardcoded secrets using Gitleaks
-        # entry: gitleaks protect --verbose --redact --staged
-        # language: golang
-        # pass_filenames: false

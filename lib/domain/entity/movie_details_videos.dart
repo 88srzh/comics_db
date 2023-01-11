@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_details_videos.g.dart';
@@ -9,7 +10,8 @@ class MovieDetailsVideos {
     required this.results,
   });
 
-  factory MovieDetailsVideos.fromJson(Map<String, dynamic> json) => _$MovieDetailsVideosFromJson(json);
+  factory MovieDetailsVideos.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailsVideosFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsVideosToJson(this);
 }
@@ -41,7 +43,8 @@ class MovieDetailsVideosResult {
     required this.id,
   });
 
-  factory MovieDetailsVideosResult.fromJson(Map<String, dynamic> json) => _$MovieDetailsVideosResultFromJson(json);
+  factory MovieDetailsVideosResult.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailsVideosResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsVideosResultToJson(this);
 }

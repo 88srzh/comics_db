@@ -1,6 +1,8 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
 
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
 import 'package:comics_db_app/domain/entity/account_details.dart';
@@ -38,7 +40,8 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PeopleDetails> popularPeopleDetails(int personId, String locale) async {
+  Future<PeopleDetails> popularPeopleDetails(
+      int personId, String locale) async {
     PeopleDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PeopleDetails.fromJson(jsonMap);
@@ -182,7 +185,8 @@ class MovieAndTvApiClient {
       return response;
     }
 
-    final result = _networkClient.get('/search/person', parser, <String, dynamic>{
+    final result =
+        _networkClient.get('/search/person', parser, <String, dynamic>{
       'api_key': Configuration.apiKey,
       'page': page.toString(),
       'language': locale,
@@ -258,7 +262,8 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> topRatedTvs(int page, String locale, String apiKey) {
+  Future<PopularTVResponse> topRatedTvs(
+      int page, String locale, String apiKey) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -277,7 +282,8 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> airingTodayTvs(int page, String locale, String apiKey) {
+  Future<PopularTVResponse> airingTodayTvs(
+      int page, String locale, String apiKey) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -296,14 +302,16 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> onTheAirTvs(int page, String locale, String apiKey) {
+  Future<PopularTVResponse> onTheAirTvs(
+      int page, String locale, String apiKey) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
       return response;
     }
 
-    final result = _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
+    final result =
+        _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
       'api_key': Configuration.apiKey,
       'page': page.toString(),
       'language': locale,
@@ -348,7 +356,8 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> popularTV(int page, String locale, String apiKey) async {
+  Future<PopularTVResponse> popularTV(
+      int page, String locale, String apiKey) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -367,7 +376,8 @@ class MovieAndTvApiClient {
     return tvResult;
   }
 
-  Future<PopularTVResponse> searchTV(int page, String locale, String query, String apiKey) async {
+  Future<PopularTVResponse> searchTV(
+      int page, String locale, String query, String apiKey) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -388,7 +398,8 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TrendingAllResponse> trendingAll(int page, String? mediaType, String? timeWindow) async {
+  Future<TrendingAllResponse> trendingAll(
+      int page, String? mediaType, String? timeWindow) async {
     TrendingAllResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrendingAllResponse.fromJson(jsonMap);

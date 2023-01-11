@@ -1,12 +1,12 @@
 part of 'account_bloc.dart';
 
-
 class AccountDetailsState extends Equatable {
   final AccountDetailsContainer accountDetailsContainer;
 
   List<AccountDetails> get details => accountDetailsContainer.accountDetails;
 
-  const AccountDetailsState.initial() : accountDetailsContainer = const AccountDetailsContainer.initial();
+  const AccountDetailsState.initial()
+      : accountDetailsContainer = const AccountDetailsContainer.initial();
 
   const AccountDetailsState({required this.accountDetailsContainer});
 
@@ -17,7 +17,8 @@ class AccountDetailsState extends Equatable {
     AccountDetailsContainer? accountDetailsContainer,
   }) {
     return AccountDetailsState(
-        accountDetailsContainer: accountDetailsContainer ?? this.accountDetailsContainer,
+      accountDetailsContainer:
+          accountDetailsContainer ?? this.accountDetailsContainer,
     );
   }
 }

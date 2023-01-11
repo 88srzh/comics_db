@@ -66,7 +66,7 @@ class PeopleDetailsCubitState {
           homepage == other.homepage &&
           localeTag == other.localeTag &&
           charactersData == other.charactersData;
-          // knownFor == other.knownFor;
+  // knownFor == other.knownFor;
 
   @override
   int get hashCode =>
@@ -86,7 +86,7 @@ class PeopleDetailsCubitState {
       homepage.hashCode ^
       localeTag.hashCode ^
       charactersData.hashCode;
-      // knownFor.hashCode;
+  // knownFor.hashCode;
 
   PeopleDetailsCubitState copyWith({
     String? birthday,

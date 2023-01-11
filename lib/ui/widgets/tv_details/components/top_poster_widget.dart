@@ -1,15 +1,21 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TvTopPosterWidget extends StatelessWidget {
   const TvTopPosterWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsPosterData = context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
+    final tvDetailsPosterData = context
+        .select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
     final posterPath = tvDetailsPosterData.posterPath;
     final backdropPath = tvDetailsPosterData.backdropPath;
     return Stack(
@@ -37,7 +43,9 @@ class TvTopPosterWidget extends StatelessWidget {
                 width: 174.0,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : Image.asset(AppImages.noImageAvailable),
+                  child: posterPath != null
+                      ? Image.network(ImageDownloader.imageUrl(posterPath))
+                      : Image.asset(AppImages.noImageAvailable),
                 ),
               ),
             ),

@@ -1,5 +1,10 @@
+// Dart imports:
 import 'dart:async';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
 
 enum LoaderViewCubitState { unknown, authorized, notAuthorized }
@@ -8,12 +13,13 @@ class LoaderViewCubit extends Cubit<LoaderViewCubitState> {
   final AuthBloc authBloc;
   late final StreamSubscription<AuthState> authBlocSubscription;
 
-  LoaderViewCubit(LoaderViewCubitState initialState, this.authBloc) : super(initialState) {
+  LoaderViewCubit(LoaderViewCubitState initialState, this.authBloc)
+      : super(initialState) {
     Future.microtask(
       () {
         _onState(authBloc.state);
         authBlocSubscription = authBloc.stream.listen(_onState);
-        authBloc.add(AuthCheckStatusEvent());
+        authBloc.add(const AuthCheckStatusEvent());
       },
     );
   }

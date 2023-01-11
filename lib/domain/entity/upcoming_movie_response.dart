@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_dates.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'upcoming_movie_response.g.dart';
 

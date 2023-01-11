@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
@@ -22,10 +25,13 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     }), transformer: sequential());
   }
 
-  Future<void> onTvListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
+  Future<void> onTvListEventLoadNextPage(
+      TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
     if (state.isSearchMode) {
-      final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
-        final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+      final container =
+          await _loadNextPage(state.searchTvContainer, (nextPage) async {
+        final result = await _tvApiClient.searchTV(
+            nextPage, event.locale, state.searchQuery, Configuration.apiKey);
         return result;
       });
       if (container != null) {
@@ -33,8 +39,10 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
         emit(newState);
       }
     } else {
-      final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.airingTodayTvs(nextPage, event.locale, Configuration.apiKey);
+      final container =
+          await _loadNextPage(state.tvContainer, (nextPage) async {
+        final result = await _tvApiClient.airingTodayTvs(
+            nextPage, event.locale, Configuration.apiKey);
         return result;
       });
       if (container != null) {
@@ -44,7 +52,8 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     }
   }
 
-  Future<TvListContainer?> _loadNextPage(TvListContainer container, Future<PopularTVResponse> Function(int) loader) async {
+  Future<TvListContainer?> _loadNextPage(TvListContainer container,
+      Future<PopularTVResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.tvContainer.currentPage + 1;
     final result = await loader(nextPage);
@@ -57,13 +66,17 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     return newContainer;
   }
 
-  Future<void> onTvListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
+  Future<void> onTvListEventLoadReset(
+      TvListEventLoadReset event, Emitter<TvListState> emit) async {
     emit(TvListState.initial());
   }
 
-  Future<void> onTvListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {
+  Future<void> onTvListEventLoadSearchTv(
+      TvListEventSearchTv event, Emitter<TvListState> emit) async {
     if (state.searchQuery == event.query) return;
-    final newState = state.copyWith(searchQuery: event.query, searchTvContainer: const TvListContainer.initial());
+    final newState = state.copyWith(
+        searchQuery: event.query,
+        searchTvContainer: const TvListContainer.initial());
     emit(newState);
   }
 }

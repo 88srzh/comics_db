@@ -1,8 +1,12 @@
-import 'package:comics_db_app/app_colors.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import 'package:comics_db_app/app_colors.dart';
+
 class HeadingAccountCardWidget extends StatelessWidget {
-  const HeadingAccountCardWidget({Key? key, required this.headingText}) : super(key: key);
+  const HeadingAccountCardWidget({Key? key, required this.headingText})
+      : super(key: key);
   final String headingText;
 
   @override
@@ -20,7 +24,10 @@ class HeadingAccountCardWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
                   headingText,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
                 ),
               ),
             ),

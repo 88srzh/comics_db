@@ -1,5 +1,8 @@
-import 'package:comics_db_app/domain/entity/tv.dart';
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/entity/tv.dart';
 
 part 'popular_tv_response.g.dart';
 

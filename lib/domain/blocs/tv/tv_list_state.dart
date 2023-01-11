@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 
@@ -24,14 +25,15 @@ class TvListState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is TvListState &&
-              runtimeType == other.runtimeType &&
-              tvContainer == other.tvContainer &&
-              searchTvContainer == other.searchTvContainer &&
-              searchQuery == other.searchQuery;
+      other is TvListState &&
+          runtimeType == other.runtimeType &&
+          tvContainer == other.tvContainer &&
+          searchTvContainer == other.searchTvContainer &&
+          searchQuery == other.searchQuery;
 
   @override
-  int get hashCode => tvContainer.hashCode ^ searchTvContainer.hashCode ^ searchQuery.hashCode;
+  int get hashCode =>
+      tvContainer.hashCode ^ searchTvContainer.hashCode ^ searchQuery.hashCode;
 
   TvListState copyWith({
     TvListContainer? tvContainer,

@@ -1,13 +1,18 @@
+// Dart imports:
 import 'dart:async';
-import 'package:comics_db_app/domain/blocs/people/people_list_container.dart';
+
+// Package imports:
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/people/people_list_container.dart';
 import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/people_response.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'popular_people_list_bloc.freezed.dart';
 
@@ -30,19 +35,23 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
     }), transformer: sequential());
   }
 
-  Future<void> onPeopleListEventLoadNextPage(PeopleListEventLoadNextPage event, Emitter<PeopleListState> emit) async {
+  Future<void> onPeopleListEventLoadNextPage(
+      PeopleListEventLoadNextPage event, Emitter<PeopleListState> emit) async {
     if (state.isSearchMode) {
       _loadNextPage(state.searchPeopleContainer, (nextPage) async {
         final result =
             // TODO may be add separate search
-            await _movieApiClient.searchPeople(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+            await _movieApiClient.searchPeople(nextPage, event.locale,
+                state.searchQuery, Configuration.apiKey);
         return result;
       });
 
       if (state.searchPeopleContainer.isComplete) return;
       final nextPage = state.searchPeopleContainer.currentPage + 1;
-      final result = await _movieApiClient.searchPeople(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
-      final people = List<People>.from(state.peopleContainer.people)..addAll(result.people);
+      final result = await _movieApiClient.searchPeople(
+          nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+      final people = List<People>.from(state.peopleContainer.people)
+        ..addAll(result.people);
       final container = state.searchPeopleContainer.copyWith(
         people: people,
         currentPage: result.page,
@@ -53,8 +62,10 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
     } else {
       if (state.peopleContainer.isComplete) return;
       final nextPage = state.peopleContainer.currentPage + 1;
-      final result = await _movieApiClient.popularPeople(nextPage, event.locale, Configuration.apiKey);
-      final people = List<People>.from(state.peopleContainer.people)..addAll(result.people);
+      final result = await _movieApiClient.popularPeople(
+          nextPage, event.locale, Configuration.apiKey);
+      final people = List<People>.from(state.peopleContainer.people)
+        ..addAll(result.people);
       final container = state.peopleContainer.copyWith(
         people: people,
         currentPage: result.page,
@@ -65,7 +76,8 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
     }
   }
 
-  Future<PeopleListContainer?> _loadNextPage(PeopleListContainer container, Future<PeopleResponse> Function(int) loader) async {
+  Future<PeopleListContainer?> _loadNextPage(PeopleListContainer container,
+      Future<PeopleResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.peopleContainer.currentPage + 1;
     final result = await loader(nextPage);
@@ -78,14 +90,18 @@ class PeopleListBloc extends Bloc<PeopleListEvent, PeopleListState> {
     return newContainer;
   }
 
-  Future<void> onPeopleListEventLoadReset(PeopleListEventLoadReset event, Emitter<PeopleListState> emit) async {
+  Future<void> onPeopleListEventLoadReset(
+      PeopleListEventLoadReset event, Emitter<PeopleListState> emit) async {
     emit(const PeopleListState.initial());
     // add(MovieListEventLoadNextPage(event.locale));
   }
 
-  Future<void> onPeopleListEventLoadSearchMovie(PeopleListEventSearchMovie event, Emitter<PeopleListState> emit) async {
+  Future<void> onPeopleListEventLoadSearchMovie(
+      PeopleListEventSearchMovie event, Emitter<PeopleListState> emit) async {
     if (state.searchQuery == event.query) return;
-    final newState = state.copyWith(searchQuery: event.query, searchPeopleContainer: const PeopleListContainer.initial());
+    final newState = state.copyWith(
+        searchQuery: event.query,
+        searchPeopleContainer: const PeopleListContainer.initial());
     emit(newState);
   }
 }

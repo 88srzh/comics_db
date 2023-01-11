@@ -36,19 +36,19 @@
 //                         child: SizedBox(
 //                           height: 200,
 //                           TOD0: rename
-                          // child: _SimilarListMovieWidget(),
-                        // ),
-                      // ),
-                    // ],
-                  // )
-                // ],
-              // ),
-            // ],
-          // ),
-        // ],
-      // ),
-    // );
-  // }
+// child: _SimilarListMovieWidget(),
+// ),
+// ),
+// ],
+// )
+// ],
+// ),
+// ],
+// ),
+// ],
+// ),
+// );
+// }
 // }
 
 // class _SimilarListMovieWidget extends StatefulWidget {
@@ -71,4 +71,3 @@
 //     return Container();
 //   }
 // }
-

@@ -1,5 +1,8 @@
-import 'package:comics_db_app/domain/entity/people.dart';
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/entity/people.dart';
 
 part 'people_response.g.dart';
 
@@ -18,6 +21,7 @@ class PeopleResponse {
     required this.totalPages,
   });
 
-  factory PeopleResponse.fromJson(Map<String, dynamic> json) => _$PeopleResponseFromJson(json);
+  factory PeopleResponse.fromJson(Map<String, dynamic> json) =>
+      _$PeopleResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PeopleResponseToJson(this);
 }

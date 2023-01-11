@@ -1,15 +1,20 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/custom_poster_top_left_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_poster_top_left_text_rating_widget.dart';
+import 'package:comics_db_app/ui/components/custom_poster_top_left_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MovieTopPosterWidget extends StatelessWidget {
   const MovieTopPosterWidget({Key? key}) : super(key: key);
@@ -33,20 +38,23 @@ class MovieTopPosterWidget extends StatelessWidget {
     // TODO add favorite icon button
     return Stack(
       children: [
-        backdropPath != null ?
-        Positioned(
-          child: Opacity(
-            opacity: 0.25,
-            child: AspectRatio(
-              aspectRatio: 390 / 220,
-              child: CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(backdropPath),
-                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-              ),
-            ),
-          ),
-        ) : Image.asset(AppImages.noImageAvailable),
+        backdropPath != null
+            ? Positioned(
+                child: Opacity(
+                  opacity: 0.25,
+                  child: AspectRatio(
+                    aspectRatio: 390 / 220,
+                    child: CachedNetworkImage(
+                      imageUrl: ImageDownloader.imageUrl(backdropPath),
+                      placeholder: (context, url) =>
+                          const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) =>
+                          Image.asset(AppImages.noImageAvailable),
+                    ),
+                  ),
+                ),
+              )
+            : Image.asset(AppImages.noImageAvailable),
         Positioned(
           top: 15,
           left: 20,
@@ -82,7 +90,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                 const SizedBox(height: 5.0),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: releaseDate, maxLines: null),
+                    CustomPosterTopLeftAlignText(
+                        text: releaseDate, maxLines: null),
                   ],
                 ),
                 Row(
@@ -103,7 +112,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    CustomPosterTopLeftAlignTextRating(text: '$voteAverageString from IMDB'),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: '$voteAverageString from IMDB'),
                   ],
                 ),
                 Row(
@@ -114,7 +124,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    CustomPosterTopLeftAlignTextRating(text: voteCount.toStringAsFixed(0)),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: voteCount.toStringAsFixed(0)),
                   ],
                 ),
                 Row(
@@ -125,7 +136,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4),
-                    CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: popularityInt.toString()),
                   ],
                 ),
               ],
@@ -142,7 +154,8 @@ class MovieTopPosterWidget extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(posterPath!),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+              errorWidget: (context, url, dynamic error) =>
+                  Image.asset(AppImages.noImageAvailable),
             ),
           ),
         ),

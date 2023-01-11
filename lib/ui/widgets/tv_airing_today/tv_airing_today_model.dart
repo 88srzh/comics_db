@@ -1,12 +1,18 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+
+// Package imports:
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class AiringTodayTvsModel extends ChangeNotifier {
   final _apiClient = MovieAndTvApiClient();
@@ -20,7 +26,6 @@ class AiringTodayTvsModel extends ChangeNotifier {
 
   List<TV> get tvs => List.unmodifiable(_tvs);
   late DateFormat _dateFormat;
-
 
 // ! - TODO: вынести в отдельный файл
   String stringFromDate(DateTime? date) =>
@@ -44,11 +49,12 @@ class AiringTodayTvsModel extends ChangeNotifier {
   Future<PopularTVResponse> _loadTVs(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
-      return await _apiClient.airingTodayTvs(nextPage, _locale, Configuration.apiKey);
+      return await _apiClient.airingTodayTvs(
+          nextPage, _locale, Configuration.apiKey);
     } else {
-      return await _apiClient.searchTV(nextPage, _locale, query, Configuration.apiKey);
+      return await _apiClient.searchTV(
+          nextPage, _locale, query, Configuration.apiKey);
     }
-
   }
 
   Future<void> _loadNextTVsPage() async {
@@ -65,7 +71,7 @@ class AiringTodayTvsModel extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _isLoadingInProgress = false;
-      print('какая-то хуйня');
+      // print('какая-то хуйня');
     }
   }
 
@@ -79,11 +85,12 @@ class AiringTodayTvsModel extends ChangeNotifier {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
       final searchQuery = text.isNotEmpty ? text : null;
-      if(_searchQuery == searchQuery) return;
+      if (_searchQuery == searchQuery) return;
       _searchQuery = searchQuery;
       await _resetTVList();
     });
   }
+
   void showedTVAtIndex(int index) {
     if (index < _tvs.length - 1) return;
     _loadNextTVsPage();

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_dates.g.dart';
@@ -8,11 +9,12 @@ class MovieDates {
   final String minimum;
 
   MovieDates({
-      required this.maximum,
-      required this.minimum,
+    required this.maximum,
+    required this.minimum,
   });
 
-  factory MovieDates.fromJson(Map<String, dynamic> json) => _$MovieDatesFromJson(json);
+  factory MovieDates.fromJson(Map<String, dynamic> json) =>
+      _$MovieDatesFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDatesToJson(this);
 }

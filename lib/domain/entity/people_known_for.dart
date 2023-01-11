@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'people_known_for.g.dart';
@@ -9,7 +10,8 @@ class PeopleKnownFor {
     required this.result,
   });
 
-  factory PeopleKnownFor.fromJson(Map<String, dynamic> json) => _$PeopleKnownForFromJson(json);
+  factory PeopleKnownFor.fromJson(Map<String, dynamic> json) =>
+      _$PeopleKnownForFromJson(json);
 
   Map<String, dynamic> toJson() => _$PeopleKnownForToJson(this);
 }
@@ -50,7 +52,8 @@ class PeopleKnownForResult {
     required this.voteAverage,
   });
 
-  factory PeopleKnownForResult.fromJson(Map<String, dynamic> json) => _$PeopleKnownForResultFromJson(json);
+  factory PeopleKnownForResult.fromJson(Map<String, dynamic> json) =>
+      _$PeopleKnownForResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$PeopleKnownForResultToJson(this);
 }

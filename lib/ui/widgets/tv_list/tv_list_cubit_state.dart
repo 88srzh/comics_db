@@ -1,5 +1,8 @@
-import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 
 class TvListCubitState extends Equatable {
   final List<TvListData> tvs;

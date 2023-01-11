@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/people_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 part 'people_details_state.dart';
 
@@ -57,15 +61,13 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   }
 
   Future<void> loadPeopleDetails(BuildContext context) async {
-    try {
-      final details = await _peopleDetailsService.loadPeopleDetails(id: id, locale: state.localeTag);
-      await updateData(details.details);
-    } on ApiClientException catch (e) {
-      print(e);
-    }
+    final details = await _peopleDetailsService.loadPeopleDetails(
+        id: id, locale: state.localeTag);
+    await updateData(details.details);
   }
 
-  Future<void> setupPeopleDetailsLocale(BuildContext context, String localeTag) async {
+  Future<void> setupPeopleDetailsLocale(
+      BuildContext context, String localeTag) async {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -97,7 +99,11 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.imdbId = details.imdbId;
     data.homepage = details.homepage;
     data.charactersData = details.credits.cast
-        .map((e) => PeopleDetailsCharacterData(character: e.character, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .map((e) => PeopleDetailsCharacterData(
+            character: e.character,
+            title: e.title,
+            posterPath: e.posterPath,
+            backdropPath: e.backdropPath))
         .toList();
     // data.knownFor = details.knownFor.result.map((e) => KnownForData(posterPath: e.posterPath, title: e.title)).toList();
 

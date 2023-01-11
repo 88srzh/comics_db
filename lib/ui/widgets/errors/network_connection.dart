@@ -1,5 +1,8 @@
-import 'package:comics_db_app/resources/resources.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:comics_db_app/resources/resources.dart';
 
 class ConnectionFailedScreen extends StatelessWidget {
   const ConnectionFailedScreen({super.key});

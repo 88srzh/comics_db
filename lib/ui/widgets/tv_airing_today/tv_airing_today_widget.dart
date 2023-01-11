@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AiringTodayTvsWidget extends StatefulWidget {
   const AiringTodayTvsWidget({Key? key}) : super(key: key);
@@ -16,8 +21,10 @@ class _AiringTodayTvsWidgetState extends State<AiringTodayTvsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-  final locale = Localizations.localeOf(context);
-  context.read<TvAiringTodayListCubit>().setupAiringTodayTvLocale(locale.languageCode);
+    final locale = Localizations.localeOf(context);
+    context
+        .read<TvAiringTodayListCubit>()
+        .setupAiringTodayTvLocale(locale.languageCode);
   }
 
   @override
@@ -70,7 +77,9 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.contain,
-          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const SizedBox.shrink(),
+          child: posterPath != null
+              ? Image.network(ImageDownloader.imageUrl(posterPath!))
+              : const SizedBox.shrink(),
         ),
       ),
     );
