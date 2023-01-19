@@ -24,15 +24,9 @@
 
 ## 🌟 Preview
 
----
-
 ## ✨ Features
 
----
-
 ## ⚡ Requirements
-
----
 
 ## 🛠️ Installation
 
