@@ -2,11 +2,12 @@
 
 ---
 
-<h4 align="center">
-<a name="install">Install</a>
-·
-<a href="">Docs</a>
-</h4>
+[//]: # (<h4 align="center">)
+
+[//]: # (<a name="install">Install</a>)
+[//]: # (·)
+[//]: # (<a href="">Docs</a>)
+[//]: # (</h4>)
 
 <p align="center">
     <img src="https://img.shields.io/github/last-commit/88srzh/comics_db?color=%237DC2E8&logo=GitHub" />
@@ -24,11 +25,11 @@
 
 ## 🌟 Preview
 
-## ✨ Features
+[//]: # (## ✨ Features)
 
-## ⚡ Requirements
+[//]: # (## ⚡ Requirements)
 
-## 🛠️ <a href="install">Installation</a>
+## 🛠️ Installation
 
 #### Clone the repository
 
