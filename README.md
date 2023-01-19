@@ -3,7 +3,7 @@
 ---
 
 <h4 align="center">
-<a href="">Install</a>
+<a name="install">Install</a>
 ·
 <a href="">Docs</a>
 </h4>
@@ -28,7 +28,7 @@
 
 ## ⚡ Requirements
 
-## 🛠️ Installation
+## 🛠️ <a href="install">Installation</a>
 
 #### Clone the repository
 
