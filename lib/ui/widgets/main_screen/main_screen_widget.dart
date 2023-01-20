@@ -115,7 +115,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             child: const TvListWidget(),
           ),
           // TODO hide while not fix
-          // _screenFactory.makePersonalScreen(),
+          _screenFactory.makePersonalScreen(),
           // MultiBlocProvider(
           //   providers: [
           //     BlocProvider(
