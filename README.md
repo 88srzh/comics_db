@@ -27,7 +27,12 @@
 
 [//]: # (## ✨ Features)
 
-[//]: # (## ⚡ Requirements)
+## ⚡ Requirements
+
+ - Account on the https://www.themoviedb.org/ 
+
+
+> Anonymous login to the application will be implemented in the future.
 
 ## 🛠️ Installation
 
