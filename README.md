@@ -19,8 +19,6 @@
 
 </p>
 
----
-
 <p align="center">The Movie Database Mobile (TMDBM) is a popular database for movies and TV shows.</p>
 
 ## 🌟 Preview
