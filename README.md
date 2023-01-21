@@ -22,7 +22,7 @@
 
 ## 🌟 Preview
 
-![Screenshot_133_edit.png](..%2F..%2F..%2FPictures%2FScreenshots%2Ftmdbm%2FScreenshot_133_edit.png)
+![Screenshot_133_edit.png](https://github.com/88srzh/comics_db/.git/readme_images/Screenshot_133_edit.png)
 ![Screenshot_129_edit.png](..%2F..%2F..%2FPictures%2FScreenshots%2Ftmdbm%2FScreenshot_129_edit.png)
 ![Screenshot_128_edit.png](..%2F..%2F..%2FPictures%2FScreenshots%2Ftmdbm%2FScreenshot_128_edit.png)
 ![Screenshot_131_edit.png](..%2F..%2F..%2FPictures%2FScreenshots%2Ftmdbm%2FScreenshot_131_edit.png)
