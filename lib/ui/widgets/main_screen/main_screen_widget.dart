@@ -17,6 +17,8 @@ import 'package:comics_db_app/domain/blocs/tv/tv_on_the_air_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
@@ -116,14 +118,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ),
           // TODO hide while not fix
           // _screenFactory.makePersonalScreen(),
-          // MultiBlocProvider(
-          //   providers: [
-          //     BlocProvider(
-          //       create: (_) => AccountDetailsCubit(),
-          //     ),
-          //   ],
-          //   child: const AccountWidget(),
-          // ),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => AccountDetailsCubit(),
+              ),
+            ],
+            child: const AccountWidget(),
+          ),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
@@ -133,7 +135,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
-          // TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
+          TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
         ],
         onTap: (int index) => setState(
           () {

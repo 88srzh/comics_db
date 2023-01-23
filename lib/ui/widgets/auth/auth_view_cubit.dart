@@ -31,6 +31,10 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
     authBloc.add(AuthLoginEvent(login: login, password: password));
   }
 
+  void guestAuth() {
+    authBloc.add(const GuestAuthLoginEvent());
+  }
+
   void logout() {
     authBloc.add(const AuthLogOutEvent());
   }

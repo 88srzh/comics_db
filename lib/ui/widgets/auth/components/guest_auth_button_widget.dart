@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
-import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 
 class GuestAuthButtonWidget extends StatelessWidget {
@@ -16,20 +15,17 @@ class GuestAuthButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthViewCubit>();
-    final authDataStorage = context.read<AuthDataStorage>();
+    // final authDataStorage = context.read<AuthDataStorage>();
     final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState ||
         cubit.state is AuthViewCubitErrorState;
-    final onPressed = canStartAuth
-        ? () => cubit.auth(
-            login: authDataStorage.login, password: authDataStorage.password)
-        : null;
+    final onPressed = canStartAuth ? () => cubit.guestAuth() : null;
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
             width: 15,
             height: 15,
             child: CircularProgressIndicator(strokeWidth: 2),
           )
-        : const Text('Login');
+        : const Text('Guest login');
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
