@@ -17,6 +17,11 @@ class AuthApiClient {
     return sessionId;
   }
 
+  Future<String> guestAuth() async {
+    final guestSessionId = await makeGuestSession();
+    return guestSessionId;
+  }
+
   Future<String> _makeToken() async {
     String parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -26,6 +31,21 @@ class AuthApiClient {
 
     final result = _networkClient.get(
       '/authentication/token/new',
+      parser,
+      <String, dynamic>{'api_key': Configuration.apiKey},
+    );
+    return result;
+  }
+
+  Future<String> makeGuestSession() async {
+    String parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final guestSessionId = jsonMap['guest_session_id'] as String;
+      return guestSessionId;
+    }
+
+    final result = _networkClient.get(
+      '/authentication/guest_session/new',
       parser,
       <String, dynamic>{'api_key': Configuration.apiKey},
     );
