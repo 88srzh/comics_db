@@ -12,7 +12,6 @@ import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dar
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
-import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
@@ -54,14 +53,14 @@ class ScreenFactory {
     );
   }
 
-  Widget makePersonalScreen() {
-    final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
-    _authBloc = authBloc;
-    return BlocProvider(
-      create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
-      child: const AccountWidget(),
-    );
-  }
+  // Widget makePersonalScreen() {
+  //   final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
+  //   _authBloc = authBloc;
+  //   return BlocProvider(
+  //     create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
+  //     child: const AccountWidget(),
+  //   );
+  // }
 
 // TODO: may be delete provider
   Widget makeMainScreen() {

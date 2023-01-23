@@ -1,3 +1,4 @@
+/*
 part of 'account_bloc.dart';
 
 class AccountDetailsState extends Equatable {
@@ -22,3 +23,4 @@ class AccountDetailsState extends Equatable {
     );
   }
 }
+*/
