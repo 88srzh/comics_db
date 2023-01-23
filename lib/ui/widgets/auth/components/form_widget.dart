@@ -11,6 +11,7 @@ import 'package:comics_db_app/ui/components/custom_auth_text_style.dart';
 import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/auth_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/error_message_widget.dart';
+import 'package:comics_db_app/ui/widgets/auth/components/guest_auth_button_widget.dart';
 
 class FormWidget extends StatelessWidget {
   FormWidget({Key? key}) : super(key: key);
@@ -53,6 +54,7 @@ class FormWidget extends StatelessWidget {
           children: const [
             SizedBox(width: 5.0),
             AuthButtonWidget(),
+            GuestAuthButtonWidget(),
             SizedBox(width: 10.0),
           ],
         )

@@ -24,6 +24,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await onAuthCheckStatusEvent(event, emit);
       } else if (event is AuthLoginEvent) {
         await onAuthLoginEvent(event, emit);
+      } else if (event is GuestAuthLoginEvent) {
+        await onGuestAuthLoginEvent(event, emit);
       } else if (event is AuthLogOutEvent) {
         await onAuthLogoutEvent(event, emit);
       }
@@ -49,6 +51,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final accountId = await _accountApiClient.getAccountInfo(sessionId);
       await _sessionDataProvider.setSessionId(sessionId);
       await _sessionDataProvider.setAccountId(accountId);
+      emit(AuthAuthorizedState());
+    } catch (e) {
+      emit(AuthFailureState(e));
+    }
+  }
+
+  Future<void> onGuestAuthLoginEvent(
+      GuestAuthLoginEvent event, Emitter<AuthState> emit) async {
+    try {
+      emit(AuthInProgressState());
+      final guestSessionId = await _authApiClient.guestAuth();
+      final guestAccountId =
+          await _accountApiClient.getAccountInfo(guestSessionId);
+      await _sessionDataProvider.setSessionId(guestSessionId);
+      await _sessionDataProvider.setAccountId(guestAccountId);
       emit(AuthAuthorizedState());
     } catch (e) {
       emit(AuthFailureState(e));
