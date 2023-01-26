@@ -16,8 +16,8 @@ class GuestAuthButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthViewCubit>();
     // final authDataStorage = context.read<AuthDataStorage>();
-    final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState || cubit.state is AuthViewCubitErrorState;
-    final onPressed = canStartAuth ? () => cubit.guestAuth() : null;
+    // final canStartAuth = cubit.state is AuthVi?ewCubitFormFillInProgressState || cubit.state is AuthViewCubitErrorState;
+    onPressed () => cubit.guestAuth();
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
             width: 15,
