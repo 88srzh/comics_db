@@ -53,7 +53,7 @@ class FormWidget extends StatelessWidget {
         Row(
           children: const [
             SizedBox(width: 5.0),
-            AuthButtonWidget(),
+            // AuthButtonWidget(),
             GuestAuthButtonWidget(),
             SizedBox(width: 10.0),
           ],

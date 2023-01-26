@@ -17,12 +17,9 @@ class AuthButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthViewCubit>();
     final authDataStorage = context.read<AuthDataStorage>();
-    final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState ||
-        cubit.state is AuthViewCubitErrorState;
-    final onPressed = canStartAuth
-        ? () => cubit.auth(
-            login: authDataStorage.login, password: authDataStorage.password)
-        : null;
+    final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState || cubit.state is AuthViewCubitErrorState;
+    final onPressed =
+        canStartAuth ? () => cubit.auth(login: authDataStorage.login, password: authDataStorage.password) : null;
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
             width: 15,
@@ -38,8 +35,7 @@ class AuthButtonWidget extends StatelessWidget {
           ),
           backgroundColor: AppColors.buttonFont,
           foregroundColor: Colors.white,
-          textStyle:
-              const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
       child: child,
     );
   }
