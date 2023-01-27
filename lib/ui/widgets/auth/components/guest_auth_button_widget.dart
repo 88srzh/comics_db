@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,9 +16,7 @@ class GuestAuthButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthViewCubit>();
-    // final authDataStorage = context.read<AuthDataStorage>();
-    // final canStartAuth = cubit.state is AuthVi?ewCubitFormFillInProgressState || cubit.state is AuthViewCubitErrorState;
-    onPressed () => cubit.guestAuth();
+    onPressed () => Navigator.of(context).pushNamed(MainNavigationRouteNames.mainScreen);
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
             width: 15,
