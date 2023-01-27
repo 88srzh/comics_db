@@ -59,7 +59,7 @@ class FormWidget extends StatelessWidget {
                 AuthButtonWidget(),
                 // TODO fix width between buttons
                 SizedBox(width: 100.0),
-                GuestAuthButtonWidget(),
+                // GuestAuthButtonWidget(),
               ],
             ),
             const SizedBox(width: 10.0),
