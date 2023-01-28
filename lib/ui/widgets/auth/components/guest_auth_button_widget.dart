@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 
 class GuestAuthButtonWidget extends StatelessWidget {
@@ -16,7 +16,8 @@ class GuestAuthButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthViewCubit>();
-    onPressed () => Navigator.of(context).pushNamed(MainNavigationRouteNames.mainScreen);
+    onPressed() => Navigator.of(context)
+        .popAndPushNamed(MainNavigationRouteNames.mainScreen);
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
             width: 15,
@@ -32,7 +33,8 @@ class GuestAuthButtonWidget extends StatelessWidget {
           ),
           backgroundColor: AppColors.buttonFont,
           foregroundColor: Colors.white,
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          textStyle:
+              const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
       child: child,
     );
   }

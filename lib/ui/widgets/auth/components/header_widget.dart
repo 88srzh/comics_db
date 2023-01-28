@@ -1,10 +1,10 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/auth/components/guest_auth_button_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_auth_text_style.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/form_widget.dart';
+import 'package:comics_db_app/ui/widgets/auth/components/guest_auth_button_widget.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({Key? key}) : super(key: key);
@@ -25,10 +25,10 @@ class HeaderWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10.0),
           Text(
-            'Or you can enter via guest login.',
+            'Or you can enter via guest.',
             style: customAuthTextStyle(),
           ),
-          const SizedBox(width: 5.0),
+          const SizedBox(height: 10.0),
           const GuestAuthButtonWidget(),
           const SizedBox(width: 5.0),
         ],
