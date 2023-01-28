@@ -15,6 +15,7 @@ class GuestAuthButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO add guest session
     final cubit = context.watch<AuthViewCubit>();
     onPressed() => Navigator.of(context)
         .popAndPushNamed(MainNavigationRouteNames.mainScreen);
