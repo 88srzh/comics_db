@@ -36,7 +36,7 @@
 
 - Account on the https://www.themoviedb.org/
 
-> Anonymous login to the application will be implemented in the future.
+> Or you can use guest login.
 
 ## 🛠️ Installation
 
