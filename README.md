@@ -1,7 +1,5 @@
 <h1 align="center">The Movie Database Mobile</h1>
 
----
-
 [//]: # '<h4 align="center">'
 [//]: # '<a name="install">Install</a>'
 [//]: # "·"
@@ -23,7 +21,6 @@
 ## 🌟 Preview
 
 <p>
-<img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_133_edit.png" alt="login" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_129_edit.png" alt="popular people" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_128_edit.png" alt="all movies" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_131_edit.png" alt="movie details" width="200">
