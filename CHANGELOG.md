@@ -1,6 +1,12 @@
+## 0.0.6
+
+- Added `guest` authorization.
+
+---
+
 ## 0.0.5
 
-- Refactoring authorization screen
+- Refactoring authorization screen.
 
 ---
 
@@ -8,7 +14,7 @@
 
 ---
 
-- Fixed logout button
+- Fixed logout button.
 
 ## 0.0.3
 

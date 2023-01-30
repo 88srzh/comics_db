@@ -1,7 +1,5 @@
 <h1 align="center">The Movie Database Mobile</h1>
 
----
-
 [//]: # '<h4 align="center">'
 [//]: # '<a name="install">Install</a>'
 [//]: # "·"
@@ -10,8 +8,8 @@
 
 <p align="center">
     <img src="https://img.shields.io/github/last-commit/88srzh/comics_db?color=%237DC2E8&logo=GitHub" />
-    <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat" />
-    <img src="https://img.shields.io/github/license/88srzh/comics_db?color=%23C9A8EF">
+    <img src="https://img.shields.io/github/repo-size/88srzh/comics_db?color=%23F097A1&logo=Github" />
+    <img src="https://img.shields.io/github/license/88srzh/comics_db?color=%23C9A8EF" />
 
 [//]: # "number of lines doesn't work, try when it will be fix"
 [//]: # '<img src="https://img.shields.io/tokei/lines/githubtp/88srzh/comics_db?color=%23EED49F">'
@@ -23,7 +21,6 @@
 ## 🌟 Preview
 
 <p>
-<img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_133_edit.png" alt="login" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_129_edit.png" alt="popular people" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_128_edit.png" alt="all movies" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_131_edit.png" alt="movie details" width="200">
@@ -36,7 +33,7 @@
 
 - Account on the https://www.themoviedb.org/
 
-> Anonymous login to the application will be implemented in the future.
+> Or you can use guest login.
 
 ## 🛠️ Installation
 

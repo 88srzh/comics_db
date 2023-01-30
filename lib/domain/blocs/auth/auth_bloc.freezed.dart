@@ -21,6 +21,7 @@ mixin _$AuthEvent {
     required TResult Function() logout,
     required TResult Function() checkStatus,
     required TResult Function(String login, String password) login,
+    required TResult Function() guestLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AuthEvent {
     TResult? Function()? logout,
     TResult? Function()? checkStatus,
     TResult? Function(String login, String password)? login,
+    TResult? Function()? guestLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AuthEvent {
     TResult Function()? logout,
     TResult Function()? checkStatus,
     TResult Function(String login, String password)? login,
+    TResult Function()? guestLogin,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$AuthEvent {
     required TResult Function(AuthLogOutEvent value) logout,
     required TResult Function(AuthCheckStatusEvent value) checkStatus,
     required TResult Function(AuthLoginEvent value) login,
+    required TResult Function(GuestAuthLoginEvent value) guestLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$AuthEvent {
     TResult? Function(AuthLogOutEvent value)? logout,
     TResult? Function(AuthCheckStatusEvent value)? checkStatus,
     TResult? Function(AuthLoginEvent value)? login,
+    TResult? Function(GuestAuthLoginEvent value)? guestLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$AuthEvent {
     TResult Function(AuthLogOutEvent value)? logout,
     TResult Function(AuthCheckStatusEvent value)? checkStatus,
     TResult Function(AuthLoginEvent value)? login,
+    TResult Function(GuestAuthLoginEvent value)? guestLogin,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
     required TResult Function() logout,
     required TResult Function() checkStatus,
     required TResult Function(String login, String password) login,
+    required TResult Function() guestLogin,
   }) {
     return logout();
   }
@@ -130,6 +137,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
     TResult? Function()? logout,
     TResult? Function()? checkStatus,
     TResult? Function(String login, String password)? login,
+    TResult? Function()? guestLogin,
   }) {
     return logout?.call();
   }
@@ -140,6 +148,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
     TResult Function()? logout,
     TResult Function()? checkStatus,
     TResult Function(String login, String password)? login,
+    TResult Function()? guestLogin,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -154,6 +163,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
     required TResult Function(AuthLogOutEvent value) logout,
     required TResult Function(AuthCheckStatusEvent value) checkStatus,
     required TResult Function(AuthLoginEvent value) login,
+    required TResult Function(GuestAuthLoginEvent value) guestLogin,
   }) {
     return logout(this);
   }
@@ -164,6 +174,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
     TResult? Function(AuthLogOutEvent value)? logout,
     TResult? Function(AuthCheckStatusEvent value)? checkStatus,
     TResult? Function(AuthLoginEvent value)? login,
+    TResult? Function(GuestAuthLoginEvent value)? guestLogin,
   }) {
     return logout?.call(this);
   }
@@ -174,6 +185,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
     TResult Function(AuthLogOutEvent value)? logout,
     TResult Function(AuthCheckStatusEvent value)? checkStatus,
     TResult Function(AuthLoginEvent value)? login,
+    TResult Function(GuestAuthLoginEvent value)? guestLogin,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -228,6 +240,7 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
     required TResult Function() logout,
     required TResult Function() checkStatus,
     required TResult Function(String login, String password) login,
+    required TResult Function() guestLogin,
   }) {
     return checkStatus();
   }
@@ -238,6 +251,7 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
     TResult? Function()? logout,
     TResult? Function()? checkStatus,
     TResult? Function(String login, String password)? login,
+    TResult? Function()? guestLogin,
   }) {
     return checkStatus?.call();
   }
@@ -248,6 +262,7 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
     TResult Function()? logout,
     TResult Function()? checkStatus,
     TResult Function(String login, String password)? login,
+    TResult Function()? guestLogin,
     required TResult orElse(),
   }) {
     if (checkStatus != null) {
@@ -262,6 +277,7 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
     required TResult Function(AuthLogOutEvent value) logout,
     required TResult Function(AuthCheckStatusEvent value) checkStatus,
     required TResult Function(AuthLoginEvent value) login,
+    required TResult Function(GuestAuthLoginEvent value) guestLogin,
   }) {
     return checkStatus(this);
   }
@@ -272,6 +288,7 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
     TResult? Function(AuthLogOutEvent value)? logout,
     TResult? Function(AuthCheckStatusEvent value)? checkStatus,
     TResult? Function(AuthLoginEvent value)? login,
+    TResult? Function(GuestAuthLoginEvent value)? guestLogin,
   }) {
     return checkStatus?.call(this);
   }
@@ -282,6 +299,7 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
     TResult Function(AuthLogOutEvent value)? logout,
     TResult Function(AuthCheckStatusEvent value)? checkStatus,
     TResult Function(AuthLoginEvent value)? login,
+    TResult Function(GuestAuthLoginEvent value)? guestLogin,
     required TResult orElse(),
   }) {
     if (checkStatus != null) {
@@ -371,6 +389,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
     required TResult Function() logout,
     required TResult Function() checkStatus,
     required TResult Function(String login, String password) login,
+    required TResult Function() guestLogin,
   }) {
     return login(this.login, password);
   }
@@ -381,6 +400,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
     TResult? Function()? logout,
     TResult? Function()? checkStatus,
     TResult? Function(String login, String password)? login,
+    TResult? Function()? guestLogin,
   }) {
     return login?.call(this.login, password);
   }
@@ -391,6 +411,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
     TResult Function()? logout,
     TResult Function()? checkStatus,
     TResult Function(String login, String password)? login,
+    TResult Function()? guestLogin,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -405,6 +426,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
     required TResult Function(AuthLogOutEvent value) logout,
     required TResult Function(AuthCheckStatusEvent value) checkStatus,
     required TResult Function(AuthLoginEvent value) login,
+    required TResult Function(GuestAuthLoginEvent value) guestLogin,
   }) {
     return login(this);
   }
@@ -415,6 +437,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
     TResult? Function(AuthLogOutEvent value)? logout,
     TResult? Function(AuthCheckStatusEvent value)? checkStatus,
     TResult? Function(AuthLoginEvent value)? login,
+    TResult? Function(GuestAuthLoginEvent value)? guestLogin,
   }) {
     return login?.call(this);
   }
@@ -425,6 +448,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
     TResult Function(AuthLogOutEvent value)? logout,
     TResult Function(AuthCheckStatusEvent value)? checkStatus,
     TResult Function(AuthLoginEvent value)? login,
+    TResult Function(GuestAuthLoginEvent value)? guestLogin,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -444,4 +468,118 @@ abstract class AuthLoginEvent implements AuthEvent {
   @JsonKey(ignore: true)
   _$$AuthLoginEventCopyWith<_$AuthLoginEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GuestAuthLoginEventCopyWith<$Res> {
+  factory _$$GuestAuthLoginEventCopyWith(_$GuestAuthLoginEvent value,
+          $Res Function(_$GuestAuthLoginEvent) then) =
+      __$$GuestAuthLoginEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GuestAuthLoginEventCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$GuestAuthLoginEvent>
+    implements _$$GuestAuthLoginEventCopyWith<$Res> {
+  __$$GuestAuthLoginEventCopyWithImpl(
+      _$GuestAuthLoginEvent _value, $Res Function(_$GuestAuthLoginEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GuestAuthLoginEvent implements GuestAuthLoginEvent {
+  const _$GuestAuthLoginEvent();
+
+  @override
+  String toString() {
+    return 'AuthEvent.guestLogin()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GuestAuthLoginEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() logout,
+    required TResult Function() checkStatus,
+    required TResult Function(String login, String password) login,
+    required TResult Function() guestLogin,
+  }) {
+    return guestLogin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? logout,
+    TResult? Function()? checkStatus,
+    TResult? Function(String login, String password)? login,
+    TResult? Function()? guestLogin,
+  }) {
+    return guestLogin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? logout,
+    TResult Function()? checkStatus,
+    TResult Function(String login, String password)? login,
+    TResult Function()? guestLogin,
+    required TResult orElse(),
+  }) {
+    if (guestLogin != null) {
+      return guestLogin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthLogOutEvent value) logout,
+    required TResult Function(AuthCheckStatusEvent value) checkStatus,
+    required TResult Function(AuthLoginEvent value) login,
+    required TResult Function(GuestAuthLoginEvent value) guestLogin,
+  }) {
+    return guestLogin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthLogOutEvent value)? logout,
+    TResult? Function(AuthCheckStatusEvent value)? checkStatus,
+    TResult? Function(AuthLoginEvent value)? login,
+    TResult? Function(GuestAuthLoginEvent value)? guestLogin,
+  }) {
+    return guestLogin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthLogOutEvent value)? logout,
+    TResult Function(AuthCheckStatusEvent value)? checkStatus,
+    TResult Function(AuthLoginEvent value)? login,
+    TResult Function(GuestAuthLoginEvent value)? guestLogin,
+    required TResult orElse(),
+  }) {
+    if (guestLogin != null) {
+      return guestLogin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GuestAuthLoginEvent implements AuthEvent {
+  const factory GuestAuthLoginEvent() = _$GuestAuthLoginEvent;
 }

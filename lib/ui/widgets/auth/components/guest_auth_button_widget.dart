@@ -7,26 +7,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
-import 'package:comics_db_app/domain/services/auth_data_storage.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 
-class AuthButtonWidget extends StatelessWidget {
-  const AuthButtonWidget({Key? key}) : super(key: key);
+class GuestAuthButtonWidget extends StatelessWidget {
+  const GuestAuthButtonWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // TODO add guest session
     final cubit = context.watch<AuthViewCubit>();
-    final authDataStorage = context.read<AuthDataStorage>();
-    final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState || cubit.state is AuthViewCubitErrorState;
-    final onPressed =
-        canStartAuth ? () => cubit.auth(login: authDataStorage.login, password: authDataStorage.password) : null;
+    onPressed() => Navigator.of(context)
+        .popAndPushNamed(MainNavigationRouteNames.mainScreen);
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
             width: 15,
             height: 15,
             child: CircularProgressIndicator(strokeWidth: 2),
           )
-        : const Text('Login');
+        : const Text('Guest login');
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -35,7 +34,8 @@ class AuthButtonWidget extends StatelessWidget {
           ),
           backgroundColor: AppColors.buttonFont,
           foregroundColor: Colors.white,
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          textStyle:
+              const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
       child: child,
     );
   }

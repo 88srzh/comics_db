@@ -50,10 +50,18 @@ class FormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 25),
         Row(
-          children: const [
-            SizedBox(width: 5.0),
-            AuthButtonWidget(),
-            SizedBox(width: 10.0),
+          children: [
+            const SizedBox(width: 5.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                AuthButtonWidget(),
+                // TODO fix width between buttons
+                SizedBox(width: 100.0),
+                // GuestAuthButtonWidget(),
+              ],
+            ),
+            const SizedBox(width: 10.0),
           ],
         )
       ],
