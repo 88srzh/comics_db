@@ -1,5 +1,3 @@
-/*
-
 // Dart imports:
 import 'dart:async';
 
@@ -57,4 +55,3 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
     await _sessionDataProvider.deleteAccountId();
   }
 }
-*/

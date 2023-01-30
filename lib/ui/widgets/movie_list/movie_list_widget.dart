@@ -39,7 +39,8 @@ class MovieListWidget extends StatelessWidget {
           ),
           // appBar: const CustomMainAppBarWidget(),
           body: ColoredBox(
-            color: AppColors.kPrimaryColor,
+            // color: AppColors.kPrimaryColor,
+            color: themeNotifier.isDark ? AppColors.kPrimaryColor : Colors.pink,
             child: ListView(
               children: [
                 Column(

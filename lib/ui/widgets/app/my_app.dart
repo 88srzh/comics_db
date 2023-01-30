@@ -50,6 +50,10 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 textTheme: GoogleFonts.signikaNegativeTextTheme(),
                 primarySwatch: Colors.red,
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.pink,
+                  scrolledUnderElevation: 0.0,
+                ),
               ),
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
