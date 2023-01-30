@@ -22,39 +22,39 @@ class CustomMainAppBarWidget extends StatelessWidget with PreferredSizeWidget {
                 Image.asset(AppImages.movieAppBarLogo),
               ],
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: const Icon(
-                    Icons.search,
-                    color: AppColors.searchIcon,
-                    size: 30,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.filter_alt_outlined,
-                      color: AppColors.ratingThumb,
-                      size: 30,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: const Icon(
-                    Icons.menu,
-                    color: AppColors.ratingThumb,
-                    size: 30,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {},
+            //       child: const Icon(
+            //         Icons.search,
+            //         color: AppColors.searchIcon,
+            //         size: 30,
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //       child: GestureDetector(
+            //         onTap: () {},
+            //         child: const Icon(
+            //           Icons.filter_alt_outlined,
+            //           color: AppColors.ratingThumb,
+            //           size: 30,
+            //         ),
+            //       ),
+            //     ),
+            //     GestureDetector(
+            //       onTap: () {},
+            //       child: const Icon(
+            //         Icons.menu,
+            //         color: AppColors.ratingThumb,
+            //         size: 30,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
