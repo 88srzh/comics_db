@@ -17,6 +17,7 @@ abstract class AppColors {
   static const movieBorderLine = Color.fromRGBO(196, 196, 196, 1.0);
   static const bottomBarBackgroundColor = Color.fromRGBO(56, 53, 75, 1.0);
   static const bottomBarIconColor = Color.fromRGBO(140, 139, 151, 1.0);
+  static const dots = Color.fromRGBO(216, 216, 216, 1.0);
 
   static const Color loginBackground = Colors.deepPurpleAccent;
   static const Color signUpBackground = Color(0xFF000A54);
