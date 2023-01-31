@@ -25,4 +25,5 @@ abstract class AppColors {
 
   // light theme
   static const headerText = Color.fromRGBO(60, 60, 60, 0.75);
+  static const bottomNavBarLight = Color.fromRGBO(119, 181, 228, 1.0);
 }

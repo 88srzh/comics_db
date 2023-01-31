@@ -121,7 +121,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ],
         ),
         bottomNavigationBar: ConvexAppBar(
-          backgroundColor: notifierTheme.isDark ? AppColors.bottomBarBackgroundColor : Colors.lightBlueAccent,
+          backgroundColor: notifierTheme.isDark ? AppColors.bottomBarBackgroundColor : AppColors.bottomNavBarLight,
           initialActiveIndex: 1,
           items: const [
             TabItem<dynamic>(icon: Icons.people, title: 'People'),
