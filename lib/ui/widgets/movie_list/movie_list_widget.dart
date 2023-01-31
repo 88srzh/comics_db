@@ -28,17 +28,17 @@ class MovieListWidget extends StatelessWidget {
     return Consumer<ModelTheme>(
       builder: (context, ModelTheme themeNotifier, child) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(themeNotifier.isDark ? "Dark mode" : "Light Mode"),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    themeNotifier.isDark ? themeNotifier.isDark = false : themeNotifier.isDark = true;
-                  },
-                  icon: Icon(themeNotifier.isDark ? Icons.nightlight_round : Icons.wb_sunny)),
-            ],
-          ),
-          // appBar: const CustomMainAppBarWidget(),
+          // appBar: AppBar(
+          //   title: Text(themeNotifier.isDark ? "Dark mode" : "Light Mode"),
+          //   actions: [
+          //     IconButton(
+          //         onPressed: () {
+          //           themeNotifier.isDark ? themeNotifier.isDark = false : themeNotifier.isDark = true;
+          //         },
+          //         icon: Icon(themeNotifier.isDark ? Icons.nightlight_round : Icons.wb_sunny)),
+          //   ],
+          // ),
+          appBar: const CustomMainAppBarWidget(),
           body: ColoredBox(
             // color: AppColors.kPrimaryColor,
             color: themeNotifier.isDark ? AppColors.kPrimaryColor : Colors.white70,
