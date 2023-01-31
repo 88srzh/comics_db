@@ -54,6 +54,10 @@ class MyApp extends StatelessWidget {
                   backgroundColor: Colors.pink,
                   scrolledUnderElevation: 0.0,
                 ),
+                bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                  selectedItemColor: Colors.white70,
+                  unselectedItemColor: Colors.white54,
+                ),
               ),
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
