@@ -40,6 +40,9 @@ class MyApp extends StatelessWidget {
                       appBarTheme: const AppBarTheme(
                         backgroundColor: AppColors.kPrimaryColor,
                         scrolledUnderElevation: 0.0,
+                        iconTheme: IconThemeData(
+                          color: Colors.white,
+                        ),
                       ),
                       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                         selectedItemColor: AppColors.bottomBarBackgroundColor,
@@ -48,11 +51,15 @@ class MyApp extends StatelessWidget {
                     )
                   : ThemeData(
                 useMaterial3: true,
+                // TODO  check font
                 textTheme: GoogleFonts.signikaNegativeTextTheme(),
                 primarySwatch: Colors.red,
                 appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.pink,
+                  backgroundColor: Colors.white,
                   scrolledUnderElevation: 0.0,
+                  iconTheme: IconThemeData(
+                    color: Colors.black,
+                  ),
                 ),
                 bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                   selectedItemColor: Colors.white70,
