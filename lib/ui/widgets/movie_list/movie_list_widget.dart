@@ -96,14 +96,7 @@ class MovieListWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Now playing',
-                        style: TextStyle(
-                          color: AppColors.genresText,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      const CustomHeaderTextWidget(text: 'Now playing'),
                       InkWell(
                         onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                         child: const Text(
