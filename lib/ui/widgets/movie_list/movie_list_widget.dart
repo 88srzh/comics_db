@@ -81,10 +81,7 @@ class MovieListWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text(
-                            'Coming Soon',
-                            style: TextStyle(color: AppColors.genresText, fontSize: 21, fontWeight: FontWeight.w600),
-                          ),
+                          CustomHeaderTextWidget(text: 'Coming soon'),
                         ],
                       ),
                     ),
