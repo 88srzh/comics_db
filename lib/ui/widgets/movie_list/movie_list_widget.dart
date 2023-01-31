@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class MovieListWidget extends StatelessWidget {
           // appBar: const CustomMainAppBarWidget(),
           body: ColoredBox(
             // color: AppColors.kPrimaryColor,
-            color: themeNotifier.isDark ? AppColors.kPrimaryColor : Colors.pink,
+            color: themeNotifier.isDark ? AppColors.kPrimaryColor : Colors.white70,
             child: ListView(
               children: [
                 Column(
@@ -57,14 +58,7 @@ class MovieListWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Popular',
-                            style: TextStyle(
-                              color: AppColors.genresText,
-                              fontSize: 21,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                          const CustomHeaderTextWidget(text: 'Popular'),
                           InkWell(
                             onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
                             child: const Text(

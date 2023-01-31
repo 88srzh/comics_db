@@ -22,4 +22,7 @@ abstract class AppColors {
   static const Color signUpBackground = Color(0xFF000A54);
   static const double defaultPadding = 16.0;
   static const defaultDuration = Duration(milliseconds: 300);
+
+  // light theme
+  static const headerText = Color.fromRGBO(60, 60, 60, 0.75);
 }
