@@ -38,7 +38,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         return Scaffold(
           appBar: const CustomDetailsAppBar(title: 'Movie Details'),
           body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
             child: ListView(
               children: [
                 Column(
