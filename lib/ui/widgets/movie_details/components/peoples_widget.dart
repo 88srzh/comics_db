@@ -39,7 +39,6 @@ class _PeoplesWidgetRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      // TODO: show only 4 people
       children: employes
           .map(
             (employee) => _PeopleWidgetRowItem(
