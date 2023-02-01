@@ -116,6 +116,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
                             text: actor.name,
                             maxLines: 1,
                             fontSize: 13,
+                            // TODO may be i can replace this to custom widget
                             color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
                             fontWeight: null,
                           ),
