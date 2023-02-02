@@ -17,7 +17,7 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
           title: Text(
             title!,
             style: TextStyle(
-              color: notifierTheme.isDark ? Colors.white : Colors.black,
+              color: notifierTheme.isDark ? Colors.white : AppColors.headerText,
               fontSize: 22,
             ),
           ),
