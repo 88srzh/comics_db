@@ -17,7 +17,7 @@ class CustomPosterTopLeftAlignTextRating extends StatelessWidget {
         text,
         style: const TextStyle(
           fontSize: 13,
-          color: AppColors.ratingText,
+          color: AppColors.genresText,
         ),
       ),
     );
