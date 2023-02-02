@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
                   : ThemeData(
                 useMaterial3: true,
                 // TODO  check font
-                textTheme: GoogleFonts.signikaNegativeTextTheme(),
+                // textTheme: GoogleFonts.signikaNegativeTextTheme(),
                 primarySwatch: Colors.red,
                 appBarTheme: const AppBarTheme(
                   backgroundColor: Colors.white,
