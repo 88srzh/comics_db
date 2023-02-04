@@ -1,10 +1,9 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
@@ -14,14 +13,15 @@ import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
-import 'package:provider/provider.dart';
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 
 class CastWidget extends StatelessWidget {
   const CastWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var charactersData = context.watch<PeopleDetailsCubit>().data.charactersData;
+    var charactersData =
+        context.watch<PeopleDetailsCubit>().data.charactersData;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return Consumer<ModelTheme>(
       builder: (context, ModelTheme notifierTheme, child) {
@@ -39,14 +39,17 @@ class CastWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.w600,
-                      color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+                      color: notifierTheme.isDark
+                          ? AppColors.genresText
+                          : AppColors.headerText,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 260.0,
                   child: Scrollbar(
-                    child: _PeopleActorListWidget(charactersData: charactersData),
+                    child:
+                        _PeopleActorListWidget(charactersData: charactersData),
                   ),
                 ),
               ],
@@ -61,7 +64,8 @@ class CastWidget extends StatelessWidget {
 class _PeopleActorListWidget extends StatelessWidget {
   final List<PeopleDetailsCharacterData> charactersData;
 
-  const _PeopleActorListWidget({Key? key, required this.charactersData}) : super(key: key);
+  const _PeopleActorListWidget({Key? key, required this.charactersData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +83,8 @@ class _PeopleActorListWidget extends StatelessWidget {
 class _PeopleActorListItemWidget extends StatelessWidget {
   final int characterIndex;
 
-  const _PeopleActorListItemWidget({Key? key, required this.characterIndex}) : super(key: key);
+  const _PeopleActorListItemWidget({Key? key, required this.characterIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,10 +116,13 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                   posterPath != null
                       ? CachedNetworkImage(
                           imageUrl: ImageDownloader.imageUrl(posterPath),
-                          placeholder: (context, url) => const LoadingIndicatorWidget(),
-                          errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                          placeholder: (context, url) =>
+                              const LoadingIndicatorWidget(),
+                          errorWidget: (context, url, dynamic error) =>
+                              Image.asset(AppImages.noImageAvailable),
                         )
-                      : const Image(image: AssetImage(AppImages.noImageAvailable)),
+                      : const Image(
+                          image: AssetImage(AppImages.noImageAvailable)),
                   // : const SizedBox.shrink(),
                   Expanded(
                     child: Padding(
