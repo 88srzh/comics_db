@@ -9,7 +9,7 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
-import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widget.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
@@ -96,7 +96,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
         children: [
           Container(
             // TODO refactoring custom movie list box decoration
-            decoration: customMovieListBoxDecoration,
+            decoration: customMovieListBoxDecorationForDarkTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
