@@ -29,9 +29,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context
-        .read<MoviePopularListCubit>()
-        .setupPopularMovieLocale(locale.languageCode);
+    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -43,13 +41,11 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
         return Scaffold(
           appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
           body: ColoredBox(
-            color:
-                notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
             child: Stack(
               children: [
                 ListView.builder(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: const EdgeInsets.only(top: 70.0),
                   itemCount: cubit.state.movies.length,
                   itemExtent: 165,
@@ -59,17 +55,13 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                     final posterPath = movie.posterPath;
                     return InkWell(
                       onTap: () => cubit.onMovieTap(context, index),
-                      child: _MoviePopularListRowWidget(
-                          posterPath: posterPath,
-                          movie: movie,
-                          cubit: cubit,
-                          index: index),
+                      child:
+                          _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
                     );
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                   child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
                 ),
               ],
