@@ -25,7 +25,10 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
           iconTheme: const IconThemeData(color: Colors.white),
           leading: IconButton(
             // color: Theme.of(context).colorScheme.onBackground,
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.headerText,
+            ),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
         );
