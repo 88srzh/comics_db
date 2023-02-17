@@ -1,3 +1,4 @@
+import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +28,10 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
               },
             );
           },
-          title: const Text(
+          title: Text(
             'Change color theme',
             style: TextStyle(
-              color: Colors.white,
+              color: themeNotifier.isDark ? Colors.white : AppColors.kPrimaryColor,
               fontSize: 14,
             ),
           ),

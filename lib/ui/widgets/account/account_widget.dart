@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -29,7 +30,7 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<AccountDetailsCubit>();
+    // var cubit = context.watch<AccountDetailsCubit>();
     // that's name need to check cubit data
     // final name = cubit.state.name;
     return const Scaffold(
