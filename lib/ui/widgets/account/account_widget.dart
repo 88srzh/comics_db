@@ -58,23 +58,28 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
     final name = cubit.state.name;
-    return ColoredBox(
-      color: AppColors.bottomBarBackgroundColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeadingAccountCardWidget(headingText: name),
-          const CustomSettingDivider(),
-          const LogoutCardWidget(),
-          const CustomSettingDivider(),
-          const HeadingAccountCardWidget(headingText: 'Settings'),
-          const CustomSettingDivider(),
-          const SettingsCardWidget(),
-          const CustomSettingDivider(),
-          const NotificationsCardWidget(),
-          const CustomSettingDivider(),
-        ],
-      ),
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return ColoredBox(
+          // TODO may be change bottomBarBackgroundColor, for what it's there?
+          color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeadingAccountCardWidget(headingText: name),
+              const CustomSettingDivider(),
+              const LogoutCardWidget(),
+              const CustomSettingDivider(),
+              const HeadingAccountCardWidget(headingText: 'Settings'),
+              const CustomSettingDivider(),
+              const SettingsCardWidget(),
+              const CustomSettingDivider(),
+              const NotificationsCardWidget(),
+              const CustomSettingDivider(),
+            ],
+          ),
+        );
+      },
     );
   }
 }
