@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -29,16 +30,18 @@ class _AccountWidgetState extends State<AccountWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<AccountDetailsCubit>();
     final name = cubit.state.name;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          // 'Personal',
-          name,
-          style: const TextStyle(color: Colors.white),
-        ),
-        backgroundColor: AppColors.kPrimaryColor,
-      ),
-      body: const BodyPersonalWidget(),
+    return const Scaffold(
+      appBar: CustomAppBar(title: 'Personal'),
+      body: BodyPersonalWidget(),
+    //   appBar: AppBar(
+    //     title: Text(
+    //       'Personal',
+          // name,
+          // style: const TextStyle(color: Colors.white),
+        // ),
+        // backgroundColor: AppColors.kPrimaryColor,
+      // ),
+      // body: const BodyPersonalWidget(),
     );
   }
 }
