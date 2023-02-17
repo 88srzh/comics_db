@@ -36,13 +36,13 @@ class _AccountWidgetState extends State<AccountWidget> {
     return const Scaffold(
       appBar: CustomAppBar(title: 'Personal'),
       body: BodyPersonalWidget(),
-    //   appBar: AppBar(
-    //     title: Text(
-    //       'Personal',
-          // name,
-          // style: const TextStyle(color: Colors.white),
-        // ),
-        // backgroundColor: AppColors.kPrimaryColor,
+      //   appBar: AppBar(
+      //     title: Text(
+      //       'Personal',
+      // name,
+      // style: const TextStyle(color: Colors.white),
+      // ),
+      // backgroundColor: AppColors.kPrimaryColor,
       // ),
       // body: const BodyPersonalWidget(),
     );
@@ -91,8 +91,7 @@ class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({Key? key}) : super(key: key);
 
   @override
-  State<NotificationsCardWidget> createState() =>
-      _NotificationsCardWidgetState();
+  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
 }
 
 class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
@@ -100,24 +99,28 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
-      value: notifications,
-      onChanged: (bool value) {
-        setState(
-          () {
-            notifications = value;
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return SwitchListTile(
+          activeColor: Colors.pinkAccent,
+          inactiveThumbColor: Colors.grey,
+          value: notifications,
+          onChanged: (bool value) {
+            setState(
+              () {
+                notifications = value;
+              },
+            );
           },
+          title: Text(
+            'Push notifications',
+            style: TextStyle(
+              fontSize: 14,
+              color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
+            ),
+          ),
         );
       },
-      title: const Text(
-        'Push notifications',
-        style: TextStyle(
-          fontSize: 14,
-          color: Colors.white,
-        ),
-      ),
     );
   }
 }
