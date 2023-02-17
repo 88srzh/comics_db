@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -29,7 +30,8 @@ class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<AccountDetailsCubit>();
-    final name = cubit.state.name;
+    // that's name need to check cubit data
+    // final name = cubit.state.name;
     return const Scaffold(
       appBar: CustomAppBar(title: 'Personal'),
       body: BodyPersonalWidget(),
@@ -80,32 +82,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           ),
         );
       },
-    );
-  }
-}
-
-class LogoutCardWidget extends StatelessWidget {
-  const LogoutCardWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.watch<AccountDetailsCubit>();
-    return ListTile(
-      onTap: () {
-        cubit.logout();
-        Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
-      },
-      title: const Text(
-        'Logout',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-        ),
-      ),
-      trailing: const Icon(
-        Icons.logout,
-        color: Colors.white,
-      ),
     );
   }
 }

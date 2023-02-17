@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         return AppBar(
           title: Text(
             title,
-            style: GoogleFonts.signikaNegative(color: notifierTheme.isDark ? Colors.white : AppColors.headerText),
+            style: GoogleFonts.signikaNegative(color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor),
           ),
           centerTitle: true,
         );
