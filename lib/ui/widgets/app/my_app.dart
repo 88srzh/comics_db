@@ -44,28 +44,31 @@ class MyApp extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                      bottomNavigationBarTheme:
+                          const BottomNavigationBarThemeData(
                         selectedItemColor: AppColors.bottomBarBackgroundColor,
                         unselectedItemColor: AppColors.bottomBarIconColor,
                       ),
                     )
                   : ThemeData(
-                useMaterial3: true,
-                // TODO  check font
-                // textTheme: GoogleFonts.signikaNegativeTextTheme(),
-                primarySwatch: Colors.red,
-                appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.white,
-                  scrolledUnderElevation: 0.0,
-                  iconTheme: IconThemeData(
-                    color: Colors.black,
-                  ),
-                ),
-                bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                  selectedItemColor: Colors.white70,
-                  unselectedItemColor: Colors.white54,
-                ),
-              ),
+                      useMaterial3: true,
+                      textTheme: GoogleFonts.signikaNegativeTextTheme(),
+                      // TODO  check font
+                      // textTheme: GoogleFonts.signikaNegativeTextTheme(),
+                      primarySwatch: Colors.red,
+                      appBarTheme: const AppBarTheme(
+                        backgroundColor: Colors.white70,
+                        scrolledUnderElevation: 0.0,
+                        iconTheme: IconThemeData(
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
+                      bottomNavigationBarTheme:
+                          const BottomNavigationBarThemeData(
+                        selectedItemColor: Colors.white70,
+                        unselectedItemColor: Colors.white54,
+                      ),
+                    ),
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,

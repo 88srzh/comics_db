@@ -1,10 +1,8 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
-import 'package:provider/provider.dart';
 
 InputDecoration customSearchInputDecoration({required String text}) {
   return InputDecoration(
@@ -25,7 +23,9 @@ InputDecoration customSearchInputDecoration({required String text}) {
     ),
   );
 }
-InputDecoration customSearchInputDecorationForLightTheme ({required String text}) {
+
+InputDecoration customSearchInputDecorationForLightTheme(
+    {required String text}) {
   return InputDecoration(
     labelText: text,
     labelStyle: const TextStyle(
