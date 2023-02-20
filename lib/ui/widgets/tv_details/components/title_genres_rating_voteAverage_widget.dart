@@ -2,6 +2,7 @@
 // ignore_for_file: file_names
 
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -53,21 +54,9 @@ class _RatingsRowWidget extends StatelessWidget {
           size: 14,
         ),
         const SizedBox(width: 2),
-        Text(
-          // TODO maybe change to String
-          tvDetailsScoresData.voteAverage ?? '0.0',
-          style: const TextStyle(
-            fontSize: 13,
-            color: AppColors.ratingText,
-          ),
-        ),
-        const Text(
-          ' / 10',
-          style: TextStyle(
-            fontSize: 13,
-            color: AppColors.ratingText,
-          ),
-        ),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(
+            text: tvDetailsScoresData.voteAverage ?? '0.0'),
+        const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: ' / 10'),
         const SizedBox(width: 20),
         const Icon(
           MdiIcons.accountOutline,
@@ -75,13 +64,8 @@ class _RatingsRowWidget extends StatelessWidget {
           size: 14,
         ),
         const SizedBox(width: 2),
-        Text(
-          tvDetailsScoresData.voteCount.toStringAsFixed(0),
-          style: const TextStyle(
-            fontSize: 13,
-            color: AppColors.ratingText,
-          ),
-        ),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(
+            text: tvDetailsScoresData.voteCount.toStringAsFixed(0)),
         const SizedBox(width: 20),
         const Icon(
           MdiIcons.heartOutline,
@@ -89,13 +73,8 @@ class _RatingsRowWidget extends StatelessWidget {
           size: 14,
         ),
         const SizedBox(width: 2),
-        Text(
-          tvDetailsScoresData.popularity.toStringAsFixed(0),
-          style: const TextStyle(
-            fontSize: 13,
-            color: AppColors.ratingText,
-          ),
-        ),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(
+            text: tvDetailsScoresData.popularity.toStringAsFixed(0)),
       ],
     );
   }
