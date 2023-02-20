@@ -2,6 +2,7 @@
 // ignore_for_file: file_names
 
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -48,33 +49,24 @@ class _RatingsRowWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(
-          MdiIcons.starOutline,
-          color: AppColors.ratingThumb,
-          size: 14,
-        ),
+        const CustomTvDetailsIconWidget(icon: MdiIcons.starOutline),
         const SizedBox(width: 2),
         CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-            text: tvDetailsScoresData.voteAverage ?? '0.0'),
+          text: tvDetailsScoresData.voteAverage ?? '0.0',
+        ),
         const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: ' / 10'),
         const SizedBox(width: 20),
-        const Icon(
-          MdiIcons.accountOutline,
-          color: AppColors.ratingThumb,
-          size: 14,
-        ),
+        const CustomTvDetailsIconWidget(icon: MdiIcons.accountOutline),
         const SizedBox(width: 2),
         CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-            text: tvDetailsScoresData.voteCount.toStringAsFixed(0)),
+          text: tvDetailsScoresData.voteCount.toStringAsFixed(0),
+        ),
         const SizedBox(width: 20),
-        const Icon(
-          MdiIcons.heartOutline,
-          color: AppColors.ratingThumb,
-          size: 14,
-        ),
+        const CustomTvDetailsIconWidget(icon: MdiIcons.heartOutline),
         const SizedBox(width: 2),
         CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-            text: tvDetailsScoresData.popularity.toStringAsFixed(0)),
+          text: tvDetailsScoresData.popularity.toStringAsFixed(0),
+        ),
       ],
     );
   }
