@@ -52,21 +52,18 @@ class _RatingsRowWidget extends StatelessWidget {
         const CustomTvDetailsIconWidget(icon: MdiIcons.starOutline),
         const SizedBox(width: 2),
         CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-          text: tvDetailsScoresData.voteAverage ?? '0.0',
-        ),
+            text: tvDetailsScoresData.voteAverage ?? '0.0'),
         const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: ' / 10'),
         const SizedBox(width: 20),
         const CustomTvDetailsIconWidget(icon: MdiIcons.accountOutline),
         const SizedBox(width: 2),
         CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-          text: tvDetailsScoresData.voteCount.toStringAsFixed(0),
-        ),
+            text: tvDetailsScoresData.voteCount.toStringAsFixed(0)),
         const SizedBox(width: 20),
         const CustomTvDetailsIconWidget(icon: MdiIcons.heartOutline),
         const SizedBox(width: 2),
         CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-          text: tvDetailsScoresData.popularity.toStringAsFixed(0),
-        ),
+            text: tvDetailsScoresData.popularity.toStringAsFixed(0)),
       ],
     );
   }
