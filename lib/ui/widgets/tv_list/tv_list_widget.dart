@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -27,15 +28,13 @@ class _TvListWidgetState extends State<TvListWidget> {
         return Scaffold(
           appBar: const CustomMainAppBarWidget(),
           body: ColoredBox(
-            color:
-                notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
             child: ListView(
               children: [
                 Column(
                   children: [
                     const Padding(
-                      padding:
-                          EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                      padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
                       child: SizedBox(
                         height: 180,
                         child: TopRatedTvWidget(),
@@ -46,16 +45,9 @@ class _TvListWidgetState extends State<TvListWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Popular',
-                            style: TextStyle(
-                                color: AppColors.genresText,
-                                fontSize: 21,
-                                fontWeight: FontWeight.w600),
-                          ),
+                          const CustomHeaderTextWidget(text: 'Popular'),
                           InkWell(
-                            onTap: () => Navigator.of(context).pushNamed(
-                                MainNavigationRouteNames.tvPopularList),
+                            onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopularList),
                             child: const Text(
                               'See All',
                               style: TextStyle(
@@ -79,13 +71,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text(
-                            'Airing Today',
-                            style: TextStyle(
-                                color: AppColors.genresText,
-                                fontSize: 21,
-                                fontWeight: FontWeight.w600),
-                          )
+                          CustomHeaderTextWidget(text: 'Airing Today'),
                         ],
                       ),
                     ),
@@ -101,13 +87,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text(
-                            'On The Air',
-                            style: TextStyle(
-                                color: AppColors.genresText,
-                                fontSize: 21,
-                                fontWeight: FontWeight.w600),
-                          )
+                          CustomHeaderTextWidget(text: 'On The Air'),
                         ],
                       ),
                     ),
