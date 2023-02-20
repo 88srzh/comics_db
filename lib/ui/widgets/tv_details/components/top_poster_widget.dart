@@ -14,8 +14,7 @@ class TvTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsPosterData = context
-        .select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
+    final tvDetailsPosterData = context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
     final posterPath = tvDetailsPosterData.posterPath;
     final backdropPath = tvDetailsPosterData.backdropPath;
     return Stack(

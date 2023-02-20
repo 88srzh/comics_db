@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -34,34 +35,36 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading =
-        context.select((TvDetailsModel model) => model.tvData.isLoading);
+    final isLoading = context.select((TvDetailsModel model) => model.tvData.isLoading);
     if (isLoading) {
       return const Center(child: LoadingIndicatorWidget());
     }
-    var tvTrailerData =
-        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
 
-    return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Tv Details'),
-      body: ColoredBox(
-        color: AppColors.kPrimaryColor,
-        child: ListView(
-          children: [
-            Column(
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return Scaffold(
+          appBar: const CustomDetailsAppBar(title: 'Tv Details'),
+          body: ColoredBox(
+            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
+            child: ListView(
               children: [
-                const TvTopPosterWidget(),
-                const TitleGenresRatingVoteAverageWidget(),
-                const TvDescriptionWidget(),
-                TvTrailerWidget(youtubeKey: tvTrailerKey),
-                // const _DirectorWidget(),
-                const TvCastWidget(),
+                Column(
+                  children: [
+                    const TvTopPosterWidget(),
+                    const TitleGenresRatingVoteAverageWidget(),
+                    const TvDescriptionWidget(),
+                    TvTrailerWidget(youtubeKey: tvTrailerKey),
+                    // const _DirectorWidget(),
+                    const TvCastWidget(),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
