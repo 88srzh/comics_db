@@ -5,6 +5,7 @@
 import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/title_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -27,7 +28,7 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
       child: Column(
         children: const [
           SizedBox(height: 12),
-          _TitleWidget(),
+          TitleWidget(),
           SizedBox(height: 8),
           _GenresWidget(),
           SizedBox(height: 4),
@@ -66,52 +67,6 @@ class _RatingsRowWidget extends StatelessWidget {
   }
 }
 
-class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final tvNameData = context.select((TvDetailsModel model) => model.tvData.tvNameData);
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  tvNameData.name,
-                  style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.w600,
-                    color: notifierTheme.isDark ? AppColors.titleText : AppColors.kPrimaryColor,
-                  ),
-                ),
-                const SizedBox(width: 2),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  tvNameData.tagline,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
 
 class _GenresWidget extends StatelessWidget {
   const _GenresWidget({
