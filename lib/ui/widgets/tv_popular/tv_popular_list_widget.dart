@@ -10,7 +10,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
-import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
@@ -112,7 +112,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20.0),
-                      CustomMovieListTextWidget(
+                      CustomCastListTextWidget(
                         text: tv.name,
                         maxLines: 1,
                         fontSize: null,
@@ -120,7 +120,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       const SizedBox(height: 5.0),
-                      CustomMovieListTextWidget(
+                      CustomCastListTextWidget(
                         text: tv.firstAirDate ?? 'No date',
                         maxLines: 1,
                         fontSize: 13,
@@ -128,7 +128,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
                         fontWeight: null,
                       ),
                       const SizedBox(height: 15.0),
-                      CustomMovieListTextWidget(
+                      CustomCastListTextWidget(
                         text: tv.overview,
                         maxLines: 3,
                         fontSize: 12,

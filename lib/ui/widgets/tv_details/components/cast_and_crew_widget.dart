@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -111,14 +111,15 @@ class _TvActorListItemWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomMovieListTextWidget(
-                              text: actor!.name,
-                              maxLines: 1,
-                              fontSize: 13,
-                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
-                              fontWeight: null),
+                          CustomCastListTextWidget(
+                            text: actor!.name,
+                            maxLines: 1,
+                            fontSize: 13,
+                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                            fontWeight: null,
+                          ),
                           const SizedBox(height: 7.0),
-                          CustomMovieListTextWidget(
+                          CustomCastListTextWidget(
                             text: actor.character,
                             maxLines: 2,
                             fontSize: 12,

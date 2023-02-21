@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
@@ -130,14 +130,14 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomMovieListTextWidget(
+                          CustomCastListTextWidget(
                               text: character.title,
                               maxLines: 1,
                               fontSize: 13,
                               color: AppColors.genresText,
                               fontWeight: null),
                           const SizedBox(height: 3),
-                          CustomMovieListTextWidget(
+                          CustomCastListTextWidget(
                               text: character.character,
                               maxLines: 2,
                               fontSize: 12,

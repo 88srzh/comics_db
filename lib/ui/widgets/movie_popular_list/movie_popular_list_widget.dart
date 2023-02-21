@@ -11,7 +11,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
-import 'package:comics_db_app/ui/components/custom_movie_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
@@ -115,21 +115,21 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 20.0),
-                          CustomMovieListTextWidget(
+                          CustomCastListTextWidget(
                               text: movie.originalTitle,
                               maxLines: 1,
                               fontSize: null,
                               color: notifierTheme.isDark ? Colors.white : AppColors.headerText,
                               fontWeight: FontWeight.bold),
                           const SizedBox(height: 5.0),
-                          CustomMovieListTextWidget(
+                          CustomCastListTextWidget(
                               text: movie.releaseDate,
                               maxLines: 1,
                               fontSize: 13,
                               color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
                               fontWeight: null),
                           const SizedBox(height: 15.0),
-                          CustomMovieListTextWidget(
+                          CustomCastListTextWidget(
                               text: movie.overview ?? '',
                               maxLines: 3,
                               fontSize: 12,
