@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -40,40 +41,43 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var tvTrailerData =
-        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
-    return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Trailer',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 21,
-              color: AppColors.genresText,
-            ),
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Trailer',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 21,
+                  color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              tvTrailerKey != null
+                  ? YoutubePlayerBuilder(
+                      player: YoutubePlayer(
+                        controller: _controller,
+                        showVideoProgressIndicator: true,
+                      ),
+                      builder: (context, player) {
+                        return Column(
+                          children: [
+                            player,
+                          ],
+                        );
+                      },
+                    )
+                  : Image.asset(AppImages.noImageAvailable),
+            ],
           ),
-          const SizedBox(height: 8.0),
-          tvTrailerKey != null
-              ? YoutubePlayerBuilder(
-                  player: YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: true,
-                  ),
-                  builder: (context, player) {
-                    return Column(
-                      children: [
-                        player,
-                      ],
-                    );
-                  },
-                )
-              : Image.asset(AppImages.noImageAvailable),
-        ],
-      ),
+        );
+      },
     );
   }
 }
