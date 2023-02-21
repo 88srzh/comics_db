@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               theme: themeNotifier.isDark
                   ? ThemeData(
                       useMaterial3: true,
-                      textTheme: GoogleFonts.signikaNegativeTextTheme(),
+                      textTheme: GoogleFonts.openSansTextTheme(),
                       primarySwatch: Colors.blue,
                       appBarTheme: const AppBarTheme(
                         backgroundColor: AppColors.kPrimaryColor,
@@ -52,9 +52,8 @@ class MyApp extends StatelessWidget {
                     )
                   : ThemeData(
                       useMaterial3: true,
-                      textTheme: GoogleFonts.signikaNegativeTextTheme(),
+                      textTheme: GoogleFonts.openSansTextTheme(),
                       // TODO  check font
-                      // textTheme: GoogleFonts.signikaNegativeTextTheme(),
                       primarySwatch: Colors.red,
                       appBarTheme: const AppBarTheme(
                         backgroundColor: Colors.white70,
