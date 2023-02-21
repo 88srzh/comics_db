@@ -4,6 +4,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -44,26 +45,22 @@ class _RatingsRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tvDetailsScoresData = context
-        .select((TvDetailsModel model) => model.tvData.tvDetailsScoresData);
+    var tvDetailsScoresData = context.select((TvDetailsModel model) => model.tvData.tvDetailsScoresData);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const CustomTvDetailsIconWidget(icon: MdiIcons.starOutline),
         const SizedBox(width: 2),
-        CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-            text: tvDetailsScoresData.voteAverage ?? '0.0'),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: tvDetailsScoresData.voteAverage ?? '0.0'),
         const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: ' / 10'),
         const SizedBox(width: 20),
         const CustomTvDetailsIconWidget(icon: MdiIcons.accountOutline),
         const SizedBox(width: 2),
-        CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-            text: tvDetailsScoresData.voteCount.toStringAsFixed(0)),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: tvDetailsScoresData.voteCount.toStringAsFixed(0)),
         const SizedBox(width: 20),
         const CustomTvDetailsIconWidget(icon: MdiIcons.heartOutline),
         const SizedBox(width: 2),
-        CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-            text: tvDetailsScoresData.popularity.toStringAsFixed(0)),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: tvDetailsScoresData.popularity.toStringAsFixed(0)),
       ],
     );
   }
@@ -76,16 +73,19 @@ class _GenresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final genres =
-        context.select((TvDetailsModel model) => model.tvData.genres);
-    return Text(
-      genres,
-      maxLines: 3,
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-        fontSize: 13,
-        color: AppColors.genresText,
-      ),
+    final genres = context.select((TvDetailsModel model) => model.tvData.genres);
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return Text(
+          genres,
+          maxLines: 3,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 13,
+            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+          ),
+        );
+      },
     );
   }
 }
@@ -97,8 +97,7 @@ class _TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tvNameData =
-        context.select((TvDetailsModel model) => model.tvData.tvNameData);
+    final tvNameData = context.select((TvDetailsModel model) => model.tvData.tvNameData);
     return Column(
       children: [
         Row(
