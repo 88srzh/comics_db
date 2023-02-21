@@ -66,6 +66,53 @@ class _RatingsRowWidget extends StatelessWidget {
   }
 }
 
+class _TitleWidget extends StatelessWidget {
+  const _TitleWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final tvNameData = context.select((TvDetailsModel model) => model.tvData.tvNameData);
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  tvNameData.name,
+                  style: TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.w600,
+                    color: notifierTheme.isDark ? AppColors.titleText : AppColors.kPrimaryColor,
+                  ),
+                ),
+                const SizedBox(width: 2),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  tvNameData.tagline,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class _GenresWidget extends StatelessWidget {
   const _GenresWidget({
     Key? key,
@@ -86,49 +133,6 @@ class _GenresWidget extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final tvNameData = context.select((TvDetailsModel model) => model.tvData.tvNameData);
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              tvNameData.name,
-              style: const TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.w600,
-                color: AppColors.titleText,
-              ),
-            ),
-            const SizedBox(width: 2),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              tvNameData.tagline,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.genresText,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
