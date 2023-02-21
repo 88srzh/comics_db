@@ -4,7 +4,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/genres_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/title_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 
 class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
@@ -30,7 +29,7 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
           SizedBox(height: 12),
           TitleWidget(),
           SizedBox(height: 8),
-          _GenresWidget(),
+          GenresWidget(),
           SizedBox(height: 4),
           _RatingsRowWidget(),
         ],
@@ -68,26 +67,3 @@ class _RatingsRowWidget extends StatelessWidget {
 }
 
 
-class _GenresWidget extends StatelessWidget {
-  const _GenresWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final genres = context.select((TvDetailsModel model) => model.tvData.genres);
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Text(
-          genres,
-          maxLines: 3,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 13,
-            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
-          ),
-        );
-      },
-    );
-  }
-}
