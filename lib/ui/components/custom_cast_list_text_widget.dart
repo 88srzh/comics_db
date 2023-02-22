@@ -1,14 +1,14 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-class CustomMovieListTextWidget extends StatelessWidget {
+class CustomCastListTextWidget extends StatelessWidget {
   final String text;
   final int maxLines;
   final double? fontSize;
   final Color? color;
   final FontWeight? fontWeight;
 
-  const CustomMovieListTextWidget(
+  const CustomCastListTextWidget(
       {Key? key,
       required this.text,
       required this.maxLines,

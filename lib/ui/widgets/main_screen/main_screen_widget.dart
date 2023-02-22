@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -27,6 +30,7 @@ import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
+import 'package:provider/provider.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -55,92 +59,83 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedTab,
-        children: [
-          _screenFactory.makePopularPeopleList(),
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => TopRatedMovieListCubit(
-                  topRatedMovieListBloc:
-                      TopRatedMovieListBloc(const MovieListState.initial()),
+    return Consumer<ModelTheme>(builder: (context, ModelTheme notifierTheme, child) {
+      return Scaffold(
+        body: IndexedStack(
+          index: _selectedTab,
+          children: [
+            _screenFactory.makePopularPeopleList(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => TopRatedMovieListCubit(
+                    topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
+                  ),
                 ),
-              ),
-              BlocProvider(
-                create: (_) => MoviePopularListCubit(
-                  movieListBloc:
-                      MoviePopularListBloc(const MovieListState.initial()),
+                BlocProvider(
+                  create: (_) => MoviePopularListCubit(
+                    movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
+                  ),
                 ),
-              ),
-              BlocProvider(
-                create: (_) => UpcomingMovieListCubit(
-                  upcomingMovieListBloc:
-                      UpcomingMovieListBloc(const MovieListState.initial()),
+                BlocProvider(
+                  create: (_) => UpcomingMovieListCubit(
+                    upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
+                  ),
                 ),
-              ),
-              BlocProvider(
-                create: (_) => NowPlayingMovieListCubit(
-                  nowPlayingMovieListBloc:
-                      NowPlayingMovieListBloc(const MovieListState.initial()),
+                BlocProvider(
+                  create: (_) => NowPlayingMovieListCubit(
+                    nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
+                  ),
                 ),
-              ),
-            ],
-            child: const MovieListWidget(),
-          ),
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => TvPopularListCubit(
-                    tvPopularListBloc:
-                        TvPopularListBloc(TvListState.initial())),
-              ),
-              BlocProvider(
-                create: (_) => TvAiringTodayListCubit(
-                    tvAiringTodayListBloc:
-                        TvAiringTodayListBloc(TvListState.initial())),
-              ),
-              BlocProvider(
-                create: (_) => TvTopRatedListCubit(
-                    tvTopRatedListBloc:
-                        TvTopRatedListBloc(TvListState.initial())),
-              ),
-              BlocProvider(
-                create: (_) => TvOnTheAirListCubit(
-                    tvOnTheAirListBloc:
-                        TvOnTheAirListBloc(TvListState.initial())),
-              ),
-            ],
-            child: const TvListWidget(),
-          ),
-          // TODO hide while not fix
-          // _screenFactory.makePersonalScreen(),
-          // MultiBlocProvider(
-          //   providers: [
-          //     BlocProvider(
-          //       create: (_) => AccountDetailsCubit(),
-          //     ),
-          //   ],
-          //   child: const AccountWidget(),
-          // ),
-        ],
-      ),
-      bottomNavigationBar: ConvexAppBar(
-        backgroundColor: AppColors.bottomBarBackgroundColor,
-        initialActiveIndex: 1,
-        items: const [
-          TabItem<dynamic>(icon: Icons.people, title: 'People'),
-          TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
-          TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
-          // TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
-        ],
-        onTap: (int index) => setState(
-          () {
-            _selectedTab = index;
-          },
+              ],
+              child: const MovieListWidget(),
+            ),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => TvPopularListCubit(tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
+                ),
+                BlocProvider(
+                  create: (_) =>
+                      TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial())),
+                ),
+                BlocProvider(
+                  create: (_) => TvTopRatedListCubit(tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
+                ),
+                BlocProvider(
+                  create: (_) => TvOnTheAirListCubit(tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial())),
+                ),
+              ],
+              child: const TvListWidget(),
+            ),
+            // TODO hide while not fix
+            // _screenFactory.makePersonalScreen(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => AccountDetailsCubit(),
+                ),
+              ],
+              child: const AccountWidget(),
+            ),
+          ],
         ),
-      ),
-    );
+        bottomNavigationBar: ConvexAppBar(
+          backgroundColor: notifierTheme.isDark ? AppColors.bottomBarBackgroundColor : AppColors.bottomNavBarLight,
+          initialActiveIndex: 1,
+          items: const [
+            TabItem<dynamic>(icon: Icons.people, title: 'People'),
+            TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
+            TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
+            TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
+          ],
+          onTap: (int index) => setState(
+            () {
+              _selectedTab = index;
+            },
+          ),
+        ),
+      );
+    });
   }
 }

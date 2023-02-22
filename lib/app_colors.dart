@@ -17,9 +17,14 @@ abstract class AppColors {
   static const movieBorderLine = Color.fromRGBO(196, 196, 196, 1.0);
   static const bottomBarBackgroundColor = Color.fromRGBO(56, 53, 75, 1.0);
   static const bottomBarIconColor = Color.fromRGBO(140, 139, 151, 1.0);
+  static const dots = Color.fromRGBO(216, 216, 216, 1.0);
 
   static const Color loginBackground = Colors.deepPurpleAccent;
   static const Color signUpBackground = Color(0xFF000A54);
   static const double defaultPadding = 16.0;
   static const defaultDuration = Duration(milliseconds: 300);
+
+  // light theme
+  static const headerText = Color.fromRGBO(60, 60, 60, 0.75);
+  static const bottomNavBarLight = Color.fromRGBO(119, 181, 228, 1.0);
 }

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -39,7 +40,6 @@ class _PeoplesWidgetRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      // TODO: show only 4 people
       children: employes
           .map(
             (employee) => _PeopleWidgetRowItem(
@@ -54,23 +54,33 @@ class _PeoplesWidgetRow extends StatelessWidget {
 class _PeopleWidgetRowItem extends StatelessWidget {
   final MovieDetailsMoviePeopleData employee;
 
-  const _PeopleWidgetRowItem({Key? key, required this.employee})
-      : super(key: key);
+  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var customPeopleTextStyle = CustomPeopleTextStyle();
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(employee.name, style: customPeopleTextStyle.nameStyle),
-            Text(employee.job, style: customPeopleTextStyle.jobStyle),
-          ],
-        ),
-      ),
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // TODO may be change customPeople style, because have extra code
+                Text(employee.name,
+                    style: notifierTheme.isDark
+                        ? customPeopleTextStyle.nameStyle
+                        : customPeopleTextStyle.nameStyleLightTheme),
+                Text(employee.job,
+                    style: notifierTheme.isDark
+                        ? customPeopleTextStyle.jobStyle
+                        : customPeopleTextStyle.jobStyleLightTheme),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

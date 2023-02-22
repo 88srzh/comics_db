@@ -56,9 +56,6 @@ class FormWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
                 AuthButtonWidget(),
-                // TODO fix width between buttons
-                SizedBox(width: 100.0),
-                // GuestAuthButtonWidget(),
               ],
             ),
             const SizedBox(width: 10.0),

@@ -38,6 +38,7 @@ class TvDetailsTrailerData {
 }
 
 class TvDetailsScoresData {
+  // TODO change voteAverage to number
   final String? voteAverage;
   final int voteCount;
   final double popularity;

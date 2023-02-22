@@ -1,16 +1,18 @@
-/*
-
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({Key? key}) : super(key: key);
@@ -28,18 +30,21 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<AccountDetailsCubit>();
-    final name = cubit.state.name;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          // 'Personal',
-          name,
-          style: const TextStyle(color: Colors.white),
-        ),
-        backgroundColor: AppColors.kPrimaryColor,
-      ),
-      body: const BodyPersonalWidget(),
+    // var cubit = context.watch<AccountDetailsCubit>();
+    // that's name need to check cubit data
+    // final name = cubit.state.name;
+    return const Scaffold(
+      appBar: CustomAppBar(title: 'Personal'),
+      body: BodyPersonalWidget(),
+      //   appBar: AppBar(
+      //     title: Text(
+      //       'Personal',
+      // name,
+      // style: const TextStyle(color: Colors.white),
+      // ),
+      // backgroundColor: AppColors.kPrimaryColor,
+      // ),
+      // body: const BodyPersonalWidget(),
     );
   }
 }
@@ -56,83 +61,28 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
     final name = cubit.state.name;
-    return ColoredBox(
-      color: AppColors.bottomBarBackgroundColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeadingAccountCardWidget(headingText: name),
-          const CustomSettingDivider(),
-          const LogoutCardWidget(),
-          const CustomSettingDivider(),
-          const HeadingAccountCardWidget(headingText: 'Settings'),
-          const CustomSettingDivider(),
-          const SettingsCardWidget(),
-          const CustomSettingDivider(),
-          const NotificationsCardWidget(),
-          const CustomSettingDivider(),
-        ],
-      ),
-    );
-  }
-}
-
-class LogoutCardWidget extends StatelessWidget {
-  const LogoutCardWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.watch<AccountDetailsCubit>();
-    return ListTile(
-      onTap: () {
-        cubit.logout();
-        Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
-      },
-      title: const Text(
-        'Logout',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-        ),
-      ),
-      trailing: const Icon(
-        Icons.logout,
-        color: Colors.white,
-      ),
-    );
-  }
-}
-
-class SettingsCardWidget extends StatefulWidget {
-  const SettingsCardWidget({Key? key}) : super(key: key);
-
-  @override
-  State<SettingsCardWidget> createState() => _SettingsCardWidgetState();
-}
-
-class _SettingsCardWidgetState extends State<SettingsCardWidget> {
-  bool themeColor = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
-      value: themeColor,
-      onChanged: (bool value) {
-        setState(
-          () {
-            themeColor = value;
-          },
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return ColoredBox(
+          // TODO may be change bottomBarBackgroundColor, for what it's there?
+          color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeadingAccountCardWidget(headingText: name),
+              const CustomSettingDivider(),
+              const LogoutCardWidget(),
+              const CustomSettingDivider(),
+              const HeadingAccountCardWidget(headingText: 'Settings'),
+              const CustomSettingDivider(),
+              const SettingsCardWidget(),
+              const CustomSettingDivider(),
+              const NotificationsCardWidget(),
+              const CustomSettingDivider(),
+            ],
+          ),
         );
       },
-      title: const Text(
-        'Change color theme',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-        ),
-      ),
     );
   }
 }
@@ -141,8 +91,7 @@ class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({Key? key}) : super(key: key);
 
   @override
-  State<NotificationsCardWidget> createState() =>
-      _NotificationsCardWidgetState();
+  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
 }
 
 class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
@@ -150,25 +99,28 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
-      value: notifications,
-      onChanged: (bool value) {
-        setState(
-          () {
-            notifications = value;
+    return Consumer<ModelTheme>(
+      builder: (context, ModelTheme notifierTheme, child) {
+        return SwitchListTile(
+          activeColor: Colors.pinkAccent,
+          inactiveThumbColor: Colors.grey,
+          value: notifications,
+          onChanged: (bool value) {
+            setState(
+              () {
+                notifications = value;
+              },
+            );
           },
+          title: Text(
+            'Push notifications',
+            style: TextStyle(
+              fontSize: 14,
+              color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
+            ),
+          ),
         );
       },
-      title: const Text(
-        'Push notifications',
-        style: TextStyle(
-          fontSize: 14,
-          color: Colors.white,
-        ),
-      ),
     );
   }
 }
-*/

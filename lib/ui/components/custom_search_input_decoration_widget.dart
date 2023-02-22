@@ -23,3 +23,23 @@ InputDecoration customSearchInputDecoration({required String text}) {
     ),
   );
 }
+
+InputDecoration customSearchInputDecorationForLightTheme({required String text}) {
+  return InputDecoration(
+    labelText: text,
+    labelStyle: TextStyle(
+      color: Colors.black.withOpacity(0.2),
+    ),
+    filled: true,
+    fillColor: Colors.white,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.black.withOpacity(0.2)),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.black.withOpacity(0.2)),
+    ),
+  );
+}

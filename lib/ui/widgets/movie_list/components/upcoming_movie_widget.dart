@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/app_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -103,7 +104,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
       width: _currentMovie == index ? 20 : 6,
       decoration: BoxDecoration(
         // refactoring color
-        color: _currentMovie == index ? Colors.white : const Color(0xFFD8D8D8),
+        color: _currentMovie == index ? Colors.white : AppColors.dots,
         borderRadius: BorderRadius.circular(3),
       ),
     );
