@@ -17,7 +17,7 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
           title: Text(
             title!,
             style: TextStyle(
-              color: notifierTheme.isDark ? Colors.white : AppColors.headerText,
+              color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
               fontSize: 22,
             ),
           ),
@@ -27,7 +27,7 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
             // color: Theme.of(context).colorScheme.onBackground,
             icon: const Icon(
               Icons.arrow_back,
-              color: AppColors.headerText,
+              color: AppColors.kPrimaryColor,
             ),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
