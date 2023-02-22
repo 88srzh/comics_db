@@ -21,7 +21,7 @@ class CustomPosterTopLeftAlignTextRating extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 13,
-              color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
             ),
           ),
         );

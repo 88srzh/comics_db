@@ -43,7 +43,7 @@ class MovieTopPosterWidget extends StatelessWidget {
           backdropPath != null
               ? Positioned(
                   child: Opacity(
-                    opacity: notifierTheme.isDark ? 0.25 : 1.00,
+                    opacity: notifierTheme.isDark ? 0.25 : 0.35,
                     child: AspectRatio(
                       aspectRatio: 390 / 220,
                       child: CachedNetworkImage(
@@ -78,10 +78,10 @@ class MovieTopPosterWidget extends StatelessWidget {
                           tagline ?? 'No tagline',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontStyle: FontStyle.italic,
                             fontSize: 13,
-                            color: AppColors.titleText,
+                            color: notifierTheme.isDark ? AppColors.titleText : AppColors.kPrimaryColor,
                           ),
                         ),
                       ),
@@ -116,9 +116,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(
+                       Icon(
                         MdiIcons.accountOutline,
-                        color: AppColors.ratingThumb,
+                        color: notifierTheme.isDark ? AppColors.ratingThumb : AppColors.kPrimaryColor,
                         size: 14,
                       ),
                       const SizedBox(width: 4),
@@ -127,9 +127,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(
+                       Icon(
                         MdiIcons.heartOutline,
-                        color: AppColors.ratingThumb,
+                        color: notifierTheme.isDark ? AppColors.ratingThumb : AppColors.kPrimaryColor,
                         size: 14,
                       ),
                       const SizedBox(width: 4),
