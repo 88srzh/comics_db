@@ -73,7 +73,10 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
                         );
                       },
                     )
-                  : Image.asset(AppImages.noImageAvailable),
+                  : Image.asset(
+                      AppImages.noVideoAvailable,
+                      width: double.infinity,
+                    ),
             ],
           ),
         );

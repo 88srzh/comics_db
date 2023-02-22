@@ -56,7 +56,6 @@ class _TrailerWidgetState extends State<TrailerWidget> {
           trailerKey != null
               ? YoutubePlayerBuilder(
                   player: YoutubePlayer(
-                    // thumbnail: 'https://img.youtube.com/vi/${widget.youtubeKey}/hqdefault.jpg',
                     controller: _controller,
                     showVideoProgressIndicator: true,
                   ),
