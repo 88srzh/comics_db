@@ -33,7 +33,7 @@ class CastWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.w600,
-                      color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+                      color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                     ),
                   ),
                 ),
@@ -117,7 +117,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
                             maxLines: 1,
                             fontSize: 13,
                             // TODO may be i can replace this to custom widget
-                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                             fontWeight: null,
                           ),
                           const SizedBox(height: 7),
@@ -125,7 +125,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
                             text: actor.character,
                             maxLines: 2,
                             fontSize: 12,
-                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                             fontWeight: null,
                           ),
                         ],
