@@ -33,7 +33,7 @@ class DescriptionWidget extends StatelessWidget {
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
                   // TODO rename text
-                  color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+                  color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                 ),
               ),
               // if i have empty biography i will have extra sizedbox

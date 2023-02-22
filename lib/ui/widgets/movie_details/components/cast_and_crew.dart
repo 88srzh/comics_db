@@ -120,7 +120,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
                             color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                             fontWeight: null,
                           ),
-                          const SizedBox(height: 7),
+                          const SizedBox(height: 7.0),
                           CustomCastListTextWidget(
                             text: actor.character,
                             maxLines: 2,

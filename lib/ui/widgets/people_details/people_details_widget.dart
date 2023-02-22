@@ -33,7 +33,7 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
         return Scaffold(
           appBar: const CustomDetailsAppBar(title: ''),
           body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : AppColors.bottomNavBarLight,
+            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
             child: ListView(
               children: [
                 Column(

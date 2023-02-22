@@ -20,8 +20,7 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var charactersData =
-        context.watch<PeopleDetailsCubit>().data.charactersData;
+    var charactersData = context.watch<PeopleDetailsCubit>().data.charactersData;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return Consumer<ModelTheme>(
       builder: (context, ModelTheme notifierTheme, child) {
@@ -39,17 +38,14 @@ class CastWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.w600,
-                      color: notifierTheme.isDark
-                          ? AppColors.genresText
-                          : AppColors.headerText,
+                      color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 260.0,
                   child: Scrollbar(
-                    child:
-                        _PeopleActorListWidget(charactersData: charactersData),
+                    child: _PeopleActorListWidget(charactersData: charactersData),
                   ),
                 ),
               ],
@@ -64,8 +60,7 @@ class CastWidget extends StatelessWidget {
 class _PeopleActorListWidget extends StatelessWidget {
   final List<PeopleDetailsCharacterData> charactersData;
 
-  const _PeopleActorListWidget({Key? key, required this.charactersData})
-      : super(key: key);
+  const _PeopleActorListWidget({Key? key, required this.charactersData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +78,7 @@ class _PeopleActorListWidget extends StatelessWidget {
 class _PeopleActorListItemWidget extends StatelessWidget {
   final int characterIndex;
 
-  const _PeopleActorListItemWidget({Key? key, required this.characterIndex})
-      : super(key: key);
+  const _PeopleActorListItemWidget({Key? key, required this.characterIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +91,9 @@ class _PeopleActorListItemWidget extends StatelessWidget {
           padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: AppColors.kPrimaryColor,
-              border: Border.all(color: Colors.white.withOpacity(0.2)),
+              color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white,
+              border: Border.all(
+                  color: notifierTheme.isDark ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
@@ -116,14 +111,10 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                   posterPath != null
                       ? CachedNetworkImage(
                           imageUrl: ImageDownloader.imageUrl(posterPath),
-                          placeholder: (context, url) =>
-                              const LoadingIndicatorWidget(),
-                          errorWidget: (context, url, dynamic error) =>
-                              Image.asset(AppImages.noImageAvailable),
+                          placeholder: (context, url) => const LoadingIndicatorWidget(),
+                          errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                         )
-                      : const Image(
-                          image: AssetImage(AppImages.noImageAvailable)),
-                  // : const SizedBox.shrink(),
+                      : const Image(image: AssetImage(AppImages.noImageAvailable)),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -134,14 +125,14 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                               text: character.title,
                               maxLines: 1,
                               fontSize: 13,
-                              color: AppColors.genresText,
+                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                               fontWeight: null),
-                          const SizedBox(height: 3),
+                          const SizedBox(height: 7.0),
                           CustomCastListTextWidget(
                               text: character.character,
                               maxLines: 2,
                               fontSize: 12,
-                              color: AppColors.genresText,
+                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                               fontWeight: null),
                         ],
                       ),

@@ -76,7 +76,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                                 maxLines: 3,
                                 style: TextStyle(
                                   fontSize: 21,
-                                  color: notifierTheme.isDark ? AppColors.titleText : AppColors.headerText,
+                                  color: notifierTheme.isDark ? AppColors.titleText : AppColors.kPrimaryColor,
                                 ),
                               ),
                             ),
@@ -97,7 +97,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 13,
-                                color: notifierTheme.isDark ? AppColors.titleText : AppColors.headerText,
+                                color: notifierTheme.isDark ? AppColors.titleText : AppColors.kPrimaryColor,
                               ),
                             ),
                           ),
