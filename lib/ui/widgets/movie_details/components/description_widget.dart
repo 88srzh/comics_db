@@ -32,7 +32,7 @@ class DescriptionWidget extends StatelessWidget {
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
                   // TODO rename text
-                  color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+                  color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
                 ),
               ),
               const SizedBox(height: 8),
@@ -40,7 +40,6 @@ class DescriptionWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    // TODO: Добавить расстояние между строками
                     child: CustomDescriptionExpandableText(description: overview),
                   ),
                 ],

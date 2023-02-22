@@ -16,13 +16,13 @@ class CustomPeopleTextStyle {
   );
 
   var nameStyleLightTheme = const TextStyle(
-    color: AppColors.headerText,
+    color: AppColors.kPrimaryColor,
     fontSize: 12,
     fontWeight: FontWeight.w700,
   );
 
   var jobStyleLightTheme = const TextStyle(
-    color: AppColors.headerText,
+    color: AppColors.kPrimaryColor,
     fontSize: 12,
     fontWeight: FontWeight.w700
   );

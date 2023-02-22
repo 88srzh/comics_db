@@ -28,7 +28,7 @@ class CustomDescriptionExpandableText extends StatelessWidget {
           prefixText: ' ',
           linkEllipsis: false,
           style: TextStyle(
-            color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
             fontSize: 12,
           ),
         );
