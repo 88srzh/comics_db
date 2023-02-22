@@ -15,7 +15,7 @@ class CustomHeaderTextWidget extends StatelessWidget {
         return Text(
           text,
           style: TextStyle(
-            color: themeNotifier.isDark ? AppColors.genresText : AppColors.headerText,
+            color: themeNotifier.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
             fontSize: 21,
             fontWeight: FontWeight.w600,
           ),
