@@ -24,12 +24,11 @@ InputDecoration customSearchInputDecoration({required String text}) {
   );
 }
 
-InputDecoration customSearchInputDecorationForLightTheme(
-    {required String text}) {
+InputDecoration customSearchInputDecorationForLightTheme({required String text}) {
   return InputDecoration(
     labelText: text,
-    labelStyle: const TextStyle(
-      color: AppColors.genresText,
+    labelStyle: TextStyle(
+      color: Colors.black.withOpacity(0.2),
     ),
     filled: true,
     fillColor: Colors.white,

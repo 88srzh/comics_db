@@ -19,7 +19,7 @@ class CustomSearchBar extends StatelessWidget {
       builder: (context, ModelTheme notifierTheme, child) {
         return TextField(
           style: TextStyle(
-            color: notifierTheme.isDark ? AppColors.genresText : AppColors.headerText,
+            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
           ),
           onChanged: onChanged,
           decoration: notifierTheme.isDark
