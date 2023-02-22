@@ -48,10 +48,10 @@ class _TvListWidgetState extends State<TvListWidget> {
                           const CustomHeaderTextWidget(text: 'Popular'),
                           InkWell(
                             onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvPopularList),
-                            child: const Text(
+                            child: Text(
                               'See All',
                               style: TextStyle(
-                                color: AppColors.ratingText,
+                                color: notifierTheme.isDark ? AppColors.ratingText : AppColors.kPrimaryColor,
                                 fontSize: 15,
                               ),
                             ),
