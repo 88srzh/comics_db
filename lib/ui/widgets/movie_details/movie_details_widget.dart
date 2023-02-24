@@ -25,7 +25,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
+    context
+        .read<MovieDetailsCubit>()
+        .setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override
@@ -33,12 +35,16 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // var cubit = context.watch<MovieDetailsCubit>().data;
     // final trailerKey = cubit.trailerKey;
 
+    // var cubit = context.watch<ThemeCubit>();
     return Consumer<ModelTheme>(
       builder: (context, ModelTheme notifierTheme, child) {
         return Scaffold(
           appBar: const CustomDetailsAppBar(title: 'Movie Details'),
           body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
+            color: notifierTheme.isDark
+                ? AppColors.kPrimaryColor
+                : Colors.transparent,
+            // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
             child: ListView(
               children: [
                 Column(

@@ -2,9 +2,6 @@
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
@@ -30,7 +27,9 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<TvPopularListCubit>().setupPopularTvLocale(locale.languageCode);
+    context
+        .read<TvPopularListCubit>()
+        .setupPopularTvLocale(locale.languageCode);
   }
 
   @override
@@ -41,11 +40,13 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
       body: Consumer<ModelTheme>(
         builder: (context, ModelTheme notifierTheme, child) {
           return ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color:
+                notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
             child: Stack(
               children: [
                 ListView.builder(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
                     padding: const EdgeInsets.only(top: 70.0),
                     itemCount: cubit.state.tvs.length,
                     itemExtent: 165,
@@ -55,11 +56,16 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
                       final posterPath = tv.posterPath;
                       return InkWell(
                         onTap: () => cubit.onTvTap(context, index),
-                        child: _TvPopularListRowWidget(posterPath: posterPath, tv: tv, cubit: cubit, index: index),
+                        child: _TvPopularListRowWidget(
+                            posterPath: posterPath,
+                            tv: tv,
+                            cubit: cubit,
+                            index: index),
                       );
                     }),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 10.0),
                   child: CustomSearchBar(onChanged: cubit.searchPopularTv),
                 ),
               ],
@@ -118,7 +124,9 @@ class _TvPopularListRowWidget extends StatelessWidget {
                             text: tv.name,
                             maxLines: 1,
                             fontSize: null,
-                            color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
+                            color: notifierTheme.isDark
+                                ? Colors.white
+                                : AppColors.kPrimaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                           const SizedBox(height: 5.0),
@@ -126,7 +134,9 @@ class _TvPopularListRowWidget extends StatelessWidget {
                             text: tv.firstAirDate ?? 'No date',
                             maxLines: 1,
                             fontSize: 13,
-                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                            color: notifierTheme.isDark
+                                ? AppColors.genresText
+                                : AppColors.kPrimaryColor,
                             fontWeight: null,
                           ),
                           const SizedBox(height: 15.0),
@@ -134,7 +144,9 @@ class _TvPopularListRowWidget extends StatelessWidget {
                             text: tv.overview,
                             maxLines: 3,
                             fontSize: 12,
-                            color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                            color: notifierTheme.isDark
+                                ? AppColors.genresText
+                                : AppColors.kPrimaryColor,
                             fontWeight: null,
                           ),
                         ],
