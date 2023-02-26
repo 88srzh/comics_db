@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -9,7 +9,7 @@ import 'package:comics_db_app/ui/widgets/people_details/components/cast_widget.d
 import 'package:comics_db_app/ui/widgets/people_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PeopleDetailsWidget extends StatefulWidget {
   const PeopleDetailsWidget({Key? key}) : super(key: key);
@@ -23,32 +23,47 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<PeopleDetailsCubit>().setupPeopleDetailsLocale(context, locale.languageCode);
+    context
+        .read<PeopleDetailsCubit>()
+        .setupPeopleDetailsLocale(context, locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Scaffold(
-          appBar: const CustomDetailsAppBar(title: ''),
-          body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-            child: ListView(
-              children: [
-                Column(
-                  children: const [
-                    PeopleTopPosterWidget(),
-                    DescriptionWidget(),
-                    CastWidget(),
-                    // KnowForWidget(),
-                    // const DescriptionWidget(),
-                  ],
-                ),
-              ],
+    return BlocConsumer<PeopleListBloc, PeopleListState>(
+      listener: (context, state) {
+        if (!state.peopleContainer.isComplete) {
+          final locale = Localizations.localeOf(context);
+          context
+              .read<PeopleDetailsCubit>()
+              .setupPeopleDetailsLocale(context, locale.languageCode);
+        }
+      },
+      builder: (context, state) {
+        if (state.peopleContainer.isComplete) {
+          return Scaffold(
+            appBar: const CustomDetailsAppBar(title: ''),
+            body: ColoredBox(
+              // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
+              color: AppColors.kPrimaryColor,
+              child: ListView(
+                children: [
+                  Column(
+                    children: const [
+                      PeopleTopPosterWidget(),
+                      DescriptionWidget(),
+                      CastWidget(),
+                      // KnowForWidget(),
+                      // const DescriptionWidget(),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          return const Center(child: Text('error'));
+        }
       },
     );
   }
