@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -91,10 +92,17 @@ class ScreenFactory {
     );
   }
 
-  Widget makeMovieDetails(int movieId) {
+  Widget makeMovieDetails(int movieId, bool isDark) {
     // TODO: should fix
-    return BlocProvider(
-      create: (_) => MovieDetailsCubit(movieId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => MovieDetailsCubit(movieId),
+        ),
+        BlocProvider(
+          create: (_) => ThemeCubit(isDark),
+        ),
+      ],
       child: const MovieDetailsWidget(),
     );
   }
@@ -161,14 +169,14 @@ class ScreenFactory {
     );
   }
 
-  // Widget makeTvAiringTodayList() {
-  //   return BlocProvider(
-  //     create: (_) => TvAiringTodayListCubit(
-  //       tvAiringTodayListBloc: TvAiringTodayListBloc(
-  //         TvListState.initial(),
-  //       ),
-  //     ),
-  //     child: const AiringTodayTvsWidget(),
-  //   );
-  // }*/
+// Widget makeTvAiringTodayList() {
+//   return BlocProvider(
+//     create: (_) => TvAiringTodayListCubit(
+//       tvAiringTodayListBloc: TvAiringTodayListBloc(
+//         TvListState.initial(),
+//       ),
+//     ),
+//     child: const AiringTodayTvsWidget(),
+//   );
+// }*/
 }

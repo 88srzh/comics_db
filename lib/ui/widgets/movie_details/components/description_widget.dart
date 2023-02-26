@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/theme/theme_cubit.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class DescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
+    var theme = context.watch<ThemeCubit>();
     var overview = cubit.state.overview;
     return Consumer<ModelTheme>(
       builder: (context, ModelTheme notifierTheme, child) {
@@ -32,7 +34,9 @@ class DescriptionWidget extends StatelessWidget {
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
                   // TODO rename text
-                  color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                  color: theme.isDark
+                      ? AppColors.genresText
+                      : AppColors.kPrimaryColor,
                 ),
               ),
               const SizedBox(height: 8),
@@ -40,7 +44,8 @@ class DescriptionWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: CustomDescriptionExpandableText(description: overview),
+                    child:
+                        CustomDescriptionExpandableText(description: overview),
                   ),
                 ],
               ),

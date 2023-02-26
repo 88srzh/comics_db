@@ -3,7 +3,6 @@ import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
@@ -15,6 +14,7 @@ import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
+import 'package:provider/provider.dart';
 
 class MoviePopularListWidget extends StatefulWidget {
   const MoviePopularListWidget({Key? key}) : super(key: key);
@@ -29,7 +29,9 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context
+        .read<MoviePopularListCubit>()
+        .setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -41,11 +43,13 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
         return Scaffold(
           appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
           body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color:
+                notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
             child: Stack(
               children: [
                 ListView.builder(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: const EdgeInsets.only(top: 70.0),
                   itemCount: cubit.state.movies.length,
                   itemExtent: 165,
@@ -55,13 +59,17 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
                     final posterPath = movie.posterPath;
                     return InkWell(
                       onTap: () => cubit.onMovieTap(context, index),
-                      child:
-                          _MoviePopularListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                      child: _MoviePopularListRowWidget(
+                          posterPath: posterPath,
+                          movie: movie,
+                          cubit: cubit,
+                          index: index),
                     );
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 10.0),
                   child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
                 ),
               ],
@@ -119,21 +127,27 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                               text: movie.originalTitle,
                               maxLines: 1,
                               fontSize: null,
-                              color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
+                              color: notifierTheme.isDark
+                                  ? Colors.white
+                                  : AppColors.kPrimaryColor,
                               fontWeight: FontWeight.bold),
                           const SizedBox(height: 5.0),
                           CustomCastListTextWidget(
                               text: movie.releaseDate,
                               maxLines: 1,
                               fontSize: 13,
-                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                              color: notifierTheme.isDark
+                                  ? AppColors.genresText
+                                  : AppColors.kPrimaryColor,
                               fontWeight: null),
                           const SizedBox(height: 15.0),
                           CustomCastListTextWidget(
                               text: movie.overview ?? '',
                               maxLines: 3,
                               fontSize: 12,
-                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
+                              color: notifierTheme.isDark
+                                  ? AppColors.genresText
+                                  : AppColors.kPrimaryColor,
                               fontWeight: null),
                         ],
                       ),

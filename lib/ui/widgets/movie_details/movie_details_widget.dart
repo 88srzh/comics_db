@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/theme/theme_cubit.dart';
 import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -35,15 +36,13 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // var cubit = context.watch<MovieDetailsCubit>().data;
     // final trailerKey = cubit.trailerKey;
 
-    // var cubit = context.watch<ThemeCubit>();
+    var theme = context.watch<ThemeCubit>();
     return Consumer<ModelTheme>(
       builder: (context, ModelTheme notifierTheme, child) {
         return Scaffold(
           appBar: const CustomDetailsAppBar(title: 'Movie Details'),
           body: ColoredBox(
-            color: notifierTheme.isDark
-                ? AppColors.kPrimaryColor
-                : Colors.transparent,
+            color: theme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
             // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
             child: ListView(
               children: [
