@@ -8,6 +8,8 @@ part 'movie.freezed.dart';
 
 part 'movie.g.dart';
 
+enum TypeOfLookingAt { movie, tv }
+
 @freezed
 class Movie with _$Movie {
   @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
