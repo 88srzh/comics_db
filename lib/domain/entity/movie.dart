@@ -28,6 +28,7 @@ class Movie with _$Movie {
     required int voteCount,
     required bool video,
     required double voteAverage,
+    required TypeOfLookingAt type,
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
