@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/domain/blocs/theme/theme_cubit.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -36,34 +34,29 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // var cubit = context.watch<MovieDetailsCubit>().data;
     // final trailerKey = cubit.trailerKey;
 
-    var theme = context.watch<ThemeCubit>();
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Scaffold(
-          appBar: const CustomDetailsAppBar(title: 'Movie Details'),
-          body: ColoredBox(
-            color: theme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-            // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-            child: ListView(
-              children: [
-                Column(
-                  children: const [
-                    MovieTopPosterWidget(),
-                    PeoplesWidget(),
-                    DescriptionWidget(),
+    return Scaffold(
+      appBar: const CustomDetailsAppBar(title: 'Movie Details'),
+      body: ColoredBox(
+        color: AppColors.kPrimaryColor,
+        // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
+        child: ListView(
+          children: [
+            Column(
+              children: const [
+                MovieTopPosterWidget(),
+                PeoplesWidget(),
+                DescriptionWidget(),
 
-                    // TODO doesn't work, the request contains an invalid parameter value, need microtask
-                    // TrailerWidget(youtubeKey: trailerKey),
+                // TODO doesn't work, the request contains an invalid parameter value, need microtask
+                // TrailerWidget(youtubeKey: trailerKey),
 
-                    CastWidget(),
-                    // const MovieSimilarWidget(),
-                  ],
-                ),
+                CastWidget(),
+                // const MovieSimilarWidget(),
               ],
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

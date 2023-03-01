@@ -23,12 +23,10 @@ class TvListWidget extends StatefulWidget {
 class _TvListWidgetState extends State<TvListWidget> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
         return Scaffold(
           appBar: const CustomMainAppBarWidget(),
           body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color: AppColors.kPrimaryColor,
             child: ListView(
               children: [
                 Column(
@@ -51,7 +49,7 @@ class _TvListWidgetState extends State<TvListWidget> {
                             child: Text(
                               'See All',
                               style: TextStyle(
-                                color: notifierTheme.isDark ? AppColors.ratingText : AppColors.kPrimaryColor,
+                                color: AppColors.ratingText,
                                 fontSize: 15,
                               ),
                             ),

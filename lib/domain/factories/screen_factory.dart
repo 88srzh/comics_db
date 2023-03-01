@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/domain/blocs/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -92,15 +91,12 @@ class ScreenFactory {
     );
   }
 
-  Widget makeMovieDetails(int movieId, bool isDark) {
+  Widget makeMovieDetails(int movieId) {
     // TODO: should fix
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (_) => MovieDetailsCubit(movieId),
-        ),
-        BlocProvider(
-          create: (_) => ThemeCubit(isDark),
         ),
       ],
       child: const MovieDetailsWidget(),

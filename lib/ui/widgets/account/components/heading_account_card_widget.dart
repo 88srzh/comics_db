@@ -7,39 +7,36 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:provider/provider.dart';
 
 class HeadingAccountCardWidget extends StatelessWidget {
-  const HeadingAccountCardWidget({Key? key, required this.headingText}) : super(key: key);
+  const HeadingAccountCardWidget({Key? key, required this.headingText})
+      : super(key: key);
   final String headingText;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return SizedBox(
-          height: 40,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 40,
-                color: notifierTheme.isDark ? AppColors.bottomBarBackgroundColor : AppColors.bottomNavBarLight,
-                child: ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: Text(
-                      headingText,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: notifierTheme.isDark ? Colors.white : Colors.white70,
-                      ),
-                    ),
+    return SizedBox(
+      height: 40,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 40,
+            color: AppColors.bottomBarBackgroundColor,
+            child: ListTile(
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Text(
+                  headingText,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
