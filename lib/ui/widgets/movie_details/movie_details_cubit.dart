@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -23,6 +22,7 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
+
   // MovieDetails? details;
 
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
@@ -57,8 +57,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           peopleData: [],
           actorsData: [],
           isLoading: false,
-    type: TypeOfLookingAt.movie,
-
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -77,15 +75,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
-      type: state.type,
     ));
   }
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
       // final _details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-      final details =
-          await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
+      final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
       // TODO: add isFavorite to update
       updateData(details);
     } on ApiClientException catch (e) {
@@ -93,8 +89,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  void _handleApiClientException(
-      ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
@@ -108,8 +103,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  Future<void> setupMovieDetailsLocale(
-      BuildContext context, String localeTag) async {
+  Future<void> setupMovieDetailsLocale(BuildContext context, String localeTag) async {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -141,12 +135,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.trailerKey = makeTrailerKey(details);
-    data.type = details.type;
-
 
     data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(
-            name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
 
     data.isLoading = true;
@@ -166,7 +157,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
-    var type = data.type;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -184,14 +174,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-      type: type,
     );
     emit(newState);
   }
 
   String makeTrailerKey(MovieDetails details) {
-    final videos = details.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     // final trailerKey = videos.first.key;
     // return trailerKey;
@@ -237,9 +225,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
-    var crew = details.credits.crew
-        .map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job))
-        .toList();
+    var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {

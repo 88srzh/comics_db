@@ -18,7 +18,6 @@ class MovieDetailsCubitState {
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
-  final TypeOfLookingAt type;
 
   const MovieDetailsCubitState({
     required this.posterPath,
@@ -37,7 +36,6 @@ class MovieDetailsCubitState {
     required this.peopleData,
     required this.actorsData,
     required this.isLoading,
-    required this.type,
   });
 
   @override
@@ -60,8 +58,7 @@ class MovieDetailsCubitState {
           trailerKey == other.trailerKey &&
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
-          isLoading == other.isLoading &&
-          type == other.type;
+          isLoading == other.isLoading;
 
   // TODO fix hashCode
   @override
@@ -84,7 +81,6 @@ class MovieDetailsCubitState {
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
-    TypeOfLookingAt? type,
   }) {
     return MovieDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -103,7 +99,6 @@ class MovieDetailsCubitState {
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
-      type: type ?? this.type,
     );
   }
 }

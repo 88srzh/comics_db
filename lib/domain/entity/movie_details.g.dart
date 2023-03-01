@@ -47,7 +47,6 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
           MovieDetailsCredits.fromJson(json['credits'] as Map<String, dynamic>),
       videos:
           MovieDetailsVideos.fromJson(json['videos'] as Map<String, dynamic>),
-      type: $enumDecode(_$TypeOfLookingAtEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
@@ -82,13 +81,7 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'vote_count': instance.voteCount,
       'credits': instance.credits.toJson(),
       'videos': instance.videos.toJson(),
-      'type': _$TypeOfLookingAtEnumMap[instance.type]!,
     };
-
-const _$TypeOfLookingAtEnumMap = {
-  TypeOfLookingAt.movie: 'movie',
-  TypeOfLookingAt.tv: 'tv',
-};
 
 BelongsToCollection _$BelongsToCollectionFromJson(Map<String, dynamic> json) =>
     BelongsToCollection();

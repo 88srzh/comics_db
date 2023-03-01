@@ -23,7 +23,6 @@ class MovieDetailsData {
   String genres = '';
   double? voteAverage = 0;
   String? trailerKey = '';
-  TypeOfLookingAt? type;
   // TODO may be decompose trailerData
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData =

@@ -39,7 +39,6 @@ class MovieDetails {
   final int voteCount;
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
-  final TypeOfLookingAt type;
 
   MovieDetails({
     required this.adult,
@@ -69,7 +68,6 @@ class MovieDetails {
     required this.voteCount,
     required this.credits,
     required this.videos,
-    required this.type,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>
