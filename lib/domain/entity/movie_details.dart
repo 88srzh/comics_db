@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -38,6 +39,8 @@ class MovieDetails {
   final int voteCount;
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
+  final TypeOfLookingAt type;
+
   MovieDetails({
     required this.adult,
     required this.backdropPath,
@@ -66,6 +69,7 @@ class MovieDetails {
     required this.voteCount,
     required this.credits,
     required this.videos,
+    required this.type,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>
@@ -88,6 +92,7 @@ class BelongsToCollection {
 class Genre {
   final int id;
   final String name;
+
   Genre({
     required this.id,
     required this.name,
@@ -140,6 +145,7 @@ class SpokenLanguage {
   @JsonKey(name: 'iso_639_1')
   final String iso;
   final String name;
+
   SpokenLanguage({
     required this.iso,
     required this.name,

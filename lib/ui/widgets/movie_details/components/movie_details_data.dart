@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -22,6 +23,7 @@ class MovieDetailsData {
   String genres = '';
   double? voteAverage = 0;
   String? trailerKey = '';
+  TypeOfLookingAt? type;
   // TODO may be decompose trailerData
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData =

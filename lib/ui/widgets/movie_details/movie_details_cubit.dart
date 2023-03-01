@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -56,6 +57,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           peopleData: [],
           actorsData: [],
           isLoading: false,
+    type: TypeOfLookingAt.movie,
+
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -74,6 +77,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
+      type: state.type,
     ));
   }
 
@@ -137,6 +141,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.trailerKey = makeTrailerKey(details);
+    data.type = details.type;
+
 
     data.actorsData = details.credits.cast
         .map((e) => MovieDetailsMovieActorData(
@@ -160,6 +166,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
+    var type = data.type;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -177,6 +184,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
+      type: type,
     );
     emit(newState);
   }
