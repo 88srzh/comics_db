@@ -15,28 +15,24 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme themeNotifier, child) {
-        return SwitchListTile(
-          activeColor: Colors.pinkAccent,
-          inactiveThumbColor: Colors.grey,
-          value: themeNotifier.isDark,
-          onChanged: (bool value) {
-            setState(
-                  () {
-                themeNotifier.isDark = value;
-              },
-            );
+    return SwitchListTile(
+      activeColor: Colors.pinkAccent,
+      inactiveThumbColor: Colors.grey,
+      value: false,
+      onChanged: (bool value) {
+        setState(
+          () {
+            value;
           },
-          title: Text(
-            'Change color theme',
-            style: TextStyle(
-              color: themeNotifier.isDark ? Colors.white : AppColors.kPrimaryColor,
-              fontSize: 14,
-            ),
-          ),
         );
       },
+      title: const Text(
+        'Change color theme',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
+      ),
     );
   }
 }

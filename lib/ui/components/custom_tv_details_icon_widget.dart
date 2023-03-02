@@ -6,21 +6,14 @@ import 'package:provider/provider.dart';
 class CustomTvDetailsIconWidget extends StatelessWidget {
   final IconData icon;
 
-  const CustomTvDetailsIconWidget({Key? key, required this.icon})
-      : super(key: key);
+  const CustomTvDetailsIconWidget({Key? key, required this.icon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Icon(
-          icon,
-          color: notifierTheme.isDark
-              ? AppColors.ratingThumb
-              : AppColors.kPrimaryColor,
-          size: 14,
-        );
-      },
+    return Icon(
+      icon,
+      color: AppColors.ratingThumb,
+      size: 14,
     );
   }
 }

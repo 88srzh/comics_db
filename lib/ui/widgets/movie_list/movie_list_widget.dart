@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -11,7 +10,6 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie
 import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/upcoming_movie_widget.dart';
-import 'package:provider/provider.dart';
 
 // Package imports:
 
@@ -25,13 +23,10 @@ class MovieListWidget extends StatelessWidget {
     // TODO: after refactoring search doesn't work
     // content: _SearchWidget(),
     // );
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme themeNotifier, child) {
         return Scaffold(
           appBar: const CustomMainAppBarWidget(),
           body: ColoredBox(
-            // color: AppColors.kPrimaryColor,
-            color: themeNotifier.isDark ? AppColors.kPrimaryColor : Colors.white70,
+            color: AppColors.kPrimaryColor,
             child: ListView(
               children: [
                 Column(
@@ -51,10 +46,10 @@ class MovieListWidget extends StatelessWidget {
                           const CustomHeaderTextWidget(text: 'Popular'),
                           InkWell(
                             onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
-                            child: Text(
+                            child: const Text(
                               'See All',
                               style: TextStyle(
-                                color: themeNotifier.isDark ? AppColors.ratingText : AppColors.kPrimaryColor,
+                                color: AppColors.ratingText,
                                 fontSize: 15,
                               ),
                             ),
@@ -92,10 +87,10 @@ class MovieListWidget extends StatelessWidget {
                       const CustomHeaderTextWidget(text: 'Now playing'),
                       InkWell(
                         onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
-                        child: Text(
+                        child: const Text(
                           'See All',
                           style: TextStyle(
-                            color: themeNotifier.isDark ? AppColors.ratingText : AppColors.kPrimaryColor,
+                            color: AppColors.ratingText,
                             fontSize: 15,
                           ),
                         ),
@@ -114,7 +109,5 @@ class MovieListWidget extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
   }
 }

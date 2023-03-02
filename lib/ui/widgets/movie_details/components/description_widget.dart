@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_cubit.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -21,38 +20,34 @@ class DescriptionWidget extends StatelessWidget {
     var cubit = context.watch<MovieDetailsCubit>();
     var theme = context.watch<ThemeCubit>();
     var overview = cubit.state.overview;
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Description',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w600,
+              // TODO rename text
+              color: theme.isDark
+                  ? AppColors.genresText
+                  : AppColors.kPrimaryColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                'Description',
-                style: TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.w600,
-                  // TODO rename text
-                  color: theme.isDark
-                      ? AppColors.genresText
-                      : AppColors.kPrimaryColor,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child:
-                        CustomDescriptionExpandableText(description: overview),
-                  ),
-                ],
+              Expanded(
+                child:
+                    CustomDescriptionExpandableText(description: overview),
               ),
             ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

@@ -61,28 +61,24 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
     final name = cubit.state.name;
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return ColoredBox(
-          // TODO may be change bottomBarBackgroundColor, for what it's there?
-          color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeadingAccountCardWidget(headingText: name),
-              const CustomSettingDivider(),
-              const LogoutCardWidget(),
-              const CustomSettingDivider(),
-              const HeadingAccountCardWidget(headingText: 'Settings'),
-              const CustomSettingDivider(),
-              const SettingsCardWidget(),
-              const CustomSettingDivider(),
-              const NotificationsCardWidget(),
-              const CustomSettingDivider(),
-            ],
-          ),
-        );
-      },
+    return ColoredBox(
+      // TODO may be change bottomBarBackgroundColor, for what it's there?
+      color: AppColors.kPrimaryColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HeadingAccountCardWidget(headingText: name),
+          const CustomSettingDivider(),
+          const LogoutCardWidget(),
+          const CustomSettingDivider(),
+          const HeadingAccountCardWidget(headingText: 'Settings'),
+          const CustomSettingDivider(),
+          const SettingsCardWidget(),
+          const CustomSettingDivider(),
+          const NotificationsCardWidget(),
+          const CustomSettingDivider(),
+        ],
+      ),
     );
   }
 }
@@ -99,28 +95,24 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return SwitchListTile(
-          activeColor: Colors.pinkAccent,
-          inactiveThumbColor: Colors.grey,
-          value: notifications,
-          onChanged: (bool value) {
-            setState(
-              () {
-                notifications = value;
-              },
-            );
+    return SwitchListTile(
+      activeColor: Colors.pinkAccent,
+      inactiveThumbColor: Colors.grey,
+      value: notifications,
+      onChanged: (bool value) {
+        setState(
+          () {
+            notifications = value;
           },
-          title: Text(
-            'Push notifications',
-            style: TextStyle(
-              fontSize: 14,
-              color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
-            ),
-          ),
         );
       },
+      title: const Text(
+        'Push notifications',
+        style: TextStyle(
+          fontSize: 14,
+          color:Colors.white,
+        ),
+      ),
     );
   }
 }
