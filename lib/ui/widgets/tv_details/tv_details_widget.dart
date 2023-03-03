@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -42,29 +41,25 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
 
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Scaffold(
-          appBar: const CustomDetailsAppBar(title: 'Tv Details'),
-          body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-            child: ListView(
+    return Scaffold(
+      appBar: const CustomDetailsAppBar(title: 'Tv Details'),
+      body: ColoredBox(
+        color: AppColors.kPrimaryColor,
+        child: ListView(
+          children: [
+            Column(
               children: [
-                Column(
-                  children: [
-                    const TvTopPosterWidget(),
-                    const TitleGenresRatingVoteAverageWidget(),
-                    const TvDescriptionWidget(),
-                    TvTrailerWidget(youtubeKey: tvTrailerKey),
-                    // const _DirectorWidget(),
-                    const TvCastWidget(),
-                  ],
-                ),
+                const TvTopPosterWidget(),
+                const TitleGenresRatingVoteAverageWidget(),
+                const TvDescriptionWidget(),
+                TvTrailerWidget(youtubeKey: tvTrailerKey),
+                // const _DirectorWidget(),
+                const TvCastWidget(),
               ],
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }
