@@ -27,14 +27,9 @@ class MovieListWidget extends StatelessWidget {
     // );
     return Scaffold(
       appBar: const CustomMainAppBarWidget(),
-      // appBar: AppBar(
-      //     leading: IconButton(
-      //       icon: const Icon(Icons.icecream),
-      //       onPressed: () => context.read<ThemeBloc>().add(const ThemeEvent()),
-      //     ),
-      // ),
       body: ColoredBox(
-        color: AppColors.kPrimaryColor,
+        // TODO doesn't work
+        color: context.read<ThemeBloc>().isLightTheme ? Colors.white70 : AppColors.kPrimaryColor,
         child: ListView(
           children: [
             Column(
