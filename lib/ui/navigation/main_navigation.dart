@@ -61,7 +61,6 @@ class MainNavigation {
       case MainNavigationRouteNames.movieDetails:
         final arguments = settings.arguments;
         final movieId = arguments is int ? arguments : 0;
-        final isDark = arguments is bool ? arguments : false;
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeMovieDetails(movieId),
         );

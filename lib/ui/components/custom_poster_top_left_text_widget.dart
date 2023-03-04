@@ -1,10 +1,8 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:comics_db_app/app_colors.dart';
-import 'package:provider/provider.dart';
 
 class CustomPosterTopLeftAlignText extends StatelessWidget {
   final String text;

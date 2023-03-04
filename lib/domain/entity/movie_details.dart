@@ -1,5 +1,4 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:

@@ -12,7 +12,6 @@ import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({Key? key}) : super(key: key);
@@ -87,7 +86,8 @@ class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({Key? key}) : super(key: key);
 
   @override
-  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
+  State<NotificationsCardWidget> createState() =>
+      _NotificationsCardWidgetState();
 }
 
 class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
@@ -110,7 +110,7 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
         'Push notifications',
         style: TextStyle(
           fontSize: 14,
-          color:Colors.white,
+          color: Colors.white,
         ),
       ),
     );
