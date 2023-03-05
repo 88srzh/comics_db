@@ -119,11 +119,9 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomCastListTextWidget(
-                        text: people.name,
-                        maxLines: 1,
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold),
+                      text: people.name,
+                      maxLines: 1,
+                    ),
                   ],
                 ),
               ),

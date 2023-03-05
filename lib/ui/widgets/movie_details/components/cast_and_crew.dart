@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -23,19 +24,15 @@ class CastWidget extends StatelessWidget {
             left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Full Cast & Crew',
-                style: TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.w600,
-                  color: DarkThemeColors.genresText,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 250.0,
               child: Scrollbar(
                 child: _MovieActorListWidget(),
@@ -81,9 +78,13 @@ class _MovieActorListItemWidget extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: DarkThemeColors.kPrimaryColor,
+          color: context.read<ThemeBloc>().isDarkTheme
+              ? DarkThemeColors.kPrimaryColor
+              : Colors.white,
           border: Border.all(
-            color: Colors.white.withOpacity(0.2),
+            color: context.read<ThemeBloc>().isDarkTheme
+                ? Colors.white.withOpacity(0.2)
+                : Colors.black.withOpacity(0.2),
           ),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [
@@ -111,18 +112,11 @@ class _MovieActorListItemWidget extends StatelessWidget {
                       CustomCastListTextWidget(
                         text: actor.name,
                         maxLines: 1,
-                        fontSize: 13,
-                        // TODO may be i can replace this to custom widget
-                        color: DarkThemeColors.genresText,
-                        fontWeight: null,
                       ),
                       const SizedBox(height: 7.0),
                       CustomCastListTextWidget(
                         text: actor.character,
                         maxLines: 2,
-                        fontSize: 12,
-                        color: DarkThemeColors.genresText,
-                        fontWeight: null,
                       ),
                     ],
                   ),

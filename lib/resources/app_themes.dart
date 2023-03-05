@@ -15,11 +15,10 @@ class AppThemes {
       useMaterial3: true,
       primarySwatch: Colors.red,
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.white70,
+        elevation: 0,
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        iconTheme: IconThemeData(
-          color: DarkThemeColors.kPrimaryColor,
-        ),
+        iconTheme: IconThemeData(color: DarkThemeColors.kPrimaryColor),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.white70,
@@ -27,7 +26,13 @@ class AppThemes {
       ),
       textTheme: const TextTheme(
         titleMedium: titleStyle,
-        displaySmall: h3style,
+        displaySmall: h4style,
+        displayMedium: h3style,
+        displayLarge: h1style,
+        headlineSmall: h5italicStyle,
+        headlineMedium: h5style,
+        labelMedium: h5subtitleBoldStyle,
+        labelSmall: h5subtitleSemiBoldStyle,
       ),
     ),
     AppTheme.darkTheme: ThemeData(
@@ -35,11 +40,10 @@ class AppThemes {
       useMaterial3: true,
       primarySwatch: Colors.blue,
       appBarTheme: const AppBarTheme(
+        elevation: 0,
         backgroundColor: DarkThemeColors.kPrimaryColor,
         scrolledUnderElevation: 0.0,
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: AppColors.bottomBarBackgroundColor,
@@ -47,7 +51,13 @@ class AppThemes {
       ),
       textTheme: TextTheme(
         titleMedium: titleStyle.copyWith(color: Colors.white),
-        displaySmall: h3style.copyWith(color: Colors.white),
+        displaySmall: h4style.copyWith(color: Colors.white),
+        displayMedium: h3style.copyWith(color: Colors.white),
+        displayLarge: h1style.copyWith(color: Colors.white),
+        headlineSmall: h5italicStyle.copyWith(color: Colors.white),
+        headlineMedium: h5style.copyWith(color: Colors.white),
+        labelMedium: h5subtitleBoldStyle.copyWith(color: Colors.white),
+        labelSmall: h5subtitleSemiBoldStyle.copyWith(color: Colors.white),
       ),
     ),
   };

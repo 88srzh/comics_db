@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -22,10 +21,7 @@ class CustomDescriptionExpandableText extends StatelessWidget {
       expandOnTextTap: true,
       prefixText: ' ',
       linkEllipsis: false,
-      style: const TextStyle(
-        color: DarkThemeColors.genresText,
-        fontSize: 12,
-      ),
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }

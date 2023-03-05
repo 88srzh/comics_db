@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/ui/components/custom_people_text_style.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
@@ -53,11 +52,11 @@ class _PeoplesWidgetRow extends StatelessWidget {
 class _PeopleWidgetRowItem extends StatelessWidget {
   final MovieDetailsMoviePeopleData employee;
 
-  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
+  const _PeopleWidgetRowItem({Key? key, required this.employee})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var customPeopleTextStyle = CustomPeopleTextStyle();
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -65,8 +64,8 @@ class _PeopleWidgetRowItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // TODO may be change customPeople style, because have extra code
-            Text(employee.name, style: customPeopleTextStyle.nameStyle),
-            Text(employee.job, style: customPeopleTextStyle.jobStyle),
+            Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
+            Text(employee.job, style: Theme.of(context).textTheme.labelSmall),
           ],
         ),
       ),

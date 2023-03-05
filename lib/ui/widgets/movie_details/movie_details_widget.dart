@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -36,25 +35,22 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Movie Details'),
-      body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
-        child: ListView(
-          children: [
-            Column(
-              children: const [
-                MovieTopPosterWidget(),
-                PeoplesWidget(),
-                DescriptionWidget(),
+      body: ListView(
+        children: [
+          Column(
+            children: const [
+              MovieTopPosterWidget(),
+              PeoplesWidget(),
+              DescriptionWidget(),
 
-                // TODO doesn't work, the request contains an invalid parameter value, need microtask
-                // TrailerWidget(youtubeKey: trailerKey),
+              // TODO doesn't work, the request contains an invalid parameter value, need microtask
+              // TrailerWidget(youtubeKey: trailerKey),
 
-                CastWidget(),
-                // const MovieSimilarWidget(),
-              ],
-            ),
-          ],
-        ),
+              CastWidget(),
+              // const MovieSimilarWidget(),
+            ],
+          ),
+        ],
       ),
     );
   }

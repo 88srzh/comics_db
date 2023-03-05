@@ -123,17 +123,11 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                       CustomCastListTextWidget(
                         text: character.title,
                         maxLines: 1,
-                        fontSize: 13,
-                        color: DarkThemeColors.genresText,
-                        fontWeight: null,
                       ),
                       const SizedBox(height: 7.0),
                       CustomCastListTextWidget(
                         text: character.character,
                         maxLines: 2,
-                        fontSize: 12,
-                        color: DarkThemeColors.genresText,
-                        fontWeight: null,
                       ),
                     ],
                   ),

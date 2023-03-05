@@ -11,18 +11,13 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       title: Text(
         title!,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 22,
-        ),
+        style: Theme.of(context).textTheme.displayLarge,
       ),
       centerTitle: true,
-      iconTheme: const IconThemeData(color: Colors.white),
+      iconTheme: const IconThemeData(),
       leading: IconButton(
-        // color: Theme.of(context).colorScheme.onBackground,
         icon: const Icon(
           Icons.arrow_back,
-          color: Colors.white,
         ),
         onPressed: () => Navigator.of(context).maybePop(),
       ),

@@ -1,5 +1,3 @@
-// Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -23,14 +21,9 @@ class DescriptionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Description',
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.w600,
-              // TODO rename text
-              color: DarkThemeColors.genresText,
-            ),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           Row(

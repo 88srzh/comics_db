@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -78,11 +80,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                         tagline ?? 'No tagline',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontSize: 13,
-                          color: AppColors.titleText,
-                        ),
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
                   ],
@@ -91,7 +89,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                 Row(
                   children: [
                     CustomPosterTopLeftAlignText(
-                        text: releaseDate, maxLines: null),
+                      text: releaseDate,
+                      maxLines: null,
+                    ),
                   ],
                 ),
                 Row(
@@ -106,9 +106,12 @@ class MovieTopPosterWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       MdiIcons.starOutline,
-                      color: AppColors.ratingStar,
+                      // TODO вывести в переменную
+                      color: context.read<ThemeBloc>().isDarkTheme
+                          ? AppColors.ratingThumb
+                          : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -118,9 +121,11 @@ class MovieTopPosterWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       MdiIcons.accountOutline,
-                      color: AppColors.ratingThumb,
+                      color: context.read<ThemeBloc>().isDarkTheme
+                          ? AppColors.ratingThumb
+                          : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -130,9 +135,11 @@ class MovieTopPosterWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       MdiIcons.heartOutline,
-                      color: AppColors.ratingThumb,
+                      color: context.read<ThemeBloc>().isDarkTheme
+                          ? AppColors.ratingThumb
+                          : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),

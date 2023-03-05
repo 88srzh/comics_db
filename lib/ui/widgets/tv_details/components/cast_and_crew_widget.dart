@@ -110,17 +110,11 @@ class _TvActorListItemWidget extends StatelessWidget {
                       CustomCastListTextWidget(
                         text: actor!.name,
                         maxLines: 1,
-                        fontSize: 13,
-                        color: DarkThemeColors.genresText,
-                        fontWeight: null,
                       ),
                       const SizedBox(height: 7.0),
                       CustomCastListTextWidget(
                         text: actor.character,
                         maxLines: 2,
-                        fontSize: 12,
-                        color: DarkThemeColors.genresText,
-                        fontWeight: null,
                       ),
                     ],
                   ),
