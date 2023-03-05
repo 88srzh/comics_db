@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
@@ -19,7 +19,8 @@ class TvCastWidget extends StatelessWidget {
     return ColoredBox(
       color: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
+        padding: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
@@ -30,7 +31,7 @@ class TvCastWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.genresText,
+                  color: DarkThemeColors.genresText,
                 ),
               ),
             ),
@@ -67,7 +68,8 @@ class _TvActorListWidget extends StatelessWidget {
 class _TvActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _TvActorListItemWidget({Key? key, required this.actorIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class _TvActorListItemWidget extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: AppColors.kPrimaryColor,
+          color: DarkThemeColors.kPrimaryColor,
           border: Border.all(
             color: Colors.white.withOpacity(0.2),
           ),
@@ -109,7 +111,7 @@ class _TvActorListItemWidget extends StatelessWidget {
                         text: actor!.name,
                         maxLines: 1,
                         fontSize: 13,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                       const SizedBox(height: 7.0),
@@ -117,7 +119,7 @@ class _TvActorListItemWidget extends StatelessWidget {
                         text: actor.character,
                         maxLines: 2,
                         fontSize: 12,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                     ],

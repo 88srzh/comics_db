@@ -73,20 +73,23 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => TvPopularListCubit(
-              tvPopularListBloc: TvPopularListBloc(TvListState.initial())),
+            tvPopularListBloc: TvPopularListBloc(TvListState.initial()),
+          ),
         ),
         BlocProvider(
           create: (_) => TvAiringTodayListCubit(
-              tvAiringTodayListBloc:
-                  TvAiringTodayListBloc(TvListState.initial())),
+            tvAiringTodayListBloc: TvAiringTodayListBloc(TvListState.initial()),
+          ),
         ),
         BlocProvider(
           create: (_) => TvTopRatedListCubit(
-              tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial())),
+            tvTopRatedListBloc: TvTopRatedListBloc(TvListState.initial()),
+          ),
         ),
         BlocProvider(
           create: (_) => TvOnTheAirListCubit(
-              tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial())),
+            tvOnTheAirListBloc: TvOnTheAirListBloc(TvListState.initial()),
+          ),
         ),
         BlocProvider(
           create: (_) => PeopleListCubit(

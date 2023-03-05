@@ -1,11 +1,11 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
@@ -24,13 +24,13 @@ class DescriptionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           const Text(
+          const Text(
             'Biography',
             style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w600,
               // TODO rename text
-              color: AppColors.genresText,
+              color: DarkThemeColors.genresText,
             ),
           ),
           // if i have empty biography i will have extra sizedbox

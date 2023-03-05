@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_poster_top_left_text_rating_widget.dart';
@@ -44,8 +44,10 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     aspectRatio: 390 / 220,
                     child: CachedNetworkImage(
                       imageUrl: ImageDownloader.imageUrl(profilePath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                      placeholder: (context, url) =>
+                          const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) =>
+                          Image.asset(AppImages.noImageAvailable),
                     ),
                   ),
                 ),
@@ -103,14 +105,19 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 7.0),
                 Row(
-                  children: [CustomPosterTopLeftAlignText(text: gender == 1 ? female : male, maxLines: null)],
+                  children: [
+                    CustomPosterTopLeftAlignText(
+                        text: gender == 1 ? female : male, maxLines: null)
+                  ],
                 ),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: birthday ?? 'no birthday', maxLines: null),
+                    CustomPosterTopLeftAlignText(
+                        text: birthday ?? 'no birthday', maxLines: null),
                   ],
                 ),
-                CustomPosterTopLeftAlignText(text: placeOfBirth ?? 'no place of birth', maxLines: null),
+                CustomPosterTopLeftAlignText(
+                    text: placeOfBirth ?? 'no place of birth', maxLines: null),
                 Row(
                   children: [
                     const Icon(
@@ -119,7 +126,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                       size: 14,
                     ),
                     const SizedBox(width: 4.0),
-                    CustomPosterTopLeftAlignTextRating(text: popularity.toInt().toString()),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: popularity.toInt().toString()),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -136,8 +144,10 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   width: 390.0,
                   child: CachedNetworkImage(
                     imageUrl: ImageDownloader.imageUrl(profilePath),
-                    placeholder: (context, url) => const LoadingIndicatorWidget(),
-                    errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                    placeholder: (context, url) =>
+                        const LoadingIndicatorWidget(),
+                    errorWidget: (context, url, dynamic error) =>
+                        Image.asset(AppImages.noImageAvailable),
                   ),
                 ),
               )

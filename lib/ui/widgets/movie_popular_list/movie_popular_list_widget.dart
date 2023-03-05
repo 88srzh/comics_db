@@ -1,10 +1,8 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
-
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
@@ -28,7 +26,9 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context
+        .read<MoviePopularListCubit>()
+        .setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -38,7 +38,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
       body: ColoredBox(
-        color: AppColors.kPrimaryColor,
+        color: DarkThemeColors.kPrimaryColor,
         child: Stack(
           children: [
             ListView.builder(
@@ -62,7 +62,8 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
             ),
           ],
@@ -122,7 +123,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                         text: movie.releaseDate,
                         maxLines: 1,
                         fontSize: 13,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                       const SizedBox(height: 15.0),
@@ -130,7 +131,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                         text: movie.overview ?? '',
                         maxLines: 3,
                         fontSize: 12,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                     ],

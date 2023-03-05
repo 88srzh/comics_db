@@ -1,8 +1,8 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
@@ -37,7 +37,7 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Popular Tvs'),
       body: ColoredBox(
-        color: AppColors.kPrimaryColor,
+        color: DarkThemeColors.kPrimaryColor,
         child: Stack(
           children: [
             ListView.builder(
@@ -122,7 +122,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
                         text: tv.firstAirDate ?? 'No date',
                         maxLines: 1,
                         fontSize: 13,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                       const SizedBox(height: 15.0),
@@ -130,7 +130,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
                         text: tv.overview,
                         maxLines: 3,
                         fontSize: 12,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                     ],

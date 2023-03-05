@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/app_colors.dart';
 
 class MovieDetailsTitle extends StatelessWidget {
   const MovieDetailsTitle({

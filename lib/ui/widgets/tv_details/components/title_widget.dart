@@ -1,4 +1,5 @@
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/app_colors.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,8 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tvNameData = context.select((TvDetailsModel model) => model.tvData.tvNameData);
+    final tvNameData =
+        context.select((TvDetailsModel model) => model.tvData.tvNameData);
     return Column(
       children: [
         Row(
@@ -35,7 +37,7 @@ class TitleWidget extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: AppColors.genresText,
+                color: DarkThemeColors.genresText,
                 fontStyle: FontStyle.italic,
               ),
             ),

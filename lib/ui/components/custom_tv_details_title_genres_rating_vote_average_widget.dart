@@ -1,10 +1,13 @@
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomTvDetailsTitleGenresRatingVoteAverageWidget extends StatelessWidget {
+class CustomTvDetailsTitleGenresRatingVoteAverageWidget
+    extends StatelessWidget {
   final String text;
 
-  const CustomTvDetailsTitleGenresRatingVoteAverageWidget({Key? key, required this.text}) : super(key: key);
+  const CustomTvDetailsTitleGenresRatingVoteAverageWidget(
+      {Key? key, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

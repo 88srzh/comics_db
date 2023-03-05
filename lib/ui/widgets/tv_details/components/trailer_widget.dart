@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -6,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 
@@ -40,7 +40,8 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var tvTrailerData = context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    var tvTrailerData =
+        context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     final tvTrailerKey = tvTrailerData.trailerKey;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -52,7 +53,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 21,
-              color: AppColors.genresText,
+              color: DarkThemeColors.genresText,
             ),
           ),
           const SizedBox(height: 8.0),

@@ -1,11 +1,11 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
@@ -20,7 +20,8 @@ class MovieNowPlayingListWidget extends StatefulWidget {
   const MovieNowPlayingListWidget({Key? key}) : super(key: key);
 
   @override
-  State<MovieNowPlayingListWidget> createState() => _MovieNowPlayingListWidgetState();
+  State<MovieNowPlayingListWidget> createState() =>
+      _MovieNowPlayingListWidgetState();
 }
 
 class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
@@ -28,7 +29,9 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<NowPlayingMovieListCubit>().setupNowPlayingMovieLocale(locale.languageCode);
+    context
+        .read<NowPlayingMovieListCubit>()
+        .setupNowPlayingMovieLocale(locale.languageCode);
   }
 
   @override
@@ -37,7 +40,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
       body: ColoredBox(
-        color: AppColors.kPrimaryColor,
+        color: DarkThemeColors.kPrimaryColor,
         child: Stack(
           children: [
             ListView.builder(
@@ -51,13 +54,17 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
                 final posterPath = movie.posterPath;
                 return InkWell(
                   onTap: () => onMovieTap(context, index),
-                  child:
-                      _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                  child: _MovieNowPlayingListRowWidget(
+                      posterPath: posterPath,
+                      movie: movie,
+                      cubit: cubit,
+                      index: index),
                 );
               },
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
             ),
           ],
@@ -69,7 +76,8 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   void onMovieTap(BuildContext context, int index) {
     final cubit = context.read<NowPlayingMovieListCubit>();
     final movieId = cubit.state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+    Navigator.of(context)
+        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }
 
@@ -122,14 +130,14 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
                           text: movie.releaseDate,
                           maxLines: 1,
                           fontSize: 13,
-                          color: AppColors.genresText,
+                          color: DarkThemeColors.genresText,
                           fontWeight: null),
                       const SizedBox(height: 15.0),
                       CustomCastListTextWidget(
                         text: movie.overview ?? '',
                         maxLines: 3,
                         fontSize: 12,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                     ],

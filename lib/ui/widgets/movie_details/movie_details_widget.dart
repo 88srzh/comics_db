@@ -1,8 +1,8 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
@@ -37,8 +37,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Movie Details'),
       body: ColoredBox(
-        color: AppColors.kPrimaryColor,
-        // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
+        color: DarkThemeColors.kPrimaryColor,
         child: ListView(
           children: [
             Column(

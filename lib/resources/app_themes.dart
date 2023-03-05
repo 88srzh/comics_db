@@ -1,4 +1,6 @@
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/app_colors.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/core/light_theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +11,7 @@ class AppThemes {
 
   static final appThemeData = {
     AppTheme.lightTheme: ThemeData(
+      scaffoldBackgroundColor: LightThemeColors.backgroundColor,
       canvasColor: Colors.white70,
       useMaterial3: true,
       textTheme: GoogleFonts.openSansTextTheme(),
@@ -17,7 +20,7 @@ class AppThemes {
         backgroundColor: Colors.white70,
         scrolledUnderElevation: 0.0,
         iconTheme: IconThemeData(
-          color: AppColors.kPrimaryColor,
+          color: DarkThemeColors.kPrimaryColor,
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -26,11 +29,12 @@ class AppThemes {
       ),
     ),
     AppTheme.darkTheme: ThemeData(
+      scaffoldBackgroundColor: DarkThemeColors.kPrimaryColor,
       useMaterial3: true,
       textTheme: GoogleFonts.openSansTextTheme(),
       primarySwatch: Colors.blue,
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.kPrimaryColor,
+        backgroundColor: DarkThemeColors.kPrimaryColor,
         scrolledUnderElevation: 0.0,
         iconTheme: IconThemeData(
           color: Colors.white,

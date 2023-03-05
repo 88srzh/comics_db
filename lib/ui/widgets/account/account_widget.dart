@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
@@ -62,7 +62,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
     final name = cubit.state.name;
     return ColoredBox(
       // TODO may be change bottomBarBackgroundColor, for what it's there?
-      color: AppColors.kPrimaryColor,
+      color: DarkThemeColors.kPrimaryColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -6,7 +7,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
@@ -19,7 +19,8 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var charactersData = context.watch<PeopleDetailsCubit>().data.charactersData;
+    var charactersData =
+        context.watch<PeopleDetailsCubit>().data.charactersData;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return ColoredBox(
       color: Colors.transparent,
@@ -35,7 +36,7 @@ class CastWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.genresText,
+                  color: DarkThemeColors.genresText,
                 ),
               ),
             ),
@@ -55,7 +56,8 @@ class CastWidget extends StatelessWidget {
 class _PeopleActorListWidget extends StatelessWidget {
   final List<PeopleDetailsCharacterData> charactersData;
 
-  const _PeopleActorListWidget({Key? key, required this.charactersData}) : super(key: key);
+  const _PeopleActorListWidget({Key? key, required this.charactersData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,8 @@ class _PeopleActorListWidget extends StatelessWidget {
 class _PeopleActorListItemWidget extends StatelessWidget {
   final int characterIndex;
 
-  const _PeopleActorListItemWidget({Key? key, required this.characterIndex}) : super(key: key);
+  const _PeopleActorListItemWidget({Key? key, required this.characterIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +87,7 @@ class _PeopleActorListItemWidget extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: AppColors.kPrimaryColor,
+          color: DarkThemeColors.kPrimaryColor,
           border: Border.all(
             color: Colors.white.withOpacity(0.2),
           ),
@@ -105,8 +108,10 @@ class _PeopleActorListItemWidget extends StatelessWidget {
               posterPath != null
                   ? CachedNetworkImage(
                       imageUrl: ImageDownloader.imageUrl(posterPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                      placeholder: (context, url) =>
+                          const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) =>
+                          Image.asset(AppImages.noImageAvailable),
                     )
                   : const Image(image: AssetImage(AppImages.noImageAvailable)),
               Expanded(
@@ -119,7 +124,7 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                         text: character.title,
                         maxLines: 1,
                         fontSize: 13,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                       const SizedBox(height: 7.0),
@@ -127,7 +132,7 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                         text: character.character,
                         maxLines: 2,
                         fontSize: 12,
-                        color: AppColors.genresText,
+                        color: DarkThemeColors.genresText,
                         fontWeight: null,
                       ),
                     ],

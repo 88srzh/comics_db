@@ -1,9 +1,9 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/cast_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/description_widget.dart';
@@ -45,7 +45,7 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
             appBar: const CustomDetailsAppBar(title: ''),
             body: ColoredBox(
               // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-              color: AppColors.kPrimaryColor,
+              color: DarkThemeColors.kPrimaryColor,
               child: ListView(
                 children: [
                   Column(

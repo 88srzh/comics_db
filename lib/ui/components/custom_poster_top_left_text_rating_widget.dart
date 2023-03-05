@@ -1,8 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
-
-// Project imports:
-import 'package:comics_db_app/app_colors.dart';
 
 class CustomPosterTopLeftAlignTextRating extends StatelessWidget {
   final String text;
@@ -18,7 +16,7 @@ class CustomPosterTopLeftAlignTextRating extends StatelessWidget {
         text,
         style: const TextStyle(
           fontSize: 13,
-          color: AppColors.genresText,
+          color: DarkThemeColors.genresText,
         ),
       ),
     );

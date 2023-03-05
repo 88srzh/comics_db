@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomPeopleTextStyle {
@@ -16,14 +16,13 @@ class CustomPeopleTextStyle {
   );
 
   var nameStyleLightTheme = const TextStyle(
-    color: AppColors.kPrimaryColor,
+    color: DarkThemeColors.kPrimaryColor,
     fontSize: 12,
     fontWeight: FontWeight.w700,
   );
 
   var jobStyleLightTheme = const TextStyle(
-    color: AppColors.kPrimaryColor,
-    fontSize: 12,
-    fontWeight: FontWeight.w700
-  );
+      color: DarkThemeColors.kPrimaryColor,
+      fontSize: 12,
+      fontWeight: FontWeight.w700);
 }
