@@ -13,13 +13,13 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   }
 
   void _switchTheme(ThemeEvent event, Emitter<ThemeState> emit) {
-    if (state.theme == AppThemes.appThemeData[AppTheme.lightTheme]) {
-      emit(state.copyWith(theme: AppThemes.appThemeData[AppTheme.darkTheme]!));
-    } else {
+    if (state.theme == AppThemes.appThemeData[AppTheme.darkTheme]) {
       emit(state.copyWith(theme: AppThemes.appThemeData[AppTheme.lightTheme]!));
+    } else {
+      emit(state.copyWith(theme: AppThemes.appThemeData[AppTheme.darkTheme]!));
     }
   }
 
-  bool get isLightTheme =>
-      state.theme == AppThemes.appThemeData[AppTheme.lightTheme] ? true : false;
+  bool get isDarkTheme =>
+      state.theme == AppThemes.appThemeData[AppTheme.darkTheme] ? true : false;
 }

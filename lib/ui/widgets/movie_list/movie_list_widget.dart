@@ -29,7 +29,9 @@ class MovieListWidget extends StatelessWidget {
       appBar: const CustomMainAppBarWidget(),
       body: ColoredBox(
         // TODO doesn't work
-        color: context.read<ThemeBloc>().isLightTheme ? Colors.white70 : AppColors.kPrimaryColor,
+        color: context.read<ThemeBloc>().isDarkTheme
+            ? AppColors.kPrimaryColor
+            : Colors.white70,
         child: ListView(
           children: [
             Column(
@@ -48,7 +50,8 @@ class MovieListWidget extends StatelessWidget {
                     children: [
                       const CustomHeaderTextWidget(text: 'Popular'),
                       InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
+                        onTap: () => Navigator.of(context)
+                            .pushNamed(MainNavigationRouteNames.popularMovie),
                         child: const Text(
                           'See All',
                           style: TextStyle(
@@ -89,7 +92,8 @@ class MovieListWidget extends StatelessWidget {
                 children: [
                   const CustomHeaderTextWidget(text: 'Now playing'),
                   InkWell(
-                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                     child: const Text(
                       'See All',
                       style: TextStyle(

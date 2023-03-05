@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:ui';
+
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 // Project imports:
-import 'package:comics_db_app/ui/components/custom_behavior.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -29,12 +30,17 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              return ScrollConfiguration(
-                behavior: CustomBehavior(),
-                child: child!,
-              );
-            },
+            scrollBehavior:
+                const MaterialScrollBehavior().copyWith(dragDevices: {
+              PointerDeviceKind.mouse,
+              PointerDeviceKind.touch,
+            }),
+            // builder: (context, child) {
+            //   return ScrollConfiguration(
+            //     behavior: CustomBehavior(),
+            //     child: child!,
+            //   );
+            // },
             theme: state.theme,
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,

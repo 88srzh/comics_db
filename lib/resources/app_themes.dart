@@ -9,6 +9,7 @@ class AppThemes {
 
   static final appThemeData = {
     AppTheme.lightTheme: ThemeData(
+      canvasColor: Colors.white70,
       useMaterial3: true,
       textTheme: GoogleFonts.openSansTextTheme(),
       primarySwatch: Colors.red,
