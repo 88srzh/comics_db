@@ -66,7 +66,7 @@ class ScreenFactory {
   Widget makeMainScreen() {
     _authBloc?.close();
     _authBloc = null;
-    return const MainScreenWidget();
+    return MainScreenWidget();
   }
 
   Widget makePopularPeopleList() {
