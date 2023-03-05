@@ -4,7 +4,6 @@ import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
@@ -46,12 +45,9 @@ class _TvListWidgetState extends State<TvListWidget> {
                       InkWell(
                         onTap: () => Navigator.of(context)
                             .pushNamed(MainNavigationRouteNames.tvPopularList),
-                        child: const Text(
+                        child: Text(
                           'See All',
-                          style: TextStyle(
-                            color: AppColors.ratingText,
-                            fontSize: 15,
-                          ),
+                          style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ),
                     ],

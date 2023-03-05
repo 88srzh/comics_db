@@ -1,4 +1,3 @@
-import 'package:comics_db_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTvDetailsTitleGenresRatingVoteAverageWidget
@@ -13,10 +12,7 @@ class CustomTvDetailsTitleGenresRatingVoteAverageWidget
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: 13,
-        color: AppColors.ratingText,
-      ),
+      style: Theme.of(context).textTheme.displaySmall,
     );
   }
 }

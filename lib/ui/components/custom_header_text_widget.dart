@@ -1,4 +1,3 @@
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomHeaderTextWidget extends StatelessWidget {
@@ -11,11 +10,7 @@ class CustomHeaderTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        color: DarkThemeColors.genresText,
-        fontSize: 21,
-        fontWeight: FontWeight.w600,
-      ),
+      style: Theme.of(context).textTheme.titleMedium,
     );
   }
 }

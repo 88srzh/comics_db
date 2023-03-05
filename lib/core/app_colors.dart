@@ -8,7 +8,6 @@ abstract class AppColors {
   static const selectedText = Color.fromRGBO(91, 234, 240, 1.0);
   static const buttonFont = Color.fromRGBO(1, 168, 210, 1.0);
   static const titleText = Color.fromRGBO(255, 255, 255, 1.0);
-  static const ratingText = Color.fromRGBO(119, 119, 119, 1.0);
   static const ratingStar = Color.fromRGBO(249, 150, 1, 1.0);
   static const ratingThumb = Color.fromRGBO(164, 163, 169, 1.0);
   static const searchIcon = Color.fromRGBO(232, 38, 38, 1.0);
