@@ -13,7 +13,7 @@ class CustomMainAppBarWidget extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       titleSpacing: 0.0,
       leading: IconButton(
-        icon: const Icon(Icons.icecream_outlined),
+        icon: const Icon(Icons.lightbulb_outline),
         onPressed: () => context.read<ThemeBloc>().add(const ThemeEvent()),
       ),
     );
