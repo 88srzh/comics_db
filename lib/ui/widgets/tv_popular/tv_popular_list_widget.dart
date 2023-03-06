@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -36,36 +36,32 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
     var cubit = context.watch<TvPopularListCubit>();
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Popular Tvs'),
-      body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
-        child: Stack(
-          children: [
-            ListView.builder(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                padding: const EdgeInsets.only(top: 70.0),
-                itemCount: cubit.state.tvs.length,
-                itemExtent: 165,
-                itemBuilder: (BuildContext context, int index) {
-                  cubit.showedPopularTvAtIndex(index);
-                  final tv = cubit.state.tvs[index];
-                  final posterPath = tv.posterPath;
-                  return InkWell(
-                    onTap: () => cubit.onTvTap(context, index),
-                    child: _TvPopularListRowWidget(
-                        posterPath: posterPath,
-                        tv: tv,
-                        cubit: cubit,
-                        index: index),
-                  );
-                }),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-              child: CustomSearchBar(onChanged: cubit.searchPopularTv),
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          ListView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: const EdgeInsets.only(top: 70.0),
+              itemCount: cubit.state.tvs.length,
+              itemExtent: 165,
+              itemBuilder: (BuildContext context, int index) {
+                cubit.showedPopularTvAtIndex(index);
+                final tv = cubit.state.tvs[index];
+                final posterPath = tv.posterPath;
+                return InkWell(
+                  onTap: () => cubit.onTvTap(context, index),
+                  child: _TvPopularListRowWidget(
+                      posterPath: posterPath,
+                      tv: tv,
+                      cubit: cubit,
+                      index: index),
+                );
+              }),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            child: CustomSearchBar(onChanged: cubit.searchPopularTv),
+          ),
+        ],
       ),
     );
   }
@@ -94,7 +90,9 @@ class _TvPopularListRowWidget extends StatelessWidget {
         children: [
           Container(
             // TODO refactoring custom movie list box decoration
-            decoration: customMovieListBoxDecorationForDarkTheme,
+            decoration: context.read<ThemeBloc>().isDarkTheme
+                ? customMovieListBoxDecorationForDarkTheme
+                : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
