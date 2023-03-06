@@ -1,9 +1,11 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final Function(String)? onChanged;
@@ -12,13 +14,17 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO check may be delete consumer, because it's only change text color
+    final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return TextField(
-      style: const TextStyle(
-        color: DarkThemeColors.genresText,
+      style: TextStyle(
+        color: isDarkTheme
+            ? DarkThemeColors.genresText
+            : DarkThemeColors.kPrimaryColor,
       ),
       onChanged: onChanged,
-      decoration: customSearchInputDecoration(text: 'Search'),
+      decoration: isDarkTheme
+          ? customSearchInputDecoration(text: 'Search')
+          : customSearchInputDecorationForLightTheme(text: 'Search'),
     );
   }
 }

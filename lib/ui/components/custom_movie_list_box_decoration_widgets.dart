@@ -17,7 +17,7 @@ BoxDecoration customMovieListBoxDecorationForDarkTheme = BoxDecoration(
 );
 
 BoxDecoration customMovieListBoxDecorationForLightTheme = BoxDecoration(
-  color: Colors.white70,
+  color: Colors.white,
   border: Border.all(color: Colors.black.withOpacity(0.2)),
   borderRadius: const BorderRadius.all(Radius.circular(20.0)),
   boxShadow: [

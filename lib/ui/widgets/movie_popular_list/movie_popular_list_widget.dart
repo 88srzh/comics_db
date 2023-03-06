@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -37,37 +37,34 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
-      body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
-        child: Stack(
-          children: [
-            ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.movies.length,
-              itemExtent: 165,
-              itemBuilder: (BuildContext context, int index) {
-                cubit.showedPopularMovieAtIndex(index);
-                final movie = cubit.state.movies[index];
-                final posterPath = movie.posterPath;
-                return InkWell(
-                  onTap: () => cubit.onMovieTap(context, index),
-                  child: _MoviePopularListRowWidget(
-                    posterPath: posterPath,
-                    movie: movie,
-                    cubit: cubit,
-                    index: index,
-                  ),
-                );
-              },
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-              child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          ListView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            padding: const EdgeInsets.only(top: 70.0),
+            itemCount: cubit.state.movies.length,
+            itemExtent: 165,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedPopularMovieAtIndex(index);
+              final movie = cubit.state.movies[index];
+              final posterPath = movie.posterPath;
+              return InkWell(
+                onTap: () => cubit.onMovieTap(context, index),
+                child: _MoviePopularListRowWidget(
+                  posterPath: posterPath,
+                  movie: movie,
+                  cubit: cubit,
+                  index: index,
+                ),
+              );
+            },
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
+          ),
+        ],
       ),
     );
   }
@@ -90,12 +87,15 @@ class _MoviePopularListRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
       child: Stack(
         children: [
           Container(
-            decoration: customMovieListBoxDecorationForDarkTheme,
+            decoration: isDarkTheme
+                ? customMovieListBoxDecorationForDarkTheme
+                : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
