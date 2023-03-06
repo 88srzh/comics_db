@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/core/light_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/page_transition.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
@@ -29,12 +28,18 @@ class MainScreenWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = useState(1);
+    bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Scaffold(
       body: PageTransition(child: screen[selectedIndex.value]),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: context.read<ThemeBloc>().isDarkTheme
+        backgroundColor: isDarkTheme
             ? DarkThemeColors.bottomBarBackgroundColor
-            : LightThemeColors.bottomNavBarLight,
+            : Colors.white,
+        color: isDarkTheme ? Colors.white : Colors.black.withOpacity(0.7),
+        shadowColor: isDarkTheme
+            ? Colors.white.withOpacity(0.4)
+            : Colors.black.withOpacity(0.4),
+        activeColor: isDarkTheme ? Colors.white : Colors.black.withOpacity(0.8),
         initialActiveIndex: selectedIndex.value,
         items: const [
           TabItem<dynamic>(icon: Icons.people, title: 'People'),

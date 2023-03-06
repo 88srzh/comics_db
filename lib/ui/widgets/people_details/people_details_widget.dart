@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -22,7 +21,9 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<PeopleDetailsCubit>().setupPeopleDetailsLocale(context, locale.languageCode);
+    context
+        .read<PeopleDetailsCubit>()
+        .setupPeopleDetailsLocale(context, locale.languageCode);
   }
 
   @override
