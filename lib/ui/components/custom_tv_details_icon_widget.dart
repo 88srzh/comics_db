@@ -1,5 +1,7 @@
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomTvDetailsIconWidget extends StatelessWidget {
   final IconData icon;
@@ -11,7 +13,9 @@ class CustomTvDetailsIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       icon,
-      color: DarkThemeColors.ratingThumb,
+      color: context.read<ThemeBloc>().isDarkTheme
+          ? DarkThemeColors.ratingThumb
+          : DarkThemeColors.kPrimaryColor,
       size: 14,
     );
   }

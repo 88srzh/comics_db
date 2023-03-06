@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -48,13 +47,9 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Trailer',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 21,
-              color: DarkThemeColors.genresText,
-            ),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8.0),
           tvTrailerKey != null

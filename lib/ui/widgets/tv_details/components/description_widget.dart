@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -20,14 +19,9 @@ class TvDescriptionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Sinopsis',
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.w600,
-              // TODO rename text
-              color: DarkThemeColors.genresText,
-            ),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           Row(
@@ -39,10 +33,7 @@ class TvDescriptionWidget extends StatelessWidget {
                   overview,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
-                  style: const TextStyle(
-                    color: DarkThemeColors.genresText,
-                    fontSize: 12,
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
             ],

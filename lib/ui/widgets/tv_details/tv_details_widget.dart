@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -45,22 +44,19 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Tv Details'),
-      body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                const TvTopPosterWidget(),
-                const TitleGenresRatingVoteAverageWidget(),
-                const TvDescriptionWidget(),
-                TvTrailerWidget(youtubeKey: tvTrailerKey),
-                // const _DirectorWidget(),
-                const TvCastWidget(),
-              ],
-            ),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              const TvTopPosterWidget(),
+              const TitleGenresRatingVoteAverageWidget(),
+              const TvDescriptionWidget(),
+              TvTrailerWidget(youtubeKey: tvTrailerKey),
+              // const _DirectorWidget(),
+              const TvCastWidget(),
+            ],
+          ),
+        ],
       ),
     );
   }

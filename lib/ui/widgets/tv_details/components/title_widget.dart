@@ -1,5 +1,3 @@
-import 'package:comics_db_app/core/app_colors.dart';
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,11 +18,7 @@ class TitleWidget extends StatelessWidget {
           children: [
             Text(
               tvNameData.name,
-              style: const TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.w600,
-                color: AppColors.titleText,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(width: 2),
           ],
@@ -34,12 +28,7 @@ class TitleWidget extends StatelessWidget {
           children: [
             Text(
               tvNameData.tagline,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: DarkThemeColors.genresText,
-                fontStyle: FontStyle.italic,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),

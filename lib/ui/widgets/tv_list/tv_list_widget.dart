@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -23,79 +22,76 @@ class _TvListWidgetState extends State<TvListWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomMainAppBarWidget(),
-      body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
-                  child: SizedBox(
-                    height: 180,
-                    child: TopRatedTvWidget(),
-                  ),
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                child: SizedBox(
+                  height: 180,
+                  child: TopRatedTvWidget(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CustomHeaderTextWidget(text: 'Popular'),
-                      InkWell(
-                        onTap: () => Navigator.of(context)
-                            .pushNamed(MainNavigationRouteNames.tvPopularList),
-                        child: Text(
-                          'See All',
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const CustomHeaderTextWidget(text: 'Popular'),
+                    InkWell(
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(MainNavigationRouteNames.tvPopularList),
+                      child: Text(
+                        'See All',
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: PopularTvWidget(),
-                  ),
+              ),
+              const SizedBox(
+                height: 200,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: PopularTvWidget(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      CustomHeaderTextWidget(text: 'Airing Today'),
-                    ],
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    CustomHeaderTextWidget(text: 'Airing Today'),
+                  ],
                 ),
-                const SizedBox(
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: AiringTodayTvsWidget(),
-                  ),
+              ),
+              const SizedBox(
+                height: 200,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: AiringTodayTvsWidget(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      CustomHeaderTextWidget(text: 'On The Air'),
-                    ],
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    CustomHeaderTextWidget(text: 'On The Air'),
+                  ],
                 ),
-                const SizedBox(
-                  height: 200,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: OnTheAirTvsWidget(),
-                  ),
+              ),
+              const SizedBox(
+                height: 200,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: OnTheAirTvsWidget(),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -16,31 +17,24 @@ class TvCastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Full Cast & Crew',
-                style: TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.w600,
-                  color: DarkThemeColors.genresText,
-                ),
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(
+          left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Full Cast & Crew',
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            SizedBox(
-              height: 250.0,
-              child: Scrollbar(child: _TvActorListWidget()),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 250.0,
+            child: Scrollbar(child: _TvActorListWidget()),
+          ),
+        ],
       ),
     );
   }
@@ -76,13 +70,16 @@ class _TvActorListItemWidget extends StatelessWidget {
     final model = Provider.of<TvDetailsModel>(context, listen: false);
     final actor = model.tvDetails?.credits.cast[actorIndex];
     final backdropPath = actor?.profilePath;
+    final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: DarkThemeColors.kPrimaryColor,
+          color: isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
           border: Border.all(
-            color: Colors.white.withOpacity(0.2),
+            color: isDarkTheme
+                ? Colors.white.withOpacity(0.2)
+                : Colors.black.withOpacity(0.2),
           ),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [
