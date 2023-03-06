@@ -1,8 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
-
-// Project imports:
-import 'package:comics_db_app/core/app_colors.dart';
 
 class HeadingAccountCardWidget extends StatelessWidget {
   const HeadingAccountCardWidget({Key? key, required this.headingText})
@@ -18,7 +16,7 @@ class HeadingAccountCardWidget extends StatelessWidget {
         children: [
           Container(
             height: 40,
-            color: AppColors.bottomBarBackgroundColor,
+            color: DarkThemeColors.bottomBarBackgroundColor,
             child: ListTile(
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 6),

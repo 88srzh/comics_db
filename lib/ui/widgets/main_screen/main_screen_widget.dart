@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/core/light_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/page_transition.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
@@ -11,6 +14,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 // Project imports:
 import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class MainScreenWidget extends HookWidget {
@@ -29,7 +33,9 @@ class MainScreenWidget extends HookWidget {
     return Scaffold(
       body: PageTransition(child: screen[selectedIndex.value]),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: AppColors.bottomBarBackgroundColor,
+        backgroundColor: context.read<ThemeBloc>().isDarkTheme
+            ? DarkThemeColors.bottomBarBackgroundColor
+            : LightThemeColors.bottomNavBarLight,
         initialActiveIndex: selectedIndex.value,
         items: const [
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
