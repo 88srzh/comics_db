@@ -1,6 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,17 +32,8 @@ class _AccountWidgetState extends State<AccountWidget> {
     // that's name need to check cubit data
     // final name = cubit.state.name;
     return const Scaffold(
-      appBar: CustomAppBar(title: 'Personal'),
+      appBar: CustomMainAppBarWidget(),
       body: BodyPersonalWidget(),
-      //   appBar: AppBar(
-      //     title: Text(
-      //       'Personal',
-      // name,
-      // style: const TextStyle(color: Colors.white),
-      // ),
-      // backgroundColor: AppColors.kPrimaryColor,
-      // ),
-      // body: const BodyPersonalWidget(),
     );
   }
 }
@@ -60,24 +50,20 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
     final name = cubit.state.name;
-    return ColoredBox(
-      // TODO may be change bottomBarBackgroundColor, for what it's there?
-      color: DarkThemeColors.kPrimaryColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeadingAccountCardWidget(headingText: name),
-          const CustomSettingDivider(),
-          const LogoutCardWidget(),
-          const CustomSettingDivider(),
-          const HeadingAccountCardWidget(headingText: 'Settings'),
-          const CustomSettingDivider(),
-          const SettingsCardWidget(),
-          const CustomSettingDivider(),
-          const NotificationsCardWidget(),
-          const CustomSettingDivider(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        HeadingAccountCardWidget(headingText: name),
+        const CustomSettingDivider(),
+        const LogoutCardWidget(),
+        const CustomSettingDivider(),
+        const HeadingAccountCardWidget(headingText: 'Settings'),
+        const CustomSettingDivider(),
+        const SettingsCardWidget(),
+        const CustomSettingDivider(),
+        const NotificationsCardWidget(),
+        const CustomSettingDivider(),
+      ],
     );
   }
 }
@@ -106,12 +92,9 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
           },
         );
       },
-      title: const Text(
+      title: Text(
         'Push notifications',
-        style: TextStyle(
-          fontSize: 14,
-          color: Colors.white,
-        ),
+        style: Theme.of(context).textTheme.headlineMedium,
       ),
     );
   }
