@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -23,48 +22,26 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<PeopleDetailsCubit>()
-        .setupPeopleDetailsLocale(context, locale.languageCode);
+    context.read<PeopleDetailsCubit>().setupPeopleDetailsLocale(context, locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PeopleListBloc, PeopleListState>(
-      listener: (context, state) {
-        if (!state.peopleContainer.isComplete) {
-          final locale = Localizations.localeOf(context);
-          context
-              .read<PeopleDetailsCubit>()
-              .setupPeopleDetailsLocale(context, locale.languageCode);
-        }
-      },
-      builder: (context, state) {
-        if (state.peopleContainer.isComplete) {
-          return Scaffold(
-            appBar: const CustomDetailsAppBar(title: ''),
-            body: ColoredBox(
-              // color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-              color: DarkThemeColors.kPrimaryColor,
-              child: ListView(
-                children: [
-                  Column(
-                    children: const [
-                      PeopleTopPosterWidget(),
-                      DescriptionWidget(),
-                      CastWidget(),
-                      // KnowForWidget(),
-                      // const DescriptionWidget(),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        } else {
-          return const Center(child: Text('error'));
-        }
-      },
+    return Scaffold(
+      appBar: const CustomDetailsAppBar(title: ''),
+      body: ListView(
+        children: [
+          Column(
+            children: const [
+              PeopleTopPosterWidget(),
+              DescriptionWidget(),
+              CastWidget(),
+              // KnowForWidget(),
+              // const DescriptionWidget(),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

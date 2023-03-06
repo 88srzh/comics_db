@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -44,10 +46,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     aspectRatio: 390 / 220,
                     child: CachedNetworkImage(
                       imageUrl: ImageDownloader.imageUrl(profilePath),
-                      placeholder: (context, url) =>
-                          const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) =>
-                          Image.asset(AppImages.noImageAvailable),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                     ),
                   ),
                 ),
@@ -73,10 +73,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                           child: Text(
                             name,
                             maxLines: 3,
-                            style: const TextStyle(
-                              fontSize: 21,
-                              color: AppColors.titleText,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                       ],
@@ -93,11 +90,7 @@ class PeopleTopPosterWidget extends StatelessWidget {
                           knownFor,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 13,
-                            color: AppColors.titleText,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
                     ),
@@ -107,27 +100,32 @@ class PeopleTopPosterWidget extends StatelessWidget {
                 Row(
                   children: [
                     CustomPosterTopLeftAlignText(
-                        text: gender == 1 ? female : male, maxLines: null)
+                      text: gender == 1 ? female : male,
+                      maxLines: null,
+                    )
                   ],
                 ),
                 Row(
                   children: [
                     CustomPosterTopLeftAlignText(
-                        text: birthday ?? 'no birthday', maxLines: null),
+                      text: birthday ?? 'no birthday',
+                      maxLines: null,
+                    ),
                   ],
                 ),
                 CustomPosterTopLeftAlignText(
-                    text: placeOfBirth ?? 'no place of birth', maxLines: null),
+                  text: placeOfBirth ?? 'no place of birth',
+                  maxLines: null,
+                ),
                 Row(
                   children: [
-                    const Icon(
+                     Icon(
                       MdiIcons.starOutline,
-                      color: AppColors.ratingStar,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4.0),
-                    CustomPosterTopLeftAlignTextRating(
-                        text: popularity.toInt().toString()),
+                    CustomPosterTopLeftAlignTextRating(text: popularity.toInt().toString()),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -144,10 +142,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   width: 390.0,
                   child: CachedNetworkImage(
                     imageUrl: ImageDownloader.imageUrl(profilePath),
-                    placeholder: (context, url) =>
-                        const LoadingIndicatorWidget(),
-                    errorWidget: (context, url, dynamic error) =>
-                        Image.asset(AppImages.noImageAvailable),
+                    placeholder: (context, url) => const LoadingIndicatorWidget(),
+                    errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                   ),
                 ),
               )

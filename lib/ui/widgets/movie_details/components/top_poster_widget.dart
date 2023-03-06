@@ -110,7 +110,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                       MdiIcons.starOutline,
                       // TODO вывести в переменную
                       color: context.read<ThemeBloc>().isDarkTheme
-                          ? AppColors.ratingThumb
+                          ? DarkThemeColors.ratingThumb
                           : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
@@ -124,7 +124,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Icon(
                       MdiIcons.accountOutline,
                       color: context.read<ThemeBloc>().isDarkTheme
-                          ? AppColors.ratingThumb
+                          ? DarkThemeColors.ratingThumb
                           : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
@@ -138,7 +138,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Icon(
                       MdiIcons.heartOutline,
                       color: context.read<ThemeBloc>().isDarkTheme
-                          ? AppColors.ratingThumb
+                          ? DarkThemeColors.ratingThumb
                           : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),

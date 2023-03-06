@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -19,8 +20,7 @@ class PopularPeopleListWidget extends StatefulWidget {
   const PopularPeopleListWidget({Key? key}) : super(key: key);
 
   @override
-  State<PopularPeopleListWidget> createState() =>
-      _PopularPeopleListWidgetState();
+  State<PopularPeopleListWidget> createState() => _PopularPeopleListWidgetState();
 }
 
 class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
@@ -29,9 +29,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context
-        .read<PeopleListCubit>()
-        .setupPopularPeopleLocale(locale.languageCode);
+    context.read<PeopleListCubit>().setupPopularPeopleLocale(locale.languageCode);
   }
 
   @override
@@ -40,7 +38,7 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Popular People'),
       body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
+        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
         child: GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -57,11 +55,8 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
             final profilePath = people.profilePath;
             return InkWell(
               onTap: () => cubit.onPeopleTap(context, index),
-              child: _PeoplePopularListColumnWidget(
-                  profilePath: profilePath,
-                  people: people,
-                  cubit: cubit,
-                  index: index),
+              child:
+                  _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
             );
           },
         ),
@@ -91,12 +86,17 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: DarkThemeColors.kPrimaryColor,
-            border: Border.all(color: Colors.white.withOpacity(0.2)),
+            color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+            border: Border.all(
+                color: context.read<ThemeBloc>().isDarkTheme
+                    ? Colors.white.withOpacity(0.2)
+                    : Colors.black.withOpacity(0.2)),
             borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             boxShadow: [
               BoxShadow(
-                color: Colors.white.withOpacity(0.1),
+                color: context.read<ThemeBloc>().isDarkTheme
+                    ? Colors.white.withOpacity(0.1)
+                    : Colors.black.withOpacity(0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               )
@@ -108,10 +108,8 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
               profilePath != null
                   ? CachedNetworkImage(
                       imageUrl: ImageDownloader.imageUrl(profilePath!),
-                      placeholder: (context, url) =>
-                          const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) =>
-                          Image.asset(AppImages.noImageAvailable),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                     )
                   : Image.asset(AppImages.noImageAvailable),
               Expanded(

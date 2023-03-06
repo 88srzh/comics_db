@@ -1,4 +1,4 @@
-import 'package:comics_db_app/core/app_colors.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTvDetailsIconWidget extends StatelessWidget {
@@ -11,7 +11,7 @@ class CustomTvDetailsIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       icon,
-      color: AppColors.ratingThumb,
+      color: DarkThemeColors.ratingThumb,
       size: 14,
     );
   }

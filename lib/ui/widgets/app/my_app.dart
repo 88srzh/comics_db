@@ -50,8 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => TopRatedMovieListCubit(
-            topRatedMovieListBloc:
-                TopRatedMovieListBloc(const MovieListState.initial()),
+            topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
           ),
         ),
         BlocProvider(
@@ -61,14 +60,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => UpcomingMovieListCubit(
-            upcomingMovieListBloc:
-                UpcomingMovieListBloc(const MovieListState.initial()),
+            upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
           ),
         ),
         BlocProvider(
           create: (_) => NowPlayingMovieListCubit(
-            nowPlayingMovieListBloc:
-                NowPlayingMovieListBloc(const MovieListState.initial()),
+            nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
           ),
         ),
         BlocProvider(
@@ -103,8 +100,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            scrollBehavior:
-                const MaterialScrollBehavior().copyWith(dragDevices: {
+            scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
               PointerDeviceKind.mouse,
               PointerDeviceKind.touch,
             }),
