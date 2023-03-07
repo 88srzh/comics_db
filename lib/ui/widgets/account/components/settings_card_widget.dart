@@ -10,7 +10,6 @@ class SettingsCardWidget extends StatefulWidget {
 }
 
 class _SettingsCardWidgetState extends State<SettingsCardWidget> {
-  // bool themeColor = false;
   bool change = false;
 
   @override

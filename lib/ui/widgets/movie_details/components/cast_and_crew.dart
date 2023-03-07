@@ -17,29 +17,26 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Full Cast & Crew',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(
+          left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Full Cast & Crew',
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            const SizedBox(
-              height: 250.0,
-              child: Scrollbar(
-                child: _MovieActorListWidget(),
-              ),
+          ),
+          const SizedBox(
+            height: 250.0,
+            child: Scrollbar(
+              child: _MovieActorListWidget(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
