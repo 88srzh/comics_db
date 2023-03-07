@@ -58,14 +58,14 @@ class PeopleTopPosterWidget extends StatelessWidget {
           top: 45,
           left: 20,
           child: SizedBox(
-            height: 300,
+            height: 320,
             width: 230,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  height: 25,
+                  height: 35,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
