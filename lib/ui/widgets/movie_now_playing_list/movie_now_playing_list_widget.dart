@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -20,8 +20,7 @@ class MovieNowPlayingListWidget extends StatefulWidget {
   const MovieNowPlayingListWidget({Key? key}) : super(key: key);
 
   @override
-  State<MovieNowPlayingListWidget> createState() =>
-      _MovieNowPlayingListWidgetState();
+  State<MovieNowPlayingListWidget> createState() => _MovieNowPlayingListWidgetState();
 }
 
 class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
@@ -29,9 +28,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<NowPlayingMovieListCubit>()
-        .setupNowPlayingMovieLocale(locale.languageCode);
+    context.read<NowPlayingMovieListCubit>().setupNowPlayingMovieLocale(locale.languageCode);
   }
 
   @override
@@ -39,36 +36,28 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
     var cubit = context.watch<NowPlayingMovieListCubit>();
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
-      body: ColoredBox(
-        color: DarkThemeColors.kPrimaryColor,
-        child: Stack(
-          children: [
-            ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.movies.length,
-              itemExtent: 165,
-              itemBuilder: (BuildContext context, int index) {
-                cubit.showedNowPlayingMovieAtIndex(index);
-                final movie = cubit.state.movies[index];
-                final posterPath = movie.posterPath;
-                return InkWell(
-                  onTap: () => onMovieTap(context, index),
-                  child: _MovieNowPlayingListRowWidget(
-                      posterPath: posterPath,
-                      movie: movie,
-                      cubit: cubit,
-                      index: index),
-                );
-              },
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-              child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          ListView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            padding: const EdgeInsets.only(top: 70.0),
+            itemCount: cubit.state.movies.length,
+            itemExtent: 165,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedNowPlayingMovieAtIndex(index);
+              final movie = cubit.state.movies[index];
+              final posterPath = movie.posterPath;
+              return InkWell(
+                onTap: () => onMovieTap(context, index),
+                child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+              );
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
+          ),
+        ],
       ),
     );
   }
@@ -76,8 +65,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   void onMovieTap(BuildContext context, int index) {
     final cubit = context.read<NowPlayingMovieListCubit>();
     final movieId = cubit.state.movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }
 
@@ -103,7 +91,9 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: customMovieListBoxDecorationForDarkTheme,
+            decoration: context.read<ThemeBloc>().isDarkTheme
+                ? customMovieListBoxDecorationForDarkTheme
+                : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
