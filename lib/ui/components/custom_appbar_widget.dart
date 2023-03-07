@@ -1,9 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:google_fonts/google_fonts.dart';
-
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
 
@@ -12,10 +9,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        title,
-        style: GoogleFonts.signikaNegative(color: Colors.white),
-      ),
+      title: Text(title),
       centerTitle: true,
     );
   }

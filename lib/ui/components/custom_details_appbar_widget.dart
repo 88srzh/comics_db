@@ -1,5 +1,8 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
@@ -16,8 +19,9 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
       centerTitle: true,
       iconTheme: const IconThemeData(),
       leading: IconButton(
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back,
+          color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
         ),
         onPressed: () => Navigator.of(context).maybePop(),
       ),
