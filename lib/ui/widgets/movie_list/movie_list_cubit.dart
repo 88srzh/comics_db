@@ -3,9 +3,9 @@ import 'dart:async';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Package imports:
-import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -24,8 +24,7 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
   var mov = <Movie>[];
 
   MoviePopularListCubit({required this.movieListBloc})
-      : super(MovieListCubitState(
-            movies: const <MovieListData>[], localeTag: '')) {
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
       () {
         _onState(movieListBloc.state);
@@ -57,8 +56,7 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
 
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
-    final releaseDateTitle =
-        releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
       title: movie.title,
       posterPath: movie.posterPath,
@@ -88,7 +86,6 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
 
   void onMovieTap(BuildContext context, int index) {
     final id = state.movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

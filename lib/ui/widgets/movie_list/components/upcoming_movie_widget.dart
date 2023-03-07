@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/app_colors.dart';
+import 'package:comics_db_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:

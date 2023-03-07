@@ -1,9 +1,7 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
@@ -25,7 +23,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
+    context
+        .read<MovieDetailsCubit>()
+        .setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override
@@ -33,32 +33,25 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     // var cubit = context.watch<MovieDetailsCubit>().data;
     // final trailerKey = cubit.trailerKey;
 
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Scaffold(
-          appBar: const CustomDetailsAppBar(title: 'Movie Details'),
-          body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.transparent,
-            child: ListView(
-              children: [
-                Column(
-                  children: const [
-                    MovieTopPosterWidget(),
-                    PeoplesWidget(),
-                    DescriptionWidget(),
+    return Scaffold(
+      appBar: const CustomDetailsAppBar(title: 'Movie Details'),
+      body: ListView(
+        children: [
+          Column(
+            children: const [
+              MovieTopPosterWidget(),
+              PeoplesWidget(),
+              DescriptionWidget(),
 
-                    // TODO doesn't work, the request contains an invalid parameter value, need microtask
-                    // TrailerWidget(youtubeKey: trailerKey),
+              // TODO doesn't work, the request contains an invalid parameter value, need microtask
+              // TrailerWidget(youtubeKey: trailerKey),
 
-                    CastWidget(),
-                    // const MovieSimilarWidget(),
-                  ],
-                ),
-              ],
-            ),
+              CastWidget(),
+              // const MovieSimilarWidget(),
+            ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

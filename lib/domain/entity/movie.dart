@@ -8,6 +8,8 @@ part 'movie.freezed.dart';
 
 part 'movie.g.dart';
 
+enum TypeOfLookingAt { movie, tv }
+
 @freezed
 class Movie with _$Movie {
   @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
@@ -26,6 +28,7 @@ class Movie with _$Movie {
     required int voteCount,
     required bool video,
     required double voteAverage,
+    TypeOfLookingAt? type,
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);

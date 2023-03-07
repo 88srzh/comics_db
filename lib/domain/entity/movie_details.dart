@@ -38,6 +38,7 @@ class MovieDetails {
   final int voteCount;
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
+
   MovieDetails({
     required this.adult,
     required this.backdropPath,
@@ -88,6 +89,7 @@ class BelongsToCollection {
 class Genre {
   final int id;
   final String name;
+
   Genre({
     required this.id,
     required this.name,
@@ -140,6 +142,7 @@ class SpokenLanguage {
   @JsonKey(name: 'iso_639_1')
   final String iso;
   final String name;
+
   SpokenLanguage({
     required this.iso,
     required this.name,

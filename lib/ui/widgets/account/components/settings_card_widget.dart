@@ -1,7 +1,6 @@
-import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsCardWidget extends StatefulWidget {
   const SettingsCardWidget({Key? key}) : super(key: key);
@@ -11,32 +10,26 @@ class SettingsCardWidget extends StatefulWidget {
 }
 
 class _SettingsCardWidgetState extends State<SettingsCardWidget> {
-  // bool themeColor = false;
+  bool change = false;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme themeNotifier, child) {
-        return SwitchListTile(
-          activeColor: Colors.pinkAccent,
-          inactiveThumbColor: Colors.grey,
-          value: themeNotifier.isDark,
-          onChanged: (bool value) {
-            setState(
-                  () {
-                themeNotifier.isDark = value;
-              },
-            );
+    return SwitchListTile(
+      activeColor: Colors.pinkAccent,
+      inactiveThumbColor: Colors.grey,
+      value: change,
+      onChanged: (bool value) {
+        setState(
+          () {
+            context.read<ThemeBloc>().add(const ThemeEvent());
+            change = value;
           },
-          title: Text(
-            'Change color theme',
-            style: TextStyle(
-              color: themeNotifier.isDark ? Colors.white : AppColors.kPrimaryColor,
-              fontSize: 14,
-            ),
-          ),
         );
       },
+      title: Text(
+        'Change color theme',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
     );
   }
 }

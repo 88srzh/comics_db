@@ -1,17 +1,15 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
-
-// Project imports:
-import 'package:comics_db_app/app_colors.dart';
 
 InputDecoration customSearchInputDecoration({required String text}) {
   return InputDecoration(
     labelText: text,
     labelStyle: const TextStyle(
-      color: AppColors.genresText,
+      color: DarkThemeColors.genresText,
     ),
     filled: true,
-    fillColor: AppColors.kPrimaryColor,
+    fillColor: DarkThemeColors.kPrimaryColor,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10.0),
     ),
@@ -24,7 +22,8 @@ InputDecoration customSearchInputDecoration({required String text}) {
   );
 }
 
-InputDecoration customSearchInputDecorationForLightTheme({required String text}) {
+InputDecoration customSearchInputDecorationForLightTheme(
+    {required String text}) {
   return InputDecoration(
     labelText: text,
     labelStyle: TextStyle(

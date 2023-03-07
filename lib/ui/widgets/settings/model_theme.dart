@@ -1,3 +1,4 @@
+/*
 import 'package:comics_db_app/ui/widgets/settings/theme_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -23,5 +24,4 @@ class ModelTheme extends ChangeNotifier {
     _isDark = await _preferences.getTheme();
     notifyListeners();
   }
-
-}
+}*/

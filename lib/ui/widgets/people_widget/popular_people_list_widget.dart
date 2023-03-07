@@ -1,5 +1,6 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +8,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
@@ -35,36 +35,32 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleListCubit>();
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Scaffold(
-          appBar: const CustomAppBar(title: 'Popular People'),
-          body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white,
-            child: GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 3,
-                mainAxisSpacing: 5,
-                crossAxisCount: 3,
-                childAspectRatio: 1 / 1.65,
-              ),
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              itemCount: cubit.state.people.length,
-              itemBuilder: (BuildContext context, int index) {
-                cubit.showedPopularPeopleAtIndex(index);
-                final people = cubit.state.people[index];
-                final profilePath = people.profilePath;
-                return InkWell(
-                  onTap: () => cubit.onPeopleTap(context, index),
-                  child: _PeoplePopularListColumnWidget(
-                      profilePath: profilePath, people: people, cubit: cubit, index: index),
-                );
-              },
-            ),
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Popular People'),
+      body: ColoredBox(
+        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+        child: GridView.builder(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 5,
+            crossAxisCount: 3,
+            childAspectRatio: 1 / 1.65,
           ),
-        );
-      },
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          itemCount: cubit.state.people.length,
+          itemBuilder: (BuildContext context, int index) {
+            cubit.showedPopularPeopleAtIndex(index);
+            final people = cubit.state.people[index];
+            final profilePath = people.profilePath;
+            return InkWell(
+              onTap: () => cubit.onPeopleTap(context, index),
+              child:
+                  _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -86,52 +82,51 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: notifierTheme.isDark ? AppColors.kPrimaryColor : AppColors.bottomNavBarLight,
-                border: Border.all(color: Colors.white.withOpacity(0.2)),
-                borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  )
-                ],
-              ),
-              clipBehavior: Clip.hardEdge,
-              child: Column(
-                children: [
-                  profilePath != null
-                      ? CachedNetworkImage(
-                          imageUrl: ImageDownloader.imageUrl(profilePath!),
-                          placeholder: (context, url) => const LoadingIndicatorWidget(),
-                          errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                        )
-                      : Image.asset(AppImages.noImageAvailable),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomCastListTextWidget(
-                            text: people.name,
-                            maxLines: 1,
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold),
-                      ],
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+            border: Border.all(
+                color: context.read<ThemeBloc>().isDarkTheme
+                    ? Colors.white.withOpacity(0.2)
+                    : Colors.black.withOpacity(0.2)),
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            boxShadow: [
+              BoxShadow(
+                color: context.read<ThemeBloc>().isDarkTheme
+                    ? Colors.white.withOpacity(0.1)
+                    : Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              )
+            ],
+          ),
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            children: [
+              profilePath != null
+                  ? CachedNetworkImage(
+                      imageUrl: ImageDownloader.imageUrl(profilePath!),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                    )
+                  : Image.asset(AppImages.noImageAvailable),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomCastListTextWidget(
+                      text: people.name,
+                      maxLines: 1,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

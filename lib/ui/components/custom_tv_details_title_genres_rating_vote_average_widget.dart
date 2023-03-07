@@ -1,7 +1,4 @@
-import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CustomTvDetailsTitleGenresRatingVoteAverageWidget
     extends StatelessWidget {
@@ -13,18 +10,9 @@ class CustomTvDetailsTitleGenresRatingVoteAverageWidget
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Text(
-          text,
-          style: TextStyle(
-            fontSize: 13,
-            color: notifierTheme.isDark
-                ? AppColors.ratingText
-                : AppColors.kPrimaryColor,
-          ),
-        );
-      },
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.displaySmall,
     );
   }
 }

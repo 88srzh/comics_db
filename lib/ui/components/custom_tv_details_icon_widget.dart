@@ -1,7 +1,7 @@
-import 'package:comics_db_app/app_colors.dart';
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomTvDetailsIconWidget extends StatelessWidget {
   final IconData icon;
@@ -11,16 +11,12 @@ class CustomTvDetailsIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Icon(
-          icon,
-          color: notifierTheme.isDark
-              ? AppColors.ratingThumb
-              : AppColors.kPrimaryColor,
-          size: 14,
-        );
-      },
+    return Icon(
+      icon,
+      color: context.read<ThemeBloc>().isDarkTheme
+          ? DarkThemeColors.ratingThumb
+          : DarkThemeColors.kPrimaryColor,
+      size: 14,
     );
   }
 }

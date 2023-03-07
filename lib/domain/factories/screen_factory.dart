@@ -66,7 +66,7 @@ class ScreenFactory {
   Widget makeMainScreen() {
     _authBloc?.close();
     _authBloc = null;
-    return const MainScreenWidget();
+    return MainScreenWidget();
   }
 
   Widget makePopularPeopleList() {
@@ -93,8 +93,12 @@ class ScreenFactory {
 
   Widget makeMovieDetails(int movieId) {
     // TODO: should fix
-    return BlocProvider(
-      create: (_) => MovieDetailsCubit(movieId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => MovieDetailsCubit(movieId),
+        ),
+      ],
       child: const MovieDetailsWidget(),
     );
   }
@@ -161,14 +165,14 @@ class ScreenFactory {
     );
   }
 
-  // Widget makeTvAiringTodayList() {
-  //   return BlocProvider(
-  //     create: (_) => TvAiringTodayListCubit(
-  //       tvAiringTodayListBloc: TvAiringTodayListBloc(
-  //         TvListState.initial(),
-  //       ),
-  //     ),
-  //     child: const AiringTodayTvsWidget(),
-  //   );
-  // }*/
+// Widget makeTvAiringTodayList() {
+//   return BlocProvider(
+//     create: (_) => TvAiringTodayListCubit(
+//       tvAiringTodayListBloc: TvAiringTodayListBloc(
+//         TvListState.initial(),
+//       ),
+//     ),
+//     child: const AiringTodayTvsWidget(),
+//   );
+// }*/
 }

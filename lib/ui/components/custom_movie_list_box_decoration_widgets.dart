@@ -1,12 +1,10 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
-
-// Project imports:
-import 'package:comics_db_app/app_colors.dart';
 
 // TODO: need to optimize code, not clean!
 BoxDecoration customMovieListBoxDecorationForDarkTheme = BoxDecoration(
-  color: AppColors.kPrimaryColor,
+  color: DarkThemeColors.kPrimaryColor,
   border: Border.all(color: Colors.white.withOpacity(0.2)),
   borderRadius: const BorderRadius.all(Radius.circular(20.0)),
   boxShadow: [
@@ -19,7 +17,7 @@ BoxDecoration customMovieListBoxDecorationForDarkTheme = BoxDecoration(
 );
 
 BoxDecoration customMovieListBoxDecorationForLightTheme = BoxDecoration(
-  color: Colors.white70,
+  color: Colors.white,
   border: Border.all(color: Colors.black.withOpacity(0.2)),
   borderRadius: const BorderRadius.all(Radius.circular(20.0)),
   boxShadow: [

@@ -1,5 +1,6 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,7 +9,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_poster_top_left_text_rating_widget.dart';
@@ -37,125 +37,135 @@ class MovieTopPosterWidget extends StatelessWidget {
     final backdropPath = cubit.state.backdropPath;
 
     // TODO add favorite icon button
-    return Consumer<ModelTheme>(builder: (context, ModelTheme notifierTheme, child) {
-      return Stack(
-        children: [
-          backdropPath != null
-              ? Positioned(
-                  child: Opacity(
-                    opacity: notifierTheme.isDark ? 0.25 : 0.35,
-                    child: AspectRatio(
-                      aspectRatio: 390 / 220,
-                      child: CachedNetworkImage(
-                        imageUrl: ImageDownloader.imageUrl(backdropPath),
-                        placeholder: (context, url) => const LoadingIndicatorWidget(),
-                        errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                      ),
+    return Stack(
+      children: [
+        backdropPath != null
+            ? Positioned(
+                child: Opacity(
+                  opacity: 0.25,
+                  child: AspectRatio(
+                    aspectRatio: 390 / 220,
+                    child: CachedNetworkImage(
+                      imageUrl: ImageDownloader.imageUrl(backdropPath),
+                      placeholder: (context, url) =>
+                          const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) =>
+                          Image.asset(AppImages.noImageAvailable),
                     ),
                   ),
-                )
-              : Image.asset(AppImages.noImageAvailable),
-          Positioned(
-            top: 15,
-            left: 20,
-            child: MovieDetailsTitle(title: title),
-          ),
-          Positioned(
-            top: 50,
-            left: 20,
-            child: SizedBox(
-              height: 300,
-              width: 230,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          tagline ?? 'No tagline',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 13,
-                            color: notifierTheme.isDark ? AppColors.titleText : AppColors.kPrimaryColor,
-                          ),
-                        ),
+                ),
+              )
+            : Image.asset(AppImages.noImageAvailable),
+        Positioned(
+          top: 15,
+          left: 20,
+          child: MovieDetailsTitle(title: title),
+        ),
+        Positioned(
+          top: 50,
+          left: 20,
+          child: SizedBox(
+            height: 300,
+            width: 230,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        tagline ?? 'No tagline',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 5.0),
-                  Row(
-                    children: [
-                      CustomPosterTopLeftAlignText(text: releaseDate, maxLines: null),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      CustomPosterTopLeftAlignText(text: summary, maxLines: null),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CustomPosterTopLeftAlignText(text: genres, maxLines: 2),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        MdiIcons.starOutline,
-                        color: AppColors.ratingStar,
-                        size: 14,
-                      ),
-                      const SizedBox(width: 4),
-                      CustomPosterTopLeftAlignTextRating(text: '$voteAverageString from IMDB'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                       Icon(
-                        MdiIcons.accountOutline,
-                        color: notifierTheme.isDark ? AppColors.ratingThumb : AppColors.kPrimaryColor,
-                        size: 14,
-                      ),
-                      const SizedBox(width: 4),
-                      CustomPosterTopLeftAlignTextRating(text: voteCount.toStringAsFixed(0)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                       Icon(
-                        MdiIcons.heartOutline,
-                        color: notifierTheme.isDark ? AppColors.ratingThumb : AppColors.kPrimaryColor,
-                        size: 14,
-                      ),
-                      const SizedBox(width: 4),
-                      CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5.0),
+                Row(
+                  children: [
+                    CustomPosterTopLeftAlignText(
+                      text: releaseDate,
+                      maxLines: null,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    CustomPosterTopLeftAlignText(text: summary, maxLines: null),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CustomPosterTopLeftAlignText(text: genres, maxLines: 2),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      MdiIcons.starOutline,
+                      // TODO вывести в переменную
+                      color: context.read<ThemeBloc>().isDarkTheme
+                          ? DarkThemeColors.ratingThumb
+                          : DarkThemeColors.kPrimaryColor,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 4),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: '$voteAverageString from IMDB'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      MdiIcons.accountOutline,
+                      color: context.read<ThemeBloc>().isDarkTheme
+                          ? DarkThemeColors.ratingThumb
+                          : DarkThemeColors.kPrimaryColor,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 4),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: voteCount.toStringAsFixed(0)),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      MdiIcons.heartOutline,
+                      color: context.read<ThemeBloc>().isDarkTheme
+                          ? DarkThemeColors.ratingThumb
+                          : DarkThemeColors.kPrimaryColor,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 4),
+                    CustomPosterTopLeftAlignTextRating(
+                        text: popularityInt.toString()),
+                  ],
+                ),
+              ],
             ),
           ),
-          Positioned(
-            top: 55,
-            right: 15,
-            child: SizedBox(
-              //     TODO: не закругляются края
-              height: 180.0,
-              width: 140.0,
-              child: CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(posterPath!),
-                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-              ),
+        ),
+        Positioned(
+          top: 55,
+          right: 15,
+          child: SizedBox(
+            //     TODO: не закругляются края
+            height: 180.0,
+            width: 140.0,
+            child: CachedNetworkImage(
+              imageUrl: ImageDownloader.imageUrl(posterPath!),
+              placeholder: (context, url) => const LoadingIndicatorWidget(),
+              errorWidget: (context, url, dynamic error) =>
+                  Image.asset(AppImages.noImageAvailable),
             ),
           ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 }

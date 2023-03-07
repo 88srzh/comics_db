@@ -1,12 +1,11 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/settings/model_theme.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
@@ -35,39 +34,31 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<NowPlayingMovieListCubit>();
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Scaffold(
-          appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
-          body: ColoredBox(
-            color: notifierTheme.isDark ? AppColors.kPrimaryColor : Colors.white70,
-            child: Stack(
-              children: [
-                ListView.builder(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: const EdgeInsets.only(top: 70.0),
-                  itemCount: cubit.state.movies.length,
-                  itemExtent: 165,
-                  itemBuilder: (BuildContext context, int index) {
-                    cubit.showedNowPlayingMovieAtIndex(index);
-                    final movie = cubit.state.movies[index];
-                    final posterPath = movie.posterPath;
-                    return InkWell(
-                      onTap: () => onMovieTap(context, index),
-                      child: _MovieNowPlayingListRowWidget(
-                          posterPath: posterPath, movie: movie, cubit: cubit, index: index),
-                    );
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                  child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
-                ),
-              ],
-            ),
+    return Scaffold(
+      appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
+      body: Stack(
+        children: [
+          ListView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            padding: const EdgeInsets.only(top: 70.0),
+            itemCount: cubit.state.movies.length,
+            itemExtent: 165,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedNowPlayingMovieAtIndex(index);
+              final movie = cubit.state.movies[index];
+              final posterPath = movie.posterPath;
+              return InkWell(
+                onTap: () => onMovieTap(context, index),
+                child: _MovieNowPlayingListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+              );
+            },
           ),
-        );
-      },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            child: CustomSearchBar(onChanged: cubit.searchNowPlayingMovie),
+          ),
+        ],
+      ),
     );
   }
 
@@ -95,62 +86,52 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ModelTheme>(
-      builder: (context, ModelTheme notifierTheme, child) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-          child: Stack(
-            children: [
-              Container(
-                decoration: notifierTheme.isDark
-                    ? customMovieListBoxDecorationForDarkTheme
-                    : customMovieListBoxDecorationForLightTheme,
-                clipBehavior: Clip.hardEdge,
-                child: Row(
-                  children: [
-                    posterPath != null
-                        ? Image.network(
-                            ImageDownloader.imageUrl(posterPath!),
-                            width: 95,
-                          )
-                        : Image.asset(AppImages.noImageAvailable),
-                    const SizedBox(width: 15.0),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 20.0),
-                          CustomCastListTextWidget(
-                              text: movie.originalTitle,
-                              maxLines: 1,
-                              fontSize: null,
-                              color: notifierTheme.isDark ? Colors.white : AppColors.kPrimaryColor,
-                              fontWeight: FontWeight.bold),
-                          const SizedBox(height: 5.0),
-                          CustomCastListTextWidget(
-                              text: movie.releaseDate,
-                              maxLines: 1,
-                              fontSize: 13,
-                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
-                              fontWeight: null),
-                          const SizedBox(height: 15.0),
-                          CustomCastListTextWidget(
-                              text: movie.overview ?? '',
-                              maxLines: 3,
-                              fontSize: 12,
-                              color: notifierTheme.isDark ? AppColors.genresText : AppColors.kPrimaryColor,
-                              fontWeight: null),
-                        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+      child: Stack(
+        children: [
+          Container(
+            decoration: context.read<ThemeBloc>().isDarkTheme
+                ? customMovieListBoxDecorationForDarkTheme
+                : customMovieListBoxDecorationForLightTheme,
+            clipBehavior: Clip.hardEdge,
+            child: Row(
+              children: [
+                posterPath != null
+                    ? Image.network(
+                        ImageDownloader.imageUrl(posterPath!),
+                        width: 95,
+                      )
+                    : Image.asset(AppImages.noImageAvailable),
+                const SizedBox(width: 15.0),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20.0),
+                      CustomCastListTextWidget(
+                        text: movie.originalTitle,
+                        maxLines: 1,
                       ),
-                    ),
-                    const SizedBox(width: 5.0),
-                  ],
+                      const SizedBox(height: 5.0),
+                      CustomCastListTextWidget(
+                        text: movie.releaseDate,
+                        maxLines: 1,
+                      ),
+                      const SizedBox(height: 15.0),
+                      CustomCastListTextWidget(
+                        text: movie.overview ?? '',
+                        maxLines: 3,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(width: 5.0),
+              ],
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

@@ -4,17 +4,9 @@ import 'package:flutter/material.dart';
 class CustomCastListTextWidget extends StatelessWidget {
   final String text;
   final int maxLines;
-  final double? fontSize;
-  final Color? color;
-  final FontWeight? fontWeight;
 
   const CustomCastListTextWidget(
-      {Key? key,
-      required this.text,
-      required this.maxLines,
-      required this.fontSize,
-      required this.color,
-      required this.fontWeight})
+      {Key? key, required this.text, required this.maxLines})
       : super(key: key);
 
   @override
@@ -23,11 +15,7 @@ class CustomCastListTextWidget extends StatelessWidget {
       text,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        color: color,
-        fontWeight: fontWeight,
-        fontSize: fontSize,
-      ),
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }
