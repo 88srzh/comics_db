@@ -11,19 +11,19 @@ class SettingsCardWidget extends StatefulWidget {
 
 class _SettingsCardWidgetState extends State<SettingsCardWidget> {
   // bool themeColor = false;
+  bool change = false;
 
   @override
   Widget build(BuildContext context) {
-    // final bool isSwitch;
     return SwitchListTile(
       activeColor: Colors.pinkAccent,
       inactiveThumbColor: Colors.grey,
-      value: false,
+      value: change,
       onChanged: (bool value) {
         setState(
           () {
             context.read<ThemeBloc>().add(const ThemeEvent());
-            value;
+            change = value;
           },
         );
       },
