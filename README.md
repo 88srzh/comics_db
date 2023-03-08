@@ -21,8 +21,8 @@
 ## 🌟 Preview
 
 <p>
-<img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_129_edit.png" alt="popular people" width="200">
-<img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_128_edit.png" alt="all movies" width="200">
+<img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/People_screen_light_theme.png" alt="popular people" width="200">
+<img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Movie_list_screen_light_theme.png" alt="all movies" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_131_edit.png" alt="movie details" width="200">
 <img src="https://raw.githubusercontent.com/88srzh/comics_db/main/images/readme/Screenshot_134_edit.png" alt="movies list" width="200">
 </p>
