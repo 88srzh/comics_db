@@ -3,7 +3,6 @@ import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_widget.dart';
@@ -21,7 +20,7 @@ class _TvListWidgetState extends State<TvListWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomMainAppBarWidget(),
+      // appBar: const CustomMainAppBarWidget(),
       body: ListView(
         children: [
           Column(

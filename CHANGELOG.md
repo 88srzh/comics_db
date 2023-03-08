@@ -1,3 +1,8 @@
+## 0.0.7
+
+- Added light theme.
+- Change `Consumer` in light theme to `Bloc`.
+
 ## 0.0.6
 
 - Added `guest` authorization.

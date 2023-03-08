@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class _AccountWidgetState extends State<AccountWidget> {
     // that's name need to check cubit data
     // final name = cubit.state.name;
     return const Scaffold(
-      appBar: CustomMainAppBarWidget(),
+      // appBar: CustomMainAppBarWidget(),
       body: BodyPersonalWidget(),
     );
   }
@@ -72,7 +71,8 @@ class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({Key? key}) : super(key: key);
 
   @override
-  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
+  State<NotificationsCardWidget> createState() =>
+      _NotificationsCardWidgetState();
 }
 
 class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
