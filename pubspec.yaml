@@ -23,28 +23,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^6.1.0
+  flutter_secure_storage: ^8.0.0
   json_annotation: ^4.6.0
-  material_design_icons_flutter: ^5.0.6996
+  material_design_icons_flutter: ^6.0.7096
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
   convex_bottom_bar: ^3.0.0
   youtube_player_flutter: ^8.1.0
   loading_indicator: ^3.1.0
-  flutter_native_splash: ^2.2.8
+  flutter_native_splash: ^2.2.19
   provider: ^6.0.3
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   bloc_concurrency: ^0.2.0
   cached_network_image: ^3.2.1
   expandable_text: 2.3.0
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.3
   freezed: ^2.3.2
   freezed_annotation: ^2.2.0
   equatable: ^2.0.5
   import_sorter: ^4.6.0
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
   flutter_hooks: ^0.18.6
   animations: ^2.0.7
 
@@ -53,7 +53,7 @@ dev_dependencies:
     sdk: flutter
 
   json_serializable: ^6.5.4
-  build_runner: ^2.3.2
+  build_runner: ^2.3.3
   dependency_validator: ^3.0.0
   flutter_lints: ^2.0.1
 
