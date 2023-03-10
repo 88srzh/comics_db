@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -30,6 +31,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   // String _locale = '';
   final movieAndTvApiClient = MovieAndTvApiClient();
   final int movieId;
+  final _movieService = MovieService();
 
   // final _localeStorage = LocalizedModelStorage();
 
@@ -57,6 +59,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           peopleData: [],
           actorsData: [],
           isLoading: false,
+          isFavorite: false,
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -75,6 +78,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
+      isFavorite: state.isFavorite,
     ));
   }
 
@@ -235,4 +239,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
     return crewChunks;
   }
+  Future<void> toggleFavoriteMovie(BuildContext context) async {
+    data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    // notifyListeners();
+    try {
+      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
+  }
+
+  bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
 }

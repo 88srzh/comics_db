@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -23,6 +24,7 @@ class MovieDetailsData {
   double? voteAverage = 0;
   String? trailerKey = '';
   // TODO may be decompose trailerData
+  FavoriteData favoriteData = FavoriteData();
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData =
       const <List<MovieDetailsMoviePeopleData>>[];
