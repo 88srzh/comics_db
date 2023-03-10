@@ -241,6 +241,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    emit(state.isFavorite as MovieDetailsCubitState);
     // notifyListeners();
     try {
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
