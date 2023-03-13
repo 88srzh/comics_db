@@ -167,6 +167,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
+    var favorite = data.favoriteData.isFavorite;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -184,6 +185,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
+      isFavorite: favorite,
     );
     emit(newState);
   }
@@ -250,7 +252,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
-    // data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     // notifyListeners();
     try {
       await _movieService.updateFavoriteMovie(

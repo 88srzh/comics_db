@@ -3,6 +3,7 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/page_transition.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen_widget/favorite_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MainScreenWidget extends HookWidget {
     const PopularPeopleListWidget(),
     const MovieListWidget(),
     const TvListWidget(),
+    const FavoriteScreenWidget(),
     const AccountWidget(),
   ];
 
@@ -45,6 +47,7 @@ class MainScreenWidget extends HookWidget {
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
+          TabItem<dynamic>(icon: Icons.favorite_outline, title: 'Favorites'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
         ],
         onTap: (int index) => selectedIndex.value = index,
