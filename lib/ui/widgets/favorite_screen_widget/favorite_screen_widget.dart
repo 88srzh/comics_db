@@ -1,3 +1,4 @@
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteScreenWidget extends StatefulWidget {
@@ -10,6 +11,8 @@ class FavoriteScreenWidget extends StatefulWidget {
 class _FavoriteScreenWidgetState extends State<FavoriteScreenWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Favorites'),
+    );
   }
 }
