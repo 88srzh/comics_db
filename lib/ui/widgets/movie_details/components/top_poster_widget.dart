@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +27,7 @@ class MovieTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<MovieDetailsCubit>();
+    final movieList = context.watch<MoviePopularListBloc>().state.movieContainer;
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
     final voteAverage = cubit.state.voteAverage;
@@ -58,6 +62,8 @@ class MovieTopPosterWidget extends StatelessWidget {
                 ),
               )
             : Image.asset(AppImages.noImageAvailable),
+        Positioned(
+            child: movieList[movieList.getIndet()] ),
         Positioned(
           top: 15,
           left: 20,
