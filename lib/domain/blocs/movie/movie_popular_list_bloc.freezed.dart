@@ -21,6 +21,7 @@ mixin _$MovieListEvent {
     required TResult Function(String locale) loadNextPage,
     required TResult Function() reset,
     required TResult Function(String query) search,
+    required TResult Function() addFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$MovieListEvent {
     TResult? Function(String locale)? loadNextPage,
     TResult? Function()? reset,
     TResult? Function(String query)? search,
+    TResult? Function()? addFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$MovieListEvent {
     TResult Function(String locale)? loadNextPage,
     TResult Function()? reset,
     TResult Function(String query)? search,
+    TResult Function()? addFavorite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,8 @@ mixin _$MovieListEvent {
     required TResult Function(MovieListEventLoadNextPage value) loadNextPage,
     required TResult Function(MovieListEventLoadReset value) reset,
     required TResult Function(MovieListEventSearchMovie value) search,
+    required TResult Function(MovieListEventFaforiteItemEvent value)
+        addFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +55,7 @@ mixin _$MovieListEvent {
     TResult? Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult? Function(MovieListEventLoadReset value)? reset,
     TResult? Function(MovieListEventSearchMovie value)? search,
+    TResult? Function(MovieListEventFaforiteItemEvent value)? addFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +63,7 @@ mixin _$MovieListEvent {
     TResult Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult Function(MovieListEventLoadReset value)? reset,
     TResult Function(MovieListEventSearchMovie value)? search,
+    TResult Function(MovieListEventFaforiteItemEvent value)? addFavorite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,6 +157,7 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
     required TResult Function(String locale) loadNextPage,
     required TResult Function() reset,
     required TResult Function(String query) search,
+    required TResult Function() addFavorite,
   }) {
     return loadNextPage(locale);
   }
@@ -160,6 +168,7 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
     TResult? Function(String locale)? loadNextPage,
     TResult? Function()? reset,
     TResult? Function(String query)? search,
+    TResult? Function()? addFavorite,
   }) {
     return loadNextPage?.call(locale);
   }
@@ -170,6 +179,7 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
     TResult Function(String locale)? loadNextPage,
     TResult Function()? reset,
     TResult Function(String query)? search,
+    TResult Function()? addFavorite,
     required TResult orElse(),
   }) {
     if (loadNextPage != null) {
@@ -184,6 +194,8 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
     required TResult Function(MovieListEventLoadNextPage value) loadNextPage,
     required TResult Function(MovieListEventLoadReset value) reset,
     required TResult Function(MovieListEventSearchMovie value) search,
+    required TResult Function(MovieListEventFaforiteItemEvent value)
+        addFavorite,
   }) {
     return loadNextPage(this);
   }
@@ -194,6 +206,7 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
     TResult? Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult? Function(MovieListEventLoadReset value)? reset,
     TResult? Function(MovieListEventSearchMovie value)? search,
+    TResult? Function(MovieListEventFaforiteItemEvent value)? addFavorite,
   }) {
     return loadNextPage?.call(this);
   }
@@ -204,6 +217,7 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
     TResult Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult Function(MovieListEventLoadReset value)? reset,
     TResult Function(MovieListEventSearchMovie value)? search,
+    TResult Function(MovieListEventFaforiteItemEvent value)? addFavorite,
     required TResult orElse(),
   }) {
     if (loadNextPage != null) {
@@ -265,6 +279,7 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
     required TResult Function(String locale) loadNextPage,
     required TResult Function() reset,
     required TResult Function(String query) search,
+    required TResult Function() addFavorite,
   }) {
     return reset();
   }
@@ -275,6 +290,7 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
     TResult? Function(String locale)? loadNextPage,
     TResult? Function()? reset,
     TResult? Function(String query)? search,
+    TResult? Function()? addFavorite,
   }) {
     return reset?.call();
   }
@@ -285,6 +301,7 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
     TResult Function(String locale)? loadNextPage,
     TResult Function()? reset,
     TResult Function(String query)? search,
+    TResult Function()? addFavorite,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -299,6 +316,8 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
     required TResult Function(MovieListEventLoadNextPage value) loadNextPage,
     required TResult Function(MovieListEventLoadReset value) reset,
     required TResult Function(MovieListEventSearchMovie value) search,
+    required TResult Function(MovieListEventFaforiteItemEvent value)
+        addFavorite,
   }) {
     return reset(this);
   }
@@ -309,6 +328,7 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
     TResult? Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult? Function(MovieListEventLoadReset value)? reset,
     TResult? Function(MovieListEventSearchMovie value)? search,
+    TResult? Function(MovieListEventFaforiteItemEvent value)? addFavorite,
   }) {
     return reset?.call(this);
   }
@@ -319,6 +339,7 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
     TResult Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult Function(MovieListEventLoadReset value)? reset,
     TResult Function(MovieListEventSearchMovie value)? search,
+    TResult Function(MovieListEventFaforiteItemEvent value)? addFavorite,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -401,6 +422,7 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
     required TResult Function(String locale) loadNextPage,
     required TResult Function() reset,
     required TResult Function(String query) search,
+    required TResult Function() addFavorite,
   }) {
     return search(query);
   }
@@ -411,6 +433,7 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
     TResult? Function(String locale)? loadNextPage,
     TResult? Function()? reset,
     TResult? Function(String query)? search,
+    TResult? Function()? addFavorite,
   }) {
     return search?.call(query);
   }
@@ -421,6 +444,7 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
     TResult Function(String locale)? loadNextPage,
     TResult Function()? reset,
     TResult Function(String query)? search,
+    TResult Function()? addFavorite,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -435,6 +459,8 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
     required TResult Function(MovieListEventLoadNextPage value) loadNextPage,
     required TResult Function(MovieListEventLoadReset value) reset,
     required TResult Function(MovieListEventSearchMovie value) search,
+    required TResult Function(MovieListEventFaforiteItemEvent value)
+        addFavorite,
   }) {
     return search(this);
   }
@@ -445,6 +471,7 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
     TResult? Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult? Function(MovieListEventLoadReset value)? reset,
     TResult? Function(MovieListEventSearchMovie value)? search,
+    TResult? Function(MovieListEventFaforiteItemEvent value)? addFavorite,
   }) {
     return search?.call(this);
   }
@@ -455,6 +482,7 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
     TResult Function(MovieListEventLoadNextPage value)? loadNextPage,
     TResult Function(MovieListEventLoadReset value)? reset,
     TResult Function(MovieListEventSearchMovie value)? search,
+    TResult Function(MovieListEventFaforiteItemEvent value)? addFavorite,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -472,4 +500,125 @@ abstract class MovieListEventSearchMovie implements MovieListEvent {
   @JsonKey(ignore: true)
   _$$MovieListEventSearchMovieCopyWith<_$MovieListEventSearchMovie>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MovieListEventFaforiteItemEventCopyWith<$Res> {
+  factory _$$MovieListEventFaforiteItemEventCopyWith(
+          _$MovieListEventFaforiteItemEvent value,
+          $Res Function(_$MovieListEventFaforiteItemEvent) then) =
+      __$$MovieListEventFaforiteItemEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MovieListEventFaforiteItemEventCopyWithImpl<$Res>
+    extends _$MovieListEventCopyWithImpl<$Res,
+        _$MovieListEventFaforiteItemEvent>
+    implements _$$MovieListEventFaforiteItemEventCopyWith<$Res> {
+  __$$MovieListEventFaforiteItemEventCopyWithImpl(
+      _$MovieListEventFaforiteItemEvent _value,
+      $Res Function(_$MovieListEventFaforiteItemEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MovieListEventFaforiteItemEvent
+    implements MovieListEventFaforiteItemEvent {
+  const _$MovieListEventFaforiteItemEvent();
+
+  @override
+  String toString() {
+    return 'MovieListEvent.addFavorite()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MovieListEventFaforiteItemEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String locale) loadNextPage,
+    required TResult Function() reset,
+    required TResult Function(String query) search,
+    required TResult Function() addFavorite,
+  }) {
+    return addFavorite();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String locale)? loadNextPage,
+    TResult? Function()? reset,
+    TResult? Function(String query)? search,
+    TResult? Function()? addFavorite,
+  }) {
+    return addFavorite?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String locale)? loadNextPage,
+    TResult Function()? reset,
+    TResult Function(String query)? search,
+    TResult Function()? addFavorite,
+    required TResult orElse(),
+  }) {
+    if (addFavorite != null) {
+      return addFavorite();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MovieListEventLoadNextPage value) loadNextPage,
+    required TResult Function(MovieListEventLoadReset value) reset,
+    required TResult Function(MovieListEventSearchMovie value) search,
+    required TResult Function(MovieListEventFaforiteItemEvent value)
+        addFavorite,
+  }) {
+    return addFavorite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MovieListEventLoadNextPage value)? loadNextPage,
+    TResult? Function(MovieListEventLoadReset value)? reset,
+    TResult? Function(MovieListEventSearchMovie value)? search,
+    TResult? Function(MovieListEventFaforiteItemEvent value)? addFavorite,
+  }) {
+    return addFavorite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MovieListEventLoadNextPage value)? loadNextPage,
+    TResult Function(MovieListEventLoadReset value)? reset,
+    TResult Function(MovieListEventSearchMovie value)? search,
+    TResult Function(MovieListEventFaforiteItemEvent value)? addFavorite,
+    required TResult orElse(),
+  }) {
+    if (addFavorite != null) {
+      return addFavorite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MovieListEventFaforiteItemEvent implements MovieListEvent {
+  const factory MovieListEventFaforiteItemEvent() =
+      _$MovieListEventFaforiteItemEvent;
 }

@@ -1,5 +1,8 @@
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/src/widget/custom_page_route.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -13,23 +16,11 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:provider/provider.dart';
 
-class MoviePopularListWidget extends StatefulWidget {
-  const MoviePopularListWidget({Key? key}) : super(key: key);
+class MoviePopularListWidget extends StatelessWidget {
+  const MoviePopularListWidget({Key? key, required this.movies, this.isReversedList = false}) : super(key: key);
 
-  @override
-  State<MoviePopularListWidget> createState() => _MoviePopularListWidgetState();
-}
-
-class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final locale = Localizations.localeOf(context);
-    context
-        .read<MoviePopularListCubit>()
-        .setupPopularMovieLocale(locale.languageCode);
-  }
+  final List<Movie> movies;
+  final bool isReversedList;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +36,18 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
             itemCount: cubit.state.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
+              Movie movie = isReversedList ? movies.reversed.toList()[index] : movies[index];
               cubit.showedPopularMovieAtIndex(index);
-              final movie = cubit.state.movies[index];
+              // final movie = cubit.state.movies[index];
               final posterPath = movie.posterPath;
               return InkWell(
-                onTap: () => cubit.onMovieTap(context, index),
+                // onTap: () => cubit.onMovieTap(context, index),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CustomPageRoute(child: MovieDetailsWidget(movie: movie)),
+                  );
+                },
                 child: _MoviePopularListRowWidget(
                   posterPath: posterPath,
                   movie: movie,
@@ -60,8 +58,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
             },
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
             child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
           ),
         ],
@@ -82,7 +79,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
   }) : super(key: key);
 
   final String? posterPath;
-  final MovieListData movie;
+  final Movie movie;
   final MoviePopularListCubit cubit;
 
   @override
@@ -93,9 +90,8 @@ class _MoviePopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: isDarkTheme
-                ? customMovieListBoxDecorationForDarkTheme
-                : customMovieListBoxDecorationForLightTheme,
+            decoration:
+                isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
@@ -117,7 +113,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5.0),
                       CustomCastListTextWidget(
-                        text: movie.releaseDate,
+                        text: movie.releaseDate.toString(),
                         maxLines: 1,
                       ),
                       const SizedBox(height: 15.0),

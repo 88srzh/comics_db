@@ -58,12 +58,12 @@ class MainNavigation {
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case MainNavigationRouteNames.movieDetails:
-        final arguments = settings.arguments;
-        final movieId = arguments is int ? arguments : 0;
-        return MaterialPageRoute(
-          builder: (_) => _screenFactory.makeMovieDetails(movieId),
-        );
+      // case MainNavigationRouteNames.movieDetails:
+      //   final arguments = settings.arguments;
+      //   final movieId = arguments is int ? arguments : 0;
+      //   return MaterialPageRoute(
+      //     builder: (_) => _screenFactory.makeMovieDetails(movie, movieId),
+      //   );
       case MainNavigationRouteNames.movieTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';
