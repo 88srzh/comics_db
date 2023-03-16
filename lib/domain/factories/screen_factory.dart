@@ -18,10 +18,8 @@ import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/movie_now_playing_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
@@ -78,16 +76,16 @@ class ScreenFactory {
     );
   }
 
-  Widget makePopularMovieList() {
-    return BlocProvider(
-      create: (_) => MoviePopularListCubit(
-        movieListBloc: MoviePopularListBloc(
-          const MovieListState.initial(),
-        ),
-      ),
-      child: const MoviePopularListWidget(),
-    );
-  }
+  // Widget makePopularMovieList() {
+  //   return BlocProvider(
+  //     create: (_) => MoviePopularListCubit(
+  //       movieListBloc: MoviePopularListBloc(
+  //         const MovieListState.initial(),
+  //       ),
+  //     ),
+  //     child: const MoviePopularListWidget(),
+  //   );
+  // }
 
   // Widget makeMovieDetails(Movie movie, int movieId) {
   //   TODO: should fix

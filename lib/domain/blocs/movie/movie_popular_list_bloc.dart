@@ -3,6 +3,7 @@ import 'dart:async';
 
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/core/app_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,15 +25,20 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
-    on<MovieListEvent>(((event, emit) async {
-      if (event is MovieListEventLoadNextPage) {
-        await onMovieListEventLoadNextPage(event, emit);
-      } else if (event is MovieListEventLoadReset) {
-        await onMovieListEventLoadReset(event, emit);
-      } else if (event is MovieListEventSearchMovie) {
-        await onMovieListEventLoadSearchMovie(event, emit);
-      }
-    }), transformer: sequential());
+    // on<MovieListEvent>(((event, emit) async {
+    //   if (event is MovieListEventLoadNextPage) {
+    //     await onMovieListEventLoadNextPage(event, emit);
+    //   } else if (event is MovieListEventLoadReset) {
+    //     await onMovieListEventLoadReset(event, emit);
+    //   } else if (event is MovieListEventSearchMovie) {
+    //     await onMovieListEventLoadSearchMovie(event, emit);
+    //   }
+    // }), transformer: sequential());
+on<LoadNextPageEvent>(onMovieListEventLoadNextPage);
+on<ResetEvent>(onMovieListEventLoadReset);
+on<SearchEvent>(onMovieListEventLoadSearchMovie);
+on<FavoriteItemEvent>(onMovieListFavoriteEvent);
+
   }
 
   Future<void> onMovieListEventLoadNextPage(
@@ -85,11 +91,15 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   }
 
   Future<void> onMovieListEventLoadSearchMovie(
-      MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
-    if (state.searchQuery == event.query) return;
+      SearchEvent event, Emitter<MovieListState> emit) async {
+    if (state.searchQuery == event.) return;
     final newState = state.copyWith(
         searchQuery: event.query,
         searchMovieContainer: const MovieListContainer.initial());
     emit(newState);
+  }
+
+  void onMovieListFavoriteEvent(FavoriteItemEvent event, Emitter<MovieListState> emit) {
+    int index = state.movieContainer.movies.getIndex(event.movie);
   }
 }

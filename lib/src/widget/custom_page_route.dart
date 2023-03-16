@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomPageRoute extends PageRouteBuilder {
+class CustomPageRoute extends PageRouteBuilder<dynamic> {
   CustomPageRoute({required this.child})
       : super(
           pageBuilder: (context, Animation<double> animation, Animation<double> secondaryAnimation) => child,

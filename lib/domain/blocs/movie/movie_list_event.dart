@@ -29,7 +29,7 @@ class ResetEvent extends MovieListEvent {
 }
 
 class SearchEvent extends MovieListEvent {
-  const SearchEvent(Movie movie, String query) : super(movie);
+  const SearchEvent(Movie movie,{required String query}) : super(movie);
 }
 
 class FavoriteItemEvent extends MovieListEvent {
