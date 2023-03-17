@@ -1,4 +1,4 @@
-part of 'movie_popular_list_bloc.dart';
+// part of 'movie_popular_list_bloc.dart';
 
 class MovieListState extends Equatable {
   final MovieListContainer movieContainer;

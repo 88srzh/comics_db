@@ -13,25 +13,27 @@ part of 'movie_popular_list_bloc.dart';
 
 abstract class MovieListEvent extends Equatable {
   final Movie movie;
+  final String query;
+  final String locale;
 
-  const MovieListEvent(this.movie);
+  const MovieListEvent(this.movie, this.query, this.locale);
 
   @override
-  List<Object?> get props => [movie];
+  List<Object?> get props => [movie, query, locale];
 }
 
 class LoadNextPageEvent extends MovieListEvent {
-  const LoadNextPageEvent(Movie movie, String locale) : super(movie);
+  const LoadNextPageEvent(Movie movie, String query, String locale) : super(movie, query, locale);
 }
 
 class ResetEvent extends MovieListEvent {
-  const ResetEvent(Movie movie) : super(movie);
+  const ResetEvent(Movie movie, String query, String locale) : super(movie, query, locale);
 }
 
 class SearchEvent extends MovieListEvent {
-  const SearchEvent(Movie movie,{required String query}) : super(movie);
+  const SearchEvent(Movie movie, String query, String locale) : super(movie, query, locale);
 }
 
 class FavoriteItemEvent extends MovieListEvent {
-  const FavoriteItemEvent(Movie movie) : super(movie);
+  const FavoriteItemEvent(Movie movie, String query, String locale) : super(movie, query, locale);
 }
