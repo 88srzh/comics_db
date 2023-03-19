@@ -132,7 +132,7 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => NowPlayingMovieListCubit(
         nowPlayingMovieListBloc: NowPlayingMovieListBloc(
-          const MovieListState.initial(),
+          // const MovieListState.initial(),
         ),
       ),
       child: const MovieNowPlayingListWidget(),
