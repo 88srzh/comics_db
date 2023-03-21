@@ -45,15 +45,13 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(
-        create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    MainNavigationRouteNames.splashScreen: (context) =>
+        ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
     // MainNavigationRouteNames.popularMovie: (_) =>
     //     _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
-    MainNavigationRouteNames.nowPlayingMovie: (context) =>
-        _screenFactory.makeNowPlayingMovieList(),
-    MainNavigationRouteNames.tvPopularList: (context) =>
-        _screenFactory.makePopularTvList(),
+    // MainNavigationRouteNames.nowPlayingMovie: (context) => _screenFactory.makeNowPlayingMovieList(),
+    MainNavigationRouteNames.tvPopularList: (context) => _screenFactory.makePopularTvList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -101,7 +99,6 @@ class MainNavigation {
   }
 
   static void resetNavigation(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        MainNavigationRouteNames.loaderWidget, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(MainNavigationRouteNames.loaderWidget, (route) => false);
   }
 }

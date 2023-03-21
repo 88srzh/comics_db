@@ -27,7 +27,7 @@ class LoadNextPageEvent extends MovieListEvent {
 }
 
 class ResetEvent extends MovieListEvent {
-  const ResetEvent(Movie movie, String query, String locale) : super(movie, query, locale);
+  const ResetEvent(Movie movie) : super(movie);
 }
 
 class SearchEvent extends MovieListEvent {

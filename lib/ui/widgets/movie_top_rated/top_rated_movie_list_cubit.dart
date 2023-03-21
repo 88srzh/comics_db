@@ -1,3 +1,4 @@
+/*
 // Dart imports:
 import 'dart:async';
 
@@ -93,3 +94,4 @@ class TopRatedMovieListCubit extends Cubit<MovieListCubitState> {
         .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }
+*/

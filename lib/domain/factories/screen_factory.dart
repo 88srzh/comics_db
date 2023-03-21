@@ -128,6 +128,7 @@ class ScreenFactory {
     );
   }*/
 
+/*
   Widget makeNowPlayingMovieList() {
     return BlocProvider(
       create: (_) => NowPlayingMovieListCubit(
@@ -138,6 +139,7 @@ class ScreenFactory {
       child: const MovieNowPlayingListWidget(),
     );
   }
+*/
 
   // Widget makeUpcomingMovieList() {
   //   return BlocProvider(
