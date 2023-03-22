@@ -10,35 +10,3 @@ class MovieListEvent with _$MovieListEvent {
 
   const factory MovieListEvent.addFavorite({required Movie movie}) = MovieListEventFaforiteItemEvent;
 }
-
-/*
-import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:equatable/equatable.dart';
-
-abstract class MovieListEvent extends Equatable {
-  final Movie movie;
-  final String query;
-  final String locale;
-
-  const MovieListEvent(this.movie, this.query, this.locale);
-
-  @override
-  List<Object?> get props => [movie, query, locale];
-}
-
-class LoadNextPageEvent extends MovieListEvent {
-  const LoadNextPageEvent(Movie movie, String query, String locale) : super(movie, query, locale);
-}
-
-class ResetEvent extends MovieListEvent {
-  const ResetEvent(Movie movie) : super(movie);
-}
-
-class SearchEvent extends MovieListEvent {
-  const SearchEvent(Movie movie, String query, String locale) : super(movie, query, locale);
-}
-
-class FavoriteItemEvent extends MovieListEvent {
-  const FavoriteItemEvent(Movie movie, String query, String locale) : super(movie, query, locale);
-}
-*/

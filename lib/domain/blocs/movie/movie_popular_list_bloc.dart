@@ -4,6 +4,7 @@ import 'dart:async';
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/core/app_extension.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,7 @@ import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 part 'movie_popular_list_bloc.freezed.dart';
 
@@ -23,6 +25,9 @@ part 'movie_list_state.dart';
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
+  late DateFormat _dateFormat;
+  Timer? searchDebounce;
+  var mov = <Movie>[];
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
@@ -40,6 +45,35 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     // on<ResetEvent>(onMovieListEventLoadReset);
     // on<SearchEvent>(onMovieListEventLoadSearchMovie);
     // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
+  }
+
+  void _onState(MovieListState state) {
+    final movies = state.movies.map(_makeListData).toList();
+    final newState = this.state.copyWith(movies: movies);
+    emit(newState);
+  }
+
+  void setupPopularMovieLocale(String localeTag) {
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
+    _dateFormat = DateFormat.yMMMd(localeTag);
+    add(const MovieListEventLoadReset());
+    add(MovieListEventLoadNextPage(locale: localeTag));
+  }
+
+  MovieListData _makeListData(Movie movie) {
+    final releaseDate = movie.releaseDate;
+    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    return MovieListData(
+      title: movie.title,
+      posterPath: movie.posterPath,
+      backdropPath: movie.backdropPath,
+      id: movie.id,
+      originalTitle: movie.originalTitle,
+      overview: movie.overview,
+      releaseDate: releaseDateTitle,
+    );
   }
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
@@ -84,8 +118,8 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
     emit(const MovieListState.initial());
-    // TODO fix
-    // add(MovieListEventLoadNextPage(event.locale));
+    // TODO should fix locale
+    add(const MovieListEventLoadNextPage(locale: ''));
   }
 
   Future<void> onMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {

@@ -85,9 +85,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      // final _details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-      final details =
-          await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
+      final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
       // TODO: add isFavorite to update
       updateData(details);
     } on ApiClientException catch (e) {
@@ -95,8 +93,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  void _handleApiClientException(
-      ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
@@ -110,8 +107,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  Future<void> setupMovieDetailsLocale(
-      BuildContext context, String localeTag) async {
+  Future<void> setupMovieDetailsLocale(BuildContext context, String localeTag) async {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -145,8 +141,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.trailerKey = makeTrailerKey(details);
 
     data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(
-            name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
 
     data.isLoading = true;
@@ -191,8 +186,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   String makeTrailerKey(MovieDetails details) {
-    final videos = details.videos.results
-        .where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
     final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
     // final trailerKey = videos.first.key;
     // return trailerKey;
@@ -238,9 +232,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
-    var crew = details.credits.crew
-        .map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job))
-        .toList();
+    var crew = details.credits.crew.map((e) => MovieDetailsMoviePeopleData(name: e.name, job: e.job)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {
@@ -255,13 +247,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     // notifyListeners();
     try {
-      await _movieService.updateFavoriteMovie(
-          movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
   }
 
-  bool get isFavorite =>
-      state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
 }
