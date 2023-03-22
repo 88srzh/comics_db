@@ -47,8 +47,8 @@ class MainNavigation {
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
     MainNavigationRouteNames.splashScreen: (context) =>
         ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-    // MainNavigationRouteNames.popularMovie: (_) =>
-    //     _screenFactory.makePopularMovieList(),
+    MainNavigationRouteNames.popularMovie: (context) =>
+        _screenFactory.makePopularMovieList(context),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
     // MainNavigationRouteNames.nowPlayingMovie: (context) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (context) => _screenFactory.makePopularTvList(),

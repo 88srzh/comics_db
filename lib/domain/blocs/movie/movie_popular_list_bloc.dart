@@ -13,6 +13,9 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'movie_popular_list_bloc.freezed.dart';
 
 part 'movie_list_event.dart';
 
@@ -23,13 +26,13 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
-      if (event is LoadNextPageEvent) {
+      if (event is MovieListEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);
-      } else if (event is ResetEvent) {
+      } else if (event is MovieListEventLoadReset) {
         await onMovieListEventLoadReset(event, emit);
-      } else if (event is SearchEvent) {
+      } else if (event is MovieListEventSearchMovie) {
         await onMovieListEventLoadSearchMovie(event, emit);
-      } else if (event is FavoriteItemEvent) {
+      } else if (event is MovieListEventFaforiteItemEvent) {
         onMovieListFavoriteEvent(event, emit);
       }
     }), transformer: sequential());
@@ -39,7 +42,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
   }
 
-  Future<void> onMovieListEventLoadNextPage(LoadNextPageEvent event, Emitter<MovieListState> emit) async {
+  Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
       final container = await loadNextPage(
         state.searchMovieContainer,
@@ -79,19 +82,19 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     return newContainer;
   }
 
-  Future<void> onMovieListEventLoadReset(ResetEvent event, Emitter<MovieListState> emit) async {
+  Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
     emit(const MovieListState.initial());
     // TODO fix
     // add(MovieListEventLoadNextPage(event.locale));
   }
 
-  Future<void> onMovieListEventLoadSearchMovie(SearchEvent event, Emitter<MovieListState> emit) async {
+  Future<void> onMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
     if (state.searchQuery == event.query) return;
     final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
     emit(newState);
   }
 
-  void onMovieListFavoriteEvent(FavoriteItemEvent event, Emitter<MovieListState> emit) {
+  void onMovieListFavoriteEvent(MovieListEventFaforiteItemEvent event, Emitter<MovieListState> emit) {
     int index = state.movieContainer.movies.getIndex(event.movie);
     final List<Movie> movies = state.movies.map((element) {
       if (element.id == event.movie.id) {
@@ -99,10 +102,13 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
       }
       return element;
     }).toList();
-    emit(MovieListState(
+    emit(
+      MovieListState(
         movieContainer: state.movieContainer,
         searchMovieContainer: state.searchMovieContainer,
         searchQuery: state.searchQuery,
-        movies: movies));
+        movies: movies,
+      ),
+    );
   }
 }

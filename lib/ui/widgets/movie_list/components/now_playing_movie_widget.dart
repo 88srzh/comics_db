@@ -1,3 +1,4 @@
+/*
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -71,3 +72,4 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
         .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }
+*/

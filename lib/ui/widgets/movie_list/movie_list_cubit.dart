@@ -44,8 +44,8 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    movieListBloc.add(ResetEvent(movie));
-    movieListBloc.add(LoadNextPageEvent(localeTag));
+    movieListBloc.add(const MovieListEventLoadReset());
+    movieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
   @override

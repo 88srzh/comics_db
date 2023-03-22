@@ -37,7 +37,9 @@ class MovieDetailsWidget extends StatelessWidget {
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Movie Details'),
       floatingActionButton: fab(
-        () => context.read<MoviePopularListBloc>().add(FavoriteItemEvent(movieList[movieList.getIndex(movie)])),
+        () => context
+            .read<MoviePopularListBloc>()
+            .add(MovieListEventFaforiteItemEvent(movie: movieList[movieList.getIndex(movie)])),
       ),
       body: ListView(
         children: [

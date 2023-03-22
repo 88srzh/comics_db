@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -76,27 +79,28 @@ class ScreenFactory {
     );
   }
 
-  // Widget makePopularMovieList() {
-  //   return BlocProvider(
-  //     create: (_) => MoviePopularListCubit(
-  //       movieListBloc: MoviePopularListBloc(
-  //         const MovieListState.initial(),
-  //       ),
-  //     ),
-  //     child: const MoviePopularListWidget(),
-  //   );
-  // }
+  Widget makePopularMovieList(BuildContext context) {
+    final List<Movie> movieList = context.watch<MoviePopularListBloc>().state.movieContainer.movies;
+    return BlocProvider(
+      create: (_) => MoviePopularListCubit(
+        movieListBloc: MoviePopularListBloc(
+          const MovieListState.initial(),
+        ),
+      ),
+      child: MoviePopularListWidget(movies: movieList),
+    );
+  }
 
   // Widget makeMovieDetails(Movie movie, int movieId) {
   //   TODO: should fix
-  //   return MultiBlocProvider(
-  //     providers: [
-  //       BlocProvider(
-  //         create: (_) => MovieDetailsCubit(movieId),
-  //       ),
-  //     ],
-  //     child: MovieDetailsWidget(movie: movie),
-  //   );
+    // return MultiBlocProvider(
+    //   providers: [
+    //     BlocProvider(
+    //       create: (_) => MovieDetailsCubit(movieId),
+    //     ),
+    //   ],
+    //   child: MovieDetailsWidget(movie: movie),
+    // );
   // }
 
   Widget makePeopleDetails(int id) {

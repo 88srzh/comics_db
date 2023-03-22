@@ -1,15 +1,19 @@
 part of 'movie_popular_list_bloc.dart';
 
-// @freezed
-// class MovieListEvent with _$MovieListEvent {
-//   const factory MovieListEvent.loadNextPage({required String locale}) = MovieListEventLoadNextPage;
-//
-//   const factory MovieListEvent.reset() = MovieListEventLoadReset;
-//
-//   const factory MovieListEvent.search({required String query}) = MovieListEventSearchMovie;
-//
-//   const factory MovieListEvent.addFavorite() = MovieListEventFaforiteItemEvent;
-// }
+@freezed
+class MovieListEvent with _$MovieListEvent {
+  const factory MovieListEvent.loadNextPage({required String locale}) = MovieListEventLoadNextPage;
+
+  const factory MovieListEvent.reset() = MovieListEventLoadReset;
+
+  const factory MovieListEvent.search({required String query}) = MovieListEventSearchMovie;
+
+  const factory MovieListEvent.addFavorite({required Movie movie}) = MovieListEventFaforiteItemEvent;
+}
+
+/*
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class MovieListEvent extends Equatable {
   final Movie movie;
@@ -37,3 +41,4 @@ class SearchEvent extends MovieListEvent {
 class FavoriteItemEvent extends MovieListEvent {
   const FavoriteItemEvent(Movie movie, String query, String locale) : super(movie, query, locale);
 }
+*/
