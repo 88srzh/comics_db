@@ -4,8 +4,10 @@ import 'dart:async';
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/core/app_extension.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -47,13 +49,13 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
   }
 
-  void _onState(MovieListState state) {
+  void _onState(MovieListState state, Emitter<MovieListState> emit) {
     final movies = state.movies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
     emit(newState);
   }
 
-  void setupPopularMovieLocale(String localeTag) {
+  void setupPopularMovieLocale(String localeTag, Emitter<MovieListState> emit) {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -74,6 +76,27 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
       overview: movie.overview,
       releaseDate: releaseDateTitle,
     );
+  }
+
+  void showedPopularMovieAtIndex(int index) {
+    if (index < state.movies.length - 1) return;
+    add(MovieListEventLoadNextPage(locale: state.localeTag));
+  }
+
+  void searchPopularMovie(String text) {
+    searchDebounce?.cancel();
+    searchDebounce = Timer(
+      const Duration(milliseconds: 300),
+          () async {
+        add(MovieListEventSearchMovie(query: text));
+        add(MovieListEventLoadNextPage(locale: state.localeTag));
+      },
+    );
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    final id = state.movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
@@ -142,6 +165,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         searchMovieContainer: state.searchMovieContainer,
         searchQuery: state.searchQuery,
         movies: movies,
+        localeTag: state.localeTag,
       ),
     );
   }

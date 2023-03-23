@@ -4,6 +4,7 @@ class MovieListState extends Equatable {
   final MovieListContainer movieContainer;
   final MovieListContainer searchMovieContainer;
   final String searchQuery;
+
   // TODO may be should delete this
   final List<Movie> movies;
   final String localeTag;
@@ -14,7 +15,7 @@ class MovieListState extends Equatable {
   //     isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
 
   @override
-  List<Object> get props => [movieContainer, searchMovieContainer, searchQuery];
+  List<Object> get props => [movieContainer, searchMovieContainer, searchQuery, movies, localeTag, isSearchMode];
 
   const MovieListState.initial()
       : movieContainer = const MovieListContainer.initial(),
