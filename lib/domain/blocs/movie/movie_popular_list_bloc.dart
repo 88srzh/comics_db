@@ -48,7 +48,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     // on<SearchEvent>(onMovieListEventLoadSearchMovie);
     // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
   }
-
+// I can't fit two states :(
   void _onState(MovieListState state, Emitter<MovieListState> emit) {
     final movies = state.movies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
