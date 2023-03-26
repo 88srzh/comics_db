@@ -9,4 +9,6 @@ class MovieListEvent with _$MovieListEvent {
   const factory MovieListEvent.search({required String query}) = MovieListEventSearchMovie;
 
   const factory MovieListEvent.addFavorite({required Movie movie}) = MovieListEventFaforiteItemEvent;
+
+  const factory MovieListEvent.loadDetails() = MovieListEventUpdateDetailsData;
 }

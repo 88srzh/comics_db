@@ -30,6 +30,8 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var mov = <Movie>[];
+  final MoviePopularListBloc moviePopularListBloc;
+  late final StreamSubscription<MovieListState> movieListBlocSubscription;
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
@@ -41,6 +43,8 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         await onMovieListEventLoadSearchMovie(event, emit);
       } else if (event is MovieListEventFaforiteItemEvent) {
         onMovieListFavoriteEvent(event, emit);
+      } else if (event is MovieListUpdateDetailsData) {
+        onMovieListUpdateDetailsData(event, emit);
       }
     }), transformer: sequential());
     // on<LoadNextPageEvent>(onMovieListEventLoadNextPage);
@@ -49,9 +53,15 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
   }
 // I can't fit two states :(
+
+  void onMovieListUpdateDetailsData(MovieListUpdateDetailsData event) {
+    _onState(moviePopularListBloc.state);
+    movieListBlocSubscription = moviePopularListBloc.stream.listen(_onState);
+  }
+
   void _onState(MovieListState state, Emitter<MovieListState> emit) {
     final movies = state.movies.map(_makeListData).toList();
-    final newState = this.state.copyWith(movies: movies);
+    final newState = this.state.copyWith(moviesData: movies);
     emit(newState);
   }
 
@@ -166,6 +176,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         searchQuery: state.searchQuery,
         movies: movies,
         localeTag: state.localeTag,
+        moviesData: state.moviesData,
       ),
     );
   }
