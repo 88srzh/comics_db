@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/core/app_extension.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,11 +28,10 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
   late DateFormat _dateFormat;
   Timer? searchDebounce;
-  var mov = <Movie>[];
-  final MoviePopularListBloc moviePopularListBloc;
+  // var mov = <Movie>[];
   late final StreamSubscription<MovieListState> movieListBlocSubscription;
 
-  MoviePopularListBloc(MovieListState initialState, this.moviePopularListBloc) : super(initialState) {
+  MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);
@@ -41,11 +39,12 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         await onMovieListEventLoadReset(event, emit);
       } else if (event is MovieListEventSearchMovie) {
         await onMovieListEventLoadSearchMovie(event, emit);
-      } else if (event is MovieListEventFaforiteItemEvent) {
-        onMovieListFavoriteEvent(event, emit);
-      } else if (event is MovieListEventUpdateDetailsData) {
-        onMovieListUpdateDetailsData(event, emit);
+      // } else if (event is MovieListEventFaforiteItemEvent) {
+      //   onMovieListFavoriteEvent(event, emit);
       }
+      // } else if (event is MovieListEventUpdateDetailsData) {
+      //   onMovieListUpdateDetailsData(event, emit);
+      // }
     }), transformer: sequential());
     // on<LoadNextPageEvent>(onMovieListEventLoadNextPage);
     // on<ResetEvent>(onMovieListEventLoadReset);
@@ -55,20 +54,16 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
 
 // I can't fit two states :(
 
-  void onMovieListUpdateDetailsData(MovieListEventUpdateDetailsData event, Emitter<MovieListState> emit) {
-    Future.microtask(
-      () {
-        _onState(moviePopularListBloc.state);
-        movieListBlocSubscription = moviePopularListBloc.stream.listen(_onState);
-      },
-    );
-  }
-
-  void _onState(MovieListState state, Emitter<MovieListState> emit) {
-    final movies = state.movies.map(_makeListData).toList();
-    final newState = this.state.copyWith(moviesData: movies);
-    emit(newState);
-  }
+  // void onMovieListUpdateDetailsData(MovieListEventUpdateDetailsData event, Emitter<MovieListState> emit) {
+  //       _onState(moviePopularListBloc.state);
+  //       movieListBlocSubscription = moviePopularListBloc.stream.listen(_onState);
+  // }
+  //
+  // void _onState(MovieListState state, Emitter<MovieListState> emit) {
+  //   final movies = state.movies.map(_makeListData).toList();
+  //   final newState = this.state.copyWith(moviesData: movies);
+  //   emit(newState);
+  // }
 
   void setupPopularMovieLocale(String localeTag, Emitter<MovieListState> emit) {
     if (state.localeTag == localeTag) return;
@@ -79,19 +74,19 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
-  MovieListData _makeListData(Movie movie) {
-    final releaseDate = movie.releaseDate;
-    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
-    return MovieListData(
-      title: movie.title,
-      posterPath: movie.posterPath,
-      backdropPath: movie.backdropPath,
-      id: movie.id,
-      originalTitle: movie.originalTitle,
-      overview: movie.overview,
-      releaseDate: releaseDateTitle,
-    );
-  }
+  // MovieListData _makeListData(Movie movie) {
+  //   final releaseDate = movie.releaseDate;
+  //   final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+  //   return MovieListData(
+  //     title: movie.title,
+  //     posterPath: movie.posterPath,
+  //     backdropPath: movie.backdropPath,
+  //     id: movie.id,
+  //     originalTitle: movie.originalTitle,
+  //     overview: movie.overview,
+  //     releaseDate: releaseDateTitle,
+  //   );
+  // }
 
   void showedPopularMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
@@ -181,7 +176,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         searchQuery: state.searchQuery,
         movies: movies,
         localeTag: state.localeTag,
-        moviesData: state.moviesData,
+        // moviesData: state.moviesData,
       ),
     );
   }

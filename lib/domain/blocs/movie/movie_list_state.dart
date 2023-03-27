@@ -4,7 +4,7 @@ class MovieListState extends Equatable {
   final MovieListContainer movieContainer;
   final MovieListContainer searchMovieContainer;
   final String searchQuery;
-  final List<MovieListData> moviesData;
+  // final List<MovieListData> moviesData;
 
   // TODO may be should delete this
   final List<Movie> movies;
@@ -16,15 +16,15 @@ class MovieListState extends Equatable {
   //     isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
 
   @override
-  List<Object> get props => [movieContainer, searchMovieContainer, searchQuery, movies, localeTag, isSearchMode, moviesData];
+  List<Object> get props => [movieContainer, searchMovieContainer, searchQuery, localeTag, isSearchMode, movies];
 
   const MovieListState.initial()
       : movieContainer = const MovieListContainer.initial(),
         searchMovieContainer = const MovieListContainer.initial(),
         searchQuery = '',
         movies = const <Movie>[],
-        localeTag = '',
-        moviesData = const <MovieListData>[];
+        localeTag = '';
+        // moviesData = const <MovieListData>[];
 
   const MovieListState({
     required this.movieContainer,
@@ -32,7 +32,7 @@ class MovieListState extends Equatable {
     required this.searchQuery,
     required this.movies,
     required this.localeTag,
-    required this.moviesData,
+    // required this.moviesData,
   });
 
   MovieListState copyWith({
@@ -41,7 +41,7 @@ class MovieListState extends Equatable {
     String? searchQuery,
     List<Movie>? movies,
     String? localeTag,
-    List<MovieListData>? moviesData,
+    // List<MovieListData>? moviesData,
   }) {
     return MovieListState(
       movieContainer: movieContainer ?? this.movieContainer,
@@ -49,7 +49,7 @@ class MovieListState extends Equatable {
       searchQuery: searchQuery ?? this.searchQuery,
       movies: movies ?? this.movies,
       localeTag: localeTag ?? this.localeTag,
-      moviesData: moviesData ?? this.moviesData,
+      // moviesData: moviesData ?? this.moviesData,
     );
   }
 }
