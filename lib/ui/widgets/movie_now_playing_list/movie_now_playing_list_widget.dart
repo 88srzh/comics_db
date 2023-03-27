@@ -1,4 +1,3 @@
-/*
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
@@ -136,4 +135,3 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
     );
   }
 }
-*/

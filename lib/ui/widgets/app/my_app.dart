@@ -48,26 +48,26 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => AccountDetailsCubit(),
         ),
-        // BlocProvider(
-        //   create: (_) => TopRatedMovieListCubit(
-        //     topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
-        //   ),
-        // ),
+        BlocProvider(
+          create: (_) => TopRatedMovieListCubit(
+            topRatedMovieListBloc: TopRatedMovieListBloc(const MovieListState.initial()),
+          ),
+        ),
         BlocProvider(
           create: (_) => MoviePopularListCubit(
             movieListBloc: MoviePopularListBloc(const MovieListState.initial()),
           ),
         ),
-        // BlocProvider(
-        //   create: (_) => UpcomingMovieListCubit(
-        //     upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
-        //   ),
-        // ),
-        // BlocProvider(
-        //   create: (_) => NowPlayingMovieListCubit(
-        //     nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
-        //   ),
-        // ),
+        BlocProvider(
+          create: (_) => UpcomingMovieListCubit(
+            upcomingMovieListBloc: UpcomingMovieListBloc(const MovieListState.initial()),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => NowPlayingMovieListCubit(
+            nowPlayingMovieListBloc: NowPlayingMovieListBloc(const MovieListState.initial()),
+          ),
+        ),
         BlocProvider(
           create: (_) => TvPopularListCubit(
             tvPopularListBloc: TvPopularListBloc(TvListState.initial()),

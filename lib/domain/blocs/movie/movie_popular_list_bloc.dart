@@ -4,9 +4,7 @@ import 'dart:async';
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/core/app_extension.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -16,7 +14,6 @@ import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'movie_popular_list_bloc.freezed.dart';
 
@@ -26,10 +23,6 @@ part 'movie_list_state.dart';
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
-  late DateFormat _dateFormat;
-  Timer? searchDebounce;
-  // var mov = <Movie>[];
-  late final StreamSubscription<MovieListState> movieListBlocSubscription;
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
@@ -39,74 +32,8 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         await onMovieListEventLoadReset(event, emit);
       } else if (event is MovieListEventSearchMovie) {
         await onMovieListEventLoadSearchMovie(event, emit);
-      // } else if (event is MovieListEventFaforiteItemEvent) {
-      //   onMovieListFavoriteEvent(event, emit);
       }
-      // } else if (event is MovieListEventUpdateDetailsData) {
-      //   onMovieListUpdateDetailsData(event, emit);
-      // }
     }), transformer: sequential());
-    // on<LoadNextPageEvent>(onMovieListEventLoadNextPage);
-    // on<ResetEvent>(onMovieListEventLoadReset);
-    // on<SearchEvent>(onMovieListEventLoadSearchMovie);
-    // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
-  }
-
-// I can't fit two states :(
-
-  // void onMovieListUpdateDetailsData(MovieListEventUpdateDetailsData event, Emitter<MovieListState> emit) {
-  //       _onState(moviePopularListBloc.state);
-  //       movieListBlocSubscription = moviePopularListBloc.stream.listen(_onState);
-  // }
-  //
-  // void _onState(MovieListState state, Emitter<MovieListState> emit) {
-  //   final movies = state.movies.map(_makeListData).toList();
-  //   final newState = this.state.copyWith(moviesData: movies);
-  //   emit(newState);
-  // }
-
-  void setupPopularMovieLocale(String localeTag, Emitter<MovieListState> emit) {
-    if (state.localeTag == localeTag) return;
-    final newState = state.copyWith(localeTag: localeTag);
-    emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
-    add(const MovieListEventLoadReset());
-    add(MovieListEventLoadNextPage(locale: localeTag));
-  }
-
-  // MovieListData _makeListData(Movie movie) {
-  //   final releaseDate = movie.releaseDate;
-  //   final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
-  //   return MovieListData(
-  //     title: movie.title,
-  //     posterPath: movie.posterPath,
-  //     backdropPath: movie.backdropPath,
-  //     id: movie.id,
-  //     originalTitle: movie.originalTitle,
-  //     overview: movie.overview,
-  //     releaseDate: releaseDateTitle,
-  //   );
-  // }
-
-  void showedPopularMovieAtIndex(int index) {
-    if (index < state.movies.length - 1) return;
-    add(MovieListEventLoadNextPage(locale: state.localeTag));
-  }
-
-  void searchPopularMovie(String text) {
-    searchDebounce?.cancel();
-    searchDebounce = Timer(
-      const Duration(milliseconds: 300),
-      () async {
-        add(MovieListEventSearchMovie(query: text));
-        add(MovieListEventLoadNextPage(locale: state.localeTag));
-      },
-    );
-  }
-
-  void onMovieTap(BuildContext context, int index) {
-    final id = state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
@@ -161,23 +88,23 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     emit(newState);
   }
 
-  void onMovieListFavoriteEvent(MovieListEventFaforiteItemEvent event, Emitter<MovieListState> emit) {
-    int index = state.movieContainer.movies.getIndex(event.movie);
-    final List<Movie> movies = state.movies.map((element) {
-      if (element.id == event.movie.id) {
-        return event.movie.copyWith(isFavorite: !state.movieContainer.movies[index].isFavorite);
-      }
-      return element;
-    }).toList();
-    emit(
-      MovieListState(
-        movieContainer: state.movieContainer,
-        searchMovieContainer: state.searchMovieContainer,
-        searchQuery: state.searchQuery,
-        movies: movies,
-        localeTag: state.localeTag,
-        // moviesData: state.moviesData,
-      ),
-    );
-  }
+  // void onMovieListFavoriteEvent(MovieListEventFaforiteItemEvent event, Emitter<MovieListState> emit) {
+  //   int index = state.movieContainer.movies.getIndex(event.movie);
+  //   final List<Movie> movies = state.movies.map((element) {
+  //     if (element.id == event.movie.id) {
+  //       return event.movie.copyWith(isFavorite: !state.movieContainer.movies[index].isFavorite);
+  //     }
+  //     return element;
+  //   }).toList();
+  //   emit(
+  //     MovieListState(
+  //       movieContainer: state.movieContainer,
+  //       searchMovieContainer: state.searchMovieContainer,
+  //       searchQuery: state.searchQuery,
+  //       movies: movies,
+  //       localeTag: state.localeTag,
+  //       moviesData: state.moviesData,
+      // ),
+    // );
+  // }
 }

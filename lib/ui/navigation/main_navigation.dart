@@ -45,23 +45,21 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (context) =>
-        ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-    MainNavigationRouteNames.popularMovie: (context) =>
-        _screenFactory.makePopularMovieList(context),
+    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
-    // MainNavigationRouteNames.nowPlayingMovie: (context) => _screenFactory.makeNowPlayingMovieList(),
+    MainNavigationRouteNames.nowPlayingMovie: (context) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (context) => _screenFactory.makePopularTvList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case MainNavigationRouteNames.movieDetails:
-      //   final arguments = settings.arguments;
-      //   final movieId = arguments is int ? arguments : 0;
-      //   return MaterialPageRoute(
-      //     builder: (_) => _screenFactory.makeMovieDetails(movie, movieId),
-      //   );
+      case MainNavigationRouteNames.movieDetails:
+        final arguments = settings.arguments;
+        final movieId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.makeMovieDetails(movieId),
+        );
       case MainNavigationRouteNames.movieTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';

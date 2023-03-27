@@ -1,4 +1,3 @@
-/*
 // Flutter imports:
 import 'package:comics_db_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -111,4 +110,3 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
     );
   }
 }
-*/

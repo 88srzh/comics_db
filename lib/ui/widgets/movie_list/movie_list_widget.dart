@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
+import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -20,18 +21,18 @@ class MovieListWidget extends StatelessWidget {
     // content: _SearchWidget(),
     // );
     return Scaffold(
-      // appBar: const CustomMainAppBarWidget(),
+      appBar: const CustomMainAppBarWidget(),
       body: ListView(
         children: [
           Column(
             children: [
-              // const Padding(
-              //   padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
-              //   child: SizedBox(
-              //     height: 180,
-              //     child: TopRatedMovieWidget(),
-              //   ),
-              // ),
+              const Padding(
+                padding: EdgeInsets.only(top: 20.0, left: 20.0, bottom: 20.0),
+                child: SizedBox(
+                  height: 180,
+                  child: TopRatedMovieWidget(),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
@@ -65,10 +66,10 @@ class MovieListWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              // const Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: 20.0),
-              //   child: UpcomingMovieWidget(),
-              // ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: UpcomingMovieWidget(),
+              ),
             ],
           ),
           Padding(
@@ -88,13 +89,13 @@ class MovieListWidget extends StatelessWidget {
               ],
             ),
           ),
-          // const SizedBox(
-          //   height: 200,
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(horizontal: 20.0),
-          //     child: NowPlayingMovieWidget(),
-          //   ),
-          // ),
+          const SizedBox(
+            height: 200,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: NowPlayingMovieWidget(),
+            ),
+          ),
         ],
       ),
     );

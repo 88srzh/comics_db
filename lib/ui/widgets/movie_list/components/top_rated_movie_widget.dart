@@ -1,4 +1,3 @@
-/*
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -68,4 +67,3 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
         .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }
-*/

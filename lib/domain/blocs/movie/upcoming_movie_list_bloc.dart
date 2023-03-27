@@ -1,4 +1,3 @@
-/*
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,4 +52,3 @@ class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }
   }
 }
-*/
