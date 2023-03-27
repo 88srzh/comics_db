@@ -33,7 +33,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final MoviePopularListBloc moviePopularListBloc;
   late final StreamSubscription<MovieListState> movieListBlocSubscription;
 
-  MoviePopularListBloc(MovieListState initialState) : super(initialState) {
+  MoviePopularListBloc(MovieListState initialState, this.moviePopularListBloc) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);
@@ -43,7 +43,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
         await onMovieListEventLoadSearchMovie(event, emit);
       } else if (event is MovieListEventFaforiteItemEvent) {
         onMovieListFavoriteEvent(event, emit);
-      } else if (event is MovieListUpdateDetailsData) {
+      } else if (event is MovieListEventUpdateDetailsData) {
         onMovieListUpdateDetailsData(event, emit);
       }
     }), transformer: sequential());
@@ -52,11 +52,16 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     // on<SearchEvent>(onMovieListEventLoadSearchMovie);
     // on<FavoriteItemEvent>(onMovieListFavoriteEvent);
   }
+
 // I can't fit two states :(
 
-  void onMovieListUpdateDetailsData(MovieListUpdateDetailsData event) {
-    _onState(moviePopularListBloc.state);
-    movieListBlocSubscription = moviePopularListBloc.stream.listen(_onState);
+  void onMovieListUpdateDetailsData(MovieListEventUpdateDetailsData event, Emitter<MovieListState> emit) {
+    Future.microtask(
+      () {
+        _onState(moviePopularListBloc.state);
+        movieListBlocSubscription = moviePopularListBloc.stream.listen(_onState);
+      },
+    );
   }
 
   void _onState(MovieListState state, Emitter<MovieListState> emit) {
@@ -97,7 +102,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     searchDebounce?.cancel();
     searchDebounce = Timer(
       const Duration(milliseconds: 300),
-          () async {
+      () async {
         add(MovieListEventSearchMovie(query: text));
         add(MovieListEventLoadNextPage(locale: state.localeTag));
       },
