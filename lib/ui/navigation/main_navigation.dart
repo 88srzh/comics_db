@@ -45,10 +45,10 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (context) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    MainNavigationRouteNames.splashScreen: (_) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.tv: (context) => const TvListWidget(),
-    MainNavigationRouteNames.nowPlayingMovie: (context) => _screenFactory.makeNowPlayingMovieList(),
+    MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (context) => _screenFactory.makePopularTvList(),
   };
 

@@ -34,13 +34,9 @@ class MainScreenWidget extends HookWidget {
     return Scaffold(
       body: PageTransition(child: screen[selectedIndex.value]),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: isDarkTheme
-            ? DarkThemeColors.bottomBarBackgroundColor
-            : Colors.white,
+        backgroundColor: isDarkTheme ? DarkThemeColors.bottomBarBackgroundColor : Colors.white,
         color: isDarkTheme ? Colors.white : Colors.black.withOpacity(0.7),
-        shadowColor: isDarkTheme
-            ? Colors.white.withOpacity(0.4)
-            : Colors.black.withOpacity(0.4),
+        shadowColor: isDarkTheme ? Colors.white.withOpacity(0.4) : Colors.black.withOpacity(0.4),
         activeColor: isDarkTheme ? Colors.white : Colors.black.withOpacity(0.8),
         initialActiveIndex: selectedIndex.value,
         items: const [

@@ -21,7 +21,6 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
   late final StreamSubscription<MovieListState> movieListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
-  var mov = <Movie>[];
 
   MoviePopularListCubit({required this.movieListBloc})
       : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {

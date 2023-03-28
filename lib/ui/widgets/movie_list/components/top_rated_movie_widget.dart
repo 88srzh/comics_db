@@ -21,9 +21,7 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<TopRatedMovieListCubit>()
-        .setupTopRatedMovieLocale(locale.languageCode);
+    context.read<TopRatedMovieListCubit>().setupTopRatedMovieLocale(locale.languageCode);
   }
 
   @override
@@ -63,7 +61,6 @@ class _TopRatedMovieWidgetState extends State<TopRatedMovieWidget> {
     // TODO may be change to watch to display images
     final cubit = context.read<TopRatedMovieListCubit>();
     final movieId = cubit.state.movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

@@ -79,7 +79,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
     emit(const MovieListState.initial());
     // TODO should fix locale
-    add(const MovieListEventLoadNextPage(locale: ''));
+    // add(const MovieListEventLoadNextPage(locale: ''));
   }
 
   Future<void> onMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
