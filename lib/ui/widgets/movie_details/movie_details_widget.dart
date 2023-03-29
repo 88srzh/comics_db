@@ -22,34 +22,28 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final locale =  Localizations.localeOf(context);
+    final locale = Localizations.localeOf(context);
     context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    // var cubit = context.watch<MovieDetailsCubit>().data;
+    var cubit = context.watch<MovieDetailsCubit>();
     // final trailerKey = cubit.trailerKey;
     // final List<Movie> movieList = context.watch<MoviePopularListBloc>().state.movieContainer.movies;
 
-    // Widget fab(VoidCallback onPressed) {
-    //   return FloatingActionButton(
-    //     elevation: 0.0,
-    //     backgroundColor: LightThemeColor.accent,
-        // onPressed: onPressed,
-        // child: movieList[movieList.getIndex(movie)].isFavorite
-        //     ? const Icon(Icons.heart_broken)
-        //     : const Icon(Icons.heart_broken_outlined),
-      // );
-    // }
+    Widget fab(VoidCallback onPressed) {
+      return FloatingActionButton(
+        elevation: 0.0,
+        backgroundColor: Colors.orange,
+        onPressed: onPressed,
+        child: cubit.isFavorite ? const Icon(Icons.heart_broken) : const Icon(Icons.monitor_heart),
+      );
+    }
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Movie Details'),
-      // floatingActionButton: fab(
-      //   () => context
-      //       .read<MoviePopularListBloc>()
-      //       .add(MovieListEventFaforiteItemEvent(movie: movieList[movieList.getIndex(movie)])),
-      // ),
+      floatingActionButton: fab(() => cubit.toggleFavoriteMovie(context)),
       body: ListView(
         children: [
           Column(

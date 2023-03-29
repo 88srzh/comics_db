@@ -148,7 +148,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () => cubit.toggleFavoriteMovie(context),
-                      icon: Icon(favoriteData.favoriteIcon),
+                      icon: Icon(cubit.isFavorite ? favoriteData.favoriteIcon : Icons.access_alarm_outlined),
                     ),
                   ],
                 ),
