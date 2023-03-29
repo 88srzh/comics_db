@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
-import 'package:comics_db_app/ui/components/custom_main_appbar_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -21,7 +20,7 @@ class MovieListWidget extends StatelessWidget {
     // content: _SearchWidget(),
     // );
     return Scaffold(
-      appBar: const CustomMainAppBarWidget(),
+      // appBar: const CustomMainAppBarWidget(),
       body: ListView(
         children: [
           Column(
