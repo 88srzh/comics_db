@@ -1,7 +1,6 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
-import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -12,10 +11,9 @@ import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 class FavoriteMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
-  final int id;
   final bloc = MoviePopularListBloc(const MovieListState.initial());
 
-  FavoriteMovieListBloc(MovieListState initialState, this.id) : super(initialState) {
+  FavoriteMovieListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onFavoriteMovieListEventLoadNextPage(event, emit);
