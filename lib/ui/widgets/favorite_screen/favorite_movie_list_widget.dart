@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<FavoriteMovieListCubit>();
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
+      appBar: const CustomAppBar(title: 'Favorite Movies'),
       body: Stack(
         children: [
           ListView.builder(
