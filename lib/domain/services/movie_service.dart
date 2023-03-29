@@ -24,35 +24,31 @@ class MovieService {
   Future<MovieResponse> upcomingMovie(int page, String locale) async =>
       _movieAndTvApiClient.upcomingMovie(page, locale, Configuration.apiKey);
 
-  Future<MovieResponse> searchMovie(
-          int page, String locale, String query) async =>
-      _movieAndTvApiClient.searchMovie(
-          page, locale, query, Configuration.apiKey);
+  Future<MovieResponse> searchMovie(int page, String locale, String query) async =>
+      _movieAndTvApiClient.searchMovie(page, locale, query, Configuration.apiKey);
+
+  // TODO may be delete
+  Future<MovieResponse> favoriteMovie(int page, String locale, String sessionId, int accountId) async =>
+      _movieAndTvApiClient.favoriteMoviesList(page, locale, Configuration.apiKey, sessionId, accountId);
 
   // may be problem with image in that function
-  Future<MovieDetailsLocal> loadMovieDetails(
-      {required int movieId, required String locale}) async {
-    final movieDetails =
-        await _movieAndTvApiClient.movieDetails(movieId, locale);
+  Future<MovieDetailsLocal> loadMovieDetails({required int movieId, required String locale}) async {
+    final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
     if (sessionId != null) {
       // TODO: pull out isFavorite
-      isFavorite =
-          await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
+      isFavorite = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
     }
     return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
   }
 
-  Future<PeopleDetailsLocal> loadPeopleDetails(
-      {required int id, required String locale}) async {
-    final peopleDetails =
-        await _movieAndTvApiClient.popularPeopleDetails(id, locale);
+  Future<PeopleDetailsLocal> loadPeopleDetails({required int id, required String locale}) async {
+    final peopleDetails = await _movieAndTvApiClient.popularPeopleDetails(id, locale);
     return PeopleDetailsLocal(details: peopleDetails);
   }
 
-  Future<void> updateFavoriteMovie(
-      {required int movieId, required bool isFavorite}) async {
+  Future<void> updateFavoriteMovie({required int movieId, required bool isFavorite}) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
 
