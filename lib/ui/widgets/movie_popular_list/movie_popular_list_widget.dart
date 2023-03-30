@@ -28,7 +28,6 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
-
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MoviePopularListCubit>();
@@ -49,12 +48,6 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
               final posterPath = movie.posterPath;
               return InkWell(
                 onTap: () => cubit.onMovieTap(context, index),
-                // onTap: () {
-                //   Navigator.push<dynamic>(
-                //     context,
-                //     CustomPageRoute(child: MovieDetailsWidget(movie: movie)),
-                //   );
-                // },
                 child: _MoviePopularListRowWidget(
                   posterPath: posterPath,
                   movie: movie,
@@ -97,7 +90,8 @@ class _MoviePopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
+            decoration:
+                isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
