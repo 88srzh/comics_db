@@ -13,9 +13,21 @@ import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:provider/provider.dart';
 
-class MoviePopularListWidget extends StatelessWidget {
-  const MoviePopularListWidget({Key? key, this.isReversedList = false}) : super(key: key);
-  final bool isReversedList;
+class MoviePopularListWidget extends StatefulWidget {
+  const MoviePopularListWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MoviePopularListWidget> createState() => _MoviePopularListWidgetState();
+}
+
+class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final locale = Localizations.localeOf(context);
+    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +44,7 @@ class MoviePopularListWidget extends StatelessWidget {
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
               // Movie movie = isReversedList ? movies.reversed.toList()[index] : movies[index];
-              // cubit.showedPopularMovieAtIndex(index);
+              cubit.showedPopularMovieAtIndex(index);
               final movie = cubit.state.movies[index];
               final posterPath = movie.posterPath;
               return InkWell(
