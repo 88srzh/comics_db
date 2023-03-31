@@ -42,7 +42,6 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
             itemCount: cubit.state.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              // Movie movie = isReversedList ? movies.reversed.toList()[index] : movies[index];
               cubit.showedPopularMovieAtIndex(index);
               final movie = cubit.state.movies[index];
               final posterPath = movie.posterPath;

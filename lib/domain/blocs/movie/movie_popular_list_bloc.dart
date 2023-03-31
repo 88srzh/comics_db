@@ -3,7 +3,7 @@ import 'dart:async';
 
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/core/app_extension.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +23,7 @@ part 'movie_list_state.dart';
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
+  final data = MovieDetailsData();
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
@@ -86,24 +87,4 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
     emit(newState);
   }
-
-  // void onMovieListFavoriteEvent(MovieListEventFaforiteItemEvent event, Emitter<MovieListState> emit) {
-  //   int index = state.movieContainer.movies.getIndex(event.movie);
-  //   final List<Movie> movies = state.movies.map((element) {
-  //     if (element.id == event.movie.id) {
-  //       return event.movie.copyWith(isFavorite: !state.movieContainer.movies[index].isFavorite);
-  //     }
-  //     return element;
-  //   }).toList();
-  //   emit(
-  //     MovieListState(
-  //       movieContainer: state.movieContainer,
-  //       searchMovieContainer: state.searchMovieContainer,
-  //       searchQuery: state.searchQuery,
-  //       movies: movies,
-  //       localeTag: state.localeTag,
-  //       moviesData: state.moviesData,
-      // ),
-    // );
-  // }
 }

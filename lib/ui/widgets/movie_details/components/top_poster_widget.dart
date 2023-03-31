@@ -36,7 +36,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
-    final favoriteData = FavoriteData();
+    // final favoriteData = FavoriteData();
 
     // TODO add favorite icon button
 
@@ -144,14 +144,14 @@ class MovieTopPosterWidget extends StatelessWidget {
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
                   ],
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => cubit.toggleFavoriteMovie(context),
-                      icon: Icon(cubit.isFavorite ? favoriteData.favoriteIcon : Icons.access_alarm_outlined),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     IconButton(
+                //       onPressed: () => cubit.toggleFavoriteMovie(context),
+                //       icon: Icon(cubit.isFavorite ? favoriteData.favoriteIcon : Icons.access_alarm_outlined),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

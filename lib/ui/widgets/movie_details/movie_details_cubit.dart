@@ -25,18 +25,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
 
-  // MovieDetails? details;
-
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
-
   // String _locale = '';
   final movieAndTvApiClient = MovieAndTvApiClient();
   final int movieId;
   final _movieService = MovieService();
 
   // final _localeStorage = LocalizedModelStorage();
-
-  // MovieDetails? _movieDetails;
 
   // TODO may be delete isLoading, because it's unnecessary
   bool isLoading = true;
@@ -245,6 +240,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    // final newState = data.favoriteData;
     // notifyListeners();
     try {
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
@@ -253,5 +249,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-  bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  // bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  bool get isFavorite => data.favoriteData.isFavorite ? true : false;
 }
