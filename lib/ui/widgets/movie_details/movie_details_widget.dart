@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,8 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    var favoriteData = FavoriteData();
+    // var favoriteData = FavoriteData();
+    var favorite = cubit.state.isFavorite;
     // final trailerKey = cubit.trailerKey;
 
     Widget fab(VoidCallback onPressed) {
@@ -39,7 +39,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         backgroundColor: Colors.orange,
         onPressed: onPressed,
         // child: cubit.isFavorite ? const Icon(Icons.heart_broken) : const Icon(Icons.monitor_heart),
-        child: Icon(favoriteData.favoriteIcon),
+        child: favorite ? const Icon(Icons.heart_broken) : const Icon(Icons.heart_broken_outlined),
       );
     }
 

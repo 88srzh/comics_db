@@ -64,6 +64,7 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
       originalTitle: movie.originalTitle,
       overview: movie.overview,
       releaseDate: releaseDateTitle,
+      // isFavorite:
     );
   }
 

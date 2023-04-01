@@ -41,7 +41,6 @@ class FavoriteMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       }
     } else {
       final container = await bloc.loadNextPage(state.movieContainer, (nextPage) async {
-        // final result = await _movieService.loadMovieDetails(movieId: id, locale: event.locale);
         final result = await _movieApiClient.favoriteMoviesList(
             nextPage, event.locale, Configuration.apiKey, sessionId, accountId);
         return result;
