@@ -30,6 +30,7 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
     context.read<FavoriteMovieListCubit>().setupFavoriteMovieLocale(locale.languageCode);
+    context.read<FavoriteMovieListCubi
   }
 
   @override

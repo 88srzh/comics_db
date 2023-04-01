@@ -18,7 +18,7 @@ class MovieDetailsCubitState {
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
-  final bool isFavorite;
+  // final bool isFavorite;
 
   const MovieDetailsCubitState({
     required this.posterPath,
@@ -37,7 +37,7 @@ class MovieDetailsCubitState {
     required this.peopleData,
     required this.actorsData,
     required this.isLoading,
-    required this.isFavorite,
+    // required this.isFavorite,
   });
 
   @override
@@ -60,8 +60,8 @@ class MovieDetailsCubitState {
           trailerKey == other.trailerKey &&
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
-          isLoading == other.isLoading &&
-          isFavorite == other.isFavorite;
+          isLoading == other.isLoading;
+          // isFavorite == other.isFavorite;
 
   // TODO fix hashCode
   @override
@@ -84,7 +84,7 @@ class MovieDetailsCubitState {
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
-    bool? isFavorite,
+    // bool? isFavorite,
   }) {
     return MovieDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -103,7 +103,7 @@ class MovieDetailsCubitState {
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
-      isFavorite: isFavorite ?? this.isFavorite,
+      // isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 }

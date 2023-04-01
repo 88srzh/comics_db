@@ -55,7 +55,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           peopleData: [],
           actorsData: [],
           isLoading: false,
-          isFavorite: false,
+          // isFavorite: false,
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -74,7 +74,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
-      isFavorite: state.isFavorite,
+      // isFavorite: state.isFavorite,
     ));
   }
 
@@ -140,7 +140,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .toList();
 
     data.isLoading = true;
-    data.favoriteData = FavoriteData(isFavorite: isFavorite);
+    // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
     var title = data.title;
     var tagline = data.tagline;
@@ -157,7 +157,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
-    var favorite = data.favoriteData.isFavorite;
+    // var favorite = data.favoriteData.isFavorite;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -175,7 +175,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-      isFavorite: favorite,
+      // isFavorite: favorite,
     );
     emit(newState);
   }
