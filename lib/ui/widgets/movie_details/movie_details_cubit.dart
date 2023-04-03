@@ -243,8 +243,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     emit(newState);
     // notifyListeners();
     try {
-      // await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
-      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: state.isFavorite);
+      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+      // await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: state.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }

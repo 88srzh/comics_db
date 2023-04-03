@@ -29,7 +29,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    var favorite = cubit.state.isFavorite;
+    var favorite = cubit.data.isFavorite;
 
     Widget fab(VoidCallback onPressed) {
       return FloatingActionButton(
