@@ -35,10 +35,6 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
-    final favorite = cubit.state.isFavorite;
-    // final favoriteData = FavoriteData();
-
-    // TODO add favorite icon button
 
     return Stack(
       children: [
@@ -142,15 +138,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => cubit.toggleFavoriteMovie(context),
-                      // icon: Icon(cubit.isFavorite ? favoriteData.favoriteIcon : Icons.access_alarm_outlined),
-                      icon: Icon(favorite ? Icons.headphones : Icons.heart_broken),
-                    ),
                   ],
                 ),
               ],
