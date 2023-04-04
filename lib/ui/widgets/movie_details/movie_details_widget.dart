@@ -29,7 +29,11 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    var favorite = cubit.data.isFavorite;
+    var favorite = cubit.data.favoriteData.isFavorite;
+
+    // С этой строки меняется, но не сохраняется иконка
+    // var favorite = cubit.state.isFavorite;
+
 
     Widget fab(VoidCallback onPressed) {
       return FloatingActionButton(
