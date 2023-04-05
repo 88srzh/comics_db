@@ -21,9 +21,10 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
   Timer? searchDebounce;
   var movie = <Movie>[];
 
-  FavoriteMovieListCubit({required this.favoriteMovieListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
+  FavoriteMovieListCubit({required this.favoriteMovieListBloc})
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
     Future.microtask(
-          () {
+      () {
         _onState(favoriteMovieListBloc.state);
         favoriteMoveListBlocSubscription = favoriteMovieListBloc.stream.listen(_onState);
       },

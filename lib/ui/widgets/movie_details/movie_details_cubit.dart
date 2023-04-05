@@ -3,6 +3,7 @@ import 'dart:async';
 
 // Flutter imports:
 import 'package:comics_db_app/domain/services/movie_service.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -37,7 +38,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   MovieDetailsCubit(this.movieId)
       // TODO should fix
-      : super(const MovieDetailsCubitState(
+      : super(MovieDetailsCubitState(
           posterPath: '',
           backdropPath: '',
           overview: '',
@@ -54,7 +55,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           peopleData: [],
           actorsData: [],
           isLoading: false,
-          isFavorite: false,
+          favoriteData: FavoriteData(),
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -73,7 +74,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
-      isFavorite: state.isFavorite,
+      favoriteData: state.favoriteData,
     ));
   }
 
@@ -156,7 +157,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
-    // var favorite = data.favoriteData.isFavorite;
+    var favorite = data.favoriteData;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -174,7 +175,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-      // isFavorite: favorite,
+      isFavorite: favorite,
     );
     emit(newState);
   }
@@ -245,12 +246,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // notifyListeners();
     try {
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
-      // await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: state.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
   }
 
-  // bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
-  // bool get isFavorite => data.favoriteData.isFavorite ? true : false;
+// bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+//   bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  IconData get favoriteIcon => state.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
+//   bool get isFavorite => state.isFavorite ? true : false;
 }

@@ -13,9 +13,9 @@ class MovieDetailsData {
   String overview = '';
   String? posterPath = '';
   String? backdropPath = '';
-  bool isFavorite = false;
-  IconData get favoriteIcon =>
-      isFavorite ? Icons.favorite : Icons.face_outlined;
+  // bool isFavorite = false;
+  // IconData get favoriteIcon =>
+  //     isFavorite ? Icons.favorite : Icons.face_outlined;
   int voteCount = 0;
   double popularity = 0;
   String summary = '';
