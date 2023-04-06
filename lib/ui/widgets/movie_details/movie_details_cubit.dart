@@ -241,7 +241,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     // this line need to work mark favorite
-    data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    // if (data.favoriteData.isFavorite = false) {
+      data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    // } else {
+    //   data.favoriteData = data.favoriteData.copyWith(isFavorite: data.favoriteData.isFavorite);
+    // }
     // final newState = state.copyWith(isFavorite: !data.favoriteData.isFavorite);
     // emit(newState);
     // notifyListeners();
@@ -253,8 +257,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
-// bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
 //   bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
-  IconData get favoriteIcon => state.isFavorite == data.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
+//   IconData get favoriteIcon => state.isFavorite == data.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
 //   bool get isFavorite => state.isFavorite ? true : false;
 }

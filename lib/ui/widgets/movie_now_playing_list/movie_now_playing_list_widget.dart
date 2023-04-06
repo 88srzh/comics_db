@@ -35,7 +35,7 @@ class _MovieNowPlayingListWidgetState extends State<MovieNowPlayingListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<NowPlayingMovieListCubit>();
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
+      // appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
       body: Stack(
         children: [
           ListView.builder(

@@ -35,7 +35,7 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<TvPopularListCubit>();
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Popular Tvs'),
+      // appBar: const CustomDetailsAppBar(title: 'Popular Tvs'),
       body: Stack(
         children: [
           ListView.builder(

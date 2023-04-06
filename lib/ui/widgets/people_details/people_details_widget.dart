@@ -27,7 +27,7 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: ''),
+      // appBar: const CustomDetailsAppBar(title: ''),
       body: ListView(
         children: [
           Column(
