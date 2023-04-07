@@ -242,7 +242,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     // this line need to work mark favorite
     // if (data.favoriteData.isFavorite = false) {
+
       data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+
+      // чтобы менялась иконка, надо emit значение
+      // final newState = state.copyWith(isFavorite: !data.favoriteData.isFavorite);
+      // emit(newState);
+
     // } else {
     //   data.favoriteData = data.favoriteData.copyWith(isFavorite: data.favoriteData.isFavorite);
     // }
@@ -252,12 +258,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     try {
       // меняется если только из favoriteData
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+      var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
+      emit(newState);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
   }
 
-  bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  // не сохраняет состояние
+  bool get isFavorite => data.favoriteData.isFavorite ? true : false;
 //   bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
 //   IconData get favoriteIcon => state.isFavorite == data.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
 //   bool get isFavorite => state.isFavorite ? true : false;
