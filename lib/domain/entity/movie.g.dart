@@ -22,7 +22,6 @@ _$_Movie _$$_MovieFromJson(Map<String, dynamic> json) => _$_Movie(
       voteCount: json['vote_count'] as int,
       video: json['video'] as bool,
       voteAverage: (json['vote_average'] as num).toDouble(),
-      type: $enumDecodeNullable(_$TypeOfLookingAtEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$$_MovieToJson(_$_Movie instance) => <String, dynamic>{
@@ -40,10 +39,4 @@ Map<String, dynamic> _$$_MovieToJson(_$_Movie instance) => <String, dynamic>{
       'vote_count': instance.voteCount,
       'video': instance.video,
       'vote_average': instance.voteAverage,
-      'type': _$TypeOfLookingAtEnumMap[instance.type],
     };
-
-const _$TypeOfLookingAtEnumMap = {
-  TypeOfLookingAt.movie: 'movie',
-  TypeOfLookingAt.tv: 'tv',
-};

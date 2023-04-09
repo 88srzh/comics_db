@@ -24,18 +24,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
 
-  // MovieDetails? details;
-
   // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
-
   // String _locale = '';
   final movieAndTvApiClient = MovieAndTvApiClient();
   final int movieId;
   final _movieService = MovieService();
 
   // final _localeStorage = LocalizedModelStorage();
-
-  // MovieDetails? _movieDetails;
 
   // TODO may be delete isLoading, because it's unnecessary
   bool isLoading = true;
@@ -84,10 +79,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      // final _details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
       final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
+      // final isFavorite = await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: state.isFavorite);
+      final isFavorite = data.favoriteData.isFavorite;
       // TODO: add isFavorite to update
-      updateData(details);
+      updateData(details, isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
@@ -116,11 +112,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // _locale = locale;
     _dateFormat = DateFormat.yMMMd(localeTag);
     // if (!_localeStorage.updateLocale(locale)) return;
-    updateData(null);
+    updateData(null, false);
     await loadMovieDetails(context);
   }
 
-  void updateData(MovieDetails? details /* bool isFavorite*/) {
+  void updateData(MovieDetails? details, bool isFavorite) {
     // may be i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
@@ -145,6 +141,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .toList();
 
     data.isLoading = true;
+    // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
     var title = data.title;
     var tagline = data.tagline;
@@ -161,6 +158,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
+    var isFavorite = data.favoriteData.isFavorite;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -178,6 +176,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
+      isFavorite: isFavorite,
     );
     emit(newState);
   }
@@ -239,16 +238,36 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
     return crewChunks;
   }
+
   Future<void> toggleFavoriteMovie(BuildContext context) async {
-    data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
-    emit(state.isFavorite as MovieDetailsCubitState);
+    // this line need to work mark favorite
+    // if (data.favoriteData.isFavorite = false) {
+
+      data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+
+      // чтобы менялась иконка, надо emit значение
+      // final newState = state.copyWith(isFavorite: !data.favoriteData.isFavorite);
+      // emit(newState);
+
+    // } else {
+    //   data.favoriteData = data.favoriteData.copyWith(isFavorite: data.favoriteData.isFavorite);
+    // }
+    // final newState = state.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    // emit(newState);
     // notifyListeners();
     try {
+      // меняется если только из favoriteData
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+      var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
+      emit(newState);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
   }
 
-  bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+  // не сохраняет состояние
+  bool get isFavorite => data.favoriteData.isFavorite ? true : false;
+//   bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
+//   IconData get favoriteIcon => state.isFavorite == data.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
+//   bool get isFavorite => state.isFavorite ? true : false;
 }

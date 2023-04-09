@@ -1,7 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -36,9 +35,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
-    final favoriteData = FavoriteData();
 
-    // TODO add favorite icon button
     return Stack(
       children: [
         backdropPath != null
@@ -141,15 +138,6 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => cubit.toggleFavoriteMovie(context),
-                      icon:
-                          Icon(context.read<MovieDetailsCubit>().isFavorite ? Icons.favorite : Icons.favorite_outline),
-                    ),
                   ],
                 ),
               ],

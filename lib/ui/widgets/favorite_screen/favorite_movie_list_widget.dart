@@ -1,6 +1,11 @@
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
@@ -9,78 +14,76 @@ import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
-import 'package:provider/provider.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 
-class TvPopularListWidget extends StatefulWidget {
-  const TvPopularListWidget({Key? key}) : super(key: key);
+class FavoriteMovieListWidget extends StatefulWidget {
+  const FavoriteMovieListWidget({Key? key}) : super(key: key);
 
   @override
-  State<TvPopularListWidget> createState() => _TvPopularListWidgetState();
+  State<FavoriteMovieListWidget> createState() => _FavoriteMovieListWidgetState();
 }
 
-class _TvPopularListWidgetState extends State<TvPopularListWidget> {
+class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final locale = Localizations.localeOf(context);
-    context
-        .read<TvPopularListCubit>()
-        .setupPopularTvLocale(locale.languageCode);
+    context.read<FavoriteMovieListCubit>().setupFavoriteMovieLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<TvPopularListCubit>();
+    var cubit = context.watch<FavoriteMovieListCubit>();
     return Scaffold(
-      // appBar: const CustomDetailsAppBar(title: 'Popular Tvs'),
+      appBar: const CustomAppBar(title: 'Favorite Movies'),
       body: Stack(
         children: [
           ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.tvs.length,
-              itemExtent: 165,
-              itemBuilder: (BuildContext context, int index) {
-                cubit.showedPopularTvAtIndex(index);
-                final tv = cubit.state.tvs[index];
-                final posterPath = tv.posterPath;
-                return InkWell(
-                  onTap: () => cubit.onTvTap(context, index),
-                  child: _TvPopularListRowWidget(
-                      posterPath: posterPath,
-                      tv: tv,
-                      cubit: cubit,
-                      index: index),
-                );
-              }),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            padding: const EdgeInsets.only(top: 70.0),
+            itemCount: cubit.state.movies.length,
+            itemExtent: 165,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedFavoriteMovieAtIndex(index);
+              final movie = cubit.state.movies[index];
+              final posterPath = movie.posterPath;
+              return InkWell(
+                onTap: () => onMovieTap(context, index),
+                child: _FavoriteMovieListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+              );
+            },
+          ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: CustomSearchBar(onChanged: cubit.searchPopularTv),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            child: CustomSearchBar(onChanged: cubit.searchFavoriteMovie),
           ),
         ],
       ),
     );
   }
+
+  void onMovieTap(BuildContext context, int index) {
+    final cubit = context.read<FavoriteMovieListCubit>();
+    final movieId = cubit.state.movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+  }
 }
 
-class _TvPopularListRowWidget extends StatelessWidget {
+class _FavoriteMovieListRowWidget extends StatelessWidget {
   final int index;
 
-  const _TvPopularListRowWidget({
+  const _FavoriteMovieListRowWidget({
     Key? key,
     required this.posterPath,
-    required this.tv,
+    required this.movie,
     required this.cubit,
     required this.index,
   }) : super(key: key);
 
   final String? posterPath;
-  final TvListData tv;
-  final TvPopularListCubit cubit;
+  final MovieListData movie;
+  final FavoriteMovieListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +92,6 @@ class _TvPopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            // TODO refactoring custom movie list box decoration
             decoration: context.read<ThemeBloc>().isDarkTheme
                 ? customMovieListBoxDecorationForDarkTheme
                 : customMovieListBoxDecorationForLightTheme,
@@ -109,23 +111,23 @@ class _TvPopularListRowWidget extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20.0),
                       CustomCastListTextWidget(
-                        text: tv.name,
+                        text: movie.originalTitle,
                         maxLines: 1,
                       ),
                       const SizedBox(height: 5.0),
                       CustomCastListTextWidget(
-                        text: tv.firstAirDate ?? 'No date',
+                        text: movie.releaseDate,
                         maxLines: 1,
                       ),
                       const SizedBox(height: 15.0),
                       CustomCastListTextWidget(
-                        text: tv.overview,
+                        text: movie.overview ?? '',
                         maxLines: 3,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 5.0),
               ],
             ),
           ),

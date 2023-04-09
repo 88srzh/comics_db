@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -9,7 +10,6 @@ import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:provider/provider.dart';
 
@@ -24,11 +24,8 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final locale = Localizations.localeOf(context);
-    context
-        .read<MoviePopularListCubit>()
-        .setupPopularMovieLocale(locale.languageCode);
+    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -36,7 +33,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     var cubit = context.watch<MoviePopularListCubit>();
 
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
+      // appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
       body: Stack(
         children: [
           ListView.builder(
@@ -60,8 +57,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
             },
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
             child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
           ),
         ],
@@ -93,9 +89,8 @@ class _MoviePopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: isDarkTheme
-                ? customMovieListBoxDecorationForDarkTheme
-                : customMovieListBoxDecorationForLightTheme,
+            decoration:
+                isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
@@ -117,7 +112,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 5.0),
                       CustomCastListTextWidget(
-                        text: movie.releaseDate,
+                        text: movie.releaseDate.toString(),
                         maxLines: 1,
                       ),
                       const SizedBox(height: 15.0),

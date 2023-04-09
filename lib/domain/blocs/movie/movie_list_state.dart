@@ -7,8 +7,7 @@ class MovieListState extends Equatable {
 
   bool get isSearchMode => searchQuery.isNotEmpty;
 
-  List<Movie> get movies =>
-      isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
+  List<Movie> get movies => isSearchMode ? searchMovieContainer.movies : movieContainer.movies;
 
   @override
   List<Object> get props => [movieContainer, searchMovieContainer, searchQuery];
@@ -30,8 +29,9 @@ class MovieListState extends Equatable {
     String? searchQuery,
   }) {
     return MovieListState(
-        movieContainer: movieContainer ?? this.movieContainer,
-        searchMovieContainer: searchMovieContainer ?? this.searchMovieContainer,
-        searchQuery: searchQuery ?? this.searchQuery);
+      movieContainer: movieContainer ?? this.movieContainer,
+      searchMovieContainer: searchMovieContainer ?? this.searchMovieContainer,
+      searchQuery: searchQuery ?? this.searchQuery,
+    );
   }
 }

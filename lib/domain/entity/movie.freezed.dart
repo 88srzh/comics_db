@@ -35,7 +35,6 @@ mixin _$Movie {
   int get voteCount => throw _privateConstructorUsedError;
   bool get video => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
-  TypeOfLookingAt? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,8 +60,7 @@ abstract class $MovieCopyWith<$Res> {
       double popularity,
       int voteCount,
       bool video,
-      double voteAverage,
-      TypeOfLookingAt? type});
+      double voteAverage});
 }
 
 /// @nodoc
@@ -92,7 +90,6 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
     Object? voteCount = null,
     Object? video = null,
     Object? voteAverage = null,
-    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       posterPath: freezed == posterPath
@@ -151,10 +148,6 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TypeOfLookingAt?,
     ) as $Val);
   }
 }
@@ -179,8 +172,7 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
       double popularity,
       int voteCount,
       bool video,
-      double voteAverage,
-      TypeOfLookingAt? type});
+      double voteAverage});
 }
 
 /// @nodoc
@@ -206,7 +198,6 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
     Object? voteCount = null,
     Object? video = null,
     Object? voteAverage = null,
-    Object? type = freezed,
   }) {
     return _then(_$_Movie(
       posterPath: freezed == posterPath
@@ -265,10 +256,6 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TypeOfLookingAt?,
     ));
   }
 }
@@ -291,8 +278,7 @@ class _$_Movie implements _Movie {
       required this.popularity,
       required this.voteCount,
       required this.video,
-      required this.voteAverage,
-      this.type})
+      required this.voteAverage})
       : _genreIds = genreIds;
 
   factory _$_Movie.fromJson(Map<String, dynamic> json) =>
@@ -333,12 +319,10 @@ class _$_Movie implements _Movie {
   final bool video;
   @override
   final double voteAverage;
-  @override
-  final TypeOfLookingAt? type;
 
   @override
   String toString() {
-    return 'Movie(posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage, type: $type)';
+    return 'Movie(posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage)';
   }
 
   @override
@@ -368,8 +352,7 @@ class _$_Movie implements _Movie {
                 other.voteCount == voteCount) &&
             (identical(other.video, video) || other.video == video) &&
             (identical(other.voteAverage, voteAverage) ||
-                other.voteAverage == voteAverage) &&
-            (identical(other.type, type) || other.type == type));
+                other.voteAverage == voteAverage));
   }
 
   @JsonKey(ignore: true)
@@ -389,8 +372,7 @@ class _$_Movie implements _Movie {
       popularity,
       voteCount,
       video,
-      voteAverage,
-      type);
+      voteAverage);
 
   @JsonKey(ignore: true)
   @override
@@ -421,8 +403,7 @@ abstract class _Movie implements Movie {
       required final double popularity,
       required final int voteCount,
       required final bool video,
-      required final double voteAverage,
-      final TypeOfLookingAt? type}) = _$_Movie;
+      required final double voteAverage}) = _$_Movie;
 
   factory _Movie.fromJson(Map<String, dynamic> json) = _$_Movie.fromJson;
 
@@ -455,8 +436,6 @@ abstract class _Movie implements Movie {
   bool get video;
   @override
   double get voteAverage;
-  @override
-  TypeOfLookingAt? get type;
   @override
   @JsonKey(ignore: true)
   _$$_MovieCopyWith<_$_Movie> get copyWith =>

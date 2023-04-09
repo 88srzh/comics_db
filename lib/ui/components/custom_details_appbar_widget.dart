@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 
 class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
+  final int movieId;
 
-  const CustomDetailsAppBar({Key? key, required this.title}) : super(key: key);
+  const CustomDetailsAppBar({Key? key, required this.title, required this.movieId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,9 @@ class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
           Icons.arrow_back,
           color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
         ),
-        onPressed: () => Navigator.of(context).maybePop(),
+        onPressed: () {
+          Navigator.of(context).maybePop();
+        },
       ),
     );
   }
