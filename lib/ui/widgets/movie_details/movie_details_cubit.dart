@@ -79,11 +79,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
-      final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
+      final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
+      // final movieDetails = details.then((value) => value.details);
+      // final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
       // final isFavorite = await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: state.isFavorite);
-      final isFavorite = data.favoriteData.isFavorite;
-      // TODO: add isFavorite to update
-      updateData(details, isFavorite);
+      // final isFavorite = data.favoriteData.isFavorite;
+      updateData(details.details, details.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
@@ -158,7 +159,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
-    var isFavorite = data.favoriteData.isFavorite;
+    // var isFavorite = data.favoriteData.isFavorite;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -266,7 +267,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   // не сохраняет состояние
-  bool get isFavorite => data.favoriteData.isFavorite ? true : false;
+  // bool get isFavorite => data.favoriteData.isFavorite ? true : false;
 //   bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
 //   IconData get favoriteIcon => state.isFavorite == data.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
 //   bool get isFavorite => state.isFavorite ? true : false;
