@@ -1,3 +1,7 @@
+## 0.0.8
+
+- Added `Favorite screen` and `Favorite button`.
+
 ## 0.0.7
 
 - Added light theme.

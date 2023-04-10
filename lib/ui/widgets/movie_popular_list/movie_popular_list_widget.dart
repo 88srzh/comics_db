@@ -33,7 +33,7 @@ class _MoviePopularListWidgetState extends State<MoviePopularListWidget> {
     var cubit = context.watch<MoviePopularListCubit>();
 
     return Scaffold(
-      // appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
+      appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
       body: Stack(
         children: [
           ListView.builder(

@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -30,15 +29,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    // var data = MovieDetailsData();
-    // IconData favoriteIcon = cubit.favoriteIcon;
-    // var favorite = cubit.data.favoriteData.isFavorite;
-
-    // С этой строки меняется, но не сохраняется иконка
-    // var favorite = data.favoriteData.isFavorite;
-    var favorite = cubit.isFavorite;
-    final int movieId = cubit.movieId;
-
+    final favorite = cubit.state.isFavorite;
 
     Widget fab(VoidCallback onPressed) {
       return FloatingActionButton(
@@ -46,13 +37,11 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         backgroundColor: Colors.orange,
         onPressed: onPressed,
         child: favorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
-        // child: favorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
-        // child: Icon(data.favoriteData.favoriteIcon),
       );
     }
 
     return Scaffold(
-      appBar: CustomDetailsAppBar(title: 'Movie Details', movieId: movieId),
+      appBar: const CustomDetailsAppBar(title: 'Movie Details'),
       floatingActionButton: fab(() => cubit.toggleFavoriteMovie(context)),
       body: ListView(
         children: [

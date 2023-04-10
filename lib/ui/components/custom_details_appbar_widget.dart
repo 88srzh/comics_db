@@ -6,9 +6,8 @@ import 'package:provider/provider.dart';
 
 class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
-  final int movieId;
 
-  const CustomDetailsAppBar({Key? key, required this.title, required this.movieId}) : super(key: key);
+  const CustomDetailsAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
