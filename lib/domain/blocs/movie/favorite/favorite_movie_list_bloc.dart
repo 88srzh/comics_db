@@ -1,3 +1,5 @@
+/*
+
 // Dart imports:
 import 'dart:async';
 
@@ -15,18 +17,18 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 
-part 'movie_popular_list_bloc.freezed.dart';
+part '../movie_popular_list_bloc.freezed.dart';
 
-part 'movie_list_event.dart';
+part '../movie_list_event.dart';
 
-part 'movie_list_state.dart';
+part '../movie_list_state.dart';
 
-class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
+class FavoriteMoviePopularListBloc extends Bloc<FavoriteMovieListEvent, FavoriteMovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
   final data = MovieDetailsData();
 
-  MoviePopularListBloc(MovieListState initialState) : super(initialState) {
-    on<MovieListEvent>(((event, emit) async {
+  FavoriteMoviePopularListBloc(FavoriteMovieListState initialState) : super(initialState) {
+    on<FavoriteMovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);
       } else if (event is MovieListEventLoadReset) {
@@ -41,9 +43,9 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     if (state.isSearchMode) {
       final container = await loadNextPage(
         state.searchMovieContainer,
-        (nextPage) async {
+            (nextPage) async {
           final result =
-              await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+          await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
           return result;
         },
       );
@@ -77,18 +79,6 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     return newContainer;
   }
 
-  Future<MovieListContainer?> loadFavoriteMovies(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
-    if (container.isComplete) return null;
-    final totalResults = state.movieContainer.totalResults;
-    final result = await loader(totalResults);
-    final movies = List<Movie>.from(container.movies)..addAll(result.movies);
-    final newContainer = container.copyWith(
-      movies: movies,
-      totalResults: result.totalResults,
-    );
-    return newContainer;
-  }
-
   Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
     emit(const MovieListState.initial());
     // add(const MovieListEventLoadReset());
@@ -100,3 +90,4 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     emit(newState);
   }
 }
+*/

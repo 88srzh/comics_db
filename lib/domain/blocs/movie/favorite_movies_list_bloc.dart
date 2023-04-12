@@ -1,12 +1,12 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 
 class FavoriteMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -40,9 +40,9 @@ class FavoriteMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
         emit(newState);
       }
     } else {
-      final container = await bloc.loadNextPage(state.movieContainer, (nextPage) async {
+      final container = await bloc.loadFavoriteMovies(state.movieContainer, (totalResults) async {
         final result = await _movieApiClient.favoriteMoviesList(
-            nextPage, event.locale, Configuration.apiKey, sessionId, accountId);
+            totalResults, event.locale, Configuration.apiKey, sessionId, accountId);
         return result;
       });
       if (container != null) {
