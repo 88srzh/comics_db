@@ -16,38 +16,38 @@ repos:
     rev: "v1.3.1"
     hooks:
       - id: remove-crlf
-  #  - repo: https://github.com/codespell-project/codespell
-  #    rev: "v2.2.2"
+      #  - repo: https://github.com/codespell-project/codespell
+      #    rev: "v2.2.2"
+      #    hooks:
+      #      - id: codespell
+      #        files: ^.*\.(yml|dart)$
+      #        args: ["--ignore-words-list"]
+  #  - repo: https://github.com/Cretezy/flutter-format-pre-commit
+  #    rev: "4a1df675bb74dea371c17934933e257e46f8dd98"
   #    hooks:
-  #      - id: codespell
-  #        files: ^.*\.(yml|dart)$
-  #        args: ["--ignore-words-list"]
-#  - repo: https://github.com/Cretezy/flutter-format-pre-commit
-#    rev: "4a1df675bb74dea371c17934933e257e46f8dd98"
-#    hooks:
-#      - id: flutter-format
-#        files: lib/*
-#        exclude: lib/src/avatar.dart
+  #      - id: flutter-format
+  #            files: lib/*
+  #            exclude: lib/src/avatar.dart
 
-#  - repo: https://github.com/Cretezy/dart-format-pre-commit
-#    rev: "fa83c73f40014f9e268bd0e62374eaa581fe3540"
-#    hooks:
-#      - id: dart-format
-#        files: lib/*
-#        exclude: lib/src/utils.dart
+  #      - repo: https://github.com/Cretezy/dart-format-pre-commit
+  #        rev: "fa83c73f40014f9e268bd0e62374eaa581fe3540"
+  #        hooks:
+  #          - id: dart-format
+  #            files: lib/*
+  #            exclude: lib/src/utils.dart
 
-#  - repo: https://github.com/dluksza/flutter-analyze-pre-commit
-#    rev: "0bfdb7415bb2d02794a884bf2b763a92772001eb"
-#    hooks:
-#      - id: flutter-analyze
+  - repo: https://github.com/dluksza/flutter-analyze-pre-commit
+    rev: "0bfdb7415bb2d02794a884bf2b763a92772001eb"
+    hooks:
+      - id: flutter-analyze
 
-#- repo: https://github.com/fluttercommunity/import_sorter
-#  rev: "f350497a11b1285c695595049e95a420068e7a9f"
-#   hooks:
-#     - id: dart-import-sorter
-#     - id: flutter-import-sorter
+  - repo: https://github.com/fluttercommunity/import_sorter
+    rev: "f350497a11b1285c695595049e95a420068e7a9f"
+    hooks:
+      - id: dart-import-sorter
+      - id: flutter-import-sorter
 
-#  - repo: https://github.com/guid-empty/flutter-dependency-validation-pre-commit
-#    rev: "4663b743f807eaa0ee1309016f5a6d20b9bb1b13"
-#    hooks:
-#      - id: flutter-dependency-validation
+  - repo: https://github.com/guid-empty/flutter-dependency-validation-pre-commit
+    rev: "4663b743f807eaa0ee1309016f5a6d20b9bb1b13"
+    hooks:
+      - id: flutter-dependency-validation
