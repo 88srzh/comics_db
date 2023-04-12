@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/description_widget.dart';
@@ -42,7 +43,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     final tvTrailerKey = tvTrailerData.trailerKey;
 
     return Scaffold(
-      // appBar: const CustomDetailsAppBar(title: 'Tv Details'),
+      appBar: const CustomDetailsAppBar(title: 'Tv Details'),
       body: ListView(
         children: [
           Column(
