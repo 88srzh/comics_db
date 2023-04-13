@@ -78,7 +78,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   }
 
   Future<MovieListContainer?> loadFavoriteMovies(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
-    if (container.isComplete) return null;
+    // if (container.isComplete) return null;
     final totalResults = state.movieContainer.totalResults;
     final result = await loader(totalResults);
     final movies = List<Movie>.from(container.movies)..addAll(result.movies);

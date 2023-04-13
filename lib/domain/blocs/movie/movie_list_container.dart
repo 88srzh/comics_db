@@ -16,7 +16,7 @@ class MovieListContainer extends Equatable {
       : movies = const <Movie>[],
         currentPage = 0,
         totalPage = 1,
-        totalResults = 1;
+        totalResults = 0;
 
   const MovieListContainer(
       {required this.movies, required this.currentPage, required this.totalPage, required this.totalResults});
