@@ -126,7 +126,7 @@ class MyApp extends StatelessWidget {
           create: (_) =>
               FavoriteMovieListCubit(
                   favoriteMovieListBloc: FavoriteMovieListBloc(
-                    const MovieListState.initial(),
+                    FavoriteMovieListState.initial(),
                   ),
               ),
         )

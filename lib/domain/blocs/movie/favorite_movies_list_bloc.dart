@@ -25,23 +25,20 @@ class FavoriteMovieListBloc extends Bloc<FavoriteMoviesListEvent, FavoriteMovieL
 
   FavoriteMovieListBloc(FavoriteMovieListState initialState) : super(initialState) {
     on<FavoriteMoviesListEvent>(((event, emit) async {
-      if (event is MovieListEventLoadNextPage) {
+      if (event is FavoriteMoviesListEventLoadFavoriteMoviesTotalResults) {
         await onFavoriteMoviesListEventLoadNextPage(event, emit);
-        // } else if (event is MovieListEventLoadReset) {
-        //   await bloc.onMovieListEventLoadReset(event, emit);
-        // } else if (event is MovieListEventSearchMovie) {
-        //   await bloc.onMovieListEventLoadSearchMovie(event, emit);
+      } else if (event is FavoriteMoviesListEventLoadReset) {
+        await onFavoriteMoviesListEventLoadReset(event, emit);
       }
     }), transformer: sequential());
   }
 
-  Future<FavoriteMovieListState> loadFavoriteMovies(List<Movie> movies,
-      Future<MovieResponse> Function(int) loader) async {
+  Future<FavoriteMovieListState> loadFavoriteMovies(
+      List<Movie> movies, Future<MovieResponse> Function(int) loader) async {
     // if (container.isComplete) return null;
     final totalResults = state.totalResults;
     final result = await loader(totalResults);
-    final movies = List<Movie>.from(state.movies)
-      ..addAll(result.movies);
+    final movies = List<Movie>.from(state.movies)..addAll(result.movies);
     final newMovies = FavoriteMovieListState(movies: movies, totalResults: totalResults).copyWith(
       movies: movies,
       totalResults: result.totalResults,
@@ -49,16 +46,22 @@ class FavoriteMovieListBloc extends Bloc<FavoriteMoviesListEvent, FavoriteMovieL
     return newMovies;
   }
 
-  Future<void> onFavoriteMoviesListEventLoadNextPage(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults event,
-      Emitter<FavoriteMovieListState> emit) async {
+  Future<void> onFavoriteMoviesListEventLoadNextPage(
+      FavoriteMoviesListEventLoadFavoriteMoviesTotalResults event, Emitter<FavoriteMovieListState> emit) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
-    final newMovies = await loadFavoriteMovies(List<Movie> movies, (totalResults) async {
+    final newMovies = await loadFavoriteMovies(state.movies, (totalResults) async {
       final result = await _movieApiClient.favoriteMoviesList(
           totalResults, event.locale, Configuration.apiKey, sessionId, accountId);
       return result;
     });
-    final newState = state.copyWith(movies: newMovies);
+    final newState = state.copyWith(movies: newMovies.movies, totalResults: newMovies.totalResults);
     emit(newState);
+  }
+
+  Future<void> onFavoriteMoviesListEventLoadReset(
+      FavoriteMoviesListEventLoadReset event, Emitter<FavoriteMovieListState> emit) async {
+    emit(FavoriteMovieListState.initial());
+    // add(const MovieListEventLoadReset());
   }
 }

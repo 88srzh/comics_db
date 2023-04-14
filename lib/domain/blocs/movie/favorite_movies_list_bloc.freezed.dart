@@ -16,20 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FavoriteMoviesListEvent {
-  String get locale => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String locale) loadFavoriteMoviesTotalResults,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String locale)? loadFavoriteMoviesTotalResults,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String locale)? loadFavoriteMoviesTotalResults,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -38,6 +40,7 @@ mixin _$FavoriteMoviesListEvent {
     required TResult Function(
             FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)
         loadFavoriteMoviesTotalResults,
+    required TResult Function(FavoriteMoviesListEventLoadReset value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,6 +48,7 @@ mixin _$FavoriteMoviesListEvent {
     TResult? Function(
             FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)?
         loadFavoriteMoviesTotalResults,
+    TResult? Function(FavoriteMoviesListEventLoadReset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,12 +56,9 @@ mixin _$FavoriteMoviesListEvent {
     TResult Function(
             FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)?
         loadFavoriteMoviesTotalResults,
+    TResult Function(FavoriteMoviesListEventLoadReset value)? reset,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FavoriteMoviesListEventCopyWith<FavoriteMoviesListEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $FavoriteMoviesListEventCopyWith<$Res> {
   factory $FavoriteMoviesListEventCopyWith(FavoriteMoviesListEvent value,
           $Res Function(FavoriteMoviesListEvent) then) =
       _$FavoriteMoviesListEventCopyWithImpl<$Res, FavoriteMoviesListEvent>;
-  @useResult
-  $Res call({String locale});
 }
 
 /// @nodoc
@@ -80,31 +79,17 @@ class _$FavoriteMoviesListEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
-  }) {
-    return _then(_value.copyWith(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
 abstract class _$$FavoriteMoviesListEventLoadFavoriteMoviesTotalResultsCopyWith<
-    $Res> implements $FavoriteMoviesListEventCopyWith<$Res> {
+    $Res> {
   factory _$$FavoriteMoviesListEventLoadFavoriteMoviesTotalResultsCopyWith(
           _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value,
           $Res Function(_$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults)
               then) =
       __$$FavoriteMoviesListEventLoadFavoriteMoviesTotalResultsCopyWithImpl<
           $Res>;
-  @override
   @useResult
   $Res call({String locale});
 }
@@ -176,6 +161,7 @@ class _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String locale) loadFavoriteMoviesTotalResults,
+    required TResult Function() reset,
   }) {
     return loadFavoriteMoviesTotalResults(locale);
   }
@@ -184,6 +170,7 @@ class _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String locale)? loadFavoriteMoviesTotalResults,
+    TResult? Function()? reset,
   }) {
     return loadFavoriteMoviesTotalResults?.call(locale);
   }
@@ -192,6 +179,7 @@ class _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String locale)? loadFavoriteMoviesTotalResults,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (loadFavoriteMoviesTotalResults != null) {
@@ -206,6 +194,7 @@ class _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
     required TResult Function(
             FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)
         loadFavoriteMoviesTotalResults,
+    required TResult Function(FavoriteMoviesListEventLoadReset value) reset,
   }) {
     return loadFavoriteMoviesTotalResults(this);
   }
@@ -216,6 +205,7 @@ class _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
     TResult? Function(
             FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)?
         loadFavoriteMoviesTotalResults,
+    TResult? Function(FavoriteMoviesListEventLoadReset value)? reset,
   }) {
     return loadFavoriteMoviesTotalResults?.call(this);
   }
@@ -226,6 +216,7 @@ class _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
     TResult Function(
             FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)?
         loadFavoriteMoviesTotalResults,
+    TResult Function(FavoriteMoviesListEventLoadReset value)? reset,
     required TResult orElse(),
   }) {
     if (loadFavoriteMoviesTotalResults != null) {
@@ -241,11 +232,124 @@ abstract class FavoriteMoviesListEventLoadFavoriteMoviesTotalResults
           {required final String locale}) =
       _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults;
 
-  @override
   String get locale;
-  @override
   @JsonKey(ignore: true)
   _$$FavoriteMoviesListEventLoadFavoriteMoviesTotalResultsCopyWith<
           _$FavoriteMoviesListEventLoadFavoriteMoviesTotalResults>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FavoriteMoviesListEventLoadResetCopyWith<$Res> {
+  factory _$$FavoriteMoviesListEventLoadResetCopyWith(
+          _$FavoriteMoviesListEventLoadReset value,
+          $Res Function(_$FavoriteMoviesListEventLoadReset) then) =
+      __$$FavoriteMoviesListEventLoadResetCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FavoriteMoviesListEventLoadResetCopyWithImpl<$Res>
+    extends _$FavoriteMoviesListEventCopyWithImpl<$Res,
+        _$FavoriteMoviesListEventLoadReset>
+    implements _$$FavoriteMoviesListEventLoadResetCopyWith<$Res> {
+  __$$FavoriteMoviesListEventLoadResetCopyWithImpl(
+      _$FavoriteMoviesListEventLoadReset _value,
+      $Res Function(_$FavoriteMoviesListEventLoadReset) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FavoriteMoviesListEventLoadReset
+    implements FavoriteMoviesListEventLoadReset {
+  const _$FavoriteMoviesListEventLoadReset();
+
+  @override
+  String toString() {
+    return 'FavoriteMoviesListEvent.reset()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FavoriteMoviesListEventLoadReset);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String locale) loadFavoriteMoviesTotalResults,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String locale)? loadFavoriteMoviesTotalResults,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String locale)? loadFavoriteMoviesTotalResults,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(
+            FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)
+        loadFavoriteMoviesTotalResults,
+    required TResult Function(FavoriteMoviesListEventLoadReset value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(
+            FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)?
+        loadFavoriteMoviesTotalResults,
+    TResult? Function(FavoriteMoviesListEventLoadReset value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(
+            FavoriteMoviesListEventLoadFavoriteMoviesTotalResults value)?
+        loadFavoriteMoviesTotalResults,
+    TResult Function(FavoriteMoviesListEventLoadReset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FavoriteMoviesListEventLoadReset
+    implements FavoriteMoviesListEvent {
+  const factory FavoriteMoviesListEventLoadReset() =
+      _$FavoriteMoviesListEventLoadReset;
 }
