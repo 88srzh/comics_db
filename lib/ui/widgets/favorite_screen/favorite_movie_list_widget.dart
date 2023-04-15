@@ -1,7 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,12 +6,13 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
-import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
-import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 
 class FavoriteMovieListWidget extends StatefulWidget {
@@ -54,10 +52,10 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
               );
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: CustomSearchBar(onChanged: cubit.searchFavoriteMovie),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          //   child: CustomSearchBar(onChanged: cubit.searchFavoriteMovie),
+          // ),
         ],
       ),
     );

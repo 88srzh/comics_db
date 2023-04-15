@@ -152,7 +152,8 @@ class MovieAndTvApiClient {
   }
 
   Future<MovieResponse> favoriteMoviesList(
-    int page,
+    // int page,
+    int totalResults,
     String locale,
     String apiKey,
     String? sessionId,
@@ -169,7 +170,8 @@ class MovieAndTvApiClient {
       parser,
       <String, dynamic>{
         'api_key': Configuration.apiKey,
-        'page': page.toString(),
+        // 'page': page.toString(),
+        'totalResults': totalResults.toString(),
         'language': locale,
         'session_id': sessionId,
       },

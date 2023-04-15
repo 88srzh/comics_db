@@ -9,14 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
-import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 
 class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
   final FavoriteMovieListBloc favoriteMovieListBloc;
-  late final StreamSubscription<MovieListState> favoriteMoveListBlocSubscription;
+  late final StreamSubscription<FavoriteMovieListState> favoriteMoveListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var movie = <Movie>[];
@@ -31,7 +30,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     );
   }
 
-  void _onState(MovieListState state) {
+  void _onState(FavoriteMovieListState state) {
     final movies = state.movies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
     emit(newState);
@@ -42,8 +41,8 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    favoriteMovieListBloc.add(const MovieListEventLoadReset());
-    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
+    favoriteMovieListBloc.add(const FavoriteMoviesListEventLoadReset());
+    favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: localeTag));
   }
 
   @override
@@ -69,9 +68,10 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
 
   void showedFavoriteMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
+    favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: state.localeTag));
   }
 
+/*
   void searchFavoriteMovie(String text) {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
@@ -79,6 +79,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
       favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
     });
   }
+*/
 
   void onMovieTap(BuildContext context, int index) {
     final id = movie[index].id;

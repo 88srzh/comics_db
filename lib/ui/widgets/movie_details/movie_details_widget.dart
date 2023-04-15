@@ -1,6 +1,8 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
@@ -8,7 +10,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   const MovieDetailsWidget({Key? key}) : super(key: key);
@@ -34,7 +36,8 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     Widget fab(VoidCallback onPressed) {
       return FloatingActionButton(
         elevation: 0.0,
-        backgroundColor: Colors.orange,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
+        backgroundColor: Colors.pinkAccent,
         onPressed: onPressed,
         child: favorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
       );

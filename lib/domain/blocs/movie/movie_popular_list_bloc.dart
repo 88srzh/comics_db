@@ -3,9 +3,9 @@ import 'dart:async';
 
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
@@ -13,7 +13,7 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 
 part 'movie_popular_list_bloc.freezed.dart';
 
@@ -73,6 +73,18 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
       movies: movies,
       currentPage: result.page,
       totalPage: result.totalPages,
+    );
+    return newContainer;
+  }
+
+  Future<MovieListContainer?> loadFavoriteMovies(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
+    // if (container.isComplete) return null;
+    final totalResults = state.movieContainer.totalResults;
+    final result = await loader(totalResults);
+    final movies = List<Movie>.from(container.movies)..addAll(result.movies);
+    final newContainer = container.copyWith(
+      movies: movies,
+      totalResults: result.totalResults,
     );
     return newContainer;
   }

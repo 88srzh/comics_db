@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
+import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
@@ -80,10 +80,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
       final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-      // final movieDetails = details.then((value) => value.details);
-      // final details = await movieAndTvApiClient.movieDetails(movieId, state.localeTag);
-      // final isFavorite = await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: state.isFavorite);
-      // final isFavorite = data.favoriteData.isFavorite;
       updateData(details.details, details.isFavorite);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
@@ -159,7 +155,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
-    // var isFavorite = data.favoriteData.isFavorite;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -241,21 +236,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
-    // this line need to work mark favorite
-    // if (data.favoriteData.isFavorite = false) {
-
-      data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
-
-      // чтобы менялась иконка, надо emit значение
-      // final newState = state.copyWith(isFavorite: !data.favoriteData.isFavorite);
-      // emit(newState);
-
-    // } else {
-    //   data.favoriteData = data.favoriteData.copyWith(isFavorite: data.favoriteData.isFavorite);
-    // }
-    // final newState = state.copyWith(isFavorite: !data.favoriteData.isFavorite);
-    // emit(newState);
-    // notifyListeners();
+    data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
       // меняется если только из favoriteData
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
@@ -265,10 +246,4 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       _handleApiClientException(e, context);
     }
   }
-
-  // не сохраняет состояние
-  // bool get isFavorite => data.favoriteData.isFavorite ? true : false;
-//   bool get isFavorite => state.isFavorite == data.favoriteData.isFavorite ? true : false;
-//   IconData get favoriteIcon => state.isFavorite == data.favoriteData.isFavorite ? Icons.favorite : Icons.favorite_outline;
-//   bool get isFavorite => state.isFavorite ? true : false;
 }

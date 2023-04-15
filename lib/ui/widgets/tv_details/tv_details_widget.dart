@@ -43,7 +43,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     final tvTrailerKey = tvTrailerData.trailerKey;
 
     return Scaffold(
-      // appBar: const CustomDetailsAppBar(title: 'Tv Details'),
+      appBar: const CustomDetailsAppBar(title: 'Tv Details'),
       body: ListView(
         children: [
           Column(
