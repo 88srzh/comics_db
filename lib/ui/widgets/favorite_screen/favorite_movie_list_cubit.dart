@@ -69,7 +69,6 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
   void showedFavoriteMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
     favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: state.localeTag));
-    // favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
 /*
