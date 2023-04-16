@@ -18,18 +18,15 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart'
 
 class UpcomingMovieListCubit extends Cubit<MovieListCubitState> {
   final UpcomingMovieListBloc upcomingMovieListBloc;
-  late final StreamSubscription<MovieListState>
-      upcomingMovieListBlocSubscription;
+  late final StreamSubscription<MovieListState> upcomingMovieListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
 
   UpcomingMovieListCubit({required this.upcomingMovieListBloc})
-      : super(MovieListCubitState(
-            movies: const <MovieListData>[], localeTag: '')) {
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(() {
       _onState(upcomingMovieListBloc.state);
-      upcomingMovieListBlocSubscription =
-          upcomingMovieListBloc.stream.listen(_onState);
+      upcomingMovieListBlocSubscription = upcomingMovieListBloc.stream.listen(_onState);
     });
   }
 
@@ -56,8 +53,7 @@ class UpcomingMovieListCubit extends Cubit<MovieListCubitState> {
 
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
-    final releaseDateTitle =
-        releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
     return MovieListData(
       title: movie.title,
       posterPath: movie.posterPath,
@@ -71,22 +67,19 @@ class UpcomingMovieListCubit extends Cubit<MovieListCubitState> {
 
   void showedUpcomingMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    upcomingMovieListBloc
-        .add(MovieListEventLoadNextPage(locale: state.localeTag));
+    upcomingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchUpcomingMovie(String text) {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
       upcomingMovieListBloc.add(MovieListEventSearchMovie(query: text));
-      upcomingMovieListBloc
-          .add(MovieListEventLoadNextPage(locale: state.localeTag));
+      upcomingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
     });
   }
 
   void onMovieTap(BuildContext context, int index) {
     final id = state.movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   }
 }

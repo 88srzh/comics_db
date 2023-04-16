@@ -21,7 +21,7 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
   Timer? searchDebounce;
   var movie = <Movie>[];
 
-  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
+  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
         _onState(nowPlayingMovieListBloc.state);

@@ -73,6 +73,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
       movies: movies,
       currentPage: result.page,
       totalPage: result.totalPages,
+      totalResults: result.totalResults,
     );
     return newContainer;
   }

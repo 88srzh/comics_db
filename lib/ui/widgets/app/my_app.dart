@@ -126,10 +126,10 @@ class MyApp extends StatelessWidget {
           create: (_) =>
               FavoriteMovieListCubit(
                   favoriteMovieListBloc: FavoriteMovieListBloc(
-                    FavoriteMovieListState.initial(),
+                    const MovieListState.initial(),
                   ),
               ),
-        )
+        ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
