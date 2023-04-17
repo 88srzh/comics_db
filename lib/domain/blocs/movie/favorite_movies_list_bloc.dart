@@ -22,7 +22,7 @@ part 'favorite_movies_list_state.dart';
 class FavoriteMovieListBloc extends Bloc<FavoriteMoviesListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
-  final bloc = MoviePopularListBloc(const MovieListState.initial());
+  // final bloc = MoviePopularListBloc(const MovieListState.initial());
 
   FavoriteMovieListBloc(MovieListState initialState) : super(initialState) {
     on<FavoriteMoviesListEvent>(((event, emit) async {
