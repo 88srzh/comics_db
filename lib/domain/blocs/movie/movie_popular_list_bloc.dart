@@ -13,7 +13,6 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 
 part 'movie_popular_list_bloc.freezed.dart';
 
@@ -23,7 +22,6 @@ part 'movie_list_state.dart';
 
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
-  final data = MovieDetailsData();
 
   MoviePopularListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
@@ -73,6 +71,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
       movies: movies,
       currentPage: result.page,
       totalPage: result.totalPages,
+      totalResults: result.totalResults,
     );
     return newContainer;
   }

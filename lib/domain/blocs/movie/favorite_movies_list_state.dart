@@ -1,3 +1,4 @@
+/*
 part of 'favorite_movies_list_bloc.dart';
 
 class FavoriteMovieListState extends Equatable {
@@ -28,4 +29,4 @@ class FavoriteMovieListState extends Equatable {
       totalResults: totalResults ?? this.totalResults,
     );
   }
-}
+}*/

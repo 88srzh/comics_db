@@ -23,7 +23,7 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
   Timer? searchDebounce;
 
   MoviePopularListCubit({required this.movieListBloc})
-      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
         _onState(movieListBloc.state);
@@ -64,7 +64,6 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
       originalTitle: movie.originalTitle,
       overview: movie.overview,
       releaseDate: releaseDateTitle,
-      // isFavorite:
     );
   }
 

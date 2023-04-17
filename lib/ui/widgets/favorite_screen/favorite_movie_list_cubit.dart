@@ -4,6 +4,7 @@ import 'dart:async';
 // Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/favorite_movies_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -15,13 +16,13 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart'
 
 class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
   final FavoriteMovieListBloc favoriteMovieListBloc;
-  late final StreamSubscription<FavoriteMovieListState> favoriteMoveListBlocSubscription;
+  late final StreamSubscription<MovieListState> favoriteMoveListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var movie = <Movie>[];
 
   FavoriteMovieListCubit({required this.favoriteMovieListBloc})
-      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '')) {
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
         _onState(favoriteMovieListBloc.state);
@@ -30,7 +31,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     );
   }
 
-  void _onState(FavoriteMovieListState state) {
+  void _onState(MovieListState state) {
     final movies = state.movies.map(_makeListData).toList();
     final newState = this.state.copyWith(movies: movies);
     emit(newState);
@@ -41,8 +42,8 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    favoriteMovieListBloc.add(const FavoriteMoviesListEventLoadReset());
-    favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: localeTag));
+    favoriteMovieListBloc.add(const MovieListEventLoadReset());
+    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -68,7 +69,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
 
   void showedFavoriteMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: state.localeTag));
+    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
 /*
