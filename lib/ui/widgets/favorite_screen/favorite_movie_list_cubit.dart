@@ -42,8 +42,8 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    favoriteMovieListBloc.add(const FavoriteMoviesListEventLoadReset());
-    favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: localeTag));
+    favoriteMovieListBloc.add(const MovieListEventLoadReset());
+    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -69,7 +69,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
 
   void showedFavoriteMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    favoriteMovieListBloc.add(FavoriteMoviesListEventLoadFavoriteMoviesTotalResults(locale: state.localeTag));
+    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
 /*

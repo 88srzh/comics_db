@@ -152,12 +152,12 @@ class MovieAndTvApiClient {
   }
 
   Future<MovieResponse> favoriteMoviesList(
-    // int page,
-    int totalResults,
+    int page,
     String locale,
     String apiKey,
     String? sessionId,
     int? accountId,
+    int totalResults,
   ) {
     MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -169,11 +169,11 @@ class MovieAndTvApiClient {
       '/account/$accountId/favorite/movies',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        // 'page': page.toString(),
-        'totalResults': totalResults.toString(),
+        'page': page.toString(),
         'language': locale,
+        'api_key': Configuration.apiKey,
         'session_id': sessionId,
+        'totalResults': totalResults.toString(),
       },
     );
     return result;

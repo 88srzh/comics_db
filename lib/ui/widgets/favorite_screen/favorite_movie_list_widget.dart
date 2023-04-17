@@ -33,9 +33,6 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<FavoriteMovieListCubit>();
-    var totalResults = cubit.favoriteMovieListBloc.state.movieContainer.totalResults;
-    // var results = cubit.state.movies.;
-    // var totalResults = cubit.favoriteMovieListBloc.state.totalResults;
     return Scaffold(
       appBar: const CustomAppBar(title: 'Favorite Movies'),
       body: Stack(
@@ -43,7 +40,7 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
           ListView.builder(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.only(top: 70.0),
-            itemCount: totalResults,
+            itemCount: cubit.state.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
               cubit.showedFavoriteMovieAtIndex(index);
