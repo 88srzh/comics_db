@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -28,7 +29,7 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const CustomDetailsAppBar(title: ''),
+      appBar: const CustomDetailsAppBar(title: 'People Details'),
       body: ListView(
         children: [
           Column(
