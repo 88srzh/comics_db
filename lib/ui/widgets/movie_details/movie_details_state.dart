@@ -44,9 +44,9 @@ class MovieDetailsCubitState {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is MovieDetailsCubitState &&
+          runtimeType == other.runtimeType &&
           posterPath == other.posterPath &&
           backdropPath == other.backdropPath &&
-          runtimeType == other.runtimeType &&
           overview == other.overview &&
           localeTag == other.localeTag &&
           title == other.title &&
@@ -63,9 +63,25 @@ class MovieDetailsCubitState {
           isLoading == other.isLoading &&
           isFavorite == other.isFavorite;
 
-  // TODO fix hashCode
   @override
-  int get hashCode => overview.hashCode ^ localeTag.hashCode;
+  int get hashCode =>
+      posterPath.hashCode ^
+      backdropPath.hashCode ^
+      overview.hashCode ^
+      localeTag.hashCode ^
+      title.hashCode ^
+      tagline.hashCode ^
+      voteAverage.hashCode ^
+      voteCount.hashCode ^
+      popularity.hashCode ^
+      releaseDate.hashCode ^
+      summary.hashCode ^
+      genres.hashCode ^
+      trailerKey.hashCode ^
+      peopleData.hashCode ^
+      actorsData.hashCode ^
+      isLoading.hashCode ^
+      isFavorite.hashCode;
 
   MovieDetailsCubitState copyWith({
     String? posterPath,
