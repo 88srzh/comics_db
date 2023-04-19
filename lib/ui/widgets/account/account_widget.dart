@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/animation_fab.dart';
 import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(),
         const NotificationsCardWidget(),
         const CustomSettingDivider(),
+        const AnimationFab(),
       ],
     );
   }
