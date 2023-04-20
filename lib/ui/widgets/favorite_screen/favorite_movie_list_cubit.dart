@@ -46,6 +46,11 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
+  void updateFavoriteMovies(String localeTag) {
+    favoriteMovieListBloc.add(const MovieListEventLoadReset());
+    favoriteMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
+  }
+
   @override
   Future<void> close() {
     favoriteMoveListBlocSubscription.cancel();
