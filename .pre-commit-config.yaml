@@ -36,18 +36,18 @@ repos:
   #            files: lib/*
   #            exclude: lib/src/utils.dart
 
-#  - repo: https://github.com/dluksza/flutter-analyze-pre-commit
-#    rev: "0bfdb7415bb2d02794a884bf2b763a92772001eb"
-#    hooks:
-#      - id: flutter-analyze
+  - repo: https://github.com/dluksza/flutter-analyze-pre-commit
+    rev: "0bfdb7415bb2d02794a884bf2b763a92772001eb"
+    hooks:
+      - id: flutter-analyze
 
-#  - repo: https://github.com/fluttercommunity/import_sorter
-#    rev: "f350497a11b1285c695595049e95a420068e7a9f"
-#    hooks:
-#      - id: dart-import-sorter
-#      - id: flutter-import-sorter
+  - repo: https://github.com/fluttercommunity/import_sorter
+    rev: "f350497a11b1285c695595049e95a420068e7a9f"
+    hooks:
+      - id: dart-import-sorter
+      - id: flutter-import-sorter
 
-#  - repo: https://github.com/guid-empty/flutter-dependency-validation-pre-commit
-#    rev: "4663b743f807eaa0ee1309016f5a6d20b9bb1b13"
-#    hooks:
-#      - id: flutter-dependency-validation
+  - repo: https://github.com/guid-empty/flutter-dependency-validation-pre-commit
+    rev: "4663b743f807eaa0ee1309016f5a6d20b9bb1b13"
+    hooks:
+      - id: flutter-dependency-validation
