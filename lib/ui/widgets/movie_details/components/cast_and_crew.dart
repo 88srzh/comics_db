@@ -17,6 +17,8 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
+    if (actorsData.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(
           left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),

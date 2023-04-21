@@ -25,13 +25,9 @@ class FavoriteMovieListWidget extends StatefulWidget {
 class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    // var cubit = context.watch<FavoriteMovieListCubit>();
-    // var totalResults = cubit.state.totalResults;
     context.read<FavoriteMovieListCubit>().setupFavoriteMovieLocale(locale.languageCode);
-    // context.read<FavoriteMovieListCubit>().updateFavoriteMovies(locale.languageCode);
-    // context.read<FavoriteMovieListCubit>().updateFavoriteMovies(totalResults, locale.languageCode);
+    super.didChangeDependencies();
   }
 
   @override
