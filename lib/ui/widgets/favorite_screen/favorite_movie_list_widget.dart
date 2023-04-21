@@ -33,6 +33,9 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<FavoriteMovieListCubit>();
+    setState(() {
+      cubit.state.movies;
+    });
     return Scaffold(
       appBar: const CustomAppBar(title: 'Favorite Movies'),
       body: Stack(
@@ -42,6 +45,7 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
             itemCount: cubit.state.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
+              // key: Key(cubit.state.movies[index].title);
               cubit.showedFavoriteMovieAtIndex(index);
               final movie = cubit.state.movies[index];
               final posterPath = movie.posterPath;
