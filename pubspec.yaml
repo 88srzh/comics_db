@@ -48,6 +48,7 @@ dependencies:
   flutter_hooks: ^0.18.6
   animations: ^2.0.7
   simple_animations: ^5.0.0+3
+  should_rebuild: 1.0.1
 
 dev_dependencies:
   flutter_test:

@@ -861,6 +861,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  should_rebuild:
+    dependency: "direct main"
+    description:
+      name: should_rebuild
+      sha256: "33b49e41c9053ac4e07a1bad7cde32c08cb39aeab07db462684ab1061c63b9a6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   simple_animations:
     dependency: "direct main"
     description:

@@ -25,17 +25,6 @@ class FavoriteMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }), transformer: sequential());
   }
 
-  // Future<MovieListState> loadFavoriteMovies(List<Movie> movies, Future<MovieResponse> Function(int) loader) async {
-  // if (container.isComplete) return null;
-  // final totalResults = state.movieContainer.totalResults;
-  // final result = await loader(totalResults);
-  // final movies = List<Movie>.from(state.movies)..addAll(result.movies);
-  // final newMovies = MovieListState(movies: movies, totalResults: totalResults).copyWith(
-  //   movies: movies,
-  //   totalResults: result.totalResults,
-  // );
-  // return newMovies;
-  // }
   Future<MovieListContainer?> loadFavoriteMovies(
       MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
@@ -56,8 +45,8 @@ class FavoriteMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
     final container = await loadNextPage(state.movieContainer, (nextPage) async {
-      final result =
-          await _movieApiClient.favoriteMoviesList(nextPage, event.locale, Configuration.apiKey, sessionId, accountId, nextPage);
+      final result = await _movieApiClient.favoriteMoviesList(
+          nextPage, event.locale, Configuration.apiKey, sessionId, accountId, nextPage);
       return result;
     });
     if (container != null) {
