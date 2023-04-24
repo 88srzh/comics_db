@@ -6,7 +6,12 @@ class MovieListCubitState {
   final String localeTag;
   final int totalResults;
 
-  MovieListCubitState({required this.movies, required this.localeTag, required this.totalResults});
+  MovieListCubitState({required this.movies, required this.localeTag, required this.totalResults}) : super();
+
+  @override
+  String toString() {
+    return 'MovieListCubitState{movies: $movies, localeTag: $localeTag, totalResults: $totalResults}';
+  }
 
   @override
   bool operator ==(Object other) =>

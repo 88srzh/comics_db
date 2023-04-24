@@ -32,11 +32,18 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // const IconData refresh_rounded = IconData(0xf00e9, fontFamily: 'MaterialIcons');
     var cubit = context.watch<FavoriteMovieListCubit>();
-    setState(() {
-      cubit.state.movies;
-    });
+    final locale = Localizations.localeOf(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        elevation: 0.0,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
+        child: const Icon(IconData(0xf00e9, fontFamily: 'MaterialIcons')),
+        onPressed: () => setState(() {
+          cubit.updateFavoriteMovies(locale.languageCode);
+        }),
+      ),
       appBar: const CustomAppBar(title: 'Favorite Movies'),
       body: Stack(
         children: [
