@@ -22,9 +22,7 @@ class _OnTheAirTvsWidgetState extends State<OnTheAirTvsWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context
-        .read<TvOnTheAirListCubit>()
-        .setupOnTheAirTvLocale(locale.languageCode);
+    context.read<TvOnTheAirListCubit>().setupOnTheAirTvLocale(locale.languageCode);
   }
 
   @override
@@ -77,9 +75,7 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.contain,
-          child: posterPath != null
-              ? Image.network(ImageDownloader.imageUrl(posterPath!))
-              : const SizedBox.shrink(),
+          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const SizedBox.shrink(),
         ),
       ),
     );
