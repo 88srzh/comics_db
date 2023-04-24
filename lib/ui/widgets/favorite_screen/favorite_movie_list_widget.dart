@@ -37,11 +37,12 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
     final locale = Localizations.localeOf(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          // child: Icon(Icons.),
-          onPressed: () =>
-              setState(() {
-                cubit.updateFavoriteMovies(locale.languageCode);
-              }),
+        elevation: 0.0,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
+        child: const Icon(IconData(0xf00e9, fontFamily: 'MaterialIcons')),
+        onPressed: () => setState(() {
+          cubit.updateFavoriteMovies(locale.languageCode);
+        }),
       ),
       appBar: const CustomAppBar(title: 'Favorite Movies'),
       body: Stack(
@@ -99,9 +100,7 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: context
-                .read<ThemeBloc>()
-                .isDarkTheme
+            decoration: context.read<ThemeBloc>().isDarkTheme
                 ? customMovieListBoxDecorationForDarkTheme
                 : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
@@ -109,9 +108,9 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
               children: [
                 posterPath != null
                     ? Image.network(
-                  ImageDownloader.imageUrl(posterPath!),
-                  width: 95,
-                )
+                        ImageDownloader.imageUrl(posterPath!),
+                        width: 95,
+                      )
                     : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(
