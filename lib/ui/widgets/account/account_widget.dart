@@ -1,7 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/animation_fab.dart';
-import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({Key? key}) : super(key: key);
@@ -28,9 +27,6 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // var cubit = context.watch<AccountDetailsCubit>();
-    // that's name need to check cubit data
-    // final name = cubit.state.name;
     return const Scaffold(
       // appBar: CustomMainAppBarWidget(),
       body: BodyPersonalWidget(),
@@ -63,7 +59,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(),
         const NotificationsCardWidget(),
         const CustomSettingDivider(),
-        const AnimationFab(),
+        // const AnimationFab(),
       ],
     );
   }
