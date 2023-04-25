@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -32,14 +33,14 @@ class TvDetailsNameData {
 }
 
 class TvDetailsTrailerData {
-  final String? trailerKey;
+  String? trailerKey;
 
   TvDetailsTrailerData({this.trailerKey});
 }
 
 class TvDetailsScoresData {
   // TODO change voteAverage to number
-  final String? voteAverage;
+  final double? voteAverage;
   final int voteCount;
   final double popularity;
 
@@ -61,6 +62,8 @@ class TvDetailsData {
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
   TvDetailsScoresData tvDetailsScoresData =
       TvDetailsScoresData(voteCount: 0, popularity: 0);
+
+  FavoriteData favoriteData = FavoriteData();
 }
 
 class TvDetailsModel extends ChangeNotifier {
@@ -134,7 +137,7 @@ class TvDetailsModel extends ChangeNotifier {
     tvData.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
       popularity: details.popularity,
-      voteAverage: details.voteAverage.toString(),
+      voteAverage: details.voteAverage,
     );
     tvData.genres = makeGenres(details);
     notifyListeners();

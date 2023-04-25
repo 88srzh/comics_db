@@ -39,8 +39,7 @@ class MovieListWidget extends StatelessWidget {
                   children: [
                     const CustomHeaderTextWidget(text: 'Popular'),
                     InkWell(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(MainNavigationRouteNames.popularMovie),
+                      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.popularMovie),
                       child: Text(
                         'See All',
                         style: Theme.of(context).textTheme.displaySmall,
@@ -78,8 +77,7 @@ class MovieListWidget extends StatelessWidget {
               children: [
                 const CustomHeaderTextWidget(text: 'Now playing'),
                 InkWell(
-                  onTap: () => Navigator.of(context)
-                      .pushNamed(MainNavigationRouteNames.nowPlayingMovie),
+                  onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.nowPlayingMovie),
                   child: Text(
                     'See All',
                     style: Theme.of(context).textTheme.displaySmall,

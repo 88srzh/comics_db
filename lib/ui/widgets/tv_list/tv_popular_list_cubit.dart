@@ -54,8 +54,7 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
 
   TvListData _makeListData(TV tv) {
     final firstAirDate = tv.firstAirDate;
-    final firstAirDateTitle =
-        firstAirDate != null ? _dateFormat.format(firstAirDate) : '';
+    final firstAirDateTitle = firstAirDate != null ? _dateFormat.format(firstAirDate) : '';
     return TvListData(
       id: tv.id,
       name: tv.name,
@@ -81,7 +80,6 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
 
   void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 }

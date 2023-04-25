@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -22,9 +23,7 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context
-        .read<TvPopularListCubit>()
-        .setupPopularTvLocale(locale.languageCode);
+    context.read<TvPopularListCubit>().setupPopularTvLocale(locale.languageCode);
   }
 
   @override
@@ -38,7 +37,7 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
           final popularTv = cubit.state.tvs[index];
           final posterPath = popularTv.posterPath;
           return InkWell(
-            onTap: () => cubit.onTvTap(context, index),
+            onTap: () => onTvTap(context, index),
             child: _PopularTvListItemWidget(
               index: index,
               posterPath: posterPath,
@@ -48,6 +47,12 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
           );
         });
   }
+}
+
+void onTvTap(BuildContext context, int index) {
+  final cubit = context.read<TvPopularListCubit>();
+  final tvId = cubit.state.tvs[index].id;
+  Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: tvId);
 }
 
 class _PopularTvListItemWidget extends StatelessWidget {
@@ -77,9 +82,7 @@ class _PopularTvListItemWidget extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.contain,
-          child: posterPath != null
-              ? Image.network(ImageDownloader.imageUrl(posterPath!))
-              : const SizedBox.shrink(),
+          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const SizedBox.shrink(),
         ),
       ),
     );

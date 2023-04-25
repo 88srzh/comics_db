@@ -6,7 +6,7 @@ class TvDetailsCubitState {
   final List<CreatedBy> createBy;
   final List<int> episodeRunTime;
   final String firstAirDate;
-  final List<Genre> genres;
+  final String genres;
   final String homepage;
   final int id;
   final bool inProduction;
@@ -35,6 +35,7 @@ class TvDetailsCubitState {
   final TvDetailsCredits credits;
   final TvDetailsVideos videos;
   final String localeTag;
+  final bool isFavorite;
 
   const TvDetailsCubitState({
     this.posterPath,
@@ -71,6 +72,7 @@ class TvDetailsCubitState {
     required this.credits,
     required this.videos,
     required this.localeTag,
+    required this.isFavorite,
   });
 
   @override
@@ -111,7 +113,8 @@ class TvDetailsCubitState {
           voteCount == other.voteCount &&
           credits == other.credits &&
           videos == other.videos &&
-          localeTag == other.localeTag;
+          localeTag == other.localeTag &&
+          isFavorite == other.isFavorite;
 
   @override
   int get hashCode =>
@@ -148,7 +151,8 @@ class TvDetailsCubitState {
       voteCount.hashCode ^
       credits.hashCode ^
       videos.hashCode ^
-      localeTag.hashCode;
+      localeTag.hashCode ^
+      isFavorite.hashCode;
 
   TvDetailsCubitState copyWith({
     String? posterPath,
@@ -156,7 +160,7 @@ class TvDetailsCubitState {
     List<CreatedBy>? createBy,
     List<int>? episodeRunTime,
     String? firstAirDate,
-    List<Genre>? genres,
+    String? genres,
     String? homepage,
     int? id,
     bool? inProduction,
@@ -185,6 +189,7 @@ class TvDetailsCubitState {
     TvDetailsCredits? credits,
     TvDetailsVideos? videos,
     String? localeTag,
+    bool? isFavorite,
   }) {
     return TvDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -221,6 +226,7 @@ class TvDetailsCubitState {
       credits: credits ?? this.credits,
       videos: videos ?? this.videos,
       localeTag: localeTag ?? this.localeTag,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 }

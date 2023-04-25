@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,16 +8,18 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 
 class TvTopPosterWidget extends StatelessWidget {
   const TvTopPosterWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final tvDetailsPosterData = context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
-    final posterPath = tvDetailsPosterData.posterPath;
-    final backdropPath = tvDetailsPosterData.backdropPath;
+    // final tvDetailsPosterData = context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
+    // final posterPath = tvDetailsPosterData.posterPath;
+    // final backdropPath = tvDetailsPosterData.backdropPath;
+    final cubit = context.watch<TvDetailsCubit>();
+    final posterPath = cubit.state.posterPath;
+    final backdropPath = cubit.state.backdropPath;
     return Stack(
       children: [
         Positioned(

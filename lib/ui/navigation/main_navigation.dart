@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 
@@ -45,11 +43,14 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    MainNavigationRouteNames.splashScreen: (_) => ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+    // TODO change to bloc
+    MainNavigationRouteNames.splashScreen: (_) =>
+        ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
-    MainNavigationRouteNames.tv: (context) => const TvListWidget(),
+    MainNavigationRouteNames.tv: (_) => const TvListWidget(),
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
-    MainNavigationRouteNames.tvPopularList: (context) => _screenFactory.makePopularTvList(),
+    MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -77,12 +78,12 @@ class MainNavigation {
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
-          // builder: (_) => _screenFactory.makeTvDetails(tvId),
+          builder: (_) => _screenFactory.makeTvDetails(tvId),
           // TODO remove changenotifier
-          builder: (context) => ChangeNotifierProvider(
-            create: (context) => TvDetailsModel(tvId),
-            child: const TvDetailsWidget(),
-          ),
+          // builder: (context) => ChangeNotifierProvider(
+          //   create: (context) => TvDetailsModel(tvId),
+          //   child: const TvDetailsWidget(),
+          // ),
         );
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;

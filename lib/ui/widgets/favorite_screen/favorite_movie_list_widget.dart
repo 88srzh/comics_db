@@ -32,7 +32,6 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // const IconData refresh_rounded = IconData(0xf00e9, fontFamily: 'MaterialIcons');
     var cubit = context.watch<FavoriteMovieListCubit>();
     final locale = Localizations.localeOf(context);
     return Scaffold(

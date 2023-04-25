@@ -185,7 +185,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     if (trailerKey != null) {
       return trailerKey;
     } else {
-      return 'no trailer key';
+      return 'No trailer key';
     }
   }
 

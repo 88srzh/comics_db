@@ -18,7 +18,7 @@ class RatingsRowWidget extends StatelessWidget {
       children: [
         const CustomTvDetailsIconWidget(icon: MdiIcons.starOutline),
         const SizedBox(width: 2),
-        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: tvDetailsScoresData.voteAverage ?? '0.0'),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: tvDetailsScoresData.voteAverage.toString()),
         const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: ' / 10'),
         const SizedBox(width: 20),
         const CustomTvDetailsIconWidget(icon: MdiIcons.accountOutline),

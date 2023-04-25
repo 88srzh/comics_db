@@ -7,6 +7,8 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_w
 import 'package:comics_db_app/ui/widgets/movie_list/components/upcoming_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_popular_list/movie_popular_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -51,8 +53,7 @@ class ScreenFactory {
     final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
     _authBloc = authBloc;
     return BlocProvider<AuthViewCubit>(
-      create: (_) =>
-          AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
+      create: (_) => AuthViewCubit(AuthViewCubitFormFillInProgressState(), authBloc),
       child: const AuthWidget(),
     );
   }
@@ -96,7 +97,7 @@ class ScreenFactory {
   }
 
   Widget makeMovieDetails(int movieId) {
-  //   TODO: should fix
+    //   TODO: should fix
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -104,6 +105,18 @@ class ScreenFactory {
         ),
       ],
       child: const MovieDetailsWidget(),
+    );
+  }
+
+  Widget makeTvDetails(int tvId) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => TvDetailsCubit(tvId),
+          child: const TvDetailsWidget(),
+        ),
+      ],
+      child: const TvDetailsWidget(),
     );
   }
 
@@ -147,7 +160,7 @@ class ScreenFactory {
     );
   }
 
-   Widget makeUpcomingMovieList() {
+  Widget makeUpcomingMovieList() {
     return BlocProvider(
       create: (_) => UpcomingMovieListCubit(
         upcomingMovieListBloc: UpcomingMovieListBloc(

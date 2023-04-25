@@ -23,13 +23,14 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   final movieAndTvClient = MovieAndTvApiClient();
   final int tvId;
   final _tvService = TvService();
+  String _locale = '';
 
   TvDetailsCubit(this.tvId)
       : super(TvDetailsCubitState(
           createBy: [],
           episodeRunTime: [],
           firstAirDate: '',
-          genres: [],
+          genres: '',
           homepage: '',
           id: 0,
           inProduction: false,
@@ -68,6 +69,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           localeTag: '',
           credits: TvDetailsCredits(cast: [], crew: []),
           videos: TvDetailsVideos(results: []),
+          isFavorite: false,
         )) {
     emit(TvDetailsCubitState(
       createBy: state.createBy,
@@ -101,7 +103,19 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       credits: state.credits,
       videos: state.videos,
       localeTag: state.localeTag,
+      isFavorite: state.isFavorite,
     ));
+  }
+
+  String stringFromDate(DateTime? date) => date != null ? dateFormat.format(date) : '';
+
+  Future<void> setupLocale(BuildContext context) async {
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    if (_locale == locale) return;
+    _locale = locale;
+    dateFormat = DateFormat.yMMMd(locale);
+    updateData(null, false);
+    await loadTvDetails(context);
   }
 
   Future<void> loadTvDetails(BuildContext context) async {
@@ -147,23 +161,60 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       posterPath: details.posterPath,
     );
     data.tvNameData = TvDetailsNameData(name: details.name, tagline: details.tagline);
-    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    data.tvTrailedData = TvDetailsTrailerData(trailerKey: trailerKey);
+    // TODO need fix
+    data.tvTrailedData.trailerKey = makeTrailerKey(details);
+
     data.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
       popularity: details.voteAverage,
-      voteAverage: details.voteAverage.toString(),
+      voteAverage: details.voteAverage,
     );
-    // data.genres = makeGenres(details);
+    data.genres = makeGenres(details);
 
     final newState = state.copyWith(
       overview: data.overview,
       name: data.name,
       tagline: data.tvNameData.tagline,
-      // videos: data.tvTrailedData.trailerKey,
+      voteCount: data.tvDetailsScoresData.voteCount,
+      popularity: data.tvDetailsScoresData.popularity,
+      voteAverage: data.tvDetailsScoresData.voteAverage,
+      genres: data.genres,
 
+      // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);
+  }
+
+  String makeTrailerKey(TVDetails details) {
+    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
+    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
+    if (trailerKey != null) {
+      return trailerKey;
+    } else {
+      return 'No trailer key';
+    }
+  }
+
+  String makeGenres(TVDetails details) {
+    var texts = <String>[];
+    if (details.genres.isNotEmpty) {
+      var genresNames = <String>[];
+      for (var genr in details.genres) {
+        genresNames.add(genr.name);
+      }
+      texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
+
+  Future<void> toggleFavoriteTv(BuildContext context) async {
+    data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
+    try {
+      await _tvService.updateFavoriteTvs(tvId: tvId, isFavorite: data.favoriteData.isFavorite);
+      var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
+      emit(newState);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
   }
 }

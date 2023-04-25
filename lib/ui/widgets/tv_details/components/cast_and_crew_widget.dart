@@ -2,6 +2,7 @@
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,7 +11,6 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 
 class TvCastWidget extends StatelessWidget {
   const TvCastWidget({Key? key}) : super(key: key);
@@ -18,8 +18,7 @@ class TvCastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -45,9 +44,11 @@ class _TvActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<TvDetailsModel>(context, listen: true);
-    var cast = model.tvDetails?.credits.cast;
-    if (cast == null || cast.isEmpty) return const SizedBox.shrink();
+    // final model = Provider.of<TvDetailsModel>(context, listen: true);
+    // var cast = model.tvDetails?.credits.cast;
+    var cubit = context.watch<TvDetailsCubit>();
+    var cast = cubit.state.credits.cast;
+    if (cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: cast.length,
       itemExtent: 120,
@@ -62,14 +63,16 @@ class _TvActorListWidget extends StatelessWidget {
 class _TvActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _TvActorListItemWidget({Key? key, required this.actorIndex})
-      : super(key: key);
+  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<TvDetailsModel>(context, listen: false);
-    final actor = model.tvDetails?.credits.cast[actorIndex];
-    final backdropPath = actor?.profilePath;
+    // final model = Provider.of<TvDetailsModel>(context, listen: false);
+    // final actor = model.tvDetails?.credits.cast[actorIndex];
+    // final backdropPath = actor?.profilePath;
+    var cubit = context.watch<TvDetailsCubit>();
+    var actor = cubit.state.credits.cast[actorIndex];
+    final backdropPath = actor.profilePath;
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
@@ -77,9 +80,7 @@ class _TvActorListItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
           border: Border.all(
-            color: isDarkTheme
-                ? Colors.white.withOpacity(0.2)
-                : Colors.black.withOpacity(0.2),
+            color: isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
           ),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [
@@ -105,7 +106,7 @@ class _TvActorListItemWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomCastListTextWidget(
-                        text: actor!.name,
+                        text: actor.name,
                         maxLines: 1,
                       ),
                       const SizedBox(height: 7.0),
