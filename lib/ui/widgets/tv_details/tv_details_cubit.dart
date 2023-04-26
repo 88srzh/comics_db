@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:flutter/material.dart';
@@ -165,6 +166,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.backdropPath = details.backdropPath ?? '';
     data.name = details.name;
     data.tagline = details.tagline;
+    data.actorsData = details.credits.cast
+        .map((e) => TvDetailsActorData(
+              name: e.name,
+              character: e.character,
+              profilePath: e.profilePath,
+            ))
+        .toList();
 
     // TODO need fix
     data.tvTrailedData.trailerKey = makeTrailerKey(details);

@@ -45,7 +45,7 @@ class _TvActorListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TvDetailsCubit>();
-    var cast = cubit.state.credits.cast;
+    var cast = cubit.data.;
     if (cast.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: cast.length,
