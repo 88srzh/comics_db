@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +16,6 @@ class TvTopPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final tvDetailsPosterData = context.select((TvDetailsModel model) => model.tvData.tvDetailsPosterData);
-    // final posterPath = tvDetailsPosterData.posterPath;
-    // final backdropPath = tvDetailsPosterData.backdropPath;
     final cubit = context.watch<TvDetailsCubit>();
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
@@ -27,13 +26,12 @@ class TvTopPosterWidget extends StatelessWidget {
             opacity: 0.25,
             child: AspectRatio(
               aspectRatio: 390 / 220,
-              child: backdropPath != null
-                  ? Image.network(
-                      ImageDownloader.imageUrl(backdropPath),
-                      fit: BoxFit.cover,
-                    )
-                  : Image.asset(AppImages.noImageAvailable),
-            ),
+                child: CachedNetworkImage(
+                  imageUrl: ImageDownloader.imageUrl(backdropPath ?? ''),
+                  placeholder: (context, url) => const LoadingIndicatorWidget(),
+                  errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                ),
+              ),
           ),
         ),
         Positioned(

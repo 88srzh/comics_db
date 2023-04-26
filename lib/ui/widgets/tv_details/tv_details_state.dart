@@ -38,8 +38,8 @@ class TvDetailsCubitState {
   final bool isFavorite;
 
   const TvDetailsCubitState({
-    this.posterPath,
-    this.backdropPath,
+    required this.posterPath,
+    required this.backdropPath,
     required this.createBy,
     required this.episodeRunTime,
     required this.firstAirDate,

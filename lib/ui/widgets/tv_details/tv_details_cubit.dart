@@ -1,8 +1,11 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_name_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Package imports:
-import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -13,7 +16,6 @@ import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 import 'package:comics_db_app/domain/services/tv_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
 
 part 'tv_details_state.dart';
 
@@ -27,6 +29,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   TvDetailsCubit(this.tvId)
       : super(TvDetailsCubitState(
+          posterPath: '',
+          backdropPath: '',
           createBy: [],
           episodeRunTime: [],
           firstAirDate: '',
@@ -72,6 +76,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           isFavorite: false,
         )) {
     emit(TvDetailsCubitState(
+      posterPath: state.posterPath,
+      backdropPath: state.backdropPath,
       createBy: state.createBy,
       episodeRunTime: state.episodeRunTime,
       firstAirDate: state.firstAirDate,
@@ -156,10 +162,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     }
     data.overview = details.overview;
     data.name = details.name;
-    data.tvDetailsPosterData = TvDetailsPosterData(
-      backdropPath: details.backdropPath,
-      posterPath: details.posterPath,
-    );
+    data.posterPath = details.posterPath ?? '';
+    data.backdropPath = details.backdropPath ?? '';
     data.tvNameData = TvDetailsNameData(name: details.name, tagline: details.tagline);
     // TODO need fix
     data.tvTrailedData.trailerKey = makeTrailerKey(details);
@@ -172,6 +176,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.genres = makeGenres(details);
 
     final newState = state.copyWith(
+      posterPath: data.posterPath,
+      backdropPath: data.backdropPath,
       overview: data.overview,
       name: data.name,
       tagline: data.tvNameData.tagline,

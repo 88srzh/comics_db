@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 
 abstract class MainNavigationRouteNames {
@@ -19,22 +18,19 @@ abstract class MainNavigationRouteNames {
   static const auth = '/auth';
   static const mainScreen = '/main_screen';
   static const movieDetails = '/main_screen/movie_details';
+  static const popularMovie = '/main_screen/popularMovie';
+  static const nowPlayingMovie = '/main_screen/nowPlayingMovie';
+  static const topRatedMovie = '/main_screen/topRatedMovie';
+  static const upcomingMovie = '/main_screen/upcomingMovie';
   static const fullCastAndCrew = '/main_screen/movie_details/fullCastAndCrew';
-  static const tv = '/tv';
+  static const movieTrailer = '/main_screen/movie_details/trailer';
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
   static const tvPopularList = '/main_screen/tvPopular';
   static const tvAiringToday = '/main_screen/tvAiringToday';
-  static const news = '/news';
-  static const trending = 'trending';
-  static const popularMovie = '/main_screen/popularMovie';
-  static const nowPlayingMovie = '/main_screen/nowPlayingMovie';
-  static const networkConnectionError = '/errors/network_connection';
-  static const movieTrailer = '/main_screen/movie_details/trailer';
-  static const topRatedMovie = '/main_screen/topRatedMovie';
-  static const upcomingMovie = '/main_screen/upcomingMovie';
   static const peopleDetails = '/main_screen/peopleDetails';
   static const settings = '/personal_widget';
+  static const networkConnectionError = '/errors/network_connection';
 }
 
 class MainNavigation {
@@ -48,7 +44,6 @@ class MainNavigation {
         ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
 
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
-    MainNavigationRouteNames.tv: (_) => const TvListWidget(),
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
   };
@@ -79,11 +74,6 @@ class MainNavigation {
         final tvId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeTvDetails(tvId),
-          // TODO remove changenotifier
-          // builder: (context) => ChangeNotifierProvider(
-          //   create: (context) => TvDetailsModel(tvId),
-          //   child: const TvDetailsWidget(),
-          // ),
         );
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;

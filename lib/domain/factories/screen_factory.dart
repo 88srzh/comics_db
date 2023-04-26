@@ -98,26 +98,17 @@ class ScreenFactory {
 
   Widget makeMovieDetails(int movieId) {
     //   TODO: should fix
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
+        return BlocProvider(
           create: (_) => MovieDetailsCubit(movieId),
-        ),
-      ],
-      child: const MovieDetailsWidget(),
-    );
+          child: const MovieDetailsWidget(),
+        );
   }
 
   Widget makeTvDetails(int tvId) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
+        return BlocProvider(
           create: (_) => TvDetailsCubit(tvId),
           child: const TvDetailsWidget(),
-        ),
-      ],
-      child: const TvDetailsWidget(),
-    );
+        );
   }
 
   Widget makePeopleDetails(int id) {
