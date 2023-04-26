@@ -43,9 +43,11 @@ class TvTopPosterWidget extends StatelessWidget {
                 width: 174.0,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: posterPath != null
-                      ? Image.network(ImageDownloader.imageUrl(posterPath))
-                      : Image.asset(AppImages.noImageAvailable),
+                  child: CachedNetworkImage(
+                    imageUrl: ImageDownloader.imageUrl(posterPath ?? ''),
+                    placeholder: (context, url) => const LoadingIndicatorWidget(),
+                    errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                  ),
                 ),
               ),
             ),

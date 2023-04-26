@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_name_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -164,7 +163,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.name = details.name;
     data.posterPath = details.posterPath ?? '';
     data.backdropPath = details.backdropPath ?? '';
-    data.tvNameData = TvDetailsNameData(name: details.name, tagline: details.tagline);
+    data.name = details.name;
+    data.tagline = details.tagline;
+
     // TODO need fix
     data.tvTrailedData.trailerKey = makeTrailerKey(details);
 
@@ -180,7 +181,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       backdropPath: data.backdropPath,
       overview: data.overview,
       name: data.name,
-      tagline: data.tvNameData.tagline,
+      tagline: data.tagline,
       voteCount: data.tvDetailsScoresData.voteCount,
       popularity: data.tvDetailsScoresData.popularity,
       voteAverage: data.tvDetailsScoresData.voteAverage,

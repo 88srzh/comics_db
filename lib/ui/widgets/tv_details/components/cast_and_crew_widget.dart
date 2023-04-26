@@ -44,8 +44,6 @@ class _TvActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = Provider.of<TvDetailsModel>(context, listen: true);
-    // var cast = model.tvDetails?.credits.cast;
     var cubit = context.watch<TvDetailsCubit>();
     var cast = cubit.state.credits.cast;
     if (cast.isEmpty) return const SizedBox.shrink();
@@ -67,9 +65,6 @@ class _TvActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = Provider.of<TvDetailsModel>(context, listen: false);
-    // final actor = model.tvDetails?.credits.cast[actorIndex];
-    // final backdropPath = actor?.profilePath;
     var cubit = context.watch<TvDetailsCubit>();
     var actor = cubit.state.credits.cast[actorIndex];
     final backdropPath = actor.profilePath;
