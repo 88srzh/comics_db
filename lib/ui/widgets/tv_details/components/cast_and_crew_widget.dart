@@ -1,22 +1,24 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvCastWidget extends StatelessWidget {
   const TvCastWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
+    if (actorsData.isNotEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
@@ -44,11 +46,11 @@ class _TvActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<TvDetailsCubit>();
-    var cast = cubit.data.;
-    if (cast.isEmpty) return const SizedBox.shrink();
+    var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
+    // var actorsData = context.read<TvDetailsCubit>().state.actorsData;
+    if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: cast.length,
+      itemCount: actorsData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -65,8 +67,9 @@ class _TvActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<TvDetailsCubit>();
-    var actor = cubit.state.credits.cast[actorIndex];
+    var cubit = context.read<TvDetailsCubit>();
+    // var actor = cubit.data.actorsData[actorIndex];
+    var actor = cubit.state.actorsData[actorIndex];
     final backdropPath = actor.profilePath;
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Padding(

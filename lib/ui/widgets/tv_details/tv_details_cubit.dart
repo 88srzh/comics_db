@@ -1,11 +1,8 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -16,6 +13,10 @@ import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 import 'package:comics_db_app/domain/services/tv_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 
 part 'tv_details_state.dart';
 
@@ -74,6 +75,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           credits: TvDetailsCredits(cast: [], crew: []),
           videos: TvDetailsVideos(results: []),
           isFavorite: false,
+          actorsData: [],
+          peopleData: [],
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -110,6 +113,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       videos: state.videos,
       localeTag: state.localeTag,
       isFavorite: state.isFavorite,
+      actorsData: state.actorsData,
+      peopleData: state.peopleData,
     ));
   }
 
@@ -167,12 +172,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.name = details.name;
     data.tagline = details.tagline;
     data.actorsData = details.credits.cast
-        .map((e) => TvDetailsActorData(
-              name: e.name,
-              character: e.character,
-              profilePath: e.profilePath,
-            ))
+        .map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
+    data.peopleData = makePeopleData(details);
 
     // TODO need fix
     data.tvTrailedData.trailerKey = makeTrailerKey(details);
@@ -194,6 +196,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       popularity: data.tvDetailsScoresData.popularity,
       voteAverage: data.tvDetailsScoresData.voteAverage,
       genres: data.genres,
+      peopleData: data.peopleData,
+      actorsData: data.actorsData,
 
       // videos: data.tvTrailedData.trailerKey,
     );
@@ -220,6 +224,16 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       texts.add(genresNames.join(', '));
     }
     return texts.join(' ');
+  }
+
+  List<List<TvDetailsPeopleData>> makePeopleData(TVDetails details) {
+    var crew = details.credits.crew.map((e) => TvDetailsPeopleData(name: e.name, job: e.job)).toList();
+    crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
+    var crewChunks = <List<TvDetailsPeopleData>>[];
+    for (var i = 0; i < crew.length; i += 2) {
+      crewChunks.add(crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2));
+    }
+    return crewChunks;
   }
 
   Future<void> toggleFavoriteTv(BuildContext context) async {

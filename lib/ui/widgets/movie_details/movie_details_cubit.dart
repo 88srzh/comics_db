@@ -228,9 +228,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<MovieDetailsMoviePeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {
-      crewChunks.add(
-        crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2),
-      );
+      crewChunks.add(crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2));
     }
     return crewChunks;
   }
