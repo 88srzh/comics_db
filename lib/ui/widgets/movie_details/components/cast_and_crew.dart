@@ -20,8 +20,7 @@ class CastWidget extends StatelessWidget {
     var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(
-          left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -65,8 +64,7 @@ class _MovieActorListWidget extends StatelessWidget {
 class _MovieActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _MovieActorListItemWidget({Key? key, required this.actorIndex})
-      : super(key: key);
+  const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +75,10 @@ class _MovieActorListItemWidget extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: context.read<ThemeBloc>().isDarkTheme
-              ? DarkThemeColors.kPrimaryColor
-              : Colors.white,
+          color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
           border: Border.all(
-            color: context.read<ThemeBloc>().isDarkTheme
-                ? Colors.white.withOpacity(0.2)
-                : Colors.black.withOpacity(0.2),
+            color:
+                context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
           ),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_voteAverage_widget.dart';
@@ -37,22 +38,13 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     final favorite = cubit.state.isFavorite;
 
     // TODO remove to separate file
-    Widget fab(VoidCallback onPressed) {
-      return FloatingActionButton(
-        elevation: 0.0,
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
-        backgroundColor: Colors.pinkAccent,
-        onPressed: onPressed,
-        child: favorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
-      );
-    }
     // var tvTrailerData =
     //     context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
     // final tvTrailerKey = tvTrailerData.trailerKey;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Tv Details'),
-      floatingActionButton: fab(() => cubit.toggleFavoriteTv(context)),
+      floatingActionButton: fab(() => cubit.toggleFavoriteTv(context), favorite),
       body: ListView(
         children: [
           Column(

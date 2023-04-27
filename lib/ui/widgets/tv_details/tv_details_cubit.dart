@@ -26,7 +26,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   final movieAndTvClient = MovieAndTvApiClient();
   final int tvId;
   final _tvService = TvService();
-  String _locale = '';
 
   TvDetailsCubit(this.tvId)
       : super(TvDetailsCubitState(
@@ -120,11 +119,14 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   String stringFromDate(DateTime? date) => date != null ? dateFormat.format(date) : '';
 
-  Future<void> setupLocale(BuildContext context) async {
-    final locale = Localizations.localeOf(context).toLanguageTag();
-    if (_locale == locale) return;
-    _locale = locale;
-    dateFormat = DateFormat.yMMMd(locale);
+  Future<void> setupLocale(BuildContext context, String localeTag) async {
+    // final locale = Localizations.localeOf(context).toLanguageTag();
+    // if (_locale == locale) return;
+    // _locale = locale;
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
+    dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null, false);
     await loadTvDetails(context);
   }
@@ -169,12 +171,12 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.name = details.name;
     data.posterPath = details.posterPath ?? '';
     data.backdropPath = details.backdropPath ?? '';
-    data.name = details.name;
     data.tagline = details.tagline;
     data.actorsData = details.credits.cast
         .map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath))
         .toList();
     data.peopleData = makePeopleData(details);
+    data.genres = makeGenres(details);
 
     // TODO need fix
     data.tvTrailedData.trailerKey = makeTrailerKey(details);
@@ -184,7 +186,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       popularity: details.voteAverage,
       voteAverage: details.voteAverage,
     );
-    data.genres = makeGenres(details);
+
+    var actorsData = data.actorsData;
+    var peopleData = data.peopleData;
 
     final newState = state.copyWith(
       posterPath: data.posterPath,
@@ -196,8 +200,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       popularity: data.tvDetailsScoresData.popularity,
       voteAverage: data.tvDetailsScoresData.voteAverage,
       genres: data.genres,
-      peopleData: data.peopleData,
-      actorsData: data.actorsData,
+      peopleData: peopleData,
+      actorsData: actorsData,
 
       // videos: data.tvTrailedData.trailerKey,
     );

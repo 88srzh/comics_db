@@ -46,8 +46,7 @@ class _TvActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context.watch<TvDetailsCubit>().state.credits.cast;
-    // var actorsData = context.read<TvDetailsCubit>().state.actorsData;
+    var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: actorsData.length,
@@ -68,7 +67,6 @@ class _TvActorListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<TvDetailsCubit>();
-    // var actor = cubit.data.actorsData[actorIndex];
     var actor = cubit.data.actorsData[actorIndex];
     final backdropPath = actor.profilePath;
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
