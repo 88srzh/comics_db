@@ -1,3 +1,5 @@
+part of 'tv_popular_list_bloc.dart';
+
 abstract class TvListEvent {}
 
 class TvListEventLoadNextPage extends TvListEvent {
