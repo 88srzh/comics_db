@@ -120,9 +120,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   String stringFromDate(DateTime? date) => date != null ? dateFormat.format(date) : '';
 
   Future<void> setupLocale(BuildContext context, String localeTag) async {
-    // final locale = Localizations.localeOf(context).toLanguageTag();
-    // if (_locale == locale) return;
-    // _locale = locale;
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -163,7 +160,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     await loadTvDetails(context);
   }
 
-  void updateData(TVDetails? details, bool isFavorite) {
+  Future<void> updateData(TVDetails? details, bool isFavorite)  async {
     if (details == null) {
       return;
     }

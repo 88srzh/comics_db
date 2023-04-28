@@ -51,84 +51,74 @@ class MyApp extends StatelessWidget {
           create: (_) => AccountDetailsCubit(),
         ),
         BlocProvider(
-          create: (_) =>
-              TopRatedMovieListCubit(
-                topRatedMovieListBloc: TopRatedMovieListBloc(
-                  const MovieListState.initial(),
-                ),
-              ),
+          create: (_) => TopRatedMovieListCubit(
+            topRatedMovieListBloc: TopRatedMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              MoviePopularListCubit(
-                movieListBloc: MoviePopularListBloc(
-                  const MovieListState.initial(),
-                ),
-              ),
+          create: (_) => MoviePopularListCubit(
+            movieListBloc: MoviePopularListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              UpcomingMovieListCubit(
-                upcomingMovieListBloc: UpcomingMovieListBloc(
-                  const MovieListState.initial(),
-                ),
-              ),
+          create: (_) => UpcomingMovieListCubit(
+            upcomingMovieListBloc: UpcomingMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              NowPlayingMovieListCubit(
-                nowPlayingMovieListBloc: NowPlayingMovieListBloc(
-                  const MovieListState.initial(),
-                ),
-              ),
+          create: (_) => NowPlayingMovieListCubit(
+            nowPlayingMovieListBloc: NowPlayingMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              TvPopularListCubit(
-                tvPopularListBloc: TvPopularListBloc(
-                  TvListState.initial(),
-                ),
-              ),
+          create: (_) => TvPopularListCubit(
+            tvPopularListBloc: TvPopularListBloc(
+              TvListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              TvAiringTodayListCubit(
-                tvAiringTodayListBloc: TvAiringTodayListBloc(
-                  TvListState.initial(),
-                ),
-              ),
+          create: (_) => TvAiringTodayListCubit(
+            tvAiringTodayListBloc: TvAiringTodayListBloc(
+              TvListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              TvTopRatedListCubit(
-                tvTopRatedListBloc: TvTopRatedListBloc(
-                  TvListState.initial(),
-                ),
-              ),
+          create: (_) => TvTopRatedListCubit(
+            tvTopRatedListBloc: TvTopRatedListBloc(
+              TvListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              TvOnTheAirListCubit(
-                tvOnTheAirListBloc: TvOnTheAirListBloc(
-                  TvListState.initial(),
-                ),
-              ),
+          create: (_) => TvOnTheAirListCubit(
+            tvOnTheAirListBloc: TvOnTheAirListBloc(
+              TvListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              PeopleListCubit(
-                peopleListBloc: PeopleListBloc(
-                  const PeopleListState.initial(),
-                ),
-              ),
+          create: (_) => PeopleListCubit(
+            peopleListBloc: PeopleListBloc(
+              const PeopleListState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
-          create: (_) =>
-              FavoriteMovieListCubit(
-                  favoriteMovieListBloc: FavoriteMovieListBloc(
-                    const MovieListState.initial(),
-                  ),
-              ),
+          create: (_) => FavoriteMovieListCubit(
+            favoriteMovieListBloc: FavoriteMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
@@ -139,12 +129,6 @@ class MyApp extends StatelessWidget {
               PointerDeviceKind.mouse,
               PointerDeviceKind.touch,
             }),
-            // builder: (context, child) {
-            //   return ScrollConfiguration(
-            //     behavior: CustomBehavior(),
-            //     child: child!,
-            //   );
-            // },
             theme: state.theme,
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,

@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:provider/provider.dart';
 
 class RatingsRowWidget extends StatelessWidget {
   const RatingsRowWidget({
@@ -21,7 +26,7 @@ class RatingsRowWidget extends StatelessWidget {
       children: [
         const CustomTvDetailsIconWidget(icon: MdiIcons.starOutline),
         const SizedBox(width: 2),
-        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: voteAverage.toString()),
+        CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: voteAverage.toStringAsFixed(1)),
         const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: ' / 10'),
         const SizedBox(width: 20),
         const CustomTvDetailsIconWidget(icon: MdiIcons.accountOutline),
@@ -35,4 +40,3 @@ class RatingsRowWidget extends StatelessWidget {
     );
   }
 }
-
