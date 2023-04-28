@@ -46,10 +46,10 @@ class _TvActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context.watch<TvDetailsCubit>().state.actorsData;
-    if (actorsData.isEmpty) return const SizedBox.shrink();
+    var peopleData = context.watch<TvDetailsCubit>().state.peopleData;
+    if (peopleData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: actorsData.length,
+      itemCount: peopleData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {

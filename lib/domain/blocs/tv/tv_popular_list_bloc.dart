@@ -5,25 +5,10 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_event.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
-
-abstract class TvListEvent {}
-
-class TvListEventLoadNextPage extends TvListEvent {
-  final String locale;
-
-  TvListEventLoadNextPage(this.locale);
-}
-
-class TvListEventLoadReset extends TvListEvent {}
-
-class TvListEventSearchTv extends TvListEvent {
-  final String query;
-
-  TvListEventSearchTv(this.query);
-}
 
 class TvListContainer {
   final List<TV> tvs;
