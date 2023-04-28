@@ -17,7 +17,8 @@ class TvCastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context.watch<TvDetailsCubit>().state.peopleData;
+    var actorsData = context.watch<TvDetailsCubit>().data.peopleData;
+    // var cubit = context.watch<TvDetailsCubit>();
     if (actorsData.isNotEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
@@ -46,7 +47,8 @@ class _TvActorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var peopleData = context.watch<TvDetailsCubit>().state.peopleData;
+    var peopleData = context.watch<TvDetailsCubit>().data.actorsData;
+    // var peopleData = context.watch<TvDetailsCubit>().data.peopleData;
     if (peopleData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       itemCount: peopleData.length,
