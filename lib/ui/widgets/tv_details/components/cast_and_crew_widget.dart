@@ -96,7 +96,7 @@ class _TvActorListItemWidget extends StatelessWidget {
             children: [
               backdropPath != null
                   ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                  : const Image(image: AssetImage(AppImages.noImage)),
+                  : const Image(image: AssetImage(AppImages.noImageAvailable)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
