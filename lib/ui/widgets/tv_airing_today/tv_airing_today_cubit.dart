@@ -25,8 +25,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
       : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
     Future.microtask(() {
       _onState(tvAiringTodayListBloc.state);
-      tvAiringTodayListBlocSubscription =
-          tvAiringTodayListBloc.stream.listen(_onState);
+      tvAiringTodayListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);
     });
   }
 
@@ -40,8 +39,8 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
-    tvAiringTodayListBloc.add(TvListEventLoadReset());
-    tvAiringTodayListBloc.add(TvListEventLoadNextPage(localeTag));
+    tvAiringTodayListBloc.add(const TvListEventLoadReset());
+    tvAiringTodayListBloc.add(TvListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -52,29 +51,27 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
 
   TvListData _makeListData(TV tv) {
     return TvListData(
-        id: tv.id,
-        name: tv.name,
-        overview: tv.overview,
-        posterPath: tv.posterPath,
-        backdropPath: tv.backdropPath);
+        id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
   }
 
   void showedAiringTodayTvAtIndex(int index) {
     if (index < state.tvs.length - 1) return;
-    tvAiringTodayListBloc.add(TvListEventLoadNextPage(state.localeTag));
+    tvAiringTodayListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchAiringTodayTv(String text) {
     searchDebounce?.cancel();
-    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      tvAiringTodayListBloc.add(TvListEventSearchTv(text));
-      tvAiringTodayListBloc.add(TvListEventLoadNextPage(state.localeTag));
-    });
+    searchDebounce = Timer(
+      const Duration(milliseconds: 300),
+      () async {
+        tvAiringTodayListBloc.add(TvListEventSearchTv(query: text));
+        tvAiringTodayListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
+      },
+    );
   }
 
   void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 }

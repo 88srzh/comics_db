@@ -42,8 +42,8 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     dateFormat = DateFormat.yMMMd(localeTag);
-    tvTopRatedListBloc.add(TvListEventLoadReset());
-    tvTopRatedListBloc.add(TvListEventLoadNextPage(localeTag));
+    tvTopRatedListBloc.add(const TvListEventLoadReset());
+    tvTopRatedListBloc.add(TvListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -63,14 +63,14 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
 
   void showedTopRatedTvAtIndex(int index) {
     if (index < state.tvs.length - 1) return;
-    tvTopRatedListBloc.add(TvListEventLoadNextPage(state.localeTag));
+    tvTopRatedListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchPopularTv(String text) {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      tvTopRatedListBloc.add(TvListEventSearchTv(text));
-      tvTopRatedListBloc.add(TvListEventLoadNextPage(state.localeTag));
+      tvTopRatedListBloc.add(TvListEventSearchTv(query: text));
+      tvTopRatedListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
     });
   }
 

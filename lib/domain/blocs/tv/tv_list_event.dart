@@ -1,17 +1,10 @@
 part of 'tv_popular_list_bloc.dart';
 
-abstract class TvListEvent {}
+@freezed
+class TvListEvent  with _$TvListEvent {
+  const factory TvListEvent.loadNextPage({required String locale}) = TvListEventLoadNextPage;
 
-class TvListEventLoadNextPage extends TvListEvent {
-  final String locale;
+  const factory TvListEvent.reset() = TvListEventLoadReset;
 
-  TvListEventLoadNextPage(this.locale);
-}
-
-class TvListEventLoadReset extends TvListEvent {}
-
-class TvListEventSearchTv extends TvListEvent {
-  final String query;
-
-  TvListEventSearchTv(this.query);
+  const factory TvListEvent.search({required String query}) = TvListEventSearchTv;
 }
