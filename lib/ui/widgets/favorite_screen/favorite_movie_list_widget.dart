@@ -47,6 +47,7 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
       body: Stack(
         children: [
           ListView.builder(
+            padding: const EdgeInsets.only(top: 70.0),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             itemCount: cubit.state.movies.length,
             itemExtent: 165,
@@ -60,6 +61,33 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
                 child: _FavoriteMovieListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
               );
             },
+          ),
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Padding(
+                  // TODO fix padding
+                  padding: const EdgeInsets.only(top: 10.0, left: 120.0),
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: const Text('Movies'),
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0, right: 100.0),
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: const Text('TV'),
+                  ),
+                ),
+              ),
+            ],
           ),
           // Padding(
           //   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
