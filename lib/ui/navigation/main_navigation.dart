@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';

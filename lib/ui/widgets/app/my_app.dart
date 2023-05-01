@@ -24,7 +24,7 @@ import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
