@@ -17,6 +17,7 @@ import 'package:comics_db_app/domain/blocs/movie/top_rated_movie_list_bloc.dart'
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/favorite_tv_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_on_the_air_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
@@ -102,6 +104,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => TvOnTheAirListCubit(
             tvOnTheAirListBloc: TvOnTheAirListBloc(
+              TvListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => FavoriteMovieListCubit(
+            favoriteMovieListBloc: FavoriteMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => FavoriteTvListCubit(
+            favoriteTvListBloc: FavoriteTvListBloc(
               TvListState.initial(),
             ),
           ),

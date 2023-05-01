@@ -25,7 +25,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   var tv = <TV>[];
 
   TvAiringTodayListCubit({required this.tvAiringTodayListBloc})
-      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
+      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(() {
       _onState(tvAiringTodayListBloc.state);
       tvAiringTodayListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);

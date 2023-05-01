@@ -12,27 +12,27 @@ import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_cubit.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 
-class FavoriteMovieListWidget extends StatefulWidget {
-  const FavoriteMovieListWidget({Key? key}) : super(key: key);
+class FavoriteTvListWidget extends StatefulWidget {
+  const FavoriteTvListWidget({Key? key}) : super(key: key);
 
   @override
-  State<FavoriteMovieListWidget> createState() => _FavoriteMovieListWidgetState();
+  State<FavoriteTvListWidget> createState() => _FavoriteTvListWidgetState();
 }
 
-class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
+class _FavoriteTvListWidgetState extends State<FavoriteTvListWidget> {
   @override
   void didChangeDependencies() {
     final locale = Localizations.localeOf(context);
-    context.read<FavoriteMovieListCubit>().setupFavoriteMovieLocale(locale.languageCode);
+    context.read<FavoriteTvListCubit>().setupFavoriteTvLocale(locale.languageCode);
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<FavoriteMovieListCubit>();
+    var cubit = context.watch<FavoriteTvListCubit>();
     final locale = Localizations.localeOf(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -40,24 +40,24 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
         child: const Icon(IconData(0xf00e9, fontFamily: 'MaterialIcons')),
         onPressed: () => setState(() {
-          cubit.updateFavoriteMovies(locale.languageCode);
+          cubit.updateFavoriteTvs(locale.languageCode);
         }),
       ),
-      appBar: const CustomAppBar(title: 'Favorite Movies'),
+      appBar: const CustomAppBar(title: 'Favorite Tv Shows'),
       body: Stack(
         children: [
           ListView.builder(
             padding: const EdgeInsets.only(top: 70.0),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            itemCount: cubit.state.movies.length,
+            itemCount: cubit.state.tvs.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              cubit.showedFavoriteMovieAtIndex(index);
-              final movie = cubit.state.movies[index];
-              final posterPath = movie.posterPath;
+              cubit.showedFavoriteTvAtIndex(index);
+              final tv = cubit.state.tvs[index];
+              final posterPath = tv.posterPath;
               return InkWell(
-                onTap: () => onMovieTap(context, index),
-                child: _FavoriteMovieListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+                onTap: () => onTvTap(context, index),
+                child: _FavoriteTvListRowWidget(posterPath: posterPath, tv: tv, cubit: cubit, index: index),
               );
             },
           ),
@@ -97,27 +97,27 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
     );
   }
 
-  void onMovieTap(BuildContext context, int index) {
-    final cubit = context.read<FavoriteMovieListCubit>();
-    final movieId = cubit.state.movies[index].id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+  void onTvTap(BuildContext context, int index) {
+    final cubit = context.read<FavoriteTvListCubit>();
+    final tvId = cubit.state.tvs[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: tvId);
   }
 }
 
-class _FavoriteMovieListRowWidget extends StatelessWidget {
+class _FavoriteTvListRowWidget extends StatelessWidget {
   final int index;
 
-  const _FavoriteMovieListRowWidget({
+  const _FavoriteTvListRowWidget({
     Key? key,
     required this.posterPath,
-    required this.movie,
+    required this.tv,
     required this.cubit,
     required this.index,
   }) : super(key: key);
 
   final String? posterPath;
-  final MovieListData movie;
-  final FavoriteMovieListCubit cubit;
+  final TvListData tv;
+  final FavoriteTvListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -134,9 +134,9 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
               children: [
                 posterPath != null
                     ? Image.network(
-                        ImageDownloader.imageUrl(posterPath!),
-                        width: 95,
-                      )
+                  ImageDownloader.imageUrl(posterPath!),
+                  width: 95,
+                )
                     : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(
@@ -145,17 +145,17 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20.0),
                       CustomCastListTextWidget(
-                        text: movie.originalTitle,
+                        text: tv.name,
                         maxLines: 1,
                       ),
                       const SizedBox(height: 5.0),
                       CustomCastListTextWidget(
-                        text: movie.releaseDate,
+                        text: tv.firstAirDate ?? '',
                         maxLines: 1,
                       ),
                       const SizedBox(height: 15.0),
                       CustomCastListTextWidget(
-                        text: movie.overview ?? '',
+                        text: tv.overview,
                         maxLines: 3,
                       ),
                     ],

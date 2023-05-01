@@ -24,7 +24,7 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
   var tv = <TV>[];
 
   TvTopRatedListCubit({required this.tvTopRatedListBloc})
-      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
+      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(() {
       _onState(tvTopRatedListBloc.state);
       tvListBlocSubscription = tvTopRatedListBloc.stream.listen(_onState);

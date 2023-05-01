@@ -179,6 +179,34 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<PopularTVResponse> favoriteTvsList(
+    int page,
+    String locale,
+    String apiKey,
+    String? sessionId,
+    int? accountId,
+    int totalResults,
+  ) {
+    PopularTVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/account/$accountId/favorite/tv',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+        'totalResults': totalResults.toString(),
+      },
+    );
+    return result;
+  }
+
   // Future<PopularAndTopRatedMovieResponse> similarMovie(
   //     int movieId, int page, String locale, String apiKey) {
   //   PopularAndTopRatedMovieResponse parser(dynamic json) {
@@ -279,6 +307,24 @@ class MovieAndTvApiClient {
 
     final result = _networkClient.get(
       '/movie/$movieId/account_states',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+      },
+    );
+    return result;
+  }
+
+  Future<bool> isFavoriteTv(int tvId, String sessionId) async {
+    bool parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['favorite'] as bool;
+      return result;
+    }
+
+    final result = _networkClient.get(
+      '/tv/$tvId/account_states',
       parser,
       <String, dynamic>{
         'api_key': Configuration.apiKey,
