@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_favorite_button.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -14,22 +15,15 @@ class FavoriteScreenWidget extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: SizedBox(
-                width: 200.0,
-                height: 200.0,
-                child: OutlinedButton(
-                  onPressed: () => Navigator.pushNamed(context, MainNavigationRouteNames.favoriteMovies),
-                  child: const Text('Movies'),
-                ),
+              child: CustomFavoriteButton(
+                onPressed: () => Navigator.pushNamed(context, MainNavigationRouteNames.favoriteMovies),
+                text: 'Movies',
               ),
             ),
             Expanded(
-              child: SizedBox(
-                height: 200.0,
-                child: OutlinedButton(
-                  onPressed: () => Navigator.pushNamed(context, MainNavigationRouteNames.favoriteTvs),
-                  child: const Text('TV'),
-                ),
+              child: CustomFavoriteButton(
+                onPressed: () => Navigator.pushNamed(context, MainNavigationRouteNames.favoriteTvs),
+                text: 'TV shows',
               ),
             ),
           ],
