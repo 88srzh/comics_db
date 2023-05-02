@@ -1,3 +1,7 @@
+## 0.0.8.1
+
+- Added `Favorite TV shows`.
+
 ## 0.0.8
 
 - Added `Favorite screen` and `Favorite button`.
