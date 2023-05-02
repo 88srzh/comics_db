@@ -9,14 +9,9 @@ import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_widget.dart
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
 
-class TvListWidget extends StatefulWidget {
+class TvListWidget extends StatelessWidget {
   const TvListWidget({Key? key}) : super(key: key);
 
-  @override
-  State<TvListWidget> createState() => _TvListWidgetState();
-}
-
-class _TvListWidgetState extends State<TvListWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

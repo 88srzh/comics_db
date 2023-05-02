@@ -44,6 +44,7 @@ class MovieService {
     return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
   }
 
+  // TODO move to separate file
   Future<PeopleDetailsLocal> loadPeopleDetails({required int id, required String locale}) async {
     final peopleDetails = await _movieAndTvApiClient.popularPeopleDetails(id, locale);
     return PeopleDetailsLocal(details: peopleDetails);

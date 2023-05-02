@@ -1,6 +1,3 @@
-// Dart imports:
-import 'dart:async';
-
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
@@ -76,7 +73,8 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
     return newContainer;
   }
 
-  Future<MovieListContainer?> loadFavoriteMovies(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
+  Future<MovieListContainer?> loadFavoriteMovies(
+      MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final totalResults = state.movieContainer.totalResults;
     final result = await loader(totalResults);

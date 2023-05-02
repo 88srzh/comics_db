@@ -1,4 +1,9 @@
+/*
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_name_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_poster_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,57 +16,6 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/domain/services/auth_view_cubit.dart';
-
-class TvDetailsPosterData {
-  final String? posterPath;
-  final String? backdropPath;
-  final IconData favoriteIcon;
-
-  TvDetailsPosterData({
-    this.posterPath,
-    this.backdropPath,
-    this.favoriteIcon = Icons.favorite_outline,
-  });
-}
-
-class TvDetailsNameData {
-  final String name;
-  final String tagline;
-
-  TvDetailsNameData({required this.name, required this.tagline});
-}
-
-class TvDetailsTrailerData {
-  final String? trailerKey;
-
-  TvDetailsTrailerData({this.trailerKey});
-}
-
-class TvDetailsScoresData {
-  // TODO change voteAverage to number
-  final String? voteAverage;
-  final int voteCount;
-  final double popularity;
-
-  TvDetailsScoresData({
-    this.voteAverage,
-    required this.voteCount,
-    required this.popularity,
-  });
-}
-
-class TvDetailsData {
-  String name = '';
-  // String tagline = '';
-  bool isLoading = true;
-  String overview = '';
-  String genres = '';
-  TvDetailsPosterData tvDetailsPosterData = TvDetailsPosterData();
-  TvDetailsNameData tvNameData = TvDetailsNameData(name: '', tagline: '');
-  TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
-  TvDetailsScoresData tvDetailsScoresData =
-      TvDetailsScoresData(voteCount: 0, popularity: 0);
-}
 
 class TvDetailsModel extends ChangeNotifier {
   final authService = AuthService();
@@ -134,7 +88,7 @@ class TvDetailsModel extends ChangeNotifier {
     tvData.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
       popularity: details.popularity,
-      voteAverage: details.voteAverage.toString(),
+      voteAverage: details.voteAverage,
     );
     tvData.genres = makeGenres(details);
     notifyListeners();
@@ -183,3 +137,4 @@ class TvDetailsModel extends ChangeNotifier {
     }
   }
 }
+*/

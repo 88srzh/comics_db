@@ -1,68 +1,20 @@
 // Package imports:
-import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 
-abstract class TvListEvent {}
+part 'tv_popular_list_bloc.freezed.dart';
 
-class TvListEventLoadNextPage extends TvListEvent {
-  final String locale;
+part 'tv_list_event.dart';
 
-  TvListEventLoadNextPage(this.locale);
-}
-
-class TvListEventLoadReset extends TvListEvent {}
-
-class TvListEventSearchTv extends TvListEvent {
-  final String query;
-
-  TvListEventSearchTv(this.query);
-}
-
-class TvListContainer {
-  final List<TV> tvs;
-  final int currentPage;
-  final int totalPage;
-
-  bool get isComplete => currentPage >= totalPage;
-
-  const TvListContainer.initial()
-      : tvs = const <TV>[],
-        currentPage = 0,
-        totalPage = 1;
-
-  TvListContainer({required this.tvs, required this.currentPage, required this.totalPage});
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is TvListContainer &&
-          runtimeType == other.runtimeType &&
-          tvs == other.tvs &&
-          currentPage == other.currentPage &&
-          totalPage == other.totalPage;
-
-  @override
-  int get hashCode => tvs.hashCode ^ currentPage.hashCode ^ totalPage.hashCode;
-
-  TvListContainer copyWith({
-    List<TV>? tvs,
-    int? currentPage,
-    int? totalPage,
-  }) {
-    return TvListContainer(
-      tvs: tvs ?? this.tvs,
-      currentPage: currentPage ?? this.currentPage,
-      totalPage: totalPage ?? this.totalPage,
-    );
-  }
-}
+part 'tv_list_state.dart';
 
 class TvPopularListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();

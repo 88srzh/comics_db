@@ -1,20 +1,20 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/components/page_transition.dart';
-import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-
-// Project imports:
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+// Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/components/page_transition.dart';
+import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
+import 'package:comics_db_app/ui/widgets/favorite_screen/favorite_screen_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 
 class MainScreenWidget extends HookWidget {
   MainScreenWidget({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class MainScreenWidget extends HookWidget {
     const PopularPeopleListWidget(),
     const MovieListWidget(),
     const TvListWidget(),
-    const FavoriteMovieListWidget(),
+    const FavoriteScreenWidget(),
     const AccountWidget(),
   ];
 

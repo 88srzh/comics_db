@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -33,19 +34,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
 
-    Widget fab(VoidCallback onPressed) {
-      return FloatingActionButton(
-        elevation: 0.0,
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
-        backgroundColor: Colors.pinkAccent,
-        onPressed: onPressed,
-        child: favorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
-      );
-    }
-
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: 'Movie Details'),
-      floatingActionButton: fab(() => cubit.toggleFavoriteMovie(context)),
+      floatingActionButton: fab(() => cubit.toggleFavoriteMovie(context), favorite),
       body: ListView(
         children: [
           Column(
@@ -54,7 +45,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               PeoplesWidget(),
               DescriptionWidget(),
 
-              // TODO doesn't work, the request contains an invalid parameter value, need microtask
+              // TODO doesn't work, the request contains an invalid parameter value, need microtask?
               // TrailerWidget(youtubeKey: trailerKey),
 
               CastWidget(),

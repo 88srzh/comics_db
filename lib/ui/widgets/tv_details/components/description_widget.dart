@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_model.dart';
+import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDescriptionWidget extends StatelessWidget {
   const TvDescriptionWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final overview =
-        context.select((TvDetailsModel model) => model.tvData.overview);
+    final cubit = context.watch<TvDetailsCubit>();
+    final overview = cubit.state.overview;
+    if (overview.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
@@ -28,13 +30,14 @@ class TvDescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
+                child: CustomDescriptionExpandableText(description: overview),
                 // Добавить расстояние между строками
-                child: Text(
-                  overview,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 4,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
+                // child: Text(
+                //   overview,
+                //   overflow: TextOverflow.ellipsis,
+                //   maxLines: 4,
+                //   style: Theme.of(context).textTheme.headlineMedium,
+                // ),
               ),
             ],
           ),

@@ -9,7 +9,6 @@ import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
-import 'package:comics_db_app/domain/blocs/tv/tv_list_state.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_on_the_air_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
@@ -25,7 +24,7 @@ class TvOnTheAirListCubit extends Cubit<TvListCubitState> {
   var tv = <TV>[];
 
   TvOnTheAirListCubit({required this.tvOnTheAirListBloc})
-      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '')) {
+      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(() {
       _onState(tvOnTheAirListBloc.state);
       tvListBlocSubscription = tvOnTheAirListBloc.stream.listen(_onState);
@@ -43,8 +42,8 @@ class TvOnTheAirListCubit extends Cubit<TvListCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     dateFormat = DateFormat.yMMMd(localeTag);
-    tvOnTheAirListBloc.add(TvListEventLoadReset());
-    tvOnTheAirListBloc.add(TvListEventLoadNextPage(localeTag));
+    tvOnTheAirListBloc.add(const TvListEventLoadReset());
+    tvOnTheAirListBloc.add(TvListEventLoadNextPage(locale: localeTag));
   }
 
   @override
@@ -64,14 +63,14 @@ class TvOnTheAirListCubit extends Cubit<TvListCubitState> {
 
   void showedOnTheAirTvAtIndex(int index) {
     if (index < state.tvs.length - 1) return;
-    tvOnTheAirListBloc.add(TvListEventLoadNextPage(state.localeTag));
+    tvOnTheAirListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
   }
 
   void searchPopularTv(String text) {
     searchDebounce?.cancel();
     searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      tvOnTheAirListBloc.add(TvListEventSearchTv(text));
-      tvOnTheAirListBloc.add(TvListEventLoadNextPage(state.localeTag));
+      tvOnTheAirListBloc.add(TvListEventSearchTv(query: text));
+      tvOnTheAirListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
     });
   }
 

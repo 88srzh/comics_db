@@ -1,22 +1,24 @@
 // Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/domain/blocs/movie/favorite_movies_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
+import 'package:comics_db_app/domain/blocs/movie/favorite_movies_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 
 class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
   final FavoriteMovieListBloc favoriteMovieListBloc;
-  late final StreamSubscription<MovieListState> favoriteMoveListBlocSubscription;
+  late final StreamSubscription<MovieListState> favoriteMovieListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
   var movie = <Movie>[];
@@ -26,7 +28,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
     Future.microtask(
       () {
         _onState(favoriteMovieListBloc.state);
-        favoriteMoveListBlocSubscription = favoriteMovieListBloc.stream.listen(_onState);
+        favoriteMovieListBlocSubscription = favoriteMovieListBloc.stream.listen(_onState);
       },
     );
   }
@@ -53,7 +55,7 @@ class FavoriteMovieListCubit extends Cubit<MovieListCubitState> {
 
   @override
   Future<void> close() {
-    favoriteMoveListBlocSubscription.cancel();
+    favoriteMovieListBlocSubscription.cancel();
     return super.close();
   }
 
