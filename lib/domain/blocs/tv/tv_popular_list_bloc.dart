@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -63,12 +64,13 @@ class TvPopularListBloc extends Bloc<TvListEvent, TvListState> {
       tvs: tvs,
       currentPage: result.page,
       totalPage: result.totalPages,
+      totalResults: result.totalResults,
     );
     return newContainer;
   }
 
   Future<void> onTvListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
-    emit(TvListState.initial());
+    emit(const TvListState.initial());
   }
 
   Future<void> onTvListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {

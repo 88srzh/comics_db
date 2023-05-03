@@ -62,7 +62,7 @@ class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
   }
 
   Future<void> onTvListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
-    emit(TvListState.initial());
+    emit(const TvListState.initial());
   }
 
   Future<void> onTvListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {

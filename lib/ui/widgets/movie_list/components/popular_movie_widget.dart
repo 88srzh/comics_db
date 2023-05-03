@@ -23,9 +23,7 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<MoviePopularListCubit>()
-        .setupPopularMovieLocale(locale.languageCode);
+    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
   }
 
   @override
@@ -41,8 +39,7 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
         return InkWell(
           onTap: () => cubit.onMovieTap(context, index),
           child: Padding(
-            padding:
-                const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
             child: Container(
               height: 200,
               width: 114,
@@ -53,9 +50,8 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
               ),
               child: FittedBox(
                 fit: BoxFit.contain,
-                child: posterPath != null
-                    ? Image.network(ImageDownloader.imageUrl(posterPath))
-                    : const SizedBox.shrink(),
+                child:
+                    posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
               ),
             ),
           ),

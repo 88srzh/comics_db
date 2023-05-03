@@ -11,6 +11,7 @@ import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
@@ -30,6 +31,8 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dar
 import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
@@ -75,39 +78,41 @@ class ScreenFactory {
 
   Widget makePopularPeopleList() {
     return BlocProvider(
-      create: (_) => PeopleListCubit(
-        peopleListBloc: PeopleListBloc(
-          const PeopleListState.initial(),
-        ),
-      ),
+      create: (_) =>
+          PeopleListCubit(
+            peopleListBloc: PeopleListBloc(
+              const PeopleListState.initial(),
+            ),
+          ),
       child: const PopularPeopleListWidget(),
     );
   }
 
   Widget makePopularMovieList() {
     return BlocProvider(
-      create: (_) => MoviePopularListCubit(
-        movieListBloc: MoviePopularListBloc(
-          const MovieListState.initial(),
-        ),
-      ),
+      create: (_) =>
+          MoviePopularListCubit(
+            movieListBloc: MoviePopularListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
       child: const MoviePopularListWidget(),
     );
   }
 
   Widget makeMovieDetails(int movieId) {
     //   TODO: should fix
-        return BlocProvider(
-          create: (_) => MovieDetailsCubit(movieId),
-          child: const MovieDetailsWidget(),
-        );
+    return BlocProvider(
+      create: (_) => MovieDetailsCubit(movieId),
+      child: const MovieDetailsWidget(),
+    );
   }
 
   Widget makeTvDetails(int tvId) {
-        return BlocProvider(
-          create: (_) => TvDetailsCubit(tvId),
-          child: const TvDetailsWidget(),
-        );
+    return BlocProvider(
+      create: (_) => TvDetailsCubit(tvId),
+      child: const TvDetailsWidget(),
+    );
   }
 
   Widget makePeopleDetails(int id) {
@@ -130,47 +135,60 @@ class ScreenFactory {
 
   Widget makeTopRatedMovieList() {
     return BlocProvider(
-      create: (_) => MoviePopularListCubit(
-        movieListBloc: MoviePopularListBloc(
-          const MovieListState.initial(),
-        ),
-      ),
+      create: (_) =>
+          MoviePopularListCubit(
+            movieListBloc: MoviePopularListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
       child: const TopRatedMovieWidget(),
     );
   }
 
   Widget makeNowPlayingMovieList() {
     return BlocProvider(
-      create: (_) => NowPlayingMovieListCubit(
-        nowPlayingMovieListBloc: NowPlayingMovieListBloc(
-          const MovieListState.initial(),
-        ),
-      ),
+      create: (_) =>
+          NowPlayingMovieListCubit(
+            nowPlayingMovieListBloc: NowPlayingMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
       child: const MovieNowPlayingListWidget(),
     );
   }
 
   Widget makeUpcomingMovieList() {
     return BlocProvider(
-      create: (_) => UpcomingMovieListCubit(
-        upcomingMovieListBloc: UpcomingMovieListBloc(
-          const MovieListState.initial(),
-        ),
-      ),
+      create: (_) =>
+          UpcomingMovieListCubit(
+            upcomingMovieListBloc: UpcomingMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
       child: const UpcomingMovieWidget(),
     );
   }
 
   Widget makePopularTvList() {
     return BlocProvider(
-      create: (_) => TvPopularListCubit(
-        tvPopularListBloc: TvPopularListBloc(
-          TvListState.initial(),
-        ),
-      ),
+      create: (_) =>
+          TvPopularListCubit(
+            tvPopularListBloc: TvPopularListBloc(
+              const TvListState.initial(),
+            ),
+          ),
       child: const TvPopularListWidget(),
     );
   }
+
+  Widget makeAiringTodayTvList() {
+    return BlocProvider(create: (_) =>
+        TvAiringTodayListCubit(tvAiringTodayListBloc:
+        TvAiringTodayListBloc(const TvListState.initial())), child: const AiringTodayTvsWidget(),
+    );
+  }
+
+}
 
 // Widget makeTvAiringTodayList() {
 //   return BlocProvider(
@@ -182,4 +200,3 @@ class ScreenFactory {
 //     child: const AiringTodayTvsWidget(),
 //   );
 // }*/
-}

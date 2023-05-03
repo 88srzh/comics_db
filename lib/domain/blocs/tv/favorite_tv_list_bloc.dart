@@ -71,6 +71,6 @@ class FavoriteTvListBloc extends Bloc<TvListEvent, TvListState> {
   }
 
   Future<void> onFavoriteTvsListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
-    emit(TvListState.initial());
+    emit(const TvListState.initial());
   }
 }
