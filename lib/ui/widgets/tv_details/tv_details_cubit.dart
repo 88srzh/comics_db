@@ -160,7 +160,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     await loadTvDetails(context);
   }
 
-  Future<void> updateData(TVDetails? details, bool isFavorite)  async {
+  Future<void> updateData(TVDetails? details, bool isFavorite) async {
     if (details == null) {
       return;
     }
@@ -187,6 +187,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var actorsData = data.actorsData;
     var peopleData = data.peopleData;
 
+    // var createdBy = makeCreatedBy(details);
+
     final newState = state.copyWith(
       posterPath: data.posterPath,
       backdropPath: data.backdropPath,
@@ -199,6 +201,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       genres: data.genres,
       peopleData: peopleData,
       actorsData: actorsData,
+      // createBy: createdBy,
 
       // videos: data.tvTrailedData.trailerKey,
     );
