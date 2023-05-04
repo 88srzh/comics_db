@@ -31,13 +31,6 @@ class TvDescriptionWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomDescriptionExpandableText(description: overview),
-                // Добавить расстояние между строками
-                // child: Text(
-                //   overview,
-                //   overflow: TextOverflow.ellipsis,
-                //   maxLines: 4,
-                //   style: Theme.of(context).textTheme.headlineMedium,
-                // ),
               ),
             ],
           ),

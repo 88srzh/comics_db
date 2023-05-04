@@ -9,8 +9,6 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final tvNameData =
-    //     context.select((TvDetailsModel model) => model.tvData.tvNameData);
     final cubit = context.watch<TvDetailsCubit>();
     final name = cubit.state.name;
     final tagline = cubit.state.tagline;
