@@ -16,7 +16,7 @@ class TvListContainer extends Equatable {
       : tvs = const <TV>[],
         currentPage = 0,
         totalPage = 1,
-        totalResults = 1;
+        totalResults = 0;
 
   const TvListContainer({required this.tvs, required this.currentPage, required this.totalPage, required this.totalResults});
 

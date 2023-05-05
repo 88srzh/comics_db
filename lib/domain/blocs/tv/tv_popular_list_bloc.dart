@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,16 +23,16 @@ class TvPopularListBloc extends Bloc<TvListEvent, TvListState> {
   TvPopularListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
-        await onTvListEventLoadNextPage(event, emit);
+        await onPopularTvListEventLoadNextPage(event, emit);
       } else if (event is TvListEventLoadReset) {
-        await onTvListEventLoadReset(event, emit);
+        await onPopularTvListEventLoadReset(event, emit);
       } else if (event is TvListEventSearchTv) {
-        await onTvListEventLoadSearchTv(event, emit);
+        await onPopularTvListEventLoadSearchTv(event, emit);
       }
     }), transformer: sequential());
   }
 
-  Future<void> onTvListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
+  Future<void> onPopularTvListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -63,15 +64,16 @@ class TvPopularListBloc extends Bloc<TvListEvent, TvListState> {
       tvs: tvs,
       currentPage: result.page,
       totalPage: result.totalPages,
+      totalResults: result.totalResults,
     );
     return newContainer;
   }
 
-  Future<void> onTvListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
-    emit(TvListState.initial());
+  Future<void> onPopularTvListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
+    emit(const TvListState.initial());
   }
 
-  Future<void> onTvListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {
+  Future<void> onPopularTvListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {
     if (state.searchQuery == event.query) return;
     final newState = state.copyWith(searchQuery: event.query, searchTvContainer: const TvListContainer.initial());
     emit(newState);

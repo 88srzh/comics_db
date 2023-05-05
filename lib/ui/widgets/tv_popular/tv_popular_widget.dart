@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +6,7 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 
 class PopularTvWidget extends StatefulWidget {
@@ -39,10 +38,10 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
           return InkWell(
             onTap: () => onTvTap(context, index),
             child: _PopularTvListItemWidget(
-              index: index,
+              // index: index,
               posterPath: posterPath,
-              tv: popularTv,
-              cubit: cubit,
+              // tv: popularTv,
+              // cubit: cubit,
             ),
           );
         });
@@ -58,16 +57,16 @@ void onTvTap(BuildContext context, int index) {
 class _PopularTvListItemWidget extends StatelessWidget {
   const _PopularTvListItemWidget({
     Key? key,
-    required this.index,
+    // required this.index,
     required this.posterPath,
-    required this.tv,
-    required this.cubit,
+    // required this.tv,
+    // required this.cubit,
   }) : super(key: key);
 
-  final int index;
+  // final int index;
   final String? posterPath;
-  final TvListData tv;
-  final TvPopularListCubit cubit;
+  // final TvListData tv;
+  // final TvPopularListCubit cubit;
 
   @override
   Widget build(BuildContext context) {

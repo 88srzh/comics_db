@@ -83,28 +83,28 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => TvPopularListCubit(
             tvPopularListBloc: TvPopularListBloc(
-              TvListState.initial(),
+              const TvListState.initial(),
             ),
           ),
         ),
         BlocProvider(
           create: (_) => TvAiringTodayListCubit(
             tvAiringTodayListBloc: TvAiringTodayListBloc(
-              TvListState.initial(),
+              const TvListState.initial(),
             ),
           ),
         ),
         BlocProvider(
           create: (_) => TvTopRatedListCubit(
             tvTopRatedListBloc: TvTopRatedListBloc(
-              TvListState.initial(),
+              const TvListState.initial(),
             ),
           ),
         ),
         BlocProvider(
           create: (_) => TvOnTheAirListCubit(
             tvOnTheAirListBloc: TvOnTheAirListBloc(
-              TvListState.initial(),
+              const TvListState.initial(),
             ),
           ),
         ),
@@ -118,7 +118,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => FavoriteTvListCubit(
             favoriteTvListBloc: FavoriteTvListBloc(
-              TvListState.initial(),
+              const TvListState.initial(),
             ),
           ),
         ),

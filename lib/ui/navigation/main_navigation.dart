@@ -50,6 +50,7 @@ class MainNavigation {
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
+    MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeAiringTodayTvList(),
     MainNavigationRouteNames.favoriteTvs: (_) => const FavoriteTvListWidget(),
     MainNavigationRouteNames.favoriteMovies: (_) => const FavoriteMovieListWidget(),
   };

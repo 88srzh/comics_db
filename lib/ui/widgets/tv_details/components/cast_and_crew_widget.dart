@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -10,6 +11,8 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvCastWidget extends StatelessWidget {
@@ -17,9 +20,10 @@ class TvCastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context.watch<TvDetailsCubit>().data.peopleData;
-    // var cubit = context.watch<TvDetailsCubit>();
-    if (actorsData.isNotEmpty) return const SizedBox.shrink();
+    var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      if (actorsData.isNotEmpty) return const SizedBox.shrink();
+    });
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
@@ -32,9 +36,11 @@ class TvCastWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 250.0,
-            child: Scrollbar(child: _TvActorListWidget()),
+            child: Scrollbar(
+              child: _TvActorListWidget(actorsData: actorsData),
+            ),
           ),
         ],
       ),
@@ -43,15 +49,17 @@ class TvCastWidget extends StatelessWidget {
 }
 
 class _TvActorListWidget extends StatelessWidget {
-  const _TvActorListWidget({Key? key}) : super(key: key);
+  final List<TvDetailsActorData> actorsData;
+
+  const _TvActorListWidget({Key? key, required this.actorsData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var peopleData = context.watch<TvDetailsCubit>().data.actorsData;
+    var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
     // var peopleData = context.watch<TvDetailsCubit>().data.peopleData;
-    if (peopleData.isEmpty) return const SizedBox.shrink();
+    if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: peopleData.length,
+      itemCount: actorsData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -95,8 +103,14 @@ class _TvActorListItemWidget extends StatelessWidget {
           child: Column(
             children: [
               backdropPath != null
-                  ? Image.network(ImageDownloader.imageUrl(backdropPath))
+                  ? CachedNetworkImage(
+                      imageUrl: ImageDownloader.imageUrl(backdropPath),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                    )
                   : const Image(image: AssetImage(AppImages.noImageAvailable)),
+              // ? Image.network(ImageDownloader.imageUrl(backdropPath))
+              // : const Image(image: AssetImage(AppImages.noImageAvailable)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

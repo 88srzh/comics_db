@@ -17,7 +17,6 @@ import 'package:comics_db_app/ui/widgets/tv_list/tv_list_cubit_state.dart';
 
 // Package imports:
 
-
 class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   final TvAiringTodayListBloc tvAiringTodayListBloc;
   late final StreamSubscription<TvListState> tvAiringTodayListBlocSubscription;

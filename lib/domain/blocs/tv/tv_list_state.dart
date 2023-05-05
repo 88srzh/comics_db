@@ -1,6 +1,6 @@
 part of 'tv_popular_list_bloc.dart';
 
-class TvListState {
+class TvListState extends Equatable{
   final TvListContainer tvContainer;
   final TvListContainer searchTvContainer;
   final String searchQuery;
@@ -9,29 +9,19 @@ class TvListState {
 
   List<TV> get tvs => isSearchMode ? searchTvContainer.tvs : tvContainer.tvs;
 
-  TvListState.initial()
+  @override
+  List<Object> get props => [tvContainer, searchTvContainer, searchQuery];
+
+  const TvListState.initial()
       : tvContainer = const TvListContainer.initial(),
         searchTvContainer = const TvListContainer.initial(),
         searchQuery = '';
 
-  TvListState({
+  const TvListState({
     required this.tvContainer,
     required this.searchTvContainer,
     required this.searchQuery,
   });
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is TvListState &&
-              runtimeType == other.runtimeType &&
-              tvContainer == other.tvContainer &&
-              searchTvContainer == other.searchTvContainer &&
-              searchQuery == other.searchQuery;
-
-  @override
-  int get hashCode =>
-      tvContainer.hashCode ^ searchTvContainer.hashCode ^ searchQuery.hashCode;
 
   TvListState copyWith({
     TvListContainer? tvContainer,
