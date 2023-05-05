@@ -1,10 +1,8 @@
 // Flutter imports:
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -13,6 +11,8 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvCastWidget extends StatelessWidget {
@@ -21,7 +21,9 @@ class TvCastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
-    if (actorsData.isNotEmpty) return const SizedBox.shrink();
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      if (actorsData.isNotEmpty) return const SizedBox.shrink();
+    });
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
