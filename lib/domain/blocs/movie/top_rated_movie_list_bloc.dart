@@ -1,14 +1,14 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/domain/entity/movie_response.dart';
 
 class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -72,7 +72,8 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     // add(const MovieListEventLoadReset());
   }
 
-  Future<void> onTopRatedMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
+  Future<void> onTopRatedMovieListEventLoadSearchMovie(
+      MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
     if (state.searchQuery == event.query) return;
     final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
     emit(newState);

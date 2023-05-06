@@ -21,8 +21,7 @@ class PopularTVResponse {
     required this.totalPages,
   });
 
-  factory PopularTVResponse.fromJson(Map<String, dynamic> json) =>
-      _$PopularTVResponseFromJson(json);
+  factory PopularTVResponse.fromJson(Map<String, dynamic> json) => _$PopularTVResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$PopularTVResponseToJson(this);
 }

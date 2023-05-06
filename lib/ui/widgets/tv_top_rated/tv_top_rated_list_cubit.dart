@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -21,7 +21,6 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
   late final StreamSubscription<TvListState> tvListBlocSubscription;
   late DateFormat dateFormat;
   Timer? searchDebounce;
-  var tv = <TV>[];
 
   TvTopRatedListCubit({required this.tvTopRatedListBloc})
       : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
@@ -54,11 +53,12 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
 
   TvListData _makeListData(TV tv) {
     return TvListData(
-        id: tv.id,
-        name: tv.name,
-        overview: tv.overview,
-        posterPath: tv.posterPath,
-        backdropPath: tv.backdropPath);
+      id: tv.id,
+      name: tv.name,
+      overview: tv.overview,
+      posterPath: tv.posterPath,
+      backdropPath: tv.backdropPath,
+    );
   }
 
   void showedTopRatedTvAtIndex(int index) {
@@ -76,7 +76,6 @@ class TvTopRatedListCubit extends Cubit<TvListCubitState> {
 
   void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 }

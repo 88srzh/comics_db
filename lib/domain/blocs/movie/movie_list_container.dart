@@ -24,7 +24,12 @@ class MovieListContainer extends Equatable {
   @override
   List<Object> get props => [movies, currentPage, totalPage, totalResults];
 
-  MovieListContainer copyWith({List<Movie>? movies, int? currentPage, int? totalPage, int? totalResults}) {
+  MovieListContainer copyWith({
+    List<Movie>? movies,
+    int? currentPage,
+    int? totalPage,
+    int? totalResults,
+  }) {
     return MovieListContainer(
       movies: movies ?? this.movies,
       currentPage: currentPage ?? this.currentPage,
