@@ -15,7 +15,6 @@ class TvListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const CustomMainAppBarWidget(),
       body: ListView(
         children: [
           Column(
