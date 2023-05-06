@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
@@ -51,8 +49,8 @@ class MainNavigation {
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeAiringTodayTvList(),
-    MainNavigationRouteNames.favoriteTvs: (_) => const FavoriteTvListWidget(),
-    MainNavigationRouteNames.favoriteMovies: (_) => const FavoriteMovieListWidget(),
+    MainNavigationRouteNames.favoriteTvs: (_) => _screenFactory.makeFavoriteTvList(),
+    MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
