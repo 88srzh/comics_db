@@ -21,7 +21,7 @@ class TvCastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       if (actorsData.isNotEmpty) return const SizedBox.shrink();
     });
     return Padding(

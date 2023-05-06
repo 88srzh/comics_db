@@ -22,9 +22,7 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<NowPlayingMovieListCubit>()
-        .setupNowPlayingMovieLocale(locale.languageCode);
+    context.read<NowPlayingMovieListCubit>().setupNowPlayingMovieLocale(locale.languageCode);
   }
 
   @override
@@ -40,8 +38,7 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
         return InkWell(
           onTap: () => onMovieTap(context, index),
           child: Padding(
-            padding:
-                const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
             child: Container(
               clipBehavior: Clip.antiAlias,
               height: 200,
@@ -53,9 +50,8 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
               // clipBehavior: Clip.antiAlias,
               child: FittedBox(
                 fit: BoxFit.contain,
-                child: posterPath != null
-                    ? Image.network(ImageDownloader.imageUrl(posterPath))
-                    : const SizedBox.shrink(),
+                child:
+                    posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
               ),
             ),
           ),
@@ -67,7 +63,6 @@ class _NowPlayingMovieWidgetState extends State<NowPlayingMovieWidget> {
   void onMovieTap(BuildContext context, int index) {
     final cubit = context.read<NowPlayingMovieListCubit>();
     final movieId = cubit.state.movies[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
 }

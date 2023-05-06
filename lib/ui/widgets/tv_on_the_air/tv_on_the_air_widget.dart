@@ -2,10 +2,13 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_cubit.dart';
 
@@ -20,7 +23,6 @@ class _OnTheAirTvsWidgetState extends State<OnTheAirTvsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final locale = Localizations.localeOf(context);
     context.read<TvOnTheAirListCubit>().setupOnTheAirTvLocale(locale.languageCode);
   }
@@ -29,22 +31,23 @@ class _OnTheAirTvsWidgetState extends State<OnTheAirTvsWidget> {
   Widget build(BuildContext context) {
     final cubit = context.watch<TvOnTheAirListCubit>();
     return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: cubit.state.tvs.length,
-        itemBuilder: (BuildContext context, int index) {
-          cubit.showedOnTheAirTvAtIndex(index);
-          final onTheAirTv = cubit.state.tvs[index];
-          final posterPath = onTheAirTv.posterPath;
-          return InkWell(
-            onTap: () => cubit.onTvTap(context, index),
-            child: _AiringTodayTvsListItemWidget(
-              index: index,
-              posterPath: posterPath,
-              tv: onTheAirTv,
-              cubit: cubit,
-            ),
-          );
-        });
+      scrollDirection: Axis.horizontal,
+      itemCount: cubit.state.tvs.length,
+      itemBuilder: (BuildContext context, int index) {
+        cubit.showedOnTheAirTvAtIndex(index);
+        final onTheAirTv = cubit.state.tvs[index];
+        final posterPath = onTheAirTv.posterPath;
+        return InkWell(
+          onTap: () => cubit.onTvTap(context, index),
+          child: _AiringTodayTvsListItemWidget(
+            index: index,
+            posterPath: posterPath,
+            tv: onTheAirTv,
+            cubit: cubit,
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -75,7 +78,13 @@ class _AiringTodayTvsListItemWidget extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.contain,
-          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const SizedBox.shrink(),
+          child: posterPath != null
+              ? CachedNetworkImage(
+                  imageUrl: ImageDownloader.imageUrl(posterPath!),
+                  placeholder: (context, url) => const LoadingIndicatorWidget(),
+                  errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                )
+              : const SizedBox.shrink(),
         ),
       ),
     );
