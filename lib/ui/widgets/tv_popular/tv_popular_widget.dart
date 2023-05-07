@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 
 class PopularTvWidget extends StatefulWidget {
@@ -38,7 +37,7 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
           final popularTv = cubit.state.tvs[index];
           final posterPath = popularTv.posterPath;
           return InkWell(
-            onTap: () => onTvTap(context, index),
+            onTap: () => cubit.onTvTap(context, index),
             child: Padding(
               padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
               child: Container(
@@ -60,10 +59,4 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
           );
         });
   }
-}
-
-void onTvTap(BuildContext context, int index) {
-  final cubit = context.read<TvPopularListCubit>();
-  final tvId = cubit.state.tvs[index].id;
-  Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: tvId);
 }
