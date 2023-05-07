@@ -1,8 +1,8 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
+import 'package:comics_db_app/ui/components/custom_header_text_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/now_playing_movie_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/popular_movie_widget.dart';
@@ -20,7 +20,6 @@ class MovieListWidget extends StatelessWidget {
     // content: _SearchWidget(),
     // );
     return Scaffold(
-      // appBar: const CustomMainAppBarWidget(),
       body: ListView(
         children: [
           Column(
