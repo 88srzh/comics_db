@@ -16,16 +16,16 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   TvAiringTodayListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
-        await onTvListEventLoadNextPage(event, emit);
+        await onTvAiringTodayListEventLoadNextPage(event, emit);
       } else if (event is TvListEventLoadReset) {
-        await onTvListEventLoadReset(event, emit);
+        await onTvAiringTodayListEventLoadReset(event, emit);
       } else if (event is TvListEventSearchTv) {
-        await onTvListEventLoadSearchTv(event, emit);
+        await onTvAiringTodayListEventLoadSearchTv(event, emit);
       }
     }), transformer: sequential());
   }
 
-  Future<void> onTvListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
+  Future<void> onTvAiringTodayListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -61,11 +61,11 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     return newContainer;
   }
 
-  Future<void> onTvListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
+  Future<void> onTvAiringTodayListEventLoadReset(TvListEventLoadReset event, Emitter<TvListState> emit) async {
     emit(const TvListState.initial());
   }
 
-  Future<void> onTvListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {
+  Future<void> onTvAiringTodayListEventLoadSearchTv(TvListEventSearchTv event, Emitter<TvListState> emit) async {
     if (state.searchQuery == event.query) return;
     final newState = state.copyWith(searchQuery: event.query, searchTvContainer: const TvListContainer.initial());
     emit(newState);

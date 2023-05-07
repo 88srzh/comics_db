@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 
@@ -24,9 +24,7 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context
-        .read<UpcomingMovieListCubit>()
-        .setupUpcomingMovieLocale(locale.languageCode);
+    context.read<UpcomingMovieListCubit>().setupUpcomingMovieLocale(locale.languageCode);
   }
 
   @override

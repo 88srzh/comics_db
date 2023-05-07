@@ -23,10 +23,12 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
 
   TvPopularListCubit({required this.tvPopularListBloc})
       : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
-    Future.microtask(() {
-      _onState(tvPopularListBloc.state);
-      tvListBlocSubscription = tvPopularListBloc.stream.listen(_onState);
-    });
+    Future.microtask(
+      () {
+        _onState(tvPopularListBloc.state);
+        tvListBlocSubscription = tvPopularListBloc.stream.listen(_onState);
+      },
+    );
   }
 
   void _onState(TvListState state) {
