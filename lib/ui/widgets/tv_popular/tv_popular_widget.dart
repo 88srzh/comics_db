@@ -2,9 +2,11 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
@@ -37,11 +39,23 @@ class _PopularTvWidgetState extends State<PopularTvWidget> {
           final posterPath = popularTv.posterPath;
           return InkWell(
             onTap: () => onTvTap(context, index),
-            child: _PopularTvListItemWidget(
-              // index: index,
-              posterPath: posterPath,
-              // tv: popularTv,
-              // cubit: cubit,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
+              child: Container(
+                height: 200,
+                width: 114,
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  color: AppColors.movieBorderLine,
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: posterPath != null
+                      ? CachedNetworkImage(imageUrl: ImageDownloader.imageUrl(posterPath))
+                      : const SizedBox.shrink(),
+                ),
+              ),
             ),
           );
         });
@@ -52,38 +66,4 @@ void onTvTap(BuildContext context, int index) {
   final cubit = context.read<TvPopularListCubit>();
   final tvId = cubit.state.tvs[index].id;
   Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: tvId);
-}
-
-class _PopularTvListItemWidget extends StatelessWidget {
-  const _PopularTvListItemWidget({
-    Key? key,
-    // required this.index,
-    required this.posterPath,
-    // required this.tv,
-    // required this.cubit,
-  }) : super(key: key);
-
-  // final int index;
-  final String? posterPath;
-  // final TvListData tv;
-  // final TvPopularListCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, right: 10.0),
-      child: Container(
-        height: 200,
-        width: 114,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        child: FittedBox(
-          fit: BoxFit.contain,
-          child: posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath!)) : const SizedBox.shrink(),
-        ),
-      ),
-    );
-  }
 }
