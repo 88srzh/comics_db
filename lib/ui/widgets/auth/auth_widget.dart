@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -29,9 +29,8 @@ class AuthWidget extends StatelessWidget {
               style: TextStyle(color: DarkThemeColors.genresText),
             ),
           ),
-          body: ColoredBox(
-            color: DarkThemeColors.kPrimaryColor,
-            child: ListView(
+          body: Scaffold(
+            body: ListView(
               children: const [
                 HeaderWidget(),
               ],
