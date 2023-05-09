@@ -6,14 +6,14 @@ part of 'tv.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TV _$TVFromJson(Map<String, dynamic> json) => TV(
+_$_TV _$$_TVFromJson(Map<String, dynamic> json) => _$_TV(
       posterPath: json['poster_path'] as String?,
       popularity: (json['popularity'] as num).toDouble(),
       id: json['id'] as int,
       backdropPath: json['backdrop_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       overview: json['overview'] as String,
-      firstAirDate: TV.parseDateFromString(json['first_air_date'] as String?),
+      firstAirDate: parseDateFromString(json['first_air_date'] as String?),
       originCountry: (json['origin_country'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -25,7 +25,7 @@ TV _$TVFromJson(Map<String, dynamic> json) => TV(
       originalName: json['original_name'] as String,
     );
 
-Map<String, dynamic> _$TVToJson(TV instance) => <String, dynamic>{
+Map<String, dynamic> _$$_TVToJson(_$_TV instance) => <String, dynamic>{
       'poster_path': instance.posterPath,
       'popularity': instance.popularity,
       'id': instance.id,

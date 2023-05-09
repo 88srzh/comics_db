@@ -425,10 +425,10 @@ packages:
     dependency: "direct main"
     description:
       name: freezed
-      sha256: e819441678f1679b719008ff2ff0ef045d66eed9f9ec81166ca0d9b02a187454
+      sha256: "73b58fe836dc05594451d8f740d97d5167886962d628b9f60a1fe945aa0a891f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.3"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -453,14 +453,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  google_fonts:
-    dependency: "direct main"
-    description:
-      name: google_fonts
-      sha256: "927573f2e8a8d65c17931e21918ad0ab0666b1b636537de7c4932bdb487b190f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.3"
   graphs:
     dependency: transitive
     description:
@@ -861,22 +853,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
-  should_rebuild:
-    dependency: "direct main"
-    description:
-      name: should_rebuild
-      sha256: "33b49e41c9053ac4e07a1bad7cde32c08cb39aeab07db462684ab1061c63b9a6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
-  simple_animations:
-    dependency: "direct main"
-    description:
-      name: simple_animations
-      sha256: "6da9a59389d7f6695391f702b0893a0fc63aed2b4d41509cfc1f8781218db635"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0+3"
   sky_engine:
     dependency: transitive
     description: flutter

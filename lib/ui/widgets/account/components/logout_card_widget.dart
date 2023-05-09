@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LogoutCardWidget extends StatelessWidget {
   const LogoutCardWidget({Key? key}) : super(key: key);
@@ -10,7 +15,6 @@ class LogoutCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
-
     return ListTile(
       onTap: () {
         cubit.logout();

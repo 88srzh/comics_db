@@ -1,16 +1,18 @@
 // Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:bloc/bloc.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 
@@ -21,7 +23,8 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
   Timer? searchDebounce;
   var movie = <Movie>[];
 
-  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
+  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc})
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
         _onState(nowPlayingMovieListBloc.state);

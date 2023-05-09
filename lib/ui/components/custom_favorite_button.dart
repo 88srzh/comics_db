@@ -1,8 +1,8 @@
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class CustomFavoriteButton extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback onPressed;
   final String text;
 
   const CustomFavoriteButton({
@@ -23,7 +23,7 @@ class CustomFavoriteButton extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
-        onPressed: () => Navigator.pushNamed(context, MainNavigationRouteNames.favoriteTvs),
+        onPressed: onPressed,
         child: Text(
           text,
           style: const TextStyle(fontSize: 30),

@@ -69,8 +69,7 @@ class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({Key? key}) : super(key: key);
 
   @override
-  State<NotificationsCardWidget> createState() =>
-      _NotificationsCardWidgetState();
+  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
 }
 
 class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {

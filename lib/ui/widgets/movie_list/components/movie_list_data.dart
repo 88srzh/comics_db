@@ -6,7 +6,6 @@ class MovieListData {
   final String originalTitle;
   final String? overview;
   final String releaseDate;
-  // final String isFavorite;
 
   MovieListData({
     required this.title,
@@ -16,6 +15,5 @@ class MovieListData {
     required this.originalTitle,
     required this.overview,
     required this.releaseDate,
-    // required this.isFavorite,
   });
 }

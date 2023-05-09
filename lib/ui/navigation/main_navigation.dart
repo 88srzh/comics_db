@@ -1,15 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:comics_db_app/domain/factories/screen_factory.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_model.dart';
-import 'package:comics_db_app/ui/widgets/splashscreen/splashscreen_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
 
 abstract class MainNavigationRouteNames {
@@ -43,16 +36,16 @@ class MainNavigation {
     MainNavigationRouteNames.loaderWidget: (_) => _screenFactory.makeLoader(),
     MainNavigationRouteNames.auth: (_) => _screenFactory.makeAuth(),
     MainNavigationRouteNames.mainScreen: (_) => _screenFactory.makeMainScreen(),
-    // TODO change to bloc
-    MainNavigationRouteNames.splashScreen: (_) =>
-        ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-
     MainNavigationRouteNames.popularMovie: (_) => _screenFactory.makePopularMovieList(),
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeAiringTodayTvList(),
-    MainNavigationRouteNames.favoriteTvs: (_) => const FavoriteTvListWidget(),
-    MainNavigationRouteNames.favoriteMovies: (_) => const FavoriteMovieListWidget(),
+    MainNavigationRouteNames.favoriteTvs: (_) => _screenFactory.makeFavoriteTvList(),
+    MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
+
+    // MainNavigationRouteNames.splashScreen: (_) =>
+    //     ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
+
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -50,8 +51,9 @@ class _PopularMovieWidgetState extends State<PopularMovieWidget> {
               ),
               child: FittedBox(
                 fit: BoxFit.contain,
-                child:
-                    posterPath != null ? Image.network(ImageDownloader.imageUrl(posterPath)) : const SizedBox.shrink(),
+                child: posterPath != null
+                    ? CachedNetworkImage(imageUrl: ImageDownloader.imageUrl(posterPath))
+                    : const SizedBox.shrink(),
               ),
             ),
           ),

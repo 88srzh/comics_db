@@ -39,16 +39,13 @@ dependencies:
   bloc_concurrency: ^0.2.0
   cached_network_image: ^3.2.1
   expandable_text: 2.3.0
-  google_fonts: ^4.0.3
-  freezed: ^2.3.2
+  freezed: ^2.3.3
   freezed_annotation: ^2.2.0
   equatable: ^2.0.5
   import_sorter: ^4.6.0
   shared_preferences: ^2.0.18
   flutter_hooks: ^0.18.6
   animations: ^2.0.7
-  simple_animations: ^5.0.0+3
-  should_rebuild: 1.0.1
 
 dev_dependencies:
   flutter_test:

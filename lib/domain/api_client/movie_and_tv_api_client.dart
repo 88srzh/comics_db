@@ -296,8 +296,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-// TODO can add watchlist and rated, look at:
-// https://developers.themoviedb.org/3/movies/get-movie-account-states
   Future<bool> isFavoriteMovie(int movieId, String sessionId) async {
     bool parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -334,7 +332,11 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> topRatedTvs(int page, String locale, String apiKey) {
+  Future<PopularTVResponse> topRatedTvs(
+    int page,
+    String locale,
+    String apiKey,
+  ) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -353,7 +355,11 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> airingTodayTvs(int page, String locale, String apiKey) {
+  Future<PopularTVResponse> airingTodayTvs(
+    int page,
+    String locale,
+    String apiKey,
+  ) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -372,7 +378,11 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<PopularTVResponse> onTheAirTvs(int page, String locale, String apiKey) {
+  Future<PopularTVResponse> onTheAirTvs(
+    int page,
+    String locale,
+    String apiKey,
+  ) {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);

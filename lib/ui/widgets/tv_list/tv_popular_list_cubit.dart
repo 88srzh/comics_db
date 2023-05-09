@@ -2,10 +2,10 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -20,14 +20,15 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
   late final StreamSubscription<TvListState> tvListBlocSubscription;
   late DateFormat _dateFormat;
   Timer? searchDebounce;
-  var tv = <TV>[];
 
   TvPopularListCubit({required this.tvPopularListBloc})
       : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
-    Future.microtask(() {
-      _onState(tvPopularListBloc.state);
-      tvListBlocSubscription = tvPopularListBloc.stream.listen(_onState);
-    });
+    Future.microtask(
+      () {
+        _onState(tvPopularListBloc.state);
+        tvListBlocSubscription = tvPopularListBloc.stream.listen(_onState);
+      },
+    );
   }
 
   void _onState(TvListState state) {
@@ -71,10 +72,13 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
 
   void searchPopularTv(String text) {
     searchDebounce?.cancel();
-    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      tvPopularListBloc.add(TvListEventSearchTv(query: text));
-      tvPopularListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
-    });
+    searchDebounce = Timer(
+      const Duration(milliseconds: 300),
+      () async {
+        tvPopularListBloc.add(TvListEventSearchTv(query: text));
+        tvPopularListBloc.add(TvListEventLoadNextPage(locale: state.localeTag));
+      },
+    );
   }
 
   void onTvTap(BuildContext context, int index) {

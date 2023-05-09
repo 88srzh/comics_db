@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
@@ -37,8 +37,11 @@ class _TrailerWidgetState extends State<TrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var data = context.watch<MovieDetailsCubit>().data;
-    final trailerKey = data.trailerKey;
+    var cubit = context.watch<MovieDetailsCubit>();
+    final trailerKey = cubit.data.trailerKey;
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      if (trailerKey != null) return const SizedBox.shrink();
+    });
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
