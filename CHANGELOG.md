@@ -1,3 +1,16 @@
+## 0.0.8.2
+
+- Fixed colors for light theme at `AuthScreen`.
+- Added custom `textfield` and `textwidget` at `AuthScreen`.
+- Updated freezed package;
+- Removed `google_fonts`, `should_rebuild` and `simple_animations` packages.
+- Removed `Splashcreen` widget (temporary).
+- Added `freezed` to `TV` widget.
+- Refactoring routes to `FavoriteScreen`;
+- Other small fixes;
+
+---
+
 ## 0.0.8.1
 
 - Added `Favorite TV shows`.
