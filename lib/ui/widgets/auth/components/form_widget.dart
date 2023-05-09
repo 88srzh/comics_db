@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/components/custom_auth_text_widget.dart';
-import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
+import 'package:comics_db_app/ui/components/custom_auth_textfield_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/auth_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/error_message_widget.dart';
 
@@ -28,20 +27,28 @@ class FormWidget extends StatelessWidget {
         const CustomAuthTextWidget(text: 'Username'),
         const SizedBox(height: 5),
         // TODO need refactoring
-        TextField(
-          style: const TextStyle(color: DarkThemeColors.genresText),
-          decoration: customSearchInputDecoration(text: ''),
+        CustomAuthTextFieldWidget(
           onChanged: (text) => authDataStorage.login = text,
+          obscureText: false,
         ),
+        // TextField(
+        //   style: const TextStyle(color: DarkThemeColors.genresText),
+        //   decoration: customSearchInputDecoration(text: ''),
+        //   onChanged: (text) => authDataStorage.login = text,
+        // ),
         const SizedBox(height: 20),
         const CustomAuthTextWidget(text: 'Password'),
         const SizedBox(height: 5),
-        TextField(
-          style: const TextStyle(color: DarkThemeColors.genresText),
-          decoration: customSearchInputDecoration(text: ''),
+        CustomAuthTextFieldWidget(
           onChanged: (text) => authDataStorage.password = text,
           obscureText: true,
         ),
+        // TextField(
+        //   style: const TextStyle(color: DarkThemeColors.genresText),
+        //   decoration: customSearchInputDecoration(text: ''),
+        //   onChanged: (text) => authDataStorage.password = text,
+        //   obscureText: true,
+        // ),
         const SizedBox(height: 25),
         Row(
           children: [
