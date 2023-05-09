@@ -71,7 +71,6 @@ class ScreenFactory {
   //   );
   // }
 
-// TODO: may be delete provider
   Widget makeMainScreen() {
     _authBloc?.close();
     _authBloc = null;
