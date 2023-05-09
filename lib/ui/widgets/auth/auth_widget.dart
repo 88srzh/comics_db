@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
@@ -24,9 +25,11 @@ class AuthWidget extends StatelessWidget {
         create: (_) => AuthDataStorage(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(
+            title: Text(
               'Login to your account',
-              style: TextStyle(color: DarkThemeColors.genresText),
+              style: TextStyle(
+                color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
+              ),
             ),
           ),
           body: Scaffold(
@@ -41,8 +44,7 @@ class AuthWidget extends StatelessWidget {
     );
   }
 
-  void _onAuthViewCubitStateChange(
-      BuildContext context, AuthViewCubitState state) {
+  void _onAuthViewCubitStateChange(BuildContext context, AuthViewCubitState state) {
     if (state is AuthViewCubitSuccessAuthState) {
       MainNavigation.resetNavigation(context);
     }
