@@ -14,7 +14,7 @@ class TvService {
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
     if (sessionId != null) {
-      isFavorite = await _tvApiClient.isFavoriteTV(tvId, sessionId);
+      isFavorite = await _tvApiClient.isFavoriteTv(tvId, sessionId);
     }
     return TvDetailsLocal(details: tvDetails, isFavorite: isFavorite);
   }
