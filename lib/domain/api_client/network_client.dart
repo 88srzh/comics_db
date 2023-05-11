@@ -5,6 +5,7 @@ import 'dart:io';
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/api_client_exception.dart';
+import 'package:flutter/foundation.dart';
 
 class NetworkClient {
   final _client = HttpClient();
@@ -63,9 +64,7 @@ class NetworkClient {
       request.headers.contentType = ContentType.json;
       request.write(jsonEncode(bodyParameters));
       final response = await request.close();
-      if (response.statusCode == 404) {
-        // print('not found - 404');
-      }
+      if (response.statusCode == 404) {}
       final dynamic json = (await response.jsonDecode());
       _validateResponse(response, json);
       final result = parser(json);
