@@ -82,7 +82,6 @@ class NetworkClient {
     if (response.statusCode == 401) {
       final dynamic status = json['status_code'];
       final code = status is int ? status : 0;
-      // TODO need refactoring
       switch (code) {
         case 30:
           if (kDebugMode) {
