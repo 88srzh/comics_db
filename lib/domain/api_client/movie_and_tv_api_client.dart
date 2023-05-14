@@ -500,10 +500,3 @@ extension HttpClientResponseJsonDecode on HttpClientResponse {
     }).then<dynamic>((v) => json.decode(v));
   }
 }
-
-/*
-status_code:
-30 - wrong login/password
-7 - invalid api key
-33 - invalid request token
-*/
