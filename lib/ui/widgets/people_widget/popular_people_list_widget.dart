@@ -55,8 +55,12 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
             final profilePath = people.profilePath;
             return InkWell(
               onTap: () => cubit.onPeopleTap(context, index),
-              child:
-                  _PeoplePopularListColumnWidget(profilePath: profilePath, people: people, cubit: cubit, index: index),
+              child: _PeoplePopularListColumnWidget(
+                profilePath: profilePath,
+                people: people,
+                cubit: cubit,
+                index: index,
+              ),
             );
           },
         ),
@@ -88,9 +92,9 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
             border: Border.all(
-                color: context.read<ThemeBloc>().isDarkTheme
-                    ? Colors.white.withOpacity(0.2)
-                    : Colors.black.withOpacity(0.2)),
+              color:
+                  context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+            ),
             borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             boxShadow: [
               BoxShadow(

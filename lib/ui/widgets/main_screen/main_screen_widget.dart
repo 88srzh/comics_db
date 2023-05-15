@@ -21,6 +21,7 @@ class MainScreenWidget extends HookWidget {
 
   final List<Widget> screen = [
     const PopularPeopleListWidget(),
+    const TrendingWidget(),
     const MovieListWidget(),
     const TvListWidget(),
     const FavoriteScreenWidget(),
@@ -41,6 +42,7 @@ class MainScreenWidget extends HookWidget {
         initialActiveIndex: selectedIndex.value,
         items: const [
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
+          TabItem<dynamic>(icon: Icons.trending_up, title: 'Trending'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.favorite_outline, title: 'Favorites'),
