@@ -33,7 +33,7 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     final result = await _trendingApiClient.trendingAll(
       nextPage,
       event.locale,
-      TimeWindowType.week,
+      TimeWindowType.week.toString(),
       Configuration.apiKey,
     );
     final trendingAll = List<TrendingAll>.from(state.trendingListContainer.trendingAll)..addAll(result.trendingAll);

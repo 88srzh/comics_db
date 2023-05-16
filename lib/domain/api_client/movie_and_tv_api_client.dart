@@ -458,7 +458,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TrendingAllResponse> trendingAll(int page, String locale, TimeWindowType timeWindow, String apiKey) async {
+  Future<TrendingAllResponse> trendingAll(int page, String locale, String timeWindow, String apiKey) async {
     TrendingAllResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrendingAllResponse.fromJson(jsonMap);
@@ -472,7 +472,7 @@ class MovieAndTvApiClient {
       <String, dynamic>{
         'page': page.toString(),
         'language': locale,
-        'time_window': timeWindow.toString(),
+        'time_window': timeWindow,
         'api_key': Configuration.apiKey,
       },
     );
