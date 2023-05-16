@@ -5,14 +5,12 @@ import 'dart:async';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_cubit_state.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:bloc/bloc.dart';
-
 // Project imports:
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // TODO replace cubit state
 
@@ -23,8 +21,7 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
   var people = <People>[];
 
   PeopleListCubit({required this.peopleListBloc})
-      : super(PeopleListCubitState(
-            people: const <PeopleListData>[], localeTag: '')) {
+      : super(PeopleListCubitState(people: const <PeopleListData>[], localeTag: '')) {
     Future.microtask(
       () {
         _onState(peopleListBloc.state);
@@ -72,15 +69,13 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
       const Duration(milliseconds: 300),
       () async {
         peopleListBloc.add(PeopleListEventSearchMovie(query: text));
-        peopleListBloc
-            .add(PeopleListEventLoadNextPage(locale: state.localeTag));
+        peopleListBloc.add(PeopleListEventLoadNextPage(locale: state.localeTag));
       },
     );
   }
 
   void onPeopleTap(BuildContext context, int index) {
     final id = state.people[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.peopleDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: id);
   }
 }
