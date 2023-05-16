@@ -1,6 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +19,16 @@ class TrendingWidget extends StatefulWidget {
 
 class _TrendingWidgetState extends State<TrendingWidget> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final locale = Localizations.localeOf(context);
+    context.read<TrendingListCubit>().setupTrendingLocale(locale.languageCode);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var cubit = context.watch<TrendingListCubit>();
     return Scaffold(
       appBar: const CustomAppBar(title: 'Trending'),
       body: ColoredBox(
@@ -26,8 +41,11 @@ class _TrendingWidgetState extends State<TrendingWidget> {
             childAspectRatio: 1 / 1.65,
           ),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          itemCount: 10,
+          itemCount: cubit.state.trendingList.length,
           itemBuilder: (BuildContext context, int index) {
+            cubit.showedTrendingAtIndex(index);
+            final trending = cubit.state.trendingList[index];
+            final posterPath = trending.posterPath;
             return InkWell(
               onTap: () {},
               child: Stack(
@@ -53,7 +71,25 @@ class _TrendingWidgetState extends State<TrendingWidget> {
                       ],
                     ),
                     clipBehavior: Clip.hardEdge,
-                    child: Column(),
+                    child: Column(
+                      children: [
+                        posterPath.isNotEmpty
+                            ? CachedNetworkImage(
+                                imageUrl: ImageDownloader.imageUrl(posterPath),
+                                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                              )
+                            : Image.asset(AppImages.noImageAvailable),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
