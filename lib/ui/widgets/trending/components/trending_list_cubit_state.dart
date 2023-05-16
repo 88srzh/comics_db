@@ -1,7 +1,7 @@
-import 'package:comics_db_app/ui/widgets/trending/components/trending_data.dart';
+import 'package:comics_db_app/ui/widgets/trending/components/trending_list_data.dart';
 
 class TrendingListCubitState {
-  final List<TrendingData> trendingList;
+  final List<TrendingListData> trendingList;
   final String localeTag;
 
   const TrendingListCubitState({
@@ -21,7 +21,7 @@ class TrendingListCubitState {
   int get hashCode => trendingList.hashCode ^ localeTag.hashCode;
 
   TrendingListCubitState copyWith({
-    List<TrendingData>? trendingList,
+    List<TrendingListData>? trendingList,
     String? localeTag,
   }) {
     return TrendingListCubitState(

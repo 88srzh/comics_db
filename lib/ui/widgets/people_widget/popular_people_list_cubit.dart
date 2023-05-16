@@ -12,8 +12,6 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// TODO replace cubit state
-
 class PeopleListCubit extends Cubit<PeopleListCubitState> {
   final PeopleListBloc peopleListBloc;
   late final StreamSubscription<PeopleListState> peopleListBlocSubscription;

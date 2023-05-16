@@ -14,6 +14,8 @@ import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
+enum TimeWindowType { sixHor, day, week }
+
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
 
@@ -456,7 +458,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TrendingAllResponse> trendingAll(int page, String? mediaType, String? timeWindow) async {
+  Future<TrendingAllResponse> trendingAll(int page, String locale, TimeWindowType timeWindow, String apiKey) async {
     TrendingAllResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrendingAllResponse.fromJson(jsonMap);
@@ -465,13 +467,13 @@ class MovieAndTvApiClient {
 
     final result = _networkClient.get(
       // сюда входят фильмы, сериалы и люди(person)
-      '/trending/$mediaType/$timeWindow',
+      '/trending/all/$timeWindow',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
         'page': page.toString(),
-        'media_type': mediaType,
-        'time_window': timeWindow,
+        'language': locale,
+        'time_window': timeWindow.toString(),
+        'api_key': Configuration.apiKey,
       },
     );
     return result;
