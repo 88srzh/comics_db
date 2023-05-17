@@ -32,13 +32,13 @@ class _TrendingWidgetState extends State<TrendingWidget> {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Trending'),
       body: ColoredBox(
-        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.genresText : Colors.white,
+        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 3,
             mainAxisSpacing: 5,
             crossAxisCount: 3,
-            childAspectRatio: 1 / 1.65,
+            childAspectRatio: 1 / 1.9,
           ),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: cubit.state.trendingList.length,
@@ -81,11 +81,16 @@ class _TrendingWidgetState extends State<TrendingWidget> {
                               )
                             : Image.asset(AppImages.noImageAvailable),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
-                            ],
+                          child: Padding(
+                            padding:  const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomCastListTextWidget(text: trending.title, maxLines: 2),
+                                CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
+                              ],
+                            ),
                           ),
                         )
                       ],
