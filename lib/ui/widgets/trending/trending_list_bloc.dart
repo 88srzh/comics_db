@@ -15,6 +15,7 @@ part 'trending_list_state.dart';
 
 class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   final _trendingApiClient = MovieAndTvApiClient();
+  final String day = 'day';
 
   TrendingListBloc(TrendingListState initialState) : super(initialState) {
     on<TrendingListEvent>(((event, emit) async {
@@ -33,7 +34,7 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     final result = await _trendingApiClient.trendingAll(
       nextPage,
       event.locale,
-      TimeWindowType.week.toString(),
+      day,
       Configuration.apiKey,
     );
     final trendingAll = List<TrendingAll>.from(state.trendingListContainer.trendingAll)..addAll(result.trendingAll);

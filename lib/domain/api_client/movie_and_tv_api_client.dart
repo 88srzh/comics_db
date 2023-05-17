@@ -14,7 +14,22 @@ import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
+
+const String sixHor = '6h';
 enum TimeWindowType { sixHor, day, week }
+
+extension TimeWindowTypeAsString on TimeWindowType {
+  String asString() {
+    switch (this) {
+      case TimeWindowType.week:
+        return 'week';
+      case TimeWindowType.day:
+        return 'day';
+      case TimeWindowType.sixHor:
+        return '6h';
+    }
+  }
+}
 
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();

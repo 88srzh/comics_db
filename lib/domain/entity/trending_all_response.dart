@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -13,15 +14,17 @@ class TrendingAllResponse {
   List<TrendingAll> trendingAll;
   final int totalResults;
   final int totalPages;
+  final String timeWindow;
 
-  TrendingAllResponse(
-      {required this.page,
-      required this.trendingAll,
-      required this.totalResults,
-      required this.totalPages});
+  TrendingAllResponse({
+    required this.page,
+    required this.trendingAll,
+    required this.totalResults,
+    required this.totalPages,
+    required this.timeWindow,
+  });
 
-  factory TrendingAllResponse.fromJson(Map<String, dynamic> json) =>
-      _$TrendingAllResponseFromJson(json);
+  factory TrendingAllResponse.fromJson(Map<String, dynamic> json) => _$TrendingAllResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrendingAllResponseToJson(this);
 }
