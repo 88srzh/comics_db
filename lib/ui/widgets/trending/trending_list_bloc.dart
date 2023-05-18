@@ -16,6 +16,8 @@ part 'trending_list_state.dart';
 class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   final _trendingApiClient = MovieAndTvApiClient();
   final String day = 'day';
+  final String week = 'week';
+  final String sixHour = '6h';
   // final TimeWindowType timeWindowType;
 
   TrendingListBloc(TrendingListState initialState) : super(initialState) {
@@ -30,7 +32,12 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
 
   Future<void> onTrendingListEventLoadNextPage(
       TrendingListEventLoadNextPage event, Emitter<TrendingListState> emit) async {
+    // final List<String> timeWindows = <String>[day, week];
     if (state.trendingListContainer.isComplete) return;
+    // if (timeWindows == day) {
+    //   final nextPage = state.trendingListContainer.currentPage + 1;
+    //   final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
+    // }
     final nextPage = state.trendingListContainer.currentPage + 1;
     final result = await _trendingApiClient.trendingAll(
       nextPage,

@@ -87,7 +87,7 @@ class _TrendingWidgetState extends State<TrendingWidget> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CustomCastListTextWidget(text: trending.title, maxLines: 2),
+                                CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
                                 CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
                               ],
                             ),
