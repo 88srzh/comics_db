@@ -1,11 +1,14 @@
+// Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_container.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'trending_list_bloc.freezed.dart';
 
@@ -42,7 +45,7 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     final result = await _trendingApiClient.trendingAll(
       nextPage,
       event.locale,
-      day,
+      week,
       Configuration.apiKey,
     );
     final trendingAll = List<TrendingAll>.from(state.trendingListContainer.trendingAll)..addAll(result.trendingAll);

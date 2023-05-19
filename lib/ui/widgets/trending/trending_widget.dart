@@ -1,4 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rolling_switch/rolling_switch.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
@@ -7,8 +15,6 @@ import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TrendingWidget extends StatefulWidget {
   const TrendingWidget({Key? key}) : super(key: key);
@@ -29,8 +35,29 @@ class _TrendingWidgetState extends State<TrendingWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TrendingListCubit>();
+    bool today = false;
     return Scaffold(
       appBar: const CustomAppBar(title: 'Trending'),
+      floatingActionButton: Center(
+        child: FloatingActionButton(
+          backgroundColor: Colors.white.withOpacity(0),
+          isExtended: true,
+          onPressed: () {
+            setState(() {
+              today = !today;
+            });
+          },
+          child: RollingSwitch.icon(
+            onChanged: (bool today) {},
+            rollingInfoRight: const RollingIconInfo(
+              text: Text('Today'),
+            ),
+            rollingInfoLeft: const RollingIconInfo(
+              text: Text('This Week'),
+            ),
+          ),
+        ),
+      ),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
         child: GridView.builder(
@@ -82,7 +109,7 @@ class _TrendingWidgetState extends State<TrendingWidget> {
                             : Image.asset(AppImages.noImageAvailable),
                         Expanded(
                           child: Padding(
-                            padding:  const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
+                            padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

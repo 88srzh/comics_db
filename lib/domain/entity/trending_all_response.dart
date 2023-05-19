@@ -1,5 +1,4 @@
 // Package imports:
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
