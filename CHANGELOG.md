@@ -1,3 +1,7 @@
+## 0.0.8.3
+
+- Added `Trending Screen`
+
 ## 0.0.8.2
 
 - Fixed colors for light theme at `AuthScreen`.
