@@ -20,6 +20,7 @@ abstract class MainNavigationRouteNames {
   static const fullCastAndCrew = '/main_screen/movie_details/fullCastAndCrew';
   static const movieTrailer = '/main_screen/movie_details/trailer';
   static const trending = '/main_screen/trending';
+  static const trendingThisWeek = '/main_screen/trending/this_week';
   static const favoriteMovies = '/main_screen/favorite_movies';
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
@@ -42,6 +43,7 @@ class MainNavigation {
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeAiringTodayTvList(),
     // MainNavigationRouteNames.trending: (_) => _screenFactory.trendingList(),
+    MainNavigationRouteNames.trendingThisWeek: (_) => _screenFactory.makeTrendingThisWeekList(),
     MainNavigationRouteNames.favoriteTvs: (_) => _screenFactory.makeFavoriteTvList(),
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
 

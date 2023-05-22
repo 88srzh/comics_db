@@ -1,11 +1,15 @@
+// Dart imports:
 import 'dart:async';
 
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_cubit_state.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_data.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class TrendingListCubit extends Cubit<TrendingListCubitState> {
   final TrendingListBloc trendingListBloc;
@@ -48,6 +52,15 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     trendingListBloc.add(TrendingListEventLoadNextPage(locale: localeTag));
   }
 
+  void setupTrendingThisWeekLocale(String localeTag) {
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
+    _dateFormat = DateFormat.yMMMd(localeTag);
+    trendingListBloc.add(TrendingListEventLoadReset());
+    trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: localeTag));
+  }
+
   @override
   Future<void> close() {
     trendingListBlocSubscription.cancel();
@@ -65,6 +78,11 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
   void showedTrendingAtIndex(int index) {
     if (index < state.trendingList.length - 1) return;
     trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
+  }
+
+  void showedTrendingThisWeekAtIndex(int index) {
+    if (index < state.trendingList.length - 1) return;
+    trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: state.localeTag));
   }
 
   // TODO need to think how realise to movie, tv and people.
