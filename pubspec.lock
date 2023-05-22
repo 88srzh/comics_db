@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.6.0"
+  animated_button_bar:
+    dependency: "direct main"
+    description:
+      name: animated_button_bar
+      sha256: fd76fc16d9179fb6c04cb955d03489983fe33eadb02c1c156c212058b163f67c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2+1"
   animations:
     dependency: "direct main"
     description:

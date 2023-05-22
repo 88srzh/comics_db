@@ -1,10 +1,10 @@
 // Flutter imports:
+import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rolling_switch/rolling_switch.dart';
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
@@ -35,99 +35,117 @@ class _TrendingWidgetState extends State<TrendingWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TrendingListCubit>();
-    bool today = false;
+    // bool today = false;
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Trending'),
-      floatingActionButton: Center(
-        child: FloatingActionButton(
-          backgroundColor: Colors.white.withOpacity(0),
-          isExtended: true,
-          onPressed: () {
-            setState(() {
-              today = !today;
-            });
-          },
-          child: RollingSwitch.icon(
-            onChanged: (bool today) {},
-            rollingInfoRight: const RollingIconInfo(
-              text: Text('Today'),
-            ),
-            rollingInfoLeft: const RollingIconInfo(
-              text: Text('This Week'),
-            ),
-          ),
-        ),
+      appBar: const CustomAppBar(
+        title: 'Trending',
       ),
-      body: ColoredBox(
-        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisSpacing: 3,
-            mainAxisSpacing: 5,
-            crossAxisCount: 3,
-            childAspectRatio: 1 / 1.9,
-          ),
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          itemCount: cubit.state.trendingList.length,
-          itemBuilder: (BuildContext context, int index) {
-            cubit.showedTrendingAtIndex(index);
-            final trending = cubit.state.trendingList[index];
-            final posterPath = trending.posterPath;
-            return InkWell(
-              onTap: () {},
-              child: Stack(
-                children: [
-                  Container(
-                    // TODO create separate custom widget, also used in people widget
-                    decoration: BoxDecoration(
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-                      border: Border.all(
-                        color: context.read<ThemeBloc>().isDarkTheme
-                            ? Colors.white.withOpacity(0.2)
-                            : Colors.black.withOpacity(0.2),
-                      ),
-                      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                      boxShadow: [
-                        BoxShadow(
+      body: Stack(
+        children: [
+          GridView.builder(
+            padding: const EdgeInsets.only(top: 70.0),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 3,
+              mainAxisSpacing: 5,
+              crossAxisCount: 3,
+              childAspectRatio: 1 / 1.9,
+            ),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            itemCount: cubit.state.trendingList.length,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedTrendingAtIndex(index);
+              final trending = cubit.state.trendingList[index];
+              final posterPath = trending.posterPath;
+              return InkWell(
+                onTap: () {},
+                child: Stack(
+                  children: [
+                    Container(
+                      // TODO create separate custom widget, also used in people widget
+                      decoration: BoxDecoration(
+                        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+                        border: Border.all(
                           color: context.read<ThemeBloc>().isDarkTheme
-                              ? Colors.white.withOpacity(0.1)
-                              : Colors.black.withOpacity(0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
+                              ? Colors.white.withOpacity(0.2)
+                              : Colors.black.withOpacity(0.2),
                         ),
-                      ],
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    child: Column(
-                      children: [
-                        posterPath.isNotEmpty
-                            ? CachedNetworkImage(
-                                imageUrl: ImageDownloader.imageUrl(posterPath),
-                                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                              )
-                            : Image.asset(AppImages.noImageAvailable),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
-                                CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
-                              ],
-                            ),
+                        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: context.read<ThemeBloc>().isDarkTheme
+                                ? Colors.white.withOpacity(0.1)
+                                : Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
                           ),
-                        )
-                      ],
+                        ],
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      child: Column(
+                        children: [
+                          posterPath.isNotEmpty
+                              ? CachedNetworkImage(
+                                  imageUrl: ImageDownloader.imageUrl(posterPath),
+                                  placeholder: (context, url) => const LoadingIndicatorWidget(),
+                                  errorWidget: (context, url, dynamic error) =>
+                                      Image.asset(AppImages.noImageAvailable),
+                                )
+                              : Image.asset(AppImages.noImageAvailable),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
+                                  CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              );
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 70.0,
+                width: 300.0,
+                child: AnimatedButtonBar(
+                  radius: 32.0,
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
+                  backgroundColor: Colors.white,
+                  foregroundColor: DarkThemeColors.kPrimaryColor.withOpacity(0.2),
+                  elevation: 24,
+                  borderColor: Colors.white,
+                  borderWidth: 2.0,
+                  innerVerticalPadding: 16,
+                  children: [
+                    ButtonBarEntry(
+                        child: const Text(
+                          'Day',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: () {}),
+                    ButtonBarEntry(
+                        child: const Text(
+                          'This Week',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: () {}),
+                  ],
+                ),
               ),
-            );
-          },
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
