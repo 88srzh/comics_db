@@ -14,6 +14,7 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
 
 class TrendingWidget extends StatefulWidget {
@@ -71,7 +72,8 @@ class _TrendingWidgetState extends State<TrendingWidget> {
                         'This Week',
                         style: TextStyle(color: Colors.black),
                       ),
-                      onTap: () => TrendingThisWeekPageListWidget(cubit: cubit),
+                      // TODO: need to create separate cubit for show this week
+                      onTap: () => MainNavigationRouteNames.trendingThisWeek,
                     ),
                   ],
                 ),

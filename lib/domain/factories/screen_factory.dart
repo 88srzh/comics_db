@@ -34,6 +34,8 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_widget.da
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
+import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/trending/trending_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
@@ -192,11 +194,13 @@ class ScreenFactory {
     return const FavoriteTvListWidget();
   }
 
-  Widget makeTrendingThisWeekList() {
+  Widget makeTrendingThisWeekList(BuildContext context) {
+    var cubit = context.watch<TrendingListCubit>();
     return BlocProvider(
       create: (_) => TrendingListBloc(
         const TrendingListState.initial(),
       ),
+      child: TrendingThisWeekPageListWidget(cubit: cubit),
     );
   }
 }
