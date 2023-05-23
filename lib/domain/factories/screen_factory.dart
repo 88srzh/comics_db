@@ -128,13 +128,6 @@ class ScreenFactory {
     return TrailerWidget(youtubeKey: youtubeKey);
   }
 
-  // Widget makeTvDetails(int tvId) {
-  //   return BlocProvider(
-  //     create: (_) => TvDetailsCubit(tvId),
-  //     child: TvDetailsWidget(),
-  //   );
-  // }
-
   Widget makeTopRatedMovieList() {
     return BlocProvider(
       create: (_) => MoviePopularListCubit(
@@ -204,14 +197,3 @@ class ScreenFactory {
     );
   }
 }
-
-// Widget makeTvAiringTodayList() {
-//   return BlocProvider(
-//     create: (_) => TvAiringTodayListCubit(
-//       tvAiringTodayListBloc: TvAiringTodayListBloc(
-//         TvListState.initial(),
-//       ),
-//     ),
-//     child: const AiringTodayTvsWidget(),
-//   );
-// }*/
