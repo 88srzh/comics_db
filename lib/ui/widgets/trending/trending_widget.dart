@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/trending/components/trending_list_cubit_state.dart';
+import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -35,54 +37,63 @@ class _TrendingWidgetState extends State<TrendingWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // final List<TrendingCategory> categories =context.watch<TrendingCategoryBloc>().state.trendingCategories;
     var cubit = context.watch<TrendingListCubit>();
-    // bool today = false;
-    return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Trending',
-      ),
-      body: Stack(
-        children: [
-          TrendingPageListWidget(cubit: cubit),
-          // TrendingThisWeekPageListWidget(cubit: cubit),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 70.0,
-                width: 300.0,
-                child: AnimatedButtonBar(
-                  radius: 32.0,
-                  padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
-                  backgroundColor: Colors.white,
-                  foregroundColor: DarkThemeColors.kPrimaryColor.withOpacity(0.2),
-                  elevation: 24,
-                  borderColor: Colors.white,
-                  borderWidth: 2.0,
-                  innerVerticalPadding: 16,
-                  children: [
-                    ButtonBarEntry(
+    return BlocListener<TrendingListCubit, TrendingListCubitState>(
+      listener: _onTrendingListCubitStateChange,
+      child: Scaffold(
+        appBar: const CustomAppBar(
+          title: 'Trending',
+        ),
+        body: Stack(
+          children: [
+            TrendingPageListWidget(cubit: cubit),
+            // TrendingThisWeekPageListWidget(cubit: cubit),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 70.0,
+                  width: 300.0,
+                  child: AnimatedButtonBar(
+                    radius: 32.0,
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
+                    backgroundColor: Colors.white,
+                    foregroundColor: DarkThemeColors.kPrimaryColor.withOpacity(0.2),
+                    elevation: 24,
+                    borderColor: Colors.white,
+                    borderWidth: 2.0,
+                    innerVerticalPadding: 16,
+                    children: [
+                      ButtonBarEntry(
+                          child: const Text(
+                            'Day',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          onTap: () {}),
+                      ButtonBarEntry(
                         child: const Text(
-                          'Day',
+                          'This Week',
                           style: TextStyle(color: Colors.black),
                         ),
-                        onTap: () {}),
-                    ButtonBarEntry(
-                      child: const Text(
-                        'This Week',
-                        style: TextStyle(color: Colors.black),
+                        // TODO: need to create separate cubit for show this week
+                        onTap: () => Navigator.pushNamed(context, MainNavigationRouteNames.trendingThisWeek),
                       ),
-                      // TODO: need to create separate cubit for show this week
-                      onTap: () => MainNavigationRouteNames.trendingThisWeek,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void _onTrendingListCubitStateChange(BuildContext context, TrendingListCubitState state) {
+    if (state is TrendingListEventLoadNextPageThisWweek) {
+      MainNavigationRouteNames.trendingThisWeek;
+    }
   }
 }
 
@@ -191,74 +202,77 @@ class _TrendingThisWeekPageListWidgetState extends State<TrendingThisWeekPageLis
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.only(top: 70.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisSpacing: 3,
-        mainAxisSpacing: 5,
-        crossAxisCount: 3,
-        childAspectRatio: 1 / 1.9,
-      ),
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      itemCount: widget.cubit.state.trendingList.length,
-      itemBuilder: (BuildContext context, int index) {
-        widget.cubit.showedTrendingThisWeekAtIndex(index);
-        final trending = widget.cubit.state.trendingList[index];
-        final posterPath = trending.posterPath;
-        return InkWell(
-          onTap: () {},
-          child: Stack(
-            children: [
-              Container(
-                // TODO create separate custom widget, also used in people widget
-                decoration: BoxDecoration(
-                  color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-                  border: Border.all(
-                    color: context.read<ThemeBloc>().isDarkTheme
-                        ? Colors.white.withOpacity(0.2)
-                        : Colors.black.withOpacity(0.2),
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  boxShadow: [
-                    BoxShadow(
+    return Scaffold(
+      appBar: AppBar(),
+      body: GridView.builder(
+        padding: const EdgeInsets.only(top: 70.0),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 3,
+          mainAxisSpacing: 5,
+          crossAxisCount: 3,
+          childAspectRatio: 1 / 1.9,
+        ),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        itemCount: widget.cubit.state.trendingList.length,
+        itemBuilder: (BuildContext context, int index) {
+          widget.cubit.showedTrendingThisWeekAtIndex(index);
+          final trending = widget.cubit.state.trendingList[index];
+          final posterPath = trending.posterPath;
+          return InkWell(
+            onTap: () {},
+            child: Stack(
+              children: [
+                Container(
+                  // TODO create separate custom widget, also used in people widget
+                  decoration: BoxDecoration(
+                    color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+                    border: Border.all(
                       color: context.read<ThemeBloc>().isDarkTheme
-                          ? Colors.white.withOpacity(0.1)
-                          : Colors.black.withOpacity(0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
+                          ? Colors.white.withOpacity(0.2)
+                          : Colors.black.withOpacity(0.2),
                     ),
-                  ],
-                ),
-                clipBehavior: Clip.hardEdge,
-                child: Column(
-                  children: [
-                    posterPath.isNotEmpty
-                        ? CachedNetworkImage(
-                            imageUrl: ImageDownloader.imageUrl(posterPath),
-                            placeholder: (context, url) => const LoadingIndicatorWidget(),
-                            errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                          )
-                        : Image.asset(AppImages.noImageAvailable),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
-                            CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
-                          ],
-                        ),
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: context.read<ThemeBloc>().isDarkTheme
+                            ? Colors.white.withOpacity(0.1)
+                            : Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: Column(
+                    children: [
+                      posterPath.isNotEmpty
+                          ? CachedNetworkImage(
+                              imageUrl: ImageDownloader.imageUrl(posterPath),
+                              placeholder: (context, url) => const LoadingIndicatorWidget(),
+                              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                            )
+                          : Image.asset(AppImages.noImageAvailable),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
+                              CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
