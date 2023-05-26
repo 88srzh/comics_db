@@ -40,15 +40,13 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadNextPage(
       TrendingListEventLoadNextPage event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    if (state.trendingListContainer.timeWindow == day) {
-      final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-        final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
-        return result;
-      });
-      if (container != null) {
-        final newState = state.copyWith(trendingListContainer: container);
-        emit(newState);
-      }
+    final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
+      final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
+      return result;
+    });
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
     }
 
 // final nextPage = state.trendingListContainer.currentPage + 1;
@@ -66,24 +64,22 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadNextPageThisWeek(
       TrendingListEventLoadNextPageThisWweek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    if (state.trendingListContainer.timeWindow == week) {
-      final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-        final result = await _trendingApiClient.trendingAll(nextPage, event.locale, week, Configuration.apiKey);
-        return result;
-      });
-      if (container != null) {
-        final newState = state.copyWith(trendingListContainer: container);
-        emit(newState);
-        // } else if (state.trendingListContainer.timeWindow == day) {
-        //   final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-        //     final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
-        //     return result;
-        //   });
-        //   if (container != null) {
-        //     final newState = state.copyWith(trendingListContainer: container);
-        //     emit(newState);
-        //   }
-      }
+    final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
+      final result = await _trendingApiClient.trendingAll(nextPage, event.locale, week, Configuration.apiKey);
+      return result;
+    });
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
+      // } else if (state.trendingListContainer.timeWindow == day) {
+      //   final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
+      //     final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
+      //     return result;
+      //   });
+      //   if (container != null) {
+      //     final newState = state.copyWith(trendingListContainer: container);
+      //     emit(newState);
+      //   }
     }
   }
 
