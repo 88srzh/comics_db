@@ -42,8 +42,6 @@ class MainNavigation {
     MainNavigationRouteNames.nowPlayingMovie: (_) => _screenFactory.makeNowPlayingMovieList(),
     MainNavigationRouteNames.tvPopularList: (_) => _screenFactory.makePopularTvList(),
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeAiringTodayTvList(),
-    // MainNavigationRouteNames.trending: (_) => _screenFactory.trendingList(),
-    MainNavigationRouteNames.trendingThisWeek: (context) => _screenFactory.makeTrendingThisWeekList(context),
     MainNavigationRouteNames.favoriteTvs: (_) => _screenFactory.makeFavoriteTvList(),
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
 

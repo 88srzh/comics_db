@@ -80,8 +80,14 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
   }
 
-  void showedTrendingThisWeekAtIndex(int index) {
-    if (index < state.trendingList.length - 1) return;
+  void showedTrendingThisDay() {
+    trendingListBloc.add(TrendingListEventLoadReset());
+    trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
+  }
+
+  void showedTrendingThisWeek() {
+    // if (index < state.trendingList.length - 1) return;a
+    trendingListBloc.add(TrendingListEventLoadReset());
     trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: state.localeTag));
   }
 

@@ -63,7 +63,7 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
 
   Future<void> onTrendingListEventLoadNextPageThisWeek(
       TrendingListEventLoadNextPageThisWweek event, Emitter<TrendingListState> emit) async {
-    if (state.trendingListContainer.isComplete) return;
+    // if (state.trendingListContainer.isComplete) return;
     final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
       final result = await _trendingApiClient.trendingAll(nextPage, event.locale, week, Configuration.apiKey);
       return result;
