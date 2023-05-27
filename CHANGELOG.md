@@ -1,6 +1,8 @@
 ## 0.0.8.3
 
-- Added `Trending Screen`
+- Added `Trending Screen` with animated button to see day and week trending.
+
+---
 
 ## 0.0.8.2
 
