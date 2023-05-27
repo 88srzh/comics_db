@@ -1,49 +1,32 @@
 // Package imports:
-import 'package:json_annotation/json_annotation.dart';
+import 'package:comics_db_app/domain/entity/data_parser.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'trending_all.freezed.dart';
 
 part 'trending_all.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-class TrendingAll {
-  final String? posterPath;
-  final bool adult;
-  final String overview;
-  @JsonKey(fromJson: parseDateFromString)
-  final DateTime? releaseDate;
-  final List<int> genreIds;
-  final int id;
-  final String originalTitle;
-  final String originalLanguage;
-  final String title;
-  final String? backdropPath;
-  final double popularity;
-  final int voteCount;
-  final bool video;
-  final double voteAverage;
+@freezed
+class TrendingAll with _$TrendingAll {
+  @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+  factory TrendingAll({
+    String? posterPath,
+    required bool adult,
+    required String overview,
+    @JsonKey(fromJson: parseDateFromString) DateTime? releaseDate,
+    required List<int> genreIds,
+    required int id,
+    required String originalTitle,
+    required String originalLanguage,
+    required String title,
+    String? backdropPath,
+    required double popularity,
+    required int voteCount,
+    required bool video,
+    required double voteAverage,
+  }) = _TrendingAll;
 
-  TrendingAll(
-      {required this.posterPath,
-      required this.adult,
-      required this.overview,
-      required this.releaseDate,
-      required this.genreIds,
-      required this.id,
-      required this.originalTitle,
-      required this.originalLanguage,
-      required this.title,
-      required this.backdropPath,
-      required this.popularity,
-      required this.voteCount,
-      required this.video,
-      required this.voteAverage});
+  factory TrendingAll.fromJson(Map<String, dynamic> json) => _$TrendingAllFromJson(json);
 
-  factory TrendingAll.fromJson(Map<String, dynamic> json) =>
-      _$TrendingAllFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TrendingAllToJson(this);
-
-  static DateTime? parseDateFromString(String? rawDate) {
-    if (rawDate == null || rawDate.isEmpty) return null;
-    return DateTime.tryParse(rawDate);
-  }
+// Map<String, dynamic> toJson() => _$TrendingAllToJson(this);
 }

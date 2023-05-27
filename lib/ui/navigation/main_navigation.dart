@@ -19,6 +19,8 @@ abstract class MainNavigationRouteNames {
   static const upcomingMovie = '/main_screen/upcomingMovie';
   static const fullCastAndCrew = '/main_screen/movie_details/fullCastAndCrew';
   static const movieTrailer = '/main_screen/movie_details/trailer';
+  static const trending = '/main_screen/trending';
+  static const trendingThisWeek = '/main_screen/trending/this_week';
   static const favoriteMovies = '/main_screen/favorite_movies';
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';

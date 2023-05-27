@@ -1,3 +1,4 @@
+/*
 // Flutter imports:
 import 'package:flutter/cupertino.dart';
 
@@ -62,3 +63,4 @@ class TrendingAllModel extends ChangeNotifier {
     _loadNextTrendingAllPage();
   }
 }
+*/

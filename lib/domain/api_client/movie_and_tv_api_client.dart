@@ -14,6 +14,23 @@ import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
+
+const String sixHor = '6h';
+enum TimeWindowType { sixHor, day, week }
+
+extension TimeWindowTypeAsString on TimeWindowType {
+  String asString() {
+    switch (this) {
+      case TimeWindowType.week:
+        return 'week';
+      case TimeWindowType.day:
+        return 'day';
+      case TimeWindowType.sixHor:
+        return '6h';
+    }
+  }
+}
+
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
 
@@ -456,7 +473,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TrendingAllResponse> trendingAll(int page, String? mediaType, String? timeWindow) async {
+  Future<TrendingAllResponse> trendingAll(int page, String locale, String timeWindow, String apiKey) async {
     TrendingAllResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TrendingAllResponse.fromJson(jsonMap);
@@ -465,13 +482,13 @@ class MovieAndTvApiClient {
 
     final result = _networkClient.get(
       // сюда входят фильмы, сериалы и люди(person)
-      '/trending/$mediaType/$timeWindow',
+      '/trending/all/$timeWindow',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
         'page': page.toString(),
-        'media_type': mediaType,
+        'language': locale,
         'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
       },
     );
     return result;
@@ -500,10 +517,3 @@ extension HttpClientResponseJsonDecode on HttpClientResponse {
     }).then<dynamic>((v) => json.decode(v));
   }
 }
-
-/*
-status_code:
-30 - wrong login/password
-7 - invalid api key
-33 - invalid request token
-*/

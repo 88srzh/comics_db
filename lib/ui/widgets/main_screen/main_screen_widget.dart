@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/trending/trending_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -21,6 +22,7 @@ class MainScreenWidget extends HookWidget {
 
   final List<Widget> screen = [
     const PopularPeopleListWidget(),
+    const TrendingWidget(),
     const MovieListWidget(),
     const TvListWidget(),
     const FavoriteScreenWidget(),
@@ -41,6 +43,7 @@ class MainScreenWidget extends HookWidget {
         initialActiveIndex: selectedIndex.value,
         items: const [
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
+          TabItem<dynamic>(icon: Icons.trending_up, title: 'Trending'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.favorite_outline, title: 'Favorites'),

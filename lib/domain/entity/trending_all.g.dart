@@ -6,12 +6,12 @@ part of 'trending_all.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TrendingAll _$TrendingAllFromJson(Map<String, dynamic> json) => TrendingAll(
+_$_TrendingAll _$$_TrendingAllFromJson(Map<String, dynamic> json) =>
+    _$_TrendingAll(
       posterPath: json['poster_path'] as String?,
       adult: json['adult'] as bool,
       overview: json['overview'] as String,
-      releaseDate:
-          TrendingAll.parseDateFromString(json['release_date'] as String?),
+      releaseDate: parseDateFromString(json['release_date'] as String?),
       genreIds:
           (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
       id: json['id'] as int,
@@ -25,7 +25,7 @@ TrendingAll _$TrendingAllFromJson(Map<String, dynamic> json) => TrendingAll(
       voteAverage: (json['vote_average'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$TrendingAllToJson(TrendingAll instance) =>
+Map<String, dynamic> _$$_TrendingAllToJson(_$_TrendingAll instance) =>
     <String, dynamic>{
       'poster_path': instance.posterPath,
       'adult': instance.adult,
