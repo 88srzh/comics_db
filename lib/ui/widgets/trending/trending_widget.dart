@@ -74,6 +74,7 @@ class AnimatedButtonBarWidget extends StatelessWidget {
             borderColor: Colors.white,
             borderWidth: 2.0,
             innerVerticalPadding: 16,
+            animationDuration: const Duration(milliseconds: 400),
             children: [
               ButtonBarEntry(
                 child: const Text(
@@ -122,7 +123,7 @@ class TrendingPageListWidget extends StatelessWidget {
         final trending = cubit.state.trendingList[index];
         final posterPath = trending.posterPath;
         return InkWell(
-          onTap: () {},
+          onTap: () => cubit.onTrendingTap(context, index),
           child: Stack(
             children: [
               Container(

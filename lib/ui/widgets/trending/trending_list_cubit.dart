@@ -1,12 +1,16 @@
 // Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/entity/trending_all.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_cubit_state.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_data.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
@@ -86,13 +90,13 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
   }
 
   void showedTrendingThisWeek() {
-    // if (index < state.trendingList.length - 1) return;a
     trendingListBloc.add(TrendingListEventLoadReset());
     trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: state.localeTag));
   }
 
   // TODO need to think how realise to movie, tv and people.
-  // void onTrendingTap(BuildContext context, int index) {
-  //   final id = state.trendingList[index].id;
-  // }
+  void onTrendingTap(BuildContext context, int index) {
+    final id = state.trendingList[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+  }
 }
