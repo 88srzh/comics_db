@@ -80,7 +80,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     return texts.join(' ');
   }
   void showedTrendingAtIndex(int index) {
-    if (index < state.trendingList.length - 1) return;
+    if (index < 10) return;
     trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
   }
 
