@@ -78,17 +78,31 @@ class AnimatedButtonBarWidget extends StatelessWidget {
             children: [
               ButtonBarEntry(
                 child: const Text(
-                  'Day',
+                  'All',
                   style: TextStyle(color: Colors.black),
                 ),
-                onTap: () => cubit.showedTrendingThisDay(),
+                onTap: () => cubit.showedTrendingMoviesThisWeek(),
               ),
               ButtonBarEntry(
                 child: const Text(
-                  'This Week',
+                  'People',
                   style: TextStyle(color: Colors.black),
                 ),
-                onTap: () => cubit.showedTrendingThisWeek(),
+                onTap: () => cubit.showedTrendingPeopleThisWeek(),
+              ),
+              ButtonBarEntry(
+                child: const Text(
+                  'Movies',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () => cubit.showedTrendingMoviesThisWeek(),
+              ),
+              ButtonBarEntry(
+                child: const Text(
+                  'TV',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () => cubit.showedTrendingTvThisWeek(),
               ),
             ],
           ),

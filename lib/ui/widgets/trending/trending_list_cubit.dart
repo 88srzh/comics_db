@@ -53,16 +53,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
     trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPage(locale: localeTag));
-  }
-
-  void setupTrendingThisWeekLocale(String localeTag) {
-    if (state.localeTag == localeTag) return;
-    final newState = state.copyWith(localeTag: localeTag);
-    emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
-    trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: localeTag));
+    trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: localeTag));
   }
 
   @override
@@ -79,19 +70,25 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     }
     return texts.join(' ');
   }
+
   void showedTrendingAtIndex(int index) {
     if (index < 10) return;
-    trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
+    trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: state.localeTag));
   }
 
-  void showedTrendingThisDay() {
+  void showedTrendingMoviesThisWeek() {
     trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
+    trendingListBloc.add(TrendingListEventLoadMoviesThisWeek(locale: state.localeTag));
   }
 
-  void showedTrendingThisWeek() {
+  void showedTrendingTvThisWeek() {
     trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: state.localeTag));
+    trendingListBloc.add(TrendingListEventLoadTvThisWeek(locale: state.localeTag));
+  }
+
+  void showedTrendingPeopleThisWeek() {
+    trendingListBloc.add(TrendingListEventLoadReset());
+    trendingListBloc.add(TrendingListEvenLoadPeopleThisWeek(locale: state.localeTag));
   }
 
   // TODO need to think how realise to movie, tv and people.

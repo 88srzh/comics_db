@@ -22,24 +22,32 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   final String day = 'day';
   final String week = 'week';
   final String sixHour = '6h';
+  final String movie = 'movie';
+  final String tv = 'tv';
+  final String people = 'people';
+  final String all = 'all';
 
   TrendingListBloc(TrendingListState initialState) : super(initialState) {
     on<TrendingListEvent>(((event, emit) async {
-      if (event is TrendingListEventLoadNextPage) {
-        await onTrendingListEventLoadNextPage(event, emit);
-      } else if (event is TrendingListEventLoadNextPageThisWweek) {
-        await onTrendingListEventLoadNextPageThisWeek(event, emit);
+      if (event is TrendingListEventLoadAllThisWeek) {
+        await onTrendingListEventLoadAllThisWeek(event, emit);
+      } else if (event is TrendingListEventLoadMoviesThisWeek) {
+        await onTrendingListEventLoadMoviesThisWeek(event, emit);
+      } else if (event is TrendingListEventLoadTvThisWeek) {
+        await onTrendingListEventLoadTvThisWeek(event, emit);
+      } else if (event is TrendingListEvenLoadPeopleThisWeek) {
+        await onTrendingListEventLoadPeopleThisWeek(event, emit);
       } else if (event is TrendingListEventLoadReset) {
         await onTrendingListEventLoadReset(event, emit);
       }
     }), transformer: sequential());
   }
 
-  Future<void> onTrendingListEventLoadNextPage(
-      TrendingListEventLoadNextPage event, Emitter<TrendingListState> emit) async {
+  Future<void> onTrendingListEventLoadAllThisWeek(
+      TrendingListEventLoadAllThisWeek event, Emitter<TrendingListState> emit) async {
     // if (state.trendingListContainer.isComplete) return;
     final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-      final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
+      final result = await _trendingApiClient.trendingAll(nextPage, event.locale, week, Configuration.apiKey);
       return result;
     });
     if (container != null) {
@@ -48,13 +56,45 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     }
   }
 
-  Future<void> onTrendingListEventLoadNextPageThisWeek(
-      TrendingListEventLoadNextPageThisWweek event, Emitter<TrendingListState> emit) async {
+  Future<void> onTrendingListEventLoadMoviesThisWeek(
+      TrendingListEventLoadMoviesThisWeek event, Emitter<TrendingListState> emit) async {
     // if (state.trendingListContainer.isComplete) return;
     final container = await _loadNextPage(
       state.trendingListContainer,
       (nextPage) async {
-        final result = await _trendingApiClient.trendingAll(nextPage, event.locale, week, Configuration.apiKey);
+        final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
+        return result;
+      },
+    );
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
+    }
+  }
+
+  Future<void> onTrendingListEventLoadTvThisWeek(
+      TrendingListEventLoadTvThisWeek event, Emitter<TrendingListState> emit) async {
+    // if (state.trendingListContainer.isComplete) return;
+    final container = await _loadNextPage(
+      state.trendingListContainer,
+      (nextPage) async {
+        final result = await _trendingApiClient.trendingTv(nextPage, event.locale, week, Configuration.apiKey);
+        return result;
+      },
+    );
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
+    }
+  }
+
+  Future<void> onTrendingListEventLoadPeopleThisWeek(
+      TrendingListEvenLoadPeopleThisWeek event, Emitter<TrendingListState> emit) async {
+    // if (state.trendingListContainer.isComplete) return;
+    final container = await _loadNextPage(
+      state.trendingListContainer,
+      (nextPage) async {
+        final result = await _trendingApiClient.trendingPeople(nextPage, event.locale, week, Configuration.apiKey);
         return result;
       },
     );

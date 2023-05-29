@@ -494,6 +494,67 @@ class MovieAndTvApiClient {
     return result;
   }
 
+
+  Future<TrendingAllResponse> trendingMovies(int page, String locale, String timeWindow, String apiKey) async {
+    TrendingAllResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrendingAllResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/trending/movie/$timeWindow',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
+      },
+    );
+    return result;
+  }
+
+  Future<TrendingAllResponse> trendingTv(int page, String locale, String timeWindow, String apiKey) async {
+    TrendingAllResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrendingAllResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/trending/tv/$timeWindow',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
+      },
+    );
+    return result;
+  }
+
+  Future<TrendingAllResponse> trendingPeople(int page, String locale, String timeWindow, String apiKey) async {
+    TrendingAllResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrendingAllResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/trending/people/$timeWindow',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
+      },
+    );
+    return result;
+  }
+
   Future<AccountDetails> accountDetails(String sessionId) async {
     AccountDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
