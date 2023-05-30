@@ -495,10 +495,10 @@ class MovieAndTvApiClient {
   }
 
 
-  Future<TrendingAllResponse> trendingMovies(int page, String locale, String timeWindow, String apiKey) async {
-    TrendingAllResponse parser(dynamic json) {
+  Future<MovieResponse> trendingMovies(int page, String locale, String timeWindow, String apiKey) async {
+    MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = TrendingAllResponse.fromJson(jsonMap);
+      final response = MovieResponse.fromJson(jsonMap);
       return response;
     }
 
