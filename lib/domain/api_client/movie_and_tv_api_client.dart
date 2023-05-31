@@ -14,7 +14,6 @@ import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
-
 const String sixHor = '6h';
 enum TimeWindowType { sixHor, day, week }
 
@@ -535,15 +534,15 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TrendingAllResponse> trendingPeople(int page, String locale, String timeWindow, String apiKey) async {
-    TrendingAllResponse parser(dynamic json) {
+  Future<PeopleResponse> trendingPeople(int page, String locale, String timeWindow, String apiKey) async {
+    PeopleResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = TrendingAllResponse.fromJson(jsonMap);
+      final response = PeopleResponse.fromJson(jsonMap);
       return response;
     }
 
     final result = _networkClient.get(
-      '/trending/people/$timeWindow',
+      '/trending/person/$timeWindow',
       parser,
       <String, dynamic>{
         'page': page.toString(),

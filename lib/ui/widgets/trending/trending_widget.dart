@@ -85,13 +85,6 @@ class AnimatedButtonBarWidget extends StatelessWidget {
               ),
               ButtonBarEntry(
                 child: const Text(
-                  'People',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onTap: () => cubit.showedTrendingPeopleThisWeek(),
-              ),
-              ButtonBarEntry(
-                child: const Text(
                   'Movies',
                   style: TextStyle(color: Colors.black),
                 ),
@@ -137,7 +130,7 @@ class TrendingPageListWidget extends StatelessWidget {
         final trending = cubit.state.trendingList[index];
         final posterPath = trending.posterPath;
         return InkWell(
-          onTap: () => cubit.onTrendingTap(context, index),
+          onTap: () {},
           child: Stack(
             children: [
               Container(

@@ -7,6 +7,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_container.dart';
@@ -59,17 +61,16 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadMoviesThisWeek(
       TrendingListEventLoadMoviesThisWeek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    final container = await _loadNextPage(
-      state.trendingListContainer,
-      (nextPage) async {
-        final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
-        return result;
-      },
+    final nextPage = state.trendingListContainer.currentPage + 1;
+    final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
+    final movie = List<Movie>.from(state.trendingListContainer.trendingMovie)..addAll(result.movies);
+    final container = state.trendingListContainer.copyWith(
+      trendingMovie: movie,
+      currentPage: result.page,
+      totalPage: result.totalPages,
     );
-    if (container != null) {
-      final newState = state.copyWith(trendingListContainer: container);
-      emit(newState);
-    }
+    final newState = state.copyWith(trendingListContainer: container);
+    emit(newState);
   }
 
   Future<void> onTrendingListEventLoadTvThisWeek(
@@ -93,9 +94,9 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     if (state.trendingListContainer.isComplete) return;
     final nextPage = state.trendingListContainer.currentPage + 1;
     final result = await _trendingApiClient.trendingPeople(nextPage, event.locale, week, Configuration.apiKey);
-    final people = List<TrendingAll>.from(state.trendingListContainer.trendingAll)..addAll(result.trendingAll);
+    final people = List<People>.from(state.trendingListContainer.people)..addAll(result.people);
     final container = state.trendingListContainer.copyWith(
-      trendingAll: people,
+      people: people,
       currentPage: result.page,
       totalPage: result.totalPages,
     );
