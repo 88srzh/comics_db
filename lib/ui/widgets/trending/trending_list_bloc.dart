@@ -23,10 +23,8 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   final _trendingApiClient = MovieAndTvApiClient();
   final String day = 'day';
   final String week = 'week';
-  final String sixHour = '6h';
   final String movie = 'movie';
   final String tv = 'tv';
-  final String people = 'people';
   final String all = 'all';
 
   TrendingListBloc(TrendingListState initialState) : super(initialState) {
@@ -61,8 +59,8 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadMoviesThisWeek(
       TrendingListEventLoadMoviesThisWeek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    final nextPage = state.trendingListContainer.currentPage + 1;
-    final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
+    // final nextPage = state.trendingListContainer.currentPage + 1;
+    final result = await _trendingApiClient.trendingMovies(1, event.locale, week, Configuration.apiKey);
     final movie = List<Movie>.from(state.trendingListContainer.trendingMovie)..addAll(result.movies);
     final container = state.trendingListContainer.copyWith(
       trendingMovie: movie,
