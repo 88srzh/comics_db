@@ -43,6 +43,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
       title: trending.title,
       name: trending.name,
       firstAirDate: firstAirDate,
+      profilePath: trending.profilePath,
     );
   }
 
@@ -85,6 +86,11 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: state.localeTag));
   }
 
+  void showedTrendingAllThisWeek() {
+    trendingListBloc.add(TrendingListEventLoadReset());
+    trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: state.localeTag));
+  }
+
   void showedTrendingMoviesThisWeek() {
     trendingListBloc.add(TrendingListEventLoadReset());
     trendingListBloc.add(TrendingListEventLoadMoviesThisWeek(locale: state.localeTag));
@@ -93,6 +99,11 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
   void showedTrendingTvThisWeek() {
     trendingListBloc.add(TrendingListEventLoadReset());
     trendingListBloc.add(TrendingListEventLoadTvThisWeek(locale: state.localeTag));
+  }
+
+  void showedTrendingPeopleThisWeek() {
+    trendingListBloc.add(TrendingListEventLoadReset());
+    trendingListBloc.add(TrendingListEvenLoadPeopleThisWeek(locale: state.localeTag));
   }
 
   // TODO need to think how realise to movie, tv and people.

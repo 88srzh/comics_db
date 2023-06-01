@@ -37,6 +37,7 @@ mixin _$TrendingAll {
   double get voteAverage => throw _privateConstructorUsedError;
   String get mediaType => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String? get profilePath => throw _privateConstructorUsedError;
   @JsonKey(fromJson: parseDateFromString)
   DateTime? get firstAirDate => throw _privateConstructorUsedError;
 
@@ -69,6 +70,7 @@ abstract class $TrendingAllCopyWith<$Res> {
       double voteAverage,
       String mediaType,
       String name,
+      String? profilePath,
       @JsonKey(fromJson: parseDateFromString) DateTime? firstAirDate});
 }
 
@@ -101,6 +103,7 @@ class _$TrendingAllCopyWithImpl<$Res, $Val extends TrendingAll>
     Object? voteAverage = null,
     Object? mediaType = null,
     Object? name = null,
+    Object? profilePath = freezed,
     Object? firstAirDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -168,6 +171,10 @@ class _$TrendingAllCopyWithImpl<$Res, $Val extends TrendingAll>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      profilePath: freezed == profilePath
+          ? _value.profilePath
+          : profilePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       firstAirDate: freezed == firstAirDate
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
@@ -201,6 +208,7 @@ abstract class _$$_TrendingAllCopyWith<$Res>
       double voteAverage,
       String mediaType,
       String name,
+      String? profilePath,
       @JsonKey(fromJson: parseDateFromString) DateTime? firstAirDate});
 }
 
@@ -231,6 +239,7 @@ class __$$_TrendingAllCopyWithImpl<$Res>
     Object? voteAverage = null,
     Object? mediaType = null,
     Object? name = null,
+    Object? profilePath = freezed,
     Object? firstAirDate = freezed,
   }) {
     return _then(_$_TrendingAll(
@@ -298,6 +307,10 @@ class __$$_TrendingAllCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      profilePath: freezed == profilePath
+          ? _value.profilePath
+          : profilePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       firstAirDate: freezed == firstAirDate
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
@@ -327,6 +340,7 @@ class _$_TrendingAll implements _TrendingAll {
       required this.voteAverage,
       required this.mediaType,
       required this.name,
+      this.profilePath,
       @JsonKey(fromJson: parseDateFromString) this.firstAirDate})
       : _genreIds = genreIds;
 
@@ -373,12 +387,14 @@ class _$_TrendingAll implements _TrendingAll {
   @override
   final String name;
   @override
+  final String? profilePath;
+  @override
   @JsonKey(fromJson: parseDateFromString)
   final DateTime? firstAirDate;
 
   @override
   String toString() {
-    return 'TrendingAll(posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage, mediaType: $mediaType, name: $name, firstAirDate: $firstAirDate)';
+    return 'TrendingAll(posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage, mediaType: $mediaType, name: $name, profilePath: $profilePath, firstAirDate: $firstAirDate)';
   }
 
   @override
@@ -412,6 +428,8 @@ class _$_TrendingAll implements _TrendingAll {
             (identical(other.mediaType, mediaType) ||
                 other.mediaType == mediaType) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.profilePath, profilePath) ||
+                other.profilePath == profilePath) &&
             (identical(other.firstAirDate, firstAirDate) ||
                 other.firstAirDate == firstAirDate));
   }
@@ -436,6 +454,7 @@ class _$_TrendingAll implements _TrendingAll {
       voteAverage,
       mediaType,
       name,
+      profilePath,
       firstAirDate);
 
   @JsonKey(ignore: true)
@@ -471,6 +490,7 @@ abstract class _TrendingAll implements TrendingAll {
       required final double voteAverage,
       required final String mediaType,
       required final String name,
+      final String? profilePath,
       @JsonKey(fromJson: parseDateFromString)
           final DateTime? firstAirDate}) = _$_TrendingAll;
 
@@ -510,6 +530,8 @@ abstract class _TrendingAll implements TrendingAll {
   String get mediaType;
   @override
   String get name;
+  @override
+  String? get profilePath;
   @override
   @JsonKey(fromJson: parseDateFromString)
   DateTime? get firstAirDate;

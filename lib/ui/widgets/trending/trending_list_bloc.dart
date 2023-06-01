@@ -7,7 +7,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_container.dart';
@@ -90,27 +89,14 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadPeopleThisWeek(
       TrendingListEvenLoadPeopleThisWeek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    final nextPage = state.trendingListContainer.currentPage + 1;
-    final result = await _trendingApiClient.trendingPeople(nextPage, event.locale, week, Configuration.apiKey);
-    final people = List<People>.from(state.trendingListContainer.people)..addAll(result.people);
-    final container = state.trendingListContainer.copyWith(
-      people: people,
-      currentPage: result.page,
-      totalPage: result.totalPages,
-    );
-    final newState = state.copyWith(trendingListContainer: container);
-    emit(newState);
-    // final container = await _loadNextPage(
-    //   state.trendingListContainer,
-    //   (nextPage) async {
-    //     final result = await _trendingApiClient.trendingPeople(nextPage, event.locale, week, Configuration.apiKey);
-    //     return result;
-    //   },
-    // );
-    // if (container != null) {
-    //   final newState = state.copyWith(trendingListContainer: container);
-    //   emit(newState);
-    // }
+    final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
+      final result = await _trendingApiClient.trendingPeople(nextPage, event.locale, week, Configuration.apiKey);
+      return result;
+    });
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
+    }
   }
 
   Future<TrendingListContainer?> _loadNextPage(

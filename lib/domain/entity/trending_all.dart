@@ -41,6 +41,7 @@ class TrendingAll with _$TrendingAll {
     required double voteAverage,
     required String mediaType,
     required String name,
+    String? profilePath,
     @JsonKey(fromJson: parseDateFromString) DateTime? firstAirDate,
   }) = _TrendingAll;
 

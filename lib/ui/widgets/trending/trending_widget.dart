@@ -81,7 +81,7 @@ class AnimatedButtonBarWidget extends StatelessWidget {
                   'All',
                   style: TextStyle(color: Colors.black),
                 ),
-                onTap: () => cubit.showedTrendingMoviesThisWeek(),
+                onTap: () => cubit.showedTrendingAllThisWeek(),
               ),
               ButtonBarEntry(
                 child: const Text(
@@ -96,6 +96,13 @@ class AnimatedButtonBarWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.black),
                 ),
                 onTap: () => cubit.showedTrendingTvThisWeek(),
+              ),
+              ButtonBarEntry(
+                child: const Text(
+                  'People',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () => cubit.showedTrendingPeopleThisWeek(),
               ),
             ],
           ),
@@ -129,6 +136,7 @@ class TrendingPageListWidget extends StatelessWidget {
         cubit.showedTrendingAtIndex(index);
         final trending = cubit.state.trendingList[index];
         final posterPath = trending.posterPath;
+        final profilePath = trending.profilePath;
         return InkWell(
           onTap: () {},
           child: Stack(
@@ -158,7 +166,7 @@ class TrendingPageListWidget extends StatelessWidget {
                   children: [
                     posterPath.isNotEmpty
                         ? CachedNetworkImage(
-                            imageUrl: ImageDownloader.imageUrl(posterPath),
+                            imageUrl: posterPath.isNotEmpty ? ImageDownloader.imageUrl(posterPath) : ImageDownloader.imageUrl(profilePath!),
                             placeholder: (context, url) => const LoadingIndicatorWidget(),
                             errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                           )
@@ -170,7 +178,7 @@ class TrendingPageListWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
+                            // CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
                             CustomCastListTextWidget(text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate, maxLines: 1),
                           ],
                         ),
