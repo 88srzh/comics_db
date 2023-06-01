@@ -50,6 +50,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     _dateFormat = DateFormat.yMMMd(localeTag);
     trendingListBloc.add(TrendingListEventLoadReset());
     trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: localeTag));
+    // trendingListBloc.add(TrendingListEventLoadMoviesThisWeek(locale: localeTag));
   }
 
   @override

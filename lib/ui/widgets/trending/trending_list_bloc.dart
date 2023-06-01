@@ -59,8 +59,9 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadMoviesThisWeek(
       TrendingListEventLoadMoviesThisWeek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    // final nextPage = state.trendingListContainer.currentPage + 1;
-    final result = await _trendingApiClient.trendingMovies(1, event.locale, week, Configuration.apiKey);
+    final nextPage = state.trendingListContainer.currentPage + 1;
+    if (state.trendingListContainer.currentPage > 10) return;
+    final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
     final movie = List<Movie>.from(state.trendingListContainer.trendingMovie)..addAll(result.movies);
     final container = state.trendingListContainer.copyWith(
       trendingMovie: movie,
@@ -115,8 +116,10 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
 
   Future<TrendingListContainer?> _loadNextPage(
       TrendingListContainer container, Future<TrendingAllResponse> Function(int) loader) async {
+    var currentPage = state.trendingListContainer.currentPage;
     if (container.isComplete) return null;
-    final nextPage = state.trendingListContainer.currentPage + 1;
+    final nextPage = currentPage + 1;
+    if (currentPage > 0) return null;
     final result = await loader(nextPage);
     final trendingAll = List<TrendingAll>.from(container.trendingAll)..addAll(result.trendingAll);
     final newContainer = container.copyWith(
