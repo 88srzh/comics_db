@@ -35,11 +35,14 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
 
   TrendingListData _makeListData(TrendingAll trending) {
     String releaseDate = makeReleaseDate(trending);
+    String firstAirDate = makeFirstAirDate(trending);
     return TrendingListData(
       id: trending.id,
       posterPath: trending.posterPath ?? '',
       releaseData: releaseDate,
       title: trending.title,
+      name: trending.name,
+      firstAirDate: firstAirDate,
     );
   }
 
@@ -64,6 +67,15 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     final releaseDate = trending.releaseDate;
     if (releaseDate != null) {
       texts.add(_dateFormat.format(releaseDate));
+    }
+    return texts.join(' ');
+  }
+
+  String makeFirstAirDate(TrendingAll trending) {
+    var texts = <String>[];
+    final firstAirDate = trending.firstAirDate;
+    if (firstAirDate != null) {
+      texts.add(_dateFormat.format(firstAirDate));
     }
     return texts.join(' ');
   }

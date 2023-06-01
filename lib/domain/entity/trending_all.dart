@@ -39,6 +39,9 @@ class TrendingAll with _$TrendingAll {
     required int voteCount,
     required bool video,
     required double voteAverage,
+    required String mediaType,
+    required String name,
+    @JsonKey(fromJson: parseDateFromString) DateTime? firstAirDate,
   }) = _TrendingAll;
 
   factory TrendingAll.fromJson(Map<String, dynamic> json) => _$TrendingAllFromJson(json);

@@ -170,8 +170,8 @@ class TrendingPageListWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
-                            CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
+                            CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
+                            CustomCastListTextWidget(text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate, maxLines: 1),
                           ],
                         ),
                       ),

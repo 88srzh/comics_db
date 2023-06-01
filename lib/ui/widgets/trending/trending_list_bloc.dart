@@ -7,7 +7,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
@@ -59,17 +58,17 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   Future<void> onTrendingListEventLoadMoviesThisWeek(
       TrendingListEventLoadMoviesThisWeek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    final nextPage = state.trendingListContainer.currentPage + 1;
-    if (state.trendingListContainer.currentPage > 10) return;
-    final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
-    final movie = List<Movie>.from(state.trendingListContainer.trendingMovie)..addAll(result.movies);
-    final container = state.trendingListContainer.copyWith(
-      trendingMovie: movie,
-      currentPage: result.page,
-      totalPage: result.totalPages,
+    final container = await _loadNextPage(
+      state.trendingListContainer,
+      (nextPage) async {
+        final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
+        return result;
+      },
     );
-    final newState = state.copyWith(trendingListContainer: container);
-    emit(newState);
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
+    }
   }
 
   Future<void> onTrendingListEventLoadTvThisWeek(
