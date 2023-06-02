@@ -166,7 +166,7 @@ class TrendingPageListWidget extends StatelessWidget {
                   children: [
                     posterPath.isNotEmpty
                         ? CachedNetworkImage(
-                            imageUrl: posterPath.isNotEmpty ? ImageDownloader.imageUrl(posterPath) : ImageDownloader.imageUrl(profilePath!),
+                            imageUrl: posterPath.isNotEmpty ? ImageDownloader.imageUrl(posterPath) : ImageDownloader.imageUrl(profilePath),
                             placeholder: (context, url) => const LoadingIndicatorWidget(),
                             errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                           )
@@ -178,7 +178,7 @@ class TrendingPageListWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
+                            CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
                             CustomCastListTextWidget(text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate, maxLines: 1),
                           ],
                         ),

@@ -5,7 +5,7 @@ class TrendingListData {
   final String? title;
   final String? name;
   final String firstAirDate;
-  final String? profilePath;
+  final String profilePath;
 
   TrendingListData({
     required this.id,

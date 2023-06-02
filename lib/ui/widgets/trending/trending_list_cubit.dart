@@ -43,7 +43,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
       title: trending.title,
       name: trending.name,
       firstAirDate: firstAirDate,
-      profilePath: trending.profilePath,
+      profilePath: trending.profilePath ?? '',
     );
   }
 
@@ -54,7 +54,6 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     _dateFormat = DateFormat.yMMMd(localeTag);
     trendingListBloc.add(TrendingListEventLoadReset());
     trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: localeTag));
-    // trendingListBloc.add(TrendingListEventLoadMoviesThisWeek(locale: localeTag));
   }
 
   @override
@@ -106,7 +105,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     trendingListBloc.add(TrendingListEvenLoadPeopleThisWeek(locale: state.localeTag));
   }
 
-  // TODO need to think how realise to movie, tv and people.
+  // TODO need to think how realize to movie, tv and people.
   // void onTrendingTap(BuildContext context, int index) {
   //   final id = state.trendingList[index].id;
   //   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
