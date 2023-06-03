@@ -1,12 +1,14 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/data_parser.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/entity/data_parser.dart';
 
 part 'trending_all.freezed.dart';
 
 part 'trending_all.g.dart';
 
-enum MediaType {movie, tv, person}
+enum MediaType { movie, tv, person }
 
 extension MediaTypeAsString on MediaType {
   String asString() {
@@ -46,6 +48,4 @@ class TrendingAll with _$TrendingAll {
   }) = _TrendingAll;
 
   factory TrendingAll.fromJson(Map<String, dynamic> json) => _$TrendingAllFromJson(json);
-
-// Map<String, dynamic> toJson() => _$TrendingAllToJson(this);
 }
