@@ -1,6 +1,9 @@
 ## 0.0.8.3
 
 - Added `Trending Screen` with animated button to see day and week trending.
+- Fixed `Trending Screen` overload.
+- Fixed `Animated Button`.
+- Changed `Animated Button` to show `Movie` and `TV` per week.
 
 ---
 
