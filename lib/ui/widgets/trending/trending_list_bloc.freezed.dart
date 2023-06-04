@@ -18,47 +18,55 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TrendingListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale) loadNextPage,
-    required TResult Function(String locale) loadNextThisWeek,
+    required TResult Function(String locale) loadAllThisWeek,
+    required TResult Function(String locale) loadMoviesThisWeek,
+    required TResult Function(String locale) loadTvThisWeek,
     required TResult Function() loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale)? loadNextPage,
-    TResult? Function(String locale)? loadNextThisWeek,
+    TResult? Function(String locale)? loadAllThisWeek,
+    TResult? Function(String locale)? loadMoviesThisWeek,
+    TResult? Function(String locale)? loadTvThisWeek,
     TResult? Function()? loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale)? loadNextPage,
-    TResult Function(String locale)? loadNextThisWeek,
+    TResult Function(String locale)? loadAllThisWeek,
+    TResult Function(String locale)? loadMoviesThisWeek,
+    TResult Function(String locale)? loadTvThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TrendingListEventLoadNextPage value) loadNextPage,
-    required TResult Function(TrendingListEventLoadNextPageThisWweek value)
-        loadNextThisWeek,
+    required TResult Function(TrendingListEventLoadAllThisWeek value)
+        loadAllThisWeek,
+    required TResult Function(TrendingListEventLoadMoviesThisWeek value)
+        loadMoviesThisWeek,
+    required TResult Function(TrendingListEventLoadTvThisWeek value)
+        loadTvThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult? Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult? Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) =>
@@ -84,23 +92,23 @@ class _$TrendingListEventCopyWithImpl<$Res, $Val extends TrendingListEvent>
 }
 
 /// @nodoc
-abstract class _$$TrendingListEventLoadNextPageCopyWith<$Res> {
-  factory _$$TrendingListEventLoadNextPageCopyWith(
-          _$TrendingListEventLoadNextPage value,
-          $Res Function(_$TrendingListEventLoadNextPage) then) =
-      __$$TrendingListEventLoadNextPageCopyWithImpl<$Res>;
+abstract class _$$TrendingListEventLoadAllThisWeekCopyWith<$Res> {
+  factory _$$TrendingListEventLoadAllThisWeekCopyWith(
+          _$TrendingListEventLoadAllThisWeek value,
+          $Res Function(_$TrendingListEventLoadAllThisWeek) then) =
+      __$$TrendingListEventLoadAllThisWeekCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$TrendingListEventLoadNextPageCopyWithImpl<$Res>
+class __$$TrendingListEventLoadAllThisWeekCopyWithImpl<$Res>
     extends _$TrendingListEventCopyWithImpl<$Res,
-        _$TrendingListEventLoadNextPage>
-    implements _$$TrendingListEventLoadNextPageCopyWith<$Res> {
-  __$$TrendingListEventLoadNextPageCopyWithImpl(
-      _$TrendingListEventLoadNextPage _value,
-      $Res Function(_$TrendingListEventLoadNextPage) _then)
+        _$TrendingListEventLoadAllThisWeek>
+    implements _$$TrendingListEventLoadAllThisWeekCopyWith<$Res> {
+  __$$TrendingListEventLoadAllThisWeekCopyWithImpl(
+      _$TrendingListEventLoadAllThisWeek _value,
+      $Res Function(_$TrendingListEventLoadAllThisWeek) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +116,7 @@ class __$$TrendingListEventLoadNextPageCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$TrendingListEventLoadNextPage(
+    return _then(_$TrendingListEventLoadAllThisWeek(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -119,22 +127,23 @@ class __$$TrendingListEventLoadNextPageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrendingListEventLoadNextPage implements TrendingListEventLoadNextPage {
-  _$TrendingListEventLoadNextPage({required this.locale});
+class _$TrendingListEventLoadAllThisWeek
+    implements TrendingListEventLoadAllThisWeek {
+  _$TrendingListEventLoadAllThisWeek({required this.locale});
 
   @override
   final String locale;
 
   @override
   String toString() {
-    return 'TrendingListEvent.loadNextPage(locale: $locale)';
+    return 'TrendingListEvent.loadAllThisWeek(locale: $locale)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendingListEventLoadNextPage &&
+            other is _$TrendingListEventLoadAllThisWeek &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -144,40 +153,44 @@ class _$TrendingListEventLoadNextPage implements TrendingListEventLoadNextPage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TrendingListEventLoadNextPageCopyWith<_$TrendingListEventLoadNextPage>
-      get copyWith => __$$TrendingListEventLoadNextPageCopyWithImpl<
-          _$TrendingListEventLoadNextPage>(this, _$identity);
+  _$$TrendingListEventLoadAllThisWeekCopyWith<
+          _$TrendingListEventLoadAllThisWeek>
+      get copyWith => __$$TrendingListEventLoadAllThisWeekCopyWithImpl<
+          _$TrendingListEventLoadAllThisWeek>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale) loadNextPage,
-    required TResult Function(String locale) loadNextThisWeek,
+    required TResult Function(String locale) loadAllThisWeek,
+    required TResult Function(String locale) loadMoviesThisWeek,
+    required TResult Function(String locale) loadTvThisWeek,
     required TResult Function() loadReset,
   }) {
-    return loadNextPage(locale);
+    return loadAllThisWeek(locale);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale)? loadNextPage,
-    TResult? Function(String locale)? loadNextThisWeek,
+    TResult? Function(String locale)? loadAllThisWeek,
+    TResult? Function(String locale)? loadMoviesThisWeek,
+    TResult? Function(String locale)? loadTvThisWeek,
     TResult? Function()? loadReset,
   }) {
-    return loadNextPage?.call(locale);
+    return loadAllThisWeek?.call(locale);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale)? loadNextPage,
-    TResult Function(String locale)? loadNextThisWeek,
+    TResult Function(String locale)? loadAllThisWeek,
+    TResult Function(String locale)? loadMoviesThisWeek,
+    TResult Function(String locale)? loadTvThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
-    if (loadNextPage != null) {
-      return loadNextPage(locale);
+    if (loadAllThisWeek != null) {
+      return loadAllThisWeek(locale);
     }
     return orElse();
   }
@@ -185,69 +198,75 @@ class _$TrendingListEventLoadNextPage implements TrendingListEventLoadNextPage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TrendingListEventLoadNextPage value) loadNextPage,
-    required TResult Function(TrendingListEventLoadNextPageThisWweek value)
-        loadNextThisWeek,
+    required TResult Function(TrendingListEventLoadAllThisWeek value)
+        loadAllThisWeek,
+    required TResult Function(TrendingListEventLoadMoviesThisWeek value)
+        loadMoviesThisWeek,
+    required TResult Function(TrendingListEventLoadTvThisWeek value)
+        loadTvThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
-    return loadNextPage(this);
+    return loadAllThisWeek(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult? Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult? Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
-    return loadNextPage?.call(this);
+    return loadAllThisWeek?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
-    if (loadNextPage != null) {
-      return loadNextPage(this);
+    if (loadAllThisWeek != null) {
+      return loadAllThisWeek(this);
     }
     return orElse();
   }
 }
 
-abstract class TrendingListEventLoadNextPage implements TrendingListEvent {
-  factory TrendingListEventLoadNextPage({required final String locale}) =
-      _$TrendingListEventLoadNextPage;
+abstract class TrendingListEventLoadAllThisWeek implements TrendingListEvent {
+  factory TrendingListEventLoadAllThisWeek({required final String locale}) =
+      _$TrendingListEventLoadAllThisWeek;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$TrendingListEventLoadNextPageCopyWith<_$TrendingListEventLoadNextPage>
+  _$$TrendingListEventLoadAllThisWeekCopyWith<
+          _$TrendingListEventLoadAllThisWeek>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TrendingListEventLoadNextPageThisWweekCopyWith<$Res> {
-  factory _$$TrendingListEventLoadNextPageThisWweekCopyWith(
-          _$TrendingListEventLoadNextPageThisWweek value,
-          $Res Function(_$TrendingListEventLoadNextPageThisWweek) then) =
-      __$$TrendingListEventLoadNextPageThisWweekCopyWithImpl<$Res>;
+abstract class _$$TrendingListEventLoadMoviesThisWeekCopyWith<$Res> {
+  factory _$$TrendingListEventLoadMoviesThisWeekCopyWith(
+          _$TrendingListEventLoadMoviesThisWeek value,
+          $Res Function(_$TrendingListEventLoadMoviesThisWeek) then) =
+      __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$TrendingListEventLoadNextPageThisWweekCopyWithImpl<$Res>
+class __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<$Res>
     extends _$TrendingListEventCopyWithImpl<$Res,
-        _$TrendingListEventLoadNextPageThisWweek>
-    implements _$$TrendingListEventLoadNextPageThisWweekCopyWith<$Res> {
-  __$$TrendingListEventLoadNextPageThisWweekCopyWithImpl(
-      _$TrendingListEventLoadNextPageThisWweek _value,
-      $Res Function(_$TrendingListEventLoadNextPageThisWweek) _then)
+        _$TrendingListEventLoadMoviesThisWeek>
+    implements _$$TrendingListEventLoadMoviesThisWeekCopyWith<$Res> {
+  __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl(
+      _$TrendingListEventLoadMoviesThisWeek _value,
+      $Res Function(_$TrendingListEventLoadMoviesThisWeek) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -255,7 +274,7 @@ class __$$TrendingListEventLoadNextPageThisWweekCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$TrendingListEventLoadNextPageThisWweek(
+    return _then(_$TrendingListEventLoadMoviesThisWeek(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -266,23 +285,23 @@ class __$$TrendingListEventLoadNextPageThisWweekCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrendingListEventLoadNextPageThisWweek
-    implements TrendingListEventLoadNextPageThisWweek {
-  _$TrendingListEventLoadNextPageThisWweek({required this.locale});
+class _$TrendingListEventLoadMoviesThisWeek
+    implements TrendingListEventLoadMoviesThisWeek {
+  _$TrendingListEventLoadMoviesThisWeek({required this.locale});
 
   @override
   final String locale;
 
   @override
   String toString() {
-    return 'TrendingListEvent.loadNextThisWeek(locale: $locale)';
+    return 'TrendingListEvent.loadMoviesThisWeek(locale: $locale)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendingListEventLoadNextPageThisWweek &&
+            other is _$TrendingListEventLoadMoviesThisWeek &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -292,41 +311,44 @@ class _$TrendingListEventLoadNextPageThisWweek
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TrendingListEventLoadNextPageThisWweekCopyWith<
-          _$TrendingListEventLoadNextPageThisWweek>
-      get copyWith => __$$TrendingListEventLoadNextPageThisWweekCopyWithImpl<
-          _$TrendingListEventLoadNextPageThisWweek>(this, _$identity);
+  _$$TrendingListEventLoadMoviesThisWeekCopyWith<
+          _$TrendingListEventLoadMoviesThisWeek>
+      get copyWith => __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<
+          _$TrendingListEventLoadMoviesThisWeek>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale) loadNextPage,
-    required TResult Function(String locale) loadNextThisWeek,
+    required TResult Function(String locale) loadAllThisWeek,
+    required TResult Function(String locale) loadMoviesThisWeek,
+    required TResult Function(String locale) loadTvThisWeek,
     required TResult Function() loadReset,
   }) {
-    return loadNextThisWeek(locale);
+    return loadMoviesThisWeek(locale);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale)? loadNextPage,
-    TResult? Function(String locale)? loadNextThisWeek,
+    TResult? Function(String locale)? loadAllThisWeek,
+    TResult? Function(String locale)? loadMoviesThisWeek,
+    TResult? Function(String locale)? loadTvThisWeek,
     TResult? Function()? loadReset,
   }) {
-    return loadNextThisWeek?.call(locale);
+    return loadMoviesThisWeek?.call(locale);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale)? loadNextPage,
-    TResult Function(String locale)? loadNextThisWeek,
+    TResult Function(String locale)? loadAllThisWeek,
+    TResult Function(String locale)? loadMoviesThisWeek,
+    TResult Function(String locale)? loadTvThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
-    if (loadNextThisWeek != null) {
-      return loadNextThisWeek(locale);
+    if (loadMoviesThisWeek != null) {
+      return loadMoviesThisWeek(locale);
     }
     return orElse();
   }
@@ -334,51 +356,211 @@ class _$TrendingListEventLoadNextPageThisWweek
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TrendingListEventLoadNextPage value) loadNextPage,
-    required TResult Function(TrendingListEventLoadNextPageThisWweek value)
-        loadNextThisWeek,
+    required TResult Function(TrendingListEventLoadAllThisWeek value)
+        loadAllThisWeek,
+    required TResult Function(TrendingListEventLoadMoviesThisWeek value)
+        loadMoviesThisWeek,
+    required TResult Function(TrendingListEventLoadTvThisWeek value)
+        loadTvThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
-    return loadNextThisWeek(this);
+    return loadMoviesThisWeek(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult? Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult? Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
-    return loadNextThisWeek?.call(this);
+    return loadMoviesThisWeek?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
-    if (loadNextThisWeek != null) {
-      return loadNextThisWeek(this);
+    if (loadMoviesThisWeek != null) {
+      return loadMoviesThisWeek(this);
     }
     return orElse();
   }
 }
 
-abstract class TrendingListEventLoadNextPageThisWweek
+abstract class TrendingListEventLoadMoviesThisWeek
     implements TrendingListEvent {
-  factory TrendingListEventLoadNextPageThisWweek(
-          {required final String locale}) =
-      _$TrendingListEventLoadNextPageThisWweek;
+  factory TrendingListEventLoadMoviesThisWeek({required final String locale}) =
+      _$TrendingListEventLoadMoviesThisWeek;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$TrendingListEventLoadNextPageThisWweekCopyWith<
-          _$TrendingListEventLoadNextPageThisWweek>
+  _$$TrendingListEventLoadMoviesThisWeekCopyWith<
+          _$TrendingListEventLoadMoviesThisWeek>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TrendingListEventLoadTvThisWeekCopyWith<$Res> {
+  factory _$$TrendingListEventLoadTvThisWeekCopyWith(
+          _$TrendingListEventLoadTvThisWeek value,
+          $Res Function(_$TrendingListEventLoadTvThisWeek) then) =
+      __$$TrendingListEventLoadTvThisWeekCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String locale});
+}
+
+/// @nodoc
+class __$$TrendingListEventLoadTvThisWeekCopyWithImpl<$Res>
+    extends _$TrendingListEventCopyWithImpl<$Res,
+        _$TrendingListEventLoadTvThisWeek>
+    implements _$$TrendingListEventLoadTvThisWeekCopyWith<$Res> {
+  __$$TrendingListEventLoadTvThisWeekCopyWithImpl(
+      _$TrendingListEventLoadTvThisWeek _value,
+      $Res Function(_$TrendingListEventLoadTvThisWeek) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? locale = null,
+  }) {
+    return _then(_$TrendingListEventLoadTvThisWeek(
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TrendingListEventLoadTvThisWeek
+    implements TrendingListEventLoadTvThisWeek {
+  _$TrendingListEventLoadTvThisWeek({required this.locale});
+
+  @override
+  final String locale;
+
+  @override
+  String toString() {
+    return 'TrendingListEvent.loadTvThisWeek(locale: $locale)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TrendingListEventLoadTvThisWeek &&
+            (identical(other.locale, locale) || other.locale == locale));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, locale);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TrendingListEventLoadTvThisWeekCopyWith<_$TrendingListEventLoadTvThisWeek>
+      get copyWith => __$$TrendingListEventLoadTvThisWeekCopyWithImpl<
+          _$TrendingListEventLoadTvThisWeek>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String locale) loadAllThisWeek,
+    required TResult Function(String locale) loadMoviesThisWeek,
+    required TResult Function(String locale) loadTvThisWeek,
+    required TResult Function() loadReset,
+  }) {
+    return loadTvThisWeek(locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String locale)? loadAllThisWeek,
+    TResult? Function(String locale)? loadMoviesThisWeek,
+    TResult? Function(String locale)? loadTvThisWeek,
+    TResult? Function()? loadReset,
+  }) {
+    return loadTvThisWeek?.call(locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String locale)? loadAllThisWeek,
+    TResult Function(String locale)? loadMoviesThisWeek,
+    TResult Function(String locale)? loadTvThisWeek,
+    TResult Function()? loadReset,
+    required TResult orElse(),
+  }) {
+    if (loadTvThisWeek != null) {
+      return loadTvThisWeek(locale);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TrendingListEventLoadAllThisWeek value)
+        loadAllThisWeek,
+    required TResult Function(TrendingListEventLoadMoviesThisWeek value)
+        loadMoviesThisWeek,
+    required TResult Function(TrendingListEventLoadTvThisWeek value)
+        loadTvThisWeek,
+    required TResult Function(TrendingListEventLoadReset value) loadReset,
+  }) {
+    return loadTvThisWeek(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
+    TResult? Function(TrendingListEventLoadReset value)? loadReset,
+  }) {
+    return loadTvThisWeek?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
+    TResult Function(TrendingListEventLoadReset value)? loadReset,
+    required TResult orElse(),
+  }) {
+    if (loadTvThisWeek != null) {
+      return loadTvThisWeek(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TrendingListEventLoadTvThisWeek implements TrendingListEvent {
+  factory TrendingListEventLoadTvThisWeek({required final String locale}) =
+      _$TrendingListEventLoadTvThisWeek;
+
+  String get locale;
+  @JsonKey(ignore: true)
+  _$$TrendingListEventLoadTvThisWeekCopyWith<_$TrendingListEventLoadTvThisWeek>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -423,8 +605,9 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale) loadNextPage,
-    required TResult Function(String locale) loadNextThisWeek,
+    required TResult Function(String locale) loadAllThisWeek,
+    required TResult Function(String locale) loadMoviesThisWeek,
+    required TResult Function(String locale) loadTvThisWeek,
     required TResult Function() loadReset,
   }) {
     return loadReset();
@@ -433,8 +616,9 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale)? loadNextPage,
-    TResult? Function(String locale)? loadNextThisWeek,
+    TResult? Function(String locale)? loadAllThisWeek,
+    TResult? Function(String locale)? loadMoviesThisWeek,
+    TResult? Function(String locale)? loadTvThisWeek,
     TResult? Function()? loadReset,
   }) {
     return loadReset?.call();
@@ -443,8 +627,9 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale)? loadNextPage,
-    TResult Function(String locale)? loadNextThisWeek,
+    TResult Function(String locale)? loadAllThisWeek,
+    TResult Function(String locale)? loadMoviesThisWeek,
+    TResult Function(String locale)? loadTvThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
@@ -457,9 +642,12 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TrendingListEventLoadNextPage value) loadNextPage,
-    required TResult Function(TrendingListEventLoadNextPageThisWweek value)
-        loadNextThisWeek,
+    required TResult Function(TrendingListEventLoadAllThisWeek value)
+        loadAllThisWeek,
+    required TResult Function(TrendingListEventLoadMoviesThisWeek value)
+        loadMoviesThisWeek,
+    required TResult Function(TrendingListEventLoadTvThisWeek value)
+        loadTvThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
     return loadReset(this);
@@ -468,9 +656,10 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult? Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult? Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
     return loadReset?.call(this);
@@ -479,9 +668,10 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendingListEventLoadNextPage value)? loadNextPage,
-    TResult Function(TrendingListEventLoadNextPageThisWweek value)?
-        loadNextThisWeek,
+    TResult Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
+    TResult Function(TrendingListEventLoadMoviesThisWeek value)?
+        loadMoviesThisWeek,
+    TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {

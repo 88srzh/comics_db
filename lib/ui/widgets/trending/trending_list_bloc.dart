@@ -21,49 +21,27 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   final _trendingApiClient = MovieAndTvApiClient();
   final String day = 'day';
   final String week = 'week';
-  final String sixHour = '6h';
-
-  // final TimeWindowType timeWindowType;
+  final String movie = 'movie';
+  final String tv = 'tv';
+  final String all = 'all';
 
   TrendingListBloc(TrendingListState initialState) : super(initialState) {
     on<TrendingListEvent>(((event, emit) async {
-      if (event is TrendingListEventLoadNextPage) {
-        await onTrendingListEventLoadNextPage(event, emit);
-      } else if (event is TrendingListEventLoadNextPageThisWweek) {
-        await onTrendingListEventLoadNextPageThisWeek(event, emit);
+      if (event is TrendingListEventLoadAllThisWeek) {
+        await onTrendingListEventLoadAllThisWeek(event, emit);
+      } else if (event is TrendingListEventLoadMoviesThisWeek) {
+        await onTrendingListEventLoadMoviesThisWeek(event, emit);
+      } else if (event is TrendingListEventLoadTvThisWeek) {
+        await onTrendingListEventLoadTvThisWeek(event, emit);
       } else if (event is TrendingListEventLoadReset) {
         await onTrendingListEventLoadReset(event, emit);
       }
     }), transformer: sequential());
   }
 
-  Future<void> onTrendingListEventLoadNextPage(
-      TrendingListEventLoadNextPage event, Emitter<TrendingListState> emit) async {
+  Future<void> onTrendingListEventLoadAllThisWeek(
+      TrendingListEventLoadAllThisWeek event, Emitter<TrendingListState> emit) async {
     if (state.trendingListContainer.isComplete) return;
-    final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-      final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
-      return result;
-    });
-    if (container != null) {
-      final newState = state.copyWith(trendingListContainer: container);
-      emit(newState);
-    }
-
-// final nextPage = state.trendingListContainer.currentPage + 1;
-// final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
-// final trendingAll = List<TrendingAll>.from(state.trendingListContainer.trendingAll)..addAll(result.trendingAll);
-// final container = state.trendingListContainer.copyWith(
-//   trendingAll: trendingAll,
-//   currentPage: result.page,
-//   totalPage: result.totalPages,
-// );
-// final newState = state.copyWith(trendingListContainer: container);
-// emit(newState);
-  }
-
-  Future<void> onTrendingListEventLoadNextPageThisWeek(
-      TrendingListEventLoadNextPageThisWweek event, Emitter<TrendingListState> emit) async {
-    // if (state.trendingListContainer.isComplete) return;
     final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
       final result = await _trendingApiClient.trendingAll(nextPage, event.locale, week, Configuration.apiKey);
       return result;
@@ -71,22 +49,47 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     if (container != null) {
       final newState = state.copyWith(trendingListContainer: container);
       emit(newState);
-      // } else if (state.trendingListContainer.timeWindow == day) {
-      //   final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-      //     final result = await _trendingApiClient.trendingAll(nextPage, event.locale, day, Configuration.apiKey);
-      //     return result;
-      //   });
-      //   if (container != null) {
-      //     final newState = state.copyWith(trendingListContainer: container);
-      //     emit(newState);
-      //   }
+    }
+  }
+
+  Future<void> onTrendingListEventLoadMoviesThisWeek(
+      TrendingListEventLoadMoviesThisWeek event, Emitter<TrendingListState> emit) async {
+    if (state.trendingListContainer.isComplete) return;
+    final container = await _loadNextPage(
+      state.trendingListContainer,
+      (nextPage) async {
+        final result = await _trendingApiClient.trendingMovies(nextPage, event.locale, week, Configuration.apiKey);
+        return result;
+      },
+    );
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
+    }
+  }
+
+  Future<void> onTrendingListEventLoadTvThisWeek(
+      TrendingListEventLoadTvThisWeek event, Emitter<TrendingListState> emit) async {
+    if (state.trendingListContainer.isComplete) return;
+    final container = await _loadNextPage(
+      state.trendingListContainer,
+      (nextPage) async {
+        final result = await _trendingApiClient.trendingTv(nextPage, event.locale, week, Configuration.apiKey);
+        return result;
+      },
+    );
+    if (container != null) {
+      final newState = state.copyWith(trendingListContainer: container);
+      emit(newState);
     }
   }
 
   Future<TrendingListContainer?> _loadNextPage(
       TrendingListContainer container, Future<TrendingAllResponse> Function(int) loader) async {
+    var currentPage = state.trendingListContainer.currentPage;
     if (container.isComplete) return null;
-    final nextPage = state.trendingListContainer.currentPage + 1;
+    final nextPage = currentPage + 1;
+    if (currentPage > 0) return null;
     final result = await loader(nextPage);
     final trendingAll = List<TrendingAll>.from(container.trendingAll)..addAll(result.trendingAll);
     final newContainer = container.copyWith(

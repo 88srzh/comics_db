@@ -63,31 +63,37 @@ class AnimatedButtonBarWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: 70.0,
-          width: 300.0,
+          height: 50.0,
+          width: 200.0,
           child: AnimatedButtonBar(
-            radius: 32.0,
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
+            radius: 8.0,
             backgroundColor: Colors.white,
             foregroundColor: DarkThemeColors.kPrimaryColor.withOpacity(0.2),
-            elevation: 24,
+            elevation: 10,
             borderColor: Colors.white,
             borderWidth: 2.0,
-            innerVerticalPadding: 16,
+            animationDuration: const Duration(milliseconds: 400),
             children: [
               ButtonBarEntry(
                 child: const Text(
-                  'Day',
+                  'All',
                   style: TextStyle(color: Colors.black),
                 ),
-                onTap: () => cubit.showedTrendingThisDay(),
+                onTap: () => cubit.showedTrendingAllThisWeek(),
               ),
               ButtonBarEntry(
                 child: const Text(
-                  'This Week',
+                  'Movies',
                   style: TextStyle(color: Colors.black),
                 ),
-                onTap: () => cubit.showedTrendingThisWeek(),
+                onTap: () => cubit.showedTrendingMoviesThisWeek(),
+              ),
+              ButtonBarEntry(
+                child: const Text(
+                  'TV',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () => cubit.showedTrendingTvThisWeek(),
               ),
             ],
           ),
@@ -162,8 +168,10 @@ class TrendingPageListWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomCastListTextWidget(text: trending.title ?? '', maxLines: 2),
-                            CustomCastListTextWidget(text: trending.releaseData, maxLines: 1),
+                            CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
+                            CustomCastListTextWidget(
+                                text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate,
+                                maxLines: 1),
                           ],
                         ),
                       ),

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class CustomCastListTextWidget extends StatelessWidget {
-  final String text;
+  final String? text;
   final int maxLines;
 
   const CustomCastListTextWidget(
@@ -12,7 +12,7 @@ class CustomCastListTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text!,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style: Theme.of(context).textTheme.headlineMedium,

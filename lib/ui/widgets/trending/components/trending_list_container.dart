@@ -1,5 +1,8 @@
-import 'package:comics_db_app/domain/entity/trending_all.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/entity/trending_all.dart';
 
 class TrendingListContainer extends Equatable {
   final List<TrendingAll> trendingAll;

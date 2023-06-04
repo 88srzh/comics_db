@@ -35,6 +35,10 @@ mixin _$TrendingAll {
   int get voteCount => throw _privateConstructorUsedError;
   bool get video => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
+  String get mediaType => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: parseDateFromString)
+  DateTime? get firstAirDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +66,10 @@ abstract class $TrendingAllCopyWith<$Res> {
       double popularity,
       int voteCount,
       bool video,
-      double voteAverage});
+      double voteAverage,
+      String mediaType,
+      String name,
+      @JsonKey(fromJson: parseDateFromString) DateTime? firstAirDate});
 }
 
 /// @nodoc
@@ -92,6 +99,9 @@ class _$TrendingAllCopyWithImpl<$Res, $Val extends TrendingAll>
     Object? voteCount = null,
     Object? video = null,
     Object? voteAverage = null,
+    Object? mediaType = null,
+    Object? name = null,
+    Object? firstAirDate = freezed,
   }) {
     return _then(_value.copyWith(
       posterPath: freezed == posterPath
@@ -150,6 +160,18 @@ class _$TrendingAllCopyWithImpl<$Res, $Val extends TrendingAll>
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double,
+      mediaType: null == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstAirDate: freezed == firstAirDate
+          ? _value.firstAirDate
+          : firstAirDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -176,7 +198,10 @@ abstract class _$$_TrendingAllCopyWith<$Res>
       double popularity,
       int voteCount,
       bool video,
-      double voteAverage});
+      double voteAverage,
+      String mediaType,
+      String name,
+      @JsonKey(fromJson: parseDateFromString) DateTime? firstAirDate});
 }
 
 /// @nodoc
@@ -204,6 +229,9 @@ class __$$_TrendingAllCopyWithImpl<$Res>
     Object? voteCount = null,
     Object? video = null,
     Object? voteAverage = null,
+    Object? mediaType = null,
+    Object? name = null,
+    Object? firstAirDate = freezed,
   }) {
     return _then(_$_TrendingAll(
       posterPath: freezed == posterPath
@@ -262,6 +290,18 @@ class __$$_TrendingAllCopyWithImpl<$Res>
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double,
+      mediaType: null == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstAirDate: freezed == firstAirDate
+          ? _value.firstAirDate
+          : firstAirDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -284,7 +324,10 @@ class _$_TrendingAll implements _TrendingAll {
       required this.popularity,
       required this.voteCount,
       required this.video,
-      required this.voteAverage})
+      required this.voteAverage,
+      required this.mediaType,
+      required this.name,
+      @JsonKey(fromJson: parseDateFromString) this.firstAirDate})
       : _genreIds = genreIds;
 
   factory _$_TrendingAll.fromJson(Map<String, dynamic> json) =>
@@ -325,10 +368,17 @@ class _$_TrendingAll implements _TrendingAll {
   final bool video;
   @override
   final double voteAverage;
+  @override
+  final String mediaType;
+  @override
+  final String name;
+  @override
+  @JsonKey(fromJson: parseDateFromString)
+  final DateTime? firstAirDate;
 
   @override
   String toString() {
-    return 'TrendingAll(posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage)';
+    return 'TrendingAll(posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage, mediaType: $mediaType, name: $name, firstAirDate: $firstAirDate)';
   }
 
   @override
@@ -358,7 +408,12 @@ class _$_TrendingAll implements _TrendingAll {
                 other.voteCount == voteCount) &&
             (identical(other.video, video) || other.video == video) &&
             (identical(other.voteAverage, voteAverage) ||
-                other.voteAverage == voteAverage));
+                other.voteAverage == voteAverage) &&
+            (identical(other.mediaType, mediaType) ||
+                other.mediaType == mediaType) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.firstAirDate, firstAirDate) ||
+                other.firstAirDate == firstAirDate));
   }
 
   @JsonKey(ignore: true)
@@ -378,7 +433,10 @@ class _$_TrendingAll implements _TrendingAll {
       popularity,
       voteCount,
       video,
-      voteAverage);
+      voteAverage,
+      mediaType,
+      name,
+      firstAirDate);
 
   @JsonKey(ignore: true)
   @override
@@ -399,7 +457,8 @@ abstract class _TrendingAll implements TrendingAll {
       {final String? posterPath,
       required final bool adult,
       required final String overview,
-      @JsonKey(fromJson: parseDateFromString) final DateTime? releaseDate,
+      @JsonKey(fromJson: parseDateFromString)
+          final DateTime? releaseDate,
       required final List<int> genreIds,
       required final int id,
       required final String originalTitle,
@@ -409,7 +468,11 @@ abstract class _TrendingAll implements TrendingAll {
       required final double popularity,
       required final int voteCount,
       required final bool video,
-      required final double voteAverage}) = _$_TrendingAll;
+      required final double voteAverage,
+      required final String mediaType,
+      required final String name,
+      @JsonKey(fromJson: parseDateFromString)
+          final DateTime? firstAirDate}) = _$_TrendingAll;
 
   factory _TrendingAll.fromJson(Map<String, dynamic> json) =
       _$_TrendingAll.fromJson;
@@ -443,6 +506,13 @@ abstract class _TrendingAll implements TrendingAll {
   bool get video;
   @override
   double get voteAverage;
+  @override
+  String get mediaType;
+  @override
+  String get name;
+  @override
+  @JsonKey(fromJson: parseDateFromString)
+  DateTime? get firstAirDate;
   @override
   @JsonKey(ignore: true)
   _$$_TrendingAllCopyWith<_$_TrendingAll> get copyWith =>

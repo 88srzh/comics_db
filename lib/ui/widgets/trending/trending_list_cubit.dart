@@ -35,11 +35,14 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
 
   TrendingListData _makeListData(TrendingAll trending) {
     String releaseDate = makeReleaseDate(trending);
+    String firstAirDate = makeFirstAirDate(trending);
     return TrendingListData(
       id: trending.id,
       posterPath: trending.posterPath ?? '',
       releaseData: releaseDate,
       title: trending.title,
+      name: trending.name,
+      firstAirDate: firstAirDate,
     );
   }
 
@@ -49,16 +52,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
     trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPage(locale: localeTag));
-  }
-
-  void setupTrendingThisWeekLocale(String localeTag) {
-    if (state.localeTag == localeTag) return;
-    final newState = state.copyWith(localeTag: localeTag);
-    emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
-    trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: localeTag));
+    trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: localeTag));
   }
 
   @override
@@ -75,24 +69,39 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     }
     return texts.join(' ');
   }
+
+  String makeFirstAirDate(TrendingAll trending) {
+    var texts = <String>[];
+    final firstAirDate = trending.firstAirDate;
+    if (firstAirDate != null) {
+      texts.add(_dateFormat.format(firstAirDate));
+    }
+    return texts.join(' ');
+  }
+
   void showedTrendingAtIndex(int index) {
-    if (index < state.trendingList.length - 1) return;
-    trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
+    if (index < 10) return;
+    trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: state.localeTag));
   }
 
-  void showedTrendingThisDay() {
+  void showedTrendingAllThisWeek() {
     trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPage(locale: state.localeTag));
+    trendingListBloc.add(TrendingListEventLoadAllThisWeek(locale: state.localeTag));
   }
 
-  void showedTrendingThisWeek() {
-    // if (index < state.trendingList.length - 1) return;a
+  void showedTrendingMoviesThisWeek() {
     trendingListBloc.add(TrendingListEventLoadReset());
-    trendingListBloc.add(TrendingListEventLoadNextPageThisWweek(locale: state.localeTag));
+    trendingListBloc.add(TrendingListEventLoadMoviesThisWeek(locale: state.localeTag));
   }
 
-  // TODO need to think how realise to movie, tv and people.
+  void showedTrendingTvThisWeek() {
+    trendingListBloc.add(TrendingListEventLoadReset());
+    trendingListBloc.add(TrendingListEventLoadTvThisWeek(locale: state.localeTag));
+  }
+
+  // TODO need to think how realize to movie, tv and people.
   // void onTrendingTap(BuildContext context, int index) {
   //   final id = state.trendingList[index].id;
+  //   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
   // }
 }

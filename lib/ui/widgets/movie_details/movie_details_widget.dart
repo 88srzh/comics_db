@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
@@ -35,7 +35,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final favorite = cubit.state.isFavorite;
 
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Movie Details'),
+      appBar: const CustomDetailsAppBar(title: ''),
       floatingActionButton: fab(() => cubit.toggleFavoriteMovie(context), favorite),
       body: ListView(
         children: [

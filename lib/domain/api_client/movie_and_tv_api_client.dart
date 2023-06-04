@@ -14,7 +14,6 @@ import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
-
 const String sixHor = '6h';
 enum TimeWindowType { sixHor, day, week }
 
@@ -483,6 +482,67 @@ class MovieAndTvApiClient {
     final result = _networkClient.get(
       // сюда входят фильмы, сериалы и люди(person)
       '/trending/all/$timeWindow',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
+      },
+    );
+    return result;
+  }
+
+
+  Future<TrendingAllResponse> trendingMovies(int page, String locale, String timeWindow, String apiKey) async {
+    TrendingAllResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrendingAllResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/trending/movie/$timeWindow',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
+      },
+    );
+    return result;
+  }
+
+  Future<TrendingAllResponse> trendingTv(int page, String locale, String timeWindow, String apiKey) async {
+    TrendingAllResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrendingAllResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/trending/tv/$timeWindow',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'time_window': timeWindow,
+        'api_key': Configuration.apiKey,
+      },
+    );
+    return result;
+  }
+
+  Future<TrendingAllResponse> trendingPeople(int page, String locale, String timeWindow, String apiKey) async {
+    TrendingAllResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TrendingAllResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/trending/person/$timeWindow',
       parser,
       <String, dynamic>{
         'page': page.toString(),
