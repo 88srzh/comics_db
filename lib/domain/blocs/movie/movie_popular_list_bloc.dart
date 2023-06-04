@@ -88,7 +88,6 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onMovieListEventLoadReset(MovieListEventLoadReset event, Emitter<MovieListState> emit) async {
     emit(const MovieListState.initial());
-    add(const MovieListEventLoadReset());
   }
 
   Future<void> onMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
