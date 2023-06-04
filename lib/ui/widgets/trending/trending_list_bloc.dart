@@ -33,8 +33,6 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
         await onTrendingListEventLoadMoviesThisWeek(event, emit);
       } else if (event is TrendingListEventLoadTvThisWeek) {
         await onTrendingListEventLoadTvThisWeek(event, emit);
-      } else if (event is TrendingListEvenLoadPeopleThisWeek) {
-        await onTrendingListEventLoadPeopleThisWeek(event, emit);
       } else if (event is TrendingListEventLoadReset) {
         await onTrendingListEventLoadReset(event, emit);
       }
@@ -80,19 +78,6 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
         return result;
       },
     );
-    if (container != null) {
-      final newState = state.copyWith(trendingListContainer: container);
-      emit(newState);
-    }
-  }
-
-  Future<void> onTrendingListEventLoadPeopleThisWeek(
-      TrendingListEvenLoadPeopleThisWeek event, Emitter<TrendingListState> emit) async {
-    if (state.trendingListContainer.isComplete) return;
-    final container = await _loadNextPage(state.trendingListContainer, (nextPage) async {
-      final result = await _trendingApiClient.trendingPeople(nextPage, event.locale, week, Configuration.apiKey);
-      return result;
-    });
     if (container != null) {
       final newState = state.copyWith(trendingListContainer: container);
       emit(newState);

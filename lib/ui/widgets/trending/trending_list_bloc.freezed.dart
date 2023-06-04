@@ -21,7 +21,6 @@ mixin _$TrendingListEvent {
     required TResult Function(String locale) loadAllThisWeek,
     required TResult Function(String locale) loadMoviesThisWeek,
     required TResult Function(String locale) loadTvThisWeek,
-    required TResult Function(String locale) loadPeopleThisWeek,
     required TResult Function() loadReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +29,6 @@ mixin _$TrendingListEvent {
     TResult? Function(String locale)? loadAllThisWeek,
     TResult? Function(String locale)? loadMoviesThisWeek,
     TResult? Function(String locale)? loadTvThisWeek,
-    TResult? Function(String locale)? loadPeopleThisWeek,
     TResult? Function()? loadReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +37,6 @@ mixin _$TrendingListEvent {
     TResult Function(String locale)? loadAllThisWeek,
     TResult Function(String locale)? loadMoviesThisWeek,
     TResult Function(String locale)? loadTvThisWeek,
-    TResult Function(String locale)? loadPeopleThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) =>
@@ -52,8 +49,6 @@ mixin _$TrendingListEvent {
         loadMoviesThisWeek,
     required TResult Function(TrendingListEventLoadTvThisWeek value)
         loadTvThisWeek,
-    required TResult Function(TrendingListEvenLoadPeopleThisWeek value)
-        loadPeopleThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,8 +58,6 @@ mixin _$TrendingListEvent {
     TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult? Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,8 +67,6 @@ mixin _$TrendingListEvent {
     TResult Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) =>
@@ -173,7 +164,6 @@ class _$TrendingListEventLoadAllThisWeek
     required TResult Function(String locale) loadAllThisWeek,
     required TResult Function(String locale) loadMoviesThisWeek,
     required TResult Function(String locale) loadTvThisWeek,
-    required TResult Function(String locale) loadPeopleThisWeek,
     required TResult Function() loadReset,
   }) {
     return loadAllThisWeek(locale);
@@ -185,7 +175,6 @@ class _$TrendingListEventLoadAllThisWeek
     TResult? Function(String locale)? loadAllThisWeek,
     TResult? Function(String locale)? loadMoviesThisWeek,
     TResult? Function(String locale)? loadTvThisWeek,
-    TResult? Function(String locale)? loadPeopleThisWeek,
     TResult? Function()? loadReset,
   }) {
     return loadAllThisWeek?.call(locale);
@@ -197,7 +186,6 @@ class _$TrendingListEventLoadAllThisWeek
     TResult Function(String locale)? loadAllThisWeek,
     TResult Function(String locale)? loadMoviesThisWeek,
     TResult Function(String locale)? loadTvThisWeek,
-    TResult Function(String locale)? loadPeopleThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
@@ -216,8 +204,6 @@ class _$TrendingListEventLoadAllThisWeek
         loadMoviesThisWeek,
     required TResult Function(TrendingListEventLoadTvThisWeek value)
         loadTvThisWeek,
-    required TResult Function(TrendingListEvenLoadPeopleThisWeek value)
-        loadPeopleThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
     return loadAllThisWeek(this);
@@ -230,8 +216,6 @@ class _$TrendingListEventLoadAllThisWeek
     TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult? Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
     return loadAllThisWeek?.call(this);
@@ -244,8 +228,6 @@ class _$TrendingListEventLoadAllThisWeek
     TResult Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
@@ -340,7 +322,6 @@ class _$TrendingListEventLoadMoviesThisWeek
     required TResult Function(String locale) loadAllThisWeek,
     required TResult Function(String locale) loadMoviesThisWeek,
     required TResult Function(String locale) loadTvThisWeek,
-    required TResult Function(String locale) loadPeopleThisWeek,
     required TResult Function() loadReset,
   }) {
     return loadMoviesThisWeek(locale);
@@ -352,7 +333,6 @@ class _$TrendingListEventLoadMoviesThisWeek
     TResult? Function(String locale)? loadAllThisWeek,
     TResult? Function(String locale)? loadMoviesThisWeek,
     TResult? Function(String locale)? loadTvThisWeek,
-    TResult? Function(String locale)? loadPeopleThisWeek,
     TResult? Function()? loadReset,
   }) {
     return loadMoviesThisWeek?.call(locale);
@@ -364,7 +344,6 @@ class _$TrendingListEventLoadMoviesThisWeek
     TResult Function(String locale)? loadAllThisWeek,
     TResult Function(String locale)? loadMoviesThisWeek,
     TResult Function(String locale)? loadTvThisWeek,
-    TResult Function(String locale)? loadPeopleThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
@@ -383,8 +362,6 @@ class _$TrendingListEventLoadMoviesThisWeek
         loadMoviesThisWeek,
     required TResult Function(TrendingListEventLoadTvThisWeek value)
         loadTvThisWeek,
-    required TResult Function(TrendingListEvenLoadPeopleThisWeek value)
-        loadPeopleThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
     return loadMoviesThisWeek(this);
@@ -397,8 +374,6 @@ class _$TrendingListEventLoadMoviesThisWeek
     TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult? Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
     return loadMoviesThisWeek?.call(this);
@@ -411,8 +386,6 @@ class _$TrendingListEventLoadMoviesThisWeek
     TResult Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
@@ -507,7 +480,6 @@ class _$TrendingListEventLoadTvThisWeek
     required TResult Function(String locale) loadAllThisWeek,
     required TResult Function(String locale) loadMoviesThisWeek,
     required TResult Function(String locale) loadTvThisWeek,
-    required TResult Function(String locale) loadPeopleThisWeek,
     required TResult Function() loadReset,
   }) {
     return loadTvThisWeek(locale);
@@ -519,7 +491,6 @@ class _$TrendingListEventLoadTvThisWeek
     TResult? Function(String locale)? loadAllThisWeek,
     TResult? Function(String locale)? loadMoviesThisWeek,
     TResult? Function(String locale)? loadTvThisWeek,
-    TResult? Function(String locale)? loadPeopleThisWeek,
     TResult? Function()? loadReset,
   }) {
     return loadTvThisWeek?.call(locale);
@@ -531,7 +502,6 @@ class _$TrendingListEventLoadTvThisWeek
     TResult Function(String locale)? loadAllThisWeek,
     TResult Function(String locale)? loadMoviesThisWeek,
     TResult Function(String locale)? loadTvThisWeek,
-    TResult Function(String locale)? loadPeopleThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
@@ -550,8 +520,6 @@ class _$TrendingListEventLoadTvThisWeek
         loadMoviesThisWeek,
     required TResult Function(TrendingListEventLoadTvThisWeek value)
         loadTvThisWeek,
-    required TResult Function(TrendingListEvenLoadPeopleThisWeek value)
-        loadPeopleThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
     return loadTvThisWeek(this);
@@ -564,8 +532,6 @@ class _$TrendingListEventLoadTvThisWeek
     TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult? Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
     return loadTvThisWeek?.call(this);
@@ -578,8 +544,6 @@ class _$TrendingListEventLoadTvThisWeek
     TResult Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
@@ -597,173 +561,6 @@ abstract class TrendingListEventLoadTvThisWeek implements TrendingListEvent {
   String get locale;
   @JsonKey(ignore: true)
   _$$TrendingListEventLoadTvThisWeekCopyWith<_$TrendingListEventLoadTvThisWeek>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TrendingListEvenLoadPeopleThisWeekCopyWith<$Res> {
-  factory _$$TrendingListEvenLoadPeopleThisWeekCopyWith(
-          _$TrendingListEvenLoadPeopleThisWeek value,
-          $Res Function(_$TrendingListEvenLoadPeopleThisWeek) then) =
-      __$$TrendingListEvenLoadPeopleThisWeekCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String locale});
-}
-
-/// @nodoc
-class __$$TrendingListEvenLoadPeopleThisWeekCopyWithImpl<$Res>
-    extends _$TrendingListEventCopyWithImpl<$Res,
-        _$TrendingListEvenLoadPeopleThisWeek>
-    implements _$$TrendingListEvenLoadPeopleThisWeekCopyWith<$Res> {
-  __$$TrendingListEvenLoadPeopleThisWeekCopyWithImpl(
-      _$TrendingListEvenLoadPeopleThisWeek _value,
-      $Res Function(_$TrendingListEvenLoadPeopleThisWeek) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
-  }) {
-    return _then(_$TrendingListEvenLoadPeopleThisWeek(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TrendingListEvenLoadPeopleThisWeek
-    implements TrendingListEvenLoadPeopleThisWeek {
-  _$TrendingListEvenLoadPeopleThisWeek({required this.locale});
-
-  @override
-  final String locale;
-
-  @override
-  String toString() {
-    return 'TrendingListEvent.loadPeopleThisWeek(locale: $locale)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TrendingListEvenLoadPeopleThisWeek &&
-            (identical(other.locale, locale) || other.locale == locale));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, locale);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TrendingListEvenLoadPeopleThisWeekCopyWith<
-          _$TrendingListEvenLoadPeopleThisWeek>
-      get copyWith => __$$TrendingListEvenLoadPeopleThisWeekCopyWithImpl<
-          _$TrendingListEvenLoadPeopleThisWeek>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String locale) loadAllThisWeek,
-    required TResult Function(String locale) loadMoviesThisWeek,
-    required TResult Function(String locale) loadTvThisWeek,
-    required TResult Function(String locale) loadPeopleThisWeek,
-    required TResult Function() loadReset,
-  }) {
-    return loadPeopleThisWeek(locale);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale)? loadAllThisWeek,
-    TResult? Function(String locale)? loadMoviesThisWeek,
-    TResult? Function(String locale)? loadTvThisWeek,
-    TResult? Function(String locale)? loadPeopleThisWeek,
-    TResult? Function()? loadReset,
-  }) {
-    return loadPeopleThisWeek?.call(locale);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale)? loadAllThisWeek,
-    TResult Function(String locale)? loadMoviesThisWeek,
-    TResult Function(String locale)? loadTvThisWeek,
-    TResult Function(String locale)? loadPeopleThisWeek,
-    TResult Function()? loadReset,
-    required TResult orElse(),
-  }) {
-    if (loadPeopleThisWeek != null) {
-      return loadPeopleThisWeek(locale);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TrendingListEventLoadAllThisWeek value)
-        loadAllThisWeek,
-    required TResult Function(TrendingListEventLoadMoviesThisWeek value)
-        loadMoviesThisWeek,
-    required TResult Function(TrendingListEventLoadTvThisWeek value)
-        loadTvThisWeek,
-    required TResult Function(TrendingListEvenLoadPeopleThisWeek value)
-        loadPeopleThisWeek,
-    required TResult Function(TrendingListEventLoadReset value) loadReset,
-  }) {
-    return loadPeopleThisWeek(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
-    TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
-        loadMoviesThisWeek,
-    TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult? Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
-    TResult? Function(TrendingListEventLoadReset value)? loadReset,
-  }) {
-    return loadPeopleThisWeek?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendingListEventLoadAllThisWeek value)? loadAllThisWeek,
-    TResult Function(TrendingListEventLoadMoviesThisWeek value)?
-        loadMoviesThisWeek,
-    TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
-    TResult Function(TrendingListEventLoadReset value)? loadReset,
-    required TResult orElse(),
-  }) {
-    if (loadPeopleThisWeek != null) {
-      return loadPeopleThisWeek(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TrendingListEvenLoadPeopleThisWeek implements TrendingListEvent {
-  factory TrendingListEvenLoadPeopleThisWeek({required final String locale}) =
-      _$TrendingListEvenLoadPeopleThisWeek;
-
-  String get locale;
-  @JsonKey(ignore: true)
-  _$$TrendingListEvenLoadPeopleThisWeekCopyWith<
-          _$TrendingListEvenLoadPeopleThisWeek>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -811,7 +608,6 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
     required TResult Function(String locale) loadAllThisWeek,
     required TResult Function(String locale) loadMoviesThisWeek,
     required TResult Function(String locale) loadTvThisWeek,
-    required TResult Function(String locale) loadPeopleThisWeek,
     required TResult Function() loadReset,
   }) {
     return loadReset();
@@ -823,7 +619,6 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
     TResult? Function(String locale)? loadAllThisWeek,
     TResult? Function(String locale)? loadMoviesThisWeek,
     TResult? Function(String locale)? loadTvThisWeek,
-    TResult? Function(String locale)? loadPeopleThisWeek,
     TResult? Function()? loadReset,
   }) {
     return loadReset?.call();
@@ -835,7 +630,6 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
     TResult Function(String locale)? loadAllThisWeek,
     TResult Function(String locale)? loadMoviesThisWeek,
     TResult Function(String locale)? loadTvThisWeek,
-    TResult Function(String locale)? loadPeopleThisWeek,
     TResult Function()? loadReset,
     required TResult orElse(),
   }) {
@@ -854,8 +648,6 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
         loadMoviesThisWeek,
     required TResult Function(TrendingListEventLoadTvThisWeek value)
         loadTvThisWeek,
-    required TResult Function(TrendingListEvenLoadPeopleThisWeek value)
-        loadPeopleThisWeek,
     required TResult Function(TrendingListEventLoadReset value) loadReset,
   }) {
     return loadReset(this);
@@ -868,8 +660,6 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
     TResult? Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult? Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult? Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult? Function(TrendingListEventLoadReset value)? loadReset,
   }) {
     return loadReset?.call(this);
@@ -882,8 +672,6 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
     TResult Function(TrendingListEventLoadMoviesThisWeek value)?
         loadMoviesThisWeek,
     TResult Function(TrendingListEventLoadTvThisWeek value)? loadTvThisWeek,
-    TResult Function(TrendingListEvenLoadPeopleThisWeek value)?
-        loadPeopleThisWeek,
     TResult Function(TrendingListEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {

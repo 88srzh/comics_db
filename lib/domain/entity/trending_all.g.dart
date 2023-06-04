@@ -25,7 +25,6 @@ _$_TrendingAll _$$_TrendingAllFromJson(Map<String, dynamic> json) =>
       voteAverage: (json['vote_average'] as num).toDouble(),
       mediaType: json['media_type'] as String,
       name: json['name'] as String,
-      profilePath: json['profile_path'] as String?,
       firstAirDate: parseDateFromString(json['first_air_date'] as String?),
     );
 
@@ -47,6 +46,5 @@ Map<String, dynamic> _$$_TrendingAllToJson(_$_TrendingAll instance) =>
       'vote_average': instance.voteAverage,
       'media_type': instance.mediaType,
       'name': instance.name,
-      'profile_path': instance.profilePath,
       'first_air_date': instance.firstAirDate?.toIso8601String(),
     };

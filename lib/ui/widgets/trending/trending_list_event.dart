@@ -5,6 +5,5 @@ class TrendingListEvent with _$TrendingListEvent {
   factory TrendingListEvent.loadAllThisWeek({required String locale}) = TrendingListEventLoadAllThisWeek;
   factory TrendingListEvent.loadMoviesThisWeek({required String locale}) = TrendingListEventLoadMoviesThisWeek;
   factory TrendingListEvent.loadTvThisWeek({required String locale}) = TrendingListEventLoadTvThisWeek;
-  factory TrendingListEvent.loadPeopleThisWeek({required String locale}) = TrendingListEvenLoadPeopleThisWeek;
   factory TrendingListEvent.loadReset() = TrendingListEventLoadReset;
 }
