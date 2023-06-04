@@ -89,7 +89,7 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
     var currentPage = state.trendingListContainer.currentPage;
     if (container.isComplete) return null;
     final nextPage = currentPage + 1;
-    if (currentPage > 2) return null;
+    if (currentPage > 0) return null;
     final result = await loader(nextPage);
     final trendingAll = List<TrendingAll>.from(container.trendingAll)..addAll(result.trendingAll);
     final newContainer = container.copyWith(

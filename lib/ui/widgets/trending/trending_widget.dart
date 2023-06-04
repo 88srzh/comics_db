@@ -63,17 +63,15 @@ class AnimatedButtonBarWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: 70.0,
-          width: 300.0,
+          height: 50.0,
+          width: 200.0,
           child: AnimatedButtonBar(
-            radius: 32.0,
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
+            radius: 8.0,
             backgroundColor: Colors.white,
             foregroundColor: DarkThemeColors.kPrimaryColor.withOpacity(0.2),
-            elevation: 24,
+            elevation: 10,
             borderColor: Colors.white,
             borderWidth: 2.0,
-            innerVerticalPadding: 16,
             animationDuration: const Duration(milliseconds: 400),
             children: [
               ButtonBarEntry(
