@@ -36,21 +36,19 @@ class _TrendingWidgetState extends State<TrendingWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<TrendingListCubit>();
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Trending',
-      ),
+      appBar: const CustomAppBar(title: 'Trending'),
       body: Stack(
         children: [
           TrendingPageListWidget(cubit: cubit),
-          AnimatedButtonBarWidget(cubit: cubit),
+          TrendingAnimatedButtonBarWidget(cubit: cubit),
         ],
       ),
     );
   }
 }
 
-class AnimatedButtonBarWidget extends StatelessWidget {
-  const AnimatedButtonBarWidget({
+class TrendingAnimatedButtonBarWidget extends StatelessWidget {
+  const TrendingAnimatedButtonBarWidget({
     super.key,
     required this.cubit,
   });

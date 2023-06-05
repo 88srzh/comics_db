@@ -50,6 +50,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeadingAccountCardWidget(headingText: name),
+        const CustomDropdownMenuItemWidget(),
         const CustomSettingDivider(),
         const LogoutCardWidget(),
         const CustomSettingDivider(),
@@ -62,6 +63,48 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         // const AnimationFab(),
       ],
     );
+  }
+}
+
+class CustomDropdownMenuItemWidget extends StatefulWidget {
+  const CustomDropdownMenuItemWidget({
+    super.key,
+  });
+
+  @override
+  State<CustomDropdownMenuItemWidget> createState() => _CustomDropdownMenuItemWidgetState();
+}
+
+class _CustomDropdownMenuItemWidgetState extends State<CustomDropdownMenuItemWidget> {
+  @override
+  Widget build(BuildContext context) {
+    // String dropDownValue = 'Favorites';
+
+    return DropdownButton<String>(
+      // items: const ['Favorites', 'Movies', 'TV'].map((String value) {
+      //   return DropdownMenuItem<String>(
+      //     value: value,
+      //     child: Text(value),
+      //   );
+      // }).toList(),
+      items: const [
+        DropdownMenuItem(value: 'Favorites', child: Text('Favorites')),
+        DropdownMenuItem(value: 'Movies', child: Text('Movies')),
+        DropdownMenuItem(value: 'TV', child: Text('TV')),
+      ],
+      value: dropDownValue,
+      isExpanded: true,
+      style: const TextStyle(color: Colors.green),
+      onChanged: dropDownCallback,
+    );
+  }
+
+  void dropDownCallback(String? selectedValue) {
+    if (selectedValue is String) {
+      setState(() {
+        dropDownValue = selectedValue;
+      });
+    }
   }
 }
 
