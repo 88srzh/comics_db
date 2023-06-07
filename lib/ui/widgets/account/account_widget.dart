@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
@@ -51,13 +53,19 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
       children: [
         HeadingAccountCardWidget(headingText: name),
         const CustomSettingDivider(),
-        const LogoutCardWidget(),
+        const HeadingAccountCardWidget(headingText: 'Favorites'),
+        const CustomSettingDivider(),
+        CustomAccountListTile(text: 'Movies', onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
+        const CustomSettingDivider(),
+        CustomAccountListTile(text: 'TV', onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
         const CustomSettingDivider(),
         const HeadingAccountCardWidget(headingText: 'Settings'),
         const CustomSettingDivider(),
         const SettingsCardWidget(),
         const CustomSettingDivider(),
         const NotificationsCardWidget(),
+        const CustomSettingDivider(),
+        const LogoutCardWidget(),
         const CustomSettingDivider(),
         // const AnimationFab(),
       ],
