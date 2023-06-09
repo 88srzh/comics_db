@@ -17,7 +17,6 @@ class MovieListWidget extends StatelessWidget {
     // TODO: перенести в каждую категорию
     // AlertDialog dialog = const AlertDialog(
     // TODO: after refactoring search doesn't work
-    // content: _SearchWidget(),
     // );
     return Scaffold(
       body: ListView(
