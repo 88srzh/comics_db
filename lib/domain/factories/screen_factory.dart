@@ -65,15 +65,6 @@ class ScreenFactory {
     );
   }
 
-  // Widget makePersonalScreen() {
-  //   final authBloc = _authBloc ?? AuthBloc(AuthCheckStatusInProgressState());
-  //   _authBloc = authBloc;
-  //   return BlocProvider(
-  //     create: (_) => AuthViewCubit(AuthViewCubitSuccessAuthState(), authBloc),
-  //     child: const AccountWidget(),
-  //   );
-  // }
-
   Widget makeMainScreen() {
     _authBloc?.close();
     _authBloc = null;
