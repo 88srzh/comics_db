@@ -13,6 +13,7 @@ import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/people/popular_people_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_airing_today_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_top_rated_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_widget.dart';
 import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_list_widget.dart';
@@ -39,6 +40,8 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 
 class ScreenFactory {
@@ -166,6 +169,17 @@ class ScreenFactory {
         ),
       ),
       child: const TvPopularListWidget(),
+    );
+  }
+
+  Widget makeTvTopRatedList() {
+    return BlocProvider(
+      create: (_) => TvTopRatedListCubit(
+        tvTopRatedListBloc: TvTopRatedListBloc(
+          const TvListState.initial(),
+        ),
+      ),
+      child: const TopRatedTvWidget(),
     );
   }
 

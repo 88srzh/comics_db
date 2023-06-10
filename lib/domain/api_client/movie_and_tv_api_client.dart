@@ -352,7 +352,7 @@ class MovieAndTvApiClient {
     int page,
     String locale,
     String apiKey,
-  ) {
+  ) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -363,7 +363,7 @@ class MovieAndTvApiClient {
       '/tv/top_rated',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
+        'api_key': apiKey,
         'page': page.toString(),
         'language': locale,
       },
@@ -375,7 +375,7 @@ class MovieAndTvApiClient {
     int page,
     String locale,
     String apiKey,
-  ) {
+  ) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
