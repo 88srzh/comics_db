@@ -1,13 +1,13 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
@@ -27,7 +27,7 @@ class CastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Full Cast & Crew',
+              'Top Billed Cast',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
@@ -51,7 +51,7 @@ class _MovieActorListWidget extends StatelessWidget {
     var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: actorsData.length,
+      itemCount: 9,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
