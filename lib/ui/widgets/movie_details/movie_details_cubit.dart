@@ -134,7 +134,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.trailerKey = makeTrailerKey(details);
 
     data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => MovieDetailsMovieActorData(
+              name: e.name,
+              character: e.character,
+              profilePath: e.profilePath,
+              id: e.id,
+            ))
         .toList();
 
     data.isLoading = true;
