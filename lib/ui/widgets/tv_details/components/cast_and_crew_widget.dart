@@ -15,15 +15,18 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
-class TvCastWidget extends StatelessWidget {
-  const TvCastWidget({Key? key}) : super(key: key);
+class TVCastWidget extends StatelessWidget {
+  const TVCastWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      if (actorsData.isNotEmpty) return const SizedBox.shrink();
-    });
+    Future.delayed(
+      const Duration(milliseconds: 1000),
+      () {
+        if (actorsData.isNotEmpty) return const SizedBox.shrink();
+      },
+    );
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
@@ -32,7 +35,7 @@ class TvCastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Full Cast & Crew',
+              'Series Cast',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
@@ -57,7 +60,7 @@ class _TvActorListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: actorsData.length,
+      itemCount: 4,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {

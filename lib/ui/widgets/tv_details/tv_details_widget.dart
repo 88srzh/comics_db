@@ -56,7 +56,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               TvDescriptionWidget(),
               // TvTrailerWidget(youtubeKey: tvTrailerKey),
               // const _DirectorWidget(),
-              TvCastWidget(),
+              TVCastWidget(),
             ],
           ),
         ],
