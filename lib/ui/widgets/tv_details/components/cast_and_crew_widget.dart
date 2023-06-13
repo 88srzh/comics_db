@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -79,59 +80,61 @@ class _TvActorListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.read<TvDetailsCubit>();
     var actor = cubit.data.actorsData[actorIndex];
+    final actorId = actor.id;
     final backdropPath = actor.profilePath;
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-          border: Border.all(
-            color: isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+    return InkWell(
+      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: actorId),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10.0),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+            border: Border.all(
+              color: isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            children: [
-              backdropPath != null
-                  ? CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(backdropPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    )
-                  : const Image(image: AssetImage(AppImages.noImageAvailable)),
-              // ? Image.network(ImageDownloader.imageUrl(backdropPath))
-              // : const Image(image: AssetImage(AppImages.noImageAvailable)),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomCastListTextWidget(
-                        text: actor.name,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(height: 7.0),
-                      CustomCastListTextWidget(
-                        text: actor.character,
-                        maxLines: 2,
-                      ),
-                    ],
-                  ),
-                ),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
               ),
             ],
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            clipBehavior: Clip.hardEdge,
+            child: Column(
+              children: [
+                backdropPath != null
+                    ? CachedNetworkImage(
+                        imageUrl: ImageDownloader.imageUrl(backdropPath),
+                        placeholder: (context, url) => const LoadingIndicatorWidget(),
+                        errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                      )
+                    : const Image(image: AssetImage(AppImages.noImageAvailable)),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomCastListTextWidget(
+                          text: actor.name,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 7.0),
+                        CustomCastListTextWidget(
+                          text: actor.character,
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
