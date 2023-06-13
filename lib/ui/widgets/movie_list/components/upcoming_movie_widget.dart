@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -61,8 +63,8 @@ class _UpcomingMovieWidgetState extends State<UpcomingMovieWidget> {
                         onTap: () => cubit.onMovieTap(context, index),
                         child: CachedNetworkImage(
                           imageUrl: ImageDownloader.imageUrl(backdropPath!),
-                          // placeholder: (context, url) => const LoadingIndicatorWidget(),
-                          // errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                          placeholder: (context, url) => const LoadingIndicatorWidget(),
+                          errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                         ),
                       ),
                     );
