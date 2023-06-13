@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';
@@ -21,6 +22,7 @@ import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_wid
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations/recommendations_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
@@ -95,8 +97,22 @@ class ScreenFactory {
 
   Widget makeMovieDetails(int movieId) {
     //   TODO: should fix
-    return BlocProvider(
-      create: (_) => MovieDetailsCubit(movieId),
+    // return BlocProvider(
+    //   create: (_) => MovieDetailsCubit(movieId),
+    //   child: const MovieDetailsWidget(),
+    // );
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => MovieDetailsCubit(movieId)),
+        BlocProvider(
+          create: (_) => MovieDetailsRecommendationsCubit(
+            movieDetailsRecommendationsBloc: MovieDetailsRecommendationsBloc(
+              const MovieListState.initial(),
+              movieId,
+            ),
+          ),
+        ),
+      ],
       child: const MovieDetailsWidget(),
     );
   }

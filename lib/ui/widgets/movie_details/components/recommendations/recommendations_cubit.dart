@@ -1,46 +1,78 @@
-// import 'dart:async';
+// Dart imports:
+import 'dart:async';
 
-// import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations.dart';
-// import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
-// import 'package:comics_db_app/domain/entity/movie.dart';
-// import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-// import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
-// import 'package:intl/intl.dart';
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
 
-// class MovieDetailsRecommendationsCubit extends Cubit<MovieListCubitState> {
-//   final MovieDetailsRecommendationsBloc movieDetailsRecommendationsBloc;
-//   late final StreamSubscription<MovieListState> movieDetailsRecommendationsBlocSubscription;
-//   late DateFormat _dateFormat;
-//   var movie = <Movie>[];
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
-  // MovieDetailsRecommendationsCubit({required this.movieDetailsRecommendationsBloc})
-  //     : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
-  //   Future.microtask(
-  //         () {
-        // _onState(movieDetailsRecommendationsBloc.state);
-        // movieDetailsRecommendationsBlocSubscription = movieDetailsRecommendationsBloc.stream.listen(_onState);
-      // },
-    // );
-  // }
+// Project imports:
+import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 
-  // void _onState(MovieListState state) {
-  //   final movies = state.movies.map(_makeListData).toList();
-  //   final newState = this.state
-  //   .
-  // }
+class MovieDetailsRecommendationsCubit extends Cubit<MovieListCubitState> {
+  final MovieDetailsRecommendationsBloc movieDetailsRecommendationsBloc;
+  late final StreamSubscription<MovieListState> movieDetailsRecommendationsBlocSubscription;
+  late DateFormat _dateFormat;
+  var movie = <Movie>[];
 
-  // MovieListData _makeListData(Movie movie) {
-  //   final releaseDate = movie.releaseDate;
-  //   final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
-  //   return MovieListData(
-  //
-  //     title: movie.title,
-  //     posterPath: movie.posterPath,
-  //     backdropPath: movie.backdropPath,
-  //     id: movie.id,
-  //     originalTitle: movie.originalTitle,
-  //     overview: movie.overview,
-  //     releaseDate: releaseDateTitle,
-  //   );
-  // }
-// }
+  MovieDetailsRecommendationsCubit({required this.movieDetailsRecommendationsBloc})
+      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
+    Future.microtask(
+      () {
+        _onState(movieDetailsRecommendationsBloc.state);
+        movieDetailsRecommendationsBlocSubscription = movieDetailsRecommendationsBloc.stream.listen(_onState);
+      },
+    );
+  }
+
+  void _onState(MovieListState state) {
+    final movies = state.movies.map(_makeListData).toList();
+    final newState = this.state.copyWith(movies: movies);
+    emit(newState);
+  }
+
+  void setupMovieDetailsRecommendations(String localeTag) {
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
+    movieDetailsRecommendationsBloc.add(const MovieListEventLoadReset());
+    movieDetailsRecommendationsBloc.add(MovieListEventLoadNextPage(locale: localeTag));
+  }
+
+  @override
+  Future<void> close() {
+    movieDetailsRecommendationsBlocSubscription.cancel();
+    return super.close();
+  }
+
+  MovieListData _makeListData(Movie movie) {
+    final releaseDate = movie.releaseDate;
+    final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
+    return MovieListData(
+      title: movie.title,
+      posterPath: movie.posterPath,
+      backdropPath: movie.backdropPath,
+      id: movie.id,
+      originalTitle: movie.originalTitle,
+      overview: movie.overview,
+      releaseDate: releaseDateTitle,
+    );
+  }
+
+  void showedMovieDetailsRecommendationsAtIndex(int index) {
+    if (index < state.movies.length -1) return;
+    movieDetailsRecommendationsBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
+  }
+
+  void onMovieTap(BuildContext context, int index) {
+    final id = movie[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+  }
+}
