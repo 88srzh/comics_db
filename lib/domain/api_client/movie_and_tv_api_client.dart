@@ -313,7 +313,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<MovieResponse> movieRecommendations(int movieId, String locale) async {
+  Future<MovieResponse> movieRecommendations(int page, int movieId, String locale) async {
     MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = MovieResponse.fromJson(jsonMap);
@@ -323,6 +323,7 @@ class MovieAndTvApiClient {
     final result = _networkClient.get('/movie/$movieId/recommendations', parser, <String, dynamic>{
       'api_key': Configuration.apiKey,
       'language': locale,
+      'page': page.toString(),
     });
     return result;
   }

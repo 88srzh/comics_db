@@ -21,6 +21,7 @@ class _MovieDetailsRecommendationsState extends State<MovieDetailsRecommendation
   super.didChangeDependencies();
   final locale = Localizations.localeOf(context);
   context.read<MovieDetailsRecommendationsCubit>().setupMovieDetailsRecommendations(locale.languageCode);
+  //   context.read<MovieDetailsCubit>().loadRecommendations(context);
   }
 
   @override
@@ -28,7 +29,7 @@ class _MovieDetailsRecommendationsState extends State<MovieDetailsRecommendation
     var cubit = context.watch<MovieDetailsRecommendationsCubit>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: cubit.state.movies.length,
+      itemCount: 4,
       itemBuilder: (BuildContext context, int index) {
         cubit.showedMovieDetailsRecommendationsAtIndex(index);
         final movie = cubit.state.movies[index];

@@ -86,6 +86,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
   }
 
+  // void loadRecommendations(BuildContext context) async {
+  //   try {
+  //     final recommendations = await movieAndTvApiClient.movieRecommendations(nextPage ,movieId, state.localeTag);
+  //     recommendations;
+  //   } on ApiClientException catch (e) {
+  //     _handleApiClientException(e, context);
+  //   }
+  // }
+
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:

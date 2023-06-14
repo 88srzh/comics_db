@@ -26,7 +26,7 @@ class MovieDetailsRecommendationsBloc extends Bloc<MovieListEvent, MovieListStat
   Future<void> onMovieDetailsRecommendationsLoadNextPage(
       MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     final container = await loadNextPage(state.movieContainer, (nextPage) async {
-      final result = await _movieApiClient.movieRecommendations(movieId, event.locale);
+      final result = await _movieApiClient.movieRecommendations(nextPage, movieId, event.locale);
       return result;
     });
     if (container != null) {

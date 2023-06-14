@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
 import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/upcoming_movie_list_bloc.dart';

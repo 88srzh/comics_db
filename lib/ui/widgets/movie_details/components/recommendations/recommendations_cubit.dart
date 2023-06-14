@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
-import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_details_recommendations_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -67,7 +67,7 @@ class MovieDetailsRecommendationsCubit extends Cubit<MovieListCubitState> {
   }
 
   void showedMovieDetailsRecommendationsAtIndex(int index) {
-    if (index < state.movies.length -1) return;
+    if (index < state.movies.length - 1) return;
     movieDetailsRecommendationsBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
