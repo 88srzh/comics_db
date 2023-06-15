@@ -19,6 +19,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
   final bool isFavorite;
+  final List<MovieDetailsRecommendationsData> recommendations;
 
   const MovieDetailsCubitState({
     required this.posterPath,
@@ -38,6 +39,7 @@ class MovieDetailsCubitState {
     required this.actorsData,
     required this.isLoading,
     required this.isFavorite,
+    required this.recommendations,
   });
 
   @override
@@ -61,7 +63,8 @@ class MovieDetailsCubitState {
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
           isLoading == other.isLoading &&
-          isFavorite == other.isFavorite;
+          isFavorite == other.isFavorite &&
+  recommendations == other.recommendations;
 
   @override
   int get hashCode =>
@@ -81,7 +84,8 @@ class MovieDetailsCubitState {
       peopleData.hashCode ^
       actorsData.hashCode ^
       isLoading.hashCode ^
-      isFavorite.hashCode;
+      isFavorite.hashCode ^
+      recommendations.hashCode;
 
   MovieDetailsCubitState copyWith({
     String? posterPath,
@@ -101,6 +105,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
     bool? isFavorite,
+    List<MovieDetailsRecommendationsData>? recommendations,
   }) {
     return MovieDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -120,6 +125,7 @@ class MovieDetailsCubitState {
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
       isFavorite: isFavorite ?? this.isFavorite,
+      recommendations: recommendations ?? this.recommendations,
     );
   }
 }

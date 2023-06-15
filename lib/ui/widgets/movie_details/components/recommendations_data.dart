@@ -1,11 +1,11 @@
-class MovieRecommendationsListData {
+class MovieDetailsRecommendationsData {
   final int id;
   final String title;
   final String? posterPath;
 
-  MovieRecommendationsListData({
+  const MovieDetailsRecommendationsData({
     required this.id,
     required this.title,
-    required this.posterPath,
+    this.posterPath,
   });
 }

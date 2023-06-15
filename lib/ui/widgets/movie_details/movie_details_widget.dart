@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,7 +11,6 @@ import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations/recommendations_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 

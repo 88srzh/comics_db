@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -6,34 +7,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations/recommendations_cubit.dart';
 
-class MovieDetailsRecommendations extends StatefulWidget {
+class MovieDetailsRecommendations extends StatelessWidget {
   const MovieDetailsRecommendations({Key? key}) : super(key: key);
 
   @override
-  State<MovieDetailsRecommendations> createState() => _MovieDetailsRecommendationsState();
-}
-
-class _MovieDetailsRecommendationsState extends State<MovieDetailsRecommendations> {
-  @override
-  void didChangeDependencies() {
-  super.didChangeDependencies();
-  final locale = Localizations.localeOf(context);
-  context.read<MovieDetailsRecommendationsCubit>().setupMovieDetailsRecommendations(locale.languageCode);
-  //   context.read<MovieDetailsCubit>().loadRecommendations(context);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MovieDetailsRecommendationsCubit>();
+    final cubit = context.watch<MovieDetailsCubit>();
+    var recommendationsData = cubit.data.recommendationsData;
+    if (recommendationsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: 4,
       itemBuilder: (BuildContext context, int index) {
-        cubit.showedMovieDetailsRecommendationsAtIndex(index);
-        final movie = cubit.state.movies[index];
-        final posterPath = movie.posterPath;
+        final recommendations = cubit.data.recommendationsData[index];
+        // var recommendationsId = recommendations.id;
+        final posterPath = recommendations.posterPath;
         return Padding(
           padding: const EdgeInsets.only(right: 15.0),
           child: Container(

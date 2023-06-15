@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -55,6 +56,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           actorsData: [],
           isLoading: false,
           isFavorite: false,
+    recommendations: [],
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -74,6 +76,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: state.actorsData,
       isLoading: state.isLoading,
       isFavorite: state.isFavorite,
+      recommendations: state.recommendations,
     ));
   }
 
@@ -141,6 +144,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.trailerKey = makeTrailerKey(details);
+    // data.recommendationsData = makeRecommendationsData(details);
 
     data.actorsData = details.credits.cast
         .map((e) => MovieDetailsMovieActorData(
@@ -169,6 +173,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
+    var recommendations = data.recommendationsData;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -187,6 +192,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: actorsData,
       isLoading: isLoading,
       isFavorite: isFavorite,
+      recommendations: recommendations,
     );
     emit(newState);
   }
@@ -245,6 +251,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       crewChunks.add(crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2));
     }
     return crewChunks;
+  }
+
+  List<MovieDetailsRecommendationsData> makeRecommendationsData(MovieDetails details) {
+    var recommendations = details.recommendations.recommendationsList.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath)).toList();
+    recommendations = recommendations.length > 4 ? recommendations.sublist(0, 4) : recommendations;
+    return recommendations;
   }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {

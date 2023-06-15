@@ -69,8 +69,8 @@ class _MovieActorListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<MovieDetailsCubit>();
-    final actor = model.data.actorsData[actorIndex];
+    final cubit = context.read<MovieDetailsCubit>();
+    final actor = cubit.data.actorsData[actorIndex];
     final actorId = actor.id;
     final profilePath = actor.profilePath;
     return InkWell(

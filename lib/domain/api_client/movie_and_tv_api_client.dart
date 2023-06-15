@@ -304,27 +304,12 @@ class MovieAndTvApiClient {
       '/movie/$movieId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits,videos',
+        'append_to_response': 'credits,videos,recommendations',
         'api_key': Configuration.apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),
       },
     );
-    return result;
-  }
-
-  Future<MovieResponse> movieRecommendations(int page, int movieId, String locale) async {
-    MovieResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get('/movie/$movieId/recommendations', parser, <String, dynamic>{
-      'api_key': Configuration.apiKey,
-      'language': locale,
-      'page': page.toString(),
-    });
     return result;
   }
 
