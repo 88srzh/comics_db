@@ -9,7 +9,8 @@ part of 'movie_details_recommendations.dart';
 MovieDetailsRecommendations _$MovieDetailsRecommendationsFromJson(
         Map<String, dynamic> json) =>
     MovieDetailsRecommendations(
-      recommendationsList: (json['recommendations_list'] as List<dynamic>)
+      page: json['page'] as int,
+      recommendationsList: (json['results'] as List<dynamic>)
           .map((e) => MovieDetailsRecommendationsList.fromJson(
               e as Map<String, dynamic>))
           .toList(),
@@ -18,8 +19,8 @@ MovieDetailsRecommendations _$MovieDetailsRecommendationsFromJson(
 Map<String, dynamic> _$MovieDetailsRecommendationsToJson(
         MovieDetailsRecommendations instance) =>
     <String, dynamic>{
-      'recommendations_list':
-          instance.recommendationsList.map((e) => e.toJson()).toList(),
+      'page': instance.page,
+      'results': instance.recommendationsList.map((e) => e.toJson()).toList(),
     };
 
 MovieDetailsRecommendationsList _$MovieDetailsRecommendationsListFromJson(
@@ -27,6 +28,7 @@ MovieDetailsRecommendationsList _$MovieDetailsRecommendationsListFromJson(
     MovieDetailsRecommendationsList(
       id: json['id'] as int,
       posterPath: json['poster_path'] as String?,
+      backdropPath: json['backdrop_path'] as String?,
       title: json['title'] as String,
     );
 
@@ -35,5 +37,6 @@ Map<String, dynamic> _$MovieDetailsRecommendationsListToJson(
     <String, dynamic>{
       'id': instance.id,
       'poster_path': instance.posterPath,
+      'backdrop_path': instance.backdropPath,
       'title': instance.title,
     };

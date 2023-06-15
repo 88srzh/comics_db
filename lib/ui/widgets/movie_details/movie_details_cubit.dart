@@ -56,7 +56,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           actorsData: [],
           isLoading: false,
           isFavorite: false,
-    recommendations: [],
+          recommendations: [],
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -156,6 +156,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .toList();
 
     data.isLoading = true;
+
+    data.recommendationsData = details.recommendations.recommendationsList
+        .map((e) => MovieDetailsRecommendationsData(
+            id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
     // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
     var title = data.title;
@@ -253,11 +258,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return crewChunks;
   }
 
-  List<MovieDetailsRecommendationsData> makeRecommendationsData(MovieDetails details) {
-    var recommendations = details.recommendations.recommendationsList.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath)).toList();
-    recommendations = recommendations.length > 4 ? recommendations.sublist(0, 4) : recommendations;
-    return recommendations;
-  }
+  // List<MovieDetailsRecommendationsData> makeRecommendationsData(MovieDetails details) {
+  //   var recommendations = details.recommendations.recommendationsList
+  //       .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath))
+  //       .toList();
+  //   recommendations = recommendations.length > 4 ? recommendations.sublist(0, 4) : recommendations;
+  //   return recommendations;
+  // }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);

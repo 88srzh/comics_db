@@ -50,13 +50,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               // TrailerWidget(youtubeKey: trailerKey),
 
               CastWidget(),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 180,
-                  child: MovieDetailsRecommendations(),
-                ),
-              ),
+              MovieDetailsRecommendations(),
               // const MovieSimilarWidget(),
             ],
           ),

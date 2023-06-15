@@ -25,7 +25,7 @@ class DescriptionWidget extends StatelessWidget {
             'Description',
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
