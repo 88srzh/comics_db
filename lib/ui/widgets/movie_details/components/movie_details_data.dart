@@ -1,5 +1,4 @@
 // Project imports:
-import 'package:comics_db_app/domain/entity/movie_details_recommendations.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';

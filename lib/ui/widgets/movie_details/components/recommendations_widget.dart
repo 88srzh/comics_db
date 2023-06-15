@@ -1,16 +1,16 @@
 // Flutter imports:
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
-import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieDetailsRecommendations extends StatelessWidget {
   const MovieDetailsRecommendations({Key? key}) : super(key: key);
@@ -44,12 +44,12 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
     var recommendationsData = context.watch<MovieDetailsCubit>().data.recommendationsData;
     if (recommendationsData.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
       child: SizedBox(
         height: 160,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: 9,
+          itemCount: 5,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.only(right: 15.0),
@@ -58,7 +58,7 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(12.0),
+                    Radius.circular(25.0),
                   ),
                 ),
                 child: MovieDetailsItemRecommendationsWidget(index: index),

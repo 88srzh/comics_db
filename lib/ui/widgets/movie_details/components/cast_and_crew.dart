@@ -25,13 +25,11 @@ class CastWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Top Billed Cast',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+          Text(
+            'Top Billed Cast',
+            style: Theme.of(context).textTheme.titleMedium,
           ),
+          const SizedBox(height: 8.0),
           const SizedBox(
             height: 250.0,
             child: Scrollbar(
