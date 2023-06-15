@@ -10,6 +10,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieDetailsRecommendations extends StatelessWidget {
@@ -83,11 +84,11 @@ class MovieDetailsItemRecommendationsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<MovieDetailsCubit>();
     final recommendationsData = cubit.data.recommendationsData[index];
-    // final recommendationsId = recommendationsData.id;
+    final recommendationsId = recommendationsData.id;
     final backdropPath = recommendationsData.backdropPath;
     final title = recommendationsData.title;
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: recommendationsId),
       child: Column(
         children: [
           const SizedBox(height: 8.0),
