@@ -170,7 +170,12 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.backdropPath = details.backdropPath ?? '';
     data.tagline = details.tagline;
     data.actorsData = details.credits.cast
-        .map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => TvDetailsActorData(
+              name: e.name,
+              character: e.character,
+              profilePath: e.profilePath,
+              id: e.id,
+            ))
         .toList();
     data.peopleData = makePeopleData(details);
     data.genres = makeGenres(details);

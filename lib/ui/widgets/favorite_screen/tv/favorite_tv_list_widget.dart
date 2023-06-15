@@ -43,7 +43,7 @@ class _FavoriteTvListWidgetState extends State<FavoriteTvListWidget> {
           cubit.updateFavoriteTvs(locale.languageCode);
         }),
       ),
-      appBar: const CustomAppBar(title: 'Favorite Tv Shows'),
+      appBar: const CustomAppBar(title: 'Favorite TV Shows'),
       body: Stack(
         children: [
           ListView.builder(

@@ -15,6 +15,7 @@ import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 
 const String sixHor = '6h';
+
 enum TimeWindowType { sixHor, day, week }
 
 extension TimeWindowTypeAsString on TimeWindowType {
@@ -303,7 +304,7 @@ class MovieAndTvApiClient {
       '/movie/$movieId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits,videos',
+        'append_to_response': 'credits,videos,recommendations',
         'api_key': Configuration.apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),
@@ -352,7 +353,7 @@ class MovieAndTvApiClient {
     int page,
     String locale,
     String apiKey,
-  ) {
+  ) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -363,7 +364,7 @@ class MovieAndTvApiClient {
       '/tv/top_rated',
       parser,
       <String, dynamic>{
-        'api_key': Configuration.apiKey,
+        'api_key': apiKey,
         'page': page.toString(),
         'language': locale,
       },
@@ -375,7 +376,7 @@ class MovieAndTvApiClient {
     int page,
     String locale,
     String apiKey,
-  ) {
+  ) async {
     PopularTVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularTVResponse.fromJson(jsonMap);
@@ -492,7 +493,6 @@ class MovieAndTvApiClient {
     );
     return result;
   }
-
 
   Future<TrendingAllResponse> trendingMovies(int page, String locale, String timeWindow, String apiKey) async {
     TrendingAllResponse parser(dynamic json) {

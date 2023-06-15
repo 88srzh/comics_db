@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -55,6 +56,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           actorsData: [],
           isLoading: false,
           isFavorite: false,
+          recommendations: [],
         )) {
     emit(MovieDetailsCubitState(
       posterPath: state.posterPath,
@@ -74,6 +76,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: state.actorsData,
       isLoading: state.isLoading,
       isFavorite: state.isFavorite,
+      recommendations: state.recommendations,
     ));
   }
 
@@ -85,6 +88,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       _handleApiClientException(e, context);
     }
   }
+
+  // void loadRecommendations(BuildContext context) async {
+  //   try {
+  //     final recommendations = await movieAndTvApiClient.movieRecommendations(nextPage ,movieId, state.localeTag);
+  //     recommendations;
+  //   } on ApiClientException catch (e) {
+  //     _handleApiClientException(e, context);
+  //   }
+  // }
 
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
@@ -132,12 +144,23 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.trailerKey = makeTrailerKey(details);
+    // data.recommendationsData = makeRecommendationsData(details);
 
     data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath))
+        .map((e) => MovieDetailsMovieActorData(
+              name: e.name,
+              character: e.character,
+              profilePath: e.profilePath,
+              id: e.id,
+            ))
         .toList();
 
     data.isLoading = true;
+
+    data.recommendationsData = details.recommendations.recommendationsList
+        .map((e) => MovieDetailsRecommendationsData(
+            id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
     // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
     var title = data.title;
@@ -155,6 +178,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
+    var recommendations = data.recommendationsData;
 
     final newState = state.copyWith(
       backdropPath: backdropPath,
@@ -173,6 +197,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: actorsData,
       isLoading: isLoading,
       isFavorite: isFavorite,
+      recommendations: recommendations,
     );
     emit(newState);
   }
@@ -232,6 +257,14 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     }
     return crewChunks;
   }
+
+  // List<MovieDetailsRecommendationsData> makeRecommendationsData(MovieDetails details) {
+  //   var recommendations = details.recommendations.recommendationsList
+  //       .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath))
+  //       .toList();
+  //   recommendations = recommendations.length > 4 ? recommendations.sublist(0, 4) : recommendations;
+  //   return recommendations;
+  // }
 
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);

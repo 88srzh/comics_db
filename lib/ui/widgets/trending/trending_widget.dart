@@ -130,7 +130,6 @@ class TrendingPageListWidget extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                // TODO create separate custom widget, also used in people widget
                 decoration: BoxDecoration(
                   color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
                   border: Border.all(

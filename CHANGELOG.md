@@ -1,3 +1,10 @@
+## 0.0.8.4
+
+- Added `Recommendations` to `Movie Details Screen`.
+- Added redirect pressing to actors cast in `Movie Details Screen` and `TV Details Screen`.
+
+---
+
 ## 0.0.8.3
 
 - Added `Trending Screen` with animated button to see day and week trending.

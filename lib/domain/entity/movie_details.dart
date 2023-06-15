@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/movie_details_recommendations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -38,6 +39,7 @@ class MovieDetails {
   final int voteCount;
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
+  final MovieDetailsRecommendations recommendations;
 
   MovieDetails({
     required this.adult,
@@ -67,6 +69,7 @@ class MovieDetails {
     required this.voteCount,
     required this.credits,
     required this.videos,
+    required this.recommendations,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>

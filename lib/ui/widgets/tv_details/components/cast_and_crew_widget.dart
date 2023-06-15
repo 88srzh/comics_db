@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,15 +16,18 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
-class TvCastWidget extends StatelessWidget {
-  const TvCastWidget({Key? key}) : super(key: key);
+class TVCastWidget extends StatelessWidget {
+  const TVCastWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      if (actorsData.isNotEmpty) return const SizedBox.shrink();
-    });
+    Future.delayed(
+      const Duration(milliseconds: 1000),
+      () {
+        if (actorsData.isNotEmpty) return const SizedBox.shrink();
+      },
+    );
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
@@ -32,7 +36,7 @@ class TvCastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Full Cast & Crew',
+              'Series Cast',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
@@ -57,7 +61,7 @@ class _TvActorListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: actorsData.length,
+      itemCount: 4,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -76,59 +80,61 @@ class _TvActorListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.read<TvDetailsCubit>();
     var actor = cubit.data.actorsData[actorIndex];
+    final actorId = actor.id;
     final backdropPath = actor.profilePath;
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-          border: Border.all(
-            color: isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+    return InkWell(
+      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: actorId),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10.0),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+            border: Border.all(
+              color: isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            children: [
-              backdropPath != null
-                  ? CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(backdropPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    )
-                  : const Image(image: AssetImage(AppImages.noImageAvailable)),
-              // ? Image.network(ImageDownloader.imageUrl(backdropPath))
-              // : const Image(image: AssetImage(AppImages.noImageAvailable)),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomCastListTextWidget(
-                        text: actor.name,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(height: 7.0),
-                      CustomCastListTextWidget(
-                        text: actor.character,
-                        maxLines: 2,
-                      ),
-                    ],
-                  ),
-                ),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
               ),
             ],
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            clipBehavior: Clip.hardEdge,
+            child: Column(
+              children: [
+                backdropPath != null
+                    ? CachedNetworkImage(
+                        imageUrl: ImageDownloader.imageUrl(backdropPath),
+                        placeholder: (context, url) => const LoadingIndicatorWidget(),
+                        errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                      )
+                    : const Image(image: AssetImage(AppImages.noImageAvailable)),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomCastListTextWidget(
+                          text: actor.name,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 7.0),
+                        CustomCastListTextWidget(
+                          text: actor.character,
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

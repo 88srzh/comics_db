@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -49,6 +50,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               // TrailerWidget(youtubeKey: trailerKey),
 
               CastWidget(),
+              MovieDetailsRecommendations(),
               // const MovieSimilarWidget(),
             ],
           ),
