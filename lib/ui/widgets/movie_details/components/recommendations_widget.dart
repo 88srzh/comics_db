@@ -104,8 +104,8 @@ class MovieDetailsItemRecommendationsWidget extends StatelessWidget {
                 : Image.asset(AppImages.imageNotAvailableHorizontal),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                child: Row(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomCastListTextWidget(text: title, maxLines: 1),
