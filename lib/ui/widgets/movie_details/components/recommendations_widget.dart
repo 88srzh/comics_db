@@ -48,24 +48,27 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12.0),
       child: SizedBox(
         height: 160,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 15.0),
-              child: Container(
-                width: 220,
-                clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25.0),
+        child: Scrollbar(
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5,
+            itemExtent: 220,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: Container(
+                  width: 220,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(25.0),
+                    ),
                   ),
+                  child: MovieDetailsItemRecommendationsWidget(index: index),
                 ),
-                child: MovieDetailsItemRecommendationsWidget(index: index),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -89,28 +92,29 @@ class MovieDetailsItemRecommendationsWidget extends StatelessWidget {
     final title = recommendationsData.title;
     return InkWell(
       onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: recommendationsId),
-      child: Column(
-        children: [
-          const SizedBox(height: 8.0),
-          backdropPath != null
-              ? CachedNetworkImage(
-                  imageUrl: ImageDownloader.imageUrl(backdropPath),
-                  placeholder: (context, url) => const LoadingIndicatorWidget(),
-                  errorWidget: (context, url, dynamic error) => Image.asset(AppImages.imageNotAvailableHorizontal),
-                )
-              : Image.asset(AppImages.imageNotAvailableHorizontal),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomCastListTextWidget(text: title, maxLines: 1),
-                ],
+      child: ClipRRect(
+        child: Column(
+          children: [
+            backdropPath != null
+                ? CachedNetworkImage(
+                    imageUrl: ImageDownloader.imageUrl(backdropPath),
+                    placeholder: (context, url) => const LoadingIndicatorWidget(),
+                    errorWidget: (context, url, dynamic error) => Image.asset(AppImages.imageNotAvailableHorizontal),
+                  )
+                : Image.asset(AppImages.imageNotAvailableHorizontal),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomCastListTextWidget(text: title, maxLines: 1),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
