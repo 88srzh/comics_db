@@ -167,8 +167,9 @@ class TrendingPageListWidget extends StatelessWidget {
                           children: [
                             CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
                             CustomCastListTextWidget(
-                                text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate,
-                                maxLines: 1),
+                              text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate,
+                              maxLines: 1,
+                            ),
                           ],
                         ),
                       ),
