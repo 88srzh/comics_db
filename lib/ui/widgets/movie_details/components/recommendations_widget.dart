@@ -25,7 +25,7 @@ class MovieDetailsRecommendations extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO move to separate custom widget
+          // TODO move to separate custom widget.
           Text(
             'Recommendations',
             style: Theme.of(context).textTheme.titleMedium,
