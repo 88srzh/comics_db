@@ -5,6 +5,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.da
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 
 class MovieDetailsData {
+  int id = 0;
   String title = '';
   String tagline = '';
   bool isLoading = true;
