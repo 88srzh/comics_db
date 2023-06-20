@@ -1,6 +1,7 @@
 ## 0.0.8.4
 
 - Added `Recommendations` to `Movie Details Screen`.
+- Added `Full Cast` to `Movie Details Screen`.
 - Added redirect pressing to actors cast in `Movie Details Screen` and `TV Details Screen`.
 
 ---
