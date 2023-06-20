@@ -23,7 +23,6 @@ class MovieDetailsData {
   // TODO may be decompose trailerData
   FavoriteData favoriteData = FavoriteData();
 
-  // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
   List<MovieDetailsRecommendationsData> recommendationsData = const <MovieDetailsRecommendationsData>[];

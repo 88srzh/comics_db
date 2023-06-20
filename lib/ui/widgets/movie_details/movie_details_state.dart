@@ -67,7 +67,7 @@ class MovieDetailsCubitState {
           actorsData == other.actorsData &&
           isLoading == other.isLoading &&
           isFavorite == other.isFavorite &&
-  recommendations == other.recommendations;
+          recommendations == other.recommendations;
 
   @override
   int get hashCode =>

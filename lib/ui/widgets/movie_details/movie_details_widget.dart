@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -34,6 +35,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
+    String? trailerKey = cubit.state.trailerKey;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
@@ -41,16 +43,16 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       body: ListView(
         children: [
           Column(
-            children: const [
-              MovieTopPosterWidget(),
-              PeoplesWidget(),
-              DescriptionWidget(),
+            children: [
+              const MovieTopPosterWidget(),
+              const PeoplesWidget(),
+              const DescriptionWidget(),
 
-              // TODO doesn't work, the request contains an invalid parameter value, need microtask?
-              // TrailerWidget(youtubeKey: trailerKey),
+              // TODO error: type 'int' is not a subtype of type 'String'
+              TrailerWidget(youtubeKey: trailerKey),
 
-              CastWidget(),
-              MovieDetailsRecommendations(),
+              const CastWidget(),
+              const MovieDetailsRecommendations(),
               // const MovieSimilarWidget(),
             ],
           ),

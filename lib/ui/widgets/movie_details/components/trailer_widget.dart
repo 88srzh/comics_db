@@ -38,10 +38,11 @@ class _TrailerWidgetState extends State<TrailerWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    final trailerKey = cubit.data.trailerKey;
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      if (trailerKey != null) return const SizedBox.shrink();
-    });
+    String? trailerKey = cubit.data.trailerKey;
+    // final trailerKey = cubit.state.trailerKey;
+    // Future.delayed(const Duration(milliseconds: 2000), () {
+    //   if (trailerKey != null) return const SizedBox.shrink();
+    // });
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       child: Column(
