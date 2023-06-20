@@ -29,6 +29,7 @@ abstract class MainNavigationRouteNames {
   static const tvAiringToday = '/main_screen/tvAiringToday';
   static const favoriteTvs = '/main_screen/favorite_tvs';
   static const peopleDetails = '/main_screen/peopleDetails';
+  static const movieDetailsFullCastAndCrewList = '/main_screen/movie_details/full_cast_and_crew';
   static const settings = '/personal_widget';
   static const networkConnectionError = '/errors/network_connection';
 }
@@ -49,7 +50,6 @@ class MainNavigation {
 
     // MainNavigationRouteNames.splashScreen: (_) =>
     //     ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
-
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -59,6 +59,12 @@ class MainNavigation {
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeMovieDetails(movieId),
+        );
+      case MainNavigationRouteNames.movieDetailsFullCastAndCrewList:
+        final arguments = settings.arguments;
+        final movieId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.makeFullCastAndCrewList(movieId),
         );
       case MainNavigationRouteNames.movieTrailer:
         final arguments = settings.arguments;

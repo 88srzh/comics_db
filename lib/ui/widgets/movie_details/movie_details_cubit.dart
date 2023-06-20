@@ -39,6 +39,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   MovieDetailsCubit(this.movieId)
       // TODO should fix
       : super(const MovieDetailsCubitState(
+          id: 0,
           posterPath: '',
           backdropPath: '',
           overview: '',
@@ -59,6 +60,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           recommendations: [],
         )) {
     emit(MovieDetailsCubitState(
+      id: state.id,
       posterPath: state.posterPath,
       backdropPath: state.backdropPath,
       overview: state.overview,
@@ -131,6 +133,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     if (details == null) {
       return;
     }
+    data.id = details.id;
     data.overview = details.overview ?? 'Loading description...';
     data.title = details.title;
     data.tagline = details.tagline ?? 'Loading tagline..';
@@ -163,6 +166,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .toList();
     // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
+    var id = data.id;
     var title = data.title;
     var tagline = data.tagline;
     var overview = data.overview;
@@ -181,6 +185,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var recommendations = data.recommendationsData;
 
     final newState = state.copyWith(
+      id: id,
       backdropPath: backdropPath,
       posterPath: posterPath,
       overview: overview,
@@ -258,14 +263,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return crewChunks;
   }
 
-  // List<MovieDetailsRecommendationsData> makeRecommendationsData(MovieDetails details) {
-  //   var recommendations = details.recommendations.recommendationsList
-  //       .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath))
-  //       .toList();
-  //   recommendations = recommendations.length > 4 ? recommendations.sublist(0, 4) : recommendations;
-  //   return recommendations;
-  // }
-
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
@@ -276,5 +273,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
+  }
+
+  void onDetailsTap(BuildContext context, int index) {
+    final id = state.id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetailsFullCastAndCrewList, arguments: id);
   }
 }

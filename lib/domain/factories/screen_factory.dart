@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -90,6 +91,13 @@ class ScreenFactory {
         ),
       ),
       child: const MoviePopularListWidget(),
+    );
+  }
+
+  Widget makeFullCastAndCrewList(int movieId) {
+    return BlocProvider(
+      create: (_) => MovieDetailsCubit(movieId),
+      child: const FullCastAndCrewWidget(),
     );
   }
 

@@ -18,16 +18,30 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
-    if (actorsData.isEmpty) return const SizedBox.shrink();
+    final cubit = context.watch<MovieDetailsCubit>();
+    var index = cubit.state.id;
+    // var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
+    // if (actorsData.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Top Billed Cast',
-            style: Theme.of(context).textTheme.titleMedium,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Top Billed Cast',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              InkWell(
+                onTap: () => cubit.onDetailsTap(context, index),
+                child: Text(
+                  'See all',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+              )
+            ],
           ),
           const SizedBox(height: 8.0),
           const SizedBox(
@@ -79,8 +93,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
             border: Border.all(
-              color:
-                  context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+              color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             boxShadow: [
@@ -96,9 +109,7 @@ class _MovieActorListItemWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: Column(
               children: [
-                profilePath != null
-                    ? Image.network(ImageDownloader.imageUrl(profilePath))
-                    : const Image(image: AssetImage(AppImages.noImageAvailable)),
+                profilePath != null ? Image.network(ImageDownloader.imageUrl(profilePath)) : const Image(image: AssetImage(AppImages.noImageAvailable)),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

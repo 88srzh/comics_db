@@ -2,6 +2,7 @@ part of 'movie_details_cubit.dart';
 
 // @immutable
 class MovieDetailsCubitState {
+  final int id;
   final String? posterPath;
   final String? backdropPath;
   final String overview;
@@ -22,6 +23,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsRecommendationsData> recommendations;
 
   const MovieDetailsCubitState({
+    required this.id,
     required this.posterPath,
     required this.backdropPath,
     required this.overview,
@@ -46,6 +48,7 @@ class MovieDetailsCubitState {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is MovieDetailsCubitState &&
+          id == other.id &&
           runtimeType == other.runtimeType &&
           posterPath == other.posterPath &&
           backdropPath == other.backdropPath &&
@@ -68,6 +71,7 @@ class MovieDetailsCubitState {
 
   @override
   int get hashCode =>
+      id.hashCode ^
       posterPath.hashCode ^
       backdropPath.hashCode ^
       overview.hashCode ^
@@ -88,6 +92,7 @@ class MovieDetailsCubitState {
       recommendations.hashCode;
 
   MovieDetailsCubitState copyWith({
+    int? id,
     String? posterPath,
     String? backdropPath,
     String? overview,
@@ -108,6 +113,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsRecommendationsData>? recommendations,
   }) {
     return MovieDetailsCubitState(
+      id: id ?? this.id,
       posterPath: posterPath ?? this.posterPath,
       backdropPath: backdropPath ?? this.backdropPath,
       overview: overview ?? this.overview,

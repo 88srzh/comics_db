@@ -112,7 +112,7 @@ class TrendingPageListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.only(top: 70.0),
+      padding: const EdgeInsets.only(top: 70.0, bottom: 8.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisSpacing: 3,
         mainAxisSpacing: 5,
@@ -167,8 +167,9 @@ class TrendingPageListWidget extends StatelessWidget {
                           children: [
                             CustomCastListTextWidget(text: trending.title ?? trending.name, maxLines: 2),
                             CustomCastListTextWidget(
-                                text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate,
-                                maxLines: 1),
+                              text: trending.releaseData.isNotEmpty ? trending.releaseData : trending.firstAirDate,
+                              maxLines: 1,
+                            ),
                           ],
                         ),
                       ),

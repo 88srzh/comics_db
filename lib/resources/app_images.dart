@@ -15,5 +15,5 @@ class AppImages {
   static const String movieAppBarLogo = 'images/components/movie_logo@1x.png';
   static const String noImageAvailable = 'images/no-image-available.png';
   static const String noVideoAvailable = 'images/no-video-available.gif';
-  static const String imageNotAvailableHorizontal = 'images/image-not-available.jpg';
+  static const String imageNotAvailableHorizontal = 'images/no-image-horizontal-small.png';
 }
