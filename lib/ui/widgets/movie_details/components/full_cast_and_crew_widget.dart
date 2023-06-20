@@ -31,46 +31,23 @@ class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
     var actorsData = cubit.data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Full Cast And Crew'),
+      appBar: const CustomAppBar(title: 'Full Cast'),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Cast', style: Theme.of(context).textTheme.titleMedium),
-            SizedBox(
-              height: 250.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemExtent: 120,
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                itemCount: cubit.data.actorsData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return _FullCastAndCrewListWidget(
-                    actorIndex: index,
-                  );
-                },
-              ),
-            ),
-            Text('Crew', style: Theme.of(context).textTheme.titleMedium),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 3,
-                  childAspectRatio: 1 / 1.8,
-                ),
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                itemCount: cubit.data.actorsData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return _FullCastAndCrewListWidget(
-                    actorIndex: index,
-                  );
-                },
-              ),
-            ),
-          ],
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 3,
+            childAspectRatio: 1 / 1.9,
+          ),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          itemCount: cubit.data.actorsData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _FullCastAndCrewListWidget(
+              actorIndex: index,
+            );
+          },
         ),
       ),
     );
@@ -121,7 +98,7 @@ class _FullCastAndCrewListWidget extends StatelessWidget {
                   children: [
                     CustomCastListTextWidget(text: actor.name, maxLines: 1),
                     const SizedBox(height: 4.0),
-                    CustomCastListTextWidget(text: actor.character, maxLines: 1),
+                    CustomCastListTextWidget(text: actor.character, maxLines: 2),
                   ],
                 ),
               ),

@@ -35,7 +35,6 @@ class CastWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               InkWell(
-                // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetailsFullCastAndCrewList, arguments: id),
                 onTap: () => cubit.onDetailsTap(context, index),
                 child: Text(
                   'See all',
