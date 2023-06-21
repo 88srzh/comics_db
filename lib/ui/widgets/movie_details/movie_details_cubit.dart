@@ -210,8 +210,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   String? makeTrailerKey(MovieDetails details) {
     final videos = details.videos.results.where((video) => video.site == 'YouTube');
     String? trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    // final trailerKey = videos.first.key;
-    // return trailerKey;
     if (trailerKey != null) {
       return trailerKey;
     } else {
