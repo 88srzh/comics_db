@@ -6,8 +6,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TvTrailerWidget extends StatefulWidget {
   final String tvYoutubeKey;
-  const TvTrailerWidget({Key? key, required this.tvYoutubeKey})
-      : super(key: key);
+
+  const TvTrailerWidget({Key? key, required this.tvYoutubeKey}) : super(key: key);
 
   @override
   State<TvTrailerWidget> createState() => _TvTrailerWidgetState();
@@ -32,19 +32,20 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
-        player: YoutubePlayer(
-          controller: _controller,
-          showVideoProgressIndicator: true,
-        ),
-        builder: (context, player) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: Column(
-              children: [
-                player,
-              ],
-            ),
-          );
-        });
+      player: YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+      ),
+      builder: (context, player) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Column(
+            children: [
+              player,
+            ],
+          ),
+        );
+      },
+    );
   }
 }
