@@ -148,23 +148,14 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
-    // data.recommendationsData = makeRecommendationsData(details);
 
-    data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(
-              name: e.name,
-              character: e.character,
-              profilePath: e.profilePath,
-              id: e.id,
-            ))
-        .toList();
+    data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.isLoading = true;
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
-    // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
     var id = data.id;
     var title = data.title;
@@ -208,7 +199,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   List<MovieDetailsVideosData> makeTrailerKey(MovieDetails details) {
-    final videos = details.videos.results.where((video) => video.site == 'YouTube');
+    final videos = details.videos.results.where((video) => video.type == "Trailer" && video.site == 'YouTube');
     String trailerKey = videos.first.key;
     var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
     return videosData;

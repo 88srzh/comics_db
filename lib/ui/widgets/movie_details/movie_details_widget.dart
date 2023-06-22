@@ -47,10 +47,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const MovieTopPosterWidget(),
               const PeoplesWidget(),
               const DescriptionWidget(),
-
-              // TODO error: type 'int' is not a subtype of type 'String'
               TrailerWidget(youtubeKey: trailerKey),
-
               const CastWidget(),
               const MovieDetailsRecommendations(),
               // const MovieSimilarWidget(),
