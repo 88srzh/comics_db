@@ -149,6 +149,18 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
+
+            // To define a customized error widget that displays whenever the builder fails
+            
+            // builder: (context, widget) {
+            //   Widget error = const Text('...rendering error..');
+            //   if (widget is Scaffold || widget is Navigator) {
+            //     error = Scaffold(body: Center(child: error));
+            //   }
+            //   ErrorWidget.builder = (errorDetails) => error;
+            //   if (widget != null) return widget;
+            //   throw ('widget is null');
+            // },
             debugShowCheckedModeBanner: false,
             scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
               PointerDeviceKind.mouse,
