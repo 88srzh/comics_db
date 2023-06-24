@@ -23,8 +23,8 @@
 - Removed `google_fonts`, `should_rebuild` and `simple_animations` packages.
 - Removed `Splashcreen` widget (temporary).
 - Added `freezed` to `TV` widget.
-- Refactoring routes to `FavoriteScreen`;
-- Other small fixes;
+- Refactoring routes to `FavoriteScreen`.
+- Other small fixes.
 
 ---
 
