@@ -2,8 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -19,6 +17,8 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
 
 part 'movie_details_state.dart';
 
@@ -91,15 +91,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       _handleApiClientException(e, context);
     }
   }
-
-  // void loadRecommendations(BuildContext context) async {
-  //   try {
-  //     final recommendations = await movieAndTvApiClient.movieRecommendations(nextPage ,movieId, state.localeTag);
-  //     recommendations;
-  //   } on ApiClientException catch (e) {
-  //     _handleApiClientException(e, context);
-  //   }
-  // }
 
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {

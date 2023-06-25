@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-// Project imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-
 class TrailerWidget extends StatefulWidget {
   final String? youtubeKey;
 
