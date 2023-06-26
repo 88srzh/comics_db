@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'popular_tv_response.dart';
+part of 'tv_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PopularTVResponse _$PopularTVResponseFromJson(Map<String, dynamic> json) =>
-    PopularTVResponse(
+TVResponse _$TVResponseFromJson(Map<String, dynamic> json) => TVResponse(
       page: json['page'] as int,
       tvs: (json['results'] as List<dynamic>)
           .map((e) => TV.fromJson(e as Map<String, dynamic>))
@@ -16,7 +15,7 @@ PopularTVResponse _$PopularTVResponseFromJson(Map<String, dynamic> json) =>
       totalPages: json['total_pages'] as int,
     );
 
-Map<String, dynamic> _$PopularTVResponseToJson(PopularTVResponse instance) =>
+Map<String, dynamic> _$TVResponseToJson(TVResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
       'results': instance.tvs.map((e) => e.toJson()).toList(),

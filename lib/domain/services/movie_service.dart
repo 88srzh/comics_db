@@ -12,6 +12,7 @@ class MovieService {
   final _sessionDataProvider = SessionDataProvider();
   final _accountApiClient = AccountApiClient();
 
+  // TODO no usage, may be delete
   Future<MovieResponse> popularMovie(int page, String locale) async =>
       _movieAndTvApiClient.popularMovie(page, locale, Configuration.apiKey);
 

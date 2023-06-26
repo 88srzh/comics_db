@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 
@@ -46,7 +46,7 @@ class TvTopRatedModel extends ChangeNotifier {
     _loadNextTVsPage();
   }
 
-  Future<PopularTVResponse> _loadTVs(int nextPage, String locale) async {
+  Future<TVResponse> _loadTVs(int nextPage, String locale) async {
     final query = _searchQuery;
     if (query == null) {
       return await _apiClient.topRatedTvs(
