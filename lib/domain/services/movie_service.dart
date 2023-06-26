@@ -5,7 +5,6 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/domain/local_entity/movie_details_local.dart';
-import 'package:comics_db_app/ui/widgets/people_details/components/people_details_local.dart';
 
 class MovieService {
   final _movieAndTvApiClient = MovieAndTvApiClient();
@@ -38,12 +37,6 @@ class MovieService {
       // notifyListeners();
     }
     return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
-  }
-
-  // TODO move to separate file
-  Future<PeopleDetailsLocal> loadPeopleDetails({required int id, required String locale}) async {
-    final peopleDetails = await _movieAndTvApiClient.popularPeopleDetails(id, locale);
-    return PeopleDetailsLocal(details: peopleDetails);
   }
 
   Future<void> updateFavoriteMovie({required int movieId, required bool isFavorite}) async {

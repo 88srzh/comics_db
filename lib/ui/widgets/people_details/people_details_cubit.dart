@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/services/people_service.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +8,6 @@ import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/entity/people_details.dart';
-import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
 
@@ -17,7 +17,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = PeopleDetailsData();
   final int id;
-  final _peopleDetailsService = MovieService();
+  final _peopleDetailsService = PeopleService();
   String locale = '';
 
   PeopleDetailsCubit(this.id)
