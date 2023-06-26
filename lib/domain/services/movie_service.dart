@@ -27,11 +27,6 @@ class MovieService {
   Future<MovieResponse> searchMovie(int page, String locale, String query) async =>
       _movieAndTvApiClient.searchMovie(page, locale, query, Configuration.apiKey);
 
-  // TODO may be delete
-  // Future<MovieResponse> favoriteMovie(int page, String locale, String sessionId, int accountId) async =>
-  //     _movieAndTvApiClient.favoriteMoviesList(page, locale, Configuration.apiKey, sessionId, accountId);
-
-  // may be problem with image in that function
   Future<MovieDetailsLocal> loadMovieDetails({required int movieId, required String locale}) async {
     final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, locale);
     final sessionId = await _sessionDataProvider.getSessionId();
