@@ -15,12 +15,12 @@ class MovieDetailsCubitState {
   final String releaseDate;
   final String summary;
   final String genres;
-  final String? trailerKey;
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
   final bool isFavorite;
   final List<MovieDetailsRecommendationsData> recommendations;
+  final List<MovieDetailsVideosData> videos;
 
   const MovieDetailsCubitState({
     required this.id,
@@ -36,12 +36,12 @@ class MovieDetailsCubitState {
     required this.releaseDate,
     required this.summary,
     required this.genres,
-    required this.trailerKey,
     required this.peopleData,
     required this.actorsData,
     required this.isLoading,
     required this.isFavorite,
     required this.recommendations,
+    required this.videos,
   });
 
   @override
@@ -62,12 +62,12 @@ class MovieDetailsCubitState {
           releaseDate == other.releaseDate &&
           summary == other.summary &&
           genres == other.genres &&
-          trailerKey == other.trailerKey &&
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
           isLoading == other.isLoading &&
           isFavorite == other.isFavorite &&
-  recommendations == other.recommendations;
+          recommendations == other.recommendations &&
+          videos == other.videos;
 
   @override
   int get hashCode =>
@@ -84,12 +84,12 @@ class MovieDetailsCubitState {
       releaseDate.hashCode ^
       summary.hashCode ^
       genres.hashCode ^
-      trailerKey.hashCode ^
       peopleData.hashCode ^
       actorsData.hashCode ^
       isLoading.hashCode ^
       isFavorite.hashCode ^
-      recommendations.hashCode;
+      recommendations.hashCode ^
+      videos.hashCode;
 
   MovieDetailsCubitState copyWith({
     int? id,
@@ -105,12 +105,12 @@ class MovieDetailsCubitState {
     String? releaseDate,
     String? summary,
     String? genres,
-    String? trailerKey,
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
     bool? isFavorite,
     List<MovieDetailsRecommendationsData>? recommendations,
+    List<MovieDetailsVideosData>? videos,
   }) {
     return MovieDetailsCubitState(
       id: id ?? this.id,
@@ -126,12 +126,12 @@ class MovieDetailsCubitState {
       releaseDate: releaseDate ?? this.releaseDate,
       summary: summary ?? this.summary,
       genres: genres ?? this.genres,
-      trailerKey: trailerKey ?? this.trailerKey,
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
       isFavorite: isFavorite ?? this.isFavorite,
       recommendations: recommendations ?? this.recommendations,
+      videos: videos ?? this.videos,
     );
   }
 }

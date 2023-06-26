@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -18,6 +17,8 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
 
 part 'movie_details_state.dart';
 
@@ -52,12 +53,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           releaseDate: '',
           summary: '',
           genres: '',
-          trailerKey: '',
           peopleData: [],
           actorsData: [],
           isLoading: false,
           isFavorite: false,
           recommendations: [],
+          videos: [],
         )) {
     emit(MovieDetailsCubitState(
       id: state.id,
@@ -73,12 +74,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: state.releaseDate,
       summary: state.summary,
       genres: state.genres,
-      trailerKey: state.trailerKey,
       peopleData: state.peopleData,
       actorsData: state.actorsData,
       isLoading: state.isLoading,
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
+      videos: state.videos,
     ));
   }
 
@@ -90,15 +91,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       _handleApiClientException(e, context);
     }
   }
-
-  // void loadRecommendations(BuildContext context) async {
-  //   try {
-  //     final recommendations = await movieAndTvApiClient.movieRecommendations(nextPage ,movieId, state.localeTag);
-  //     recommendations;
-  //   } on ApiClientException catch (e) {
-  //     _handleApiClientException(e, context);
-  //   }
-  // }
 
   void _handleApiClientException(ApiClientException exception, BuildContext context) {
     switch (exception.type) {
@@ -146,25 +138,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.peopleData = makePeopleData(details);
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
-    data.trailerKey = makeTrailerKey(details);
-    // data.recommendationsData = makeRecommendationsData(details);
+    data.videosData = makeTrailerKey(details);
 
-    data.actorsData = details.credits.cast
-        .map((e) => MovieDetailsMovieActorData(
-              name: e.name,
-              character: e.character,
-              profilePath: e.profilePath,
-              id: e.id,
-            ))
-        .toList();
+    data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.isLoading = true;
 
     data.recommendationsData = details.recommendations.recommendationsList
-        .map((e) => MovieDetailsRecommendationsData(
-            id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
-    // data.favoriteData = FavoriteData(isFavorite: isFavorite);
 
     var id = data.id;
     var title = data.title;
@@ -176,13 +158,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var releaseDate = data.releaseDate;
     var summary = data.summary;
     var genres = data.genres;
-    var trailerKeys = data.trailerKey;
     var peopleData = data.peopleData;
     var actorsData = data.actorsData;
     var isLoading = data.isLoading;
     var posterPath = data.posterPath;
     var backdropPath = data.backdropPath;
     var recommendations = data.recommendationsData;
+    var videos = data.videosData;
 
     final newState = state.copyWith(
       id: id,
@@ -197,26 +179,21 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       releaseDate: releaseDate,
       summary: summary,
       genres: genres,
-      trailerKey: trailerKeys,
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
       isFavorite: isFavorite,
       recommendations: recommendations,
+      videos: videos,
     );
     emit(newState);
   }
 
-  String makeTrailerKey(MovieDetails details) {
-    final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    // final trailerKey = videos.first.key;
-    // return trailerKey;
-    if (trailerKey != null) {
-      return trailerKey;
-    } else {
-      return 'No trailer key';
-    }
+  List<MovieDetailsVideosData> makeTrailerKey(MovieDetails details) {
+    final videos = details.videos.results.where((video) => video.type == "Trailer" && video.site == 'YouTube');
+    String trailerKey = videos.first.key;
+    var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
+    return videosData;
   }
 
   String makeReleaseDate(MovieDetails details) {
