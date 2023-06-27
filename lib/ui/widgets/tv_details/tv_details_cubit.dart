@@ -189,8 +189,12 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       voteAverage: details.voteAverage,
     );
 
+    data.favoriteData.isFavorite = isFavorite;
+
+    var isFavoriteData = data.favoriteData.isFavorite;
     var actorsData = data.actorsData;
     var peopleData = data.peopleData;
+
 
     // var createdBy = makeCreatedBy(details);
 
@@ -206,6 +210,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       genres: data.genres,
       peopleData: peopleData,
       actorsData: actorsData,
+      isFavorite: isFavoriteData,
       // createBy: createdBy,
 
       // videos: data.tvTrailedData.trailerKey,
