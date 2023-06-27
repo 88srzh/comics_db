@@ -13,7 +13,7 @@ part 'movie_details.g.dart';
 class MovieDetails {
   final bool adult;
   final String? backdropPath;
-  final BelongsToCollection? belongsToCollection;
+  final List<BelongsToCollection>? belongsToCollection;
   final int budget;
   final List<Genre> genres;
   final String? homepage;
@@ -80,7 +80,17 @@ class MovieDetails {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class BelongsToCollection {
-  const BelongsToCollection();
+  final int id;
+  final String name;
+  final String? posterPath;
+  final String? backdropPath;
+
+  const BelongsToCollection({
+    required this.id,
+    required this.name,
+    this.posterPath,
+    this.backdropPath,
+  });
 
   factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
       _$BelongsToCollectionFromJson(json);
