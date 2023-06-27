@@ -1,5 +1,6 @@
 // Project imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
@@ -27,4 +28,5 @@ class MovieDetailsData {
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
   List<MovieDetailsRecommendationsData> recommendationsData = const <MovieDetailsRecommendationsData>[];
   List<MovieDetailsVideosData> videosData = const <MovieDetailsVideosData>[];
+  List<BelongsToCollectionData> collectionData = const <BelongsToCollectionData>[];
 }

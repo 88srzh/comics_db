@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -59,6 +60,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
+          collection: [],
         )) {
     emit(MovieDetailsCubitState(
       id: state.id,
@@ -80,6 +82,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      collection: state.collection,
     ));
   }
 
@@ -145,6 +148,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.isLoading = true;
 
     data.favoriteData.isFavorite = isFavorite;
+
+    // data.collectionData = details.belongsToCollection.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
