@@ -19,7 +19,6 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
-  // String trailerKey = '';
 
   // TODO may be decompose trailerData
   FavoriteData favoriteData = FavoriteData();

@@ -144,6 +144,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
     data.isLoading = true;
 
+    data.favoriteData.isFavorite = isFavorite;
+
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
@@ -165,6 +167,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var backdropPath = data.backdropPath;
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
+    var isFavoriteData = data.favoriteData.isFavorite;
 
     final newState = state.copyWith(
       id: id,
@@ -182,7 +185,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-      isFavorite: isFavorite,
+      isFavorite: isFavoriteData,
       recommendations: recommendations,
       videos: videos,
     );
@@ -240,11 +243,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return crewChunks;
   }
 
-  Future<void> toggleFavoriteMovie(BuildContext context) async {
+  void toggleFavoriteMovie(BuildContext context) {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
-      // меняется если только из favoriteData
-      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+      _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
     } on ApiClientException catch (e) {
