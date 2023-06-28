@@ -143,13 +143,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
 
+    data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.isLoading = true;
 
     data.favoriteData.isFavorite = isFavorite;
-
-    // data.collectionData = details.belongsToCollection.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
@@ -173,6 +173,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
     var isFavoriteData = data.favoriteData.isFavorite;
+    var collection = data.collectionData;
 
     final newState = state.copyWith(
       id: id,
@@ -193,6 +194,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavoriteData,
       recommendations: recommendations,
       videos: videos,
+      collection: collection,
     );
     emit(newState);
   }

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/collection_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -49,6 +50,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const DescriptionWidget(),
               TrailerWidget(youtubeKey: trailerKey),
               const CastWidget(),
+              const MovieDetailsCollectionWidget(),
               const MovieDetailsRecommendations(),
               // const MovieSimilarWidget(),
             ],
