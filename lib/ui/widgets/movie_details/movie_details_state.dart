@@ -21,7 +21,7 @@ class MovieDetailsCubitState {
   final bool isFavorite;
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
-  final List<BelongsToCollectionData> collection;
+  final List<BelongsToCollectionData>? collection;
 
   const MovieDetailsCubitState({
     required this.id,

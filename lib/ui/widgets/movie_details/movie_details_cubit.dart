@@ -143,7 +143,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
 
-    data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    if (details.belongsToCollection != null) {
+      data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    }
+
 
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 

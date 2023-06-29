@@ -12,9 +12,9 @@ class MovieDetailsCollectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    var collectionData = context.watch<MovieDetailsCubit>().data.collectionData;
+    var collectionData = context.watch<MovieDetailsCubit>().state.collection;
     if (collectionData == null) return const SizedBox.shrink();
-    final String? backdropPath = cubit.state.collection.first.backdropPath;
+    final String? backdropPath = cubit.data.collectionData.first.backdropPath;
     return Scaffold(
       body: AspectRatio(
         aspectRatio: 390 / 220,

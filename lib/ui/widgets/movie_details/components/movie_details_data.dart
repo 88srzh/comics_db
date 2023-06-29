@@ -21,7 +21,6 @@ class MovieDetailsData {
   String genres = '';
   double? voteAverage = 0;
 
-  // TODO may be decompose trailerData
   FavoriteData favoriteData = FavoriteData();
 
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
