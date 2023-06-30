@@ -1,10 +1,11 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/movie_details_recommendations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/entity/data_parser.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
+import 'package:comics_db_app/domain/entity/movie_details_recommendations.dart';
+import 'package:comics_db_app/domain/entity/movie_details_reviews.dart';
 import 'package:comics_db_app/domain/entity/movie_details_videos.dart';
 
 part 'movie_details.g.dart';
@@ -40,6 +41,7 @@ class MovieDetails {
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
   final MovieDetailsRecommendations recommendations;
+  final MovieDetailsReviews reviews;
 
   MovieDetails({
     required this.adult,
@@ -70,6 +72,7 @@ class MovieDetails {
     required this.credits,
     required this.videos,
     required this.recommendations,
+    required this.reviews,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>
