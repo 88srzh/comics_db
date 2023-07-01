@@ -9,6 +9,7 @@ import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/cast_and_crew.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
@@ -49,6 +50,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const DescriptionWidget(),
               TrailerWidget(youtubeKey: trailerKey),
               const CastWidget(),
+              const MovieDetailsReviewsWidget(),
               const MovieDetailsRecommendations(),
               // const MovieSimilarWidget(),
             ],

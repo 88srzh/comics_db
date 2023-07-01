@@ -21,6 +21,7 @@ class MovieDetailsCubitState {
   final bool isFavorite;
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
+  final List<MovieDetailsReviewsData> reviews;
 
   const MovieDetailsCubitState({
     required this.id,
@@ -42,6 +43,7 @@ class MovieDetailsCubitState {
     required this.isFavorite,
     required this.recommendations,
     required this.videos,
+    required this.reviews,
   });
 
   @override
@@ -67,7 +69,8 @@ class MovieDetailsCubitState {
           isLoading == other.isLoading &&
           isFavorite == other.isFavorite &&
           recommendations == other.recommendations &&
-          videos == other.videos;
+          videos == other.videos &&
+          reviews == other.reviews;
 
   @override
   int get hashCode =>
@@ -89,7 +92,8 @@ class MovieDetailsCubitState {
       isLoading.hashCode ^
       isFavorite.hashCode ^
       recommendations.hashCode ^
-      videos.hashCode;
+      videos.hashCode ^
+      reviews.hashCode;
 
   MovieDetailsCubitState copyWith({
     int? id,
@@ -111,6 +115,7 @@ class MovieDetailsCubitState {
     bool? isFavorite,
     List<MovieDetailsRecommendationsData>? recommendations,
     List<MovieDetailsVideosData>? videos,
+    List<MovieDetailsReviewsData>? reviews,
   }) {
     return MovieDetailsCubitState(
       id: id ?? this.id,
@@ -132,6 +137,7 @@ class MovieDetailsCubitState {
       isFavorite: isFavorite ?? this.isFavorite,
       recommendations: recommendations ?? this.recommendations,
       videos: videos ?? this.videos,
+      reviews: reviews ?? this.reviews,
     );
   }
 }

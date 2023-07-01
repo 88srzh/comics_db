@@ -16,6 +16,7 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
@@ -59,6 +60,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
+          reviews: [],
         )) {
     emit(MovieDetailsCubitState(
       id: state.id,
@@ -80,6 +82,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      reviews: state.reviews,
     ));
   }
 
@@ -141,6 +144,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.videosData = makeTrailerKey(details);
 
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
+
+    // data.reviewsData = details.reviews.result
+    //     .map((e) => MovieDetailsReviewsData(
+    //         author: e.author, authorDetails: e.authorDetails, content: e.content, createdAt: e.createdAt.toString(), id: e.id, updatedAt: e.updatedAt.toString(), url: e.url))
+    //     .toList();
 
     data.isLoading = true;
 
