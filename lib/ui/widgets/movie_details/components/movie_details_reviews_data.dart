@@ -1,6 +1,6 @@
 class MovieDetailsReviewsData {
   final String author;
-  final AuthorDetailsData authorDetails;
+  final List<AuthorDetailsData> authorDetails;
   final String content;
   final String createdAt;
   final String id;

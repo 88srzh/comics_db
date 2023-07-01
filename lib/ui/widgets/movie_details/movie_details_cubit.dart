@@ -147,10 +147,14 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
     // data.reviewsData = details.reviews.result
     //     .map((e) => MovieDetailsReviewsData(
-    //         author: e.author, authorDetails: e.authorDetails, content: e.content, createdAt: e.createdAt.toString(), id: e.id, updatedAt: e.updatedAt.toString(), url: e.url))
+    //         author: e.author,
+    //         authorDetails: List<AuthorDetailsData>e.authorDetails,
+    //         content: e.content,
+    //         createdAt: e.createdAt.toString(),
+    //         id: e.id,
+    //         updatedAt: e.updatedAt.toString(),
+    //         url: e.url))
     //     .toList();
-
-    data.isLoading = true;
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))

@@ -29,5 +29,5 @@ class MovieDetailsData {
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
   List<MovieDetailsRecommendationsData> recommendationsData = const <MovieDetailsRecommendationsData>[];
   List<MovieDetailsVideosData> videosData = const <MovieDetailsVideosData>[];
-  List<MovieDetailsReviewsData> reviewsData = const <MovieDetailsReviewsData>[];
+  List<List<MovieDetailsReviewsData>> reviewsData = const <List<MovieDetailsReviewsData>>[];
 }

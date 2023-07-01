@@ -19,7 +19,7 @@ class MovieDetailsReviews {
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class MovieDetailsReviewsResult {
   final String author;
-  final AuthorDetails authorDetails;
+  final List<AuthorDetails> authorDetails;
   final String content;
   final DateTime createdAt;
   final String id;

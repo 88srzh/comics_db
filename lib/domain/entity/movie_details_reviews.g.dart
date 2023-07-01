@@ -24,8 +24,9 @@ MovieDetailsReviewsResult _$MovieDetailsReviewsResultFromJson(
         Map<String, dynamic> json) =>
     MovieDetailsReviewsResult(
       author: json['author'] as String,
-      authorDetails: AuthorDetails.fromJson(
-          json['author_details'] as Map<String, dynamic>),
+      authorDetails: (json['author_details'] as List<dynamic>)
+          .map((e) => AuthorDetails.fromJson(e as Map<String, dynamic>))
+          .toList(),
       content: json['content'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
       id: json['id'] as String,
@@ -37,7 +38,7 @@ Map<String, dynamic> _$MovieDetailsReviewsResultToJson(
         MovieDetailsReviewsResult instance) =>
     <String, dynamic>{
       'author': instance.author,
-      'author_details': instance.authorDetails.toJson(),
+      'author_details': instance.authorDetails.map((e) => e.toJson()).toList(),
       'content': instance.content,
       'created_at': instance.createdAt.toIso8601String(),
       'id': instance.id,
