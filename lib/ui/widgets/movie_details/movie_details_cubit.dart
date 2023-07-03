@@ -16,7 +16,6 @@ import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
@@ -60,7 +59,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
-          reviews: [],
+          // reviews: [],
+          // similar: [],
         )) {
     emit(MovieDetailsCubitState(
       id: state.id,
@@ -82,7 +82,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
-      reviews: state.reviews,
+      // reviews: state.reviews,
+      // similar: state.similar,
     ));
   }
 
@@ -145,16 +146,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
-    // data.reviewsData = details.reviews.result
-    //     .map((e) => MovieDetailsReviewsData(
-    //         author: e.author,
-    //         authorDetails: List<AuthorDetailsData>e.authorDetails,
-    //         content: e.content,
-    //         createdAt: e.createdAt.toString(),
-    //         id: e.id,
-    //         updatedAt: e.updatedAt.toString(),
-    //         url: e.url))
-    //     .toList();
+    // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
@@ -177,6 +169,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var backdropPath = data.backdropPath;
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
+    // var similar = data.similarData;
 
     final newState = state.copyWith(
       id: id,
@@ -197,6 +190,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavorite,
       recommendations: recommendations,
       videos: videos,
+      // similar: similar,
     );
     emit(newState);
   }
@@ -255,7 +249,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
-      // меняется если только из favoriteData
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_similar_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -36,7 +37,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
-    final String trailerKey = cubit.state.videos.first.key;
+    // final String trailerKey = cubit.state.videos.first.key;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
@@ -48,10 +49,11 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               const MovieTopPosterWidget(),
               const PeoplesWidget(),
               const DescriptionWidget(),
-              TrailerWidget(youtubeKey: trailerKey),
+              // TrailerWidget(youtubeKey: trailerKey),
               const CastWidget(),
-              const MovieDetailsReviewsWidget(),
+              // const MovieDetailsReviewsWidget(),
               const MovieDetailsRecommendations(),
+              // const MovieDetailsSimilarWidget(),
               // const MovieSimilarWidget(),
             ],
           ),
