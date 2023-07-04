@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -62,6 +63,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           // externalIds: [],
           // reviews: [],
           // similar: [],
+          collection: [],
         )) {
     emit(MovieDetailsCubitState(
       id: state.id,
@@ -86,6 +88,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       // externalIds: state.externalIds,
       // reviews: state.reviews,
       // similar: state.similar,
+      collection: state.collection,
     ));
   }
 
@@ -146,9 +149,16 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
 
+    if (details.belongsToCollection != null) {
+      data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    }
+
+
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
+
+    data.favoriteData.isFavorite = isFavorite;
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
@@ -172,6 +182,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
     // var similar = data.similarData;
+    var isFavoriteData = data.favoriteData.isFavorite;
+    var collection = data.collectionData;
 
     final newState = state.copyWith(
       id: id,
@@ -189,11 +201,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isLoading: isLoading,
-      isFavorite: isFavorite,
+      isFavorite: isFavoriteData,
       recommendations: recommendations,
       videos: videos,
       // externalIds: facebookId,
       // similar: similar,
+      collection: collection,
     );
     emit(newState);
   }
@@ -249,10 +262,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     return crewChunks;
   }
 
-  Future<void> toggleFavoriteMovie(BuildContext context) async {
+  void toggleFavoriteMovie(BuildContext context) {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
-      await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
+      _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
     } on ApiClientException catch (e) {

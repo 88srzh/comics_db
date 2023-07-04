@@ -9,10 +9,9 @@ part of 'movie_details.dart';
 MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       adult: json['adult'] as bool,
       backdropPath: json['backdrop_path'] as String?,
-      belongsToCollection: json['belongs_to_collection'] == null
-          ? null
-          : BelongsToCollection.fromJson(
-              json['belongs_to_collection'] as Map<String, dynamic>),
+      belongsToCollection: (json['belongs_to_collection'] as List<dynamic>?)
+          ?.map((e) => BelongsToCollection.fromJson(e as Map<String, dynamic>))
+          .toList(),
       budget: json['budget'] as int,
       genres: (json['genres'] as List<dynamic>)
           .map((e) => Genre.fromJson(e as Map<String, dynamic>))
@@ -59,7 +58,8 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
     <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
-      'belongs_to_collection': instance.belongsToCollection?.toJson(),
+      'belongs_to_collection':
+          instance.belongsToCollection?.map((e) => e.toJson()).toList(),
       'budget': instance.budget,
       'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
@@ -92,11 +92,21 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
     };
 
 BelongsToCollection _$BelongsToCollectionFromJson(Map<String, dynamic> json) =>
-    BelongsToCollection();
+    BelongsToCollection(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      posterPath: json['poster_path'] as String?,
+      backdropPath: json['backdrop_path'] as String?,
+    );
 
 Map<String, dynamic> _$BelongsToCollectionToJson(
         BelongsToCollection instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'poster_path': instance.posterPath,
+      'backdrop_path': instance.backdropPath,
+    };
 
 Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
       id: json['id'] as int,

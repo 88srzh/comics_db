@@ -8,7 +8,7 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
-import 'package:comics_db_app/domain/entity/popular_tv_response.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 
 class FavoriteTvListBloc extends Bloc<TvListEvent, TvListState> {
@@ -26,7 +26,7 @@ class FavoriteTvListBloc extends Bloc<TvListEvent, TvListState> {
   }
 
   Future<TvListContainer?> loadFavoriteTvs(
-      TvListContainer container, Future<PopularTVResponse> Function(int) loader) async {
+      TvListContainer container, Future<TVResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.tvContainer.currentPage + 1;
     final result = await loader(nextPage);
@@ -56,7 +56,7 @@ class FavoriteTvListBloc extends Bloc<TvListEvent, TvListState> {
   }
 
   Future<TvListContainer?> loadNextPage(
-      TvListContainer container, Future<PopularTVResponse> Function(int) loader) async {
+      TvListContainer container, Future<TVResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.tvContainer.currentPage + 1;
     final result = await loader(nextPage);
