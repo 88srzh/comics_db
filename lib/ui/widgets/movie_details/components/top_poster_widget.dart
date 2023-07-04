@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -35,6 +36,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
+    final String trailerKey = cubit.state.videos.first.key;
 
     return Stack(
       children: [
@@ -105,9 +107,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Icon(
                       MdiIcons.starOutline,
                       // TODO вывести в переменную
-                      color: context.read<ThemeBloc>().isDarkTheme
-                          ? DarkThemeColors.ratingThumb
-                          : DarkThemeColors.kPrimaryColor,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -118,9 +118,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                   children: [
                     Icon(
                       MdiIcons.accountOutline,
-                      color: context.read<ThemeBloc>().isDarkTheme
-                          ? DarkThemeColors.ratingThumb
-                          : DarkThemeColors.kPrimaryColor,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -131,13 +129,40 @@ class MovieTopPosterWidget extends StatelessWidget {
                   children: [
                     Icon(
                       MdiIcons.heartOutline,
-                      color: context.read<ThemeBloc>().isDarkTheme
-                          ? DarkThemeColors.ratingThumb
-                          : DarkThemeColors.kPrimaryColor,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
+                  ],
+                ),
+                const SizedBox(height: 10.0),
+                Row(
+                  children: [
+                    Icon(
+                      MdiIcons.youtube,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 4),
+                    InkWell(
+                      // add popup to trailer
+                      onTap: () {
+                        showDialog<Widget>(
+                          context: context,
+                          builder: (context) => Stack(
+                            children: [
+                              Positioned(
+                                top: 250,
+                                child: TrailerWidget(youtubeKey: trailerKey),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieTrailer),
+                      child: const CustomPosterTopLeftAlignText(text: 'Play Trailer', maxLines: 1),
+                    ),
                   ],
                 ),
               ],
