@@ -24,7 +24,7 @@ class MovieDetailsCubitState {
   // final MovieDetailsExternalIdsData externalIds;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
-  final List<BelongsToCollectionData>? collection;
+  // final List<BelongsToCollectionData>? collection;
 
   const MovieDetailsCubitState({
     required this.id,
@@ -49,7 +49,7 @@ class MovieDetailsCubitState {
     // required this.externalIds,
     // required this.reviews,
     // required this.similar,
-    required this.collection,
+    // required this.collection,
   });
 
   @override
@@ -78,8 +78,8 @@ class MovieDetailsCubitState {
           // externalIds == other.externalIds;
           // reviews == other.reviews &&
           // similar == other.similar;
-          videos == other.videos &&
-          collection == other.collection;
+          videos == other.videos;
+          // collection == other.collection;
 
   @override
   int get hashCode =>
@@ -104,8 +104,8 @@ class MovieDetailsCubitState {
       // externalIds.hashCode;
       // reviews.hashCode ^
       // similar.hashCode;
-      videos.hashCode ^
-      collection.hashCode;
+      videos.hashCode;
+      // collection.hashCode;
 
   MovieDetailsCubitState copyWith({
     int? id,
@@ -130,7 +130,7 @@ class MovieDetailsCubitState {
     // MovieDetailsExternalIdsData? externalIds,
     // List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
-    List<BelongsToCollectionData>? collection,
+    // List<BelongsToCollectionData>? collection,
   }) {
     return MovieDetailsCubitState(
       id: id ?? this.id,
@@ -155,7 +155,7 @@ class MovieDetailsCubitState {
       // externalIds: externalIds ?? this.externalIds,
       // reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
-      collection: collection ?? this.collection,
+      // collection: collection ?? this.collection,
     );
   }
 }

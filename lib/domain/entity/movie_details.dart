@@ -14,7 +14,7 @@ part 'movie_details.g.dart';
 class MovieDetails {
   final bool adult;
   final String? backdropPath;
-  final List<BelongsToCollection>? belongsToCollection;
+  // final List<BelongsToCollection>? belongsToCollection;
   final int budget;
   final List<Genre> genres;
   final String? homepage;
@@ -48,7 +48,7 @@ class MovieDetails {
   MovieDetails({
     required this.adult,
     required this.backdropPath,
-    required this.belongsToCollection,
+    // required this.belongsToCollection,
     required this.budget,
     required this.genres,
     required this.homepage,
@@ -85,25 +85,25 @@ class MovieDetails {
   Map<String, dynamic> toJson() => _$MovieDetailsToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-class BelongsToCollection {
-  final int id;
-  final String name;
-  final String? posterPath;
-  final String? backdropPath;
+// @JsonSerializable(fieldRename: FieldRename.snake)
+// class BelongsToCollection {
+//   final int id;
+//   final String name;
+//   final String? posterPath;
+//   final String? backdropPath;
 
-  const BelongsToCollection({
-    required this.id,
-    required this.name,
-    this.posterPath,
-    this.backdropPath,
-  });
+//   const BelongsToCollection({
+//     required this.id,
+//     required this.name,
+//     this.posterPath,
+//     this.backdropPath,
+//   });
 
-  factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
-      _$BelongsToCollectionFromJson(json);
+//   factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
+//       _$BelongsToCollectionFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BelongsToCollectionToJson(this);
-}
+//   Map<String, dynamic> toJson() => _$BelongsToCollectionToJson(this);
+// }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Genre {
