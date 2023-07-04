@@ -36,11 +36,6 @@ class _TrailerWidgetState extends State<TrailerWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Trailer',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8.0),
           YoutubePlayerBuilder(
             player: YoutubePlayer(
               controller: _controller,

@@ -21,6 +21,9 @@ class MovieDetailsCubitState {
   final bool isFavorite;
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
+  // final MovieDetailsExternalIdsData externalIds;
+  // final List<MovieDetailsReviewsData> reviews;
+  // final List<MovieDetailsSimilarData> similar;
 
   const MovieDetailsCubitState({
     required this.id,
@@ -42,6 +45,9 @@ class MovieDetailsCubitState {
     required this.isFavorite,
     required this.recommendations,
     required this.videos,
+    // required this.externalIds,
+    // required this.reviews,
+    // required this.similar,
   });
 
   @override
@@ -68,6 +74,9 @@ class MovieDetailsCubitState {
           isFavorite == other.isFavorite &&
           recommendations == other.recommendations &&
           videos == other.videos;
+          // externalIds == other.externalIds;
+          // reviews == other.reviews &&
+          // similar == other.similar;
 
   @override
   int get hashCode =>
@@ -90,6 +99,9 @@ class MovieDetailsCubitState {
       isFavorite.hashCode ^
       recommendations.hashCode ^
       videos.hashCode;
+      // externalIds.hashCode;
+      // reviews.hashCode ^
+      // similar.hashCode;
 
   MovieDetailsCubitState copyWith({
     int? id,
@@ -111,6 +123,9 @@ class MovieDetailsCubitState {
     bool? isFavorite,
     List<MovieDetailsRecommendationsData>? recommendations,
     List<MovieDetailsVideosData>? videos,
+    // MovieDetailsExternalIdsData? externalIds,
+    // List<MovieDetailsReviewsData>? reviews,
+    // List<MovieDetailsSimilarData>? similar,
   }) {
     return MovieDetailsCubitState(
       id: id ?? this.id,
@@ -132,6 +147,9 @@ class MovieDetailsCubitState {
       isFavorite: isFavorite ?? this.isFavorite,
       recommendations: recommendations ?? this.recommendations,
       videos: videos ?? this.videos,
+      // externalIds: externalIds ?? this.externalIds,
+      // reviews: reviews ?? this.reviews,
+      // similar: similar ?? this.similar,
     );
   }
 }

@@ -59,6 +59,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
+          // externalIds: [],
+          // reviews: [],
+          // similar: [],
         )) {
     emit(MovieDetailsCubitState(
       id: state.id,
@@ -80,6 +83,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      // externalIds: state.externalIds,
+      // reviews: state.reviews,
+      // similar: state.similar,
     ));
   }
 
@@ -142,7 +148,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
-    data.isLoading = true;
+    // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
@@ -165,6 +171,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var backdropPath = data.backdropPath;
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
+    // var similar = data.similarData;
 
     final newState = state.copyWith(
       id: id,
@@ -185,6 +192,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavorite,
       recommendations: recommendations,
       videos: videos,
+      // externalIds: facebookId,
+      // similar: similar,
     );
     emit(newState);
   }
@@ -243,7 +252,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   Future<void> toggleFavoriteMovie(BuildContext context) async {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
-      // меняется если только из favoriteData
       await _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
