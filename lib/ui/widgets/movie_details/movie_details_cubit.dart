@@ -59,6 +59,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
+          // externalIds: [],
           // reviews: [],
           // similar: [],
         )) {
@@ -82,6 +83,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      // externalIds: state.externalIds,
       // reviews: state.reviews,
       // similar: state.similar,
     ));
@@ -190,6 +192,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavorite,
       recommendations: recommendations,
       videos: videos,
+      // externalIds: facebookId,
       // similar: similar,
     );
     emit(newState);
