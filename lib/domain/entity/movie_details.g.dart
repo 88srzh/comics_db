@@ -9,10 +9,6 @@ part of 'movie_details.dart';
 MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       adult: json['adult'] as bool,
       backdropPath: json['backdrop_path'] as String?,
-      belongsToCollection: json['belongs_to_collection'] == null
-          ? null
-          : BelongsToCollection.fromJson(
-              json['belongs_to_collection'] as Map<String, dynamic>),
       budget: json['budget'] as int,
       genres: (json['genres'] as List<dynamic>)
           .map((e) => Genre.fromJson(e as Map<String, dynamic>))
@@ -59,7 +55,6 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
     <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
-      'belongs_to_collection': instance.belongsToCollection?.toJson(),
       'budget': instance.budget,
       'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
@@ -90,13 +85,6 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'recommendations': instance.recommendations.toJson(),
       'similar': instance.similar?.toJson(),
     };
-
-BelongsToCollection _$BelongsToCollectionFromJson(Map<String, dynamic> json) =>
-    BelongsToCollection();
-
-Map<String, dynamic> _$BelongsToCollectionToJson(
-        BelongsToCollection instance) =>
-    <String, dynamic>{};
 
 Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
       id: json['id'] as int,

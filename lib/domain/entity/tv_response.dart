@@ -4,24 +4,24 @@ import 'package:json_annotation/json_annotation.dart';
 // Project imports:
 import 'package:comics_db_app/domain/entity/tv.dart';
 
-part 'popular_tv_response.g.dart';
+part 'tv_response.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class PopularTVResponse {
+class TVResponse {
   final int page;
   @JsonKey(name: 'results')
   List<TV> tvs;
   final int totalResults;
   final int totalPages;
 
-  PopularTVResponse({
+  TVResponse({
     required this.page,
     required this.tvs,
     required this.totalResults,
     required this.totalPages,
   });
 
-  factory PopularTVResponse.fromJson(Map<String, dynamic> json) => _$PopularTVResponseFromJson(json);
+  factory TVResponse.fromJson(Map<String, dynamic> json) => _$TVResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PopularTVResponseToJson(this);
+  Map<String, dynamic> toJson() => _$TVResponseToJson(this);
 }

@@ -1,5 +1,4 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
 import 'package:comics_db_app/domain/entity/movie_details_similar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -15,7 +14,7 @@ part 'movie_details.g.dart';
 class MovieDetails {
   final bool adult;
   final String? backdropPath;
-  final BelongsToCollection? belongsToCollection;
+  // final List<BelongsToCollection>? belongsToCollection;
   final int budget;
   final List<Genre> genres;
   final String? homepage;
@@ -49,7 +48,7 @@ class MovieDetails {
   MovieDetails({
     required this.adult,
     required this.backdropPath,
-    required this.belongsToCollection,
+    // required this.belongsToCollection,
     required this.budget,
     required this.genres,
     required this.homepage,
@@ -86,15 +85,25 @@ class MovieDetails {
   Map<String, dynamic> toJson() => _$MovieDetailsToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-class BelongsToCollection {
-  const BelongsToCollection();
+// @JsonSerializable(fieldRename: FieldRename.snake)
+// class BelongsToCollection {
+//   final int id;
+//   final String name;
+//   final String? posterPath;
+//   final String? backdropPath;
 
-  factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
-      _$BelongsToCollectionFromJson(json);
+//   const BelongsToCollection({
+//     required this.id,
+//     required this.name,
+//     this.posterPath,
+//     this.backdropPath,
+//   });
 
-  Map<String, dynamic> toJson() => _$BelongsToCollectionToJson(this);
-}
+//   factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
+//       _$BelongsToCollectionFromJson(json);
+
+//   Map<String, dynamic> toJson() => _$BelongsToCollectionToJson(this);
+// }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Genre {
