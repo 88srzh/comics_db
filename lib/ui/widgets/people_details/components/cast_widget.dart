@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -57,7 +58,7 @@ class _PeopleActorListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: charactersData.length,
+      itemCount: 8,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -76,57 +77,61 @@ class _PeopleActorListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<PeopleDetailsCubit>();
     final character = cubit.data.charactersData[characterIndex];
+    final characterId = character.id;
     final posterPath = character.posterPath;
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-          border: Border.all(
-            color:
-                context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+    return InkWell(
+      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: characterId),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+            border: Border.all(
+              color:
+                  context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            children: [
-              posterPath != null
-                  ? CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(posterPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    )
-                  : const Image(image: AssetImage(AppImages.noImageAvailable)),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomCastListTextWidget(
-                        text: character.title,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(height: 7.0),
-                      CustomCastListTextWidget(
-                        text: character.character,
-                        maxLines: 2,
-                      ),
-                    ],
-                  ),
-                ),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
               ),
             ],
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            clipBehavior: Clip.hardEdge,
+            child: Column(
+              children: [
+                posterPath != null
+                    ? CachedNetworkImage(
+                        imageUrl: ImageDownloader.imageUrl(posterPath),
+                        placeholder: (context, url) => const LoadingIndicatorWidget(),
+                        errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                      )
+                    : const Image(image: AssetImage(AppImages.noImageAvailable)),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomCastListTextWidget(
+                          text: character.title,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 7.0),
+                        CustomCastListTextWidget(
+                          text: character.character,
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
