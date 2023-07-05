@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew_widget.dart';
+import 'package:comics_db_app/ui/widgets/people_details/components/known_for_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -98,6 +99,13 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => MovieDetailsCubit(movieId),
       child: const FullCastAndCrewWidget(),
+    );
+  }
+
+  Widget makePeopleDetailsKnownForList(int peopleId) {
+    return BlocProvider(
+      create: (_) => PeopleDetailsCubit(peopleId),
+      child: const KnownForListWidget(),
     );
   }
 

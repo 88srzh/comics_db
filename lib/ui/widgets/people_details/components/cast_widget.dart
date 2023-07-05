@@ -21,7 +21,9 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var charactersData = context.watch<PeopleDetailsCubit>().data.charactersData;
+    var cubit = context.watch<PeopleDetailsCubit>();
+    var charactersData = cubit.data.charactersData;
+    var index = cubit.state.id;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return ColoredBox(
       color: Colors.transparent,
@@ -30,15 +32,24 @@ class CastWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                'Known For',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Known For',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                InkWell(
+                  onTap: () => cubit.onSeeAllKnownForTap(context, index),
+                  child: Text(
+                    'See all',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
-              height: 260.0,
+              height: 280.0,
               child: Scrollbar(
                 child: _PeopleActorListWidget(charactersData: charactersData),
               ),
@@ -87,8 +98,7 @@ class _PeopleActorListItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
             border: Border.all(
-              color:
-                  context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+              color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             boxShadow: [
@@ -119,7 +129,7 @@ class _PeopleActorListItemWidget extends StatelessWidget {
                       children: [
                         CustomCastListTextWidget(
                           text: character.title,
-                          maxLines: 1,
+                          maxLines: 2,
                         ),
                         const SizedBox(height: 7.0),
                         CustomCastListTextWidget(

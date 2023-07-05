@@ -23,6 +23,7 @@ class PeopleDetailsCubitState {
   final String? homepage;
   final String localeTag;
   List<PeopleDetailsCharacterData>? charactersData;
+  final int id;
   // final List<KnownForData> knownFor;
 
   PeopleDetailsCubitState({
@@ -42,6 +43,7 @@ class PeopleDetailsCubitState {
     required this.homepage,
     required this.localeTag,
     required this.charactersData,
+    required this.id,
     // required this.knownFor,
   });
 
@@ -65,7 +67,8 @@ class PeopleDetailsCubitState {
           imdbId == other.imdbId &&
           homepage == other.homepage &&
           localeTag == other.localeTag &&
-          charactersData == other.charactersData;
+          charactersData == other.charactersData &&
+          id == other.id;
   // knownFor == other.knownFor;
 
   @override
@@ -85,7 +88,8 @@ class PeopleDetailsCubitState {
       imdbId.hashCode ^
       homepage.hashCode ^
       localeTag.hashCode ^
-      charactersData.hashCode;
+      charactersData.hashCode ^
+      id.hashCode;
   // knownFor.hashCode;
 
   PeopleDetailsCubitState copyWith({
@@ -105,6 +109,7 @@ class PeopleDetailsCubitState {
     String? homepage,
     String? localeTag,
     List<PeopleDetailsCharacterData>? charactersData,
+    int? id,
     // List<KnownForData>? knownFor,
   }) {
     return PeopleDetailsCubitState(
@@ -124,6 +129,7 @@ class PeopleDetailsCubitState {
       homepage: homepage ?? this.homepage,
       localeTag: localeTag ?? this.localeTag,
       charactersData: charactersData ?? this.charactersData,
+      id: id ?? this.id,
       // knownFor: knownFor ?? this.knownFor,
     );
   }

@@ -31,6 +31,7 @@ abstract class MainNavigationRouteNames {
   static const favoriteTvs = '/main_screen/favorite_tvs';
   static const peopleDetails = '/main_screen/peopleDetails';
   static const movieDetailsFullCastAndCrewList = '/main_screen/movie_details/full_cast_and_crew';
+  static const peopleDetailsKnownForList = '/main_screen/people_details/full_known_for';
   static const settings = '/personal_widget';
   static const networkConnectionError = '/errors/network_connection';
 }
@@ -66,6 +67,12 @@ class MainNavigation {
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeFullCastAndCrewList(movieId),
+        );
+      case MainNavigationRouteNames.peopleDetailsKnownForList:
+        final arguments = settings.arguments;
+        final peopleId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.makePeopleDetailsKnownForList(peopleId),
         );
       case MainNavigationRouteNames.movieTrailer:
         final arguments = settings.arguments;

@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/domain/services/people_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -38,6 +39,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
           homepage: '',
           localeTag: '',
           charactersData: [],
+          id: 0,
           // knownFor: [],
         )) {
     emit(PeopleDetailsCubitState(
@@ -56,6 +58,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       homepage: state.homepage,
       localeTag: state.localeTag,
       charactersData: state.charactersData,
+      id: state.id,
       // knownFor: state.knownFor,
     ));
   }
@@ -144,6 +147,11 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       texts.add(_dateFormat.format(birthday));
     }
     return texts.join();
+  }
+
+  void onSeeAllKnownForTap(BuildContext context, int index) {
+    final id = state.id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetailsKnownForList, arguments: id);
   }
 
 // String makeKnownFor(PeopleDetails details) {
