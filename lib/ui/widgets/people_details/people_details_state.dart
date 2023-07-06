@@ -6,6 +6,7 @@ part of 'people_details_cubit.dart';
 // class PeopleDetailsDartInitial extends PeopleDetailsState {}
 
 class PeopleDetailsCubitState {
+  final int id;
   final String? birthday;
   final String knownForDepartment;
   final String? dateOfDeath;
@@ -23,10 +24,10 @@ class PeopleDetailsCubitState {
   final String? homepage;
   final String localeTag;
   List<PeopleDetailsCharacterData>? charactersData;
-  final int id;
   // final List<KnownForData> knownFor;
 
   PeopleDetailsCubitState({
+    required this.id,
     required this.birthday,
     required this.knownForDepartment,
     required this.dateOfDeath,
@@ -43,7 +44,6 @@ class PeopleDetailsCubitState {
     required this.homepage,
     required this.localeTag,
     required this.charactersData,
-    required this.id,
     // required this.knownFor,
   });
 
@@ -55,7 +55,7 @@ class PeopleDetailsCubitState {
           birthday == other.birthday &&
           knownForDepartment == other.knownForDepartment &&
           dateOfDeath == other.dateOfDeath &&
-          // id == other.id &&
+          id == other.id &&
           name == other.name &&
           alsoKnownAs == other.alsoKnownAs &&
           gender == other.gender &&
@@ -67,8 +67,7 @@ class PeopleDetailsCubitState {
           imdbId == other.imdbId &&
           homepage == other.homepage &&
           localeTag == other.localeTag &&
-          charactersData == other.charactersData &&
-          id == other.id;
+          charactersData == other.charactersData;
   // knownFor == other.knownFor;
 
   @override
@@ -76,7 +75,7 @@ class PeopleDetailsCubitState {
       birthday.hashCode ^
       knownForDepartment.hashCode ^
       dateOfDeath.hashCode ^
-      // id.hashCode ^
+      id.hashCode ^
       name.hashCode ^
       alsoKnownAs.hashCode ^
       gender.hashCode ^
@@ -88,11 +87,11 @@ class PeopleDetailsCubitState {
       imdbId.hashCode ^
       homepage.hashCode ^
       localeTag.hashCode ^
-      charactersData.hashCode ^
-      id.hashCode;
+      charactersData.hashCode;
   // knownFor.hashCode;
 
   PeopleDetailsCubitState copyWith({
+    int? id,
     String? birthday,
     String? knownForDepartment,
     String? dateOfDeath,
@@ -109,10 +108,10 @@ class PeopleDetailsCubitState {
     String? homepage,
     String? localeTag,
     List<PeopleDetailsCharacterData>? charactersData,
-    int? id,
     // List<KnownForData>? knownFor,
   }) {
     return PeopleDetailsCubitState(
+      id: id ?? this.id,
       birthday: birthday ?? this.birthday,
       knownForDepartment: knownForDepartment ?? this.knownForDepartment,
       dateOfDeath: dateOfDeath ?? this.dateOfDeath,
@@ -129,7 +128,6 @@ class PeopleDetailsCubitState {
       homepage: homepage ?? this.homepage,
       localeTag: localeTag ?? this.localeTag,
       charactersData: charactersData ?? this.charactersData,
-      id: id ?? this.id,
       // knownFor: knownFor ?? this.knownFor,
     );
   }

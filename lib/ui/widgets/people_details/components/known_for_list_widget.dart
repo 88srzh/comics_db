@@ -27,7 +27,8 @@ class _KnownForListWidgetState extends State<KnownForListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final characterData = context.watch<PeopleDetailsCubit>().data.charactersData;
+    final cubit = context.watch<PeopleDetailsCubit>();
+    var characterData = cubit.data.charactersData;
     if (characterData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: const CustomAppBar(title: 'Known For'),
@@ -60,7 +61,8 @@ class _KnownForAllListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final character = context.read<PeopleDetailsCubit>().data.charactersData[index];
+    final cubit = context.read<PeopleDetailsCubit>();
+    final character = cubit.data.charactersData[index];
     final characterId = character.id;
     final posterPath = character.posterPath;
     return Stack(

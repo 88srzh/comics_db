@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/services/people_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,12 @@ part 'people_details_state.dart';
 class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = PeopleDetailsData();
-  final int id;
+  final int peopleId;
   final _peopleDetailsService = PeopleService();
   String locale = '';
+  var people = <People>[];
 
-  PeopleDetailsCubit(this.id)
+  PeopleDetailsCubit(this.peopleId)
       : super(PeopleDetailsCubitState(
           birthday: '',
           knownForDepartment: '',
@@ -64,7 +66,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   }
 
   Future<void> loadPeopleDetails(BuildContext context) async {
-    final details = await _peopleDetailsService.loadPeopleDetails(id: id, locale: state.localeTag);
+    final details = await _peopleDetailsService.loadPeopleDetails(id: peopleId, locale: state.localeTag);
     await updateData(details.details);
   }
 
