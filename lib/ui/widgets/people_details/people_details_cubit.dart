@@ -120,6 +120,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     var imdbId = data.imdbId;
     var homepage = data.homepage;
     var charactersData = data.charactersData;
+    var id = data.id;
     // var knownFor = data.knownFor;
 
     final newState = state.copyWith(
@@ -137,6 +138,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       imdbId: imdbId,
       homepage: homepage,
       charactersData: charactersData,
+      id: id,
       // knownFor: knownFor,
     );
     emit(newState);

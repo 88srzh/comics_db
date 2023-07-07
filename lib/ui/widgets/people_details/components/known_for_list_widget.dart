@@ -6,9 +6,10 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class KnownForListWidget extends StatefulWidget {
   const KnownForListWidget({Key? key}) : super(key: key);
@@ -45,7 +46,8 @@ class _KnownForListWidgetState extends State<KnownForListWidget> {
           itemCount: characterData.length,
           itemBuilder: (BuildContext context, int index) {
             return _KnownForAllListWidget(
-              index: index,
+              characterIndex: index,
+              characterData: characterData,
             );
           },
         ),
@@ -55,15 +57,20 @@ class _KnownForListWidgetState extends State<KnownForListWidget> {
 }
 
 class _KnownForAllListWidget extends StatelessWidget {
-  final int index;
+  final List<PeopleDetailsCharacterData> characterData;
+  final int characterIndex;
 
-  const _KnownForAllListWidget({Key? key, required this.index}) : super(key: key);
+  const _KnownForAllListWidget({
+    Key? key,
+    required this.characterIndex,
+    required this.characterData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<PeopleDetailsCubit>();
-    final character = cubit.data.charactersData[index];
-    final characterId = character.id;
+    final character = cubit.data.charactersData[characterIndex];
+    // final characterId = character.id;
     final posterPath = character.posterPath;
     return Stack(
       children: [
@@ -87,10 +94,10 @@ class _KnownForAllListWidget extends StatelessWidget {
             children: [
               posterPath != null
                   ? CachedNetworkImage(
-                imageUrl: ImageDownloader.imageUrl(posterPath),
-                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-              )
+                      imageUrl: ImageDownloader.imageUrl(posterPath),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                    )
                   : Image.asset(AppImages.noImageAvailable),
               Expanded(
                 child: Column(
