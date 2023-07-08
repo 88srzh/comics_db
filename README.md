@@ -42,5 +42,3 @@
 ```shell
 git clone --depth 5 https://github.com/88srzh/comics_db
 ```
-
----
