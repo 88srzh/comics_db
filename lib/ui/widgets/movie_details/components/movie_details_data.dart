@@ -32,6 +32,6 @@ class MovieDetailsData {
   List<MovieDetailsVideosData> videosData = const <MovieDetailsVideosData>[];
   List<List<MovieDetailsReviewsData>> reviewsData = const <List<MovieDetailsReviewsData>>[];
   List<MovieDetailsSimilarData> similarData = const <MovieDetailsSimilarData>[];
-  MovieDetailsExternalIdsData externalIds = MovieDetailsExternalIdsData();
+  List<MovieDetailsExternalIdsData> externalIds = const <MovieDetailsExternalIdsData>[];
   List<BelongsToCollectionData> collectionData = const <BelongsToCollectionData>[];
 }

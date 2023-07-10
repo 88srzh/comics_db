@@ -36,24 +36,28 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
-    final String trailerKey = cubit.state.videos.first.key;
+    late String trailerKey = cubit.state.videos.first.key;
+
+
+    // TODO malfunction
+    // final String? instagram = cubit.state.externalIds.first.instagramId;
 
     return Stack(
       children: [
         backdropPath != null
             ? Positioned(
-                child: Opacity(
-                  opacity: 0.25,
-                  child: AspectRatio(
-                    aspectRatio: 390 / 220,
-                    child: CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(backdropPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    ),
-                  ),
-                ),
-              )
+          child: Opacity(
+            opacity: 0.25,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: CachedNetworkImage(
+                imageUrl: ImageDownloader.imageUrl(backdropPath),
+                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+              ),
+            ),
+          ),
+        )
             : Image.asset(AppImages.noImageAvailable),
         Positioned(
           top: 15,
@@ -78,7 +82,10 @@ class MovieTopPosterWidget extends StatelessWidget {
                         tagline ?? 'No tagline',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .headlineSmall,
                       ),
                     ),
                   ],
@@ -107,7 +114,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                     Icon(
                       MdiIcons.starOutline,
                       // TODO вывести в переменную
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                      color: context
+                          .read<ThemeBloc>()
+                          .isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -118,7 +127,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                   children: [
                     Icon(
                       MdiIcons.accountOutline,
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                      color: context
+                          .read<ThemeBloc>()
+                          .isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -129,7 +140,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                   children: [
                     Icon(
                       MdiIcons.heartOutline,
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                      color: context
+                          .read<ThemeBloc>()
+                          .isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -141,7 +154,9 @@ class MovieTopPosterWidget extends StatelessWidget {
                   children: [
                     Icon(
                       MdiIcons.youtube,
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                      color: context
+                          .read<ThemeBloc>()
+                          .isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
@@ -150,14 +165,15 @@ class MovieTopPosterWidget extends StatelessWidget {
                       onTap: () {
                         showDialog<Widget>(
                           context: context,
-                          builder: (context) => Stack(
-                            children: [
-                              Positioned(
-                                top: 250,
-                                child: TrailerWidget(youtubeKey: trailerKey),
+                          builder: (context) =>
+                              Stack(
+                                children: [
+                                  Positioned(
+                                    top: 250,
+                                    child: TrailerWidget(youtubeKey: trailerKey),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
                         );
                       },
                       // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieTrailer),
@@ -165,6 +181,15 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                // Row(
+                //   children: [
+                //     Icon(MdiIcons.instagram, color: context
+                //         .read<ThemeBloc>()
+                //         .isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,),
+                //     const SizedBox(width: 4),
+                //     CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
+                //   ],
+                // ),
               ],
             ),
           ),

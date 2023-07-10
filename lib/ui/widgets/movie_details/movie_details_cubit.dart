@@ -60,6 +60,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           recommendations: [],
           videos: [],
           // externalIds: [],
+          // externalIds: [],
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -84,6 +85,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      // externalIds: state.externalIds,
       // externalIds: state.externalIds,
       // reviews: state.reviews,
       // similar: state.similar,
@@ -152,7 +154,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
     // }
 
-
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
@@ -162,6 +163,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
+
+    // data.externalIds = details.externalIds
+    //     .map((e) => MovieDetailsExternalIdsData(id: e.id, imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId))
+    //     .toList();
 
     var id = data.id;
     var title = data.title;
@@ -182,6 +187,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var videos = data.videosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
+    // var externalIds = data.externalIds;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -203,7 +209,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavoriteData,
       recommendations: recommendations,
       videos: videos,
-      // externalIds: facebookId,
+      // externalIds: externalIds,
+      // externalIds: instagramId,
       // similar: similar,
       // collection: collection,
     );

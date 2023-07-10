@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
 import 'package:comics_db_app/domain/entity/movie_details_similar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -43,7 +44,7 @@ class MovieDetails {
   final MovieDetailsRecommendations recommendations;
   // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;
-  // final MovieDetailsExternalIds externalIds;
+  // final List<MovieDetailsExternalIds> externalIds;
 
   MovieDetails({
     required this.adult,
