@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -59,9 +61,20 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
                 child: Container(
                   width: 220,
                   clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(25.0),
+                  decoration: BoxDecoration(
+                    color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+                    border: Border.all(
+                      color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.purple.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10.0),
                     ),
                   ),
                   child: MovieDetailsItemRecommendationsWidget(index: index),
