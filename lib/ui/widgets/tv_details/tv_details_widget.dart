@@ -39,11 +39,6 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     var cubit = context.watch<TvDetailsCubit>();
     final favorite = cubit.state.isFavorite;
 
-    // TODO remove to separate file
-    // var tvTrailerData =
-    //     context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
-    // final tvTrailerKey = tvTrailerData.trailerKey;
-
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
       floatingActionButton: fab(() => cubit.toggleFavoriteTv(context), favorite),

@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -76,6 +78,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           isFavorite: false,
           actorsData: [],
           peopleData: [],
+          recommendationsData: [],
+          videosData: [],
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -114,6 +118,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       isFavorite: state.isFavorite,
       actorsData: state.actorsData,
       peopleData: state.peopleData,
+      recommendationsData: state.recommendationsData,
+      videosData: state.videosData,
     ));
   }
 
@@ -180,9 +186,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.peopleData = makePeopleData(details);
     data.genres = makeGenres(details);
 
-    // TODO need fix
-    data.tvTrailedData.trailerKey = makeTrailerKey(details);
-
     data.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
       popularity: details.voteAverage,
@@ -191,10 +194,15 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     data.favoriteData.isFavorite = isFavorite;
 
+    data.recommendationsData = details.recommendations.recommendationsList.map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    data.videosData = makeTrailerKey(details);
+
     var isFavoriteData = data.favoriteData.isFavorite;
     var actorsData = data.actorsData;
     var peopleData = data.peopleData;
 
+    var recommendationsData = data.recommendationsData;
+    var videosData = data.videosData;
 
     // var createdBy = makeCreatedBy(details);
 
@@ -211,6 +219,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isFavorite: isFavoriteData,
+      recommendationsData: recommendationsData,
+      videosData: videosData,
       // createBy: createdBy,
 
       // videos: data.tvTrailedData.trailerKey,
@@ -218,14 +228,11 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     emit(newState);
   }
 
-  String makeTrailerKey(TVDetails details) {
+  List<TvDetailsVideosData> makeTrailerKey(TVDetails details) {
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    final trailerKey = videos.isNotEmpty == true ? videos.first.key : null;
-    if (trailerKey != null) {
-      return trailerKey;
-    } else {
-      return 'No trailer key';
-    }
+    String trailerKey = videos.first.key;
+    var videosData = details.videos.results.map((e) => TvDetailsVideosData(key: trailerKey)).toList();
+    return videosData;
   }
 
   String makeGenres(TVDetails details) {

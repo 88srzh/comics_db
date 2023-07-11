@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/tv_details_recommendations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -21,6 +22,7 @@ class TVDetails {
   final String lastAirDate;
   final LastEpisodeToAir lastEpisodeToAir;
   final String name;
+
   // TODO возможно DateFormat
   final NextEpisodeToAir? nextEpisodeToAir;
   final List<Network> networks;
@@ -43,6 +45,8 @@ class TVDetails {
   final int voteCount;
   final TvDetailsCredits credits;
   final TvDetailsVideos videos;
+  final TvDetailsRecommendations recommendations;
+
   TVDetails({
     required this.backdropPath,
     required this.createdBy,
@@ -77,10 +81,10 @@ class TVDetails {
     required this.voteCount,
     required this.videos,
     required this.credits,
+    required this.recommendations,
   });
 
-  factory TVDetails.fromJson(Map<String, dynamic> json) =>
-      _$TVDetailsFromJson(json);
+  factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TVDetailsToJson(this);
 }
@@ -101,8 +105,7 @@ class CreatedBy {
     required this.profilePath,
   });
 
-  factory CreatedBy.fromJson(Map<String, dynamic> json) =>
-      _$CreatedByFromJson(json);
+  factory CreatedBy.fromJson(Map<String, dynamic> json) => _$CreatedByFromJson(json);
 
   Map<String, dynamic> toJson() => _$CreatedByToJson(this);
 }
@@ -134,6 +137,7 @@ class LastEpisodeToAir {
   final String? stillPath;
   final double voteAverage;
   final int voteCount;
+
   LastEpisodeToAir({
     required this.airDate,
     required this.episodeNumber,
@@ -147,8 +151,7 @@ class LastEpisodeToAir {
     required this.voteCount,
   });
 
-  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) =>
-      _$LastEpisodeToAirFromJson(json);
+  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => _$LastEpisodeToAirFromJson(json);
 
   Map<String, dynamic> toJson() => _$LastEpisodeToAirToJson(this);
 }
@@ -157,8 +160,7 @@ class LastEpisodeToAir {
 class NextEpisodeToAir {
   const NextEpisodeToAir();
 
-  factory NextEpisodeToAir.fromJson(Map<String, dynamic> json) =>
-      _$NextEpisodeToAirFromJson(json);
+  factory NextEpisodeToAir.fromJson(Map<String, dynamic> json) => _$NextEpisodeToAirFromJson(json);
 
   Map<String, dynamic> toJson() => _$NextEpisodeToAirToJson(this);
 }
@@ -177,8 +179,7 @@ class Network {
     required this.originCountry,
   });
 
-  factory Network.fromJson(Map<String, dynamic> json) =>
-      _$NetworkFromJson(json);
+  factory Network.fromJson(Map<String, dynamic> json) => _$NetworkFromJson(json);
 
   Map<String, dynamic> toJson() => _$NetworkToJson(this);
 }
@@ -197,8 +198,7 @@ class ProductionCompany {
     required this.originCountry,
   });
 
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCompanyFromJson(json);
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) => _$ProductionCompanyFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCompanyToJson(this);
 }
@@ -214,8 +214,7 @@ class ProductionCountry {
     required this.name,
   });
 
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCountryFromJson(json);
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) => _$ProductionCountryFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCountryToJson(this);
 }
@@ -258,8 +257,7 @@ class SpokenLanguage {
     required this.name,
   });
 
-  factory SpokenLanguage.fromJson(Map<String, dynamic> json) =>
-      _$SpokenLanguageFromJson(json);
+  factory SpokenLanguage.fromJson(Map<String, dynamic> json) => _$SpokenLanguageFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpokenLanguageToJson(this);
 }

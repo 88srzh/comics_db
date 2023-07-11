@@ -18,7 +18,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dar
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 
 part 'movie_details_state.dart';
 

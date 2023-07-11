@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// TODO analog in movie details widget
 class TvTrailerWidget extends StatefulWidget {
-  final String tvYoutubeKey;
+  final String? tvYoutubeKey;
 
   const TvTrailerWidget({Key? key, required this.tvYoutubeKey}) : super(key: key);
 
@@ -21,7 +22,7 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.tvYoutubeKey,
+      initialVideoId: widget.tvYoutubeKey ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: true,

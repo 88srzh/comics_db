@@ -1,10 +1,8 @@
 // Flutter imports:
-// ignore_for_file: file_names
-
-// Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/genres_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/rating_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/title_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
 class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
@@ -23,10 +21,10 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
           GenresWidget(),
           SizedBox(height: 4),
           RatingsRowWidget(),
+          SizedBox(height: 4),
+          TvTrailerWidget(),
         ],
       ),
     );
   }
 }
-
-

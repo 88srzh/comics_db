@@ -349,11 +349,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> topRatedTvs(
-    int page,
-    String locale,
-    String apiKey,
-  ) async {
+  Future<TVResponse> topRatedTvs(int page, String locale, String apiKey) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TVResponse.fromJson(jsonMap);
@@ -364,7 +360,7 @@ class MovieAndTvApiClient {
       '/tv/top_rated',
       parser,
       <String, dynamic>{
-        'api_key': apiKey,
+        'api_key': Configuration.apiKey,
         'page': page.toString(),
         'language': locale,
       },
@@ -372,11 +368,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> airingTodayTvs(
-    int page,
-    String locale,
-    String apiKey,
-  ) async {
+  Future<TVResponse> airingTodayTvs(int page, String locale, String apiKey) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TVResponse.fromJson(jsonMap);
@@ -395,18 +387,17 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> onTheAirTvs(
-    int page,
-    String locale,
-    String apiKey,
-  ) {
+  Future<TVResponse> onTheAirTvs(int page, String locale, String apiKey) {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TVResponse.fromJson(jsonMap);
       return response;
     }
 
-    final result = _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
+    final result = _networkClient.get(
+        '/tv/on_the_air',
+        parser,
+        <String, dynamic>{
       'api_key': Configuration.apiKey,
       'page': page.toString(),
       'language': locale,
@@ -425,7 +416,7 @@ class MovieAndTvApiClient {
       '/tv/$tvId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits,videos',
+        'append_to_response': 'credits,videos,recommendations',
         'api_key': Configuration.apiKey,
         'language': locale,
       },

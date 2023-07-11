@@ -7,19 +7,19 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 // Project imports:
 import 'package:comics_db_app/resources/resources.dart';
 
-class TvTrailerWidget extends StatefulWidget {
+class TvTrailerYoutubeWidget extends StatefulWidget {
   final String? youtubeKey;
 
-  const TvTrailerWidget({
+  const TvTrailerYoutubeWidget({
     Key? key,
     required this.youtubeKey,
   }) : super(key: key);
 
   @override
-  State<TvTrailerWidget> createState() => _TvTrailerWidgetState();
+  State<TvTrailerYoutubeWidget> createState() => _TvTrailerYoutubeWidgetState();
 }
 
-class _TvTrailerWidgetState extends State<TvTrailerWidget> {
+class _TvTrailerYoutubeWidgetState extends State<TvTrailerYoutubeWidget> {
   late final YoutubePlayerController _controller;
 
   @override
