@@ -22,7 +22,7 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
           SizedBox(height: 4),
           RatingsRowWidget(),
           SizedBox(height: 4),
-          TvTrailerWidget(),
+          TvTrailerListWidget(),
         ],
       ),
     );

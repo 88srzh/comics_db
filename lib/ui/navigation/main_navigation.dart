@@ -97,7 +97,7 @@ class MainNavigation {
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
-          builder: (context) => TvTrailerWidget(tvYoutubeKey: youtubeKey),
+          builder: (context) => TvDetailsTrailerWidget(tvYoutubeKey: youtubeKey),
         );
       default:
         const widget = Text('Navigation error ');

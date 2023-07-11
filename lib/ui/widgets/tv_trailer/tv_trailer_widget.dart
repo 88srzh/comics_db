@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // TODO analog in movie details widget
-class TvTrailerWidget extends StatefulWidget {
+class TvDetailsTrailerWidget extends StatefulWidget {
   final String? tvYoutubeKey;
 
-  const TvTrailerWidget({Key? key, required this.tvYoutubeKey}) : super(key: key);
+  const TvDetailsTrailerWidget({Key? key, required this.tvYoutubeKey}) : super(key: key);
 
   @override
-  State<TvTrailerWidget> createState() => _TvTrailerWidgetState();
+  State<TvDetailsTrailerWidget> createState() => _TvDetailsTrailerWidgetState();
 }
 
-class _TvTrailerWidgetState extends State<TvTrailerWidget> {
+class _TvDetailsTrailerWidgetState extends State<TvDetailsTrailerWidget> {
   late final YoutubePlayerController _controller;
 
   @override
@@ -32,21 +32,29 @@ class _TvTrailerWidgetState extends State<TvTrailerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-      player: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-      ),
-      builder: (context, player) {
-        return Scaffold(
-          appBar: AppBar(),
-          body: Column(
-            children: [
-              player,
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          YoutubePlayerBuilder(
+            player: YoutubePlayer(
+              controller: _controller,
+              showVideoProgressIndicator: true,
+            ),
+            builder: (context, player) {
+              return Scaffold(
+                appBar: AppBar(),
+                body: Column(
+                  children: [
+                    player,
+                  ],
+                ),
+              );
+            },
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

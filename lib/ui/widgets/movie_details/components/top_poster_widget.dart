@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -170,7 +170,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                                 children: [
                                   Positioned(
                                     top: 250,
-                                    child: TrailerWidget(youtubeKey: trailerKey),
+                                    child: MovieDetailsTrailerWidget(youtubeKey: trailerKey),
                                   ),
                                 ],
                               ),
