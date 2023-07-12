@@ -43,13 +43,10 @@ class _TvDetailsTrailerWidgetState extends State<TvDetailsTrailerWidget> {
               showVideoProgressIndicator: true,
             ),
             builder: (context, player) {
-              return Scaffold(
-                appBar: AppBar(),
-                body: Column(
-                  children: [
-                    player,
-                  ],
-                ),
+              return Column(
+                children: [
+                  player,
+                ],
               );
             },
           ),
