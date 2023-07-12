@@ -23,7 +23,7 @@ class TvDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Sinopsis',
+            'Overview',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),

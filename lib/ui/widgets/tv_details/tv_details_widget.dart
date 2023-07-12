@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -52,6 +53,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               // TvTrailerWidget(youtubeKey: tvTrailerKey),
               // const _DirectorWidget(),
               TVCastWidget(),
+              TvDetailsRecommendationsWidget(),
             ],
           ),
         ],
