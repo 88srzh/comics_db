@@ -49,6 +49,8 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
           ? null
           : MovieDetailsSimilar.fromJson(
               json['similar'] as Map<String, dynamic>),
+      externalIds: MovieDetailsExternalIds.fromJson(
+          json['external_ids'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
@@ -84,6 +86,7 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'videos': instance.videos.toJson(),
       'recommendations': instance.recommendations.toJson(),
       'similar': instance.similar?.toJson(),
+      'external_ids': instance.externalIds.toJson(),
     };
 
 Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
