@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -59,6 +60,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
+          allVideos: [],
           // externalIds: [],
           // reviews: [],
           // similar: [],
@@ -84,6 +86,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      allVideos: state.allVideos,
       // externalIds: state.externalIds,
       // reviews: state.reviews,
       // similar: state.similar,
@@ -162,6 +165,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
     // data.externalIds = details.externalIds.map((e) => MovieDetailsExternalIdsData(id: e.id, imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId)).toList();
 
+    data.allVideosData = details.videos.results.map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id)).toList();
+
     var id = data.id;
     var title = data.title;
     var tagline = data.tagline;
@@ -179,6 +184,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var backdropPath = data.backdropPath;
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
+    var allVideos = data.allVideosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
     // var externalIds = data.externalIds;
@@ -203,6 +209,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavoriteData,
       recommendations: recommendations,
       videos: videos,
+      allVideos: allVideos,
       // externalIds: externalIds,
       // similar: similar,
       // collection: collection,
