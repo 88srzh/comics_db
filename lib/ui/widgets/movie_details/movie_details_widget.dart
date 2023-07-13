@@ -35,7 +35,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
-    // final String trailerKey = cubit.state.videos.first.key;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),

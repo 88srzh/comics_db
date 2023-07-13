@@ -39,7 +39,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     late String trailerKey = cubit.state.videos.first.key;
 
     // TODO malfunction
-    late String? instagram = cubit.state.externalIds.first.instagramId;
+    // late String? instagram = cubit.state.externalIds.first.instagramId;
 
     return Stack(
       children: [
@@ -168,14 +168,15 @@ class MovieTopPosterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                // so far don't work
                 Row(
                   children: [
                     Icon(
                       MdiIcons.instagram,
                       color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                     ),
-                    const SizedBox(width: 4),
-                    CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
+                    // const SizedBox(width: 4),
+                    // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],
                 ),
               ],
