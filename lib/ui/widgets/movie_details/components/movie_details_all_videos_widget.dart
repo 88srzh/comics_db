@@ -26,34 +26,14 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: cubit.state.allVideos.length,
-      itemBuilder: (BuildContext context, int index) {
-        // cubit.showedTopRatedMovieAtIndex(index);
-        // final video = cubit.state.allVideos[index];
-        // final backdropPath = video.backdropPath;
-        return Padding(
-          padding: const EdgeInsets.only(right: 15.0),
-          child: Container(
-            width: 320,
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-            ),
-            child: InkWell(
-              onTap: () => onMovieTap(context, index),
-              // child: backdropPath != null
-              // TODO: may be wrap in fitted box
-                  // ? Image.network(ImageDownloader.imageUrl(backdropPath))
-                  // : const SizedBox.shrink(),
-              child: const Text('123'),
-            ),
-          ),
-        );
-      },
+    return Scrollbar(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: cubit.state.allVideos.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _MovieDetailsAllVideosListWidget(videoIndex: index);
+        },
+      ),
     );
   }
 
@@ -61,5 +41,34 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
     final cubit = context.read<MovieDetailsCubit>();
     final movieId = cubit.state.allVideos[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+  }
+}
+
+class _MovieDetailsAllVideosListWidget extends StatelessWidget {
+  final int videoIndex;
+
+  const _MovieDetailsAllVideosListWidget({
+    required this.videoIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var cubit = context.read<MovieDetailsCubit>();
+    final video = cubit.data.allVideosData[videoIndex];
+    return InkWell(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.only(right: 15.0),
+        child: Container(
+          height: 220,
+          width: 320,
+          clipBehavior: Clip.antiAlias,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+          child: const Text('123'),
+        ),
+      ),
+    );
   }
 }
