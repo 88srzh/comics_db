@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsAllVideosWidget extends StatefulWidget {
   const MovieDetailsAllVideosWidget({Key? key}) : super(key: key);
@@ -16,6 +17,21 @@ class MovieDetailsAllVideosWidget extends StatefulWidget {
 }
 
 class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidget> {
+  late final YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.youtubeKey ?? '',
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
+    );
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -26,13 +42,51 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      itemCount: cubit.state.allVideos.length,
-      itemBuilder: (BuildContext context, int index) {
-        return _MovieDetailsAllVideosListWidget(videoIndex: index);
-      },
+    var videosData = cubit.data.videosData;
+    if (videosData.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'All Videos',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          SizedBox(
+            height: 250.0,
+            child: Scrollbar(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: cubit.state.allVideos.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        YoutubePlayerBuilder(
+                          player: YoutubePlayer(
+                            controller: _controller,
+                            showVideoProgressIndicator: true,
+                          ),
+                          builder: (context, player) {
+                            return Column(
+                              children: [
+                                player,
+                              ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -40,35 +94,5 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
     final cubit = context.read<MovieDetailsCubit>();
     final movieId = cubit.state.allVideos[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
-  }
-}
-
-class _MovieDetailsAllVideosListWidget extends StatelessWidget {
-  final int videoIndex;
-
-  const _MovieDetailsAllVideosListWidget({
-    required this.videoIndex,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    var cubit = context.read<MovieDetailsCubit>();
-    final video = cubit.data.allVideosData[videoIndex];
-    final name = video.name;
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.only(right: 15.0),
-        child: Container(
-          height: 220,
-          width: 320,
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-          ),
-          child: Text(name),
-        ),
-      ),
-    );
   }
 }
