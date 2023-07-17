@@ -26,14 +26,13 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
-    return Scrollbar(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: cubit.state.allVideos.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _MovieDetailsAllVideosListWidget(videoIndex: index);
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: cubit.state.allVideos.length,
+      itemBuilder: (BuildContext context, int index) {
+        return _MovieDetailsAllVideosListWidget(videoIndex: index);
+      },
     );
   }
 
@@ -55,6 +54,7 @@ class _MovieDetailsAllVideosListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.read<MovieDetailsCubit>();
     final video = cubit.data.allVideosData[videoIndex];
+    final name = video.name;
     return InkWell(
       onTap: () {},
       child: Padding(
@@ -66,7 +66,7 @@ class _MovieDetailsAllVideosListWidget extends StatelessWidget {
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          child: const Text('123'),
+          child: Text(name),
         ),
       ),
     );
