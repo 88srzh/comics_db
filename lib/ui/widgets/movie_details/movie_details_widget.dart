@@ -36,6 +36,8 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
+    var videosKey = cubit.state.videos[index].key;
+
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
@@ -43,14 +45,18 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       body: ListView(
         children: [
           Column(
-            children: const [
-              MovieTopPosterWidget(),
-              PeoplesWidget(),
-              DescriptionWidget(),
-              CastWidget(),
-              MovieDetailsAllVideosWidget(),
+            children: [
+              const MovieTopPosterWidget(),
+              const PeoplesWidget(),
+              const DescriptionWidget(),
+              const CastWidget(),
+              ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return const MovieDetailsAllVideosWidget(index: null,)),
+                },
+              ),
               // const MovieDetailsReviewsWidget(),
-              MovieDetailsRecommendations(),
+              const MovieDetailsRecommendations(),
               // const MovieDetailsSimilarWidget(),
               // const MovieSimilarWidget(),
             ],
