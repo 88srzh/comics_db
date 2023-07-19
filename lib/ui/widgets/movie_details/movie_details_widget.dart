@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/collection_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -36,8 +34,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
-    var videosKey = cubit.state.videos[index].key;
-
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
@@ -45,18 +41,14 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       body: ListView(
         children: [
           Column(
-            children: [
-              const MovieTopPosterWidget(),
-              const PeoplesWidget(),
-              const DescriptionWidget(),
-              const CastWidget(),
-              ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return const MovieDetailsAllVideosWidget(index: null,)),
-                },
-              ),
+            children: const [
+               MovieTopPosterWidget(),
+               PeoplesWidget(),
+               DescriptionWidget(),
+               CastWidget(),
+                  // MovieDetailsAllVideosWidget(),
               // const MovieDetailsReviewsWidget(),
-              const MovieDetailsRecommendations(),
+               MovieDetailsRecommendations(),
               // const MovieDetailsSimilarWidget(),
               // const MovieSimilarWidget(),
             ],
