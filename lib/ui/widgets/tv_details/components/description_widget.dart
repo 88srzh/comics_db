@@ -15,6 +15,7 @@ class TvDescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
     final overview = cubit.state.overview;
+    late String trailerKey = cubit.state.videosData.first.key;
     if (overview.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -22,7 +23,7 @@ class TvDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Sinopsis',
+            'Overview',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),

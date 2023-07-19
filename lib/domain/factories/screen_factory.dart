@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew_widget.dart';
+import 'package:comics_db_app/ui/widgets/people_details/components/known_for_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -22,7 +23,7 @@ import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_wid
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/loader_widget/loader_widget.dart';
 import 'package:comics_db_app/ui/widgets/main_screen/main_screen_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/top_rated_movie_widget.dart';
@@ -101,6 +102,13 @@ class ScreenFactory {
     );
   }
 
+  Widget makePeopleDetailsKnownForList(int peopleId) {
+    return BlocProvider(
+      create: (_) => PeopleDetailsCubit(peopleId),
+      child: const KnownForListWidget(),
+    );
+  }
+
   Widget makeMovieDetails(int movieId) {
     //   TODO: should fix
     return BlocProvider(
@@ -124,7 +132,7 @@ class ScreenFactory {
   }
 
   Widget makeMovieTrailer(String youtubeKey) {
-    return TrailerWidget(youtubeKey: youtubeKey);
+    return MovieDetailsTrailerWidget(youtubeKey: youtubeKey);
   }
 
   Widget makeTopRatedMovieList() {

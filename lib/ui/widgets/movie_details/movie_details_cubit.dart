@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -18,7 +19,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dar
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/videos_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 
 part 'movie_details_state.dart';
 
@@ -59,6 +60,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           isFavorite: false,
           recommendations: [],
           videos: [],
+          allVideos: [],
           // externalIds: [],
           // reviews: [],
           // similar: [],
@@ -84,6 +86,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: state.isFavorite,
       recommendations: state.recommendations,
       videos: state.videos,
+      allVideos: state.allVideos,
       // externalIds: state.externalIds,
       // reviews: state.reviews,
       // similar: state.similar,
@@ -152,16 +155,17 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
     // }
 
-
     data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
     data.favoriteData.isFavorite = isFavorite;
 
-    data.recommendationsData = details.recommendations.recommendationsList
-        .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
-        .toList();
+    data.recommendationsData = details.recommendations.recommendationsList.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+
+    // data.externalIds = details.externalIds.map((e) => MovieDetailsExternalIdsData(id: e.id, imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId)).toList();
+
+    data.allVideosData = details.videos.results.map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id)).toList();
 
     var id = data.id;
     var title = data.title;
@@ -180,8 +184,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var backdropPath = data.backdropPath;
     var recommendations = data.recommendationsData;
     var videos = data.videosData;
+    var allVideos = data.allVideosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
+    // var externalIds = data.externalIds;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -203,7 +209,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavoriteData,
       recommendations: recommendations,
       videos: videos,
-      // externalIds: facebookId,
+      allVideos: allVideos,
+      // externalIds: externalIds,
       // similar: similar,
       // collection: collection,
     );

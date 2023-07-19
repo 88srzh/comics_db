@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -39,11 +40,6 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     var cubit = context.watch<TvDetailsCubit>();
     final favorite = cubit.state.isFavorite;
 
-    // TODO remove to separate file
-    // var tvTrailerData =
-    //     context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
-    // final tvTrailerKey = tvTrailerData.trailerKey;
-
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
       floatingActionButton: fab(() => cubit.toggleFavoriteTv(context), favorite),
@@ -57,6 +53,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               // TvTrailerWidget(youtubeKey: tvTrailerKey),
               // const _DirectorWidget(),
               TVCastWidget(),
+              TvDetailsRecommendationsWidget(),
             ],
           ),
         ],

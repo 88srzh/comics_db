@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/trailer_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -36,7 +36,10 @@ class MovieTopPosterWidget extends StatelessWidget {
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
-    final String trailerKey = cubit.state.videos.first.key;
+    late String trailerKey = cubit.state.videos.first.key;
+
+    // TODO malfunction
+    // late String? instagram = cubit.state.externalIds.first.instagramId;
 
     return Stack(
       children: [
@@ -154,7 +157,7 @@ class MovieTopPosterWidget extends StatelessWidget {
                             children: [
                               Positioned(
                                 top: 250,
-                                child: TrailerWidget(youtubeKey: trailerKey),
+                                child: MovieDetailsTrailerWidget(youtubeKey: trailerKey),
                               ),
                             ],
                           ),
@@ -163,6 +166,17 @@ class MovieTopPosterWidget extends StatelessWidget {
                       // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieTrailer),
                       child: const CustomPosterTopLeftAlignText(text: 'Play Trailer', maxLines: 1),
                     ),
+                  ],
+                ),
+                // so far don't work
+                Row(
+                  children: [
+                    Icon(
+                      MdiIcons.instagram,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                    ),
+                    // const SizedBox(width: 4),
+                    // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],
                 ),
               ],

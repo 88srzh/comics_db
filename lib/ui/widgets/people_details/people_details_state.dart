@@ -6,6 +6,7 @@ part of 'people_details_cubit.dart';
 // class PeopleDetailsDartInitial extends PeopleDetailsState {}
 
 class PeopleDetailsCubitState {
+  final int id;
   final String? birthday;
   final String knownForDepartment;
   final String? dateOfDeath;
@@ -26,6 +27,7 @@ class PeopleDetailsCubitState {
   // final List<KnownForData> knownFor;
 
   PeopleDetailsCubitState({
+    required this.id,
     required this.birthday,
     required this.knownForDepartment,
     required this.dateOfDeath,
@@ -53,7 +55,7 @@ class PeopleDetailsCubitState {
           birthday == other.birthday &&
           knownForDepartment == other.knownForDepartment &&
           dateOfDeath == other.dateOfDeath &&
-          // id == other.id &&
+          id == other.id &&
           name == other.name &&
           alsoKnownAs == other.alsoKnownAs &&
           gender == other.gender &&
@@ -73,7 +75,7 @@ class PeopleDetailsCubitState {
       birthday.hashCode ^
       knownForDepartment.hashCode ^
       dateOfDeath.hashCode ^
-      // id.hashCode ^
+      id.hashCode ^
       name.hashCode ^
       alsoKnownAs.hashCode ^
       gender.hashCode ^
@@ -89,6 +91,7 @@ class PeopleDetailsCubitState {
   // knownFor.hashCode;
 
   PeopleDetailsCubitState copyWith({
+    int? id,
     String? birthday,
     String? knownForDepartment,
     String? dateOfDeath,
@@ -108,6 +111,7 @@ class PeopleDetailsCubitState {
     // List<KnownForData>? knownFor,
   }) {
     return PeopleDetailsCubitState(
+      id: id ?? this.id,
       birthday: birthday ?? this.birthday,
       knownForDepartment: knownForDepartment ?? this.knownForDepartment,
       dateOfDeath: dateOfDeath ?? this.dateOfDeath,

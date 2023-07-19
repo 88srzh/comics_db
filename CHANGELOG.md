@@ -1,3 +1,11 @@
+## 0.0.8.5
+- Added forwarding to movie details at the `People Details Screen`.
+- Fixed border at `Movie Details Recommendations`.
+- Added recommendations to `TV Details Screen`.
+- Fixed ui in `Trending Widget` for Pixel 5.
+
+---
+
 ## 0.0.8.4
 
 - Added `Recommendations` to `Movie Details Screen`.

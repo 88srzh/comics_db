@@ -16,7 +16,6 @@ class PeopleDetailsData {
   bool adult = true;
   String imdbId = '';
   String? homepage = '';
-  List<PeopleDetailsCharacterData> charactersData =
-      const <PeopleDetailsCharacterData>[];
-  // List<KnownForData> knownFor = const <KnownForData>[];
+  List<PeopleDetailsCharacterData> charactersData = const <PeopleDetailsCharacterData>[];
+// List<KnownForData> knownFor = const <KnownForData>[];
 }

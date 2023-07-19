@@ -1,5 +1,7 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/services/people_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -16,11 +18,12 @@ part 'people_details_state.dart';
 class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = PeopleDetailsData();
-  final int id;
+  final int peopleId;
   final _peopleDetailsService = PeopleService();
   String locale = '';
+  var people = <People>[];
 
-  PeopleDetailsCubit(this.id)
+  PeopleDetailsCubit(this.peopleId)
       : super(PeopleDetailsCubitState(
           birthday: '',
           knownForDepartment: '',
@@ -38,6 +41,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
           homepage: '',
           localeTag: '',
           charactersData: [],
+          id: 0,
           // knownFor: [],
         )) {
     emit(PeopleDetailsCubitState(
@@ -56,18 +60,17 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       homepage: state.homepage,
       localeTag: state.localeTag,
       charactersData: state.charactersData,
+      id: state.id,
       // knownFor: state.knownFor,
     ));
   }
 
   Future<void> loadPeopleDetails(BuildContext context) async {
-    final details = await _peopleDetailsService.loadPeopleDetails(
-        id: id, locale: state.localeTag);
+    final details = await _peopleDetailsService.loadPeopleDetails(id: peopleId, locale: state.localeTag);
     await updateData(details.details);
   }
 
-  Future<void> setupPeopleDetailsLocale(
-      BuildContext context, String localeTag) async {
+  Future<void> setupPeopleDetailsLocale(BuildContext context, String localeTag) async {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
@@ -99,11 +102,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.imdbId = details.imdbId;
     data.homepage = details.homepage;
     data.charactersData = details.credits.cast
-        .map((e) => PeopleDetailsCharacterData(
-            character: e.character,
-            title: e.title,
-            posterPath: e.posterPath,
-            backdropPath: e.backdropPath))
+        .map((e) => PeopleDetailsCharacterData(id: e.id, character: e.character, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
     // data.knownFor = details.knownFor.result.map((e) => KnownForData(posterPath: e.posterPath, title: e.title)).toList();
 
@@ -121,6 +120,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     var imdbId = data.imdbId;
     var homepage = data.homepage;
     var charactersData = data.charactersData;
+    var id = data.id;
     // var knownFor = data.knownFor;
 
     final newState = state.copyWith(
@@ -138,6 +138,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       imdbId: imdbId,
       homepage: homepage,
       charactersData: charactersData,
+      id: id,
       // knownFor: knownFor,
     );
     emit(newState);
@@ -150,6 +151,11 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
       texts.add(_dateFormat.format(birthday));
     }
     return texts.join();
+  }
+
+  void onSeeAllKnownForTap(BuildContext context, int index) {
+    final id = state.id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetailsKnownForList, arguments: id);
   }
 
 // String makeKnownFor(PeopleDetails details) {

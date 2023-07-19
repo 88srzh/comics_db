@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
 import 'package:comics_db_app/domain/entity/movie_details_similar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
