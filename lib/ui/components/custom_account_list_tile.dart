@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomAccountListTile extends StatelessWidget {
   const CustomAccountListTile({
@@ -16,8 +17,9 @@ class CustomAccountListTile extends StatelessWidget {
     return ListTile(
       title: Text(
         text,
-        style: Theme.of(context).textTheme.headlineMedium,
+        style: Theme.of(context).textTheme.displayMedium,
       ),
+      leading: const Icon(MdiIcons.movie),
       onTap: onTap,
     );
   }

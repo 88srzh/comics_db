@@ -26,7 +26,7 @@ class HeadingAccountCardWidget extends StatelessWidget {
                   // style: Theme.of(context).textTheme.displaySmall,
                   style: TextStyle(
                     color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white,
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
               ),
