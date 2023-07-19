@@ -12,7 +12,7 @@ class CustomSettingDivider extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 0.5,
-      color: isDarkTheme ? Colors.grey : Colors.grey,
+      color: isDarkTheme ? Colors.black : Colors.grey,
     );
   }
 }

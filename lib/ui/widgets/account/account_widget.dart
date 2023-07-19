@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/HeadAccountCardWidget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -30,7 +32,7 @@ class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      // appBar: CustomMainAppBarWidget(),
+      appBar: CustomDetailsAppBar(title: ''),
       body: BodyPersonalWidget(),
     );
   }
@@ -46,12 +48,13 @@ class BodyPersonalWidget extends StatefulWidget {
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AccountDetailsCubit>();
-    final name = cubit.state.name;
+    // final cubit = context.watch<AccountDetailsCubit>();
+    // TODO name don't work
+    // final name = cubit.state.name;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HeadingAccountCardWidget(headingText: name),
+        const HeadAccountCardWidget(),
         const CustomSettingDivider(),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
         const CustomSettingDivider(),
