@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           recommendations: [],
           videos: [],
           allVideos: [],
-          // externalIds: [],
+          externalIds: [],
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -87,7 +88,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
-      // externalIds: state.externalIds,
+      externalIds: state.externalIds,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -187,7 +188,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var allVideos = data.allVideosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
-    // var externalIds = data.externalIds;
+    var externalIds = data.externalIds;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -210,7 +211,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: recommendations,
       videos: videos,
       allVideos: allVideos,
-      // externalIds: externalIds,
+      externalIds: externalIds,
       // similar: similar,
       // collection: collection,
     );

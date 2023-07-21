@@ -19,6 +19,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.19.2 <3.0.0"
+#   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -48,6 +49,7 @@ dependencies:
   animations: ^2.0.7
   rolling_switch: ^0.0.2
   animated_button_bar: ^0.0.2
+#  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:
