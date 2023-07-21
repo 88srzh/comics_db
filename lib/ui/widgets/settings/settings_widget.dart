@@ -36,9 +36,9 @@ class BodySettingsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
         // HeadingPersonalCardWidget(headingText: 'General'),
-        CustomSettingDivider(),
+        CustomSettingDivider(height: 0.5),
         GeneralCard(),
-        CustomSettingDivider(),
+        CustomSettingDivider(height: 0.5),
       ],
     );
   }

@@ -55,19 +55,19 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const HeadAccountCardWidget(),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 3.0),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 10.0),
         const HeadingAccountCardWidget(headingText: 'Settings'),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         const SettingsCardWidget(),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         const NotificationsCardWidget(),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         CustomAccountListTile(
             text: 'Logout',
             icon: MdiIcons.logout,
@@ -75,7 +75,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
               cubit.logout();
               Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
             }),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.5),
         // const AnimationFab(),
       ],
     );
