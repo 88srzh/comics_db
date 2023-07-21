@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/HeadAccountCardWidget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -56,6 +57,12 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
       children: [
         const HeadAccountCardWidget(),
         const CustomSettingDivider(height: 3.0),
+        const HeadingAccountCardWidget(headingText: 'Ratings'),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () {}),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(text: 'TV', icon: MdiIcons.movie, onTap: () {}),
+        const CustomSettingDivider(height: 3.0),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
         const CustomSettingDivider(height: 0.8),
         CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
@@ -78,37 +85,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(height: 0.5),
         // const AnimationFab(),
       ],
-    );
-  }
-}
-
-class NotificationsCardWidget extends StatefulWidget {
-  const NotificationsCardWidget({Key? key}) : super(key: key);
-
-  @override
-  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
-}
-
-class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
-  bool notifications = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
-      value: notifications,
-      onChanged: (bool value) {
-        setState(
-          () {
-            notifications = value;
-          },
-        );
-      },
-      title: Text(
-        'Push notifications',
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
     );
   }
 }
