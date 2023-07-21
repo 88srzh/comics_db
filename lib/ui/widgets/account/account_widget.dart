@@ -2,6 +2,7 @@
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/HeadAccountCardWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
@@ -12,7 +13,6 @@ import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 
 class AccountWidget extends StatefulWidget {
@@ -48,7 +48,7 @@ class BodyPersonalWidget extends StatefulWidget {
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.watch<AccountDetailsCubit>();
+    final cubit = context.watch<AccountDetailsCubit>();
     // TODO name don't work
     // final name = cubit.state.name;
     return Column(
@@ -58,9 +58,9 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
         const CustomSettingDivider(),
-        CustomAccountListTile(text: 'Movies', onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
+        CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
         const CustomSettingDivider(),
-        CustomAccountListTile(text: 'TV', onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
+        CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
         const CustomSettingDivider(),
         const HeadingAccountCardWidget(headingText: 'Settings'),
         const CustomSettingDivider(),
@@ -68,7 +68,13 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(),
         const NotificationsCardWidget(),
         const CustomSettingDivider(),
-        const LogoutCardWidget(),
+        CustomAccountListTile(
+            text: 'Logout',
+            icon: MdiIcons.logout,
+            onTap: () {
+              cubit.logout();
+              Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
+            }),
         const CustomSettingDivider(),
         // const AnimationFab(),
       ],
