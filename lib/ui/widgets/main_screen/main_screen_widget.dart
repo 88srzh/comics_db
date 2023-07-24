@@ -41,7 +41,7 @@ class MainScreenWidget extends HookWidget {
         initialActiveIndex: selectedIndex.value,
         items: const [
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
-          TabItem<dynamic>(icon: Icons.trending_up, title: 'Trending'),
+          // TabItem<dynamic>(icon: Icons.trending_up, title: 'Trending'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),
           TabItem<dynamic>(icon: Icons.tv, title: 'TV'),
           TabItem<dynamic>(icon: Icons.settings, title: 'Personal'),
