@@ -9,7 +9,7 @@ class AccountDetails with _$AccountDetails {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   factory AccountDetails({
     required int id,
-    @JsonKey(name: 'iso_693_1') required String iso6391,
+    @JsonKey(name: 'iso_639_1') required String iso6391,
     @JsonKey(name: 'iso_3166_1') required String iso31661,
     required String name,
     required bool includeAdult,
