@@ -13,14 +13,12 @@ class TrendingAllResponse {
   List<TrendingAll> trendingAll;
   final int totalResults;
   final int totalPages;
-  final String timeWindow;
 
   TrendingAllResponse({
     required this.page,
     required this.trendingAll,
     required this.totalResults,
     required this.totalPages,
-    required this.timeWindow,
   });
 
   factory TrendingAllResponse.fromJson(Map<String, dynamic> json) => _$TrendingAllResponseFromJson(json);

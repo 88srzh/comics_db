@@ -14,7 +14,6 @@ TrendingAllResponse _$TrendingAllResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       totalResults: json['total_results'] as int,
       totalPages: json['total_pages'] as int,
-      timeWindow: json['time_window'] as String,
     );
 
 Map<String, dynamic> _$TrendingAllResponseToJson(
@@ -24,5 +23,4 @@ Map<String, dynamic> _$TrendingAllResponseToJson(
       'results': instance.trendingAll.map((e) => e.toJson()).toList(),
       'total_results': instance.totalResults,
       'total_pages': instance.totalPages,
-      'time_window': instance.timeWindow,
     };
