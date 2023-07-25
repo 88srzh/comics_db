@@ -1,5 +1,9 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/HeadAccountCardWidget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
@@ -10,7 +14,6 @@ import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/logout_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 
 class AccountWidget extends StatefulWidget {
@@ -30,7 +33,7 @@ class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      // appBar: CustomMainAppBarWidget(),
+      appBar: CustomDetailsAppBar(title: ''),
       body: BodyPersonalWidget(),
     );
   }
@@ -47,59 +50,41 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
-    final name = cubit.state.name;
+    // TODO name don't work
+    // final name = cubit.state.name;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HeadingAccountCardWidget(headingText: name),
-        const CustomSettingDivider(),
+        const HeadAccountCardWidget(),
+        const CustomSettingDivider(height: 3.0),
+        const HeadingAccountCardWidget(headingText: 'Ratings'),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () {}),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(text: 'TV', icon: MdiIcons.movie, onTap: () {}),
+        const CustomSettingDivider(height: 3.0),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
-        const CustomSettingDivider(),
-        CustomAccountListTile(text: 'Movies', onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
-        const CustomSettingDivider(),
-        CustomAccountListTile(text: 'TV', onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
+        const CustomSettingDivider(height: 10.0),
         const HeadingAccountCardWidget(headingText: 'Settings'),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         const SettingsCardWidget(),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
         const NotificationsCardWidget(),
-        const CustomSettingDivider(),
-        const LogoutCardWidget(),
-        const CustomSettingDivider(),
+        const CustomSettingDivider(height: 0.8),
+        CustomAccountListTile(
+            text: 'Logout',
+            icon: MdiIcons.logout,
+            onTap: () {
+              cubit.logout();
+              Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
+            }),
+        const CustomSettingDivider(height: 0.5),
         // const AnimationFab(),
       ],
-    );
-  }
-}
-
-class NotificationsCardWidget extends StatefulWidget {
-  const NotificationsCardWidget({Key? key}) : super(key: key);
-
-  @override
-  State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
-}
-
-class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
-  bool notifications = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
-      value: notifications,
-      onChanged: (bool value) {
-        setState(
-          () {
-            notifications = value;
-          },
-        );
-      },
-      title: Text(
-        'Push notifications',
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
     );
   }
 }

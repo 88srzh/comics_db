@@ -18,7 +18,8 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.2 <3.0.0"
+#  sdk: ">=2.19.2 <3.0.0"
+   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -28,7 +29,7 @@ dependencies:
   material_design_icons_flutter: ^6.0.7096
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.18.0
   convex_bottom_bar: ^3.0.0
   youtube_player_flutter: ^8.1.2
   loading_indicator: ^3.1.0
@@ -48,6 +49,7 @@ dependencies:
   animations: ^2.0.7
   rolling_switch: ^0.0.2
   animated_button_bar: ^0.0.2
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

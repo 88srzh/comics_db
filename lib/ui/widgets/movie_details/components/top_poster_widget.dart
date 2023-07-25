@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/components/custom_social_icon.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,7 @@ class MovieTopPosterWidget extends StatelessWidget {
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
+    // late String? facebook = cubit.state.externalIds.first.facebookId;
 
     // TODO malfunction
     // late String? instagram = cubit.state.externalIds.first.instagramId;
@@ -170,11 +172,16 @@ class MovieTopPosterWidget extends StatelessWidget {
                 ),
                 // so far don't work
                 Row(
-                  children: [
-                    Icon(
-                      MdiIcons.instagram,
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
-                    ),
+                  children: const [
+                    InkWell(
+                      // onTap: () => N,
+                        child: CustomSocialIcon(icon: MdiIcons.facebook)),
+                    SizedBox(width: 4.0),
+                    CustomSocialIcon(icon: MdiIcons.twitter),
+                    SizedBox(width: 4.0),
+                    CustomSocialIcon(icon: MdiIcons.instagram),
+                    SizedBox(width: 4.0),
+                    CustomSocialIcon(icon: MdiIcons.home),
                     // const SizedBox(width: 4),
                     // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],

@@ -21,7 +21,7 @@ AccountDetails _$AccountDetailsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AccountDetails {
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'iso_693_1')
+  @JsonKey(name: 'iso_639_1')
   String get iso6391 => throw _privateConstructorUsedError;
   @JsonKey(name: 'iso_3166_1')
   String get iso31661 => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $AccountDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: 'iso_693_1') String iso6391,
+      @JsonKey(name: 'iso_639_1') String iso6391,
       @JsonKey(name: 'iso_3166_1') String iso31661,
       String name,
       bool includeAdult,
@@ -109,7 +109,7 @@ abstract class _$$_AccountDetailsCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: 'iso_693_1') String iso6391,
+      @JsonKey(name: 'iso_639_1') String iso6391,
       @JsonKey(name: 'iso_3166_1') String iso31661,
       String name,
       bool includeAdult,
@@ -169,7 +169,7 @@ class __$$_AccountDetailsCopyWithImpl<$Res>
 class _$_AccountDetails implements _AccountDetails {
   _$_AccountDetails(
       {required this.id,
-      @JsonKey(name: 'iso_693_1') required this.iso6391,
+      @JsonKey(name: 'iso_639_1') required this.iso6391,
       @JsonKey(name: 'iso_3166_1') required this.iso31661,
       required this.name,
       required this.includeAdult,
@@ -181,7 +181,7 @@ class _$_AccountDetails implements _AccountDetails {
   @override
   final int id;
   @override
-  @JsonKey(name: 'iso_693_1')
+  @JsonKey(name: 'iso_639_1')
   final String iso6391;
   @override
   @JsonKey(name: 'iso_3166_1')
@@ -236,7 +236,7 @@ class _$_AccountDetails implements _AccountDetails {
 abstract class _AccountDetails implements AccountDetails {
   factory _AccountDetails(
       {required final int id,
-      @JsonKey(name: 'iso_693_1') required final String iso6391,
+      @JsonKey(name: 'iso_639_1') required final String iso6391,
       @JsonKey(name: 'iso_3166_1') required final String iso31661,
       required final String name,
       required final bool includeAdult,
@@ -248,7 +248,7 @@ abstract class _AccountDetails implements AccountDetails {
   @override
   int get id;
   @override
-  @JsonKey(name: 'iso_693_1')
+  @JsonKey(name: 'iso_639_1')
   String get iso6391;
   @override
   @JsonKey(name: 'iso_3166_1')

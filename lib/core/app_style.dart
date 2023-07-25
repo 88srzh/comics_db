@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 const titleStyle = TextStyle(
   color: DarkThemeColors.kPrimaryColor,
-  fontSize: 21,
+  fontSize: 25,
   fontWeight: FontWeight.w600,
 );
 
@@ -13,9 +13,8 @@ const h1style = TextStyle(
 );
 
 const h3style = TextStyle(
-  color: DarkThemeColors.kPrimaryColor,
+  color: Colors.black,
   fontSize: 18,
-  fontWeight: FontWeight.w800,
 );
 
 const h4style = TextStyle(
@@ -24,7 +23,7 @@ const h4style = TextStyle(
 );
 
 const h5style = TextStyle(
-  color: DarkThemeColors.kPrimaryColor,
+  color: Colors.black,
   fontSize: 13,
 );
 

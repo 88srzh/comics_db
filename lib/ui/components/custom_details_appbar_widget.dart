@@ -4,7 +4,7 @@ import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomDetailsAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
 
   const CustomDetailsAppBar({Key? key, required this.title}) : super(key: key);

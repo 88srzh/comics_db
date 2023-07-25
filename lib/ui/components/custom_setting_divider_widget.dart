@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomSettingDivider extends StatelessWidget {
-  const CustomSettingDivider({Key? key}) : super(key: key);
+  const CustomSettingDivider({Key? key, required this.height}) : super(key: key);
+
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Container(
       width: double.infinity,
-      height: 0.5,
-      color: isDarkTheme ? Colors.grey : Colors.grey,
+      height: height,
+      color: isDarkTheme ? Colors.black : Colors.grey,
     );
   }
 }

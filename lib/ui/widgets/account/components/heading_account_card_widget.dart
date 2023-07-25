@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HeadingAccountCardWidget extends StatelessWidget {
-  const HeadingAccountCardWidget({Key? key, required this.headingText})
-      : super(key: key);
+  const HeadingAccountCardWidget({Key? key, required this.headingText}) : super(key: key);
   final String headingText;
 
   @override
@@ -16,17 +15,19 @@ class HeadingAccountCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 40,
-            color: context.read<ThemeBloc>().isDarkTheme
-                ? DarkThemeColors.bottomBarBackgroundColor
-                : Colors.white,
+            // color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.bottomBarBackgroundColor : Colors.white,
             child: ListTile(
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
                   headingText,
-                  style: Theme.of(context).textTheme.displaySmall,
+                  // style: Theme.of(context).textTheme.displaySmall,
+                  style: TextStyle(
+                    color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),

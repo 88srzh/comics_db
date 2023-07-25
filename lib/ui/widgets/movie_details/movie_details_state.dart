@@ -22,7 +22,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
   final List<MovieDetailsAllVideosData> allVideos;
-  // final List<MovieDetailsExternalIdsData> externalIds;
+  final List<MovieDetailsExternalIdsData> externalIds;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
@@ -48,8 +48,7 @@ class MovieDetailsCubitState {
     required this.recommendations,
     required this.videos,
     required this.allVideos,
-    // required this.externalIds,
-    // required this.externalIds,
+    required this.externalIds,
     // required this.reviews,
     // required this.similar,
     // required this.collection,
@@ -78,7 +77,7 @@ class MovieDetailsCubitState {
           isLoading == other.isLoading &&
           isFavorite == other.isFavorite &&
           recommendations == other.recommendations &&
-          // externalIds == other.externalIds &&
+          externalIds == other.externalIds &&
           // reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
@@ -105,8 +104,7 @@ class MovieDetailsCubitState {
       isLoading.hashCode ^
       isFavorite.hashCode ^
       recommendations.hashCode ^
-      // externalIds.hashCode ^
-      // externalIds.hashCode;
+      externalIds.hashCode ^
       // reviews.hashCode ^
       // similar.hashCode;
       videos.hashCode ^
@@ -134,7 +132,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsRecommendationsData>? recommendations,
     List<MovieDetailsVideosData>? videos,
     List<MovieDetailsAllVideosData>? allVideos,
-    // List<MovieDetailsExternalIdsData>? externalIds,
+    List<MovieDetailsExternalIdsData>? externalIds,
     // List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
@@ -160,7 +158,7 @@ class MovieDetailsCubitState {
       recommendations: recommendations ?? this.recommendations,
       videos: videos ?? this.videos,
       allVideos: allVideos ?? this.allVideos,
-      // externalIds: externalIds ?? this.externalIds,
+      externalIds: externalIds ?? this.externalIds,
       // reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,

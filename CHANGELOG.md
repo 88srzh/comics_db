@@ -1,3 +1,11 @@
+## 0.0.8.6
+- Added avatar image, rating list tile for `Account Widget`.
+- Fixed icon colors and logout list tile at `Account Widget`.
+- Added social networks ui for `Movie Details Widget`.
+- Upgraded to `Flutter 3`.
+
+---
+
 ## 0.0.8.5
 - Added forwarding to movie details at the `People Details Screen`.
 - Fixed border at `Movie Details Recommendations`.

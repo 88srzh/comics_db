@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // Project imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomMainAppBarWidget extends StatelessWidget with PreferredSizeWidget {
+class CustomMainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const CustomMainAppBarWidget({Key? key}) : super(key: key);
 
   @override
