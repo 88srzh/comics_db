@@ -24,6 +24,7 @@ class MovieDetailsData {
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
+  String? facebook = '';
 
   FavoriteData favoriteData = FavoriteData();
 

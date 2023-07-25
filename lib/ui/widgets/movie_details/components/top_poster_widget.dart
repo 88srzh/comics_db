@@ -18,10 +18,16 @@ import 'package:comics_db_app/ui/components/custom_poster_top_left_text_widget.d
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class MovieTopPosterWidget extends StatelessWidget {
+class MovieTopPosterWidget extends StatefulWidget {
   const MovieTopPosterWidget({Key? key}) : super(key: key);
 
+  @override
+  State<MovieTopPosterWidget> createState() => _MovieTopPosterWidgetState();
+}
+
+class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<MovieDetailsCubit>();
@@ -39,6 +45,11 @@ class MovieTopPosterWidget extends StatelessWidget {
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
     // late String? facebook = cubit.state.externalIds.first.facebookId;
+    // late String? facebook = 'transformersmovie';
+    late String? facebook = cubit.state.facebook;
+    // final Uri facebookUrl = Uri.parse('https://www.facebook.com/$facebook');
+    Future<void>? _launched;
+    final Uri toLaunch = Uri(scheme: 'https', host: 'www.facebook.com', path: facebook);
 
     // TODO malfunction
     // late String? instagram = cubit.state.externalIds.first.instagramId;
@@ -172,16 +183,19 @@ class MovieTopPosterWidget extends StatelessWidget {
                 ),
                 // so far don't work
                 Row(
-                  children: const [
+                  children: [
                     InkWell(
-                      // onTap: () => N,
-                        child: CustomSocialIcon(icon: MdiIcons.facebook)),
-                    SizedBox(width: 4.0),
-                    CustomSocialIcon(icon: MdiIcons.twitter),
-                    SizedBox(width: 4.0),
-                    CustomSocialIcon(icon: MdiIcons.instagram),
-                    SizedBox(width: 4.0),
-                    CustomSocialIcon(icon: MdiIcons.home),
+                      onTap: () => setState(() {
+                        _launched = _launchInBrowser(toLaunch);
+                      }),
+                      child: const CustomSocialIcon(icon: MdiIcons.facebook),
+                    ),
+                    const SizedBox(width: 4.0),
+                    const CustomSocialIcon(icon: MdiIcons.twitter),
+                    const SizedBox(width: 4.0),
+                    const CustomSocialIcon(icon: MdiIcons.instagram),
+                    const SizedBox(width: 4.0),
+                    const CustomSocialIcon(icon: MdiIcons.home),
                     // const SizedBox(width: 4),
                     // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],
@@ -206,5 +220,14 @@ class MovieTopPosterWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+Future<void> _launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw Exception('Could not launch $url');
   }
 }
