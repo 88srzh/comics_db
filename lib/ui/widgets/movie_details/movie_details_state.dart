@@ -22,7 +22,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
   final List<MovieDetailsAllVideosData> allVideos;
-  final String? facebook;
+  // final String? facebook;
   // final List<MovieDetailsExternalIdsData> externalIds;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
@@ -49,7 +49,7 @@ class MovieDetailsCubitState {
     required this.recommendations,
     required this.videos,
     required this.allVideos,
-    required this.facebook,
+    // required this.facebook,
     // required this.externalIds,
     // required this.reviews,
     // required this.similar,
@@ -83,8 +83,8 @@ class MovieDetailsCubitState {
           // reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
-          allVideos == other.allVideos &&
-          facebook == other.facebook;
+          allVideos == other.allVideos;
+          // facebook == other.facebook;
           // collection == other.collection;
 
   @override
@@ -111,8 +111,8 @@ class MovieDetailsCubitState {
       // reviews.hashCode ^
       // similar.hashCode;
       videos.hashCode ^
-      allVideos.hashCode ^
-      facebook.hashCode;
+      allVideos.hashCode;
+      // facebook.hashCode;
       // collection.hashCode;
 
   MovieDetailsCubitState copyWith({
@@ -136,7 +136,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsRecommendationsData>? recommendations,
     List<MovieDetailsVideosData>? videos,
     List<MovieDetailsAllVideosData>? allVideos,
-    String? facebook,
+    // String? facebook,
     // List<MovieDetailsExternalIdsData>? externalIds,
     // List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
@@ -163,7 +163,7 @@ class MovieDetailsCubitState {
       recommendations: recommendations ?? this.recommendations,
       videos: videos ?? this.videos,
       allVideos: allVideos ?? this.allVideos,
-      facebook: facebook ?? this.facebook,
+      // facebook: facebook ?? this.facebook,
       // externalIds: externalIds ?? this.externalIds,
       // reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,

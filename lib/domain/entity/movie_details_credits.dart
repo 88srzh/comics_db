@@ -7,13 +7,13 @@ part 'movie_details_credits.g.dart';
 class MovieDetailsCredits {
   final List<Actor> cast;
   final List<Employee> crew;
+
   MovieDetailsCredits({
     required this.cast,
     required this.crew,
   });
 
-  factory MovieDetailsCredits.fromJson(Map<String, dynamic> json) =>
-      _$MovieDetailsCreditsFromJson(json);
+  factory MovieDetailsCredits.fromJson(Map<String, dynamic> json) => _$MovieDetailsCreditsFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsCreditsToJson(this);
 }
@@ -32,6 +32,7 @@ class Actor {
   final String character;
   final String creditId;
   final int order;
+
   Actor({
     required this.adult,
     required this.gender,
@@ -65,6 +66,7 @@ class Employee {
   final String creditId;
   final String department;
   final String job;
+
   Employee({
     required this.adult,
     required this.gender,
@@ -79,8 +81,7 @@ class Employee {
     required this.job,
   });
 
-  factory Employee.fromJson(Map<String, dynamic> json) =>
-      _$EmployeeFromJson(json);
+  factory Employee.fromJson(Map<String, dynamic> json) => _$EmployeeFromJson(json);
 
   Map<String, dynamic> toJson() => _$EmployeeToJson(this);
 }
