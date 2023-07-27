@@ -228,11 +228,15 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     emit(newState);
   }
 
-  List<TvDetailsVideosData> makeTrailerKey(TVDetails details) {
+  List<TvDetailsVideosData>? makeTrailerKey(TVDetails details) {
     final videos = details.videos.results.where((video) => video.type == 'Trailer' && video.site == 'YouTube');
-    String trailerKey = videos.first.key;
-    var videosData = details.videos.results.map((e) => TvDetailsVideosData(key: trailerKey)).toList();
-    return videosData;
+    if (videos.isNotEmpty) {
+      String trailerKey = videos.first.key;
+      var videosData = details.videos.results.map((e) => TvDetailsVideosData(key: trailerKey)).toList();
+      return videosData;
+    } else {
+      return null;
+    }
   }
 
   String makeGenres(TVDetails details) {

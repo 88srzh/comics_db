@@ -15,6 +15,7 @@ class TvTrailerListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
     late String youtubeKey = cubit.state.videosData.first.key;
+    if (cubit.state.videosData.isEmpty) return const SizedBox.shrink();
     return InkWell(
       onTap: () {
         showDialog<Widget>(
@@ -31,9 +32,9 @@ class TvTrailerListWidget extends StatelessWidget {
       },
       // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: youtubeKey),
       // onTap: => {return TvTrailerYoutubeWidget(youtubeKey: trailerKey),}
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           CustomTvDetailsIconWidget(icon: MdiIcons.youtube),
           SizedBox(width: 4),
           CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: 'Play Trailer'),

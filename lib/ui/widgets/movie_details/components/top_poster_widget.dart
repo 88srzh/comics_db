@@ -55,21 +55,19 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
 
     return Stack(
       children: [
-        backdropPath != null
-            ? Positioned(
-                child: Opacity(
-                  opacity: 0.25,
-                  child: AspectRatio(
-                    aspectRatio: 390 / 220,
-                    child: CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(backdropPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    ),
-                  ),
-                ),
-              )
-            : Image.asset(AppImages.noImageAvailable),
+        Positioned(
+          child: Opacity(
+            opacity: 0.25,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: CachedNetworkImage(
+                imageUrl: ImageDownloader.imageUrl(backdropPath!),
+                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+              ),
+            ),
+          ),
+        ),
         Positioned(
           top: 15,
           left: 20,

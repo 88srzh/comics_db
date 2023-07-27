@@ -19,7 +19,7 @@ class TvDetailsData {
   List<List<TvDetailsPeopleData>> peopleData = const <List<TvDetailsPeopleData>>[];
   List<TvDetailsActorData> actorsData = const <TvDetailsActorData>[];
   List<TvDetailsRecommendationsData> recommendationsData = const <TvDetailsRecommendationsData>[];
-  List<TvDetailsVideosData> videosData = const <TvDetailsVideosData>[];
+  List<TvDetailsVideosData>? videosData = const <TvDetailsVideosData>[];
 
   FavoriteData favoriteData = FavoriteData();
 }
