@@ -17,7 +17,7 @@ class TvTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
-    final posterPath = cubit.state.posterPath;
+    var posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
     return Stack(
       children: [

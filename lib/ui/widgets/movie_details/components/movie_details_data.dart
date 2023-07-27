@@ -31,7 +31,7 @@ class MovieDetailsData {
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
   List<MovieDetailsRecommendationsData> recommendationsData = const <MovieDetailsRecommendationsData>[];
-  List<MovieDetailsVideosData> videosData = const <MovieDetailsVideosData>[];
+  List<MovieDetailsVideosData>? videosData = const <MovieDetailsVideosData>[];
   List<MovieDetailsAllVideosData> allVideosData = const <MovieDetailsAllVideosData>[];
   List<List<MovieDetailsReviewsData>> reviewsData = const <List<MovieDetailsReviewsData>>[];
   List<MovieDetailsSimilarData> similarData = const <MovieDetailsSimilarData>[];

@@ -43,6 +43,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
+    if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
     // late String? facebook = cubit.state.externalIds.first.facebookId;
     // late String? facebook = 'transformersmovie';
     // late String? facebook = cubit.state.facebook;
