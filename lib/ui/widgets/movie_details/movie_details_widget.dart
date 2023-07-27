@@ -39,9 +39,9 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       appBar: const CustomDetailsAppBar(title: ''),
       floatingActionButton: fab(() => cubit.toggleFavoriteMovie(context), favorite),
       body: ListView(
-        children: [
+        children: const [
           Column(
-            children: const [
+            children: [
                MovieTopPosterWidget(),
                PeoplesWidget(),
                DescriptionWidget(),

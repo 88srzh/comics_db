@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +61,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           recommendations: [],
           videos: [],
           allVideos: [],
-          externalIds: [],
+          // facebook: '',
+          // externalIds: [],
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -88,7 +88,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
-      externalIds: state.externalIds,
+      // externalIds: state.externalIds,
+      // facebook: state.facebook,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -151,6 +152,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
+    // data.facebook = details.externalIds.facebookId;
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
@@ -188,7 +190,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var allVideos = data.allVideosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
-    var externalIds = data.externalIds;
+    // var facebook = data.facebook;
+    // var externalIds = data.externalIds;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -211,18 +214,22 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: recommendations,
       videos: videos,
       allVideos: allVideos,
-      externalIds: externalIds,
+      // facebook: facebook,
+      // externalIds: externalIds,
       // similar: similar,
       // collection: collection,
     );
     emit(newState);
   }
 
-  List<MovieDetailsVideosData> makeTrailerKey(MovieDetails details) {
+  List<MovieDetailsVideosData>? makeTrailerKey(MovieDetails details) {
     final videos = details.videos.results.where((video) => video.type == "Trailer" && video.site == 'YouTube');
+    if (videos.isNotEmpty) {
     String trailerKey = videos.first.key;
     var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
-    return videosData;
+    return videosData;} else {
+      return null;
+    }
   }
 
   String makeReleaseDate(MovieDetails details) {

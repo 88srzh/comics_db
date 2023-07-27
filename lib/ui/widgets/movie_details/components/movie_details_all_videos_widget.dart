@@ -70,12 +70,12 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
     }
   }
 
-  @override
-  void dispose() {
-    for (var element in listYoutubePlayerController) {
-      element.dispose();
-    }
-  }
+  // @override
+  // void dispose() {
+  //   for (var element in listYoutubePlayerController) {
+  //     element.dispose();
+  //   }
+  // }
 
   @override
   void didChangeDependencies() {
@@ -88,7 +88,7 @@ class _MovieDetailsAllVideosWidgetState extends State<MovieDetailsAllVideosWidge
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     var videosData = cubit.data.videosData;
-    if (videosData.isEmpty) return const SizedBox.shrink();
+    if (videosData!.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
       child: Column(

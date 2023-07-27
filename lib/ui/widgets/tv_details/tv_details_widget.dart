@@ -44,13 +44,12 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
       appBar: const CustomDetailsAppBar(title: ''),
       floatingActionButton: fab(() => cubit.toggleFavoriteTv(context), favorite),
       body: ListView(
-        children: [
+        children: const [
           Column(
-            children: const [
+            children: [
               TvTopPosterWidget(),
               TitleGenresRatingVoteAverageWidget(),
               TvDescriptionWidget(),
-              // TvTrailerWidget(youtubeKey: tvTrailerKey),
               // const _DirectorWidget(),
               TVCastWidget(),
               TvDetailsRecommendationsWidget(),

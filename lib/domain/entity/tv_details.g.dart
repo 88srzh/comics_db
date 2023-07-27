@@ -216,7 +216,7 @@ Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
       id: json['id'] as int,
       name: json['name'] as String,
       overview: json['overview'] as String,
-      posterPath: json['poster_path'] as String,
+      posterPath: json['poster_path'] as String?,
       seasonNumber: json['season_number'] as int,
     );
 

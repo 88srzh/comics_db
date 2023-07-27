@@ -17,7 +17,7 @@ class TvTopPosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
-    final posterPath = cubit.state.posterPath;
+    var posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
     return Stack(
       children: [
@@ -35,7 +35,9 @@ class TvTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          child: Center(
+          child:
+          posterPath != null ?
+          Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 80.0),
               child: SizedBox(
@@ -44,14 +46,14 @@ class TvTopPosterWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: CachedNetworkImage(
-                    imageUrl: ImageDownloader.imageUrl(posterPath ?? ''),
+                    imageUrl: ImageDownloader.imageUrl(posterPath),
                     placeholder: (context, url) => const LoadingIndicatorWidget(),
                     errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                   ),
                 ),
               ),
             ),
-          ),
+          ) : Image.asset(AppImages.noImageAvailable),
         ),
       ],
     );

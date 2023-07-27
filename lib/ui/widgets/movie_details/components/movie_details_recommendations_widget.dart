@@ -44,8 +44,6 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var recommendationsData = context.watch<MovieDetailsCubit>().data.recommendationsData;
-    if (recommendationsData.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: SizedBox(

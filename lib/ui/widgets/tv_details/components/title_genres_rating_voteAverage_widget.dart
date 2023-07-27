@@ -12,9 +12,9 @@ class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
-        children: const [
+        children:  [
           SizedBox(height: 12),
           TitleWidget(),
           SizedBox(height: 8),

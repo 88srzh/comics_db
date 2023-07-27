@@ -19,9 +19,14 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_title.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
-class MovieTopPosterWidget extends StatelessWidget {
+class MovieTopPosterWidget extends StatefulWidget {
   const MovieTopPosterWidget({Key? key}) : super(key: key);
 
+  @override
+  State<MovieTopPosterWidget> createState() => _MovieTopPosterWidgetState();
+}
+
+class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<MovieDetailsCubit>();
@@ -38,28 +43,32 @@ class MovieTopPosterWidget extends StatelessWidget {
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
+    if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
     // late String? facebook = cubit.state.externalIds.first.facebookId;
+    // late String? facebook = 'transformersmovie';
+    // late String? facebook = cubit.state.facebook;
+    // final Uri facebookUrl = Uri.parse('https://www.facebook.com/$facebook');
+    // Future<void>? _launched;
+    // final Uri toLaunch = Uri(scheme: 'https', host: 'www.facebook.com', path: facebook);
 
     // TODO malfunction
     // late String? instagram = cubit.state.externalIds.first.instagramId;
 
     return Stack(
       children: [
-        backdropPath != null
-            ? Positioned(
-                child: Opacity(
-                  opacity: 0.25,
-                  child: AspectRatio(
-                    aspectRatio: 390 / 220,
-                    child: CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(backdropPath),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    ),
-                  ),
-                ),
-              )
-            : Image.asset(AppImages.noImageAvailable),
+        Positioned(
+          child: Opacity(
+            opacity: 0.25,
+            child: AspectRatio(
+              aspectRatio: 390 / 220,
+              child: CachedNetworkImage(
+                imageUrl: ImageDownloader.imageUrl(backdropPath!),
+                placeholder: (context, url) => const LoadingIndicatorWidget(),
+                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+              ),
+            ),
+          ),
+        ),
         Positioned(
           top: 15,
           left: 20,
@@ -171,11 +180,14 @@ class MovieTopPosterWidget extends StatelessWidget {
                   ],
                 ),
                 // so far don't work
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     InkWell(
-                      // onTap: () => N,
-                        child: CustomSocialIcon(icon: MdiIcons.facebook)),
+                      // onTap: () => setState(() {
+                      //   _launched = _launchInBrowser(toLaunch);
+                      // }),
+                      child: CustomSocialIcon(icon: MdiIcons.facebook),
+                    ),
                     SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.twitter),
                     SizedBox(width: 4.0),
@@ -208,3 +220,12 @@ class MovieTopPosterWidget extends StatelessWidget {
     );
   }
 }
+
+// Future<void> _launchInBrowser(Uri url) async {
+//   if (!await launchUrl(
+//     url,
+//     mode: LaunchMode.externalApplication,
+//   )) {
+//     throw Exception('Could not launch $url');
+//   }
+// }

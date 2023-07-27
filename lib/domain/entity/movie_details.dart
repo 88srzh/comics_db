@@ -44,7 +44,7 @@ class MovieDetails {
   final MovieDetailsRecommendations recommendations;
   // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;
-  final MovieDetailsExternalIds externalIds;
+  // final MovieDetailsExternalIds externalIds;
 
   MovieDetails({
     required this.adult,
@@ -77,7 +77,7 @@ class MovieDetails {
     required this.recommendations,
     // required this.reviews,
     required this.similar,
-    required this.externalIds,
+    // required this.externalIds,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>

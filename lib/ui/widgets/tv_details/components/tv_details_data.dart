@@ -14,12 +14,11 @@ class TvDetailsData {
   String overview = '';
   String genres = '';
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
-  TvDetailsScoresData tvDetailsScoresData =
-  TvDetailsScoresData(voteCount: 0, popularity: 0);
+  TvDetailsScoresData tvDetailsScoresData = TvDetailsScoresData(voteCount: 0, popularity: 0);
   List<List<TvDetailsPeopleData>> peopleData = const <List<TvDetailsPeopleData>>[];
   List<TvDetailsActorData> actorsData = const <TvDetailsActorData>[];
   List<TvDetailsRecommendationsData> recommendationsData = const <TvDetailsRecommendationsData>[];
-  List<TvDetailsVideosData> videosData = const <TvDetailsVideosData>[];
+  List<TvDetailsVideosData>? videosData = const <TvDetailsVideosData>[];
 
   FavoriteData favoriteData = FavoriteData();
 }
