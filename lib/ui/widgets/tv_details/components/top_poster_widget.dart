@@ -35,7 +35,9 @@ class TvTopPosterWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          child: Center(
+          child:
+          posterPath != null ?
+          Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 80.0),
               child: SizedBox(
@@ -44,14 +46,14 @@ class TvTopPosterWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: CachedNetworkImage(
-                    imageUrl: ImageDownloader.imageUrl(posterPath ?? ''),
+                    imageUrl: ImageDownloader.imageUrl(posterPath),
                     placeholder: (context, url) => const LoadingIndicatorWidget(),
                     errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                   ),
                 ),
               ),
             ),
-          ),
+          ) : Image.asset(AppImages.noImageAvailable),
         ),
       ],
     );
