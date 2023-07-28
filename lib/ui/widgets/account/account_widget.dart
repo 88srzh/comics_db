@@ -61,7 +61,8 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(height: 0.8),
         CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () {}),
         const CustomSettingDivider(height: 0.8),
-        CustomAccountListTile(text: 'TV', icon: MdiIcons.movie, onTap: () {}),
+        // TODO need to change tv icon to one style
+        CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () {}),
         const CustomSettingDivider(height: 3.0),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
         const CustomSettingDivider(height: 0.8),
