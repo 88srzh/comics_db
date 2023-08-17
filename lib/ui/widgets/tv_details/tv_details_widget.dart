@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
-import 'package:comics_db_app/ui/components/custom_floating_action_button.dart';
+import 'package:comics_db_app/ui/components/custom_favorite_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/description_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_voteAverage_widget.dart';
@@ -42,7 +42,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
-      floatingActionButton: fab(() => cubit.toggleFavoriteTv(context), favorite),
+      floatingActionButton: fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
       body: ListView(
         children: const [
           Column(
