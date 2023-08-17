@@ -19,6 +19,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsMovieActorData> actorsData;
   final bool isLoading;
   final bool isFavorite;
+  final bool isWatchlist;
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
   final List<MovieDetailsAllVideosData> allVideos;
@@ -46,6 +47,7 @@ class MovieDetailsCubitState {
     required this.actorsData,
     required this.isLoading,
     required this.isFavorite,
+    required this.isWatchlist,
     required this.recommendations,
     required this.videos,
     required this.allVideos,
@@ -78,6 +80,7 @@ class MovieDetailsCubitState {
           actorsData == other.actorsData &&
           isLoading == other.isLoading &&
           isFavorite == other.isFavorite &&
+          isWatchlist == other.isWatchlist &&
           recommendations == other.recommendations &&
           // externalIds == other.externalIds &&
           // reviews == other.reviews &&
@@ -106,6 +109,7 @@ class MovieDetailsCubitState {
       actorsData.hashCode ^
       isLoading.hashCode ^
       isFavorite.hashCode ^
+      isWatchlist.hashCode ^
       recommendations.hashCode ^
       // externalIds.hashCode ^
       // reviews.hashCode ^
@@ -133,6 +137,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsMovieActorData>? actorsData,
     bool? isLoading,
     bool? isFavorite,
+    bool? isWatchlist,
     List<MovieDetailsRecommendationsData>? recommendations,
     List<MovieDetailsVideosData>? videos,
     List<MovieDetailsAllVideosData>? allVideos,
@@ -160,6 +165,7 @@ class MovieDetailsCubitState {
       actorsData: actorsData ?? this.actorsData,
       isLoading: isLoading ?? this.isLoading,
       isFavorite: isFavorite ?? this.isFavorite,
+      isWatchlist: isWatchlist ?? this.isWatchlist,
       recommendations: recommendations ?? this.recommendations,
       videos: videos ?? this.videos,
       allVideos: allVideos ?? this.allVideos,

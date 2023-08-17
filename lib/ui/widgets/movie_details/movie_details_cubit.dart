@@ -58,6 +58,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           actorsData: [],
           isLoading: false,
           isFavorite: false,
+          isWatchlist: false,
           recommendations: [],
           videos: [],
           allVideos: [],
@@ -85,6 +86,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: state.actorsData,
       isLoading: state.isLoading,
       isFavorite: state.isFavorite,
+      isWatchlist: state.isWatchlist,
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
@@ -225,9 +227,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   List<MovieDetailsVideosData>? makeTrailerKey(MovieDetails details) {
     final videos = details.videos.results.where((video) => video.type == "Trailer" && video.site == 'YouTube');
     if (videos.isNotEmpty) {
-    String trailerKey = videos.first.key;
-    var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
-    return videosData;} else {
+      String trailerKey = videos.first.key;
+      var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
+      return videosData;
+    } else {
       return null;
     }
   }
@@ -281,6 +284,17 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     try {
       _movieService.updateFavoriteMovie(movieId: movieId, isFavorite: data.favoriteData.isFavorite);
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
+      emit(newState);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e, context);
+    }
+  }
+
+  void toggleWatchlistMovie(BuildContext context) {
+    data.watchlistData = data.watchlistData.copyWith(isWatchlist: !data.watchlistData.isWatchlist);
+    try {
+      _movieService.updateWatchlistMovie(movieId: movieId, isWatchlist: data.watchlistData.isWatchlist);
+      var newState = state.copyWith(isWatchlist: data.watchlistData.isWatchlist);
       emit(newState);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);

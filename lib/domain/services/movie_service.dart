@@ -34,4 +34,18 @@ class MovieService {
       isFavorite: isFavorite,
     );
   }
+
+  Future<void> updateWatchlistMovie({required int movieId, required bool isWatchlist}) async {
+    final sessionId = await _sessionDataProvider.getSessionId();
+    final accountId = await _sessionDataProvider.getAccountId();
+
+    if (sessionId == null || accountId == null) return;
+    await _accountApiClient.markAsWatchlist(
+      accountId: accountId,
+      sessionId: sessionId,
+      mediaType: MediaType.movie,
+      mediaId: movieId,
+      isWatchlist: isWatchlist,
+    );
+  }
 }
