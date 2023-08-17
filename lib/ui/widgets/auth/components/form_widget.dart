@@ -50,16 +50,16 @@ class FormWidget extends StatelessWidget {
         //   obscureText: true,
         // ),
         const SizedBox(height: 25),
-        Row(
+        const Row(
           children: [
-            const SizedBox(width: 5.0),
+            SizedBox(width: 5.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
+              children: [
                 AuthButtonWidget(),
               ],
             ),
-            const SizedBox(width: 10.0),
+            SizedBox(width: 10.0),
           ],
         )
       ],
