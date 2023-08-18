@@ -331,6 +331,24 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<bool> isWatchlistMovie(int movieId, String sessionId) async {
+    bool parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['watchlist'] as bool;
+      return result;
+    }
+
+    final result = _networkClient.get(
+      '/movie/$movieId/account_states',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+      }
+    );
+    return result;
+  }
+
   Future<bool> isFavoriteTv(int tvId, String sessionId) async {
     bool parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;

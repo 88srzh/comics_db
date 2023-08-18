@@ -101,7 +101,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
       final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-      updateData(details.details, details.isFavorite);
+      updateData(details.details, details.isFavorite, details.isWatchlist);
     } on ApiClientException catch (e) {
       _handleApiClientException(e, context);
     }
@@ -130,11 +130,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // _locale = locale;
     _dateFormat = DateFormat.yMMMd(localeTag);
     // if (!_localeStorage.updateLocale(locale)) return;
-    updateData(null, false);
+    updateData(null, false, false);
     await loadMovieDetails(context);
   }
 
-  void updateData(MovieDetails? details, bool isFavorite) {
+  void updateData(MovieDetails? details, bool isFavorite, bool isWatchlist) {
     // may be i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
@@ -165,6 +165,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
     data.favoriteData.isFavorite = isFavorite;
+    data.watchlistData.isWatchlist = isWatchlist;
 
     data.recommendationsData = details.recommendations.recommendationsList.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
@@ -192,6 +193,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var allVideos = data.allVideosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
+    var isWatchlistData = data.watchlistData.isWatchlist;
     // var facebook = data.facebook;
     // var externalIds = data.externalIds;
     // var collection = data.collectionData;
@@ -213,6 +215,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: actorsData,
       isLoading: isLoading,
       isFavorite: isFavoriteData,
+      isWatchlist: isWatchlistData,
       recommendations: recommendations,
       videos: videos,
       allVideos: allVideos,

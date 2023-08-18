@@ -13,12 +13,14 @@ class MovieService {
     final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
+    var isWatchlist = false;
     if (sessionId != null) {
       // TODO: pull out isFavorite
       isFavorite = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
+      isWatchlist = await _movieAndTvApiClient.isWatchlistMovie(movieId, sessionId);
       // notifyListeners();
     }
-    return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
+    return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite, isWatchlist: isWatchlist);
   }
 
   Future<void> updateFavoriteMovie({required int movieId, required bool isFavorite}) async {
