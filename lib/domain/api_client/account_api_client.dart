@@ -90,7 +90,7 @@ class AccountApiClient {
     final parameters = <String, dynamic>{
       'media_type': mediaType.asString(),
       'media_id': mediaId,
-      'isWatchlist': isWatchlist,
+      'watchlist': isWatchlist,
     };
     final result = _networkClient.post(
       '/account/$accountId/watchlist',
