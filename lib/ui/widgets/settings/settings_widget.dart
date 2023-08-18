@@ -32,9 +32,9 @@ class BodySettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children:  [
         // HeadingPersonalCardWidget(headingText: 'General'),
         CustomSettingDivider(height: 0.5),
         GeneralCard(),

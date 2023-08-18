@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,11 +12,12 @@ import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 import 'package:comics_db_app/domain/services/tv_service.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 
 part 'tv_details_state.dart';
 
@@ -139,15 +138,15 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       final details = await _tvService.loadTvDetails(tvId: tvId, locale: state.localeTag);
       updateData(details.details, details.isFavorite);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
     }
   }
 
-  void _handleApiClientException(ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
-        MainNavigation.resetNavigation(context);
+        // MainNavigation.resetNavigation(context);
         break;
       case ApiClientExceptionType.other:
         // print('exception other');
@@ -268,7 +267,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
     }
   }
 }

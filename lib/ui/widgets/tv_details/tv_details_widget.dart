@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,8 +9,9 @@ import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_favorite_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/description_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_voteAverage_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/top_poster_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDetailsWidget extends StatefulWidget {

@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -16,10 +15,11 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 
 part 'movie_details_state.dart';
 
@@ -103,15 +103,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
       updateData(details.details, details.isFavorite, details.isWatchlist);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
     }
   }
 
-  void _handleApiClientException(ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
-        MainNavigation.resetNavigation(context);
+        // MainNavigation.resetNavigation();
         break;
       case ApiClientExceptionType.other:
         // print('exception other');
@@ -289,7 +289,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
     }
   }
 
@@ -300,7 +300,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       var newState = state.copyWith(isWatchlist: data.watchlistData.isWatchlist);
       emit(newState);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
     }
   }
 

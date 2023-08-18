@@ -111,6 +111,7 @@ class TrendingPageListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<TrendingListCubit>();
     return GridView.builder(
       padding: const EdgeInsets.only(top: 70.0, bottom: 8.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -126,7 +127,7 @@ class TrendingPageListWidget extends StatelessWidget {
         final trending = cubit.state.trendingList[index];
         final posterPath = trending.posterPath;
         return InkWell(
-          onTap: () {},
+          onTap: () => trending.mediaType == 'movie' ? cubit.onTrendingTap(context, index) : cubit.onTrendingTap(context, index),
           child: Stack(
             children: [
               Container(
