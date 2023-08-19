@@ -7,6 +7,7 @@ class TrendingListData {
   final String? firstAirDate;
   final String? mediaType;
   final bool? adult;
+  final String overview;
 
   TrendingListData({
     required this.id,
@@ -17,5 +18,6 @@ class TrendingListData {
     required this.firstAirDate,
     required this.mediaType,
     required this.adult,
+    required this.overview,
   });
 }

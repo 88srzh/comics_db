@@ -51,6 +51,7 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
       firstAirDate: firstAirDate,
       mediaType: trending.mediaType,
       adult: trending.adult,
+      overview: trending.overview,
     );
   }
 
@@ -107,9 +108,14 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     trendingListBloc.add(TrendingListEventLoadTvThisWeek(locale: state.localeTag));
   }
 
-  void onTrendingTap(BuildContext context, int index) {
+  void onTrendingMovieTap(BuildContext context, int index) {
     final id = state.trendingList[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+  }
+
+  void onTrendingTVTap(BuildContext context, int index) {
+    final id = state.trendingList[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 
 // void onTvTap(BuildContext context, int index) {

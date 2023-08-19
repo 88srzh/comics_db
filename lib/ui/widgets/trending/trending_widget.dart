@@ -127,7 +127,7 @@ class TrendingPageListWidget extends StatelessWidget {
         final trending = cubit.state.trendingList[index];
         final posterPath = trending.posterPath;
         return InkWell(
-          onTap: () => trending.mediaType == 'movie' ? cubit.onTrendingTap(context, index) : cubit.onTrendingTap(context, index),
+          onTap: () => trending.mediaType == 'movie' ? cubit.onTrendingMovieTap(context, index) : cubit.onTrendingTVTap(context, index),
           child: Stack(
             children: [
               Container(
