@@ -476,8 +476,7 @@ abstract class _TrendingAll implements TrendingAll {
       {final String? posterPath,
       required final bool adult,
       required final String overview,
-      @JsonKey(fromJson: parseDateFromString)
-          final DateTime? releaseDate,
+      @JsonKey(fromJson: parseDateFromString) final DateTime? releaseDate,
       required final List<int> genreIds,
       required final int id,
       required final String? originalTitle,
@@ -492,7 +491,7 @@ abstract class _TrendingAll implements TrendingAll {
       required final String mediaType,
       required final String? name,
       @JsonKey(fromJson: parseDateFromString)
-          final DateTime? firstAirDate}) = _$_TrendingAll;
+      final DateTime? firstAirDate}) = _$_TrendingAll;
 
   factory _TrendingAll.fromJson(Map<String, dynamic> json) =
       _$_TrendingAll.fromJson;
