@@ -1,12 +1,16 @@
 // Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/entity/trending_all.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_cubit_state.dart';
 import 'package:comics_db_app/ui/widgets/trending/components/trending_list_data.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
@@ -17,8 +21,10 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
   var trending = <TrendingAll>[];
   late DateFormat _dateFormat;
 
-  TrendingListCubit({required this.trendingListBloc})
-      : super(const TrendingListCubitState(trendingList: <TrendingListData>[], localeTag: '')) {
+  // final List<MovieListData> movies;
+  // final List<TvListData> tvs = [];
+
+  TrendingListCubit({required this.trendingListBloc}) : super(const TrendingListCubitState(trendingList: <TrendingListData>[], localeTag: '')) {
     Future.microtask(
       () {
         _onState(trendingListBloc.state);
@@ -43,6 +49,9 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
       title: trending.title,
       name: trending.name,
       firstAirDate: firstAirDate,
+      mediaType: trending.mediaType,
+      adult: trending.adult,
+      overview: trending.overview,
     );
   }
 
@@ -99,9 +108,18 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     trendingListBloc.add(TrendingListEventLoadTvThisWeek(locale: state.localeTag));
   }
 
-  // TODO need to think how realize to movie, tv and people.
-  // void onTrendingTap(BuildContext context, int index) {
-  //   final id = state.trendingList[index].id;
-  //   Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
-  // }
+  void onTrendingMovieTap(BuildContext context, int index) {
+    final id = state.trendingList[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: id);
+  }
+
+  void onTrendingTVTap(BuildContext context, int index) {
+    final id = state.trendingList[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+  }
+
+// void onTvTap(BuildContext context, int index) {
+//   final id = state.tvs[index].id;
+//   Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+// }
 }

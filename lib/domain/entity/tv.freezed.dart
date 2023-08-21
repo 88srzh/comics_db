@@ -385,7 +385,7 @@ abstract class _TV implements TV {
       required final double voteAverage,
       required final String overview,
       @JsonKey(fromJson: parseDateFromString)
-          required final DateTime? firstAirDate,
+      required final DateTime? firstAirDate,
       required final List<String> originCountry,
       required final List<int> genreIds,
       required final String originalLanguage,

@@ -1,19 +1,19 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/HeadAccountCardWidget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 // Package imports:
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
+import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 
 class AccountWidget extends StatefulWidget {
@@ -61,7 +61,8 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         const CustomSettingDivider(height: 0.8),
         CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () {}),
         const CustomSettingDivider(height: 0.8),
-        CustomAccountListTile(text: 'TV', icon: MdiIcons.movie, onTap: () {}),
+        // TODO need to change tv icon to one style
+        CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () {}),
         const CustomSettingDivider(height: 3.0),
         const HeadingAccountCardWidget(headingText: 'Favorites'),
         const CustomSettingDivider(height: 0.8),

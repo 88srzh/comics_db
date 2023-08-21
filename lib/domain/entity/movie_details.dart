@@ -1,12 +1,11 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
-import 'package:comics_db_app/domain/entity/movie_details_similar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/entity/data_parser.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/domain/entity/movie_details_recommendations.dart';
+import 'package:comics_db_app/domain/entity/movie_details_similar.dart';
 import 'package:comics_db_app/domain/entity/movie_details_videos.dart';
 
 part 'movie_details.g.dart';

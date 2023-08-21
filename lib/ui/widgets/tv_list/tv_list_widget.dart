@@ -49,11 +49,11 @@ class TvListWidget extends StatelessWidget {
                   child: PopularTvWidget(),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              const Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children:  [
                     CustomHeaderTextWidget(text: 'Airing Today'),
                   ],
                 ),
@@ -65,11 +65,11 @@ class TvListWidget extends StatelessWidget {
                   child: AiringTodayTvsWidget(),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              const Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children:  [
                     CustomHeaderTextWidget(text: 'On The Air'),
                   ],
                 ),

@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/favorite_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

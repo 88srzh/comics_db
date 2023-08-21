@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/widgets/movie_details/components/poster_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/favorite_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';

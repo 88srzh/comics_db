@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -16,10 +15,11 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/services/movie_service.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 
 part 'movie_details_state.dart';
 
@@ -58,6 +58,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           actorsData: [],
           isLoading: false,
           isFavorite: false,
+          isWatchlist: false,
           recommendations: [],
           videos: [],
           allVideos: [],
@@ -85,6 +86,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: state.actorsData,
       isLoading: state.isLoading,
       isFavorite: state.isFavorite,
+      isWatchlist: state.isWatchlist,
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
@@ -99,17 +101,17 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   Future<void> loadMovieDetails(BuildContext context) async {
     try {
       final details = await _movieService.loadMovieDetails(movieId: movieId, locale: state.localeTag);
-      updateData(details.details, details.isFavorite);
+      updateData(details.details, details.isFavorite, details.isWatchlist);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
     }
   }
 
-  void _handleApiClientException(ApiClientException exception, BuildContext context) {
+  void _handleApiClientException(ApiClientException exception) {
     switch (exception.type) {
       case ApiClientExceptionType.sessionExpired:
         // _authService.logout();
-        MainNavigation.resetNavigation(context);
+        // MainNavigation.resetNavigation();
         break;
       case ApiClientExceptionType.other:
         // print('exception other');
@@ -128,11 +130,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // _locale = locale;
     _dateFormat = DateFormat.yMMMd(localeTag);
     // if (!_localeStorage.updateLocale(locale)) return;
-    updateData(null, false);
+    updateData(null, false, false);
     await loadMovieDetails(context);
   }
 
-  void updateData(MovieDetails? details, bool isFavorite) {
+  void updateData(MovieDetails? details, bool isFavorite, bool isWatchlist) {
     // may be i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
@@ -163,6 +165,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
     data.favoriteData.isFavorite = isFavorite;
+    data.watchlistData.isWatchlist = isWatchlist;
 
     data.recommendationsData = details.recommendations.recommendationsList.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
@@ -190,6 +193,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var allVideos = data.allVideosData;
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
+    var isWatchlistData = data.watchlistData.isWatchlist;
     // var facebook = data.facebook;
     // var externalIds = data.externalIds;
     // var collection = data.collectionData;
@@ -211,6 +215,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       actorsData: actorsData,
       isLoading: isLoading,
       isFavorite: isFavoriteData,
+      isWatchlist: isWatchlistData,
       recommendations: recommendations,
       videos: videos,
       allVideos: allVideos,
@@ -225,9 +230,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   List<MovieDetailsVideosData>? makeTrailerKey(MovieDetails details) {
     final videos = details.videos.results.where((video) => video.type == "Trailer" && video.site == 'YouTube');
     if (videos.isNotEmpty) {
-    String trailerKey = videos.first.key;
-    var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
-    return videosData;} else {
+      String trailerKey = videos.first.key;
+      var videosData = details.videos.results.map((e) => MovieDetailsVideosData(key: trailerKey)).toList();
+      return videosData;
+    } else {
       return null;
     }
   }
@@ -283,7 +289,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
     } on ApiClientException catch (e) {
-      _handleApiClientException(e, context);
+      _handleApiClientException(e);
+    }
+  }
+
+  void toggleWatchlistMovie(BuildContext context) {
+    data.watchlistData = data.watchlistData.copyWith(isWatchlist: !data.watchlistData.isWatchlist);
+    try {
+      _movieService.updateWatchlistMovie(movieId: movieId, isWatchlist: data.watchlistData.isWatchlist);
+      var newState = state.copyWith(isWatchlist: data.watchlistData.isWatchlist);
+      emit(newState);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e);
     }
   }
 

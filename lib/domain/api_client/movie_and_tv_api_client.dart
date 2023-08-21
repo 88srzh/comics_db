@@ -10,9 +10,9 @@ import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
 import 'package:comics_db_app/domain/entity/people_response.dart';
-import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 
 // const String sixHor = '6h';
 
@@ -331,6 +331,24 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<bool> isWatchlistMovie(int movieId, String sessionId) async {
+    bool parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final result = jsonMap['watchlist'] as bool;
+      return result;
+    }
+
+    final result = _networkClient.get(
+      '/movie/$movieId/account_states',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+      }
+    );
+    return result;
+  }
+
   Future<bool> isFavoriteTv(int tvId, String sessionId) async {
     bool parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -416,7 +434,7 @@ class MovieAndTvApiClient {
       '/tv/$tvId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits,videos,recommendations,external_ids',
+        'append_to_response': 'credits,videos,recommendations',
         'api_key': Configuration.apiKey,
         'language': locale,
       },

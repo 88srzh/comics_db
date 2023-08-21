@@ -23,8 +23,8 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
               Container(
                 decoration: isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
                 clipBehavior: Clip.hardEdge,
-                child: Column(
-                  children: const [],
+                child: const Column(
+                  children: [],
                 ),
               ),
             ],

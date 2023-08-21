@@ -13,12 +13,14 @@ class MovieService {
     final movieDetails = await _movieAndTvApiClient.movieDetails(movieId, locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
+    var isWatchlist = false;
     if (sessionId != null) {
       // TODO: pull out isFavorite
       isFavorite = await _movieAndTvApiClient.isFavoriteMovie(movieId, sessionId);
+      isWatchlist = await _movieAndTvApiClient.isWatchlistMovie(movieId, sessionId);
       // notifyListeners();
     }
-    return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite);
+    return MovieDetailsLocal(details: movieDetails, isFavorite: isFavorite, isWatchlist: isWatchlist);
   }
 
   Future<void> updateFavoriteMovie({required int movieId, required bool isFavorite}) async {
@@ -32,6 +34,20 @@ class MovieService {
       mediaType: MediaType.movie,
       mediaId: movieId,
       isFavorite: isFavorite,
+    );
+  }
+
+  Future<void> updateWatchlistMovie({required int movieId, required bool isWatchlist}) async {
+    final sessionId = await _sessionDataProvider.getSessionId();
+    final accountId = await _sessionDataProvider.getAccountId();
+
+    if (sessionId == null || accountId == null) return;
+    await _accountApiClient.markAsWatchlist(
+      accountId: accountId,
+      sessionId: sessionId,
+      mediaType: MediaType.movie,
+      mediaId: movieId,
+      isWatchlist: isWatchlist,
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-FloatingActionButton fab(VoidCallback onPressed, bool favorite) {
+FloatingActionButton fabFavorite(VoidCallback onPressed, bool favorite) {
   return FloatingActionButton(
+    heroTag: 'favorite',
     elevation: 0.0,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
     backgroundColor: Colors.pinkAccent,

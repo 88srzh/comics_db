@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:

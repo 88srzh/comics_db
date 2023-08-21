@@ -1,6 +1,11 @@
-import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 
 class HeadAccountCardWidget extends StatelessWidget {
   const HeadAccountCardWidget({super.key});
