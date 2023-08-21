@@ -1,3 +1,8 @@
+## 0.0.8.7
+- Added a push to films and tvs on `Trending Screen`.
+
+---
+
 ## 0.0.8.6
 - Added avatar image, rating list tile for `Account Widget`.
 - Fixed icon colors and logout list tile at `Account Widget`.
