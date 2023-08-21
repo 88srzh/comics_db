@@ -1,16 +1,16 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-class WatchlistData {
+class MovieDetailsWatchlistData {
   bool isWatchlist;
   IconData get watchlistIcon => isWatchlist ? Icons.bookmark : Icons.bookmark_outline;
 
-  WatchlistData({this.isWatchlist = false});
+  MovieDetailsWatchlistData({this.isWatchlist = false});
 
-  WatchlistData copyWith({
+  MovieDetailsWatchlistData copyWith({
     bool? isWatchlist,
   }) {
-    return WatchlistData(
+    return MovieDetailsWatchlistData(
       isWatchlist: isWatchlist ?? this.isWatchlist,
     );
   }

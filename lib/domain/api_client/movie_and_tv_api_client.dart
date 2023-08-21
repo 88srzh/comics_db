@@ -196,6 +196,34 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<MovieResponse> watchlistMoviesList(
+    int page,
+    String locale,
+    String apiKey,
+    String? sessionId,
+    int? accountId,
+    int totalResults,
+  ) {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/account/$accountId/watchlist/movies',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+        'totalResults': totalResults.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<TVResponse> favoriteTvsList(
     int page,
     String locale,
@@ -212,6 +240,34 @@ class MovieAndTvApiClient {
 
     final result = _networkClient.get(
       '/account/$accountId/favorite/tv',
+      parser,
+      <String, dynamic>{
+        'page': page.toString(),
+        'language': locale,
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+        'totalResults': totalResults.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<TVResponse> watchlistTvsList(
+    int page,
+    String locale,
+    String apiKey,
+    String? sessionId,
+    int? accountId,
+    int totalResults,
+  ) {
+    TVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/account/$accountId/watchlist/tv',
       parser,
       <String, dynamic>{
         'page': page.toString(),
@@ -338,14 +394,10 @@ class MovieAndTvApiClient {
       return result;
     }
 
-    final result = _networkClient.get(
-      '/movie/$movieId/account_states',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'session_id': sessionId,
-      }
-    );
+    final result = _networkClient.get('/movie/$movieId/account_states', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'session_id': sessionId,
+    });
     return result;
   }
 
@@ -412,10 +464,7 @@ class MovieAndTvApiClient {
       return response;
     }
 
-    final result = _networkClient.get(
-        '/tv/on_the_air',
-        parser,
-        <String, dynamic>{
+    final result = _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
       'api_key': Configuration.apiKey,
       'page': page.toString(),
       'language': locale,
