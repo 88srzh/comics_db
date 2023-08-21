@@ -18,6 +18,6 @@ void main() {
     if (kReleaseMode) exit(1);
   };
   const app = MyApp();
-  HttpOverrides.global = MyHttpOverrides();
+  // HttpOverrides.global = MyHttpOverrides();
   runApp(app);
 }
