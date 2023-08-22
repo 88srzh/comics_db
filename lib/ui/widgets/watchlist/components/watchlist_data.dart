@@ -5,7 +5,7 @@ class WatchlistData {
   final String? title;
   final String? name;
   final String firstAirDate;
-  final String mediaType;
+  // final String mediaType;
   final String overview;
 
   const WatchlistData({
@@ -15,7 +15,7 @@ class WatchlistData {
     this.title,
     this.name,
     required this.firstAirDate,
-    required this.mediaType,
+    // required this.mediaType,
     required this.overview,
   });
 }
