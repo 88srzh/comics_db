@@ -4,5 +4,5 @@ part of 'watchlist_bloc.dart';
 class WatchlistEvent with _$WatchlistEvent {
   factory WatchlistEvent.loadMovies({required String locale}) = WatchlistEventLoadMovies;
   factory WatchlistEvent.loadTV({required String locale}) = WatchlistEventLoadTV;
-  factory WatchlistEvent.loadReset() = WatchlistLoadReset;
+  factory WatchlistEvent.loadReset() = WatchlistEventLoadReset;
 }

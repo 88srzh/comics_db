@@ -2,8 +2,10 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/watchlist/watchlist_bloc.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/watchlist_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -142,6 +144,13 @@ class MyApp extends StatelessWidget {
           create: (_) => TrendingListCubit(
             trendingListBloc: TrendingListBloc(
               const TrendingListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => WatchlistCubit(
+            watchlistBloc: WatchlistBloc(
+              const WatchlistState.initial(),
             ),
           ),
         ),

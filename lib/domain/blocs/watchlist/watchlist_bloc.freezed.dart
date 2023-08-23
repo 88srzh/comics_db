@@ -42,21 +42,21 @@ mixin _$WatchlistEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(WatchlistEventLoadMovies value) loadMovies,
     required TResult Function(WatchlistEventLoadTV value) loadTV,
-    required TResult Function(WatchlistLoadReset value) loadReset,
+    required TResult Function(WatchlistEventLoadReset value) loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult? Function(WatchlistEventLoadTV value)? loadTV,
-    TResult? Function(WatchlistLoadReset value)? loadReset,
+    TResult? Function(WatchlistEventLoadReset value)? loadReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult Function(WatchlistEventLoadTV value)? loadTV,
-    TResult Function(WatchlistLoadReset value)? loadReset,
+    TResult Function(WatchlistEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -182,7 +182,7 @@ class _$WatchlistEventLoadMovies implements WatchlistEventLoadMovies {
   TResult map<TResult extends Object?>({
     required TResult Function(WatchlistEventLoadMovies value) loadMovies,
     required TResult Function(WatchlistEventLoadTV value) loadTV,
-    required TResult Function(WatchlistLoadReset value) loadReset,
+    required TResult Function(WatchlistEventLoadReset value) loadReset,
   }) {
     return loadMovies(this);
   }
@@ -192,7 +192,7 @@ class _$WatchlistEventLoadMovies implements WatchlistEventLoadMovies {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult? Function(WatchlistEventLoadTV value)? loadTV,
-    TResult? Function(WatchlistLoadReset value)? loadReset,
+    TResult? Function(WatchlistEventLoadReset value)? loadReset,
   }) {
     return loadMovies?.call(this);
   }
@@ -202,7 +202,7 @@ class _$WatchlistEventLoadMovies implements WatchlistEventLoadMovies {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult Function(WatchlistEventLoadTV value)? loadTV,
-    TResult Function(WatchlistLoadReset value)? loadReset,
+    TResult Function(WatchlistEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
     if (loadMovies != null) {
@@ -323,7 +323,7 @@ class _$WatchlistEventLoadTV implements WatchlistEventLoadTV {
   TResult map<TResult extends Object?>({
     required TResult Function(WatchlistEventLoadMovies value) loadMovies,
     required TResult Function(WatchlistEventLoadTV value) loadTV,
-    required TResult Function(WatchlistLoadReset value) loadReset,
+    required TResult Function(WatchlistEventLoadReset value) loadReset,
   }) {
     return loadTV(this);
   }
@@ -333,7 +333,7 @@ class _$WatchlistEventLoadTV implements WatchlistEventLoadTV {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult? Function(WatchlistEventLoadTV value)? loadTV,
-    TResult? Function(WatchlistLoadReset value)? loadReset,
+    TResult? Function(WatchlistEventLoadReset value)? loadReset,
   }) {
     return loadTV?.call(this);
   }
@@ -343,7 +343,7 @@ class _$WatchlistEventLoadTV implements WatchlistEventLoadTV {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult Function(WatchlistEventLoadTV value)? loadTV,
-    TResult Function(WatchlistLoadReset value)? loadReset,
+    TResult Function(WatchlistEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
     if (loadTV != null) {
@@ -364,25 +364,25 @@ abstract class WatchlistEventLoadTV implements WatchlistEvent {
 }
 
 /// @nodoc
-abstract class _$$WatchlistLoadResetCopyWith<$Res> {
-  factory _$$WatchlistLoadResetCopyWith(_$WatchlistLoadReset value,
-          $Res Function(_$WatchlistLoadReset) then) =
-      __$$WatchlistLoadResetCopyWithImpl<$Res>;
+abstract class _$$WatchlistEventLoadResetCopyWith<$Res> {
+  factory _$$WatchlistEventLoadResetCopyWith(_$WatchlistEventLoadReset value,
+          $Res Function(_$WatchlistEventLoadReset) then) =
+      __$$WatchlistEventLoadResetCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$WatchlistLoadResetCopyWithImpl<$Res>
-    extends _$WatchlistEventCopyWithImpl<$Res, _$WatchlistLoadReset>
-    implements _$$WatchlistLoadResetCopyWith<$Res> {
-  __$$WatchlistLoadResetCopyWithImpl(
-      _$WatchlistLoadReset _value, $Res Function(_$WatchlistLoadReset) _then)
+class __$$WatchlistEventLoadResetCopyWithImpl<$Res>
+    extends _$WatchlistEventCopyWithImpl<$Res, _$WatchlistEventLoadReset>
+    implements _$$WatchlistEventLoadResetCopyWith<$Res> {
+  __$$WatchlistEventLoadResetCopyWithImpl(_$WatchlistEventLoadReset _value,
+      $Res Function(_$WatchlistEventLoadReset) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$WatchlistLoadReset implements WatchlistLoadReset {
-  _$WatchlistLoadReset();
+class _$WatchlistEventLoadReset implements WatchlistEventLoadReset {
+  _$WatchlistEventLoadReset();
 
   @override
   String toString() {
@@ -392,7 +392,8 @@ class _$WatchlistLoadReset implements WatchlistLoadReset {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WatchlistLoadReset);
+        (other.runtimeType == runtimeType &&
+            other is _$WatchlistEventLoadReset);
   }
 
   @override
@@ -437,7 +438,7 @@ class _$WatchlistLoadReset implements WatchlistLoadReset {
   TResult map<TResult extends Object?>({
     required TResult Function(WatchlistEventLoadMovies value) loadMovies,
     required TResult Function(WatchlistEventLoadTV value) loadTV,
-    required TResult Function(WatchlistLoadReset value) loadReset,
+    required TResult Function(WatchlistEventLoadReset value) loadReset,
   }) {
     return loadReset(this);
   }
@@ -447,7 +448,7 @@ class _$WatchlistLoadReset implements WatchlistLoadReset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult? Function(WatchlistEventLoadTV value)? loadTV,
-    TResult? Function(WatchlistLoadReset value)? loadReset,
+    TResult? Function(WatchlistEventLoadReset value)? loadReset,
   }) {
     return loadReset?.call(this);
   }
@@ -457,7 +458,7 @@ class _$WatchlistLoadReset implements WatchlistLoadReset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WatchlistEventLoadMovies value)? loadMovies,
     TResult Function(WatchlistEventLoadTV value)? loadTV,
-    TResult Function(WatchlistLoadReset value)? loadReset,
+    TResult Function(WatchlistEventLoadReset value)? loadReset,
     required TResult orElse(),
   }) {
     if (loadReset != null) {
@@ -467,6 +468,6 @@ class _$WatchlistLoadReset implements WatchlistLoadReset {
   }
 }
 
-abstract class WatchlistLoadReset implements WatchlistEvent {
-  factory WatchlistLoadReset() = _$WatchlistLoadReset;
+abstract class WatchlistEventLoadReset implements WatchlistEvent {
+  factory WatchlistEventLoadReset() = _$WatchlistEventLoadReset;
 }

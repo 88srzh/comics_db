@@ -22,6 +22,7 @@ abstract class MainNavigationRouteNames {
   static const trending = '/main_screen/trending';
   static const trendingThisWeek = '/main_screen/trending/this_week';
   static const favoriteMovies = '/main_screen/favorite_movies';
+  static const watchlist = '/main_screen/watchlist';
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
   static const tvTopRated = '/main_screen/tv_top_rated';
@@ -48,6 +49,7 @@ class MainNavigation {
     MainNavigationRouteNames.tvAiringToday: (_) => _screenFactory.makeAiringTodayTvList(),
     MainNavigationRouteNames.favoriteTvs: (_) => _screenFactory.makeFavoriteTvList(),
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
+    MainNavigationRouteNames.watchlist: (_) => _screenFactory.makeWatchlist(),
 
     // MainNavigationRouteNames.splashScreen: (_) =>
     //     ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
