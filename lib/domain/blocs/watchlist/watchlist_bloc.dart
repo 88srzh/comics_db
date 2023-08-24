@@ -2,9 +2,12 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
+import 'package:comics_db_app/domain/entity/tv.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -34,14 +37,14 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   Future<void> onWatchlistEventLoadMovies(WatchlistEventLoadMovies event, Emitter<WatchlistState> emit) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
-    if (state.watchlistContainer.isComplete) return;
-    final container = await _loadNextPage(state.watchlistContainer, (nextPage) async {
+    if (state.movieListContainer.isComplete) return;
+    final container = await _loadNextPage(state.movieListContainer, (nextPage) async {
       // nextPage at the end show for totalResult, may be need to change
       final result = await _watchListApiClient.watchlistMoviesList(nextPage, event.locale, Configuration.apiKey, sessionId, accountId, nextPage);
       return result;
     });
     if (container != null) {
-      final newState = state.copyWith(watchlistContainer: container);
+      final newState = state.copyWith(movieListContainer: container);
       emit(newState);
     }
   }
@@ -49,14 +52,14 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   Future<void> onWatchlistEventLoadTVs(WatchlistEventLoadTV event, Emitter<WatchlistState> emit) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
-    if (state.watchlistContainer.isComplete) return;
-    final container = await _loadNextPage(state.watchlistContainer, (nextPage) async {
+    if (state.movieListContainer.isComplete) return;
+    final container = await _loadNextPageTVs(state.tvListContainer, (nextPage) async {
       // nextPage at the end show for totalResult, may be need to change
       final result = await _watchListApiClient.watchlistTvsList(nextPage, event.locale, Configuration.apiKey, sessionId, accountId, nextPage);
       return result;
     });
     if (container != null) {
-      final newState = state.copyWith(watchlistContainer: container);
+      final newState = state.copyWith(tvListContainer: container);
       emit(newState);
     }
   }
@@ -66,7 +69,7 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   }
 
   Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
-    var currentPage = state.watchlistContainer.currentPage;
+    var currentPage = state.movieListContainer.currentPage;
     if (container.isComplete) return null;
     final nextPage = currentPage + 1;
     if (currentPage > 0) return null;
@@ -79,20 +82,19 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
     );
     return newContainer;
   }
-}
 
-// Future<WatchlistContainer?> _loadNextPageTVs(WatchlistContainer container, Future<TrendingAllResponse> Function(int) loader) async {
-//   var currentPage = state.watchlistContainer.currentPage;
-//   if (container.isComplete) return null;
-//   final nextPage = currentPage + 1;
-//   if (currentPage > 0) return null;
-//   final result = await loader(nextPage);
-//   final watchlist = List<TrendingAll>.from(container.watchlist)..addAll(result.trendingAll);
-//   final newContainer = container.copyWith(
-//     watchlist: watchlist,
-//     currentPage: result.page,
-//     totalPage: result.totalPages,
-//   );
-//   return newContainer;
-// }
-// }
+Future<TvListContainer?> _loadNextPageTVs(TvListContainer container, Future<TVResponse> Function(int) loader) async {
+  var currentPage = state.movieListContainer.currentPage;
+  if (container.isComplete) return null;
+  final nextPage = currentPage + 1;
+  if (currentPage > 0) return null;
+  final result = await loader(nextPage);
+  final watchlist = List<TV>.from(container.tvs)..addAll(result.tvs);
+  final newContainer = container.copyWith(
+    tvs: watchlist,
+    currentPage: result.page,
+    totalPage: result.totalPages,
+  );
+  return newContainer;
+}
+}

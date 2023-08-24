@@ -252,7 +252,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<MovieResponse> watchlistTvsList(
+  Future<TVResponse> watchlistTvsList(
     int page,
     String locale,
     String apiKey,
@@ -260,9 +260,9 @@ class MovieAndTvApiClient {
     int? accountId,
     int totalResults,
   ) {
-    MovieResponse parser(dynamic json) {
+    TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
+      final response = TVResponse.fromJson(jsonMap);
       return response;
     }
 

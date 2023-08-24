@@ -27,7 +27,7 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
   }
 
   void _onState(WatchlistState state) {
-    final movie = state.watchlist.map(_makeListData).toList();
+    final movie = state.watchlistMovie.map(_makeListData).toList();
     // may be need two lists for movie and tv separately
     final newState = this.state.copyWith(watchlistList: movie);
     emit(newState);

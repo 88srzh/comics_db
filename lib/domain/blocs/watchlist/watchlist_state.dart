@@ -1,24 +1,32 @@
 part of 'watchlist_bloc.dart';
 
 class WatchlistState extends Equatable {
-  final MovieListContainer watchlistContainer;
+  final MovieListContainer movieListContainer;
+  final TvListContainer tvListContainer;
 
-  List<Movie> get watchlist => watchlistContainer.movies;
+  List<Movie> get watchlistMovie => movieListContainer.movies;
 
-  const WatchlistState.initial() : watchlistContainer = const MovieListContainer.initial();
+  List<TV> get watchlistTV => tvListContainer.tvs;
+
+  const WatchlistState.initial()
+      : movieListContainer = const MovieListContainer.initial(),
+        tvListContainer = const TvListContainer.initial();
 
   const WatchlistState({
-    required this.watchlistContainer,
+    required this.movieListContainer,
+    required this.tvListContainer,
   });
 
   @override
-  List<Object> get props => [watchlistContainer];
+  List<Object> get props => [movieListContainer, tvListContainer];
 
   WatchlistState copyWith({
-    MovieListContainer? watchlistContainer,
+    MovieListContainer? movieListContainer,
+    TvListContainer? tvListContainer,
   }) {
     return WatchlistState(
-      watchlistContainer: watchlistContainer ?? this.watchlistContainer,
+      movieListContainer: movieListContainer ?? this.movieListContainer,
+      tvListContainer: tvListContainer ?? this.tvListContainer,
     );
   }
 }
