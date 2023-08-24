@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:comics_db_app/domain/blocs/watchlist/watchlist_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/trending_all.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/components/watchlist_data.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/watchlist_cubit_state.dart';
@@ -69,15 +68,16 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
     watchlistBloc.add(WatchlistEventLoadTV(locale: state.localeTag));
   }
 
-  WatchlistData _makeListData(TrendingAll trending) {
-    String releaseDate = makeMovieReleaseDate(trending);
+  WatchlistData _makeListData(Movie movie) {
+    String releaseDate = makeMovieReleaseDate(movie);
     return WatchlistData(
-      id: trending.id,
-      posterPath: trending.posterPath ?? '',
+      id: movie.id,
+      posterPath: movie.posterPath ?? '',
       releaseData: releaseDate,
       firstAirDate: '',
-      overview: trending.overview,
-      title: trending.title,
+      overview: movie.overview,
+      title: movie.title,
+      mediaType: '',
     );
   }
 
@@ -101,9 +101,9 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
     return texts.join(' ');
   }
 
-  String makeMovieReleaseDate(TrendingAll trending) {
+  String makeMovieReleaseDate(Movie movie) {
     var texts = <String>[];
-    final releaseDate = trending.releaseDate;
+    final releaseDate = movie.releaseDate;
     if (releaseDate != null) {
       texts.add(_dateFormat.format(releaseDate));
     }

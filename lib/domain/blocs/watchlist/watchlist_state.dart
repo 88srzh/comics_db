@@ -3,7 +3,7 @@ part of 'watchlist_bloc.dart';
 class WatchlistState extends Equatable {
   final MovieListContainer watchlistContainer;
 
-  List<TrendingAll> get watchlist => watchlistContainer.watchlist;
+  List<Movie> get watchlist => watchlistContainer.movies;
 
   const WatchlistState.initial() : watchlistContainer = const MovieListContainer.initial();
 

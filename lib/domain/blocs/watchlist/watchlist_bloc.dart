@@ -2,14 +2,9 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
-import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
-import 'package:comics_db_app/domain/entity/trending_all.dart';
-import 'package:comics_db_app/domain/entity/trending_all_response.dart';
-import 'package:comics_db_app/domain/entity/tv.dart';
-import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -70,15 +65,15 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
     emit(const WatchlistState.initial());
   }
 
-  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<TrendingAllResponse> Function(int) loader) async {
+  Future<MovieListContainer?> _loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     var currentPage = state.watchlistContainer.currentPage;
     if (container.isComplete) return null;
     final nextPage = currentPage + 1;
     if (currentPage > 0) return null;
     final result = await loader(nextPage);
-    final watchlist = List<TrendingAll>.from(container.watchlist)..addAll(result.trendingAll);
+    final watchlist = List<Movie>.from(container.movies)..addAll(result.movies);
     final newContainer = container.copyWith(
-      watchlist: watchlist,
+      movies: watchlist,
       currentPage: result.page,
       totalPage: result.totalPages,
     );
