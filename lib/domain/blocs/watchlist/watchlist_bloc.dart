@@ -1,4 +1,10 @@
+// Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
@@ -8,9 +14,6 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/domain/entity/tv_response.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'watchlist_bloc.freezed.dart';
 
@@ -44,23 +47,27 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       return result;
     });
     if (container != null) {
-      final newState = state.copyWith(movieListContainer: container);
-      emit(newState);
+      final movieNewState = state.copyWith(movieListContainer: container);
+      emit(movieNewState);
     }
   }
+
+  // void _switchMovieAndTV(WatchlistEvent event, Emitter<WatchlistState> emit) {
+  //   if (state.)
+  // }
 
   Future<void> onWatchlistEventLoadTVs(WatchlistEventLoadTV event, Emitter<WatchlistState> emit) async {
     final sessionId = await _sessionDataProvider.getSessionId();
     final accountId = await _sessionDataProvider.getAccountId();
-    if (state.movieListContainer.isComplete) return;
+    if (state.tvListContainer.isComplete) return;
     final container = await _loadNextPageTVs(state.tvListContainer, (nextPage) async {
       // nextPage at the end show for totalResult, may be need to change
       final result = await _watchListApiClient.watchlistTvsList(nextPage, event.locale, Configuration.apiKey, sessionId, accountId, nextPage);
       return result;
     });
     if (container != null) {
-      final newState = state.copyWith(tvListContainer: container);
-      emit(newState);
+      final tvNewState = state.copyWith(tvListContainer: container);
+      emit(tvNewState);
     }
   }
 
