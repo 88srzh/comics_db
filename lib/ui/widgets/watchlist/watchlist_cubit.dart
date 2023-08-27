@@ -1,12 +1,16 @@
+// Dart imports:
 import 'dart:async';
 
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/blocs/watchlist/watchlist_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/components/watchlist_data.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/watchlist_cubit_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class WatchlistCubit extends Cubit<WatchlistCubitState> {
   final WatchlistBloc watchlistBloc;
@@ -20,17 +24,18 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
       () {
         _onState(watchlistBloc.state);
         watchlistBlocSubscription = watchlistBloc.stream.listen(_onState);
-        // watchlistBlocSubscription = watchlistBloc.stream.asBroadcastStream();
-        // watchlistBlocSubscription = watchlistBloc.stream.listen(_onStateTV);
       },
     );
   }
 
   void _onState(WatchlistState state) {
-    final movie = state.watchlistMovie.map(_makeListData).toList();
+    final tv = state.watchlistTV.map(_makeTVsListData).toList();
+    final newTvState = this.state.copyWith(watchlistList: tv);
+    emit(newTvState);
+    final movie = state.watchlistMovie.map(_makeMovieListData).toList();
     // may be need two lists for movie and tv separately
-    final newState = this.state.copyWith(watchlistList: movie);
-    emit(newState);
+    final newMovieState = this.state.copyWith(watchlistList: movie);
+    emit(newMovieState);
   }
 
   // void _onStateTV(WatchlistState state) {
@@ -68,7 +73,7 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
     watchlistBloc.add(WatchlistEventLoadTV(locale: state.localeTag));
   }
 
-  WatchlistData _makeListData(Movie movie) {
+  WatchlistData _makeMovieListData(Movie movie) {
     String releaseDate = makeMovieReleaseDate(movie);
     return WatchlistData(
       id: movie.id,
@@ -81,16 +86,17 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
     );
   }
 
-  // WatchlistData _makeTVsListData(TV tv) {
-  //   String firstAirDate = makeFirstAirDate(tv);
-  //   return WatchlistData(
-  //     id: tv.id,
-  //     posterPath: tv.posterPath ?? '',
-  //     releaseData: '',
-  //     firstAirDate: firstAirDate,
-  //     overview: tv.overview,
-  //   );
-  // }
+  WatchlistData _makeTVsListData(TV tv) {
+    String firstAirDate = makeFirstAirDate(tv);
+    return WatchlistData(
+      id: tv.id,
+      posterPath: tv.posterPath ?? '',
+      releaseData: '',
+      firstAirDate: firstAirDate,
+      overview: tv.overview,
+      mediaType: '',
+    );
+  }
 
   String makeFirstAirDate(TV tv) {
     var texts = <String>[];
@@ -119,5 +125,5 @@ class WatchlistCubit extends Cubit<WatchlistCubitState> {
     return texts.join(' ');
   }
 
-  // TODO add onTap to movie and tv
+// TODO add onTap to movie and tv
 }
