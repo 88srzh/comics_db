@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/known_for_list_widget.dart';
-import 'package:comics_db_app/ui/widgets/watchlist/watchlist_widget.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -207,6 +207,6 @@ class ScreenFactory {
   }
 
   Widget makeWatchlist() {
-    return const WatchlistWidget();
+    return const WatchlistMovieWidget();
   }
 }

@@ -7,28 +7,28 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
-import 'package:comics_db_app/ui/widgets/watchlist/watchlist_cubit.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WatchlistWidget extends StatefulWidget {
-  const WatchlistWidget({super.key});
+class WatchlistMovieWidget extends StatefulWidget {
+  const WatchlistMovieWidget({super.key});
 
   @override
-  State<WatchlistWidget> createState() => _WatchlistWidgetState();
+  State<WatchlistMovieWidget> createState() => _WatchlistMovieWidgetState();
 }
 
-class _WatchlistWidgetState extends State<WatchlistWidget> {
+class _WatchlistMovieWidgetState extends State<WatchlistMovieWidget> {
   @override
   void didChangeDependencies() {
     final locale = Localizations.localeOf(context);
-    context.read<WatchlistCubit>().setupWatchlistLocale(locale.languageCode);
+    context.read<WatchlistMovieCubit>().setupWatchlistLocale(locale.languageCode);
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<WatchlistCubit>();
+    var cubit = context.watch<WatchlistMovieCubit>();
     return Scaffold(
       appBar: const CustomAppBar(title: 'Watchlist'),
       body: Stack(
@@ -48,7 +48,7 @@ class WatchlistAnimatedButtonBarWidget extends StatelessWidget {
     required this.cubit,
   });
 
-  final WatchlistCubit cubit;
+  final WatchlistMovieCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,8 @@ class WatchlistAnimatedButtonBarWidget extends StatelessWidget {
                   'TV',
                   style: TextStyle(color: Colors.black),
                 ),
-                onTap: () => cubit.showedWatchlistTVs(),
+                onTap: () {},
+                // cubit.showedWatchlistTVs(),
               ),
             ],
           ),
@@ -95,7 +96,7 @@ class WatchlistPageWidget extends StatelessWidget {
     required this.cubit,
   });
 
-  final WatchlistCubit cubit;
+  final WatchlistMovieCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +110,10 @@ class WatchlistPageWidget extends StatelessWidget {
           childAspectRatio: 1 / 2,
         ),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        itemCount: cubit.state.watchlistList.length,
+        itemCount: cubit.state.movies.length,
         itemBuilder: (BuildContext context, int index) {
           cubit.showedWatchlistMovieAtIndex(index);
-          final movie = cubit.state.watchlistList[index];
+          final movie = cubit.state.movies[index];
           final posterPath = movie.posterPath;
           return InkWell(
             onTap: () {},
@@ -136,7 +137,7 @@ class WatchlistPageWidget extends StatelessWidget {
                   clipBehavior: Clip.hardEdge,
                   child: Column(
                     children: [
-                      posterPath.isNotEmpty
+                      posterPath != null
                           ? CachedNetworkImage(
                               imageUrl: ImageDownloader.imageUrl(posterPath),
                               placeholder: (context, url) => const LoadingIndicatorWidget(),
@@ -150,8 +151,8 @@ class WatchlistPageWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomCastListTextWidget(text: movie.title ?? movie.name, maxLines: 2),
-                              CustomCastListTextWidget(text: movie.releaseData.isNotEmpty ? movie.releaseData : movie.firstAirDate, maxLines: 1),
+                              CustomCastListTextWidget(text: movie.title, maxLines: 2),
+                              CustomCastListTextWidget(text: movie.releaseDate, maxLines: 1),
                             ],
                           ),
                         ),

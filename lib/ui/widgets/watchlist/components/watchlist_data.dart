@@ -1,4 +1,4 @@
-class WatchlistData {
+class MovieListData {
   final int id;
   final String posterPath;
   final String releaseData;
@@ -8,7 +8,7 @@ class WatchlistData {
   final String mediaType;
   final String overview;
 
-  const WatchlistData({
+  const MovieListData({
     required this.id,
     required this.posterPath,
     required this.releaseData,
