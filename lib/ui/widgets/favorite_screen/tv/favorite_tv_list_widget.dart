@@ -98,38 +98,27 @@ class _FavoriteTvListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: context.read<ThemeBloc>().isDarkTheme
-                ? customMovieListBoxDecorationForDarkTheme
-                : customMovieListBoxDecorationForLightTheme,
+            decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
                 posterPath != null
                     ? Image.network(
-                  ImageDownloader.imageUrl(posterPath!),
-                  width: 95,
-                )
+                        ImageDownloader.imageUrl(posterPath!),
+                        width: 95,
+                      )
                     : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20.0),
-                      CustomCastListTextWidget(
-                        text: tv.name,
-                        maxLines: 1,
-                      ),
+                      const SizedBox(height: 10.0),
+                      CustomCastListTextWidget(text: tv.name, maxLines: 1),
                       const SizedBox(height: 5.0),
-                      CustomCastListTextWidget(
-                        text: tv.firstAirDate ?? '',
-                        maxLines: 1,
-                      ),
+                      CustomCastListTextWidget(text: tv.firstAirDate, maxLines: 1),
                       const SizedBox(height: 15.0),
-                      CustomCastListTextWidget(
-                        text: tv.overview,
-                        maxLines: 3,
-                      ),
+                      CustomCastListTextWidget(text: tv.overview, maxLines: 4),
                     ],
                   ),
                 ),
