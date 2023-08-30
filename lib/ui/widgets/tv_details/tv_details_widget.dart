@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -39,10 +40,18 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     // }
     var cubit = context.watch<TvDetailsCubit>();
     final favorite = cubit.state.isFavorite;
+    final watchlist = cubit.state.isWatchlist;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
-      floatingActionButton: fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
+      floatingActionButton: Wrap(
+        direction: Axis.horizontal,
+        children: [
+          fabWatchlist(() => cubit.toggleWatchlistTV(context), watchlist),
+          const SizedBox(width: 10.0),
+          fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
+        ],
+      ),
       body: ListView(
         children: const [
           Column(

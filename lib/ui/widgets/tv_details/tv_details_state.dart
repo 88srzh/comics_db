@@ -36,6 +36,7 @@ class TvDetailsCubitState {
   final TvDetailsVideos videos;
   final String localeTag;
   final bool isFavorite;
+  final bool isWatchlist;
   final List<TvDetailsActorData> actorsData;
   final List<List<TvDetailsPeopleData>> peopleData;
   final List<TvDetailsRecommendationsData> recommendationsData;
@@ -77,6 +78,7 @@ class TvDetailsCubitState {
     required this.videos,
     required this.localeTag,
     required this.isFavorite,
+    required this.isWatchlist,
     required this.actorsData,
     required this.peopleData,
     required this.recommendationsData,
@@ -123,6 +125,7 @@ class TvDetailsCubitState {
           videos == other.videos &&
           localeTag == other.localeTag &&
           isFavorite == other.isFavorite &&
+          isWatchlist == other.isWatchlist &&
           actorsData == other.actorsData &&
           peopleData == other.peopleData &&
           recommendationsData == other.recommendationsData &&
@@ -165,6 +168,7 @@ class TvDetailsCubitState {
       videos.hashCode ^
       localeTag.hashCode ^
       isFavorite.hashCode ^
+      isWatchlist.hashCode ^
       actorsData.hashCode ^
       peopleData.hashCode ^
       recommendationsData.hashCode ^
@@ -206,6 +210,7 @@ class TvDetailsCubitState {
     TvDetailsVideos? videos,
     String? localeTag,
     bool? isFavorite,
+    bool? isWatchlist,
     List<TvDetailsActorData>? actorsData,
     List<List<TvDetailsPeopleData>>? peopleData,
     List<TvDetailsRecommendationsData>? recommendationsData,
@@ -247,6 +252,7 @@ class TvDetailsCubitState {
       videos: videos ?? this.videos,
       localeTag: localeTag ?? this.localeTag,
       isFavorite: isFavorite ?? this.isFavorite,
+      isWatchlist: isWatchlist ?? this.isWatchlist,
       actorsData: actorsData ?? this.actorsData,
       peopleData: peopleData ?? this.peopleData,
       recommendationsData: recommendationsData ?? this.recommendationsData,

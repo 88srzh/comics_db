@@ -75,6 +75,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           credits: TvDetailsCredits(cast: [], crew: []),
           videos: TvDetailsVideos(results: []),
           isFavorite: false,
+          isWatchlist: false,
           actorsData: [],
           peopleData: [],
           recommendationsData: [],
@@ -115,6 +116,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       videos: state.videos,
       localeTag: state.localeTag,
       isFavorite: state.isFavorite,
+      isWatchlist: state.isWatchlist,
       actorsData: state.actorsData,
       peopleData: state.peopleData,
       recommendationsData: state.recommendationsData,
@@ -129,14 +131,14 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     dateFormat = DateFormat.yMMMd(localeTag);
-    updateData(null, false);
+    updateData(null, false, false);
     await loadTvDetails(context);
   }
 
   Future<void> loadTvDetails(BuildContext context) async {
     try {
       final details = await _tvService.loadTvDetails(tvId: tvId, locale: state.localeTag);
-      updateData(details.details, details.isFavorite);
+      updateData(details.details, details.isFavorite, details.isWatchlist);
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }
@@ -161,11 +163,11 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     dateFormat = DateFormat.yMMMd(localeTag);
-    updateData(null, false);
+    updateData(null, false, false);
     await loadTvDetails(context);
   }
 
-  Future<void> updateData(TVDetails? details, bool isFavorite) async {
+  Future<void> updateData(TVDetails? details, bool isFavorite, bool isWatchlist) async {
     if (details == null) {
       return;
     }
@@ -192,11 +194,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     );
 
     data.favoriteData.isFavorite = isFavorite;
+    data.watchlistData.isWatchlist = isWatchlist;
 
     data.recommendationsData = details.recommendations.recommendationsList.map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
     data.videosData = makeTrailerKey(details);
 
     var isFavoriteData = data.favoriteData.isFavorite;
+    var isWatchlistData = data.watchlistData.isWatchlist;
     var actorsData = data.actorsData;
     var peopleData = data.peopleData;
 
@@ -218,6 +222,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       peopleData: peopleData,
       actorsData: actorsData,
       isFavorite: isFavoriteData,
+      isWatchlist: isWatchlistData,
       recommendationsData: recommendationsData,
       videosData: videosData,
       // createBy: createdBy,
@@ -260,14 +265,26 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     return crewChunks;
   }
 
-  Future<void> toggleFavoriteTv(BuildContext context) async {
+  void toggleFavoriteTv(BuildContext context) {
     data.favoriteData = data.favoriteData.copyWith(isFavorite: !data.favoriteData.isFavorite);
     try {
-      await _tvService.updateFavoriteTvs(tvId: tvId, isFavorite: data.favoriteData.isFavorite);
+      _tvService.updateFavoriteTvs(tvId: tvId, isFavorite: data.favoriteData.isFavorite);
       var newState = state.copyWith(isFavorite: data.favoriteData.isFavorite);
       emit(newState);
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }
+  }
+
+  void toggleWatchlistTV(BuildContext context) {
+    data.watchlistData = data.watchlistData.copyWith(isWatchlist: !data.watchlistData.isWatchlist);
+    try {
+      _tvService.updateWatchlistTV(tvId: tvId, isWatchlist: data.watchlistData.isWatchlist);
+      var newState = state.copyWith(isWatchlist: data.watchlistData.isWatchlist);
+      emit(newState);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e);
+    }
+
   }
 }
