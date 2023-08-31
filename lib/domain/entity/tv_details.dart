@@ -1,9 +1,9 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/tv_details_recommendations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
+import 'package:comics_db_app/domain/entity/tv_details_recommendations.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 
 part 'tv_details.g.dart';
@@ -13,7 +13,7 @@ class TVDetails {
   final String? backdropPath;
   final List<CreatedBy> createdBy;
   final List<int> episodeRunTime;
-  final String firstAirDate;
+  final String? firstAirDate;
   final List<Genre> genres;
   final String homepage;
   final int id;
@@ -127,7 +127,7 @@ class Genre {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class LastEpisodeToAir {
-  final String airDate;
+  final String? airDate;
   final int episodeNumber;
   final int id;
   final String name;
@@ -221,7 +221,7 @@ class ProductionCountry {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Season {
-  final String airDate;
+  final String? airDate;
   final int episodeCount;
   final int id;
   final String name;
