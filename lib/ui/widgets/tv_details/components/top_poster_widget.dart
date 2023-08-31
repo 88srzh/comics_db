@@ -1,15 +1,15 @@
 // Flutter imports:
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvTopPosterWidget extends StatelessWidget {
   const TvTopPosterWidget({Key? key}) : super(key: key);
@@ -26,11 +26,11 @@ class TvTopPosterWidget extends StatelessWidget {
             opacity: 0.25,
             child: AspectRatio(
               aspectRatio: 390 / 220,
-                child: CachedNetworkImage(
-                  imageUrl: ImageDownloader.imageUrl(backdropPath ?? ''),
+                child: backdropPath != null ? CachedNetworkImage(
+                  imageUrl: ImageDownloader.imageUrl(backdropPath),
                   placeholder: (context, url) => const LoadingIndicatorWidget(),
                   errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                ),
+                ) : const SizedBox.shrink(),
               ),
           ),
         ),
