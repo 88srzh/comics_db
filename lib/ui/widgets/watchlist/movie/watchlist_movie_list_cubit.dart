@@ -2,15 +2,15 @@
 import 'dart:async';
 
 // Package imports:
-import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/watchlist_movie_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
 
 class WatchlistMovieCubit extends Cubit<MovieListCubitState> {
   final WatchlistMovieBloc watchlistBloc;
@@ -55,12 +55,13 @@ class WatchlistMovieCubit extends Cubit<MovieListCubitState> {
   }
 
   void showedWatchlistMovieAtIndex(int index) {
+    if (index < state.movies.length - 1) return;
     watchlistBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
-  void showedWatchlistMovies() {
+  void updatedWatchlistMovies(String localeTag) {
     watchlistBloc.add(const MovieListEventLoadReset());
-    watchlistBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
+    watchlistBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
   MovieListData _makeListData(Movie movie) {

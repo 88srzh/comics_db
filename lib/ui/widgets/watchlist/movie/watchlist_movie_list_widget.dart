@@ -1,4 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
@@ -7,8 +14,6 @@ import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistMovieWidget extends StatefulWidget {
   const WatchlistMovieWidget({super.key});
@@ -28,8 +33,17 @@ class _WatchlistMovieWidgetState extends State<WatchlistMovieWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<WatchlistMovieCubit>();
+    final locale = Localizations.localeOf(context);
     return Scaffold(
       appBar: const CustomAppBar(title: 'Watchlist'),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0.0,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
+        child: const Icon(IconData(0xf00e9, fontFamily: 'MaterialIcons')),
+        onPressed: () => setState(() {
+          cubit.updatedWatchlistMovies(locale.languageCode);
+        }),
+      ),
       body: Stack(
         children: [
           WatchlistPageWidget(cubit: cubit),
