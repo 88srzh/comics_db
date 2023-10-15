@@ -52,39 +52,43 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
     final cubit = context.watch<AccountDetailsCubit>();
     // TODO name don't work
     // final name = cubit.state.name;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
       children: [
-        const HeadAccountCardWidget(),
-        const CustomSettingDivider(height: 3.0),
-        const HeadingAccountCardWidget(headingText: 'Watchlist'),
-        const CustomSettingDivider(height: 0.8),
-        CustomAccountListTile(text: 'Movie', icon: MdiIcons.bookmark, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
-        const CustomSettingDivider(height: 0.8),
-        // TODO need to change tv icon to one style
-        CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
-        const CustomSettingDivider(height: 3.0),
-        const HeadingAccountCardWidget(headingText: 'Favorites'),
-        const CustomSettingDivider(height: 0.8),
-        CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
-        const CustomSettingDivider(height: 0.8),
-        CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
-        const CustomSettingDivider(height: 10.0),
-        const HeadingAccountCardWidget(headingText: 'Settings'),
-        const CustomSettingDivider(height: 0.8),
-        const SettingsCardWidget(),
-        const CustomSettingDivider(height: 0.8),
-        const NotificationsCardWidget(),
-        const CustomSettingDivider(height: 0.8),
-        CustomAccountListTile(
-            text: 'Logout',
-            icon: MdiIcons.logout,
-            onTap: () {
-              cubit.logout();
-              Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
-            }),
-        const CustomSettingDivider(height: 0.5),
-        // const AnimationFab(),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const HeadAccountCardWidget(),
+            const CustomSettingDivider(height: 3.0),
+            const HeadingAccountCardWidget(headingText: 'Watchlist'),
+            const CustomSettingDivider(height: 0.8),
+            CustomAccountListTile(text: 'Movie', icon: MdiIcons.bookmark, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
+            const CustomSettingDivider(height: 0.8),
+            // TODO need to change tv icon to one style
+            CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
+            const CustomSettingDivider(height: 3.0),
+            const HeadingAccountCardWidget(headingText: 'Favorites'),
+            const CustomSettingDivider(height: 0.8),
+            CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
+            const CustomSettingDivider(height: 0.8),
+            CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
+            const CustomSettingDivider(height: 10.0),
+            const HeadingAccountCardWidget(headingText: 'Settings'),
+            const CustomSettingDivider(height: 0.8),
+            const SettingsCardWidget(),
+            const CustomSettingDivider(height: 0.8),
+            const NotificationsCardWidget(),
+            const CustomSettingDivider(height: 0.8),
+            CustomAccountListTile(
+                text: 'Logout',
+                icon: MdiIcons.logout,
+                onTap: () {
+                  cubit.logout();
+                  Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
+                }),
+            const CustomSettingDivider(height: 0.5),
+            // const AnimationFab(),
+          ],
+        ),
       ],
     );
   }
