@@ -13,10 +13,12 @@ class TvService {
     final tvDetails = await _tvApiClient.tvDetails(tvId, locale);
     final sessionId = await _sessionDataProvider.getSessionId();
     var isFavorite = false;
+    var isWatchlist = false;
     if (sessionId != null) {
       isFavorite = await _tvApiClient.isFavoriteTv(tvId, sessionId);
+      isWatchlist = await _tvApiClient.isFavoriteTv(tvId, sessionId);
     }
-    return TvDetailsLocal(details: tvDetails, isFavorite: isFavorite);
+    return TvDetailsLocal(details: tvDetails, isFavorite: isFavorite, isWatchlist: isWatchlist);
   }
 
   Future<void> updateFavoriteTvs({required int tvId, required bool isFavorite}) async {
@@ -30,6 +32,21 @@ class TvService {
       mediaType: MediaType.tv,
       mediaId: tvId,
       isFavorite: isFavorite,
+    );
+  }
+
+  Future<void> updateWatchlistTV({required int tvId, required bool isWatchlist}) async {
+    final sessionId = await _sessionDataProvider.getSessionId();
+    final accountId = await _sessionDataProvider.getAccountId();
+
+    if (sessionId == null || accountId == null) return;
+    // TODO watch may be i can disable duplicate with media type for other methods
+    await _accountApiClient.markAsWatchlist(
+      accountId: accountId,
+      sessionId: sessionId,
+      mediaType: MediaType.tv,
+      mediaId: tvId,
+      isWatchlist: isWatchlist,
     );
   }
 }

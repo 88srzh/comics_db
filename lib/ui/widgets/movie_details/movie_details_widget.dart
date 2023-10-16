@@ -35,14 +35,14 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MovieDetailsCubit>();
     final favorite = cubit.state.isFavorite;
-    final rate = cubit.state.isWatchlist;
+    final watchlist = cubit.state.isWatchlist;
 
     return Scaffold(
       appBar: const CustomDetailsAppBar(title: ''),
       floatingActionButton: Wrap(
         direction: Axis.horizontal,
         children: [
-          fabWatchlist(() => cubit.toggleWatchlistMovie(context), rate),
+          fabWatchlist(() => cubit.toggleWatchlistMovie(context), watchlist),
           const SizedBox(width: 10.0),
           fabFavorite(() => cubit.toggleFavoriteMovie(context), favorite),
         ],

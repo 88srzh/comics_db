@@ -14,7 +14,7 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
       episodeRunTime: (json['episode_run_time'] as List<dynamic>)
           .map((e) => e as int)
           .toList(),
-      firstAirDate: json['first_air_date'] as String,
+      firstAirDate: json['first_air_date'] as String?,
       genres: (json['genres'] as List<dynamic>)
           .map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -136,7 +136,7 @@ Map<String, dynamic> _$GenreToJson(Genre instance) => <String, dynamic>{
 
 LastEpisodeToAir _$LastEpisodeToAirFromJson(Map<String, dynamic> json) =>
     LastEpisodeToAir(
-      airDate: json['air_date'] as String,
+      airDate: json['air_date'] as String?,
       episodeNumber: json['episode_number'] as int,
       id: json['id'] as int,
       name: json['name'] as String,
@@ -211,7 +211,7 @@ Map<String, dynamic> _$ProductionCountryToJson(ProductionCountry instance) =>
     };
 
 Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
-      airDate: json['air_date'] as String,
+      airDate: json['air_date'] as String?,
       episodeCount: json['episode_count'] as int,
       id: json['id'] as int,
       name: json['name'] as String,

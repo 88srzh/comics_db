@@ -111,7 +111,7 @@ class TrendingPageListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<TrendingListCubit>();
+    // final cubit = context.watch<TrendingListCubit>();
     return GridView.builder(
       padding: const EdgeInsets.only(top: 70.0, bottom: 8.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

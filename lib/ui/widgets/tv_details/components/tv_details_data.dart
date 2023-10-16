@@ -4,6 +4,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_watchlist_data.dart';
 
 class TvDetailsData {
   String name = '';
@@ -21,4 +22,5 @@ class TvDetailsData {
   List<TvDetailsVideosData>? videosData = const <TvDetailsVideosData>[];
 
   FavoriteData favoriteData = FavoriteData();
+  TvDetailsWatchlistData watchlistData = TvDetailsWatchlistData();
 }

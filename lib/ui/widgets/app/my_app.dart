@@ -2,8 +2,12 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/movie/watchlist_movie_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/watchlist_tv_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/tv/watchlist_tv_list_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -142,6 +146,20 @@ class MyApp extends StatelessWidget {
           create: (_) => TrendingListCubit(
             trendingListBloc: TrendingListBloc(
               const TrendingListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => WatchlistMovieCubit(
+            watchlistBloc: WatchlistMovieBloc(
+              const MovieListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => WatchlistTVCubit(
+            watchlistBloc: WatchlistTVBloc(
+              const TvListState.initial(),
             ),
           ),
         ),

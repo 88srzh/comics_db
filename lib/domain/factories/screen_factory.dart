@@ -1,6 +1,8 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/known_for_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/watchlist/tv/watchlist_tv_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -203,5 +205,12 @@ class ScreenFactory {
 
   Widget makeFavoriteTvList() {
     return const FavoriteTvListWidget();
+  }
+
+  Widget makeWatchlistMovie() {
+    return const WatchlistMovieWidget();
+  }
+  Widget makeWatchlistTV() {
+    return const WatchlistTVWidget();
   }
 }

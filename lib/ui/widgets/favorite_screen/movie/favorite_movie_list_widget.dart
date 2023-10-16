@@ -98,9 +98,7 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: context.read<ThemeBloc>().isDarkTheme
-                ? customMovieListBoxDecorationForDarkTheme
-                : customMovieListBoxDecorationForLightTheme,
+            decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
@@ -115,25 +113,16 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20.0),
-                      CustomCastListTextWidget(
-                        text: movie.originalTitle,
-                        maxLines: 1,
-                      ),
+                      const SizedBox(height: 10.0),
+                      CustomCastListTextWidget(text: movie.originalTitle, maxLines: 1),
                       const SizedBox(height: 5.0),
-                      CustomCastListTextWidget(
-                        text: movie.releaseDate,
-                        maxLines: 1,
-                      ),
+                      CustomCastListTextWidget(text: movie.releaseDate, maxLines: 1),
                       const SizedBox(height: 15.0),
-                      CustomCastListTextWidget(
-                        text: movie.overview ?? '',
-                        maxLines: 3,
-                      ),
+                      CustomCastListTextWidget(text: movie.overview, maxLines: 4),
                     ],
                   ),
                 ),
-                const SizedBox(width: 5.0),
+                const SizedBox(height: 5.0),
               ],
             ),
           ),

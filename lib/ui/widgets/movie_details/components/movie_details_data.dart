@@ -9,7 +9,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_d
 import 'package:comics_db_app/ui/widgets/movie_details/components/favorite_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/watchlist_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_watchlist_data.dart';
 
 class MovieDetailsData {
   int id = 0;
@@ -28,7 +28,7 @@ class MovieDetailsData {
   String? facebook = '';
 
   FavoriteData favoriteData = FavoriteData();
-  WatchlistData watchlistData = WatchlistData();
+  MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();
 
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];

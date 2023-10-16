@@ -21,9 +21,6 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
   var trending = <TrendingAll>[];
   late DateFormat _dateFormat;
 
-  // final List<MovieListData> movies;
-  // final List<TvListData> tvs = [];
-
   TrendingListCubit({required this.trendingListBloc}) : super(const TrendingListCubitState(trendingList: <TrendingListData>[], localeTag: '')) {
     Future.microtask(
       () {
@@ -117,9 +114,4 @@ class TrendingListCubit extends Cubit<TrendingListCubitState> {
     final id = state.trendingList[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
-
-// void onTvTap(BuildContext context, int index) {
-//   final id = state.tvs[index].id;
-//   Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
-// }
 }
