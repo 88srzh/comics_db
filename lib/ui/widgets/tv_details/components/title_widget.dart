@@ -24,14 +24,22 @@ class TitleWidget extends StatelessWidget {
             const SizedBox(width: 2),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              tagline,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ],
+        SizedBox(
+          width: 300,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: Text(
+                  textAlign: TextAlign.center,
+                  tagline,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
