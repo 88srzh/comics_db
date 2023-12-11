@@ -75,7 +75,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           child: MovieDetailsTitle(title: title),
         ),
         Positioned(
-          top: 50,
+          top: 40,
           left: 20,
           child: SizedBox(
             height: 300,
@@ -150,7 +150,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
                   ],
                 ),
-                const SizedBox(height: 10.0),
                 Row(
                   children: [
                     Icon(
