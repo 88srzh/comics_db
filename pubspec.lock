@@ -21,10 +21,10 @@ packages:
     dependency: "direct main"
     description:
       name: animated_button_bar
-      sha256: fd76fc16d9179fb6c04cb955d03489983fe33eadb02c1c156c212058b163f67c
+      sha256: "7beb84f9a2380bb4d1b51f8df3ad78b1f8fe01596a13e8892aab0880eaf115e5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2+1"
+    version: "1.0.0"
   animations:
     dependency: "direct main"
     description:
