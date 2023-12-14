@@ -25,7 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_secure_storage: ^8.0.0
-  json_annotation: ^4.6.0
+  json_annotation: ^4.8.1
   material_design_icons_flutter: ^6.0.7096
   flutter_localizations:
     sdk: flutter
@@ -55,7 +55,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^6.5.4
+  json_serializable: ^6.7.1
   build_runner: ^2.3.3
   dependency_validator: ^3.0.0
   flutter_lints: ^2.0.1
