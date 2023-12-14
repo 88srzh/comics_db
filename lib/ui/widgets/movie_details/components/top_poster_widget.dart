@@ -179,7 +179,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                   ],
                 ),
                 // so far don't work
-                const Row(
+                Row(
                   children: [
                     InkWell(
                       // onTap: () => setState(() {
@@ -187,11 +187,11 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                       // }),
                       child: CustomSocialIcon(icon: MdiIcons.facebook),
                     ),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.twitter),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.instagram),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.home),
                     // const SizedBox(width: 4),
                     // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),

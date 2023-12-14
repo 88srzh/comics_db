@@ -32,12 +32,12 @@ class TvTrailerListWidget extends StatelessWidget {
       },
       // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: youtubeKey),
       // onTap: => {return TvTrailerYoutubeWidget(youtubeKey: trailerKey),}
-      child: const Row(
+      child:  Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomTvDetailsIconWidget(icon: MdiIcons.youtube),
-          SizedBox(width: 4),
-          CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: 'Play Trailer'),
+          const SizedBox(width: 4),
+          const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: 'Play Trailer'),
         ],
       ),
     );
