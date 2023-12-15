@@ -40,8 +40,8 @@ dependencies:
   bloc_concurrency: ^0.2.2
   cached_network_image: ^3.3.0
   expandable_text: 2.3.0
-  freezed: ^2.3.3
-  freezed_annotation: ^2.2.0
+  freezed: ^2.4.5
+  freezed_annotation: ^2.4.1
   equatable: ^2.0.5
   import_sorter: ^4.6.0
   shared_preferences: ^2.0.18
