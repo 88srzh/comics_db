@@ -75,7 +75,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           child: MovieDetailsTitle(title: title),
         ),
         Positioned(
-          top: 50,
+          top: 40,
           left: 20,
           child: SizedBox(
             height: 300,
@@ -150,7 +150,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     CustomPosterTopLeftAlignTextRating(text: popularityInt.toString()),
                   ],
                 ),
-                const SizedBox(height: 10.0),
                 Row(
                   children: [
                     Icon(
@@ -180,7 +179,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                   ],
                 ),
                 // so far don't work
-                const Row(
+                Row(
                   children: [
                     InkWell(
                       // onTap: () => setState(() {
@@ -188,11 +187,11 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                       // }),
                       child: CustomSocialIcon(icon: MdiIcons.facebook),
                     ),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.twitter),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.instagram),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.home),
                     // const SizedBox(width: 4),
                     // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
