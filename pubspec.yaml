@@ -35,7 +35,7 @@ dependencies:
   loading_indicator: ^3.1.1
   flutter_native_splash: ^2.3.7
   provider: ^6.1.1
-  bloc: ^8.1.0
+  bloc: ^8.1.2
   flutter_bloc: ^8.1.1
   bloc_concurrency: ^0.2.0
   cached_network_image: ^3.2.1
