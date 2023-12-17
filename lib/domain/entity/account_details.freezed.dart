@@ -100,11 +100,11 @@ class _$AccountDetailsCopyWithImpl<$Res, $Val extends AccountDetails>
 }
 
 /// @nodoc
-abstract class _$$_AccountDetailsCopyWith<$Res>
+abstract class _$$AccountDetailsImplCopyWith<$Res>
     implements $AccountDetailsCopyWith<$Res> {
-  factory _$$_AccountDetailsCopyWith(
-          _$_AccountDetails value, $Res Function(_$_AccountDetails) then) =
-      __$$_AccountDetailsCopyWithImpl<$Res>;
+  factory _$$AccountDetailsImplCopyWith(_$AccountDetailsImpl value,
+          $Res Function(_$AccountDetailsImpl) then) =
+      __$$AccountDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -117,11 +117,11 @@ abstract class _$$_AccountDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AccountDetailsCopyWithImpl<$Res>
-    extends _$AccountDetailsCopyWithImpl<$Res, _$_AccountDetails>
-    implements _$$_AccountDetailsCopyWith<$Res> {
-  __$$_AccountDetailsCopyWithImpl(
-      _$_AccountDetails _value, $Res Function(_$_AccountDetails) _then)
+class __$$AccountDetailsImplCopyWithImpl<$Res>
+    extends _$AccountDetailsCopyWithImpl<$Res, _$AccountDetailsImpl>
+    implements _$$AccountDetailsImplCopyWith<$Res> {
+  __$$AccountDetailsImplCopyWithImpl(
+      _$AccountDetailsImpl _value, $Res Function(_$AccountDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +134,7 @@ class __$$_AccountDetailsCopyWithImpl<$Res>
     Object? includeAdult = null,
     Object? username = null,
   }) {
-    return _then(_$_AccountDetails(
+    return _then(_$AccountDetailsImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -166,8 +166,8 @@ class __$$_AccountDetailsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$_AccountDetails implements _AccountDetails {
-  _$_AccountDetails(
+class _$AccountDetailsImpl implements _AccountDetails {
+  _$AccountDetailsImpl(
       {required this.id,
       @JsonKey(name: 'iso_639_1') required this.iso6391,
       @JsonKey(name: 'iso_3166_1') required this.iso31661,
@@ -175,8 +175,8 @@ class _$_AccountDetails implements _AccountDetails {
       required this.includeAdult,
       required this.username});
 
-  factory _$_AccountDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountDetailsFromJson(json);
+  factory _$AccountDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountDetailsImplFromJson(json);
 
   @override
   final int id;
@@ -202,7 +202,7 @@ class _$_AccountDetails implements _AccountDetails {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountDetails &&
+            other is _$AccountDetailsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.iso6391, iso6391) || other.iso6391 == iso6391) &&
             (identical(other.iso31661, iso31661) ||
@@ -222,12 +222,13 @@ class _$_AccountDetails implements _AccountDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountDetailsCopyWith<_$_AccountDetails> get copyWith =>
-      __$$_AccountDetailsCopyWithImpl<_$_AccountDetails>(this, _$identity);
+  _$$AccountDetailsImplCopyWith<_$AccountDetailsImpl> get copyWith =>
+      __$$AccountDetailsImplCopyWithImpl<_$AccountDetailsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountDetailsToJson(
+    return _$$AccountDetailsImplToJson(
       this,
     );
   }
@@ -240,10 +241,10 @@ abstract class _AccountDetails implements AccountDetails {
       @JsonKey(name: 'iso_3166_1') required final String iso31661,
       required final String name,
       required final bool includeAdult,
-      required final String username}) = _$_AccountDetails;
+      required final String username}) = _$AccountDetailsImpl;
 
   factory _AccountDetails.fromJson(Map<String, dynamic> json) =
-      _$_AccountDetails.fromJson;
+      _$AccountDetailsImpl.fromJson;
 
   @override
   int get id;
@@ -261,6 +262,6 @@ abstract class _AccountDetails implements AccountDetails {
   String get username;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountDetailsCopyWith<_$_AccountDetails> get copyWith =>
+  _$$AccountDetailsImplCopyWith<_$AccountDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

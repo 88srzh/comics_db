@@ -64,23 +64,25 @@ class _$AccountDetailsResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AccountDetailsResponseCopyWith<$Res>
+abstract class _$$AccountDetailsResponseImplCopyWith<$Res>
     implements $AccountDetailsResponseCopyWith<$Res> {
-  factory _$$_AccountDetailsResponseCopyWith(_$_AccountDetailsResponse value,
-          $Res Function(_$_AccountDetailsResponse) then) =
-      __$$_AccountDetailsResponseCopyWithImpl<$Res>;
+  factory _$$AccountDetailsResponseImplCopyWith(
+          _$AccountDetailsResponseImpl value,
+          $Res Function(_$AccountDetailsResponseImpl) then) =
+      __$$AccountDetailsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<AccountDetails> accountDetails});
 }
 
 /// @nodoc
-class __$$_AccountDetailsResponseCopyWithImpl<$Res>
+class __$$AccountDetailsResponseImplCopyWithImpl<$Res>
     extends _$AccountDetailsResponseCopyWithImpl<$Res,
-        _$_AccountDetailsResponse>
-    implements _$$_AccountDetailsResponseCopyWith<$Res> {
-  __$$_AccountDetailsResponseCopyWithImpl(_$_AccountDetailsResponse _value,
-      $Res Function(_$_AccountDetailsResponse) _then)
+        _$AccountDetailsResponseImpl>
+    implements _$$AccountDetailsResponseImplCopyWith<$Res> {
+  __$$AccountDetailsResponseImplCopyWithImpl(
+      _$AccountDetailsResponseImpl _value,
+      $Res Function(_$AccountDetailsResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_AccountDetailsResponseCopyWithImpl<$Res>
   $Res call({
     Object? accountDetails = null,
   }) {
-    return _then(_$_AccountDetailsResponse(
+    return _then(_$AccountDetailsResponseImpl(
       accountDetails: null == accountDetails
           ? _value._accountDetails
           : accountDetails // ignore: cast_nullable_to_non_nullable
@@ -99,13 +101,13 @@ class __$$_AccountDetailsResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AccountDetailsResponse implements _AccountDetailsResponse {
-  _$_AccountDetailsResponse(
+class _$AccountDetailsResponseImpl implements _AccountDetailsResponse {
+  _$AccountDetailsResponseImpl(
       {required final List<AccountDetails> accountDetails})
       : _accountDetails = accountDetails;
 
-  factory _$_AccountDetailsResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountDetailsResponseFromJson(json);
+  factory _$AccountDetailsResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountDetailsResponseImplFromJson(json);
 
   final List<AccountDetails> _accountDetails;
   @override
@@ -124,7 +126,7 @@ class _$_AccountDetailsResponse implements _AccountDetailsResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountDetailsResponse &&
+            other is _$AccountDetailsResponseImpl &&
             const DeepCollectionEquality()
                 .equals(other._accountDetails, _accountDetails));
   }
@@ -137,13 +139,13 @@ class _$_AccountDetailsResponse implements _AccountDetailsResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountDetailsResponseCopyWith<_$_AccountDetailsResponse> get copyWith =>
-      __$$_AccountDetailsResponseCopyWithImpl<_$_AccountDetailsResponse>(
-          this, _$identity);
+  _$$AccountDetailsResponseImplCopyWith<_$AccountDetailsResponseImpl>
+      get copyWith => __$$AccountDetailsResponseImplCopyWithImpl<
+          _$AccountDetailsResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountDetailsResponseToJson(
+    return _$$AccountDetailsResponseImplToJson(
       this,
     );
   }
@@ -152,15 +154,15 @@ class _$_AccountDetailsResponse implements _AccountDetailsResponse {
 abstract class _AccountDetailsResponse implements AccountDetailsResponse {
   factory _AccountDetailsResponse(
           {required final List<AccountDetails> accountDetails}) =
-      _$_AccountDetailsResponse;
+      _$AccountDetailsResponseImpl;
 
   factory _AccountDetailsResponse.fromJson(Map<String, dynamic> json) =
-      _$_AccountDetailsResponse.fromJson;
+      _$AccountDetailsResponseImpl.fromJson;
 
   @override
   List<AccountDetails> get accountDetails;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountDetailsResponseCopyWith<_$_AccountDetailsResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AccountDetailsResponseImplCopyWith<_$AccountDetailsResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

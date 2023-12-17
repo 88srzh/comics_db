@@ -11,7 +11,7 @@ class TvDetailsCubitState {
   final int id;
   final bool inProduction;
   final List<String> languages;
-  final String lastAirDate;
+  final String? lastAirDate;
   final LastEpisodeToAir lastEpisodeToAir;
   final String name;
   final NextEpisodeToAir? nextEpisodeToAir;

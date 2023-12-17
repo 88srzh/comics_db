@@ -153,9 +153,10 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
 }
 
 /// @nodoc
-abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
-  factory _$$_MovieCopyWith(_$_Movie value, $Res Function(_$_Movie) then) =
-      __$$_MovieCopyWithImpl<$Res>;
+abstract class _$$MovieImplCopyWith<$Res> implements $MovieCopyWith<$Res> {
+  factory _$$MovieImplCopyWith(
+          _$MovieImpl value, $Res Function(_$MovieImpl) then) =
+      __$$MovieImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -176,9 +177,11 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
-    implements _$$_MovieCopyWith<$Res> {
-  __$$_MovieCopyWithImpl(_$_Movie _value, $Res Function(_$_Movie) _then)
+class __$$MovieImplCopyWithImpl<$Res>
+    extends _$MovieCopyWithImpl<$Res, _$MovieImpl>
+    implements _$$MovieImplCopyWith<$Res> {
+  __$$MovieImplCopyWithImpl(
+      _$MovieImpl _value, $Res Function(_$MovieImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -199,7 +202,7 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
     Object? video = null,
     Object? voteAverage = null,
   }) {
-    return _then(_$_Movie(
+    return _then(_$MovieImpl(
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
@@ -263,8 +266,8 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
-class _$_Movie implements _Movie {
-  _$_Movie(
+class _$MovieImpl implements _Movie {
+  _$MovieImpl(
       {this.posterPath,
       required this.adult,
       required this.overview,
@@ -281,8 +284,8 @@ class _$_Movie implements _Movie {
       required this.voteAverage})
       : _genreIds = genreIds;
 
-  factory _$_Movie.fromJson(Map<String, dynamic> json) =>
-      _$$_MovieFromJson(json);
+  factory _$MovieImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MovieImplFromJson(json);
 
   @override
   final String? posterPath;
@@ -329,7 +332,7 @@ class _$_Movie implements _Movie {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Movie &&
+            other is _$MovieImpl &&
             (identical(other.posterPath, posterPath) ||
                 other.posterPath == posterPath) &&
             (identical(other.adult, adult) || other.adult == adult) &&
@@ -377,12 +380,12 @@ class _$_Movie implements _Movie {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MovieCopyWith<_$_Movie> get copyWith =>
-      __$$_MovieCopyWithImpl<_$_Movie>(this, _$identity);
+  _$$MovieImplCopyWith<_$MovieImpl> get copyWith =>
+      __$$MovieImplCopyWithImpl<_$MovieImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MovieToJson(
+    return _$$MovieImplToJson(
       this,
     );
   }
@@ -403,9 +406,9 @@ abstract class _Movie implements Movie {
       required final double popularity,
       required final int voteCount,
       required final bool video,
-      required final double voteAverage}) = _$_Movie;
+      required final double voteAverage}) = _$MovieImpl;
 
-  factory _Movie.fromJson(Map<String, dynamic> json) = _$_Movie.fromJson;
+  factory _Movie.fromJson(Map<String, dynamic> json) = _$MovieImpl.fromJson;
 
   @override
   String? get posterPath;
@@ -438,6 +441,6 @@ abstract class _Movie implements Movie {
   double get voteAverage;
   @override
   @JsonKey(ignore: true)
-  _$$_MovieCopyWith<_$_Movie> get copyWith =>
+  _$$MovieImplCopyWith<_$MovieImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

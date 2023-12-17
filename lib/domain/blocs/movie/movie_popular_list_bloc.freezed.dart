@@ -81,22 +81,22 @@ class _$MovieListEventCopyWithImpl<$Res, $Val extends MovieListEvent>
 }
 
 /// @nodoc
-abstract class _$$MovieListEventLoadNextPageCopyWith<$Res> {
-  factory _$$MovieListEventLoadNextPageCopyWith(
-          _$MovieListEventLoadNextPage value,
-          $Res Function(_$MovieListEventLoadNextPage) then) =
-      __$$MovieListEventLoadNextPageCopyWithImpl<$Res>;
+abstract class _$$MovieListEventLoadNextPageImplCopyWith<$Res> {
+  factory _$$MovieListEventLoadNextPageImplCopyWith(
+          _$MovieListEventLoadNextPageImpl value,
+          $Res Function(_$MovieListEventLoadNextPageImpl) then) =
+      __$$MovieListEventLoadNextPageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$MovieListEventLoadNextPageCopyWithImpl<$Res>
-    extends _$MovieListEventCopyWithImpl<$Res, _$MovieListEventLoadNextPage>
-    implements _$$MovieListEventLoadNextPageCopyWith<$Res> {
-  __$$MovieListEventLoadNextPageCopyWithImpl(
-      _$MovieListEventLoadNextPage _value,
-      $Res Function(_$MovieListEventLoadNextPage) _then)
+class __$$MovieListEventLoadNextPageImplCopyWithImpl<$Res>
+    extends _$MovieListEventCopyWithImpl<$Res, _$MovieListEventLoadNextPageImpl>
+    implements _$$MovieListEventLoadNextPageImplCopyWith<$Res> {
+  __$$MovieListEventLoadNextPageImplCopyWithImpl(
+      _$MovieListEventLoadNextPageImpl _value,
+      $Res Function(_$MovieListEventLoadNextPageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +104,7 @@ class __$$MovieListEventLoadNextPageCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$MovieListEventLoadNextPage(
+    return _then(_$MovieListEventLoadNextPageImpl(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ class __$$MovieListEventLoadNextPageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
-  const _$MovieListEventLoadNextPage({required this.locale});
+class _$MovieListEventLoadNextPageImpl implements MovieListEventLoadNextPage {
+  const _$MovieListEventLoadNextPageImpl({required this.locale});
 
   @override
   final String locale;
@@ -130,7 +130,7 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MovieListEventLoadNextPage &&
+            other is _$MovieListEventLoadNextPageImpl &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -140,9 +140,9 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MovieListEventLoadNextPageCopyWith<_$MovieListEventLoadNextPage>
-      get copyWith => __$$MovieListEventLoadNextPageCopyWithImpl<
-          _$MovieListEventLoadNextPage>(this, _$identity);
+  _$$MovieListEventLoadNextPageImplCopyWith<_$MovieListEventLoadNextPageImpl>
+      get copyWith => __$$MovieListEventLoadNextPageImplCopyWithImpl<
+          _$MovieListEventLoadNextPageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -215,34 +215,36 @@ class _$MovieListEventLoadNextPage implements MovieListEventLoadNextPage {
 
 abstract class MovieListEventLoadNextPage implements MovieListEvent {
   const factory MovieListEventLoadNextPage({required final String locale}) =
-      _$MovieListEventLoadNextPage;
+      _$MovieListEventLoadNextPageImpl;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$MovieListEventLoadNextPageCopyWith<_$MovieListEventLoadNextPage>
+  _$$MovieListEventLoadNextPageImplCopyWith<_$MovieListEventLoadNextPageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MovieListEventLoadResetCopyWith<$Res> {
-  factory _$$MovieListEventLoadResetCopyWith(_$MovieListEventLoadReset value,
-          $Res Function(_$MovieListEventLoadReset) then) =
-      __$$MovieListEventLoadResetCopyWithImpl<$Res>;
+abstract class _$$MovieListEventLoadResetImplCopyWith<$Res> {
+  factory _$$MovieListEventLoadResetImplCopyWith(
+          _$MovieListEventLoadResetImpl value,
+          $Res Function(_$MovieListEventLoadResetImpl) then) =
+      __$$MovieListEventLoadResetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MovieListEventLoadResetCopyWithImpl<$Res>
-    extends _$MovieListEventCopyWithImpl<$Res, _$MovieListEventLoadReset>
-    implements _$$MovieListEventLoadResetCopyWith<$Res> {
-  __$$MovieListEventLoadResetCopyWithImpl(_$MovieListEventLoadReset _value,
-      $Res Function(_$MovieListEventLoadReset) _then)
+class __$$MovieListEventLoadResetImplCopyWithImpl<$Res>
+    extends _$MovieListEventCopyWithImpl<$Res, _$MovieListEventLoadResetImpl>
+    implements _$$MovieListEventLoadResetImplCopyWith<$Res> {
+  __$$MovieListEventLoadResetImplCopyWithImpl(
+      _$MovieListEventLoadResetImpl _value,
+      $Res Function(_$MovieListEventLoadResetImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MovieListEventLoadReset implements MovieListEventLoadReset {
-  const _$MovieListEventLoadReset();
+class _$MovieListEventLoadResetImpl implements MovieListEventLoadReset {
+  const _$MovieListEventLoadResetImpl();
 
   @override
   String toString() {
@@ -253,7 +255,7 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MovieListEventLoadReset);
+            other is _$MovieListEventLoadResetImpl);
   }
 
   @override
@@ -329,25 +331,26 @@ class _$MovieListEventLoadReset implements MovieListEventLoadReset {
 }
 
 abstract class MovieListEventLoadReset implements MovieListEvent {
-  const factory MovieListEventLoadReset() = _$MovieListEventLoadReset;
+  const factory MovieListEventLoadReset() = _$MovieListEventLoadResetImpl;
 }
 
 /// @nodoc
-abstract class _$$MovieListEventSearchMovieCopyWith<$Res> {
-  factory _$$MovieListEventSearchMovieCopyWith(
-          _$MovieListEventSearchMovie value,
-          $Res Function(_$MovieListEventSearchMovie) then) =
-      __$$MovieListEventSearchMovieCopyWithImpl<$Res>;
+abstract class _$$MovieListEventSearchMovieImplCopyWith<$Res> {
+  factory _$$MovieListEventSearchMovieImplCopyWith(
+          _$MovieListEventSearchMovieImpl value,
+          $Res Function(_$MovieListEventSearchMovieImpl) then) =
+      __$$MovieListEventSearchMovieImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
 }
 
 /// @nodoc
-class __$$MovieListEventSearchMovieCopyWithImpl<$Res>
-    extends _$MovieListEventCopyWithImpl<$Res, _$MovieListEventSearchMovie>
-    implements _$$MovieListEventSearchMovieCopyWith<$Res> {
-  __$$MovieListEventSearchMovieCopyWithImpl(_$MovieListEventSearchMovie _value,
-      $Res Function(_$MovieListEventSearchMovie) _then)
+class __$$MovieListEventSearchMovieImplCopyWithImpl<$Res>
+    extends _$MovieListEventCopyWithImpl<$Res, _$MovieListEventSearchMovieImpl>
+    implements _$$MovieListEventSearchMovieImplCopyWith<$Res> {
+  __$$MovieListEventSearchMovieImplCopyWithImpl(
+      _$MovieListEventSearchMovieImpl _value,
+      $Res Function(_$MovieListEventSearchMovieImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -355,7 +358,7 @@ class __$$MovieListEventSearchMovieCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
   }) {
-    return _then(_$MovieListEventSearchMovie(
+    return _then(_$MovieListEventSearchMovieImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -366,8 +369,8 @@ class __$$MovieListEventSearchMovieCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
-  const _$MovieListEventSearchMovie({required this.query});
+class _$MovieListEventSearchMovieImpl implements MovieListEventSearchMovie {
+  const _$MovieListEventSearchMovieImpl({required this.query});
 
   @override
   final String query;
@@ -381,7 +384,7 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MovieListEventSearchMovie &&
+            other is _$MovieListEventSearchMovieImpl &&
             (identical(other.query, query) || other.query == query));
   }
 
@@ -391,9 +394,9 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MovieListEventSearchMovieCopyWith<_$MovieListEventSearchMovie>
-      get copyWith => __$$MovieListEventSearchMovieCopyWithImpl<
-          _$MovieListEventSearchMovie>(this, _$identity);
+  _$$MovieListEventSearchMovieImplCopyWith<_$MovieListEventSearchMovieImpl>
+      get copyWith => __$$MovieListEventSearchMovieImplCopyWithImpl<
+          _$MovieListEventSearchMovieImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -466,10 +469,10 @@ class _$MovieListEventSearchMovie implements MovieListEventSearchMovie {
 
 abstract class MovieListEventSearchMovie implements MovieListEvent {
   const factory MovieListEventSearchMovie({required final String query}) =
-      _$MovieListEventSearchMovie;
+      _$MovieListEventSearchMovieImpl;
 
   String get query;
   @JsonKey(ignore: true)
-  _$$MovieListEventSearchMovieCopyWith<_$MovieListEventSearchMovie>
+  _$$MovieListEventSearchMovieImplCopyWith<_$MovieListEventSearchMovieImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

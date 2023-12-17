@@ -92,23 +92,23 @@ class _$TrendingListEventCopyWithImpl<$Res, $Val extends TrendingListEvent>
 }
 
 /// @nodoc
-abstract class _$$TrendingListEventLoadAllThisWeekCopyWith<$Res> {
-  factory _$$TrendingListEventLoadAllThisWeekCopyWith(
-          _$TrendingListEventLoadAllThisWeek value,
-          $Res Function(_$TrendingListEventLoadAllThisWeek) then) =
-      __$$TrendingListEventLoadAllThisWeekCopyWithImpl<$Res>;
+abstract class _$$TrendingListEventLoadAllThisWeekImplCopyWith<$Res> {
+  factory _$$TrendingListEventLoadAllThisWeekImplCopyWith(
+          _$TrendingListEventLoadAllThisWeekImpl value,
+          $Res Function(_$TrendingListEventLoadAllThisWeekImpl) then) =
+      __$$TrendingListEventLoadAllThisWeekImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$TrendingListEventLoadAllThisWeekCopyWithImpl<$Res>
+class __$$TrendingListEventLoadAllThisWeekImplCopyWithImpl<$Res>
     extends _$TrendingListEventCopyWithImpl<$Res,
-        _$TrendingListEventLoadAllThisWeek>
-    implements _$$TrendingListEventLoadAllThisWeekCopyWith<$Res> {
-  __$$TrendingListEventLoadAllThisWeekCopyWithImpl(
-      _$TrendingListEventLoadAllThisWeek _value,
-      $Res Function(_$TrendingListEventLoadAllThisWeek) _then)
+        _$TrendingListEventLoadAllThisWeekImpl>
+    implements _$$TrendingListEventLoadAllThisWeekImplCopyWith<$Res> {
+  __$$TrendingListEventLoadAllThisWeekImplCopyWithImpl(
+      _$TrendingListEventLoadAllThisWeekImpl _value,
+      $Res Function(_$TrendingListEventLoadAllThisWeekImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +116,7 @@ class __$$TrendingListEventLoadAllThisWeekCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$TrendingListEventLoadAllThisWeek(
+    return _then(_$TrendingListEventLoadAllThisWeekImpl(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -127,9 +127,9 @@ class __$$TrendingListEventLoadAllThisWeekCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrendingListEventLoadAllThisWeek
+class _$TrendingListEventLoadAllThisWeekImpl
     implements TrendingListEventLoadAllThisWeek {
-  _$TrendingListEventLoadAllThisWeek({required this.locale});
+  _$TrendingListEventLoadAllThisWeekImpl({required this.locale});
 
   @override
   final String locale;
@@ -143,7 +143,7 @@ class _$TrendingListEventLoadAllThisWeek
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendingListEventLoadAllThisWeek &&
+            other is _$TrendingListEventLoadAllThisWeekImpl &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -153,10 +153,10 @@ class _$TrendingListEventLoadAllThisWeek
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TrendingListEventLoadAllThisWeekCopyWith<
-          _$TrendingListEventLoadAllThisWeek>
-      get copyWith => __$$TrendingListEventLoadAllThisWeekCopyWithImpl<
-          _$TrendingListEventLoadAllThisWeek>(this, _$identity);
+  _$$TrendingListEventLoadAllThisWeekImplCopyWith<
+          _$TrendingListEventLoadAllThisWeekImpl>
+      get copyWith => __$$TrendingListEventLoadAllThisWeekImplCopyWithImpl<
+          _$TrendingListEventLoadAllThisWeekImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -240,33 +240,33 @@ class _$TrendingListEventLoadAllThisWeek
 
 abstract class TrendingListEventLoadAllThisWeek implements TrendingListEvent {
   factory TrendingListEventLoadAllThisWeek({required final String locale}) =
-      _$TrendingListEventLoadAllThisWeek;
+      _$TrendingListEventLoadAllThisWeekImpl;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$TrendingListEventLoadAllThisWeekCopyWith<
-          _$TrendingListEventLoadAllThisWeek>
+  _$$TrendingListEventLoadAllThisWeekImplCopyWith<
+          _$TrendingListEventLoadAllThisWeekImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TrendingListEventLoadMoviesThisWeekCopyWith<$Res> {
-  factory _$$TrendingListEventLoadMoviesThisWeekCopyWith(
-          _$TrendingListEventLoadMoviesThisWeek value,
-          $Res Function(_$TrendingListEventLoadMoviesThisWeek) then) =
-      __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<$Res>;
+abstract class _$$TrendingListEventLoadMoviesThisWeekImplCopyWith<$Res> {
+  factory _$$TrendingListEventLoadMoviesThisWeekImplCopyWith(
+          _$TrendingListEventLoadMoviesThisWeekImpl value,
+          $Res Function(_$TrendingListEventLoadMoviesThisWeekImpl) then) =
+      __$$TrendingListEventLoadMoviesThisWeekImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<$Res>
+class __$$TrendingListEventLoadMoviesThisWeekImplCopyWithImpl<$Res>
     extends _$TrendingListEventCopyWithImpl<$Res,
-        _$TrendingListEventLoadMoviesThisWeek>
-    implements _$$TrendingListEventLoadMoviesThisWeekCopyWith<$Res> {
-  __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl(
-      _$TrendingListEventLoadMoviesThisWeek _value,
-      $Res Function(_$TrendingListEventLoadMoviesThisWeek) _then)
+        _$TrendingListEventLoadMoviesThisWeekImpl>
+    implements _$$TrendingListEventLoadMoviesThisWeekImplCopyWith<$Res> {
+  __$$TrendingListEventLoadMoviesThisWeekImplCopyWithImpl(
+      _$TrendingListEventLoadMoviesThisWeekImpl _value,
+      $Res Function(_$TrendingListEventLoadMoviesThisWeekImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -274,7 +274,7 @@ class __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$TrendingListEventLoadMoviesThisWeek(
+    return _then(_$TrendingListEventLoadMoviesThisWeekImpl(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -285,9 +285,9 @@ class __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrendingListEventLoadMoviesThisWeek
+class _$TrendingListEventLoadMoviesThisWeekImpl
     implements TrendingListEventLoadMoviesThisWeek {
-  _$TrendingListEventLoadMoviesThisWeek({required this.locale});
+  _$TrendingListEventLoadMoviesThisWeekImpl({required this.locale});
 
   @override
   final String locale;
@@ -301,7 +301,7 @@ class _$TrendingListEventLoadMoviesThisWeek
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendingListEventLoadMoviesThisWeek &&
+            other is _$TrendingListEventLoadMoviesThisWeekImpl &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -311,10 +311,10 @@ class _$TrendingListEventLoadMoviesThisWeek
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TrendingListEventLoadMoviesThisWeekCopyWith<
-          _$TrendingListEventLoadMoviesThisWeek>
-      get copyWith => __$$TrendingListEventLoadMoviesThisWeekCopyWithImpl<
-          _$TrendingListEventLoadMoviesThisWeek>(this, _$identity);
+  _$$TrendingListEventLoadMoviesThisWeekImplCopyWith<
+          _$TrendingListEventLoadMoviesThisWeekImpl>
+      get copyWith => __$$TrendingListEventLoadMoviesThisWeekImplCopyWithImpl<
+          _$TrendingListEventLoadMoviesThisWeekImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -399,33 +399,33 @@ class _$TrendingListEventLoadMoviesThisWeek
 abstract class TrendingListEventLoadMoviesThisWeek
     implements TrendingListEvent {
   factory TrendingListEventLoadMoviesThisWeek({required final String locale}) =
-      _$TrendingListEventLoadMoviesThisWeek;
+      _$TrendingListEventLoadMoviesThisWeekImpl;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$TrendingListEventLoadMoviesThisWeekCopyWith<
-          _$TrendingListEventLoadMoviesThisWeek>
+  _$$TrendingListEventLoadMoviesThisWeekImplCopyWith<
+          _$TrendingListEventLoadMoviesThisWeekImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TrendingListEventLoadTvThisWeekCopyWith<$Res> {
-  factory _$$TrendingListEventLoadTvThisWeekCopyWith(
-          _$TrendingListEventLoadTvThisWeek value,
-          $Res Function(_$TrendingListEventLoadTvThisWeek) then) =
-      __$$TrendingListEventLoadTvThisWeekCopyWithImpl<$Res>;
+abstract class _$$TrendingListEventLoadTvThisWeekImplCopyWith<$Res> {
+  factory _$$TrendingListEventLoadTvThisWeekImplCopyWith(
+          _$TrendingListEventLoadTvThisWeekImpl value,
+          $Res Function(_$TrendingListEventLoadTvThisWeekImpl) then) =
+      __$$TrendingListEventLoadTvThisWeekImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$TrendingListEventLoadTvThisWeekCopyWithImpl<$Res>
+class __$$TrendingListEventLoadTvThisWeekImplCopyWithImpl<$Res>
     extends _$TrendingListEventCopyWithImpl<$Res,
-        _$TrendingListEventLoadTvThisWeek>
-    implements _$$TrendingListEventLoadTvThisWeekCopyWith<$Res> {
-  __$$TrendingListEventLoadTvThisWeekCopyWithImpl(
-      _$TrendingListEventLoadTvThisWeek _value,
-      $Res Function(_$TrendingListEventLoadTvThisWeek) _then)
+        _$TrendingListEventLoadTvThisWeekImpl>
+    implements _$$TrendingListEventLoadTvThisWeekImplCopyWith<$Res> {
+  __$$TrendingListEventLoadTvThisWeekImplCopyWithImpl(
+      _$TrendingListEventLoadTvThisWeekImpl _value,
+      $Res Function(_$TrendingListEventLoadTvThisWeekImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -433,7 +433,7 @@ class __$$TrendingListEventLoadTvThisWeekCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$TrendingListEventLoadTvThisWeek(
+    return _then(_$TrendingListEventLoadTvThisWeekImpl(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -444,9 +444,9 @@ class __$$TrendingListEventLoadTvThisWeekCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrendingListEventLoadTvThisWeek
+class _$TrendingListEventLoadTvThisWeekImpl
     implements TrendingListEventLoadTvThisWeek {
-  _$TrendingListEventLoadTvThisWeek({required this.locale});
+  _$TrendingListEventLoadTvThisWeekImpl({required this.locale});
 
   @override
   final String locale;
@@ -460,7 +460,7 @@ class _$TrendingListEventLoadTvThisWeek
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendingListEventLoadTvThisWeek &&
+            other is _$TrendingListEventLoadTvThisWeekImpl &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -470,9 +470,10 @@ class _$TrendingListEventLoadTvThisWeek
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TrendingListEventLoadTvThisWeekCopyWith<_$TrendingListEventLoadTvThisWeek>
-      get copyWith => __$$TrendingListEventLoadTvThisWeekCopyWithImpl<
-          _$TrendingListEventLoadTvThisWeek>(this, _$identity);
+  _$$TrendingListEventLoadTvThisWeekImplCopyWith<
+          _$TrendingListEventLoadTvThisWeekImpl>
+      get copyWith => __$$TrendingListEventLoadTvThisWeekImplCopyWithImpl<
+          _$TrendingListEventLoadTvThisWeekImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -556,36 +557,38 @@ class _$TrendingListEventLoadTvThisWeek
 
 abstract class TrendingListEventLoadTvThisWeek implements TrendingListEvent {
   factory TrendingListEventLoadTvThisWeek({required final String locale}) =
-      _$TrendingListEventLoadTvThisWeek;
+      _$TrendingListEventLoadTvThisWeekImpl;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$TrendingListEventLoadTvThisWeekCopyWith<_$TrendingListEventLoadTvThisWeek>
+  _$$TrendingListEventLoadTvThisWeekImplCopyWith<
+          _$TrendingListEventLoadTvThisWeekImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TrendingListEventLoadResetCopyWith<$Res> {
-  factory _$$TrendingListEventLoadResetCopyWith(
-          _$TrendingListEventLoadReset value,
-          $Res Function(_$TrendingListEventLoadReset) then) =
-      __$$TrendingListEventLoadResetCopyWithImpl<$Res>;
+abstract class _$$TrendingListEventLoadResetImplCopyWith<$Res> {
+  factory _$$TrendingListEventLoadResetImplCopyWith(
+          _$TrendingListEventLoadResetImpl value,
+          $Res Function(_$TrendingListEventLoadResetImpl) then) =
+      __$$TrendingListEventLoadResetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TrendingListEventLoadResetCopyWithImpl<$Res>
-    extends _$TrendingListEventCopyWithImpl<$Res, _$TrendingListEventLoadReset>
-    implements _$$TrendingListEventLoadResetCopyWith<$Res> {
-  __$$TrendingListEventLoadResetCopyWithImpl(
-      _$TrendingListEventLoadReset _value,
-      $Res Function(_$TrendingListEventLoadReset) _then)
+class __$$TrendingListEventLoadResetImplCopyWithImpl<$Res>
+    extends _$TrendingListEventCopyWithImpl<$Res,
+        _$TrendingListEventLoadResetImpl>
+    implements _$$TrendingListEventLoadResetImplCopyWith<$Res> {
+  __$$TrendingListEventLoadResetImplCopyWithImpl(
+      _$TrendingListEventLoadResetImpl _value,
+      $Res Function(_$TrendingListEventLoadResetImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
-  _$TrendingListEventLoadReset();
+class _$TrendingListEventLoadResetImpl implements TrendingListEventLoadReset {
+  _$TrendingListEventLoadResetImpl();
 
   @override
   String toString() {
@@ -596,7 +599,7 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendingListEventLoadReset);
+            other is _$TrendingListEventLoadResetImpl);
   }
 
   @override
@@ -683,5 +686,5 @@ class _$TrendingListEventLoadReset implements TrendingListEventLoadReset {
 }
 
 abstract class TrendingListEventLoadReset implements TrendingListEvent {
-  factory TrendingListEventLoadReset() = _$TrendingListEventLoadReset;
+  factory TrendingListEventLoadReset() = _$TrendingListEventLoadResetImpl;
 }

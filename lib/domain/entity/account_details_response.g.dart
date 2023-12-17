@@ -6,16 +6,16 @@ part of 'account_details_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AccountDetailsResponse _$$_AccountDetailsResponseFromJson(
+_$AccountDetailsResponseImpl _$$AccountDetailsResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AccountDetailsResponse(
+    _$AccountDetailsResponseImpl(
       accountDetails: (json['accountDetails'] as List<dynamic>)
           .map((e) => AccountDetails.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_AccountDetailsResponseToJson(
-        _$_AccountDetailsResponse instance) =>
+Map<String, dynamic> _$$AccountDetailsResponseImplToJson(
+        _$AccountDetailsResponseImpl instance) =>
     <String, dynamic>{
       'accountDetails': instance.accountDetails,
     };

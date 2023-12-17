@@ -6,8 +6,8 @@ part of 'account_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AccountDetails _$$_AccountDetailsFromJson(Map<String, dynamic> json) =>
-    _$_AccountDetails(
+_$AccountDetailsImpl _$$AccountDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$AccountDetailsImpl(
       id: json['id'] as int,
       iso6391: json['iso_639_1'] as String,
       iso31661: json['iso_3166_1'] as String,
@@ -16,7 +16,8 @@ _$_AccountDetails _$$_AccountDetailsFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String,
     );
 
-Map<String, dynamic> _$$_AccountDetailsToJson(_$_AccountDetails instance) =>
+Map<String, dynamic> _$$AccountDetailsImplToJson(
+        _$AccountDetailsImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'iso_639_1': instance.iso6391,
