@@ -160,18 +160,24 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
     // }
 
-    data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
+    data.actorsData =
+        details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
     data.favoriteData.isFavorite = isFavorite;
     data.watchlistData.isWatchlist = isWatchlist;
 
-    data.recommendationsData = details.recommendations.recommendationsList.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    data.recommendationsData = details.recommendations.recommendationsList
+        .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
 
     // data.externalIds = details.externalIds.map((e) => MovieDetailsExternalIdsData(id: e.id, imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId)).toList();
 
-    data.allVideosData = details.videos.results.map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id)).toList();
+    data.allVideosData = details.videos.results
+        .map((e) => MovieDetailsAllVideosData(
+            name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
+        .toList();
 
     var id = data.id;
     var title = data.title;
@@ -307,10 +313,5 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   void onDetailsTap(BuildContext context, int index) {
     final id = state.id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetailsFullCastAndCrewList, arguments: id);
-  }
-
-  void onPeopleTap(BuildContext context, int index) {
-    final id = state.id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: id);
   }
 }
