@@ -6,6 +6,7 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,8 +45,9 @@ class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: cubit.data.actorsData.length,
           itemBuilder: (BuildContext context, int index) {
+            final actorId = actorsData[index].id;
             return InkWell(
-              onTap: () => cubit.onPeopleTap(context, index),
+              onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: actorId),
               child: _FullCastAndCrewListWidget(
                 actorIndex: index,
               ),
