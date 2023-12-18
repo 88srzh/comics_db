@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -32,7 +33,7 @@ class MovieDetailsRecommendations extends StatelessWidget {
             'Recommendations',
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          const _MovieDetailsRecommendationsWidget(),
+          _MovieDetailsRecommendationsWidget(recommendationsData: recommendationsData),
         ],
       ),
     );
@@ -40,7 +41,11 @@ class MovieDetailsRecommendations extends StatelessWidget {
 }
 
 class _MovieDetailsRecommendationsWidget extends StatelessWidget {
-  const _MovieDetailsRecommendationsWidget({Key? key}) : super(key: key);
+  final List<MovieDetailsRecommendationsData> recommendationsData;
+  const _MovieDetailsRecommendationsWidget({
+    Key? key,
+    required this.recommendationsData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
         child: Scrollbar(
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 5,
+            itemCount: recommendationsData.length,
             itemExtent: 220,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
