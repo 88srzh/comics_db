@@ -23,7 +23,7 @@ class MovieDetailsRecommendations extends StatelessWidget {
     var recommendationsData = context.watch<MovieDetailsCubit>().data.recommendationsData;
     if (recommendationsData.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+      padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
