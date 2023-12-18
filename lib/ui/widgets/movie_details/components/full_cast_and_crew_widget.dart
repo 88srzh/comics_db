@@ -44,8 +44,11 @@ class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: cubit.data.actorsData.length,
           itemBuilder: (BuildContext context, int index) {
-            return _FullCastAndCrewListWidget(
-              actorIndex: index,
+            return InkWell(
+              onTap: () => cubit.onPeopleTap(context, index),
+              child: _FullCastAndCrewListWidget(
+                actorIndex: index,
+              ),
             );
           },
         ),

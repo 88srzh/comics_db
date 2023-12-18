@@ -308,4 +308,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final id = state.id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetailsFullCastAndCrewList, arguments: id);
   }
+
+  void onPeopleTap(BuildContext context, int index) {
+    final id = state.id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: id);
+  }
 }
