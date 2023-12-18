@@ -40,7 +40,7 @@ class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
             crossAxisCount: 3,
             mainAxisSpacing: 5,
             crossAxisSpacing: 3,
-            childAspectRatio: 1 / 1.9,
+            childAspectRatio: 1 / 1.8,
           ),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: cubit.data.actorsData.length,
@@ -103,7 +103,7 @@ class _FullCastAndCrewListWidget extends StatelessWidget {
                   children: [
                     CustomCastListTextWidget(text: actor.name, maxLines: 1),
                     const SizedBox(height: 4.0),
-                    CustomCastListTextWidget(text: actor.character, maxLines: 2),
+                    CustomCastListTextWidget(text: actor.character, maxLines: 1),
                   ],
                 ),
               ),
