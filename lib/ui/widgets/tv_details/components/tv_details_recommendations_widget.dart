@@ -104,7 +104,7 @@ class TvDetailsItemRecommendationsWidget extends StatelessWidget {
     final backdropPath = recommendationsData.backdropPath;
     final name = recommendationsData.name;
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: recommendationsId),
+      onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: recommendationsId),
       child: ClipRRect(
         child: Column(
           children: [
