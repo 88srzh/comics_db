@@ -16,8 +16,8 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
-class CastWidget extends StatelessWidget {
-  const CastWidget({Key? key}) : super(key: key);
+class PeopleDetailsCastWidget extends StatelessWidget {
+  const PeopleDetailsCastWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
