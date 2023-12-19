@@ -23,7 +23,7 @@ class PeopleDetailsCastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleDetailsCubit>();
     var charactersData = cubit.data.charactersData;
-    var index = cubit.state.id;
+    // var index = cubit.state.id;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return ColoredBox(
       color: Colors.transparent,
@@ -39,13 +39,14 @@ class PeopleDetailsCastWidget extends StatelessWidget {
                   'Known For',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                InkWell(
-                  onTap: () => cubit.onSeeAllKnownForTap(context, index),
-                  child: Text(
-                    'See all',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                ),
+                // TODO disable "See all", because it doesn't work and it's not on the original site
+                // InkWell(
+                //   onTap: () => cubit.onSeeAllKnownForTap(context, index),
+                //   child: Text(
+                //     'See all',
+                //     style: Theme.of(context).textTheme.displaySmall,
+                //   ),
+                // ),
               ],
             ),
             SizedBox(
