@@ -23,7 +23,7 @@ class CastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleDetailsCubit>();
     var charactersData = cubit.data.charactersData;
-    var id = cubit.state.id;
+    var index = cubit.state.id;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return ColoredBox(
       color: Colors.transparent,
@@ -40,7 +40,7 @@ class CastWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 InkWell(
-                  onTap: () => cubit.onSeeAllKnownForTap(context, id),
+                  onTap: () => cubit.onSeeAllKnownForTap(context, index),
                   child: Text(
                     'See all',
                     style: Theme.of(context).textTheme.displaySmall,
