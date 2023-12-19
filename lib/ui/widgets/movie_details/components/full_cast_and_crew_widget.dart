@@ -9,7 +9,7 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FullCastAndCrewWidget extends StatefulWidget {
   const FullCastAndCrewWidget({Key? key}) : super(key: key);

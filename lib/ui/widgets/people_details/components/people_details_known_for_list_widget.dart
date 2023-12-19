@@ -10,14 +10,14 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class KnownForListWidget extends StatefulWidget {
-  const KnownForListWidget({Key? key}) : super(key: key);
+class PeopleDetailsKnownForListWidget extends StatefulWidget {
+  const PeopleDetailsKnownForListWidget({Key? key}) : super(key: key);
 
   @override
-  State<KnownForListWidget> createState() => _KnownForListWidgetState();
+  State<PeopleDetailsKnownForListWidget> createState() => _PeopleDetailsKnownForListWidgetState();
 }
 
-class _KnownForListWidgetState extends State<KnownForListWidget> {
+class _PeopleDetailsKnownForListWidgetState extends State<PeopleDetailsKnownForListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
