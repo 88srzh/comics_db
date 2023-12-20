@@ -39,10 +39,6 @@ class HeadAccountCardWidget extends StatelessWidget {
             username,
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          subtitle: const Text(
-            'Member since 2021',
-            style: TextStyle(color: Colors.grey),
-          ),
         ),
       ],
     );
