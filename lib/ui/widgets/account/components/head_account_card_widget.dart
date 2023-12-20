@@ -19,12 +19,12 @@ class HeadAccountCardWidget extends StatelessWidget {
     var cubit = context.watch<AccountDetailsCubit>();
     final String username = cubit.state.username;
     final String avatarPath = cubit.state.avatarPath;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ListTile(
-          leading: CircleAvatar(
-            radius: 50.0,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 40.0,
             backgroundColor: Colors.transparent,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(100.0)),
@@ -35,12 +35,13 @@ class HeadAccountCardWidget extends StatelessWidget {
               ),
             ),
           ),
-          title: Text(
+          const SizedBox(width: 15.0),
+          Text(
             username,
             style: Theme.of(context).textTheme.titleMedium,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
