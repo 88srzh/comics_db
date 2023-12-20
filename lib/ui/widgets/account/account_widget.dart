@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
-import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
@@ -33,7 +32,6 @@ class _AccountWidgetState extends State<AccountWidget> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomDetailsAppBar(title: ''),
       body: BodyPersonalWidget(),
     );
   }
