@@ -491,7 +491,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> discoverPopularTV(int page, String locale, String apiKey, bool includeAdult, bool includeNullFirstAirDates, String sortBy) async {
+  Future<TVResponse> discoverPopularTV(int page, String locale, String apiKey, bool includeAdult, bool includeNullFirstAirDates, String sortBy, bool screenThreatrically) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TVResponse.fromJson(jsonMap);
@@ -505,6 +505,7 @@ class MovieAndTvApiClient {
       'include_adult': includeAdult.toString(),
       'include_null_first_air_dates': includeNullFirstAirDates.toString(),
       'sort_by': sortBy,
+      'screened_theatrically': screenThreatrically.toString(),
     });
     return tvResult;
   }

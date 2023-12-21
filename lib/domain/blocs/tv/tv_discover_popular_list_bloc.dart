@@ -40,7 +40,7 @@ class TvDiscoverPopularListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.discoverPopularTV(nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc');
+        final result = await _tvApiClient.discoverPopularTV(nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', true);
         return result;
       });
       if (container != null) {
