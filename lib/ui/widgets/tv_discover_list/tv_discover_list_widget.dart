@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_discover_popular_list/tv_discover_popular_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/tv_discover_list/tv_discover_list_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,14 +12,14 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 
-class DiscoverPopularTvsWidget extends StatefulWidget {
-  const DiscoverPopularTvsWidget({Key? key}) : super(key: key);
+class DiscoverTvsWidget extends StatefulWidget {
+  const DiscoverTvsWidget({Key? key}) : super(key: key);
 
   @override
-  State<DiscoverPopularTvsWidget> createState() => _DiscoverPopularTvsWidgetState();
+  State<DiscoverTvsWidget> createState() => _DiscoverTvsWidgetState();
 }
 
-class _DiscoverPopularTvsWidgetState extends State<DiscoverPopularTvsWidget> {
+class _DiscoverTvsWidgetState extends State<DiscoverTvsWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

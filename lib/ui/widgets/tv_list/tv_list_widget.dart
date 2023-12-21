@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_discover_popular_list/tv_discover_popular_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_discover_list/tv_discover_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -50,11 +50,19 @@ class TvListWidget extends StatelessWidget {
                   child: PopularTvWidget(),
                 ),
               ),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomHeaderTextWidget(text: 'Discover TV'),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 200,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: DiscoverPopularTvsWidget(),
+                  child: DiscoverTvsWidget(),
                 ),
               ),
               const Padding(
