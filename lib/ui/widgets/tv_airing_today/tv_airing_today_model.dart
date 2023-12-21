@@ -1,3 +1,4 @@
+/*
 // Dart imports:
 import 'dart:async';
 
@@ -14,7 +15,7 @@ import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 
-class AiringTodayTvsModel extends ChangeNotifier {
+// class AiringTodayTvsModel extends ChangeNotifier {
   final _apiClient = MovieAndTvApiClient();
   final _tvs = <TV>[];
   late int _currentPage;
@@ -50,7 +51,7 @@ class AiringTodayTvsModel extends ChangeNotifier {
     final query = _searchQuery;
     if (query == null) {
       return await _apiClient.airingTodayTvs(
-          nextPage, _locale, Configuration.apiKey);
+          nextPage, _locale, Configuration.apiKey, false, 'popularity.desc', '{max_date}', '{min_date}');
     } else {
       return await _apiClient.searchTV(
           nextPage, _locale, query, Configuration.apiKey);
@@ -95,4 +96,4 @@ class AiringTodayTvsModel extends ChangeNotifier {
     if (index < _tvs.length - 1) return;
     _loadNextTVsPage();
   }
-}
+}*/
