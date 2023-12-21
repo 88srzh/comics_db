@@ -53,13 +53,6 @@ class MovieListWidget extends StatelessWidget {
                   child: PopularMovieWidget(),
                 ),
               ),
-              const SizedBox(
-                height: 200,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: PopularMovieWidget(),
-                ),
-              ),
               const Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(

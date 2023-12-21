@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_discover_popular_list/tv_discover_popular_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -47,6 +48,13 @@ class TvListWidget extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: PopularTvWidget(),
+                ),
+              ),
+              const SizedBox(
+                height: 200,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: DiscoverPopularTvsWidget(),
                 ),
               ),
               const Padding(
