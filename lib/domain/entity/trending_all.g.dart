@@ -6,8 +6,8 @@ part of 'trending_all.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TrendingAll _$$_TrendingAllFromJson(Map<String, dynamic> json) =>
-    _$_TrendingAll(
+_$TrendingAllImpl _$$TrendingAllImplFromJson(Map<String, dynamic> json) =>
+    _$TrendingAllImpl(
       posterPath: json['poster_path'] as String?,
       adult: json['adult'] as bool,
       overview: json['overview'] as String,
@@ -29,7 +29,7 @@ _$_TrendingAll _$$_TrendingAllFromJson(Map<String, dynamic> json) =>
       firstAirDate: parseDateFromString(json['first_air_date'] as String?),
     );
 
-Map<String, dynamic> _$$_TrendingAllToJson(_$_TrendingAll instance) =>
+Map<String, dynamic> _$$TrendingAllImplToJson(_$TrendingAllImpl instance) =>
     <String, dynamic>{
       'poster_path': instance.posterPath,
       'adult': instance.adult,

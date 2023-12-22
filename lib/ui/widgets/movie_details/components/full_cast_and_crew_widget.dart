@@ -6,9 +6,10 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FullCastAndCrewWidget extends StatefulWidget {
   const FullCastAndCrewWidget({Key? key}) : super(key: key);
@@ -39,13 +40,17 @@ class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
             crossAxisCount: 3,
             mainAxisSpacing: 5,
             crossAxisSpacing: 3,
-            childAspectRatio: 1 / 1.9,
+            childAspectRatio: 1 / 1.8,
           ),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: cubit.data.actorsData.length,
           itemBuilder: (BuildContext context, int index) {
-            return _FullCastAndCrewListWidget(
-              actorIndex: index,
+            final actorId = actorsData[index].id;
+            return InkWell(
+              onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.peopleDetails, arguments: actorId),
+              child: _FullCastAndCrewListWidget(
+                actorIndex: index,
+              ),
             );
           },
         ),
@@ -98,7 +103,7 @@ class _FullCastAndCrewListWidget extends StatelessWidget {
                   children: [
                     CustomCastListTextWidget(text: actor.name, maxLines: 1),
                     const SizedBox(height: 4.0),
-                    CustomCastListTextWidget(text: actor.character, maxLines: 2),
+                    CustomCastListTextWidget(text: actor.character, maxLines: 1),
                   ],
                 ),
               ),

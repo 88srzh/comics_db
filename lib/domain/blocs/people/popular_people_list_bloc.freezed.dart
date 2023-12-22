@@ -81,22 +81,23 @@ class _$PeopleListEventCopyWithImpl<$Res, $Val extends PeopleListEvent>
 }
 
 /// @nodoc
-abstract class _$$PeopleListEventLoadNextPageCopyWith<$Res> {
-  factory _$$PeopleListEventLoadNextPageCopyWith(
-          _$PeopleListEventLoadNextPage value,
-          $Res Function(_$PeopleListEventLoadNextPage) then) =
-      __$$PeopleListEventLoadNextPageCopyWithImpl<$Res>;
+abstract class _$$PeopleListEventLoadNextPageImplCopyWith<$Res> {
+  factory _$$PeopleListEventLoadNextPageImplCopyWith(
+          _$PeopleListEventLoadNextPageImpl value,
+          $Res Function(_$PeopleListEventLoadNextPageImpl) then) =
+      __$$PeopleListEventLoadNextPageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$PeopleListEventLoadNextPageCopyWithImpl<$Res>
-    extends _$PeopleListEventCopyWithImpl<$Res, _$PeopleListEventLoadNextPage>
-    implements _$$PeopleListEventLoadNextPageCopyWith<$Res> {
-  __$$PeopleListEventLoadNextPageCopyWithImpl(
-      _$PeopleListEventLoadNextPage _value,
-      $Res Function(_$PeopleListEventLoadNextPage) _then)
+class __$$PeopleListEventLoadNextPageImplCopyWithImpl<$Res>
+    extends _$PeopleListEventCopyWithImpl<$Res,
+        _$PeopleListEventLoadNextPageImpl>
+    implements _$$PeopleListEventLoadNextPageImplCopyWith<$Res> {
+  __$$PeopleListEventLoadNextPageImplCopyWithImpl(
+      _$PeopleListEventLoadNextPageImpl _value,
+      $Res Function(_$PeopleListEventLoadNextPageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +105,7 @@ class __$$PeopleListEventLoadNextPageCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$PeopleListEventLoadNextPage(
+    return _then(_$PeopleListEventLoadNextPageImpl(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -115,8 +116,8 @@ class __$$PeopleListEventLoadNextPageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PeopleListEventLoadNextPage implements PeopleListEventLoadNextPage {
-  _$PeopleListEventLoadNextPage({required this.locale});
+class _$PeopleListEventLoadNextPageImpl implements PeopleListEventLoadNextPage {
+  _$PeopleListEventLoadNextPageImpl({required this.locale});
 
   @override
   final String locale;
@@ -130,7 +131,7 @@ class _$PeopleListEventLoadNextPage implements PeopleListEventLoadNextPage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PeopleListEventLoadNextPage &&
+            other is _$PeopleListEventLoadNextPageImpl &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -140,9 +141,9 @@ class _$PeopleListEventLoadNextPage implements PeopleListEventLoadNextPage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PeopleListEventLoadNextPageCopyWith<_$PeopleListEventLoadNextPage>
-      get copyWith => __$$PeopleListEventLoadNextPageCopyWithImpl<
-          _$PeopleListEventLoadNextPage>(this, _$identity);
+  _$$PeopleListEventLoadNextPageImplCopyWith<_$PeopleListEventLoadNextPageImpl>
+      get copyWith => __$$PeopleListEventLoadNextPageImplCopyWithImpl<
+          _$PeopleListEventLoadNextPageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -215,34 +216,36 @@ class _$PeopleListEventLoadNextPage implements PeopleListEventLoadNextPage {
 
 abstract class PeopleListEventLoadNextPage implements PeopleListEvent {
   factory PeopleListEventLoadNextPage({required final String locale}) =
-      _$PeopleListEventLoadNextPage;
+      _$PeopleListEventLoadNextPageImpl;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$PeopleListEventLoadNextPageCopyWith<_$PeopleListEventLoadNextPage>
+  _$$PeopleListEventLoadNextPageImplCopyWith<_$PeopleListEventLoadNextPageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PeopleListEventLoadResetCopyWith<$Res> {
-  factory _$$PeopleListEventLoadResetCopyWith(_$PeopleListEventLoadReset value,
-          $Res Function(_$PeopleListEventLoadReset) then) =
-      __$$PeopleListEventLoadResetCopyWithImpl<$Res>;
+abstract class _$$PeopleListEventLoadResetImplCopyWith<$Res> {
+  factory _$$PeopleListEventLoadResetImplCopyWith(
+          _$PeopleListEventLoadResetImpl value,
+          $Res Function(_$PeopleListEventLoadResetImpl) then) =
+      __$$PeopleListEventLoadResetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PeopleListEventLoadResetCopyWithImpl<$Res>
-    extends _$PeopleListEventCopyWithImpl<$Res, _$PeopleListEventLoadReset>
-    implements _$$PeopleListEventLoadResetCopyWith<$Res> {
-  __$$PeopleListEventLoadResetCopyWithImpl(_$PeopleListEventLoadReset _value,
-      $Res Function(_$PeopleListEventLoadReset) _then)
+class __$$PeopleListEventLoadResetImplCopyWithImpl<$Res>
+    extends _$PeopleListEventCopyWithImpl<$Res, _$PeopleListEventLoadResetImpl>
+    implements _$$PeopleListEventLoadResetImplCopyWith<$Res> {
+  __$$PeopleListEventLoadResetImplCopyWithImpl(
+      _$PeopleListEventLoadResetImpl _value,
+      $Res Function(_$PeopleListEventLoadResetImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PeopleListEventLoadReset implements PeopleListEventLoadReset {
-  _$PeopleListEventLoadReset();
+class _$PeopleListEventLoadResetImpl implements PeopleListEventLoadReset {
+  _$PeopleListEventLoadResetImpl();
 
   @override
   String toString() {
@@ -253,7 +256,7 @@ class _$PeopleListEventLoadReset implements PeopleListEventLoadReset {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PeopleListEventLoadReset);
+            other is _$PeopleListEventLoadResetImpl);
   }
 
   @override
@@ -329,26 +332,27 @@ class _$PeopleListEventLoadReset implements PeopleListEventLoadReset {
 }
 
 abstract class PeopleListEventLoadReset implements PeopleListEvent {
-  factory PeopleListEventLoadReset() = _$PeopleListEventLoadReset;
+  factory PeopleListEventLoadReset() = _$PeopleListEventLoadResetImpl;
 }
 
 /// @nodoc
-abstract class _$$PeopleListEventSearchMovieCopyWith<$Res> {
-  factory _$$PeopleListEventSearchMovieCopyWith(
-          _$PeopleListEventSearchMovie value,
-          $Res Function(_$PeopleListEventSearchMovie) then) =
-      __$$PeopleListEventSearchMovieCopyWithImpl<$Res>;
+abstract class _$$PeopleListEventSearchMovieImplCopyWith<$Res> {
+  factory _$$PeopleListEventSearchMovieImplCopyWith(
+          _$PeopleListEventSearchMovieImpl value,
+          $Res Function(_$PeopleListEventSearchMovieImpl) then) =
+      __$$PeopleListEventSearchMovieImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
 }
 
 /// @nodoc
-class __$$PeopleListEventSearchMovieCopyWithImpl<$Res>
-    extends _$PeopleListEventCopyWithImpl<$Res, _$PeopleListEventSearchMovie>
-    implements _$$PeopleListEventSearchMovieCopyWith<$Res> {
-  __$$PeopleListEventSearchMovieCopyWithImpl(
-      _$PeopleListEventSearchMovie _value,
-      $Res Function(_$PeopleListEventSearchMovie) _then)
+class __$$PeopleListEventSearchMovieImplCopyWithImpl<$Res>
+    extends _$PeopleListEventCopyWithImpl<$Res,
+        _$PeopleListEventSearchMovieImpl>
+    implements _$$PeopleListEventSearchMovieImplCopyWith<$Res> {
+  __$$PeopleListEventSearchMovieImplCopyWithImpl(
+      _$PeopleListEventSearchMovieImpl _value,
+      $Res Function(_$PeopleListEventSearchMovieImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -356,7 +360,7 @@ class __$$PeopleListEventSearchMovieCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
   }) {
-    return _then(_$PeopleListEventSearchMovie(
+    return _then(_$PeopleListEventSearchMovieImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -367,8 +371,8 @@ class __$$PeopleListEventSearchMovieCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PeopleListEventSearchMovie implements PeopleListEventSearchMovie {
-  _$PeopleListEventSearchMovie({required this.query});
+class _$PeopleListEventSearchMovieImpl implements PeopleListEventSearchMovie {
+  _$PeopleListEventSearchMovieImpl({required this.query});
 
   @override
   final String query;
@@ -382,7 +386,7 @@ class _$PeopleListEventSearchMovie implements PeopleListEventSearchMovie {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PeopleListEventSearchMovie &&
+            other is _$PeopleListEventSearchMovieImpl &&
             (identical(other.query, query) || other.query == query));
   }
 
@@ -392,9 +396,9 @@ class _$PeopleListEventSearchMovie implements PeopleListEventSearchMovie {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PeopleListEventSearchMovieCopyWith<_$PeopleListEventSearchMovie>
-      get copyWith => __$$PeopleListEventSearchMovieCopyWithImpl<
-          _$PeopleListEventSearchMovie>(this, _$identity);
+  _$$PeopleListEventSearchMovieImplCopyWith<_$PeopleListEventSearchMovieImpl>
+      get copyWith => __$$PeopleListEventSearchMovieImplCopyWithImpl<
+          _$PeopleListEventSearchMovieImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -467,10 +471,10 @@ class _$PeopleListEventSearchMovie implements PeopleListEventSearchMovie {
 
 abstract class PeopleListEventSearchMovie implements PeopleListEvent {
   factory PeopleListEventSearchMovie({required final String query}) =
-      _$PeopleListEventSearchMovie;
+      _$PeopleListEventSearchMovieImpl;
 
   String get query;
   @JsonKey(ignore: true)
-  _$$PeopleListEventSearchMovieCopyWith<_$PeopleListEventSearchMovie>
+  _$$PeopleListEventSearchMovieImplCopyWith<_$PeopleListEventSearchMovieImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

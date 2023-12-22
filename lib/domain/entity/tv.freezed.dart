@@ -145,9 +145,9 @@ class _$TVCopyWithImpl<$Res, $Val extends TV> implements $TVCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_TVCopyWith<$Res> implements $TVCopyWith<$Res> {
-  factory _$$_TVCopyWith(_$_TV value, $Res Function(_$_TV) then) =
-      __$$_TVCopyWithImpl<$Res>;
+abstract class _$$TVImplCopyWith<$Res> implements $TVCopyWith<$Res> {
+  factory _$$TVImplCopyWith(_$TVImpl value, $Res Function(_$TVImpl) then) =
+      __$$TVImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -167,9 +167,9 @@ abstract class _$$_TVCopyWith<$Res> implements $TVCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TVCopyWithImpl<$Res> extends _$TVCopyWithImpl<$Res, _$_TV>
-    implements _$$_TVCopyWith<$Res> {
-  __$$_TVCopyWithImpl(_$_TV _value, $Res Function(_$_TV) _then)
+class __$$TVImplCopyWithImpl<$Res> extends _$TVCopyWithImpl<$Res, _$TVImpl>
+    implements _$$TVImplCopyWith<$Res> {
+  __$$TVImplCopyWithImpl(_$TVImpl _value, $Res Function(_$TVImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -189,7 +189,7 @@ class __$$_TVCopyWithImpl<$Res> extends _$TVCopyWithImpl<$Res, _$_TV>
     Object? name = null,
     Object? originalName = null,
   }) {
-    return _then(_$_TV(
+    return _then(_$TVImpl(
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
@@ -249,8 +249,8 @@ class __$$_TVCopyWithImpl<$Res> extends _$TVCopyWithImpl<$Res, _$_TV>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
-class _$_TV implements _TV {
-  _$_TV(
+class _$TVImpl implements _TV {
+  _$TVImpl(
       {this.posterPath,
       required this.popularity,
       required this.id,
@@ -267,7 +267,8 @@ class _$_TV implements _TV {
       : _originCountry = originCountry,
         _genreIds = genreIds;
 
-  factory _$_TV.fromJson(Map<String, dynamic> json) => _$$_TVFromJson(json);
+  factory _$TVImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TVImplFromJson(json);
 
   @override
   final String? posterPath;
@@ -318,7 +319,7 @@ class _$_TV implements _TV {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TV &&
+            other is _$TVImpl &&
             (identical(other.posterPath, posterPath) ||
                 other.posterPath == posterPath) &&
             (identical(other.popularity, popularity) ||
@@ -365,12 +366,12 @@ class _$_TV implements _TV {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TVCopyWith<_$_TV> get copyWith =>
-      __$$_TVCopyWithImpl<_$_TV>(this, _$identity);
+  _$$TVImplCopyWith<_$TVImpl> get copyWith =>
+      __$$TVImplCopyWithImpl<_$TVImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TVToJson(
+    return _$$TVImplToJson(
       this,
     );
   }
@@ -391,9 +392,9 @@ abstract class _TV implements TV {
       required final String originalLanguage,
       required final double voteCount,
       required final String name,
-      required final String originalName}) = _$_TV;
+      required final String originalName}) = _$TVImpl;
 
-  factory _TV.fromJson(Map<String, dynamic> json) = _$_TV.fromJson;
+  factory _TV.fromJson(Map<String, dynamic> json) = _$TVImpl.fromJson;
 
   @override
   String? get posterPath;
@@ -424,5 +425,6 @@ abstract class _TV implements TV {
   String get originalName;
   @override
   @JsonKey(ignore: true)
-  _$$_TVCopyWith<_$_TV> get copyWith => throw _privateConstructorUsedError;
+  _$$TVImplCopyWith<_$TVImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

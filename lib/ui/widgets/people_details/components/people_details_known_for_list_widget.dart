@@ -6,19 +6,18 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
-import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class KnownForListWidget extends StatefulWidget {
-  const KnownForListWidget({Key? key}) : super(key: key);
+class PeopleDetailsKnownForListWidget extends StatefulWidget {
+  const PeopleDetailsKnownForListWidget({Key? key}) : super(key: key);
 
   @override
-  State<KnownForListWidget> createState() => _KnownForListWidgetState();
+  State<PeopleDetailsKnownForListWidget> createState() => _PeopleDetailsKnownForListWidgetState();
 }
 
-class _KnownForListWidgetState extends State<KnownForListWidget> {
+class _PeopleDetailsKnownForListWidgetState extends State<PeopleDetailsKnownForListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -47,7 +46,6 @@ class _KnownForListWidgetState extends State<KnownForListWidget> {
           itemBuilder: (BuildContext context, int index) {
             return _KnownForAllListWidget(
               characterIndex: index,
-              characterData: characterData,
             );
           },
         ),
@@ -57,13 +55,11 @@ class _KnownForListWidgetState extends State<KnownForListWidget> {
 }
 
 class _KnownForAllListWidget extends StatelessWidget {
-  final List<PeopleDetailsCharacterData> characterData;
   final int characterIndex;
 
   const _KnownForAllListWidget({
     Key? key,
     required this.characterIndex,
-    required this.characterData,
   }) : super(key: key);
 
   @override

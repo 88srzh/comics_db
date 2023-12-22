@@ -61,7 +61,7 @@ class _TvActorListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 4,
+      itemCount: actorsData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {

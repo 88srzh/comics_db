@@ -23,8 +23,7 @@ class TvOnTheAirListCubit extends Cubit<TvListCubitState> {
   Timer? searchDebounce;
   var tv = <TV>[];
 
-  TvOnTheAirListCubit({required this.tvOnTheAirListBloc})
-      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
+  TvOnTheAirListCubit({required this.tvOnTheAirListBloc}) : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(() {
       _onState(tvOnTheAirListBloc.state);
       tvListBlocSubscription = tvOnTheAirListBloc.stream.listen(_onState);
@@ -53,12 +52,7 @@ class TvOnTheAirListCubit extends Cubit<TvListCubitState> {
   }
 
   TvListData _makeListData(TV tv) {
-    return TvListData(
-        id: tv.id,
-        name: tv.name,
-        overview: tv.overview,
-        posterPath: tv.posterPath,
-        backdropPath: tv.backdropPath);
+    return TvListData(id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
   }
 
   void showedOnTheAirTvAtIndex(int index) {
@@ -76,7 +70,6 @@ class TvOnTheAirListCubit extends Cubit<TvListCubitState> {
 
   void onTvTap(BuildContext context, int index) {
     final id = state.tvs[index].id;
-    Navigator.of(context)
-        .pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetails, arguments: id);
   }
 }

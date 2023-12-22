@@ -81,20 +81,22 @@ class _$TvListEventCopyWithImpl<$Res, $Val extends TvListEvent>
 }
 
 /// @nodoc
-abstract class _$$TvListEventLoadNextPageCopyWith<$Res> {
-  factory _$$TvListEventLoadNextPageCopyWith(_$TvListEventLoadNextPage value,
-          $Res Function(_$TvListEventLoadNextPage) then) =
-      __$$TvListEventLoadNextPageCopyWithImpl<$Res>;
+abstract class _$$TvListEventLoadNextPageImplCopyWith<$Res> {
+  factory _$$TvListEventLoadNextPageImplCopyWith(
+          _$TvListEventLoadNextPageImpl value,
+          $Res Function(_$TvListEventLoadNextPageImpl) then) =
+      __$$TvListEventLoadNextPageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String locale});
 }
 
 /// @nodoc
-class __$$TvListEventLoadNextPageCopyWithImpl<$Res>
-    extends _$TvListEventCopyWithImpl<$Res, _$TvListEventLoadNextPage>
-    implements _$$TvListEventLoadNextPageCopyWith<$Res> {
-  __$$TvListEventLoadNextPageCopyWithImpl(_$TvListEventLoadNextPage _value,
-      $Res Function(_$TvListEventLoadNextPage) _then)
+class __$$TvListEventLoadNextPageImplCopyWithImpl<$Res>
+    extends _$TvListEventCopyWithImpl<$Res, _$TvListEventLoadNextPageImpl>
+    implements _$$TvListEventLoadNextPageImplCopyWith<$Res> {
+  __$$TvListEventLoadNextPageImplCopyWithImpl(
+      _$TvListEventLoadNextPageImpl _value,
+      $Res Function(_$TvListEventLoadNextPageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +104,7 @@ class __$$TvListEventLoadNextPageCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
   }) {
-    return _then(_$TvListEventLoadNextPage(
+    return _then(_$TvListEventLoadNextPageImpl(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -113,8 +115,8 @@ class __$$TvListEventLoadNextPageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TvListEventLoadNextPage implements TvListEventLoadNextPage {
-  const _$TvListEventLoadNextPage({required this.locale});
+class _$TvListEventLoadNextPageImpl implements TvListEventLoadNextPage {
+  const _$TvListEventLoadNextPageImpl({required this.locale});
 
   @override
   final String locale;
@@ -128,7 +130,7 @@ class _$TvListEventLoadNextPage implements TvListEventLoadNextPage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TvListEventLoadNextPage &&
+            other is _$TvListEventLoadNextPageImpl &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
@@ -138,9 +140,9 @@ class _$TvListEventLoadNextPage implements TvListEventLoadNextPage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TvListEventLoadNextPageCopyWith<_$TvListEventLoadNextPage> get copyWith =>
-      __$$TvListEventLoadNextPageCopyWithImpl<_$TvListEventLoadNextPage>(
-          this, _$identity);
+  _$$TvListEventLoadNextPageImplCopyWith<_$TvListEventLoadNextPageImpl>
+      get copyWith => __$$TvListEventLoadNextPageImplCopyWithImpl<
+          _$TvListEventLoadNextPageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -213,34 +215,34 @@ class _$TvListEventLoadNextPage implements TvListEventLoadNextPage {
 
 abstract class TvListEventLoadNextPage implements TvListEvent {
   const factory TvListEventLoadNextPage({required final String locale}) =
-      _$TvListEventLoadNextPage;
+      _$TvListEventLoadNextPageImpl;
 
   String get locale;
   @JsonKey(ignore: true)
-  _$$TvListEventLoadNextPageCopyWith<_$TvListEventLoadNextPage> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TvListEventLoadNextPageImplCopyWith<_$TvListEventLoadNextPageImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TvListEventLoadResetCopyWith<$Res> {
-  factory _$$TvListEventLoadResetCopyWith(_$TvListEventLoadReset value,
-          $Res Function(_$TvListEventLoadReset) then) =
-      __$$TvListEventLoadResetCopyWithImpl<$Res>;
+abstract class _$$TvListEventLoadResetImplCopyWith<$Res> {
+  factory _$$TvListEventLoadResetImplCopyWith(_$TvListEventLoadResetImpl value,
+          $Res Function(_$TvListEventLoadResetImpl) then) =
+      __$$TvListEventLoadResetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TvListEventLoadResetCopyWithImpl<$Res>
-    extends _$TvListEventCopyWithImpl<$Res, _$TvListEventLoadReset>
-    implements _$$TvListEventLoadResetCopyWith<$Res> {
-  __$$TvListEventLoadResetCopyWithImpl(_$TvListEventLoadReset _value,
-      $Res Function(_$TvListEventLoadReset) _then)
+class __$$TvListEventLoadResetImplCopyWithImpl<$Res>
+    extends _$TvListEventCopyWithImpl<$Res, _$TvListEventLoadResetImpl>
+    implements _$$TvListEventLoadResetImplCopyWith<$Res> {
+  __$$TvListEventLoadResetImplCopyWithImpl(_$TvListEventLoadResetImpl _value,
+      $Res Function(_$TvListEventLoadResetImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TvListEventLoadReset implements TvListEventLoadReset {
-  const _$TvListEventLoadReset();
+class _$TvListEventLoadResetImpl implements TvListEventLoadReset {
+  const _$TvListEventLoadResetImpl();
 
   @override
   String toString() {
@@ -250,7 +252,8 @@ class _$TvListEventLoadReset implements TvListEventLoadReset {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TvListEventLoadReset);
+        (other.runtimeType == runtimeType &&
+            other is _$TvListEventLoadResetImpl);
   }
 
   @override
@@ -326,24 +329,24 @@ class _$TvListEventLoadReset implements TvListEventLoadReset {
 }
 
 abstract class TvListEventLoadReset implements TvListEvent {
-  const factory TvListEventLoadReset() = _$TvListEventLoadReset;
+  const factory TvListEventLoadReset() = _$TvListEventLoadResetImpl;
 }
 
 /// @nodoc
-abstract class _$$TvListEventSearchTvCopyWith<$Res> {
-  factory _$$TvListEventSearchTvCopyWith(_$TvListEventSearchTv value,
-          $Res Function(_$TvListEventSearchTv) then) =
-      __$$TvListEventSearchTvCopyWithImpl<$Res>;
+abstract class _$$TvListEventSearchTvImplCopyWith<$Res> {
+  factory _$$TvListEventSearchTvImplCopyWith(_$TvListEventSearchTvImpl value,
+          $Res Function(_$TvListEventSearchTvImpl) then) =
+      __$$TvListEventSearchTvImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
 }
 
 /// @nodoc
-class __$$TvListEventSearchTvCopyWithImpl<$Res>
-    extends _$TvListEventCopyWithImpl<$Res, _$TvListEventSearchTv>
-    implements _$$TvListEventSearchTvCopyWith<$Res> {
-  __$$TvListEventSearchTvCopyWithImpl(
-      _$TvListEventSearchTv _value, $Res Function(_$TvListEventSearchTv) _then)
+class __$$TvListEventSearchTvImplCopyWithImpl<$Res>
+    extends _$TvListEventCopyWithImpl<$Res, _$TvListEventSearchTvImpl>
+    implements _$$TvListEventSearchTvImplCopyWith<$Res> {
+  __$$TvListEventSearchTvImplCopyWithImpl(_$TvListEventSearchTvImpl _value,
+      $Res Function(_$TvListEventSearchTvImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -351,7 +354,7 @@ class __$$TvListEventSearchTvCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
   }) {
-    return _then(_$TvListEventSearchTv(
+    return _then(_$TvListEventSearchTvImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -362,8 +365,8 @@ class __$$TvListEventSearchTvCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TvListEventSearchTv implements TvListEventSearchTv {
-  const _$TvListEventSearchTv({required this.query});
+class _$TvListEventSearchTvImpl implements TvListEventSearchTv {
+  const _$TvListEventSearchTvImpl({required this.query});
 
   @override
   final String query;
@@ -377,7 +380,7 @@ class _$TvListEventSearchTv implements TvListEventSearchTv {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TvListEventSearchTv &&
+            other is _$TvListEventSearchTvImpl &&
             (identical(other.query, query) || other.query == query));
   }
 
@@ -387,8 +390,8 @@ class _$TvListEventSearchTv implements TvListEventSearchTv {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TvListEventSearchTvCopyWith<_$TvListEventSearchTv> get copyWith =>
-      __$$TvListEventSearchTvCopyWithImpl<_$TvListEventSearchTv>(
+  _$$TvListEventSearchTvImplCopyWith<_$TvListEventSearchTvImpl> get copyWith =>
+      __$$TvListEventSearchTvImplCopyWithImpl<_$TvListEventSearchTvImpl>(
           this, _$identity);
 
   @override
@@ -462,10 +465,10 @@ class _$TvListEventSearchTv implements TvListEventSearchTv {
 
 abstract class TvListEventSearchTv implements TvListEvent {
   const factory TvListEventSearchTv({required final String query}) =
-      _$TvListEventSearchTv;
+      _$TvListEventSearchTvImpl;
 
   String get query;
   @JsonKey(ignore: true)
-  _$$TvListEventSearchTvCopyWith<_$TvListEventSearchTv> get copyWith =>
+  _$$TvListEventSearchTvImplCopyWith<_$TvListEventSearchTvImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

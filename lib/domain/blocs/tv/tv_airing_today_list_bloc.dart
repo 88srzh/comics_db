@@ -37,7 +37,15 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.airingTodayTvs(nextPage, event.locale, Configuration.apiKey);
+        final result = await _tvApiClient.airingTodayTvs(
+          nextPage,
+          event.locale,
+          Configuration.apiKey,
+          false,
+          'popularity.desc',
+          // '{max_date}',
+          // '{min_date}',
+        );
         return result;
       });
       if (container != null) {
@@ -47,8 +55,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     }
   }
 
-  Future<TvListContainer?> _loadNextPage(
-      TvListContainer container, Future<TVResponse> Function(int) loader) async {
+  Future<TvListContainer?> _loadNextPage(TvListContainer container, Future<TVResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.tvContainer.currentPage + 1;
     final result = await loader(nextPage);

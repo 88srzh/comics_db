@@ -86,25 +86,25 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
 }
 
 /// @nodoc
-abstract class _$$AuthLogOutEventCopyWith<$Res> {
-  factory _$$AuthLogOutEventCopyWith(
-          _$AuthLogOutEvent value, $Res Function(_$AuthLogOutEvent) then) =
-      __$$AuthLogOutEventCopyWithImpl<$Res>;
+abstract class _$$AuthLogOutEventImplCopyWith<$Res> {
+  factory _$$AuthLogOutEventImplCopyWith(_$AuthLogOutEventImpl value,
+          $Res Function(_$AuthLogOutEventImpl) then) =
+      __$$AuthLogOutEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthLogOutEventCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthLogOutEvent>
-    implements _$$AuthLogOutEventCopyWith<$Res> {
-  __$$AuthLogOutEventCopyWithImpl(
-      _$AuthLogOutEvent _value, $Res Function(_$AuthLogOutEvent) _then)
+class __$$AuthLogOutEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$AuthLogOutEventImpl>
+    implements _$$AuthLogOutEventImplCopyWith<$Res> {
+  __$$AuthLogOutEventImplCopyWithImpl(
+      _$AuthLogOutEventImpl _value, $Res Function(_$AuthLogOutEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthLogOutEvent implements AuthLogOutEvent {
-  const _$AuthLogOutEvent();
+class _$AuthLogOutEventImpl implements AuthLogOutEvent {
+  const _$AuthLogOutEventImpl();
 
   @override
   String toString() {
@@ -114,7 +114,7 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthLogOutEvent);
+        (other.runtimeType == runtimeType && other is _$AuthLogOutEventImpl);
   }
 
   @override
@@ -196,29 +196,29 @@ class _$AuthLogOutEvent implements AuthLogOutEvent {
 }
 
 abstract class AuthLogOutEvent implements AuthEvent {
-  const factory AuthLogOutEvent() = _$AuthLogOutEvent;
+  const factory AuthLogOutEvent() = _$AuthLogOutEventImpl;
 }
 
 /// @nodoc
-abstract class _$$AuthCheckStatusEventCopyWith<$Res> {
-  factory _$$AuthCheckStatusEventCopyWith(_$AuthCheckStatusEvent value,
-          $Res Function(_$AuthCheckStatusEvent) then) =
-      __$$AuthCheckStatusEventCopyWithImpl<$Res>;
+abstract class _$$AuthCheckStatusEventImplCopyWith<$Res> {
+  factory _$$AuthCheckStatusEventImplCopyWith(_$AuthCheckStatusEventImpl value,
+          $Res Function(_$AuthCheckStatusEventImpl) then) =
+      __$$AuthCheckStatusEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthCheckStatusEventCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthCheckStatusEvent>
-    implements _$$AuthCheckStatusEventCopyWith<$Res> {
-  __$$AuthCheckStatusEventCopyWithImpl(_$AuthCheckStatusEvent _value,
-      $Res Function(_$AuthCheckStatusEvent) _then)
+class __$$AuthCheckStatusEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$AuthCheckStatusEventImpl>
+    implements _$$AuthCheckStatusEventImplCopyWith<$Res> {
+  __$$AuthCheckStatusEventImplCopyWithImpl(_$AuthCheckStatusEventImpl _value,
+      $Res Function(_$AuthCheckStatusEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
-  const _$AuthCheckStatusEvent();
+class _$AuthCheckStatusEventImpl implements AuthCheckStatusEvent {
+  const _$AuthCheckStatusEventImpl();
 
   @override
   String toString() {
@@ -228,7 +228,8 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthCheckStatusEvent);
+        (other.runtimeType == runtimeType &&
+            other is _$AuthCheckStatusEventImpl);
   }
 
   @override
@@ -310,24 +311,24 @@ class _$AuthCheckStatusEvent implements AuthCheckStatusEvent {
 }
 
 abstract class AuthCheckStatusEvent implements AuthEvent {
-  const factory AuthCheckStatusEvent() = _$AuthCheckStatusEvent;
+  const factory AuthCheckStatusEvent() = _$AuthCheckStatusEventImpl;
 }
 
 /// @nodoc
-abstract class _$$AuthLoginEventCopyWith<$Res> {
-  factory _$$AuthLoginEventCopyWith(
-          _$AuthLoginEvent value, $Res Function(_$AuthLoginEvent) then) =
-      __$$AuthLoginEventCopyWithImpl<$Res>;
+abstract class _$$AuthLoginEventImplCopyWith<$Res> {
+  factory _$$AuthLoginEventImplCopyWith(_$AuthLoginEventImpl value,
+          $Res Function(_$AuthLoginEventImpl) then) =
+      __$$AuthLoginEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String login, String password});
 }
 
 /// @nodoc
-class __$$AuthLoginEventCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthLoginEvent>
-    implements _$$AuthLoginEventCopyWith<$Res> {
-  __$$AuthLoginEventCopyWithImpl(
-      _$AuthLoginEvent _value, $Res Function(_$AuthLoginEvent) _then)
+class __$$AuthLoginEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$AuthLoginEventImpl>
+    implements _$$AuthLoginEventImplCopyWith<$Res> {
+  __$$AuthLoginEventImplCopyWithImpl(
+      _$AuthLoginEventImpl _value, $Res Function(_$AuthLoginEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -336,7 +337,7 @@ class __$$AuthLoginEventCopyWithImpl<$Res>
     Object? login = null,
     Object? password = null,
   }) {
-    return _then(_$AuthLoginEvent(
+    return _then(_$AuthLoginEventImpl(
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
@@ -351,8 +352,8 @@ class __$$AuthLoginEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthLoginEvent implements AuthLoginEvent {
-  const _$AuthLoginEvent({required this.login, required this.password});
+class _$AuthLoginEventImpl implements AuthLoginEvent {
+  const _$AuthLoginEventImpl({required this.login, required this.password});
 
   @override
   final String login;
@@ -368,7 +369,7 @@ class _$AuthLoginEvent implements AuthLoginEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthLoginEvent &&
+            other is _$AuthLoginEventImpl &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -380,8 +381,9 @@ class _$AuthLoginEvent implements AuthLoginEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthLoginEventCopyWith<_$AuthLoginEvent> get copyWith =>
-      __$$AuthLoginEventCopyWithImpl<_$AuthLoginEvent>(this, _$identity);
+  _$$AuthLoginEventImplCopyWith<_$AuthLoginEventImpl> get copyWith =>
+      __$$AuthLoginEventImplCopyWithImpl<_$AuthLoginEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -461,35 +463,35 @@ class _$AuthLoginEvent implements AuthLoginEvent {
 abstract class AuthLoginEvent implements AuthEvent {
   const factory AuthLoginEvent(
       {required final String login,
-      required final String password}) = _$AuthLoginEvent;
+      required final String password}) = _$AuthLoginEventImpl;
 
   String get login;
   String get password;
   @JsonKey(ignore: true)
-  _$$AuthLoginEventCopyWith<_$AuthLoginEvent> get copyWith =>
+  _$$AuthLoginEventImplCopyWith<_$AuthLoginEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$GuestAuthLoginEventCopyWith<$Res> {
-  factory _$$GuestAuthLoginEventCopyWith(_$GuestAuthLoginEvent value,
-          $Res Function(_$GuestAuthLoginEvent) then) =
-      __$$GuestAuthLoginEventCopyWithImpl<$Res>;
+abstract class _$$GuestAuthLoginEventImplCopyWith<$Res> {
+  factory _$$GuestAuthLoginEventImplCopyWith(_$GuestAuthLoginEventImpl value,
+          $Res Function(_$GuestAuthLoginEventImpl) then) =
+      __$$GuestAuthLoginEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GuestAuthLoginEventCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$GuestAuthLoginEvent>
-    implements _$$GuestAuthLoginEventCopyWith<$Res> {
-  __$$GuestAuthLoginEventCopyWithImpl(
-      _$GuestAuthLoginEvent _value, $Res Function(_$GuestAuthLoginEvent) _then)
+class __$$GuestAuthLoginEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$GuestAuthLoginEventImpl>
+    implements _$$GuestAuthLoginEventImplCopyWith<$Res> {
+  __$$GuestAuthLoginEventImplCopyWithImpl(_$GuestAuthLoginEventImpl _value,
+      $Res Function(_$GuestAuthLoginEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$GuestAuthLoginEvent implements GuestAuthLoginEvent {
-  const _$GuestAuthLoginEvent();
+class _$GuestAuthLoginEventImpl implements GuestAuthLoginEvent {
+  const _$GuestAuthLoginEventImpl();
 
   @override
   String toString() {
@@ -499,7 +501,8 @@ class _$GuestAuthLoginEvent implements GuestAuthLoginEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GuestAuthLoginEvent);
+        (other.runtimeType == runtimeType &&
+            other is _$GuestAuthLoginEventImpl);
   }
 
   @override
@@ -581,5 +584,5 @@ class _$GuestAuthLoginEvent implements GuestAuthLoginEvent {
 }
 
 abstract class GuestAuthLoginEvent implements AuthEvent {
-  const factory GuestAuthLoginEvent() = _$GuestAuthLoginEvent;
+  const factory GuestAuthLoginEvent() = _$GuestAuthLoginEventImpl;
 }

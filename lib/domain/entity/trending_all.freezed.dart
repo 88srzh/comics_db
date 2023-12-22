@@ -184,11 +184,11 @@ class _$TrendingAllCopyWithImpl<$Res, $Val extends TrendingAll>
 }
 
 /// @nodoc
-abstract class _$$_TrendingAllCopyWith<$Res>
+abstract class _$$TrendingAllImplCopyWith<$Res>
     implements $TrendingAllCopyWith<$Res> {
-  factory _$$_TrendingAllCopyWith(
-          _$_TrendingAll value, $Res Function(_$_TrendingAll) then) =
-      __$$_TrendingAllCopyWithImpl<$Res>;
+  factory _$$TrendingAllImplCopyWith(
+          _$TrendingAllImpl value, $Res Function(_$TrendingAllImpl) then) =
+      __$$TrendingAllImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -213,11 +213,11 @@ abstract class _$$_TrendingAllCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TrendingAllCopyWithImpl<$Res>
-    extends _$TrendingAllCopyWithImpl<$Res, _$_TrendingAll>
-    implements _$$_TrendingAllCopyWith<$Res> {
-  __$$_TrendingAllCopyWithImpl(
-      _$_TrendingAll _value, $Res Function(_$_TrendingAll) _then)
+class __$$TrendingAllImplCopyWithImpl<$Res>
+    extends _$TrendingAllCopyWithImpl<$Res, _$TrendingAllImpl>
+    implements _$$TrendingAllImplCopyWith<$Res> {
+  __$$TrendingAllImplCopyWithImpl(
+      _$TrendingAllImpl _value, $Res Function(_$TrendingAllImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -242,7 +242,7 @@ class __$$_TrendingAllCopyWithImpl<$Res>
     Object? name = freezed,
     Object? firstAirDate = freezed,
   }) {
-    return _then(_$_TrendingAll(
+    return _then(_$TrendingAllImpl(
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
@@ -322,8 +322,8 @@ class __$$_TrendingAllCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
-class _$_TrendingAll implements _TrendingAll {
-  _$_TrendingAll(
+class _$TrendingAllImpl implements _TrendingAll {
+  _$TrendingAllImpl(
       {this.posterPath,
       required this.adult,
       required this.overview,
@@ -344,8 +344,8 @@ class _$_TrendingAll implements _TrendingAll {
       @JsonKey(fromJson: parseDateFromString) this.firstAirDate})
       : _genreIds = genreIds;
 
-  factory _$_TrendingAll.fromJson(Map<String, dynamic> json) =>
-      _$$_TrendingAllFromJson(json);
+  factory _$TrendingAllImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TrendingAllImplFromJson(json);
 
   @override
   final String? posterPath;
@@ -401,7 +401,7 @@ class _$_TrendingAll implements _TrendingAll {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrendingAll &&
+            other is _$TrendingAllImpl &&
             (identical(other.posterPath, posterPath) ||
                 other.posterPath == posterPath) &&
             (identical(other.adult, adult) || other.adult == adult) &&
@@ -460,12 +460,12 @@ class _$_TrendingAll implements _TrendingAll {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrendingAllCopyWith<_$_TrendingAll> get copyWith =>
-      __$$_TrendingAllCopyWithImpl<_$_TrendingAll>(this, _$identity);
+  _$$TrendingAllImplCopyWith<_$TrendingAllImpl> get copyWith =>
+      __$$TrendingAllImplCopyWithImpl<_$TrendingAllImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TrendingAllToJson(
+    return _$$TrendingAllImplToJson(
       this,
     );
   }
@@ -491,10 +491,10 @@ abstract class _TrendingAll implements TrendingAll {
       required final String mediaType,
       required final String? name,
       @JsonKey(fromJson: parseDateFromString)
-      final DateTime? firstAirDate}) = _$_TrendingAll;
+      final DateTime? firstAirDate}) = _$TrendingAllImpl;
 
   factory _TrendingAll.fromJson(Map<String, dynamic> json) =
-      _$_TrendingAll.fromJson;
+      _$TrendingAllImpl.fromJson;
 
   @override
   String? get posterPath;
@@ -536,6 +536,6 @@ abstract class _TrendingAll implements TrendingAll {
   DateTime? get firstAirDate;
   @override
   @JsonKey(ignore: true)
-  _$$_TrendingAllCopyWith<_$_TrendingAll> get copyWith =>
+  _$$TrendingAllImplCopyWith<_$TrendingAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

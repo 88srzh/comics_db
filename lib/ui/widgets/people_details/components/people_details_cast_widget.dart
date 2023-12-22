@@ -16,14 +16,14 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
-class CastWidget extends StatelessWidget {
-  const CastWidget({Key? key}) : super(key: key);
+class PeopleDetailsCastWidget extends StatelessWidget {
+  const PeopleDetailsCastWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleDetailsCubit>();
     var charactersData = cubit.data.charactersData;
-    var id = cubit.state.id;
+    // var index = cubit.state.id;
     if (charactersData.isEmpty) return const SizedBox.shrink();
     return ColoredBox(
       color: Colors.transparent,
@@ -39,13 +39,14 @@ class CastWidget extends StatelessWidget {
                   'Known For',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                InkWell(
-                  onTap: () => cubit.onSeeAllKnownForTap(context, id),
-                  child: Text(
-                    'See all',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                ),
+                // TODO disable "See all", because it doesn't work and it's not on the original site
+                // InkWell(
+                //   onTap: () => cubit.onSeeAllKnownForTap(context, index),
+                //   child: Text(
+                //     'See all',
+                //     style: Theme.of(context).textTheme.displaySmall,
+                //   ),
+                // ),
               ],
             ),
             SizedBox(
@@ -69,7 +70,7 @@ class _PeopleActorListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 8,
+      itemCount: charactersData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {

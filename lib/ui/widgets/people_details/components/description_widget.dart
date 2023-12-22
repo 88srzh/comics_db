@@ -27,7 +27,7 @@ class DescriptionWidget extends StatelessWidget {
             'Biography',
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          // if i have empty biography i will have extra sizedbox
+          // if i have empty biography i will have extra SizedBox
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
