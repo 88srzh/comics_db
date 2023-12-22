@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/domain/blocs/tv/tv_discover_popular_list_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -38,7 +37,7 @@ class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.topRatedTvs(nextPage, event.locale, Configuration.apiKey);
+        final result = await _tvApiClient.discoverTV(nextPage, event.locale, Configuration.apiKey, false, false, 'vote_average.desc', false, 200);
         return result;
       });
       if (container != null) {

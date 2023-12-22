@@ -419,7 +419,15 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> topRatedTvs(int page, String locale, String apiKey) async {
+  Future<TVResponse> topRatedTvs(
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+    bool includeNullFirstAirDates,
+    String sortBy,
+    bool screenThreatrically,
+  ) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TVResponse.fromJson(jsonMap);
@@ -433,6 +441,10 @@ class MovieAndTvApiClient {
         'api_key': Configuration.apiKey,
         'page': page.toString(),
         'language': locale,
+        'include_adult': includeAdult.toString(),
+        'include_null_first_air_dates': includeNullFirstAirDates.toString(),
+        'sort_by': sortBy,
+        'screen_threatrically': screenThreatrically.toString(),
       },
     );
     return result;
@@ -512,6 +524,7 @@ class MovieAndTvApiClient {
     bool includeNullFirstAirDates,
     String sortBy,
     bool screenThreatrically,
+    double? voteCountGte,
     // String firstAirDateYear,
   ) async {
     TVResponse parser(dynamic json) {
@@ -528,6 +541,7 @@ class MovieAndTvApiClient {
       'include_null_first_air_dates': includeNullFirstAirDates.toString(),
       'sort_by': sortBy,
       'screened_theatrically': screenThreatrically.toString(),
+      'vote_count.gte': voteCountGte.toString(),
       // 'first_air_date_year': firstAirDateYear,
     });
     return tvResult;
