@@ -525,6 +525,7 @@ class MovieAndTvApiClient {
     String sortBy,
     bool screenThreatrically,
     double? voteCountGte,
+    int airDateGte,
     // String firstAirDateYear,
   ) async {
     TVResponse parser(dynamic json) {
@@ -542,6 +543,7 @@ class MovieAndTvApiClient {
       'sort_by': sortBy,
       'screened_theatrically': screenThreatrically.toString(),
       'vote_count.gte': voteCountGte.toString(),
+      'air_date.gte': airDateGte.toString(),
       // 'first_air_date_year': firstAirDateYear,
     });
     return tvResult;
