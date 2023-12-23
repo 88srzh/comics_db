@@ -21,8 +21,7 @@ class TvPopularListCubit extends Cubit<TvListCubitState> {
   late DateFormat _dateFormat;
   Timer? searchDebounce;
 
-  TvPopularListCubit({required this.tvPopularListBloc})
-      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
+  TvPopularListCubit({required this.tvPopularListBloc}) : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
         _onState(tvPopularListBloc.state);
