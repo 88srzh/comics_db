@@ -37,15 +37,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.airingTodayTvs(
-          nextPage,
-          event.locale,
-          Configuration.apiKey,
-          false,
-          'popularity.desc',
-          // '{max_date}',
-          // '{min_date}',
-        );
+        final result = await _tvApiClient.discoverTV(nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, 10, '2023-12-20');
         return result;
       });
       if (container != null) {

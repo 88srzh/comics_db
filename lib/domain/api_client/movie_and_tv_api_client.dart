@@ -523,9 +523,9 @@ class MovieAndTvApiClient {
     bool includeAdult,
     bool includeNullFirstAirDates,
     String sortBy,
-    bool screenThreatrically,
+    bool? screenThreatrically,
     double? voteCountGte,
-    int airDateGte,
+    String? airDateGte,
     // String firstAirDateYear,
   ) async {
     TVResponse parser(dynamic json) {
