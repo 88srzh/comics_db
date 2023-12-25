@@ -33,6 +33,7 @@ import 'package:comics_db_app/domain/entity/tv_response.dart';
 
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
+  DateTime today = DateTime.now();
 
   Future<MovieResponse> popularMovie(
     int page,
@@ -492,9 +493,9 @@ class MovieAndTvApiClient {
     bool includeAdult,
     bool includeNullFirstAirDates,
     String sortBy,
-    bool? screenThreatrically,
-    double? voteCountGte,
-    String? airDateGte,
+    bool screenThreatrically,
+    double voteCountGte,
+    String airDateGte,
     // String firstAirDateYear,
   ) async {
     TVResponse parser(dynamic json) {
@@ -543,6 +544,37 @@ class MovieAndTvApiClient {
       'sort_by': sortBy,
       'screened_theatrically': screenThreatrically.toString(),
       'vote_count.gte': voteCountGte.toString(),
+    });
+    return tvResult;
+  }
+  Future<TVResponse> discoverAiringTodayTV(
+      int page,
+      String locale,
+      String apiKey,
+      bool includeAdult,
+      bool includeNullFirstAirDates,
+      String sortBy,
+      bool screenThreatrically,
+      String dateTimeMaximum,
+      String dateTimeMinimum,
+      // String firstAirDateYear,
+      ) async {
+    TVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final tvResult = _networkClient.get('/discover/tv', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'page': page.toString(),
+      'language': locale,
+      'include_adult': includeAdult.toString(),
+      'include_null_first_air_dates': includeNullFirstAirDates.toString(),
+      'sort_by': sortBy,
+      'screened_theatrically': screenThreatrically.toString(),
+      'air_date.lte': dateTimeMaximum,
+      'air_date.gte': dateTimeMinimum,
     });
     return tvResult;
   }
