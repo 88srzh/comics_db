@@ -9,9 +9,13 @@ import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
+import 'package:intl/intl.dart';
 
 class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
+
+  // TODO duplicate string with airing today tv
+  final String minimumDateTime = '1970-01-01';
 
   TvOnTheAirListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
@@ -26,6 +30,8 @@ class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
   }
 
   Future<void> onTvListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    String maximumDateTime = dateFormat.format(DateTime.now());
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -37,7 +43,8 @@ class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.onTheAirTvs(nextPage, event.locale, Configuration.apiKey);
+        final result = await _tvApiClient.discoverAiringTodayTV(
+            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, maximumDateTime, minimumDateTime);
         return result;
       });
       if (container != null) {
@@ -47,8 +54,7 @@ class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
     }
   }
 
-  Future<TvListContainer?> _loadNextPage(
-      TvListContainer container, Future<TVResponse> Function(int) loader) async {
+  Future<TvListContainer?> _loadNextPage(TvListContainer container, Future<TVResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.tvContainer.currentPage + 1;
     final result = await loader(nextPage);
