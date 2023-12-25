@@ -13,10 +13,6 @@ import 'package:intl/intl.dart';
 
 class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
-  final String minimumDateTime = '1970-01-01';
-
-  // DateTime now = DateTime.now();
-  // String convertedDateTime = "${now.year.toString()}-${now.month.toString().padLeft(2,'0')}-${now.day.toString().padLeft(2,'0')} ${now.hour.toString().padLeft(2,'0')}-${now.minute.toString().padLeft(2,'0')}";
 
   TvAiringTodayListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
@@ -45,7 +41,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
         final result = await _tvApiClient.discoverAiringTodayTV(
-            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, maximumDateTime, minimumDateTime);
+            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, maximumDateTime, maximumDateTime);
         return result;
       });
       if (container != null) {
