@@ -526,25 +526,6 @@ class MovieAndTvApiClient {
     return tvResult;
   }
 
-  Future<TVResponse> popularTV(int page, String locale, String apiKey) async {
-    TVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final tvResult = _networkClient.get(
-      '/tv/popular',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
-    return tvResult;
-  }
-
   Future<TVResponse> searchTV(int page, String locale, String query, String apiKey) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
