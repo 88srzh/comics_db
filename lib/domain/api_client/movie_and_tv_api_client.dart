@@ -452,21 +452,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> onTheAirTvs(int page, String locale, String apiKey) {
-    TVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
-      'api_key': Configuration.apiKey,
-      'page': page.toString(),
-      'language': locale,
-    });
-    return result;
-  }
-
   Future<TVDetails> tvDetails(int tvId, String locale) async {
     TVDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
