@@ -419,37 +419,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> topRatedTvs(
-    int page,
-    String locale,
-    String apiKey,
-    bool includeAdult,
-    bool includeNullFirstAirDates,
-    String sortBy,
-    bool screenThreatrically,
-  ) async {
-    TVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/tv/top_rated',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-        'include_adult': includeAdult.toString(),
-        'include_null_first_air_dates': includeNullFirstAirDates.toString(),
-        'sort_by': sortBy,
-        'screen_threatrically': screenThreatrically.toString(),
-      },
-    );
-    return result;
-  }
-
   Future<TVResponse> airingTodayTvs(
     int page,
     String locale,
