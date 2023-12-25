@@ -33,6 +33,7 @@ import 'package:comics_db_app/domain/entity/tv_response.dart';
 
 class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
+  DateTime today = DateTime.now();
 
   Future<MovieResponse> popularMovie(
     int page,
@@ -419,84 +420,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> topRatedTvs(
-    int page,
-    String locale,
-    String apiKey,
-    bool includeAdult,
-    bool includeNullFirstAirDates,
-    String sortBy,
-    bool screenThreatrically,
-  ) async {
-    TVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/tv/top_rated',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-        'include_adult': includeAdult.toString(),
-        'include_null_first_air_dates': includeNullFirstAirDates.toString(),
-        'sort_by': sortBy,
-        'screen_threatrically': screenThreatrically.toString(),
-      },
-    );
-    return result;
-  }
-
-  Future<TVResponse> airingTodayTvs(
-    int page,
-    String locale,
-    String apiKey,
-    bool includeAdult,
-    String sortBy,
-    // String airDateLte,
-    // String airDateGte,
-  ) async {
-    TVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/tv/airing_today',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-        'include_adult': includeAdult.toString(),
-        'sort_by': sortBy,
-        // TODO fix
-        // 'air_date.lte': airDateLte.toString(),
-        // 'air_date.gte': airDateGte.toString(),
-      },
-    );
-    return result;
-  }
-
-  Future<TVResponse> onTheAirTvs(int page, String locale, String apiKey) {
-    TVResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get('/tv/on_the_air', parser, <String, dynamic>{
-      'api_key': Configuration.apiKey,
-      'page': page.toString(),
-      'language': locale,
-    });
-    return result;
-  }
-
   Future<TVDetails> tvDetails(int tvId, String locale) async {
     TVDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -516,7 +439,7 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> discoverTV(
+  Future<TVResponse> discoverPopularTV(
     int page,
     String locale,
     String apiKey,
@@ -524,8 +447,34 @@ class MovieAndTvApiClient {
     bool includeNullFirstAirDates,
     String sortBy,
     bool screenThreatrically,
+  ) async {
+    TVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final tvResult = _networkClient.get('/discover/tv', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'page': page.toString(),
+      'language': locale,
+      'include_adult': includeAdult.toString(),
+      'include_null_first_air_dates': includeNullFirstAirDates.toString(),
+      'sort_by': sortBy,
+      'screened_theatrically': screenThreatrically.toString(),
+    });
+    return tvResult;
+  }
+
+  Future<TVResponse> discoverTopRatedTV(
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+    bool includeNullFirstAirDates,
+    String sortBy,
+    bool? screenThreatrically,
     double? voteCountGte,
-    // String firstAirDateYear,
   ) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -542,27 +491,38 @@ class MovieAndTvApiClient {
       'sort_by': sortBy,
       'screened_theatrically': screenThreatrically.toString(),
       'vote_count.gte': voteCountGte.toString(),
-      // 'first_air_date_year': firstAirDateYear,
     });
     return tvResult;
   }
 
-  Future<TVResponse> popularTV(int page, String locale, String apiKey) async {
+  Future<TVResponse> discoverAiringTodayTV(
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+    bool includeNullFirstAirDates,
+    String sortBy,
+    bool screenThreatrically,
+    String dateTimeMaximum,
+    String dateTimeMinimum,
+  ) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = TVResponse.fromJson(jsonMap);
       return response;
     }
 
-    final tvResult = _networkClient.get(
-      '/tv/popular',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
+    final tvResult = _networkClient.get('/discover/tv', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'page': page.toString(),
+      'language': locale,
+      'include_adult': includeAdult.toString(),
+      'include_null_first_air_dates': includeNullFirstAirDates.toString(),
+      'sort_by': sortBy,
+      'screened_theatrically': screenThreatrically.toString(),
+      'air_date.lte': dateTimeMaximum,
+      'air_date.gte': dateTimeMinimum,
+    });
     return tvResult;
   }
 

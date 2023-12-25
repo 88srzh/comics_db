@@ -28,9 +28,7 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
     super.didChangeDependencies();
 
     final locale = Localizations.localeOf(context);
-    context
-        .read<TvPopularListCubit>()
-        .setupPopularTvLocale(locale.languageCode);
+    context.read<TvPopularListCubit>().setupPopularTvLocale(locale.languageCode);
   }
 
   @override
@@ -51,16 +49,11 @@ class _TvPopularListWidgetState extends State<TvPopularListWidget> {
                 final posterPath = tv.posterPath;
                 return InkWell(
                   onTap: () => cubit.onTvTap(context, index),
-                  child: _TvPopularListRowWidget(
-                      posterPath: posterPath,
-                      tv: tv,
-                      cubit: cubit,
-                      index: index),
+                  child: _TvPopularListRowWidget(posterPath: posterPath, tv: tv, cubit: cubit, index: index),
                 );
               }),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
             child: CustomSearchBar(onChanged: cubit.searchPopularTv),
           ),
         ],
@@ -92,9 +85,7 @@ class _TvPopularListRowWidget extends StatelessWidget {
         children: [
           Container(
             // TODO refactoring custom movie list box decoration
-            decoration: context.read<ThemeBloc>().isDarkTheme
-                ? customMovieListBoxDecorationForDarkTheme
-                : customMovieListBoxDecorationForLightTheme,
+            decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [

@@ -9,6 +9,7 @@ import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
+import 'package:intl/intl.dart';
 
 class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
@@ -26,6 +27,8 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   }
 
   Future<void> onTvAiringTodayListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    String maximumDateTime = dateFormat.format(DateTime.now());
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -37,15 +40,8 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.airingTodayTvs(
-          nextPage,
-          event.locale,
-          Configuration.apiKey,
-          false,
-          'popularity.desc',
-          // '{max_date}',
-          // '{min_date}',
-        );
+        final result = await _tvApiClient.discoverAiringTodayTV(
+            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, maximumDateTime, maximumDateTime);
         return result;
       });
       if (container != null) {
