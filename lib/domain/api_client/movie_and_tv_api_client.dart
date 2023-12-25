@@ -35,29 +35,6 @@ class MovieAndTvApiClient {
   final _networkClient = NetworkClient();
   DateTime today = DateTime.now();
 
-  Future<MovieResponse> popularMovie(
-    int page,
-    String locale,
-    String apiKey,
-  ) async {
-    MovieResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/movie/popular',
-      parser,
-      <String, dynamic>{
-        'api_key': apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
-    return result;
-  }
-
   Future<PeopleDetails> popularPeopleDetails(int personId, String locale) async {
     PeopleDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -100,6 +77,54 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<MovieResponse> popularMovie(
+    int page,
+    String locale,
+    String apiKey,
+  ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/movie/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+  Future<MovieResponse> discoverPopularMovie(
+      int page,
+      String locale,
+      String apiKey,
+      bool includeAdult,
+      String sortBy,
+      ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/movie/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'include_adult': includeAdult.toString(),
+        'sort_by': sortBy,
+      },
+    );
+    return result;
+  }
   Future<MovieResponse> topRatedMovie(
     int page,
     String locale,
