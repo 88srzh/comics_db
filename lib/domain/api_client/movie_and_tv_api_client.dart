@@ -505,7 +505,6 @@ class MovieAndTvApiClient {
     bool screenThreatrically,
     String dateTimeMaximum,
     String dateTimeMinimum,
-    // String firstAirDateYear,
   ) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
