@@ -37,7 +37,7 @@ class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.discoverTV(nextPage, event.locale, Configuration.apiKey, false, false, 'vote_average.desc', false, 200, '2023-12-20');
+        final result = await _tvApiClient.discoverTopRatedTV(nextPage, event.locale, Configuration.apiKey, false, false, 'vote_average.desc', false, 200);
         return result;
       });
       if (container != null) {
