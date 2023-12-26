@@ -12,6 +12,7 @@ import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 
 class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
+  // final String minimumDateTime = '1970-01-01';
 
   UpcomingMovieListBloc(MovieListState initialState) : super(initialState) {
     on<MovieListEvent>(((event, emit) async {
@@ -25,14 +26,14 @@ class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }), transformer: sequential());
   }
 
-  Future<void> onUpcomingMovieListEventLoadNextPage(
-      MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
+  Future<void> onUpcomingMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
+    // DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    // String maximumDateTime = dateFormat.format(DateTime.now());
     if (state.isSearchMode) {
       final container = await loadNextPage(
         state.searchMovieContainer,
         (nextPage) async {
-          final result =
-              await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+          final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
           return result;
         },
       );
@@ -52,8 +53,7 @@ class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }
   }
 
-  Future<MovieListContainer?> loadNextPage(
-      MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
+  Future<MovieListContainer?> loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.movieContainer.currentPage + 1;
     final result = await loader(nextPage);
@@ -71,8 +71,7 @@ class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     emit(const MovieListState.initial());
   }
 
-  Future<void> onUpcomingMovieListEventLoadSearchMovie(
-      MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
+  Future<void> onUpcomingMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
     if (state.searchQuery == event.query) return;
     final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
     emit(newState);
