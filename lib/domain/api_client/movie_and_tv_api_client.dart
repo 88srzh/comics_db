@@ -92,7 +92,7 @@ class MovieAndTvApiClient {
     }
 
     final result = _networkClient.get(
-      '/movie/popular',
+      '/discover/movie',
       parser,
       <String, dynamic>{
         'api_key': apiKey,
