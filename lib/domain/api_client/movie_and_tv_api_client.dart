@@ -106,6 +106,39 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<MovieResponse> discoverTopRatedMovie(
+      int page,
+      String locale,
+      String apiKey,
+      bool includeAdult,
+      bool includeVideo,
+      String sortBy,
+      String withoutGenres,
+      double voteCountGte,
+      ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/movie/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'include_adult': includeAdult.toString(),
+        'include_video': includeVideo.toString(),
+        'sort_by': sortBy,
+        'without_genres': withoutGenres,
+        'vote_count.gte': voteCountGte.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<MovieResponse> topRatedMovie(
     int page,
     String locale,

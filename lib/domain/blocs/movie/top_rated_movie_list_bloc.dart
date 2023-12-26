@@ -42,7 +42,7 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       }
     } else {
       final container = await loadNextPage(state.movieContainer, (nextPage) async {
-        final result = await _movieApiClient.topRatedMovie(nextPage, event.locale, Configuration.apiKey);
+        final result = await _movieApiClient.discoverTopRatedMovie(nextPage, event.locale, Configuration.apiKey, false, false, 'vote_average.desc', '99', 200);
         return result;
       });
       if (container != null) {
