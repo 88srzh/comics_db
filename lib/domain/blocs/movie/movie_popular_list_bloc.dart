@@ -48,7 +48,7 @@ class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
       }
     } else {
       final container = await loadNextPage(state.movieContainer, (nextPage) async {
-        final result = await _movieApiClient.discoverPopularMovie(nextPage, event.locale, Configuration.apiKey, false, 'popularity.desc');
+        final result = await _movieApiClient.discoverPopularMovie(nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc');
         return result;
       });
       if (container != null) {

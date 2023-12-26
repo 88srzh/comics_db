@@ -82,6 +82,7 @@ class MovieAndTvApiClient {
     String locale,
     String apiKey,
     bool includeAdult,
+    bool includeVideo,
     String sortBy,
   ) async {
     MovieResponse parser(dynamic json) {
@@ -98,6 +99,7 @@ class MovieAndTvApiClient {
         'page': page.toString(),
         'language': locale,
         'include_adult': includeAdult.toString(),
+        'include_video': includeVideo.toString(),
         'sort_by': sortBy,
       },
     );
