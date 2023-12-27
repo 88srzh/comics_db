@@ -24,7 +24,7 @@ class PeopleDetails {
   final String? placeOfBirth;
   final String? profilePath;
   final bool adult;
-  final String imdbId;
+  final String? imdbId;
   final String? homepage;
   final PeopleDetailsCredits credits;
 

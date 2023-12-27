@@ -99,7 +99,7 @@ class PeopleDetailsCubit extends Cubit<PeopleDetailsCubitState> {
     data.placeOfBirth = details.placeOfBirth;
     data.profilePath = details.profilePath;
     data.adult = details.adult;
-    data.imdbId = details.imdbId;
+    data.imdbId = details.imdbId ?? '';
     data.homepage = details.homepage;
     data.charactersData = details.credits.cast
         .map((e) => PeopleDetailsCharacterData(id: e.id, character: e.character, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
