@@ -9,6 +9,21 @@ part of 'movie_details_external_ids.dart';
 MovieDetailsExternalIds _$MovieDetailsExternalIdsFromJson(
         Map<String, dynamic> json) =>
     MovieDetailsExternalIds(
+      results: (json['results'] as List<dynamic>)
+          .map((e) => MovieDetailsExternalIdsResults.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MovieDetailsExternalIdsToJson(
+        MovieDetailsExternalIds instance) =>
+    <String, dynamic>{
+      'results': instance.results.map((e) => e.toJson()).toList(),
+    };
+
+MovieDetailsExternalIdsResults _$MovieDetailsExternalIdsResultsFromJson(
+        Map<String, dynamic> json) =>
+    MovieDetailsExternalIdsResults(
       id: json['id'] as int,
       imdbId: json['imdb_id'] as String?,
       facebookId: json['facebook_id'] as String?,
@@ -17,8 +32,8 @@ MovieDetailsExternalIds _$MovieDetailsExternalIdsFromJson(
       wikidataId: json['wikidata_id'] as String?,
     );
 
-Map<String, dynamic> _$MovieDetailsExternalIdsToJson(
-        MovieDetailsExternalIds instance) =>
+Map<String, dynamic> _$MovieDetailsExternalIdsResultsToJson(
+        MovieDetailsExternalIdsResults instance) =>
     <String, dynamic>{
       'id': instance.id,
       'imdb_id': instance.imdbId,

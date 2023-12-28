@@ -8,10 +8,10 @@ class MovieDetailsExternalIdsData {
 
   MovieDetailsExternalIdsData({
     required this.id,
-    this.imdbId,
-    this.wikidataId,
-    this.facebookId,
-    this.instagramId,
-    this.twitterId,
+    required this.imdbId,
+    required this.wikidataId,
+    required this.facebookId,
+    required this.instagramId,
+    required this.twitterId,
   });
 }

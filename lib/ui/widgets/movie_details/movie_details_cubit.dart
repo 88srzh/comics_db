@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -63,7 +64,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           videos: [],
           allVideos: [],
           // facebook: '',
-          // externalIds: [],
+          externalIds: [],
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -90,7 +91,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
-      // externalIds: state.externalIds,
+      externalIds: state.externalIds,
       // facebook: state.facebook,
       // reviews: state.reviews,
       // similar: state.similar,
@@ -168,6 +169,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.favoriteData.isFavorite = isFavorite;
     data.watchlistData.isWatchlist = isWatchlist;
 
+    data.externalIds = details.externalIds.results
+        .map((e) => MovieDetailsExternalIdsData(
+            id: e.id, imdbId: e.imdbId, wikidataId: e.wikidataId, facebookId: e.facebookId, instagramId: e.instagramId, twitterId: e.twitterId))
+        .toList();
+
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
@@ -201,7 +207,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isFavoriteData = data.favoriteData.isFavorite;
     var isWatchlistData = data.watchlistData.isWatchlist;
     // var facebook = data.facebook;
-    // var externalIds = data.externalIds;
+    var externalIds = data.externalIds;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -226,7 +232,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       videos: videos,
       allVideos: allVideos,
       // facebook: facebook,
-      // externalIds: externalIds,
+      externalIds: externalIds,
       // similar: similar,
       // collection: collection,
     );
