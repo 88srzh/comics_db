@@ -24,7 +24,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsVideosData> videos;
   final List<MovieDetailsAllVideosData> allVideos;
   // final String? facebook;
-  // final List<MovieDetailsExternalIdsData> externalIds;
+  // final MovieDetailsExternalIdsData externalIds;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
@@ -142,7 +142,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsVideosData>? videos,
     List<MovieDetailsAllVideosData>? allVideos,
     // String? facebook,
-    // List<MovieDetailsExternalIdsData>? externalIds,
+    MovieDetailsExternalIdsData? externalIds,
     // List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,

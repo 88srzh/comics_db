@@ -22,7 +22,7 @@ PeopleDetails _$PeopleDetailsFromJson(Map<String, dynamic> json) =>
       placeOfBirth: json['place_of_birth'] as String?,
       profilePath: json['profile_path'] as String?,
       adult: json['adult'] as bool,
-      imdbId: json['imdb_id'] as String,
+      imdbId: json['imdb_id'] as String?,
       homepage: json['homepage'] as String?,
       credits: PeopleDetailsCredits.fromJson(
           json['credits'] as Map<String, dynamic>),

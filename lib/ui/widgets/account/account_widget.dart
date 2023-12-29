@@ -59,7 +59,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 3.0),
             const HeadingAccountCardWidget(headingText: 'Watchlist'),
             const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: 'Movie', icon: MdiIcons.bookmark, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
+            CustomAccountListTile(text: 'Movie', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
             const CustomSettingDivider(height: 0.8),
             // TODO need to change tv icon to one style
             CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),

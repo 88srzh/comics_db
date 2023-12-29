@@ -31,7 +31,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
 
   Future<void> loadAccountDetails(BuildContext context) async {
     final sessionId = await _sessionDataProvider.getSessionId();
-    final details = await movieAndTvApiClient.accountDetails(sessionId ?? '');
+    final details = await movieAndTvApiClient.accountDetails(sessionId ?? 'Гостевая сессия');
     updateData(details);
   }
 
@@ -43,7 +43,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   void updateData(AccountDetails? details) {
     accountDetailsData.id = details?.id ?? 0;
     accountDetailsData.name = details?.name ?? '';
-    accountDetailsData.userName = details?.username ?? '';
+    accountDetailsData.userName = details?.username ?? 'Гость';
     accountDetailsData.includeAdult = details?.includeAdult ?? true;
     accountDetailsData.avatarPath = details?.avatar.tmdb.avatarPath ?? '';
 
