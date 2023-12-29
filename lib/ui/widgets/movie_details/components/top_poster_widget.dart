@@ -44,7 +44,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
-    final id = cubit.state.externalIds.first.id;
     // late String? facebook = cubit.state.externalIds.first.facebookId;
     // late String? facebook = 'transformersmovie';
     // late String? facebook = cubit.state.facebook;
@@ -189,7 +188,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                       child: CustomSocialIcon(icon: MdiIcons.facebook),
                     ),
                     const SizedBox(width: 4.0),
-                    Text(id.toString(), style: const TextStyle(color: Colors.white)),
                     CustomSocialIcon(icon: MdiIcons.twitter),
                     const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.instagram),

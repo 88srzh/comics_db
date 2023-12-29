@@ -64,7 +64,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           videos: [],
           allVideos: [],
           // facebook: '',
-          externalIds: [],
+          // externalIds: [],
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -91,7 +91,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
-      externalIds: state.externalIds,
+      // externalIds: state.externalIds,
       // facebook: state.facebook,
       // reviews: state.reviews,
       // similar: state.similar,
@@ -169,10 +169,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.favoriteData.isFavorite = isFavorite;
     data.watchlistData.isWatchlist = isWatchlist;
 
-    data.externalIds = details.externalIds.results
-        .map((e) => MovieDetailsExternalIdsData(
-            id: e.id, imdbId: e.imdbId, wikidataId: e.wikidataId, facebookId: e.facebookId, instagramId: e.instagramId, twitterId: e.twitterId))
-        .toList();
+
 
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
