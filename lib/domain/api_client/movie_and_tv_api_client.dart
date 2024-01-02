@@ -105,7 +105,41 @@ class MovieAndTvApiClient {
     );
     return result;
   }
+  Future<MovieResponse> discoverNowPlayingMovie(
+      // TODO need to add with_release_type= 2 or 3, now result = 0
+      int page,
+      String locale,
+      String apiKey,
+      bool includeAdult,
+      bool includeVideo,
+      String sortBy,
+      // int withReleaseType,
+      String releaseDateGte,
+      String releaseDateLte,
+      ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
 
+    final result = _networkClient.get(
+      '/discover/movie',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'include_adult': includeAdult.toString(),
+        'include_video': includeVideo.toString(),
+        'sort_by': sortBy,
+        // 'with_release_type': withReleaseType.toString(),
+        'release_date.gte': releaseDateGte.toString(),
+        'release_date.lte': releaseDateLte.toString(),
+      },
+    );
+    return result;
+  }
   Future<MovieResponse> discoverTopRatedMovie(
     int page,
     String locale,
