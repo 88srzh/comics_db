@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/core/datetime.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -29,6 +30,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   Future<void> onTvAiringTodayListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String maximumDateTime = dateFormat.format(DateTime.now());
+    String minimumDateTime = Datetime.minimumDateLastYear;
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -41,7 +43,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
         final result = await _tvApiClient.discoverAiringTodayTV(
-            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, maximumDateTime, maximumDateTime);
+            nextPage, event.locale, Configuration.apiKey, false, 'popularity.desc', maximumDateTime, minimumDateTime);
         return result;
       });
       if (container != null) {

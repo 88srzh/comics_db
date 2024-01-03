@@ -581,9 +581,7 @@ class MovieAndTvApiClient {
     String locale,
     String apiKey,
     bool includeAdult,
-    bool includeNullFirstAirDates,
     String sortBy,
-    bool screenThreatrically,
     String dateTimeMaximum,
     String dateTimeMinimum,
   ) async {
@@ -598,9 +596,7 @@ class MovieAndTvApiClient {
       'page': page.toString(),
       'language': locale,
       'include_adult': includeAdult.toString(),
-      'include_null_first_air_dates': includeNullFirstAirDates.toString(),
       'sort_by': sortBy,
-      'screened_theatrically': screenThreatrically.toString(),
       'air_date.lte': dateTimeMaximum,
       'air_date.gte': dateTimeMinimum,
     });
