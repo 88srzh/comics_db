@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/core/datetime.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
@@ -31,7 +32,7 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   Future<void> onNowPlayingMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String maximumDateTime = dateFormat.format(DateTime.now());
-    String minimumDate = '1970-01-01';
+    String minimumDate = Datetime.minimumDate;
     if (state.isSearchMode) {
       final container = await loadNextPage(state.searchMovieContainer, (nextPage) async {
         final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
