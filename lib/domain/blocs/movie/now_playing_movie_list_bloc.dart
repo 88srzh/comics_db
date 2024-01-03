@@ -44,7 +44,7 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     } else {
       final container = await loadNextPage(state.movieContainer, (nextPage) async {
         final result = await _movieApiClient.discoverNowPlayingMovie(
-            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', minimumDate, maximumDateTime);
+            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', 3, minimumDate, maximumDateTime);
         return result;
       });
       if (container != null) {

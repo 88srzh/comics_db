@@ -113,7 +113,7 @@ class MovieAndTvApiClient {
       bool includeAdult,
       bool includeVideo,
       String sortBy,
-      // int withReleaseType,
+      int withReleaseType,
       String releaseDateGte,
       String releaseDateLte,
       ) async {
@@ -133,7 +133,7 @@ class MovieAndTvApiClient {
         'include_adult': includeAdult.toString(),
         'include_video': includeVideo.toString(),
         'sort_by': sortBy,
-        // 'with_release_type': withReleaseType.toString(),
+        'with_release_type': withReleaseType.toString(),
         'release_date.lte': releaseDateLte.toString(),
         'release_date.gte': releaseDateGte.toString(),
       },
