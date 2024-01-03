@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 
 class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
+
   // TODO duplicate in other places
 
   NowPlayingMovieListBloc(MovieListState initialState) : super(initialState) {
@@ -42,8 +43,8 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       }
     } else {
       final container = await loadNextPage(state.movieContainer, (nextPage) async {
-        final result =
-            await _movieApiClient.discoverNowPlayingMovie(nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', maximumDateTime, minimumDate);
+        final result = await _movieApiClient.discoverNowPlayingMovie(
+            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', minimumDate, maximumDateTime);
         return result;
       });
       if (container != null) {

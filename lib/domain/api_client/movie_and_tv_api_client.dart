@@ -134,8 +134,8 @@ class MovieAndTvApiClient {
         'include_video': includeVideo.toString(),
         'sort_by': sortBy,
         // 'with_release_type': withReleaseType.toString(),
-        'release_date.gte': releaseDateGte.toString(),
         'release_date.lte': releaseDateLte.toString(),
+        'release_date.gte': releaseDateGte.toString(),
       },
     );
     return result;
