@@ -30,7 +30,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   Future<void> onTvAiringTodayListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String maximumDateTime = dateFormat.format(DateTime.now());
-    String minimumDateTime = Datetime.minimumDateLastYear;
+    String minimumDateTime = Datetime.minimumDateHalfYear;
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
