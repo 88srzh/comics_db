@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/core/datetime.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -11,6 +10,7 @@ import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
@@ -30,7 +30,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   Future<void> onTvAiringTodayListEventLoadNextPage(TvListEventLoadNextPage event, Emitter<TvListState> emit) async {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String maximumDateTime = dateFormat.format(DateTime.now());
-    String minimumDateTime = Datetime.minimumDateHalfYear;
+    String lastYear = dateFormat.format(Jiffy.parse(maximumDateTime).subtract(years: 1).dateTime);
     if (state.isSearchMode) {
       final container = await _loadNextPage(state.searchTvContainer, (nextPage) async {
         final result = await _tvApiClient.searchTV(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -43,7 +43,7 @@ class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
         final result = await _tvApiClient.discoverAiringTodayTV(
-            nextPage, event.locale, Configuration.apiKey, false, 'popularity.desc', maximumDateTime, minimumDateTime);
+            nextPage, event.locale, Configuration.apiKey, false, 'popularity.desc', maximumDateTime, lastYear);
         return result;
       });
       if (container != null) {

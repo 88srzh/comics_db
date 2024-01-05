@@ -47,8 +47,7 @@ class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
     }
   }
 
-  Future<TvListContainer?> _loadNextPage(
-      TvListContainer container, Future<TVResponse> Function(int) loader) async {
+  Future<TvListContainer?> _loadNextPage(TvListContainer container, Future<TVResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.tvContainer.currentPage + 1;
     final result = await loader(nextPage);
