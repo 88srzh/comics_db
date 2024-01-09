@@ -5,7 +5,7 @@ part 'people.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class People {
-  final String profilePath;
+  final String? profilePath;
   final bool adult;
   final int id;
 

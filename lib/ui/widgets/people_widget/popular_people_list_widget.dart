@@ -92,15 +92,12 @@ class _PeoplePopularListColumnWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
             border: Border.all(
-              color:
-                  context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+              color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             boxShadow: [
               BoxShadow(
-                color: context.read<ThemeBloc>().isDarkTheme
-                    ? Colors.white.withOpacity(0.1)
-                    : Colors.black.withOpacity(0.1),
+                color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               )

@@ -52,8 +52,7 @@ class _PeoplesWidgetRow extends StatelessWidget {
 class _PeopleWidgetRowItem extends StatelessWidget {
   final MovieDetailsMoviePeopleData employee;
 
-  const _PeopleWidgetRowItem({Key? key, required this.employee})
-      : super(key: key);
+  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
