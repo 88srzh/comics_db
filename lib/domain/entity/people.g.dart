@@ -7,7 +7,7 @@ part of 'people.dart';
 // **************************************************************************
 
 People _$PeopleFromJson(Map<String, dynamic> json) => People(
-      profilePath: json['profile_path'] as String,
+      profilePath: json['profile_path'] as String?,
       adult: json['adult'] as bool,
       id: json['id'] as int,
       name: json['name'] as String,

@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/core/datetime.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -13,9 +14,6 @@ import 'package:intl/intl.dart';
 
 class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
-
-  // TODO duplicate string with airing today tv
-  final String minimumDateTime = '1970-01-01';
 
   TvOnTheAirListBloc(TvListState initialState) : super(initialState) {
     on<TvListEvent>(((event, emit) async {
@@ -43,8 +41,8 @@ class TvOnTheAirListBloc extends Bloc<TvListEvent, TvListState> {
       }
     } else {
       final container = await _loadNextPage(state.tvContainer, (nextPage) async {
-        final result = await _tvApiClient.discoverAiringTodayTV(
-            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', false, maximumDateTime, minimumDateTime);
+        final result = await _tvApiClient.discoverOnTheAirTodayTV(
+            nextPage, event.locale, Configuration.apiKey, false, 'popularity.desc', maximumDateTime, 2023);
         return result;
       });
       if (container != null) {

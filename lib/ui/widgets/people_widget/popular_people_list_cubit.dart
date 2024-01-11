@@ -51,7 +51,7 @@ class PeopleListCubit extends Cubit<PeopleListCubitState> {
   PeopleListData _makeListData(People people) {
     return PeopleListData(
       name: people.name,
-      profilePath: people.profilePath,
+      profilePath: people.profilePath ?? '',
       id: people.id,
     );
   }

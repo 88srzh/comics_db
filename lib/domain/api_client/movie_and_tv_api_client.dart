@@ -106,6 +106,42 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<MovieResponse> discoverNowPlayingMovie(
+    // TODO need to add with_release_type= 2 or 3, now result = 0
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+    bool includeVideo,
+    String sortBy,
+    int withReleaseType,
+    String releaseDateGte,
+    String releaseDateLte,
+  ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/discover/movie',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'include_adult': includeAdult.toString(),
+        'include_video': includeVideo.toString(),
+        'sort_by': sortBy,
+        'with_release_type': withReleaseType.toString(),
+        'release_date.lte': releaseDateLte.toString(),
+        'release_date.gte': releaseDateGte.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<MovieResponse> discoverTopRatedMovie(
     int page,
     String locale,
@@ -497,7 +533,6 @@ class MovieAndTvApiClient {
     bool includeAdult,
     bool includeNullFirstAirDates,
     String sortBy,
-    bool screenThreatrically,
   ) async {
     TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -512,7 +547,6 @@ class MovieAndTvApiClient {
       'include_adult': includeAdult.toString(),
       'include_null_first_air_dates': includeNullFirstAirDates.toString(),
       'sort_by': sortBy,
-      'screened_theatrically': screenThreatrically.toString(),
     });
     return tvResult;
   }
@@ -524,7 +558,6 @@ class MovieAndTvApiClient {
     bool includeAdult,
     bool includeNullFirstAirDates,
     String sortBy,
-    bool? screenThreatrically,
     double? voteCountGte,
   ) async {
     TVResponse parser(dynamic json) {
@@ -540,7 +573,6 @@ class MovieAndTvApiClient {
       'include_adult': includeAdult.toString(),
       'include_null_first_air_dates': includeNullFirstAirDates.toString(),
       'sort_by': sortBy,
-      'screened_theatrically': screenThreatrically.toString(),
       'vote_count.gte': voteCountGte.toString(),
     });
     return tvResult;
@@ -551,9 +583,7 @@ class MovieAndTvApiClient {
     String locale,
     String apiKey,
     bool includeAdult,
-    bool includeNullFirstAirDates,
     String sortBy,
-    bool screenThreatrically,
     String dateTimeMaximum,
     String dateTimeMinimum,
   ) async {
@@ -568,11 +598,36 @@ class MovieAndTvApiClient {
       'page': page.toString(),
       'language': locale,
       'include_adult': includeAdult.toString(),
-      'include_null_first_air_dates': includeNullFirstAirDates.toString(),
       'sort_by': sortBy,
-      'screened_theatrically': screenThreatrically.toString(),
       'air_date.lte': dateTimeMaximum,
       'air_date.gte': dateTimeMinimum,
+    });
+    return tvResult;
+  }
+
+  Future<TVResponse> discoverOnTheAirTodayTV(
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+    String sortBy,
+    String dateTimeMaximum,
+    int firstAirDateYear,
+  ) async {
+    TVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final tvResult = _networkClient.get('/discover/tv', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'page': page.toString(),
+      'language': locale,
+      'include_adult': includeAdult.toString(),
+      'sort_by': sortBy,
+      'air_date.lte': dateTimeMaximum,
+      'first_air_date_year': firstAirDateYear.toString(),
     });
     return tvResult;
   }
