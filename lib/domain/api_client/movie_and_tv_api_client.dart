@@ -198,29 +198,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<MovieResponse> nowPlayingMovie(
-    int page,
-    String locale,
-    String apiKey,
-  ) {
-    MovieResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/movie/now_playing',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
-    return result;
-  }
-
   Future<MovieResponse> favoriteMoviesList(
     int page,
     String locale,
