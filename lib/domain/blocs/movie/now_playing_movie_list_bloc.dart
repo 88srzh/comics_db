@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/core/datetime.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
@@ -11,6 +10,7 @@ import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -32,7 +32,7 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   Future<void> onNowPlayingMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String maximumDateTime = dateFormat.format(DateTime.now());
-    String minimumDate = Datetime.minimumDate;
+    String lastSixMonth = dateFormat.format(Jiffy.parse(maximumDateTime).subtract(months: 6).dateTime);
     if (state.isSearchMode) {
       final container = await loadNextPage(state.searchMovieContainer, (nextPage) async {
         final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
@@ -45,7 +45,7 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     } else {
       final container = await loadNextPage(state.movieContainer, (nextPage) async {
         final result = await _movieApiClient.discoverNowPlayingMovie(
-            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', 3, minimumDate, maximumDateTime);
+            nextPage, event.locale, Configuration.apiKey, false, false, 'popularity.desc', 3, lastSixMonth, maximumDateTime);
         return result;
       });
       if (container != null) {

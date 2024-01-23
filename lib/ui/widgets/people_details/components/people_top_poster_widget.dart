@@ -17,7 +17,7 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
 class PeopleTopPosterWidget extends StatelessWidget {
-  const PeopleTopPosterWidget({Key? key}) : super(key: key);
+  const PeopleTopPosterWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +45,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                     aspectRatio: 390 / 220,
                     child: CachedNetworkImage(
                       imageUrl: ImageDownloader.imageUrl(profilePath),
-                      placeholder: (context, url) =>
-                          const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) =>
-                          Image.asset(AppImages.noImageAvailable),
+                      placeholder: (context, url) => const LoadingIndicatorWidget(),
+                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                     ),
                   ),
                 ),
@@ -122,14 +120,11 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   children: [
                     Icon(
                       MdiIcons.starOutline,
-                      color: context.read<ThemeBloc>().isDarkTheme
-                          ? DarkThemeColors.ratingThumb
-                          : DarkThemeColors.kPrimaryColor,
+                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
                       size: 14,
                     ),
                     const SizedBox(width: 4.0),
-                    CustomPosterTopLeftAlignTextRating(
-                        text: popularity.toInt().toString()),
+                    CustomPosterTopLeftAlignTextRating(text: popularity.toInt().toString()),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -146,10 +141,8 @@ class PeopleTopPosterWidget extends StatelessWidget {
                   width: 390.0,
                   child: CachedNetworkImage(
                     imageUrl: ImageDownloader.imageUrl(profilePath),
-                    placeholder: (context, url) =>
-                        const LoadingIndicatorWidget(),
-                    errorWidget: (context, url, dynamic error) =>
-                        Image.asset(AppImages.noImageAvailable),
+                    placeholder: (context, url) => const LoadingIndicatorWidget(),
+                    errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                   ),
                 ),
               )

@@ -175,41 +175,6 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<MovieResponse> discoverUpcomingMovie(
-    int page,
-    String locale,
-    String apiKey,
-    bool includeAdult,
-    bool includeVideo,
-    String sortBy,
-    int withReleaseType,
-    String releaseDateGte,
-    String releaseDateLte,
-  ) async {
-    MovieResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/discover/movie',
-      parser,
-      <String, dynamic>{
-        'api_key': apiKey,
-        'page': page.toString(),
-        'language': locale,
-        'include_adult': includeAdult.toString(),
-        'include_video': includeVideo.toString(),
-        'sort_by': sortBy,
-        'with_release_type': withReleaseType.toString(),
-        'release_date.gte': releaseDateGte,
-        'release_date.lte': releaseDateLte,
-      },
-    );
-    return result;
-  }
-
   Future<MovieResponse> upcomingMovie(
     int page,
     String locale,
@@ -223,29 +188,6 @@ class MovieAndTvApiClient {
 
     final result = _networkClient.get(
       '/movie/upcoming',
-      parser,
-      <String, dynamic>{
-        'api_key': Configuration.apiKey,
-        'page': page.toString(),
-        'language': locale,
-      },
-    );
-    return result;
-  }
-
-  Future<MovieResponse> nowPlayingMovie(
-    int page,
-    String locale,
-    String apiKey,
-  ) {
-    MovieResponse parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
-
-    final result = _networkClient.get(
-      '/movie/now_playing',
       parser,
       <String, dynamic>{
         'api_key': Configuration.apiKey,
