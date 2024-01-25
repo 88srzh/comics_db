@@ -202,12 +202,13 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           ),
         ),
         Positioned(
-          top: 55,
-          right: 15,
+          left: 122,
+          // top: 55,
+          // right: 15,
           child: SizedBox(
             //     TODO: не закругляются края
-            height: 180.0,
-            width: 140.0,
+            height: 230.0,
+            width: 390.0,
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(posterPath!),
               placeholder: (context, url) => const LoadingIndicatorWidget(),
