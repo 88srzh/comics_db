@@ -20,7 +20,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieTopPosterWidget extends StatefulWidget {
-  const MovieTopPosterWidget({Key? key}) : super(key: key);
+  const MovieTopPosterWidget({super.key});
 
   @override
   State<MovieTopPosterWidget> createState() => _MovieTopPosterWidgetState();
@@ -60,7 +60,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           child: Opacity(
             opacity: 0.25,
             child: AspectRatio(
-              aspectRatio: 390 / 220,
+              aspectRatio: 390 / 230,
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(backdropPath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
@@ -193,7 +193,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     CustomSocialIcon(icon: MdiIcons.instagram),
                     const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.home),
-                    // const SizedBox(width: 4),
+                    // const SizedBox(width: 8.0),
                     // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],
                 ),
