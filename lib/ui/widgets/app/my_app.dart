@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
   // TODO: нужно отказаться от mainNavigation
   static final mainNavigation = MainNavigation();
 
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HeadingAccountCardWidget extends StatelessWidget {
-  const HeadingAccountCardWidget({Key? key, required this.headingText}) : super(key: key);
+  const HeadingAccountCardWidget({super.key, required this.headingText});
   final String headingText;
 
   @override
