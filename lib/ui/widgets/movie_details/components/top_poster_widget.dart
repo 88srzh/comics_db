@@ -32,13 +32,12 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final cubit = context.watch<MovieDetailsCubit>();
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
-    final voteAverage = cubit.state.voteAverage;
-    final voteAverageString = voteAverage!.toStringAsFixed(1);
+    final voteAverageString = cubit.state.voteAverage!.toStringAsFixed(1);
     final voteCount = cubit.state.voteCount;
     final popularity = cubit.state.popularity;
     int? popularityInt = popularity?.toInt();
     final releaseDate = cubit.state.releaseDate;
-    final summary = cubit.state.summary;
+    final runtime = cubit.state.runtime;
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
@@ -108,7 +107,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                 ),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: summary, maxLines: null),
+                    CustomPosterTopLeftAlignText(text: runtime, maxLines: null),
                   ],
                 ),
                 Column(
