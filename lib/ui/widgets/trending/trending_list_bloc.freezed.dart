@@ -140,7 +140,7 @@ class _$TrendingListEventLoadAllThisWeekImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrendingListEventLoadAllThisWeekImpl &&
@@ -298,7 +298,7 @@ class _$TrendingListEventLoadMoviesThisWeekImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrendingListEventLoadMoviesThisWeekImpl &&
@@ -457,7 +457,7 @@ class _$TrendingListEventLoadTvThisWeekImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrendingListEventLoadTvThisWeekImpl &&
@@ -596,7 +596,7 @@ class _$TrendingListEventLoadResetImpl implements TrendingListEventLoadReset {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrendingListEventLoadResetImpl);

@@ -127,7 +127,7 @@ class _$MovieListEventLoadNextPageImpl implements MovieListEventLoadNextPage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MovieListEventLoadNextPageImpl &&
@@ -252,7 +252,7 @@ class _$MovieListEventLoadResetImpl implements MovieListEventLoadReset {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MovieListEventLoadResetImpl);
@@ -381,7 +381,7 @@ class _$MovieListEventSearchMovieImpl implements MovieListEventSearchMovie {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MovieListEventSearchMovieImpl &&

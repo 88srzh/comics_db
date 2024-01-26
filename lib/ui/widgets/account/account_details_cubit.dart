@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -18,6 +19,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final accountDetailsData = AccountDetailsData();
   final movieAndTvApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
+  final _authApiClient = AuthApiClient();
 
   AccountDetailsCubit() : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '')) {
     emit(AccountDetailsCubitState(
@@ -31,7 +33,8 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
 
   Future<void> loadAccountDetails(BuildContext context) async {
     final sessionId = await _sessionDataProvider.getSessionId();
-    final details = await movieAndTvApiClient.accountDetails(sessionId ?? 'Гостевая сессия');
+    final guestSessionId = await _authApiClient.guestAuth();
+    final details = await movieAndTvApiClient.accountDetails(sessionId ?? guestSessionId);
     updateData(details);
   }
 

@@ -26,3 +26,8 @@ class AuthViewCubitFormFillInProgressState extends AuthViewCubitState {
   @override
   List<Object> get props => [];
 }
+
+class AuthGuestProgressState extends AuthViewCubitState {
+  @override
+  List<Object> get props => [];
+}

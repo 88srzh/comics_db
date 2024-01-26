@@ -7,7 +7,7 @@ import 'package:comics_db_app/ui/widgets/auth/components/form_widget.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/guest_auth_button_widget.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({Key? key}) : super(key: key);
+  const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

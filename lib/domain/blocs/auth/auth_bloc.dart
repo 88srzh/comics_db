@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final _authApiClient = AuthApiClient();
   final _accountApiClient = AccountApiClient();
 
-  AuthBloc(AuthState initialState) : super(initialState) {
+  AuthBloc(super.initialState) {
     on<AuthEvent>(((event, emit) async {
       if (event is AuthCheckStatusEvent) {
         await onAuthCheckStatusEvent(event, emit);

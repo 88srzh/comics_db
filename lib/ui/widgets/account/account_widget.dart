@@ -28,6 +28,7 @@ class _AccountWidgetState extends State<AccountWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // TODO if guest session - what to do?
     context.read<AccountDetailsCubit>().setupAccountDetails(context);
   }
 
@@ -64,7 +65,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(text: 'Movie', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
             const CustomSettingDivider(height: 0.8),
-            // TODO need to change tv icon to one style
             CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
             const CustomSettingDivider(height: 3.0),
             const HeadingAccountCardWidget(headingText: 'Favorites'),
@@ -125,8 +125,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
                     );
                   },
                 );
-                // cubit.logout();
-                // Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
               },
             ),
             const CustomSettingDivider(height: 0.5),

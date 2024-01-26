@@ -316,7 +316,7 @@ class _$TVImpl implements _TV {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TVImpl &&
