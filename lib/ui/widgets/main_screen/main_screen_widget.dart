@@ -17,13 +17,14 @@ import 'package:comics_db_app/ui/widgets/trending/trending_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
 
 class MainScreenWidget extends HookWidget {
-  MainScreenWidget({Key? key}) : super(key: key);
+  MainScreenWidget({super.key});
 
   final List<Widget> screen = [
     const PopularPeopleListWidget(),
     const TrendingWidget(),
     const MovieListWidget(),
     const TvListWidget(),
+    // TODO add if sessionId != null then load sessionIdAccountWidget else load AccountWidget
     const AccountWidget(),
   ];
 
