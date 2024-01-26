@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:comics_db_app/resources/resources.dart';
 
 class SplashScreenBodyWidget extends StatelessWidget {
-  const SplashScreenBodyWidget({Key? key}) : super(key: key);
+  const SplashScreenBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
