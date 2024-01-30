@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
+import 'package:comics_db_app/ui/widgets/account/accounts_widget.dart';
+import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -25,11 +28,14 @@ class MainScreenWidget extends HookWidget {
     const MovieListWidget(),
     const TvListWidget(),
     // TODO add if sessionId != null then load sessionIdAccountWidget else load AccountWidget
-    const AccountWidget(),
+    const AccountsWidget(),
+    // const AccountWidget(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthViewCubit>();
+    String? guestSessionId = cubit.guestAuth.toString();
     final selectedIndex = useState(1);
     bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return Scaffold(
