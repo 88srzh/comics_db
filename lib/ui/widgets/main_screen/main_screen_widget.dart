@@ -28,8 +28,8 @@ class MainScreenWidget extends HookWidget {
     const MovieListWidget(),
     const TvListWidget(),
     // TODO add if sessionId != null then load sessionIdAccountWidget else load AccountWidget
-    const AccountsWidget(),
-    // const AccountWidget(),
+    // const AccountsWidget(),
+    const AccountWidget(),
   ];
 
   @override

@@ -10,7 +10,7 @@ import 'package:comics_db_app/ui/widgets/tv_popular/tv_popular_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_widget.dart';
 
 class TvListWidget extends StatelessWidget {
-  const TvListWidget({Key? key}) : super(key: key);
+  const TvListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
