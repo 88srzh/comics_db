@@ -33,8 +33,8 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
 
   Future<void> loadAccountDetails(BuildContext context) async {
     final sessionId = await _sessionDataProvider.getSessionId();
-    final guestSessionId = await _authApiClient.guestAuth();
-    final details = await movieAndTvApiClient.accountDetails(sessionId ?? guestSessionId);
+    // final guestSessionId = await _authApiClient.guestAuth();
+    final details = await movieAndTvApiClient.accountDetails(sessionId ?? '');
     updateData(details);
   }
 

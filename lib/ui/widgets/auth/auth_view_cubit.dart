@@ -35,9 +35,10 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
   //   authBloc.add(const GuestAuthLoginEvent());
   // }
 
-  Future<void> guestAuth() async {
-    await authApiClient.guestAuth();
-  }
+  // Future<void> guestAuth() async {
+  //   await authApiClient.guestAuth();
+  // }
+
   // not used
   // void logout() {
   //   authBloc.add(const AuthLogOutEvent());
