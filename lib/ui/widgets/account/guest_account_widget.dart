@@ -10,14 +10,13 @@ class GuestAccountWidget extends StatefulWidget {
 }
 
 class _GuestAccountWidgetState extends State<GuestAccountWidget> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    context.read<GuestAccountDetailsCubit>().loadGuestAccountDetails();
-  }
-
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   context.read<GuestAccountDetailsCubit>().loadGuestAccountDetails();
+  // }
   @override
   Widget build(BuildContext context) {
-    return const Text('That is work!');
+    return const Center(child: Text('That is work!'));
   }
 }
