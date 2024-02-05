@@ -34,7 +34,7 @@ class MainScreenWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthViewCubit>();
+    // final cubit = context.watch<AuthViewCubit>();
     // String? guestSessionId = cubit.guestAuth.toString();
     final selectedIndex = useState(1);
     bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;

@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -19,7 +18,6 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final accountDetailsData = AccountDetailsData();
   final movieAndTvApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
-  final _authApiClient = AuthApiClient();
 
   AccountDetailsCubit() : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '')) {
     emit(AccountDetailsCubitState(
@@ -33,8 +31,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
 
   Future<void> loadAccountDetails(BuildContext context) async {
     final sessionId = await _sessionDataProvider.getSessionId();
-    // final guestSessionId = await _authApiClient.guestAuth();
-    final details = await movieAndTvApiClient.accountDetails(sessionId ?? '');
+    final details = await movieAndTvApiClient.accountDetails(sessionId ?? 'Guest session');
     updateData(details);
   }
 
@@ -46,7 +43,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   void updateData(AccountDetails? details) {
     accountDetailsData.id = details?.id ?? 0;
     accountDetailsData.name = details?.name ?? '';
-    accountDetailsData.userName = details?.username ?? 'Гость';
+    accountDetailsData.userName = details?.username ?? 'Guest';
     accountDetailsData.includeAdult = details?.includeAdult ?? true;
     accountDetailsData.avatarPath = details?.avatar.tmdb.avatarPath ?? '';
 
