@@ -128,7 +128,7 @@ class _$PeopleListEventLoadNextPageImpl implements PeopleListEventLoadNextPage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PeopleListEventLoadNextPageImpl &&
@@ -253,7 +253,7 @@ class _$PeopleListEventLoadResetImpl implements PeopleListEventLoadReset {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PeopleListEventLoadResetImpl);
@@ -383,7 +383,7 @@ class _$PeopleListEventSearchMovieImpl implements PeopleListEventSearchMovie {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PeopleListEventSearchMovieImpl &&

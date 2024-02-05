@@ -23,8 +23,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   Timer? searchDebounce;
   var tv = <TV>[];
 
-  TvAiringTodayListCubit({required this.tvAiringTodayListBloc})
-      : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
+  TvAiringTodayListCubit({required this.tvAiringTodayListBloc}) : super(const TvListCubitState(tvs: <TvListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(() {
       _onState(tvAiringTodayListBloc.state);
       tvAiringTodayListBlocSubscription = tvAiringTodayListBloc.stream.listen(_onState);
@@ -52,8 +51,7 @@ class TvAiringTodayListCubit extends Cubit<TvListCubitState> {
   }
 
   TvListData _makeListData(TV tv) {
-    return TvListData(
-        id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
+    return TvListData(id: tv.id, name: tv.name, overview: tv.overview, posterPath: tv.posterPath, backdropPath: tv.backdropPath);
   }
 
   void showedAiringTodayTvAtIndex(int index) {

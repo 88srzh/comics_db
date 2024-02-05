@@ -11,15 +11,20 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 
 class GuestAuthButtonWidget extends StatelessWidget {
-  const GuestAuthButtonWidget({Key? key}) : super(key: key);
+  const GuestAuthButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     // TODO add guest session
     final cubit = context.watch<AuthViewCubit>();
-    onPressed() => Navigator.of(context)
-        .popAndPushNamed(MainNavigationRouteNames.mainScreen);
-    final child = cubit.state is AuthViewCubitAuthProgressState
+    // final canStart = cubit.state is AuthGuestProgressState;
+    onPressed() {
+      // cubit.guestAuth();
+      Navigator.of(context).popAndPushNamed(MainNavigationRouteNames.mainScreen);
+    }
+    // onPressed() => Navigator.of(context).popAndPushNamed(MainNavigationRouteNames.mainScreen);
+    // final child = cubit.state is AuthViewCubitAuthProgressState
+    final child = cubit.state is AuthGuestProgressState
         ? const SizedBox(
             width: 15,
             height: 15,
@@ -34,8 +39,7 @@ class GuestAuthButtonWidget extends StatelessWidget {
           ),
           backgroundColor: AppColors.buttonFont,
           foregroundColor: Colors.white,
-          textStyle:
-              const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
       child: child,
     );
   }

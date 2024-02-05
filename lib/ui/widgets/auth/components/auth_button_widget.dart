@@ -11,7 +11,7 @@ import 'package:comics_db_app/domain/services/auth_data_storage.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 
 class AuthButtonWidget extends StatelessWidget {
-  const AuthButtonWidget({Key? key}) : super(key: key);
+  const AuthButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

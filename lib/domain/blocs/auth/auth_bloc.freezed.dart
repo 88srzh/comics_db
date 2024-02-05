@@ -112,7 +112,7 @@ class _$AuthLogOutEventImpl implements AuthLogOutEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$AuthLogOutEventImpl);
   }
@@ -226,7 +226,7 @@ class _$AuthCheckStatusEventImpl implements AuthCheckStatusEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthCheckStatusEventImpl);
@@ -366,7 +366,7 @@ class _$AuthLoginEventImpl implements AuthLoginEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthLoginEventImpl &&
@@ -499,7 +499,7 @@ class _$GuestAuthLoginEventImpl implements GuestAuthLoginEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GuestAuthLoginEventImpl);

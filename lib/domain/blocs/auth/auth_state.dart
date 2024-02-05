@@ -31,3 +31,8 @@ class AuthCheckStatusInProgressState extends AuthState {
   @override
   List<Object> get props => [];
 }
+
+class AuthGuestState extends AuthState {
+  @override
+  List<Object> get props => [];
+}

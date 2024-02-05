@@ -15,7 +15,7 @@ import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:comics_db_app/ui/widgets/auth/components/header_widget.dart';
 
 class AuthWidget extends StatelessWidget {
-  const AuthWidget({Key? key}) : super(key: key);
+  const AuthWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

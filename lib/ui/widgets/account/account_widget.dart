@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -16,7 +18,7 @@ import 'package:comics_db_app/ui/widgets/account/components/notification_card_wi
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
 
 class AccountWidget extends StatefulWidget {
-  const AccountWidget({Key? key}) : super(key: key);
+  const AccountWidget({super.key});
 
   @override
   State<AccountWidget> createState() => _AccountWidgetState();
@@ -26,6 +28,7 @@ class _AccountWidgetState extends State<AccountWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // TODO if guest session - what to do?
     context.read<AccountDetailsCubit>().setupAccountDetails(context);
   }
 
@@ -38,7 +41,7 @@ class _AccountWidgetState extends State<AccountWidget> {
 }
 
 class BodyPersonalWidget extends StatefulWidget {
-  const BodyPersonalWidget({Key? key}) : super(key: key);
+  const BodyPersonalWidget({super.key});
 
   @override
   State<BodyPersonalWidget> createState() => _BodyPersonalWidgetState();
@@ -48,6 +51,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
+    final Color titleColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white;
     // TODO name don't work
     // final name = cubit.state.name;
     return ListView(
@@ -61,7 +65,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(text: 'Movie', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
             const CustomSettingDivider(height: 0.8),
-            // TODO need to change tv icon to one style
             CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
             const CustomSettingDivider(height: 3.0),
             const HeadingAccountCardWidget(headingText: 'Favorites'),
@@ -77,12 +80,53 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const NotificationsCardWidget(),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(
-                text: 'Logout',
-                icon: MdiIcons.logout,
-                onTap: () {
-                  cubit.logout();
-                  Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false);
-                }),
+              text: 'Logout',
+              icon: MdiIcons.logout,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.bottomBarBackgroundColor : Colors.white,
+                      title: Center(
+                        child: Text(
+                          'Logout',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ),
+                      content: SizedBox(
+                        height: 80,
+                        width: 200,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Do you really want to logout?',
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                            const SizedBox(height: 10.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ElevatedButton(
+                                  child: const Text('Cancel'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                ElevatedButton(
+                                  child: const Text('Logout'),
+                                  onPressed: () {
+                                    cubit.logout().whenComplete(() => Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false));
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
             const CustomSettingDivider(height: 0.5),
             // const AnimationFab(),
           ],

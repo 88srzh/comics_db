@@ -20,7 +20,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieTopPosterWidget extends StatefulWidget {
-  const MovieTopPosterWidget({Key? key}) : super(key: key);
+  const MovieTopPosterWidget({super.key});
 
   @override
   State<MovieTopPosterWidget> createState() => _MovieTopPosterWidgetState();
@@ -32,13 +32,12 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final cubit = context.watch<MovieDetailsCubit>();
     final title = cubit.state.title;
     final tagline = cubit.state.tagline;
-    final voteAverage = cubit.state.voteAverage;
-    final voteAverageString = voteAverage!.toStringAsFixed(1);
+    final voteAverageString = cubit.state.voteAverage!.toStringAsFixed(1);
     final voteCount = cubit.state.voteCount;
     final popularity = cubit.state.popularity;
     int? popularityInt = popularity?.toInt();
     final releaseDate = cubit.state.releaseDate;
-    final summary = cubit.state.summary;
+    final runtime = cubit.state.runtime;
     final genres = cubit.state.genres;
     final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
@@ -60,7 +59,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           child: Opacity(
             opacity: 0.25,
             child: AspectRatio(
-              aspectRatio: 390 / 220,
+              aspectRatio: 390 / 230,
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(backdropPath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
@@ -108,7 +107,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                 ),
                 Row(
                   children: [
-                    CustomPosterTopLeftAlignText(text: summary, maxLines: null),
+                    CustomPosterTopLeftAlignText(text: runtime, maxLines: null),
                   ],
                 ),
                 Column(
@@ -193,7 +192,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     CustomSocialIcon(icon: MdiIcons.instagram),
                     const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.home),
-                    // const SizedBox(width: 4),
+                    // const SizedBox(width: 8.0),
                     // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],
                 ),
@@ -202,12 +201,13 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           ),
         ),
         Positioned(
-          top: 55,
-          right: 15,
+          left: 122,
+          // top: 55,
+          // right: 15,
           child: SizedBox(
             //     TODO: не закругляются края
-            height: 180.0,
-            width: 140.0,
+            height: 230.0,
+            width: 390.0,
             child: CachedNetworkImage(
               imageUrl: ImageDownloader.imageUrl(posterPath!),
               placeholder: (context, url) => const LoadingIndicatorWidget(),

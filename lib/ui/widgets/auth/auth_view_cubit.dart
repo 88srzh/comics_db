@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Package imports:
+import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -12,15 +13,14 @@ import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 class AuthViewCubit extends Cubit<AuthViewCubitState> {
   final AuthBloc authBloc;
   late final StreamSubscription<AuthState> authBlocSubscription;
+  final authApiClient = AuthApiClient();
 
-  AuthViewCubit(AuthViewCubitState initialState, this.authBloc)
-      : super(initialState) {
+  AuthViewCubit(super.initialState, this.authBloc) {
     _onState(authBloc.state);
     authBlocSubscription = authBloc.stream.listen(_onState);
   }
 
-  bool _isValid(String login, String password) =>
-      login.isNotEmpty && password.isNotEmpty;
+  bool _isValid(String login, String password) => login.isNotEmpty && password.isNotEmpty;
 
   void auth({required String login, required String password}) {
     if (!_isValid(login, password)) {
@@ -31,13 +31,18 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
     authBloc.add(AuthLoginEvent(login: login, password: password));
   }
 
-  void guestAuth() {
-    authBloc.add(const GuestAuthLoginEvent());
-  }
+  // void guestAuth() {
+  //   authBloc.add(const GuestAuthLoginEvent());
+  // }
 
-  void logout() {
-    authBloc.add(const AuthLogOutEvent());
-  }
+  // Future<void> guestAuth() async {
+  //   await authApiClient.guestAuth();
+  // }
+
+  // not used
+  // void logout() {
+  //   authBloc.add(const AuthLogOutEvent());
+  // }
 
   void _onState(AuthState state) {
     if (state is AuthUnauthorizedState) {
@@ -52,6 +57,9 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
       emit(AuthViewCubitAuthProgressState());
     } else if (state is AuthCheckStatusInProgressState) {
       emit(AuthViewCubitAuthProgressState());
+      // TODO may be delete it
+    } else if (state is AuthGuestProgressState) {
+      emit(AuthGuestProgressState());
     }
   }
 

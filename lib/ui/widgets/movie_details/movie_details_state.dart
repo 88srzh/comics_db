@@ -13,7 +13,7 @@ class MovieDetailsCubitState {
   final int voteCount;
   final double? popularity;
   final String releaseDate;
-  final String summary;
+  final String runtime;
   final String genres;
   final List<List<MovieDetailsMoviePeopleData>> peopleData;
   final List<MovieDetailsMovieActorData> actorsData;
@@ -41,7 +41,7 @@ class MovieDetailsCubitState {
     required this.voteCount,
     required this.popularity,
     required this.releaseDate,
-    required this.summary,
+    required this.runtime,
     required this.genres,
     required this.peopleData,
     required this.actorsData,
@@ -74,7 +74,7 @@ class MovieDetailsCubitState {
           voteCount == other.voteCount &&
           popularity == other.popularity &&
           releaseDate == other.releaseDate &&
-          summary == other.summary &&
+          runtime == other.runtime &&
           genres == other.genres &&
           peopleData == other.peopleData &&
           actorsData == other.actorsData &&
@@ -103,7 +103,7 @@ class MovieDetailsCubitState {
       voteCount.hashCode ^
       popularity.hashCode ^
       releaseDate.hashCode ^
-      summary.hashCode ^
+      runtime.hashCode ^
       genres.hashCode ^
       peopleData.hashCode ^
       actorsData.hashCode ^
@@ -159,7 +159,7 @@ class MovieDetailsCubitState {
       voteCount: voteCount ?? this.voteCount,
       popularity: popularity ?? this.popularity,
       releaseDate: releaseDate ?? this.releaseDate,
-      summary: summary ?? this.summary,
+      runtime: summary ?? this.runtime,
       genres: genres ?? this.genres,
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,

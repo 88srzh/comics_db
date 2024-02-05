@@ -194,7 +194,11 @@ class ScreenFactory {
 
   Widget makeAiringTodayTvList() {
     return BlocProvider(
-      create: (_) => TvAiringTodayListCubit(tvAiringTodayListBloc: TvAiringTodayListBloc(const TvListState.initial())),
+      create: (_) => TvAiringTodayListCubit(
+        tvAiringTodayListBloc: TvAiringTodayListBloc(
+          const TvListState.initial(),
+        ),
+      ),
       child: const AiringTodayTvsWidget(),
     );
   }
@@ -210,6 +214,7 @@ class ScreenFactory {
   Widget makeWatchlistMovie() {
     return const WatchlistMovieWidget();
   }
+
   Widget makeWatchlistTV() {
     return const WatchlistTVWidget();
   }

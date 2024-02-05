@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:comics_db_app/ui/widgets/splashscreen/components/splashscreen_body_widget.dart';
 
 class SplashscreenWidget extends StatelessWidget {
-  const SplashscreenWidget({Key? key}) : super(key: key);
+  const SplashscreenWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

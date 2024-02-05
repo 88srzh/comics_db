@@ -23,7 +23,7 @@ abstract class MainNavigationRouteNames {
   static const trendingThisWeek = '/main_screen/trending/this_week';
   static const favoriteMovies = '/main_screen/favorite_movies';
   static const watchlistMovie = '/main_screen/watchlistMovie';
-  static const watchlistTV = '/main_screen/watchlustTV';
+  static const watchlistTV = '/main_screen/watchlistTV';
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
   static const tvTopRated = '/main_screen/tv_top_rated';

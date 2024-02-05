@@ -127,7 +127,7 @@ class _$TvListEventLoadNextPageImpl implements TvListEventLoadNextPage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvListEventLoadNextPageImpl &&
@@ -250,7 +250,7 @@ class _$TvListEventLoadResetImpl implements TvListEventLoadReset {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvListEventLoadResetImpl);
@@ -377,7 +377,7 @@ class _$TvListEventSearchTvImpl implements TvListEventSearchTv {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvListEventSearchTvImpl &&
