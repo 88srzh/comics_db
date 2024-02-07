@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NotificationsCardWidget extends StatefulWidget {
-  const NotificationsCardWidget({Key? key}) : super(key: key);
+  const NotificationsCardWidget({super.key});
 
   @override
   State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
