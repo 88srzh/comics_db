@@ -2,8 +2,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class Keys {
-  static const sessionId = 'session-id';
+  static const sessionId = 'session_id';
   static const accountId = 'account_id';
+  static const guestSessionId = 'guest_session_id';
 }
 
 class SessionDataProvider {
@@ -30,5 +31,15 @@ class SessionDataProvider {
 
   Future<void> deleteAccountId() {
     return _secureStorage.delete(key: Keys.accountId);
+  }
+
+  Future<String?> getGuestSessionId() => _secureStorage.read(key: Keys.guestSessionId);
+
+  Future<void> setGuestSessionId(String value) {
+    return _secureStorage.write(key: Keys.guestSessionId, value: value);
+  }
+
+  Future<void> deleteGuestSessionId() {
+    return _secureStorage.delete(key: Keys.guestSessionId);
   }
 }
