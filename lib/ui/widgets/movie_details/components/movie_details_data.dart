@@ -6,7 +6,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_similar_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/favorite_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_watchlist_data.dart';
@@ -27,7 +27,7 @@ class MovieDetailsData {
   double? voteAverage = 0;
   String? facebook = '';
 
-  FavoriteData favoriteData = FavoriteData();
+  MovieFavoriteData favoriteData = MovieFavoriteData();
   MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();
 
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];

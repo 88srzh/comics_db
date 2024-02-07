@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class FavoriteData {
+class MovieFavoriteData {
   bool isFavorite;
   IconData get favoriteIcon => isFavorite ? Icons.favorite : Icons.favorite_outline;
 
-  FavoriteData({this.isFavorite = false});
+  MovieFavoriteData({this.isFavorite = false});
 
-  FavoriteData copyWith({
+  MovieFavoriteData copyWith({
     bool? isFavorite,
   }) {
-    return FavoriteData(
+    return MovieFavoriteData(
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }

@@ -1,10 +1,11 @@
-import 'package:comics_db_app/ui/widgets/movie_details/components/favorite_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_watchlist_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_favorite_data.dart';
 
 class TvDetailsData {
   String name = '';
@@ -21,6 +22,6 @@ class TvDetailsData {
   List<TvDetailsRecommendationsData> recommendationsData = const <TvDetailsRecommendationsData>[];
   List<TvDetailsVideosData>? videosData = const <TvDetailsVideosData>[];
 
-  FavoriteData favoriteData = FavoriteData();
+  TvFavoriteData favoriteData = TvFavoriteData();
   TvDetailsWatchlistData watchlistData = TvDetailsWatchlistData();
 }

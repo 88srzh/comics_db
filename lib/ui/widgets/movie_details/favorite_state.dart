@@ -1,11 +1,11 @@
-import 'package:comics_db_app/ui/widgets/movie_details/components/favorite_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 @immutable
 
 class FavoriteState extends Equatable {
-  final FavoriteData favoriteData;
+  final MovieFavoriteData favoriteData;
 
   const FavoriteState({required this.favoriteData});
 
@@ -13,7 +13,7 @@ class FavoriteState extends Equatable {
   List<Object?> get props => [favoriteData];
 
   FavoriteState copyWith({
-    FavoriteData? favoriteData,
+    MovieFavoriteData? favoriteData,
   }) {
     return FavoriteState(
       favoriteData: favoriteData ?? this.favoriteData,

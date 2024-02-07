@@ -196,7 +196,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.favoriteData.isFavorite = isFavorite;
     data.watchlistData.isWatchlist = isWatchlist;
 
-    data.recommendationsData = details.recommendations.recommendationsList.map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    data.recommendationsData = details.recommendations.recommendationsList
+        .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
     data.videosData = makeTrailerKey(details);
 
     var isFavoriteData = data.favoriteData.isFavorite;
@@ -285,6 +287,5 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }
-
   }
 }

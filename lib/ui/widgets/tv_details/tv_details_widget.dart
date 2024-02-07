@@ -15,7 +15,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recomm
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDetailsWidget extends StatefulWidget {
-  const TvDetailsWidget({Key? key}) : super(key: key);
+  const TvDetailsWidget({super.key});
 
   @override
   State<TvDetailsWidget> createState() => _TvDetailsWidgetState();
