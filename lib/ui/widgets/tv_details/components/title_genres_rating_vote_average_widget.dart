@@ -9,8 +9,8 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_traile
 
 class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
   const TitleGenresRatingVoteAverageWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

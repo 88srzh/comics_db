@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +17,22 @@ class TitleWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              name,
-              style: Theme.of(context).textTheme.titleMedium,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
             ),
             const SizedBox(width: 2),
           ],
         ),
+        const SizedBox(height: 5.0),
         SizedBox(
           width: 300,
           child: Row(

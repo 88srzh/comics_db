@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class MovieDetailsTitle extends StatelessWidget {
   const MovieDetailsTitle({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   final String title;
 
