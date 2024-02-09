@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/director_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/top_poster_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               TvTopPosterWidget(),
               TitleGenresRatingVoteAverageWidget(),
               TvDescriptionWidget(),
-              const _DirectorWidget(),
+              DirectorWidget(),
               TVCastWidget(),
               TvDetailsRecommendationsWidget(),
             ],
