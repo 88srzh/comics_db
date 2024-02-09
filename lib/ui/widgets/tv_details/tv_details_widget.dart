@@ -54,7 +54,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               TvTopPosterWidget(),
               TitleGenresRatingVoteAverageWidget(),
               TvDescriptionWidget(),
-              // const _DirectorWidget(),
+              const _DirectorWidget(),
               TVCastWidget(),
               TvDetailsRecommendationsWidget(),
             ],

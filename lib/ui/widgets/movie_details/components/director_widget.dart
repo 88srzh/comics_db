@@ -1,5 +1,4 @@
-/*
-// Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,7 +12,8 @@ class DirectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<TvDetailsModel>(context);
+    // final model = Provider.of<TvDetailsModel>(context);
+    final cubit = context.read<TvDetailsCubit>();
     var names = <String>[];
     final createdBy = model.tvDetails?.createdBy;
     if (createdBy != null && createdBy.isNotEmpty) {
@@ -40,4 +40,3 @@ class DirectorWidget extends StatelessWidget {
     );
   }
 }
-*/
