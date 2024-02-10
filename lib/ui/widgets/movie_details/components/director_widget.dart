@@ -1,3 +1,4 @@
+import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ class DirectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final model = Provider.of<TvDetailsModel>(context);
-    final cubit = context.read<TvDetailsCubit>();
-    var creators = cubit.state.peopleData;
+    final cubit = context.watch<TvDetailsCubit>();
+    var creators = cubit.state.createBy;
     if (creators.isEmpty) return const SizedBox.shrink();
     // var names = <String>[];
     // final createdBy = model.tvDetails?.createdBy;
@@ -41,7 +42,7 @@ class DirectorWidget extends StatelessWidget {
 }
 
 class _TvPeoplesWidgetRow extends StatelessWidget {
-  final List<TvDetailsPeopleData> employes;
+  final List<CreatedBy> employes;
 
   const _TvPeoplesWidgetRow({required this.employes});
 
@@ -55,7 +56,7 @@ class _TvPeoplesWidgetRow extends StatelessWidget {
 }
 
 class _TvPeoplesWidgetRowItem extends StatelessWidget {
-  final TvDetailsPeopleData employee;
+  final CreatedBy employee;
 
   const _TvPeoplesWidgetRowItem({required this.employee});
 
@@ -71,7 +72,7 @@ class _TvPeoplesWidgetRowItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
-                Text(employee.job, style: Theme.of(context).textTheme.labelMedium),
+                // Text(employee., style: Theme.of(context).textTheme.labelMedium),
               ],
             ),
           ),
