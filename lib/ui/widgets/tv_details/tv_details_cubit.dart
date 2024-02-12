@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -32,7 +33,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       : super(TvDetailsCubitState(
           posterPath: '',
           backdropPath: '',
-          createBy: [],
+          createdBy: [],
           episodeRunTime: [],
           firstAirDate: '',
           genres: '',
@@ -84,7 +85,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
       backdropPath: state.backdropPath,
-      createBy: state.createBy,
+      createdBy: state.createdBy,
       episodeRunTime: state.episodeRunTime,
       firstAirDate: state.firstAirDate,
       genres: state.genres,
@@ -200,11 +201,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
         .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
     data.videosData = makeTrailerKey(details);
+    data.createdByData = makeCreatedByData(details);
 
     var isFavoriteData = data.favoriteData.isFavorite;
     var isWatchlistData = data.watchlistData.isWatchlist;
     var actorsData = data.actorsData;
     var peopleData = data.peopleData;
+    var createdByData = data.createdByData;
 
     var recommendationsData = data.recommendationsData;
     var videosData = data.videosData;
@@ -227,7 +230,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       isWatchlist: isWatchlistData,
       recommendationsData: recommendationsData,
       videosData: videosData,
-      // createBy: createdBy,
+      createdBy: createdByData,
 
       // videos: data.tvTrailedData.trailerKey,
     );
@@ -265,6 +268,19 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       crewChunks.add(crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2));
     }
     return crewChunks;
+  }
+
+  List<List<TvDetailsCreatedByData>> makeCreatedByData(TVDetails details) {
+    var creators = details.createdBy
+        .map((e) => TvDetailsCreatedByData(id: e.id, createdId: e.creditId, name: e.name, gender: e.gender, profilePath: e.profilePath.toString()))
+        .toList();
+    creators = creators.length > 2 ? creators.sublist(0, 2) : creators;
+    var creatorsChunks = <List<TvDetailsCreatedByData>>[];
+    for (var i = 0; i < creators.length; i++) {
+      // TODO may be change
+      creatorsChunks.add(creators.sublist(i, i + 2 > creators.length ? creators.length : i + 2));
+    }
+    return creatorsChunks;
   }
 
   void toggleFavoriteTv(BuildContext context) {

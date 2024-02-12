@@ -46,8 +46,8 @@ class _TvPeoplesWidgetRowItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text('Creator ', style: Theme.of(context).textTheme.labelMedium),
             Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
-            Text('Creator', style: Theme.of(context).textTheme.labelMedium),
           ],
         ),
       ),
