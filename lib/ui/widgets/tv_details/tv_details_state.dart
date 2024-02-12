@@ -3,7 +3,7 @@ part of 'tv_details_cubit.dart';
 class TvDetailsCubitState {
   final String? posterPath;
   final String? backdropPath;
-  final List<CreatedBy> createBy;
+  final List<List<CreatedBy>> createBy;
   final List<int> episodeRunTime;
   final String firstAirDate;
   final String genres;
@@ -177,7 +177,7 @@ class TvDetailsCubitState {
   TvDetailsCubitState copyWith({
     String? posterPath,
     String? backdropPath,
-    List<CreatedBy>? createBy,
+    List<List<CreatedBy>>? createBy,
     List<int>? episodeRunTime,
     String? firstAirDate,
     String? genres,

@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/entity/tv_details.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -10,75 +10,47 @@ class DirectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final CreatedBy employee;
     final cubit = context.watch<TvDetailsCubit>();
-    var creators = cubit.state.createBy;
-    if (creators.isEmpty) return const SizedBox.shrink();
-    // var names = <String>[];
-    // final createdBy = model.tvDetails?.createdBy;
-    // if (createdBy != null && createdBy.isNotEmpty) {
-    //   var createdByNames = <String>[];
-    //   for (var create in createdBy) {
-    //     createdByNames.add(create.name);
-    //   }
-    //   names.add(createdByNames.join(', '));
-    // }
-
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: creators.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
-      // children: creators.map((chunk) => _TvPeoplesWidgetRow(employes: chunk)).toList(),
-      // const Text(
-      //   'Creator: ',
-      //   style: TextStyle(color: Colors.grey),
-      // ),
-      // Expanded(
-      //   child: Text(
-      //     names.join(' '),
-      //     style: const TextStyle(color: Colors.black87),
-      //   ),
-      // ),
+    var crew = cubit.state.peopleData;
+    if (crew.isEmpty) return const SizedBox.shrink();
+    return Column(
+      children: crew.map((chunk) => _TvPeoplesWidgetRow(employes: chunk)).toList(),
     );
   }
 }
 
-// class _TvPeoplesWidgetRow extends StatelessWidget {
-//   final List<CreatedBy> employes;
-//
-//   const _TvPeoplesWidgetRow({required this.employes});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisSize: MainAxisSize.max,
-//       children: employes.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
-//     );
-//   }
-// }
+class _TvPeoplesWidgetRow extends StatelessWidget {
+  final List<TvDetailsPeopleData> employes;
 
-class _TvPeoplesWidgetRowItem extends StatelessWidget {
-  final CreatedBy employee;
-
-  const _TvPeoplesWidgetRowItem({required this.employee});
+  const _TvPeoplesWidgetRow({required this.employes});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
-                // Text(employee., style: Theme.of(context).textTheme.labelMedium),
-              ],
-            ),
-          ),
-        )
-      ],
+      children: employes.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
+    );
+  }
+}
+
+class _TvPeoplesWidgetRowItem extends StatelessWidget {
+  final TvDetailsPeopleData employee;
+
+  const _TvPeoplesWidgetRowItem({required this.employee});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
+            Text('Creator', style: Theme.of(context).textTheme.labelMedium),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -258,7 +258,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   }
 
   List<List<TvDetailsPeopleData>> makePeopleData(TVDetails details) {
-    var crew = details.credits.crew.map((e) => TvDetailsPeopleData(name: e.name, job: e.job)).toList();
+    var crew = details.credits.crew.map((e) => TvDetailsPeopleData(name: e.name)).toList();
     crew = crew.length > 4 ? crew.sublist(0, 4) : crew;
     var crewChunks = <List<TvDetailsPeopleData>>[];
     for (var i = 0; i < crew.length; i += 2) {
