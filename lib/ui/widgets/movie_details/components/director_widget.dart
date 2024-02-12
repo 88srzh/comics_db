@@ -1,5 +1,4 @@
 import 'package:comics_db_app/domain/entity/tv_details.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,7 @@ class DirectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = Provider.of<TvDetailsModel>(context);
+    // final CreatedBy employee;
     final cubit = context.watch<TvDetailsCubit>();
     var creators = cubit.state.createBy;
     if (creators.isEmpty) return const SizedBox.shrink();
@@ -26,7 +25,9 @@ class DirectorWidget extends StatelessWidget {
     // }
 
     return Row(
-      children: creators.map((chunk) => _TvPeoplesWidgetRow(employes: chunk)).toList(),
+      mainAxisSize: MainAxisSize.max,
+      children: creators.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
+      // children: creators.map((chunk) => _TvPeoplesWidgetRow(employes: chunk)).toList(),
       // const Text(
       //   'Creator: ',
       //   style: TextStyle(color: Colors.grey),
@@ -41,19 +42,19 @@ class DirectorWidget extends StatelessWidget {
   }
 }
 
-class _TvPeoplesWidgetRow extends StatelessWidget {
-  final List<CreatedBy> employes;
-
-  const _TvPeoplesWidgetRow({required this.employes});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: employes.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
-    );
-  }
-}
+// class _TvPeoplesWidgetRow extends StatelessWidget {
+//   final List<CreatedBy> employes;
+//
+//   const _TvPeoplesWidgetRow({required this.employes});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisSize: MainAxisSize.max,
+//       children: employes.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
+//     );
+//   }
+// }
 
 class _TvPeoplesWidgetRowItem extends StatelessWidget {
   final CreatedBy employee;

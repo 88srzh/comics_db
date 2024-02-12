@@ -12,7 +12,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsCastWidget extends StatelessWidget {
-  const MovieDetailsCastWidget({Key? key}) : super(key: key);
+  const MovieDetailsCastWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class MovieDetailsCastWidget extends StatelessWidget {
 }
 
 class _MovieActorListWidget extends StatelessWidget {
-  const _MovieActorListWidget({Key? key}) : super(key: key);
+  const _MovieActorListWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _MovieActorListWidget extends StatelessWidget {
 class _MovieActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _MovieActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _MovieActorListItemWidget({required this.actorIndex});
 
   @override
   Widget build(BuildContext context) {
