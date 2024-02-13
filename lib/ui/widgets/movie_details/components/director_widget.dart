@@ -44,7 +44,6 @@ class _TvPeoplesWidgetRowItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
