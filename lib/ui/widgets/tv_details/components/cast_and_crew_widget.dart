@@ -17,7 +17,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TVCastWidget extends StatelessWidget {
-  const TVCastWidget({Key? key}) : super(key: key);
+  const TVCastWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class TVCastWidget extends StatelessWidget {
 class _TvActorListWidget extends StatelessWidget {
   final List<TvDetailsActorData> actorsData;
 
-  const _TvActorListWidget({Key? key, required this.actorsData}) : super(key: key);
+  const _TvActorListWidget({required this.actorsData});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _TvActorListWidget extends StatelessWidget {
 class _TvActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _TvActorListItemWidget({required this.actorIndex});
 
   @override
   Widget build(BuildContext context) {
