@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:provider/provider.dart';
 
-class DirectorWidget extends StatelessWidget {
-  const DirectorWidget({super.key});
+class TvDirectorWidget extends StatelessWidget {
+  const TvDirectorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
