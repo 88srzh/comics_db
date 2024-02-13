@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class DirectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
-    var crew = cubit.state.peopleData;
+    var crew = cubit.state.createdBy;
     if (crew.isEmpty) return const SizedBox.shrink();
     return Column(
       children: crew.map((chunk) => _TvPeoplesWidgetRow(employes: chunk)).toList(),
@@ -20,7 +20,7 @@ class DirectorWidget extends StatelessWidget {
 }
 
 class _TvPeoplesWidgetRow extends StatelessWidget {
-  final List<TvDetailsPeopleData> employes;
+  final List<TvDetailsCreatedByData> employes;
 
   const _TvPeoplesWidgetRow({required this.employes});
 
@@ -34,7 +34,7 @@ class _TvPeoplesWidgetRow extends StatelessWidget {
 }
 
 class _TvPeoplesWidgetRowItem extends StatelessWidget {
-  final TvDetailsPeopleData employee;
+  final TvDetailsCreatedByData employee;
 
   const _TvPeoplesWidgetRowItem({required this.employee});
 
@@ -43,11 +43,12 @@ class _TvPeoplesWidgetRowItem extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Creator ', style: Theme.of(context).textTheme.labelMedium),
             Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
+            Text('Creator ', style: Theme.of(context).textTheme.labelMedium),
           ],
         ),
       ),

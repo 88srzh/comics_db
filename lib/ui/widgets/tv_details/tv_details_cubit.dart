@@ -274,9 +274,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var creators = details.createdBy
         .map((e) => TvDetailsCreatedByData(id: e.id, createdId: e.creditId, name: e.name, gender: e.gender, profilePath: e.profilePath.toString()))
         .toList();
-    creators = creators.length > 2 ? creators.sublist(0, 2) : creators;
+    creators = creators.length > 4 ? creators.sublist(0, 4) : creators;
     var creatorsChunks = <List<TvDetailsCreatedByData>>[];
-    for (var i = 0; i < creators.length; i++) {
+    for (var i = 0; i < creators.length; i += 2) {
       // TODO may be change
       creatorsChunks.add(creators.sublist(i, i + 2 > creators.length ? creators.length : i + 2));
     }
