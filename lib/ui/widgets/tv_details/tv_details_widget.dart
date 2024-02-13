@@ -53,7 +53,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
           Column(
             children: [
               TvTopPosterWidget(),
-              TitleGenresRatingVoteAverageWidget(),
+              TvTitleGenresRatingVoteAverageWidget(),
               TvDirectorWidget(),
               TvDescriptionWidget(),
               TVCastWidget(),
