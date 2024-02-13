@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/director_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/top_poster_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,7 +17,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recomm
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDetailsWidget extends StatefulWidget {
-  const TvDetailsWidget({Key? key}) : super(key: key);
+  const TvDetailsWidget({super.key});
 
   @override
   State<TvDetailsWidget> createState() => _TvDetailsWidgetState();
@@ -50,10 +52,10 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
         children: const [
           Column(
             children: [
-              // TvTopPosterWidget(),
-              TitleGenresRatingVoteAverageWidget(),
+              TvTopPosterWidget(),
+              TvTitleGenresRatingVoteAverageWidget(),
+              TvDirectorWidget(),
               TvDescriptionWidget(),
-              // const _DirectorWidget(),
               TVCastWidget(),
               TvDetailsRecommendationsWidget(),
             ],

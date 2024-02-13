@@ -7,10 +7,10 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/rating_widget.dar
 import 'package:comics_db_app/ui/widgets/tv_details/components/title_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_widget.dart';
 
-class TitleGenresRatingVoteAverageWidget extends StatelessWidget {
-  const TitleGenresRatingVoteAverageWidget({
-    Key? key,
-  }) : super(key: key);
+class TvTitleGenresRatingVoteAverageWidget extends StatelessWidget {
+  const TvTitleGenresRatingVoteAverageWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

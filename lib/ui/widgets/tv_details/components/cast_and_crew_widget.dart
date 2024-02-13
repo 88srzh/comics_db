@@ -17,18 +17,18 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TVCastWidget extends StatelessWidget {
-  const TVCastWidget({Key? key}) : super(key: key);
+  const TVCastWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
-    Future.delayed(
-      const Duration(milliseconds: 1000),
-      () {
-        if (actorsData.isNotEmpty) return const SizedBox.shrink();
-      },
-    );
+    // Future.delayed(
+    //   const Duration(milliseconds: 1000),
+    //   () {
+    //     if (actorsData.isNotEmpty) return const SizedBox.shrink();
+    //   },
+    // );
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
@@ -56,7 +56,7 @@ class TVCastWidget extends StatelessWidget {
 class _TvActorListWidget extends StatelessWidget {
   final List<TvDetailsActorData> actorsData;
 
-  const _TvActorListWidget({Key? key, required this.actorsData}) : super(key: key);
+  const _TvActorListWidget({required this.actorsData});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _TvActorListWidget extends StatelessWidget {
 class _TvActorListItemWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _TvActorListItemWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _TvActorListItemWidget({required this.actorIndex});
 
   @override
   Widget build(BuildContext context) {

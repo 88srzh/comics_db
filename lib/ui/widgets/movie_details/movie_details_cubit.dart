@@ -169,8 +169,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.favoriteData.isFavorite = isFavorite;
     data.watchlistData.isWatchlist = isWatchlist;
 
-
-
     data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();

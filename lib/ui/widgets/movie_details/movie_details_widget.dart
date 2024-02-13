@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_wid
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
-  const MovieDetailsWidget({Key? key}) : super(key: key);
+  const MovieDetailsWidget({super.key});
 
   @override
   State<MovieDetailsWidget> createState() => _MovieDetailsWidgetState();

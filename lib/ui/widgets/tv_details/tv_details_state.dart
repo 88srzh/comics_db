@@ -3,7 +3,7 @@ part of 'tv_details_cubit.dart';
 class TvDetailsCubitState {
   final String? posterPath;
   final String? backdropPath;
-  final List<CreatedBy> createBy;
+  final List<List<TvDetailsCreatedByData>> createdBy;
   final List<int> episodeRunTime;
   final String firstAirDate;
   final String genres;
@@ -45,7 +45,7 @@ class TvDetailsCubitState {
   const TvDetailsCubitState({
     required this.posterPath,
     required this.backdropPath,
-    required this.createBy,
+    required this.createdBy,
     required this.episodeRunTime,
     required this.firstAirDate,
     required this.genres,
@@ -92,7 +92,7 @@ class TvDetailsCubitState {
           runtimeType == other.runtimeType &&
           posterPath == other.posterPath &&
           backdropPath == other.backdropPath &&
-          createBy == other.createBy &&
+          createdBy == other.createdBy &&
           episodeRunTime == other.episodeRunTime &&
           firstAirDate == other.firstAirDate &&
           genres == other.genres &&
@@ -135,7 +135,7 @@ class TvDetailsCubitState {
   int get hashCode =>
       posterPath.hashCode ^
       backdropPath.hashCode ^
-      createBy.hashCode ^
+      createdBy.hashCode ^
       episodeRunTime.hashCode ^
       firstAirDate.hashCode ^
       genres.hashCode ^
@@ -177,7 +177,7 @@ class TvDetailsCubitState {
   TvDetailsCubitState copyWith({
     String? posterPath,
     String? backdropPath,
-    List<CreatedBy>? createBy,
+    List<List<TvDetailsCreatedByData>>? createdBy,
     List<int>? episodeRunTime,
     String? firstAirDate,
     String? genres,
@@ -219,7 +219,7 @@ class TvDetailsCubitState {
     return TvDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
       backdropPath: backdropPath ?? this.backdropPath,
-      createBy: createBy ?? this.createBy,
+      createdBy: createdBy ?? this.createdBy,
       episodeRunTime: episodeRunTime ?? this.episodeRunTime,
       firstAirDate: firstAirDate ?? this.firstAirDate,
       genres: genres ?? this.genres,

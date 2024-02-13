@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsCardWidget extends StatefulWidget {
-  const SettingsCardWidget({Key? key}) : super(key: key);
+  const SettingsCardWidget({super.key});
 
   @override
   State<SettingsCardWidget> createState() => _SettingsCardWidgetState();

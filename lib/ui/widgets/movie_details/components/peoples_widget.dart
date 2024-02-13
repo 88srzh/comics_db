@@ -9,7 +9,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_d
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class PeoplesWidget extends StatelessWidget {
-  const PeoplesWidget({Key? key}) : super(key: key);
+  const PeoplesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,8 @@ class _PeoplesWidgetRow extends StatelessWidget {
   final List<MovieDetailsMoviePeopleData> employes;
 
   const _PeoplesWidgetRow({
-    Key? key,
     required this.employes,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _PeoplesWidgetRow extends StatelessWidget {
 class _PeopleWidgetRowItem extends StatelessWidget {
   final MovieDetailsMoviePeopleData employee;
 
-  const _PeopleWidgetRowItem({Key? key, required this.employee}) : super(key: key);
+  const _PeopleWidgetRowItem({required this.employee});
 
   @override
   Widget build(BuildContext context) {

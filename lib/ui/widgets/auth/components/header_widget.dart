@@ -26,7 +26,7 @@ class HeaderWidget extends StatelessWidget {
           const SizedBox(height: 10.0),
           const CustomAuthTextWidget(text: 'Or you can enter via guest.'),
           const SizedBox(height: 10.0),
-          // const GuestAuthButtonWidget(),
+          const GuestAuthButtonWidget(),
           const SizedBox(width: 5.0),
         ],
       ),

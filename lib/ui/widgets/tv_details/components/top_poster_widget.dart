@@ -12,12 +12,12 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvTopPosterWidget extends StatelessWidget {
-  const TvTopPosterWidget({Key? key}) : super(key: key);
+  const TvTopPosterWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
-    var posterPath = cubit.state.posterPath;
+    final posterPath = cubit.state.posterPath;
     final backdropPath = cubit.state.backdropPath;
     return Stack(
       children: [

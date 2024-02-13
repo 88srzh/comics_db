@@ -19,11 +19,10 @@ class GuestAuthButtonWidget extends StatelessWidget {
     final cubit = context.watch<AuthViewCubit>();
     // final canStart = cubit.state is AuthGuestProgressState;
     onPressed() {
-      // cubit.guestAuth();
+      cubit.guestAuth();
       Navigator.of(context).popAndPushNamed(MainNavigationRouteNames.mainScreen);
     }
-    // onPressed() => Navigator.of(context).popAndPushNamed(MainNavigationRouteNames.mainScreen);
-    // final child = cubit.state is AuthViewCubitAuthProgressState
+
     final child = cubit.state is AuthGuestProgressState
         ? const SizedBox(
             width: 15,

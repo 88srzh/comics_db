@@ -6,11 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomAccountListTile extends StatelessWidget {
   const CustomAccountListTile({
-    Key? key,
+    super.key,
     required this.text,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final String text;
   final IconData icon;

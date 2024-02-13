@@ -1,7 +1,8 @@
-import 'package:comics_db_app/domain/api_client/auth_api_client.dart';
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/guest_account_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AccountsWidget extends StatefulWidget {
   const AccountsWidget({super.key});
@@ -11,11 +12,14 @@ class AccountsWidget extends StatefulWidget {
 }
 
 class _AccountsWidgetState extends State<AccountsWidget> {
-  final _authApiClient = AuthApiClient();
   @override
   Widget build(BuildContext context) {
-    final guestSessionId = _authApiClient.guestAuth();
-    // return guestSessionId != null ? const GuestAccountWidget() : const AccountWidget();
-    return const AccountWidget();
+    var cubit = context.watch<AccountDetailsCubit>();
+    final String username = cubit.state.username;
+    if (username.isNotEmpty) {
+      return const AccountWidget();
+    } else {
+      return const GuestAccountWidget();
+    }
   }
 }

@@ -30,8 +30,6 @@ class TvTrailerListWidget extends StatelessWidget {
           ),
         );
       },
-      // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvTrailer, arguments: youtubeKey),
-      // onTap: => {return TvTrailerYoutubeWidget(youtubeKey: trailerKey),}
       child:  Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
