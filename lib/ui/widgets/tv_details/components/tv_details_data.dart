@@ -13,9 +13,10 @@ class TvDetailsData {
   String posterPath = '';
   String backdropPath = '';
   String tagline = '';
-  bool isLoading = true;
+  bool isLoading = false;
   String overview = '';
   String genres = '';
+  String firstAirDate = '';
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
   TvDetailsScoresData tvDetailsScoresData = TvDetailsScoresData(voteCount: 0, popularity: 0);
   List<List<TvDetailsPeopleData>> peopleData = const <List<TvDetailsPeopleData>>[];

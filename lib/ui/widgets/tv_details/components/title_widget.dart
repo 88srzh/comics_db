@@ -10,8 +10,9 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
-    final name = cubit.state.name;
-    final tagline = cubit.state.tagline;
+    final String name = cubit.state.name;
+    final String tagline = cubit.state.tagline;
+    final String firstAirDate = cubit.state.firstAirDate;
     return Column(
       children: [
         Row(
@@ -19,9 +20,9 @@ class TitleWidget extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.only(right: 2.0),
                 child: Text(
-                  name,
+                  '$name (${firstAirDate.substring(0, 4)})',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -29,7 +30,6 @@ class TitleWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 2),
           ],
         ),
         const SizedBox(height: 5.0),

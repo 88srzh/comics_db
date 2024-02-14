@@ -24,9 +24,18 @@ class TvDetailsWidget extends StatefulWidget {
 }
 
 class _TvDetailsWidgetState extends State<TvDetailsWidget> {
+  late Future<String> lazyValue;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    Future<String> loadingDelay() {
+      Duration duration = const Duration(seconds: 1);
+
+      return Future.delayed(duration, () => 'It took ${duration.inSeconds}');
+    }
+
+    lazyValue = loadingDelay();
 
     final locale = Localizations.localeOf(context);
     context.read<TvDetailsCubit>().setupTvDetailsLocale(context, locale.languageCode);
@@ -38,30 +47,39 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
     final favorite = cubit.state.isFavorite;
     final watchlist = cubit.state.isWatchlist;
 
-    return Scaffold(
-      appBar: const CustomDetailsAppBar(title: ''),
-      floatingActionButton: Wrap(
-        direction: Axis.horizontal,
-        children: [
-          fabWatchlist(() => cubit.toggleWatchlistTV(context), watchlist),
-          const SizedBox(width: 10.0),
-          fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
-        ],
-      ),
-      body: ListView(
-        children: const [
-          Column(
-            children: [
-              TvTopPosterWidget(),
-              TvTitleGenresRatingVoteAverageWidget(),
-              TvDirectorWidget(),
-              TvDescriptionWidget(),
-              TVCastWidget(),
-              TvDetailsRecommendationsWidget(),
-            ],
-          ),
-        ],
-      ),
+    return FutureBuilder(
+      future: lazyValue,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: const CustomDetailsAppBar(title: ''),
+            floatingActionButton: Wrap(
+              direction: Axis.horizontal,
+              children: [
+                fabWatchlist(() => cubit.toggleWatchlistTV(context), watchlist),
+                const SizedBox(width: 10.0),
+                fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
+              ],
+            ),
+            body: ListView(
+              children: const [
+                Column(
+                  children: [
+                    TvTopPosterWidget(),
+                    TvTitleGenresRatingVoteAverageWidget(),
+                    TvDirectorWidget(),
+                    TvDescriptionWidget(),
+                    TVCastWidget(),
+                    TvDetailsRecommendationsWidget(),
+                  ],
+                ),
+              ],
+            ),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }

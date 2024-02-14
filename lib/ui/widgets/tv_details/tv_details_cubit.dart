@@ -172,11 +172,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     if (details == null) {
       return;
     }
-    data.overview = details.overview;
     data.name = details.name;
+    data.overview = details.overview;
     data.posterPath = details.posterPath ?? '';
     data.backdropPath = details.backdropPath ?? '';
     data.tagline = details.tagline;
+    var firstAirDate = data.firstAirDate = details.firstAirDate ?? '';
+
     data.actorsData = details.credits.cast
         .map((e) => TvDetailsActorData(
               name: e.name,
@@ -220,6 +222,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       overview: data.overview,
       name: data.name,
       tagline: data.tagline,
+      firstAirDate: firstAirDate,
       voteCount: data.tvDetailsScoresData.voteCount,
       popularity: data.tvDetailsScoresData.popularity,
       voteAverage: data.tvDetailsScoresData.voteAverage,
