@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_content_ratings_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -81,6 +82,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           peopleData: [],
           recommendationsData: [],
           videosData: [],
+          ratingsData: [],
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -122,6 +124,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       peopleData: state.peopleData,
       recommendationsData: state.recommendationsData,
       videosData: state.videosData,
+      ratingsData: state.ratingsData,
     ));
   }
 
@@ -172,11 +175,16 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     if (details == null) {
       return;
     }
-    data.overview = details.overview;
+    // TODO add all to var
     data.name = details.name;
+    data.overview = details.overview;
     data.posterPath = details.posterPath ?? '';
     data.backdropPath = details.backdropPath ?? '';
     data.tagline = details.tagline;
+    var firstAirDate = data.firstAirDate = details.firstAirDate ?? '';
+    var ratingsData = data.ratingsData = details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList();
+
+
     data.actorsData = details.credits.cast
         .map((e) => TvDetailsActorData(
               name: e.name,
@@ -220,6 +228,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       overview: data.overview,
       name: data.name,
       tagline: data.tagline,
+      firstAirDate: firstAirDate,
       voteCount: data.tvDetailsScoresData.voteCount,
       popularity: data.tvDetailsScoresData.popularity,
       voteAverage: data.tvDetailsScoresData.voteAverage,
@@ -231,6 +240,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       recommendationsData: recommendationsData,
       videosData: videosData,
       createdBy: createdByData,
+      ratingsData: ratingsData,
 
       // videos: data.tvTrailedData.trailerKey,
     );

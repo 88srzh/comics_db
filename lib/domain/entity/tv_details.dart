@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/tv_details_content_ratings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -46,6 +47,7 @@ class TVDetails {
   final TvDetailsCredits credits;
   final TvDetailsVideos videos;
   final TvDetailsRecommendations recommendations;
+  final TvDetailsContentRatings contentRatings;
 
   TVDetails({
     required this.backdropPath,
@@ -82,6 +84,7 @@ class TVDetails {
     required this.videos,
     required this.credits,
     required this.recommendations,
+    required this.contentRatings,
   });
 
   factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);
