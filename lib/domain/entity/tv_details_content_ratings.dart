@@ -5,12 +5,10 @@ part 'tv_details_content_ratings.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TvDetailsContentRatings {
   @JsonKey(name: 'results')
-  final int id;
-  final List<TvDetailsContentRatingsList> ratingsList;
+  final List<TvDetailsContentRatingsResult> results;
 
   const TvDetailsContentRatings({
-    required this.id,
-    required this.ratingsList,
+    required this.results,
   });
 
   factory TvDetailsContentRatings.fromJson(Map<String, dynamic> json) => _$TvDetailsContentRatingsFromJson(json);
@@ -19,20 +17,20 @@ class TvDetailsContentRatings {
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class TvDetailsContentRatingsList {
-  final List descriptors;
+class TvDetailsContentRatingsResult {
+  final List? descriptors;
   @JsonKey(name: 'iso_3166_1')
   final String iso;
   final String rating;
 
-  const TvDetailsContentRatingsList({
+  const TvDetailsContentRatingsResult({
     required this.descriptors,
     required this.iso,
     required this.rating,
   });
 
-  factory TvDetailsContentRatingsList.fromJson(Map<String, dynamic> json) => _$TvDetailsContentRatingsListFromJson(json);
+  factory TvDetailsContentRatingsResult.fromJson(Map<String, dynamic> json) => _$TvDetailsContentRatingsResultFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TvDetailsContentRatingsListToJson(this);
+  Map<String, dynamic> toJson() => _$TvDetailsContentRatingsResultToJson(this);
 }
 

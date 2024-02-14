@@ -6,6 +6,7 @@ part 'tv_details_recommendations.g.dart';
 class TvDetailsRecommendations {
   final int page;
   @JsonKey(name: 'results')
+  // TODO refactoring to recommendations results
   final List<TvDetailsRecommendationsList> recommendationsList;
 
   const TvDetailsRecommendations({

@@ -47,7 +47,7 @@ class TVDetails {
   final TvDetailsCredits credits;
   final TvDetailsVideos videos;
   final TvDetailsRecommendations recommendations;
-  final TvDetailsContentRatings ratings;
+  final TvDetailsContentRatings contentRatings;
 
   TVDetails({
     required this.backdropPath,
@@ -84,7 +84,7 @@ class TVDetails {
     required this.videos,
     required this.credits,
     required this.recommendations,
-    required this.ratings,
+    required this.contentRatings,
   });
 
   factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);

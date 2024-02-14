@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomTvDetailsTitleGenresRatingVoteAverageWidget
-    extends StatelessWidget {
+class CustomTvDetailsTitleGenresRatingVoteAverageWidget extends StatelessWidget {
   final String text;
 
-  const CustomTvDetailsTitleGenresRatingVoteAverageWidget(
-      {Key? key, required this.text})
-      : super(key: key);
+  const CustomTvDetailsTitleGenresRatingVoteAverageWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

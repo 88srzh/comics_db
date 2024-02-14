@@ -41,6 +41,7 @@ class TvDetailsCubitState {
   final List<List<TvDetailsPeopleData>> peopleData;
   final List<TvDetailsRecommendationsData> recommendationsData;
   final List<TvDetailsVideosData> videosData;
+  final List<TvDetailsContentRatingsData> ratingsData;
 
   const TvDetailsCubitState({
     required this.posterPath,
@@ -83,6 +84,7 @@ class TvDetailsCubitState {
     required this.peopleData,
     required this.recommendationsData,
     required this.videosData,
+    required this.ratingsData,
   });
 
   @override
@@ -129,7 +131,8 @@ class TvDetailsCubitState {
           actorsData == other.actorsData &&
           peopleData == other.peopleData &&
           recommendationsData == other.recommendationsData &&
-          videosData == other.videosData;
+          videosData == other.videosData &&
+          ratingsData == other.ratingsData;
 
   @override
   int get hashCode =>
@@ -172,7 +175,8 @@ class TvDetailsCubitState {
       actorsData.hashCode ^
       peopleData.hashCode ^
       recommendationsData.hashCode ^
-      videosData.hashCode;
+      videosData.hashCode ^
+      ratingsData.hashCode;
 
   TvDetailsCubitState copyWith({
     String? posterPath,
@@ -215,6 +219,7 @@ class TvDetailsCubitState {
     List<List<TvDetailsPeopleData>>? peopleData,
     List<TvDetailsRecommendationsData>? recommendationsData,
     List<TvDetailsVideosData>? videosData,
+    List<TvDetailsContentRatingsData>? ratingsData,
   }) {
     return TvDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -257,6 +262,7 @@ class TvDetailsCubitState {
       peopleData: peopleData ?? this.peopleData,
       recommendationsData: recommendationsData ?? this.recommendationsData,
       videosData: videosData ?? this.videosData,
+      ratingsData: ratingsData ?? this.ratingsData,
     );
   }
 }

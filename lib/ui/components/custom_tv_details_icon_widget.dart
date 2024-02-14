@@ -6,16 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CustomTvDetailsIconWidget extends StatelessWidget {
   final IconData icon;
 
-  const CustomTvDetailsIconWidget({Key? key, required this.icon})
-      : super(key: key);
+  const CustomTvDetailsIconWidget({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Icon(
       icon,
-      color: context.read<ThemeBloc>().isDarkTheme
-          ? DarkThemeColors.ratingThumb
-          : DarkThemeColors.kPrimaryColor,
+      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
       size: 14,
     );
   }
