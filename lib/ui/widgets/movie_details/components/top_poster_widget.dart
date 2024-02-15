@@ -43,15 +43,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
-    // late String? facebook = cubit.state.externalIds.first.facebookId;
-    // late String? facebook = 'transformersmovie';
-    // late String? facebook = cubit.state.facebook;
-    // final Uri facebookUrl = Uri.parse('https://www.facebook.com/$facebook');
-    // Future<void>? _launched;
-    // final Uri toLaunch = Uri(scheme: 'https', host: 'www.facebook.com', path: facebook);
-
-    // TODO malfunction
-    // late String? instagram = cubit.state.externalIds.first.instagramId;
+    final String? facebook = cubit.state.externalIds.facebookId;
 
     return Stack(
       children: [
@@ -180,12 +172,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                 // so far don't work
                 Row(
                   children: [
-                    InkWell(
-                      // onTap: () => setState(() {
-                      //   _launched = _launchInBrowser(toLaunch);
-                      // }),
-                      child: CustomSocialIcon(icon: MdiIcons.facebook),
-                    ),
+                    facebook != null ? CustomSocialIcon(icon: MdiIcons.facebook) : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.twitter),
                     const SizedBox(width: 4.0),

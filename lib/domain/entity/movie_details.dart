@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -14,6 +15,7 @@ part 'movie_details.g.dart';
 class MovieDetails {
   final bool adult;
   final String? backdropPath;
+
   // final List<BelongsToCollection>? belongsToCollection;
   final int budget;
   final List<Genre> genres;
@@ -41,9 +43,10 @@ class MovieDetails {
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
   final MovieDetailsRecommendations recommendations;
+
   // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;
-  // final MovieDetailsExternalIds externalIds;
+  final MovieDetailsExternalIDs externalIds;
 
   MovieDetails({
     required this.adult,
@@ -76,11 +79,10 @@ class MovieDetails {
     required this.recommendations,
     // required this.reviews,
     required this.similar,
-    // required this.externalIds,
+    required this.externalIds,
   });
 
-  factory MovieDetails.fromJson(Map<String, dynamic> json) =>
-      _$MovieDetailsFromJson(json);
+  factory MovieDetails.fromJson(Map<String, dynamic> json) => _$MovieDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsToJson(this);
 }
@@ -134,8 +136,7 @@ class ProductionCompany {
     required this.originCountry,
   });
 
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCompanyFromJson(json);
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) => _$ProductionCompanyFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCompanyToJson(this);
 }
@@ -151,8 +152,7 @@ class ProductionCountry {
     required this.name,
   });
 
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCountryFromJson(json);
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) => _$ProductionCountryFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCountryToJson(this);
 }
@@ -168,8 +168,7 @@ class SpokenLanguage {
     required this.name,
   });
 
-  factory SpokenLanguage.fromJson(Map<String, dynamic> json) =>
-      _$SpokenLanguageFromJson(json);
+  factory SpokenLanguage.fromJson(Map<String, dynamic> json) => _$SpokenLanguageFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpokenLanguageToJson(this);
 }

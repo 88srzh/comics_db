@@ -24,7 +24,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsVideosData> videos;
   final List<MovieDetailsAllVideosData> allVideos;
   // final String? facebook;
-  // final MovieDetailsExternalIdsData externalIds;
+  final MovieDetailsExternalIdsData externalIds;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
@@ -51,8 +51,7 @@ class MovieDetailsCubitState {
     required this.recommendations,
     required this.videos,
     required this.allVideos,
-    // required this.facebook,
-    // required this.externalIds,
+    required this.externalIds,
     // required this.reviews,
     // required this.similar,
     // required this.collection,
@@ -82,12 +81,11 @@ class MovieDetailsCubitState {
           isFavorite == other.isFavorite &&
           isWatchlist == other.isWatchlist &&
           recommendations == other.recommendations &&
-          // externalIds == other.externalIds &&
+          externalIds == other.externalIds &&
           // reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
           allVideos == other.allVideos;
-          // facebook == other.facebook;
           // collection == other.collection;
 
   @override
@@ -111,12 +109,11 @@ class MovieDetailsCubitState {
       isFavorite.hashCode ^
       isWatchlist.hashCode ^
       recommendations.hashCode ^
-      // externalIds.hashCode ^
+      externalIds.hashCode ^
       // reviews.hashCode ^
       // similar.hashCode;
       videos.hashCode ^
       allVideos.hashCode;
-      // facebook.hashCode;
       // collection.hashCode;
 
   MovieDetailsCubitState copyWith({
@@ -131,7 +128,7 @@ class MovieDetailsCubitState {
     int? voteCount,
     double? popularity,
     String? releaseDate,
-    String? summary,
+    String? runtime,
     String? genres,
     List<List<MovieDetailsMoviePeopleData>>? peopleData,
     List<MovieDetailsMovieActorData>? actorsData,
@@ -159,7 +156,7 @@ class MovieDetailsCubitState {
       voteCount: voteCount ?? this.voteCount,
       popularity: popularity ?? this.popularity,
       releaseDate: releaseDate ?? this.releaseDate,
-      runtime: summary ?? this.runtime,
+      runtime: runtime ?? this.runtime,
       genres: genres ?? this.genres,
       peopleData: peopleData ?? this.peopleData,
       actorsData: actorsData ?? this.actorsData,
@@ -170,7 +167,7 @@ class MovieDetailsCubitState {
       videos: videos ?? this.videos,
       allVideos: allVideos ?? this.allVideos,
       // facebook: facebook ?? this.facebook,
-      // externalIds: externalIds ?? this.externalIds,
+      externalIds: externalIds ?? this.externalIds,
       // reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,
