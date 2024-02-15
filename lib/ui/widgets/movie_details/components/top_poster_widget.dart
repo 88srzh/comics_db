@@ -59,7 +59,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           child: Opacity(
             opacity: 0.25,
             child: AspectRatio(
-              aspectRatio: 390 / 230,
+              aspectRatio: 1.778,
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(backdropPath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
