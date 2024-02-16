@@ -43,7 +43,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
-    final String? facebook = cubit.state.externalIds.facebookId;
+    final String? facebookId = cubit.state.facebookId;
 
     return Stack(
       children: [
@@ -172,7 +172,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                 // so far don't work
                 Row(
                   children: [
-                    facebook != null ? CustomSocialIcon(icon: MdiIcons.facebook) : const SizedBox.shrink(),
+                    facebookId != null ? InkWell(onTap: () {}, child: CustomSocialIcon(icon: MdiIcons.facebook)) : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.twitter),
                     const SizedBox(width: 4.0),

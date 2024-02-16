@@ -25,6 +25,7 @@ class MovieDetailsCubitState {
   final List<MovieDetailsAllVideosData> allVideos;
   // final String? facebook;
   final MovieDetailsExternalIdsData externalIds;
+  final String? facebookId;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
@@ -52,6 +53,7 @@ class MovieDetailsCubitState {
     required this.videos,
     required this.allVideos,
     required this.externalIds,
+    required this.facebookId,
     // required this.reviews,
     // required this.similar,
     // required this.collection,
@@ -82,6 +84,7 @@ class MovieDetailsCubitState {
           isWatchlist == other.isWatchlist &&
           recommendations == other.recommendations &&
           externalIds == other.externalIds &&
+          facebookId == other.facebookId &&
           // reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
@@ -112,6 +115,7 @@ class MovieDetailsCubitState {
       externalIds.hashCode ^
       // reviews.hashCode ^
       // similar.hashCode;
+      facebookId.hashCode ^
       videos.hashCode ^
       allVideos.hashCode;
       // collection.hashCode;
@@ -140,6 +144,7 @@ class MovieDetailsCubitState {
     List<MovieDetailsAllVideosData>? allVideos,
     // String? facebook,
     MovieDetailsExternalIdsData? externalIds,
+    String? facebookId,
     // List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
@@ -168,6 +173,7 @@ class MovieDetailsCubitState {
       allVideos: allVideos ?? this.allVideos,
       // facebook: facebook ?? this.facebook,
       externalIds: externalIds ?? this.externalIds,
+      facebookId: facebookId ?? this.facebookId,
       // reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,

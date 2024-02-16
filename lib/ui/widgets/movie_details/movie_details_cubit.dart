@@ -64,7 +64,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           videos: [],
           allVideos: [],
           externalIds: MovieDetailsExternalIdsData(),
-          // facebook: '',
+          facebookId: '',
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -92,6 +92,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       videos: state.videos,
       allVideos: state.allVideos,
       externalIds: state.externalIds,
+      facebookId: state.facebookId,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -176,7 +177,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     //         imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId))
     //     .toList();
 
-    data.externalIds.facebookId = details.externalIds.facebookId;
+    var facebookId = data.facebookId = details.externalIds.facebookId;
 
     data.allVideosData = details.videos.results
         .map((e) => MovieDetailsAllVideosData(
@@ -229,6 +230,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       allVideos: allVideos,
       // facebook: facebook,
       externalIds: MovieDetailsExternalIdsData(),
+      facebookId: facebookId,
       // similar: similar,
       // collection: collection,
     );
