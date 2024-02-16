@@ -26,6 +26,10 @@ class MovieDetailsData {
   String genres = '';
   double? voteAverage = 0;
   String? facebookId = '';
+  String? imdb = '';
+  String? wikidataId = '';
+  String? instagramId = '';
+  String? twitterId = '';
 
   MovieFavoriteData favoriteData = MovieFavoriteData();
   MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();

@@ -26,6 +26,10 @@ class MovieDetailsCubitState {
   // final String? facebook;
   final MovieDetailsExternalIdsData externalIds;
   final String? facebookId;
+  final String? imdbId;
+  final String? wikidataId;
+  final String? instagramId;
+  final String? twitterId;
   // final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
@@ -54,6 +58,10 @@ class MovieDetailsCubitState {
     required this.allVideos,
     required this.externalIds,
     required this.facebookId,
+    required this.imdbId,
+    required this.wikidataId,
+    required this.instagramId,
+    required this.twitterId,
     // required this.reviews,
     // required this.similar,
     // required this.collection,
@@ -85,6 +93,10 @@ class MovieDetailsCubitState {
           recommendations == other.recommendations &&
           externalIds == other.externalIds &&
           facebookId == other.facebookId &&
+          imdbId == other.imdbId &&
+          wikidataId == other.wikidataId &&
+          instagramId == other.instagramId &&
+          twitterId == other.twitterId &&
           // reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
@@ -116,6 +128,10 @@ class MovieDetailsCubitState {
       // reviews.hashCode ^
       // similar.hashCode;
       facebookId.hashCode ^
+      imdbId.hashCode ^
+      wikidataId.hashCode ^
+      instagramId.hashCode ^
+      twitterId.hashCode ^
       videos.hashCode ^
       allVideos.hashCode;
       // collection.hashCode;
@@ -145,6 +161,10 @@ class MovieDetailsCubitState {
     // String? facebook,
     MovieDetailsExternalIdsData? externalIds,
     String? facebookId,
+    String? imdbId,
+    String? wikidataId,
+    String? instagramId,
+    String? twitterId,
     // List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
@@ -174,6 +194,10 @@ class MovieDetailsCubitState {
       // facebook: facebook ?? this.facebook,
       externalIds: externalIds ?? this.externalIds,
       facebookId: facebookId ?? this.facebookId,
+      imdbId: imdbId ?? this.imdbId,
+      wikidataId: wikidataId ?? this.wikidataId,
+      instagramId: instagramId ?? this.instagramId,
+      twitterId: twitterId ?? this.twitterId,
       // reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,
