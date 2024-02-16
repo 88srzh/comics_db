@@ -10,8 +10,8 @@ MovieDetailsRecommendations _$MovieDetailsRecommendationsFromJson(
         Map<String, dynamic> json) =>
     MovieDetailsRecommendations(
       page: json['page'] as int,
-      recommendationsList: (json['results'] as List<dynamic>)
-          .map((e) => MovieDetailsRecommendationsList.fromJson(
+      recommendationsResults: (json['results'] as List<dynamic>)
+          .map((e) => MovieDetailsRecommendationsResults.fromJson(
               e as Map<String, dynamic>))
           .toList(),
     );
@@ -20,20 +20,21 @@ Map<String, dynamic> _$MovieDetailsRecommendationsToJson(
         MovieDetailsRecommendations instance) =>
     <String, dynamic>{
       'page': instance.page,
-      'results': instance.recommendationsList.map((e) => e.toJson()).toList(),
+      'results':
+          instance.recommendationsResults.map((e) => e.toJson()).toList(),
     };
 
-MovieDetailsRecommendationsList _$MovieDetailsRecommendationsListFromJson(
+MovieDetailsRecommendationsResults _$MovieDetailsRecommendationsResultsFromJson(
         Map<String, dynamic> json) =>
-    MovieDetailsRecommendationsList(
+    MovieDetailsRecommendationsResults(
       id: json['id'] as int,
       posterPath: json['poster_path'] as String?,
       backdropPath: json['backdrop_path'] as String?,
       title: json['title'] as String,
     );
 
-Map<String, dynamic> _$MovieDetailsRecommendationsListToJson(
-        MovieDetailsRecommendationsList instance) =>
+Map<String, dynamic> _$MovieDetailsRecommendationsResultsToJson(
+        MovieDetailsRecommendationsResults instance) =>
     <String, dynamic>{
       'id': instance.id,
       'poster_path': instance.posterPath,
