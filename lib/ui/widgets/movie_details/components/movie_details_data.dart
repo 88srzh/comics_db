@@ -21,11 +21,15 @@ class MovieDetailsData {
   String? backdropPath = '';
   int voteCount = 0;
   double popularity = 0;
-  String summary = '';
+  String runtime = '';
   String releaseDate = '';
   String genres = '';
   double? voteAverage = 0;
-  String? facebook = '';
+  String? facebookId = '';
+  String? imdb = '';
+  String? wikidataId = '';
+  String? instagramId = '';
+  String? twitterId = '';
 
   MovieFavoriteData favoriteData = MovieFavoriteData();
   MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();

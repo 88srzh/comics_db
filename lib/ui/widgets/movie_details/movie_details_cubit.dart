@@ -41,7 +41,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   MovieDetailsCubit(this.movieId)
       // TODO should fix
-      : super(const MovieDetailsCubitState(
+      : super(MovieDetailsCubitState(
           id: 0,
           posterPath: '',
           backdropPath: '',
@@ -63,8 +63,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           recommendations: [],
           videos: [],
           allVideos: [],
-          // facebook: '',
-          // externalIds: [],
+          externalIds: MovieDetailsExternalIdsData(),
+          facebookId: '',
+          imdbId: '',
+          wikidataId: '',
+          instagramId: '',
+          twitterId: '',
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -91,8 +95,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: state.recommendations,
       videos: state.videos,
       allVideos: state.allVideos,
-      // externalIds: state.externalIds,
-      // facebook: state.facebook,
+      externalIds: state.externalIds,
+      facebookId: state.facebookId,
+      imdbId: state.imdbId,
+      wikidataId: state.wikidataId,
+      instagramId: state.instagramId,
+      twitterId: state.twitterId,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -149,13 +157,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.voteCount = details.voteCount;
     data.popularity = details.popularity;
     data.releaseDate = makeReleaseDate(details);
-    data.summary = makeSummary(details);
+    data.runtime = makeSummary(details);
     data.genres = makeGenres(details);
     data.peopleData = makePeopleData(details);
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
-    // data.facebook = details.externalIds.facebookId;
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
@@ -169,11 +176,16 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.favoriteData.isFavorite = isFavorite;
     data.watchlistData.isWatchlist = isWatchlist;
 
-    data.recommendationsData = details.recommendations.recommendationsList
+    data.recommendationsData = details.recommendations.recommendationsResults
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
 
-    // data.externalIds = details.externalIds.map((e) => MovieDetailsExternalIdsData(id: e.id, imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId)).toList();
+    // data.externalIds = details.externalIds
+    //     .map((e) => MovieDetailsExternalIdsData(
+    //         imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId))
+    //     .toList();
+
+    var facebookId = data.facebookId = details.externalIds.facebookId;
 
     data.allVideosData = details.videos.results
         .map((e) => MovieDetailsAllVideosData(
@@ -188,7 +200,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var voteCount = data.voteCount;
     var popularity = data.popularity;
     var releaseDate = data.releaseDate;
-    var summary = data.summary;
+    var runtime = data.runtime;
     var genres = data.genres;
     var peopleData = data.peopleData;
     var actorsData = data.actorsData;
@@ -201,8 +213,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
     var isWatchlistData = data.watchlistData.isWatchlist;
-    // var facebook = data.facebook;
-    var externalIds = data.externalIds;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -216,7 +226,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       voteCount: voteCount,
       popularity: popularity,
       releaseDate: releaseDate,
-      summary: summary,
+      runtime: runtime,
       genres: genres,
       peopleData: peopleData,
       actorsData: actorsData,
@@ -227,7 +237,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       videos: videos,
       allVideos: allVideos,
       // facebook: facebook,
-      externalIds: externalIds,
+      externalIds: MovieDetailsExternalIdsData(),
+      facebookId: facebookId,
       // similar: similar,
       // collection: collection,
     );

@@ -23,9 +23,18 @@ class MovieDetailsWidget extends StatefulWidget {
 }
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
+  late Future<String> lazyValue;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    Future<String> loadingDelay() {
+      Duration duration = const Duration(seconds: 1);
+
+      return Future.delayed(duration, () => 'It took ${duration.inSeconds}');
+    }
+
+    lazyValue = loadingDelay();
 
     final locale = Localizations.localeOf(context);
     context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
@@ -37,33 +46,42 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final favorite = cubit.state.isFavorite;
     final watchlist = cubit.state.isWatchlist;
 
-    return Scaffold(
-      appBar: const CustomDetailsAppBar(title: ''),
-      floatingActionButton: Wrap(
-        direction: Axis.horizontal,
-        children: [
-          fabWatchlist(() => cubit.toggleWatchlistMovie(context), watchlist),
-          const SizedBox(width: 10.0),
-          fabFavorite(() => cubit.toggleFavoriteMovie(context), favorite),
-        ],
-      ),
-      body: ListView(
-        children: const [
-          Column(
-            children: [
-              MovieTopPosterWidget(),
-              PeoplesWidget(),
-              DescriptionWidget(),
-              MovieDetailsCastWidget(),
-              // MovieDetailsAllVideosWidget(),
-              // const MovieDetailsReviewsWidget(),
-              MovieDetailsRecommendations(),
-              // const MovieDetailsSimilarWidget(),
-              // const MovieSimilarWidget(),
-            ],
-          ),
-        ],
-      ),
+    return FutureBuilder(
+      future: lazyValue,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: const CustomDetailsAppBar(title: ''),
+            floatingActionButton: Wrap(
+              direction: Axis.horizontal,
+              children: [
+                fabWatchlist(() => cubit.toggleWatchlistMovie(context), watchlist),
+                const SizedBox(width: 10.0),
+                fabFavorite(() => cubit.toggleFavoriteMovie(context), favorite),
+              ],
+            ),
+            body: ListView(
+              children: const [
+                Column(
+                  children: [
+                    MovieTopPosterWidget(),
+                    PeoplesWidget(),
+                    DescriptionWidget(),
+                    MovieDetailsCastWidget(),
+                    // MovieDetailsAllVideosWidget(),
+                    // const MovieDetailsReviewsWidget(),
+                    MovieDetailsRecommendations(),
+                    // const MovieDetailsSimilarWidget(),
+                    // const MovieSimilarWidget(),
+                  ],
+                ),
+              ],
+            ),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }

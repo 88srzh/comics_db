@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/components/custom_social_icon.dart';
+import 'package:comics_db_app/ui/components/social_link_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -43,15 +43,11 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
-    // late String? facebook = cubit.state.externalIds.first.facebookId;
-    // late String? facebook = 'transformersmovie';
-    // late String? facebook = cubit.state.facebook;
-    // final Uri facebookUrl = Uri.parse('https://www.facebook.com/$facebook');
-    // Future<void>? _launched;
-    // final Uri toLaunch = Uri(scheme: 'https', host: 'www.facebook.com', path: facebook);
-
-    // TODO malfunction
-    // late String? instagram = cubit.state.externalIds.first.instagramId;
+    final String? facebookId = cubit.state.facebookId;
+    final String? imdbId = cubit.state.imdbId;
+    final String? wikidataId = cubit.state.wikidataId;
+    final String? instagramId = cubit.state.instagramId;
+    final String? twitterId = cubit.state.twitterId;
 
     return Stack(
       children: [
@@ -59,7 +55,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           child: Opacity(
             opacity: 0.25,
             child: AspectRatio(
-              aspectRatio: 390 / 230,
+              aspectRatio: 1.778,
               child: CachedNetworkImage(
                 imageUrl: ImageDownloader.imageUrl(backdropPath!),
                 placeholder: (context, url) => const LoadingIndicatorWidget(),
@@ -180,20 +176,12 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                 // so far don't work
                 Row(
                   children: [
-                    InkWell(
-                      // onTap: () => setState(() {
-                      //   _launched = _launchInBrowser(toLaunch);
-                      // }),
-                      child: CustomSocialIcon(icon: MdiIcons.facebook),
-                    ),
+                    facebookId != null ? SocialLinkButton(icon: MdiIcons.facebook, url: 'https://www.facebook.com/$facebookId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
-                    CustomSocialIcon(icon: MdiIcons.twitter),
+                    twitterId != null ? SocialLinkButton(icon: MdiIcons.twitter, url: 'https://twitter.com/$twitterId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
-                    CustomSocialIcon(icon: MdiIcons.instagram),
+                    instagramId != null ? SocialLinkButton(icon: MdiIcons.instagram, url: 'https://www.instagram.com/$instagramId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
-                    CustomSocialIcon(icon: MdiIcons.home),
-                    // const SizedBox(width: 8.0),
-                    // CustomPosterTopLeftAlignText(text: instagram!, maxLines: 1),
                   ],
                 ),
               ],
@@ -220,6 +208,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
   }
 }
 
+// var facebook = data.facebook;
 // Future<void> _launchInBrowser(Uri url) async {
 //   if (!await launchUrl(
 //     url,
