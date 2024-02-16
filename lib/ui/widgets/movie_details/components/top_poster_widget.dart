@@ -2,6 +2,7 @@
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_social_icon.dart';
+import 'package:comics_db_app/ui/components/social_link_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -172,7 +173,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                 // so far don't work
                 Row(
                   children: [
-                    facebookId != null ? InkWell(onTap: () {}, child: CustomSocialIcon(icon: MdiIcons.facebook)) : const SizedBox.shrink(),
+                    facebookId != null ? SocialLinkButton(icon: MdiIcons.facebook, url: 'https://www.facebook.com/$facebookId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
                     CustomSocialIcon(icon: MdiIcons.twitter),
                     const SizedBox(width: 4.0),
@@ -207,6 +208,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
   }
 }
 
+// var facebook = data.facebook;
 // Future<void> _launchInBrowser(Uri url) async {
 //   if (!await launchUrl(
 //     url,
