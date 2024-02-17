@@ -69,6 +69,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           wikidataId: '',
           instagramId: '',
           twitterId: '',
+          homepage: '',
           // reviews: [],
           // similar: [],
           // collection: [],
@@ -101,6 +102,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       wikidataId: state.wikidataId,
       instagramId: state.instagramId,
       twitterId: state.twitterId,
+      homepage: state.homepage,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -213,6 +215,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     // var similar = data.similarData;
     var isFavoriteData = data.favoriteData.isFavorite;
     var isWatchlistData = data.watchlistData.isWatchlist;
+    final String? homepage = data.homepage = details.homepage;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -239,6 +242,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       // facebook: facebook,
       externalIds: MovieDetailsExternalIdsData(),
       facebookId: facebookId,
+      homepage: homepage,
       // similar: similar,
       // collection: collection,
     );

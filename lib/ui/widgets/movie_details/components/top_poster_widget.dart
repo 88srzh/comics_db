@@ -46,6 +46,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final String? facebookId = cubit.state.facebookId;
     final String? instagramId = cubit.state.instagramId;
     final String? twitterId = cubit.state.twitterId;
+    final String? homepage = cubit.state.homepage;
 
     return Stack(
       children: [
@@ -178,6 +179,8 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     twitterId != null ? SocialLinkButton(icon: MdiIcons.twitter, url: 'https://twitter.com/$twitterId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
                     instagramId != null ? SocialLinkButton(icon: MdiIcons.instagram, url: 'https://www.instagram.com/$instagramId') : const SizedBox.shrink(),
+                    const SizedBox(width: 4.0),
+                    homepage != null ? SocialLinkButton(icon: MdiIcons.link, url: homepage) : const SizedBox.shrink(),
                   ],
                 ),
               ],

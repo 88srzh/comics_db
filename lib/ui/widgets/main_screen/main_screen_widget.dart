@@ -42,6 +42,7 @@ class MainScreenWidget extends HookWidget {
         activeColor: isDarkTheme ? Colors.white : Colors.black.withOpacity(0.8),
         initialActiveIndex: selectedIndex.value,
         items: const [
+          // TODO may be change icons to mdi.icons
           TabItem<dynamic>(icon: Icons.people, title: 'People'),
           TabItem<dynamic>(icon: Icons.trending_up, title: 'Trending'),
           TabItem<dynamic>(icon: Icons.movie, title: 'Movie'),

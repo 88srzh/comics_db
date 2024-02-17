@@ -30,6 +30,7 @@ class MovieDetailsData {
   String? wikidataId = '';
   String? instagramId = '';
   String? twitterId = '';
+  String? homepage = '';
 
   MovieFavoriteData favoriteData = MovieFavoriteData();
   MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();
