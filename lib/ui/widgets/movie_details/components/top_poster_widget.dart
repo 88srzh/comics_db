@@ -186,17 +186,21 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           ),
         ),
         Positioned(
-          left: 122,
-          // top: 55,
-          // right: 15,
-          child: SizedBox(
-            //     TODO: не закругляются края
-            height: 230.0,
-            width: 390.0,
-            child: CachedNetworkImage(
-              imageUrl: ImageDownloader.imageUrl(posterPath!),
-              placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+          left: 140.0,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: SizedBox(
+              //     TODO: не закругляются края
+              height: 230.0,
+              width: 390.0,
+              child: AspectRatio(
+                aspectRatio: 1.778,
+                child: CachedNetworkImage(
+                  imageUrl: ImageDownloader.imageUrl(posterPath!),
+                  placeholder: (context, url) => const LoadingIndicatorWidget(),
+                  errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                ),
+              ),
             ),
           ),
         ),
@@ -204,13 +208,3 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     );
   }
 }
-
-// var facebook = data.facebook;
-// Future<void> _launchInBrowser(Uri url) async {
-//   if (!await launchUrl(
-//     url,
-//     mode: LaunchMode.externalApplication,
-//   )) {
-//     throw Exception('Could not launch $url');
-//   }
-// }
