@@ -44,8 +44,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
     final String? facebookId = cubit.state.facebookId;
-    final String? imdbId = cubit.state.imdbId;
-    final String? wikidataId = cubit.state.wikidataId;
     final String? instagramId = cubit.state.instagramId;
     final String? twitterId = cubit.state.twitterId;
 
@@ -181,7 +179,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     twitterId != null ? SocialLinkButton(icon: MdiIcons.twitter, url: 'https://twitter.com/$twitterId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
                     instagramId != null ? SocialLinkButton(icon: MdiIcons.instagram, url: 'https://www.instagram.com/$instagramId') : const SizedBox.shrink(),
-                    const SizedBox(width: 4.0),
                   ],
                 ),
               ],
