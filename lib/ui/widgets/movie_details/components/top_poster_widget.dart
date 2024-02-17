@@ -166,7 +166,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                           ),
                         );
                       },
-                      // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieTrailer),
                       child: const CustomPosterTopLeftAlignText(text: 'Play Trailer', maxLines: 1),
                     ),
                   ],
