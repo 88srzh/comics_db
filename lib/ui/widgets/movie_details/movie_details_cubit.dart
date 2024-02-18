@@ -3,6 +3,7 @@ import 'dart:async';
 
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -27,14 +28,9 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   late DateFormat _dateFormat;
   final data = MovieDetailsData();
-
-  // MovieDetailsTrailerData trailerData = MovieDetailsTrailerData();
-  // String _locale = '';
   final movieAndTvApiClient = MovieAndTvApiClient();
   final int movieId;
   final _movieService = MovieService();
-
-  // final _localeStorage = LocalizedModelStorage();
 
   // TODO may be delete isLoading, because it's unnecessary
   bool isLoading = true;
@@ -70,7 +66,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           instagramId: '',
           twitterId: '',
           homepage: '',
-          // reviews: [],
+          reviews: [],
           // similar: [],
           // collection: [],
         )) {
@@ -103,6 +99,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       instagramId: state.instagramId,
       twitterId: state.twitterId,
       homepage: state.homepage,
+      reviews: state.reviews,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -182,16 +179,23 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
 
-    // data.externalIds = details.externalIds
-    //     .map((e) => MovieDetailsExternalIdsData(
-    //         imdbId: e.imdbId, instagramId: e.instagramId, wikidataId: e.wikidataId, facebookId: e.facebookId, twitterId: e.twitterId))
-    //     .toList();
-
     var facebookId = data.facebookId = details.externalIds.facebookId;
 
     data.allVideosData = details.videos.results
         .map((e) => MovieDetailsAllVideosData(
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
+        .toList();
+
+    data.reviewsData = details.reviews.result
+        .map((e) => MovieDetailsReviewsData(
+            author: e.author,
+            authorDetails:
+                e.authorDetails.map((e) => AuthorDetailsData(name: e.name, username: e.username, avatarPath: e.avatarPath, rating: e.rating)).toList(),
+            content: e.content,
+            createdAt: e.createdAt.toString(),
+            id: e.id,
+            updatedAt: e.updatedAt.toString(),
+            url: e.url))
         .toList();
 
     var id = data.id;
@@ -216,6 +220,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isFavoriteData = data.favoriteData.isFavorite;
     var isWatchlistData = data.watchlistData.isWatchlist;
     final String? homepage = data.homepage = details.homepage;
+    var reviews = data.reviewsData;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -243,6 +248,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       externalIds: MovieDetailsExternalIdsData(),
       facebookId: facebookId,
       homepage: homepage,
+      reviews: reviews,
       // similar: similar,
       // collection: collection,
     );

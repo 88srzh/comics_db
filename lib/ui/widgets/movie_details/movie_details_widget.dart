@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -69,7 +70,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                     DescriptionWidget(),
                     MovieDetailsCastWidget(),
                     // MovieDetailsAllVideosWidget(),
-                    // const MovieDetailsReviewsWidget(),
+                    MovieDetailsReviewsWidget(),
                     MovieDetailsRecommendations(),
                     // const MovieDetailsSimilarWidget(),
                     // const MovieSimilarWidget(),

@@ -17,7 +17,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieDetailsRecommendations extends StatelessWidget {
-  const MovieDetailsRecommendations({Key? key}) : super(key: key);
+  const MovieDetailsRecommendations({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +42,10 @@ class MovieDetailsRecommendations extends StatelessWidget {
 
 class _MovieDetailsRecommendationsWidget extends StatelessWidget {
   final List<MovieDetailsRecommendationsData> recommendationsData;
+
   const _MovieDetailsRecommendationsWidget({
-    Key? key,
     required this.recommendationsData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(right: 15.0),
                 child: Container(
-                  width: 220,
+                  width: 220.0,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
@@ -76,9 +76,7 @@ class _MovieDetailsRecommendationsWidget extends StatelessWidget {
                         offset: const Offset(0, 2),
                       ),
                     ],
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: MovieDetailsItemRecommendationsWidget(index: index),
                 ),

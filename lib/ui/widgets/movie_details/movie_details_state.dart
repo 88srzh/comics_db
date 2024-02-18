@@ -31,7 +31,7 @@ class MovieDetailsCubitState {
   final String? instagramId;
   final String? twitterId;
   final String? homepage;
-  // final List<MovieDetailsReviewsData> reviews;
+  final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
 
@@ -64,7 +64,7 @@ class MovieDetailsCubitState {
     required this.instagramId,
     required this.twitterId,
     required this.homepage,
-    // required this.reviews,
+    required this.reviews,
     // required this.similar,
     // required this.collection,
   });
@@ -100,7 +100,7 @@ class MovieDetailsCubitState {
           instagramId == other.instagramId &&
           twitterId == other.twitterId &&
           homepage == other.homepage &&
-          // reviews == other.reviews &&
+          reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
           allVideos == other.allVideos;
@@ -129,7 +129,7 @@ class MovieDetailsCubitState {
       recommendations.hashCode ^
       externalIds.hashCode ^
       homepage.hashCode ^
-      // reviews.hashCode ^
+      reviews.hashCode ^
       // similar.hashCode;
       facebookId.hashCode ^
       imdbId.hashCode ^
@@ -170,7 +170,7 @@ class MovieDetailsCubitState {
     String? instagramId,
     String? twitterId,
     String? homepage,
-    // List<MovieDetailsReviewsData>? reviews,
+    List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
   }) {
@@ -204,7 +204,7 @@ class MovieDetailsCubitState {
       instagramId: instagramId ?? this.instagramId,
       twitterId: twitterId ?? this.twitterId,
       homepage: homepage ?? this.homepage,
-      // reviews: reviews ?? this.reviews,
+      reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,
     );
