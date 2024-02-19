@@ -189,8 +189,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
             author: e.author,
-            authorDetails:
-                e.authorDetails.map((e) => AuthorDetailsData(name: e.name, username: e.username, avatarPath: e.avatarPath, rating: e.rating)).toList(),
+            // authorDetails:
+            //     e.authorDetails.map((e) => AuthorDetailsData(name: e.name, username: e.username, avatarPath: e.avatarPath, rating: e.rating)).toList(),
             content: e.content,
             createdAt: e.createdAt.toString(),
             id: e.id,
