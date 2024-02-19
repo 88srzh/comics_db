@@ -186,13 +186,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
 
-    data.reviewsData = details.reviews.result
+    var reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
             author: e.author,
             // authorDetails:
             //     e.authorDetails.map((e) => AuthorDetailsData(name: e.name, username: e.username, avatarPath: e.avatarPath, rating: e.rating)).toList(),
             content: e.content,
-            createdAt: e.createdAt.toString(),
+            createdAt: makeCreatedAtReviews(details),
             id: e.id,
             updatedAt: e.updatedAt.toString(),
             url: e.url))
@@ -220,7 +220,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var isFavoriteData = data.favoriteData.isFavorite;
     var isWatchlistData = data.watchlistData.isWatchlist;
     final String? homepage = data.homepage = details.homepage;
-    var reviews = data.reviewsData;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -271,6 +270,15 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final releaseDate = details.releaseDate;
     if (releaseDate != null) {
       texts.add(_dateFormat.format(releaseDate));
+    }
+    return texts.join(' ');
+  }
+
+  String makeCreatedAtReviews(MovieDetails details) {
+    var texts = <String>[];
+    final createdAt = details.reviews.result.first.createdAt;
+    if (createdAt != null) {
+      texts.add(_dateFormat.format(createdAt));
     }
     return texts.join(' ');
   }

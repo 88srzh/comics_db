@@ -6,8 +6,7 @@ class CustomCastListTextWidget extends StatelessWidget {
   final int maxLines;
 
   const CustomCastListTextWidget(
-      {Key? key, required this.text, required this.maxLines})
-      : super(key: key);
+      {super.key, required this.text, required this.maxLines});
 
   @override
   Widget build(BuildContext context) {
