@@ -30,7 +30,7 @@ class DescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: overview),
+                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: '',),
               ),
             ],
           ),

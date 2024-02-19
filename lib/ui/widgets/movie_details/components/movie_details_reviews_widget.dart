@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MovieDetailsReviewsWidget extends StatelessWidget {
   const MovieDetailsReviewsWidget({super.key});
@@ -44,34 +46,35 @@ class _MovieDetailsReviewsColumnWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: SizedBox(
-        height: 260.0,
+        height: 240.0,
         child: Scrollbar(
           child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: reviewsData.length,
-              itemExtent: 420,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: Container(
-                    width: double.infinity,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-                      border: Border.all(color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.purple.withOpacity(0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    child: MovieDetailsReviewsItemWidget(index: index),
+            scrollDirection: Axis.horizontal,
+            itemCount: reviewsData.length,
+            itemExtent: 375,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: Container(
+                  width: double.infinity,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+                    border: Border.all(color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.purple.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
-                );
-              }),
+                  child: MovieDetailsReviewsItemWidget(index: index),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -91,12 +94,14 @@ class MovieDetailsReviewsItemWidget extends StatelessWidget {
     final String author = reviewsData.author;
     final String content = reviewsData.content;
     final String createdAt = reviewsData.createdAt;
+    Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
+    Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Column(
       children: [
         Row(
           children: [
             CircleAvatar(
-              radius: 40.0,
+              radius: 30.0,
               backgroundColor: Colors.transparent,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(100.0)),
@@ -107,17 +112,77 @@ class MovieDetailsReviewsItemWidget extends StatelessWidget {
                 //   errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
               ),
             ),
-            const SizedBox(width: 5.0),
+            // const SizedBox(width: 5.0),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'A review by $author on $createdAt',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                Row(
+                  children: [
+                    Text(
+                      'A review by $author',
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: textColor,
+                        border: Border.all(
+                          color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Icon(MdiIcons.star, size: 14, color: reverseTextColor),
+                            Text(
+                              '6.0',
+                              style: TextStyle(
+                                color: reverseTextColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 5.0),
+                    Row(
+                      children: [
+                        Text(
+                          'Written by ',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        Text(
+                          author,
+                          style: TextStyle(
+                            color: textColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
-        )
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomDescriptionExpandableText(description: content, maxLines: 10, expandedText: 'show more'),
+            ),
+          ],
+        ),
       ],
     );
   }

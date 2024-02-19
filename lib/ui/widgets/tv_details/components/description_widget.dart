@@ -9,7 +9,7 @@ import 'package:comics_db_app/ui/components/custom_description_expandable_text_w
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDescriptionWidget extends StatelessWidget {
-  const TvDescriptionWidget({Key? key}) : super(key: key);
+  const TvDescriptionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class TvDescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: overview),
+                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: '',),
               ),
             ],
           ),

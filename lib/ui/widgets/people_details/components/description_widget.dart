@@ -10,8 +10,8 @@ import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dar
 
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class DescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: biography),
+                child: CustomDescriptionExpandableText(description: biography, maxLines: 5, expandedText: '',),
               ),
             ],
           ),
