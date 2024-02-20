@@ -176,12 +176,24 @@ class MovieDetailsReviewsItemWidget extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: [
-            Expanded(
-              child: CustomDescriptionExpandableText(description: content, maxLines: 10, expandedText: 'show more'),
-            ),
-          ],
+        Expanded(
+          child: Row(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: SizedBox(
+                    width: 320.0,
+                    child: Text(
+                      content,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ],
     );
