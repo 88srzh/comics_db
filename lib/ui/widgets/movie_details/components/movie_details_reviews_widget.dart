@@ -46,54 +46,48 @@ class _MovieDetailsReviewsColumnWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: SizedBox(
-        height: 240.0,
-        child: Scrollbar(
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: reviewsData.length,
-            itemExtent: 375,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 15.0),
-                child: Container(
-                  width: double.infinity,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-                    border: Border.all(color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.purple.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  child: MovieDetailsReviewsItemWidget(index: index),
-                ),
-              );
-            },
+        height: 200.0,
+        // width: 360.0,
+        // scrollDirection: Axis.horizontal,
+        // itemCount: reviewsData.length,
+        // itemExtent: 375,
+        // itemBuilder: (BuildContext context, int index) {
+        child: Container(
+          width: double.infinity,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+            border: Border.all(color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           ),
+          child: const MovieDetailsReviewsItemWidget(),
         ),
+        // },
       ),
     );
   }
 }
 
 class MovieDetailsReviewsItemWidget extends StatelessWidget {
-  final int index;
+  // final int index;
 
-  const MovieDetailsReviewsItemWidget({super.key, required this.index});
+  const MovieDetailsReviewsItemWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<MovieDetailsCubit>();
-    final reviewsData = cubit.data.reviewsData[index];
-    final reviewsId = reviewsData.id;
-    final String author = reviewsData.author;
-    final String content = reviewsData.content;
-    final String createdAt = reviewsData.createdAt;
+    final reviewsData = cubit.data.reviewsData;
+    final reviewsId = reviewsData.first.id;
+    final String author = reviewsData.first.author;
+    final String content = reviewsData.first.content;
+    final String createdAt = reviewsData.first.createdAt;
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Column(
@@ -184,7 +178,7 @@ class MovieDetailsReviewsItemWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: SizedBox(
-                    width: 320.0,
+                    width: 325.0,
                     child: Text(
                       content,
                       style: Theme.of(context).textTheme.headlineMedium,
