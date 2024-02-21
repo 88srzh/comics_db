@@ -32,6 +32,7 @@ abstract class MainNavigationRouteNames {
   static const favoriteTvs = '/main_screen/favorite_tvs';
   static const peopleDetails = '/main_screen/peopleDetails';
   static const movieDetailsFullCastAndCrewList = '/main_screen/movie_details/full_cast_and_crew';
+  static const movieDetailsFullReviewsList = '/main_screen/movie_details/full_reviews';
   static const peopleDetailsKnownForList = '/main_screen/people_details/full_known_for';
   static const settings = '/personal_widget';
   static const networkConnectionError = '/errors/network_connection';
@@ -70,6 +71,12 @@ class MainNavigation {
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeFullCastAndCrewList(movieId),
+        );
+      case MainNavigationRouteNames.movieDetailsFullReviewsList:
+        final arguments = settings.arguments;
+        final movieId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.makeFullReviewsList(movieId),
         );
       case MainNavigationRouteNames.peopleDetailsKnownForList:
         final arguments = settings.arguments;

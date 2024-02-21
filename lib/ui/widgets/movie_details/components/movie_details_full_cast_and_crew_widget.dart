@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FullCastAndCrewWidget extends StatefulWidget {
-  const FullCastAndCrewWidget({Key? key}) : super(key: key);
+  const FullCastAndCrewWidget({super.key});
 
   @override
   State<FullCastAndCrewWidget> createState() => _FullCastAndCrewWidgetState();
@@ -62,13 +62,12 @@ class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
 class _FullCastAndCrewListWidget extends StatelessWidget {
   final int actorIndex;
 
-  const _FullCastAndCrewListWidget({Key? key, required this.actorIndex}) : super(key: key);
+  const _FullCastAndCrewListWidget({required this.actorIndex});
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<MovieDetailsCubit>();
     final actor = cubit.data.actorsData[actorIndex];
-    // final actorId = actor.id;
     final profilePath = actor.profilePath;
     return Stack(
       children: [
