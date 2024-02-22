@@ -101,7 +101,7 @@ class ScreenFactory {
   Widget makeFullCastAndCrewList(int movieId) {
     return BlocProvider(
       create: (_) => MovieDetailsCubit(movieId),
-      child: const FullCastAndCrewWidget(),
+      child: const MovieDetailsFullCastAndCrewWidget(),
     );
   }
 

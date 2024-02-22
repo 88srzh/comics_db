@@ -21,6 +21,8 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final locale = Localizations.localeOf(context);
+    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
     Future<String> loadingDelay() {
       Duration duration = const Duration(seconds: 1);
 
@@ -28,9 +30,6 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
     }
 
     lazyValue = loadingDelay();
-
-    final locale = Localizations.localeOf(context);
-    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override

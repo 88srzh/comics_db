@@ -11,14 +11,14 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FullCastAndCrewWidget extends StatefulWidget {
-  const FullCastAndCrewWidget({super.key});
+class MovieDetailsFullCastAndCrewWidget extends StatefulWidget {
+  const MovieDetailsFullCastAndCrewWidget({super.key});
 
   @override
-  State<FullCastAndCrewWidget> createState() => _FullCastAndCrewWidgetState();
+  State<MovieDetailsFullCastAndCrewWidget> createState() => _MovieDetailsFullCastAndCrewWidgetState();
 }
 
-class _FullCastAndCrewWidgetState extends State<FullCastAndCrewWidget> {
+class _MovieDetailsFullCastAndCrewWidgetState extends State<MovieDetailsFullCastAndCrewWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
