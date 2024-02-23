@@ -59,11 +59,6 @@ class _MovieDetailsReviewsColumnWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12.0),
       child: SizedBox(
         height: 200.0,
-        // width: 360.0,
-        // scrollDirection: Axis.horizontal,
-        // itemCount: reviewsData.length,
-        // itemExtent: 375,
-        // itemBuilder: (BuildContext context, int index) {
         child: Container(
           width: double.infinity,
           clipBehavior: Clip.antiAlias,

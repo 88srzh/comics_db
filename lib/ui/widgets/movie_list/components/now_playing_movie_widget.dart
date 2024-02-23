@@ -11,7 +11,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 
 class NowPlayingMovieWidget extends StatefulWidget {
-  const NowPlayingMovieWidget({Key? key}) : super(key: key);
+  const NowPlayingMovieWidget({super.key});
 
   @override
   State<NowPlayingMovieWidget> createState() => _NowPlayingMovieWidgetState();

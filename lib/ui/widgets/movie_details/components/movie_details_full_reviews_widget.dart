@@ -34,31 +34,19 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
 
   @override
   Widget build(BuildContext context) {
-    var reviewsData = context.read<MovieDetailsCubit>().data.reviewsData;
+    var reviewsData = context.watch<MovieDetailsCubit>().data.reviewsData;
     if (reviewsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: const CustomAppBar(title: 'Reviews'),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Reviews',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text(
-                  'See all',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-              ],
-            ),
-            _MovieDetailsFullReviewsColumnWidget(reviewsData: reviewsData),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _MovieDetailsFullReviewsColumnWidget(reviewsData: reviewsData),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -71,20 +59,18 @@ class _MovieDetailsFullReviewsColumnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: reviewsData.length,
-        itemExtent: 375,
-        itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            height: 200.0,
-            // width: 360.0,
-            // scrollDirection: Axis.horizontal,
-            // itemCount: reviewsData.length,
-            // itemExtent: 375,
-            // itemBuilder: (BuildContext context, int index) {
+    return ListView.builder(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      shrinkWrap: true,
+      physics: const ScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemCount: reviewsData.length,
+      itemExtent: 375,
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: SizedBox(
+            height: double.infinity,
             child: Container(
               width: double.infinity,
               clipBehavior: Clip.antiAlias,
@@ -102,9 +88,9 @@ class _MovieDetailsFullReviewsColumnWidget extends StatelessWidget {
               ),
               child: _MovieDetailsFullReviewsItemWidget(index: index),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -205,17 +191,15 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
         ),
         Expanded(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SizedBox(
-                    width: 325.0,
-                    child: Text(
-                      content,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: SizedBox(
+                  width: 420.0,
+                  child: Text(
+                    content,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
               )
