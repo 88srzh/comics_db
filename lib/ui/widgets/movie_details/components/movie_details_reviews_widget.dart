@@ -20,6 +20,7 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
     final cubit = context.watch<MovieDetailsCubit>();
     var index = cubit.state.id;
     var reviewsData = context.read<MovieDetailsCubit>().data.reviewsData;
+    // TODO add widget if there are no reviews
     if (reviewsData.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
@@ -36,7 +37,8 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
               InkWell(
                 onTap: () => cubit.tapToSeeFullListOfReviews(context, index),
                 child: Text(
-                  'See all', style: Theme.of(context).textTheme.displaySmall,
+                  'See all',
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
             ],
@@ -83,7 +85,6 @@ class _MovieDetailsReviewsColumnWidget extends StatelessWidget {
 }
 
 class _MovieDetailsReviewsItemWidget extends StatelessWidget {
-
   const _MovieDetailsReviewsItemWidget();
 
   @override

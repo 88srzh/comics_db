@@ -2,6 +2,7 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -184,19 +185,19 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
             ),
           ],
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: SizedBox(
-              // height: MediaQuery.of(context).size.height * 2.0,
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Text(
-                content,
-                style: Theme.of(context).textTheme.headlineMedium,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: CustomDescriptionExpandableText(description: content, maxLines: 5, expandedText: ''),
               ),
-            ),
+
+            ],
           ),
         ),
+
       ],
     );
   }

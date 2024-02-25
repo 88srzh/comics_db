@@ -9,8 +9,8 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart'
 
 class MovieDetailsDescriptionWidget extends StatelessWidget {
   const MovieDetailsDescriptionWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

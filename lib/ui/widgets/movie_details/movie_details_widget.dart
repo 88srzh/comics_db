@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_favorite_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_cast_and_crew_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/description_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_description_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_recommendations_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
