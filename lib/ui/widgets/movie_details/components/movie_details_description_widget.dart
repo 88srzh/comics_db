@@ -30,7 +30,7 @@ class MovieDetailsDescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: '',),
+                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: ' read the rest.'),
               ),
             ],
           ),
