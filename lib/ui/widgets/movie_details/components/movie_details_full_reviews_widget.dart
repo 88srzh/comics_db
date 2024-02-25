@@ -69,25 +69,20 @@ class _MovieDetailsFullReviewsColumnWidget extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: SizedBox(
-            height: double.infinity,
-            child: Container(
-              width: double.infinity,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
-                border: Border.all(color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.purple.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-              ),
-              child: _MovieDetailsFullReviewsItemWidget(index: index),
+          child: Container(
+            decoration: BoxDecoration(
+              color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+              border: Border.all(color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.purple.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             ),
+            child: _MovieDetailsFullReviewsItemWidget(index: index),
           ),
         );
       },
@@ -191,14 +186,17 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
         ),
         Expanded(
           child: Row(
+            textDirection: TextDirection.ltr,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SizedBox(
-                  width: 420.0,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: Text(
                     content,
+                    textDirection: TextDirection.ltr,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
