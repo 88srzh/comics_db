@@ -185,23 +185,16 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
           ],
         ),
         Expanded(
-          child: Row(
-            textDirection: TextDirection.ltr,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Text(
-                    content,
-                    textDirection: TextDirection.ltr,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-              )
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SizedBox(
+              // height: MediaQuery.of(context).size.height * 2.0,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Text(
+                content,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
           ),
         ),
       ],

@@ -67,7 +67,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                   children: [
                     MovieTopPosterWidget(),
                     PeoplesWidget(),
-                    DescriptionWidget(),
+                    MovieDetailsDescriptionWidget(),
                     MovieDetailsCastWidget(),
                     // MovieDetailsAllVideosWidget(),
                     MovieDetailsReviewsWidget(),

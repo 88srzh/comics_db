@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
-class DescriptionWidget extends StatelessWidget {
-  const DescriptionWidget({
+class MovieDetailsDescriptionWidget extends StatelessWidget {
+  const MovieDetailsDescriptionWidget({
     Key? key,
   }) : super(key: key);
 
