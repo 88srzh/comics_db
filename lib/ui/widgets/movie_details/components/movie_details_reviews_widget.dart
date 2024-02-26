@@ -25,7 +25,7 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,113 +89,126 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<MovieDetailsCubit>();
-    final reviewsData = cubit.data.reviewsData;
+    final reviewsData = context.read<MovieDetailsCubit>().data.reviewsData;
     final String author = reviewsData.first.author;
     final String content = reviewsData.first.content;
     final String createdAt = reviewsData.first.createdAt;
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
-    return Column(
-      children: [
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 30.0,
-              backgroundColor: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(100.0)),
-                child: Image.asset(AppImages.noImageAvailable),
-                // child: CachedNetworkImage(
-                //   imageUrl: ImageDownloader.imageUrl(avatarPath),
-                //   placeholder: (context, url) => const LoadingIndicatorWidget(),
-                //   errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-              ),
-            ),
-            // const SizedBox(width: 5.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'A review by $author',
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+    return IntrinsicHeight(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 30.0,
+                backgroundColor: Colors.transparent,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(100.0)),
+                  child: Image.asset(AppImages.noImageAvailable),
+                  // child: CachedNetworkImage(
+                  //   imageUrl: ImageDownloader.imageUrl(avatarPath),
+                  //   placeholder: (context, url) => const LoadingIndicatorWidget(),
+                  //   errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
                 ),
-                Row(
+              ),
+              // const SizedBox(width: 5.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: textColor,
-                        border: Border.all(
-                          color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                    Row(
+                      children: [
+                        Text(
+                          'A review by $author',
+                          style: TextStyle(
+                            color: textColor,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Row(
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Column(
                           children: [
-                            Icon(MdiIcons.star, size: 14, color: reverseTextColor),
-                            Text(
-                              '6.0',
-                              style: TextStyle(
-                                color: reverseTextColor,
+                            Container(
+                              decoration: BoxDecoration(
+                                color: textColor,
+                                border: Border.all(
+                                  color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: Row(
+                                  children: [
+                                    Icon(MdiIcons.star, size: 14, color: reverseTextColor),
+                                    Text(
+                                      '6.0',
+                                      style: TextStyle(
+                                        color: reverseTextColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 5.0),
-                    Row(
-                      children: [
-                        Text(
-                          'Written by ',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        Text(
-                          author,
-                          style: TextStyle(
-                            color: textColor,
-                            fontWeight: FontWeight.w500,
+                        const SizedBox(width: 5.0),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Written by $author on $createdAt',
+                                    style: Theme.of(context).textTheme.headlineMedium,
+                                  ),
+                                  // Text(
+                                  //   author,
+                                  //   style: TextStyle(
+                                  //     color: textColor,
+                                  //     fontWeight: FontWeight.w500,
+                                  //   ),
+                                  // ),
+                                  // Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
+                                ],
+                              )
+                            ],
                           ),
                         ),
-                        Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
                       ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ],
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SizedBox(
-                    width: 325.0,
-                    child: Text(
-                      content,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ),
-                ),
-              )
+              ),
             ],
           ),
-        ),
-      ],
+          Expanded(
+            child: Row(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SizedBox(
+                      width: 325.0,
+                      child: Text(
+                        content,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
