@@ -2,6 +2,7 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
+import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -38,16 +39,7 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
     if (reviewsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: const CustomAppBar(title: 'Reviews'),
-      body: ListView(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _MovieDetailsFullReviewsColumnWidget(reviewsData: reviewsData),
-            ],
-          ),
-        ],
-      ),
+      body: _MovieDetailsFullReviewsColumnWidget(reviewsData: reviewsData),
     );
   }
 }
@@ -65,10 +57,9 @@ class _MovieDetailsFullReviewsColumnWidget extends StatelessWidget {
       physics: const ScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemCount: reviewsData.length,
-      itemExtent: 375,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: const EdgeInsets.only(bottom: 15.0),
           child: Container(
             decoration: BoxDecoration(
               color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
@@ -164,10 +155,7 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
                     const SizedBox(width: 5.0),
                     Row(
                       children: [
-                        Text(
-                          'Written by ',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
+                        Text('Written by ', style: Theme.of(context).textTheme.headlineMedium),
                         Text(
                           author,
                           style: TextStyle(
@@ -184,26 +172,25 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
             ),
           ],
         ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Padding(
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 400.0,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: Text(
-                      content,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    child: CustomDescriptionExpandableText(description: content, maxLines: 6, expandedText: ' read the rest.'),
+                    // child: Text(
+                    //   content,
+                    //   style: Theme.of(context).textTheme.headlineMedium,
+                    // ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ],
     );

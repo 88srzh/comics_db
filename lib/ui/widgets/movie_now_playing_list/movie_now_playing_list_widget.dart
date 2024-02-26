@@ -17,7 +17,7 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 import 'package:comics_db_app/ui/widgets/movie_now_playing_list/now_playing_movie_list_cubit.dart';
 
 class MovieNowPlayingListWidget extends StatefulWidget {
-  const MovieNowPlayingListWidget({Key? key}) : super(key: key);
+  const MovieNowPlayingListWidget({super.key});
 
   @override
   State<MovieNowPlayingListWidget> createState() => _MovieNowPlayingListWidgetState();
@@ -73,12 +73,11 @@ class _MovieNowPlayingListRowWidget extends StatelessWidget {
   final int index;
 
   const _MovieNowPlayingListRowWidget({
-    Key? key,
     required this.posterPath,
     required this.movie,
     required this.cubit,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String? posterPath;
   final MovieListData movie;
