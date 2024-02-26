@@ -1,5 +1,6 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/movie_details/components/full_cast_and_crew_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_full_cast_and_crew_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_full_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_known_for_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/tv/watchlist_tv_list_widget.dart';
@@ -100,7 +101,14 @@ class ScreenFactory {
   Widget makeFullCastAndCrewList(int movieId) {
     return BlocProvider(
       create: (_) => MovieDetailsCubit(movieId),
-      child: const FullCastAndCrewWidget(),
+      child: const MovieDetailsFullCastAndCrewWidget(),
+    );
+  }
+
+  Widget makeFullReviewsList(int movieId) {
+    return BlocProvider(
+      create: (_) => MovieDetailsCubit(movieId),
+      child: const MovieDetailsFullReviewsListWidget(),
     );
   }
 

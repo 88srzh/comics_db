@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
+import 'package:comics_db_app/domain/entity/movie_details_reviews.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -47,6 +48,7 @@ class MovieDetails {
   // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;
   final MovieDetailsExternalIDs externalIds;
+  final MovieDetailsReviews reviews;
 
   MovieDetails({
     required this.adult,
@@ -80,6 +82,7 @@ class MovieDetails {
     // required this.reviews,
     required this.similar,
     required this.externalIds,
+    required this.reviews,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) => _$MovieDetailsFromJson(json);

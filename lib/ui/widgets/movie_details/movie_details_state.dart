@@ -30,7 +30,8 @@ class MovieDetailsCubitState {
   final String? wikidataId;
   final String? instagramId;
   final String? twitterId;
-  // final List<MovieDetailsReviewsData> reviews;
+  final String? homepage;
+  final List<MovieDetailsReviewsData> reviews;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
 
@@ -62,7 +63,8 @@ class MovieDetailsCubitState {
     required this.wikidataId,
     required this.instagramId,
     required this.twitterId,
-    // required this.reviews,
+    required this.homepage,
+    required this.reviews,
     // required this.similar,
     // required this.collection,
   });
@@ -97,7 +99,8 @@ class MovieDetailsCubitState {
           wikidataId == other.wikidataId &&
           instagramId == other.instagramId &&
           twitterId == other.twitterId &&
-          // reviews == other.reviews &&
+          homepage == other.homepage &&
+          reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
           allVideos == other.allVideos;
@@ -125,7 +128,8 @@ class MovieDetailsCubitState {
       isWatchlist.hashCode ^
       recommendations.hashCode ^
       externalIds.hashCode ^
-      // reviews.hashCode ^
+      homepage.hashCode ^
+      reviews.hashCode ^
       // similar.hashCode;
       facebookId.hashCode ^
       imdbId.hashCode ^
@@ -165,7 +169,8 @@ class MovieDetailsCubitState {
     String? wikidataId,
     String? instagramId,
     String? twitterId,
-    // List<MovieDetailsReviewsData>? reviews,
+    String? homepage,
+    List<MovieDetailsReviewsData>? reviews,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
   }) {
@@ -198,7 +203,8 @@ class MovieDetailsCubitState {
       wikidataId: wikidataId ?? this.wikidataId,
       instagramId: instagramId ?? this.instagramId,
       twitterId: twitterId ?? this.twitterId,
-      // reviews: reviews ?? this.reviews,
+      homepage: homepage ?? this.homepage,
+      reviews: reviews ?? this.reviews,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,
     );

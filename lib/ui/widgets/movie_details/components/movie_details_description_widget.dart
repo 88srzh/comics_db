@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
-class DescriptionWidget extends StatelessWidget {
-  const DescriptionWidget({
-    Key? key,
-  }) : super(key: key);
+class MovieDetailsDescriptionWidget extends StatelessWidget {
+  const MovieDetailsDescriptionWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class DescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: overview),
+                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: ' read the rest.'),
               ),
             ],
           ),

@@ -140,13 +140,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (_) => FavoriteMovieListCubit(
-            favoriteMovieListBloc: FavoriteMovieListBloc(
-              const MovieListState.initial(),
-            ),
-          ),
-        ),
-        BlocProvider(
           create: (_) => TrendingListCubit(
             trendingListBloc: TrendingListBloc(
               const TrendingListState.initial(),

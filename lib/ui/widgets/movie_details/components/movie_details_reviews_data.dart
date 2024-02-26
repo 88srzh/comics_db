@@ -1,6 +1,6 @@
 class MovieDetailsReviewsData {
   final String author;
-  final List<AuthorDetailsData> authorDetails;
+  // final List<AuthorDetailsData> authorDetails;
   final String content;
   final String createdAt;
   final String id;
@@ -9,7 +9,7 @@ class MovieDetailsReviewsData {
 
   const MovieDetailsReviewsData({
     required this.author,
-    required this.authorDetails,
+    // required this.authorDetails,
     required this.content,
     required this.createdAt,
     required this.id,

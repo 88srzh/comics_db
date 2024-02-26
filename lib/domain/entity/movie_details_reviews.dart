@@ -5,6 +5,7 @@ part 'movie_details_reviews.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class MovieDetailsReviews {
+  @JsonKey(name: 'results')
   final List<MovieDetailsReviewsResult> result;
 
   const MovieDetailsReviews({
@@ -19,7 +20,8 @@ class MovieDetailsReviews {
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class MovieDetailsReviewsResult {
   final String author;
-  final List<AuthorDetails> authorDetails;
+  // @JsonKey(name: 'author_details')
+  // final List<AuthorDetails> authorDetails;
   final String content;
   final DateTime createdAt;
   final String id;
@@ -28,7 +30,7 @@ class MovieDetailsReviewsResult {
 
   const MovieDetailsReviewsResult({
     required this.author,
-    required this.authorDetails,
+    // required this.authorDetails,
     required this.content,
     required this.createdAt,
     required this.id,
@@ -41,21 +43,21 @@ class MovieDetailsReviewsResult {
   Map<String, dynamic> toJson() => _$MovieDetailsReviewsResultToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class AuthorDetails {
-  final String? name;
-  final String username;
-  final String? avatarPath;
-  final int? rating;
-
-  const AuthorDetails({
-    this.name,
-    required this.username,
-    this.avatarPath,
-    this.rating,
-  });
-
-  factory AuthorDetails.fromJson(Map<String, dynamic> json) => _$AuthorDetailsFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AuthorDetailsToJson(this);
-}
+// @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+// class AuthorDetails {
+//   final String? name;
+//   final String username;
+//   final String? avatarPath;
+//   final int? rating;
+//
+//   const AuthorDetails({
+//     this.name,
+//     required this.username,
+//     this.avatarPath,
+//     this.rating,
+//   });
+//
+//   factory AuthorDetails.fromJson(Map<String, dynamic> json) => _$AuthorDetailsFromJson(json);
+//
+//   Map<String, dynamic> toJson() => _$AuthorDetailsToJson(this);
+// }

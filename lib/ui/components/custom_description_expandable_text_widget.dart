@@ -6,16 +6,17 @@ import 'package:expandable_text/expandable_text.dart';
 
 class CustomDescriptionExpandableText extends StatelessWidget {
   final String description;
+  final int maxLines;
+  final String expandedText;
 
-  const CustomDescriptionExpandableText({Key? key, required this.description})
-      : super(key: key);
+  const CustomDescriptionExpandableText({super.key, required this.description, required this.maxLines, required this.expandedText});
 
   @override
   Widget build(BuildContext context) {
     return ExpandableText(
       description,
-      expandText: '',
-      maxLines: 5,
+      expandText: expandedText,
+      maxLines: maxLines,
       linkColor: Colors.deepOrangeAccent,
       animation: true,
       expandOnTextTap: true,

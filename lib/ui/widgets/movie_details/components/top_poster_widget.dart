@@ -44,10 +44,9 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
     final String? facebookId = cubit.state.facebookId;
-    final String? imdbId = cubit.state.imdbId;
-    final String? wikidataId = cubit.state.wikidataId;
     final String? instagramId = cubit.state.instagramId;
     final String? twitterId = cubit.state.twitterId;
+    final String? homepage = cubit.state.homepage;
 
     return Stack(
       children: [
@@ -168,7 +167,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                           ),
                         );
                       },
-                      // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieTrailer),
                       child: const CustomPosterTopLeftAlignText(text: 'Play Trailer', maxLines: 1),
                     ),
                   ],
@@ -182,6 +180,7 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                     const SizedBox(width: 4.0),
                     instagramId != null ? SocialLinkButton(icon: MdiIcons.instagram, url: 'https://www.instagram.com/$instagramId') : const SizedBox.shrink(),
                     const SizedBox(width: 4.0),
+                    homepage != null ? SocialLinkButton(icon: MdiIcons.link, url: homepage) : const SizedBox.shrink(),
                   ],
                 ),
               ],
@@ -189,17 +188,21 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
           ),
         ),
         Positioned(
-          left: 122,
-          // top: 55,
-          // right: 15,
-          child: SizedBox(
-            //     TODO: не закругляются края
-            height: 230.0,
-            width: 390.0,
-            child: CachedNetworkImage(
-              imageUrl: ImageDownloader.imageUrl(posterPath!),
-              placeholder: (context, url) => const LoadingIndicatorWidget(),
-              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+          left: 140.0,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: SizedBox(
+              //     TODO: не закругляются края
+              height: 230.0,
+              width: 390.0,
+              child: AspectRatio(
+                aspectRatio: 1.778,
+                child: CachedNetworkImage(
+                  imageUrl: ImageDownloader.imageUrl(posterPath!),
+                  placeholder: (context, url) => const LoadingIndicatorWidget(),
+                  errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                ),
+              ),
             ),
           ),
         ),
@@ -207,13 +210,3 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     );
   }
 }
-
-// var facebook = data.facebook;
-// Future<void> _launchInBrowser(Uri url) async {
-//   if (!await launchUrl(
-//     url,
-//     mode: LaunchMode.externalApplication,
-//   )) {
-//     throw Exception('Could not launch $url');
-//   }
-// }

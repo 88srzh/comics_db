@@ -30,7 +30,7 @@ class MovieDetailsSimilarWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
               ),
               InkWell(
-                onTap: () => cubit.onDetailsTap(context, index),
+                onTap: () => cubit.tapToSeeFullCastAndCrewList(context, index),
                 child: Text(
                   'See all',
                   style: Theme.of(context).textTheme.displaySmall,
