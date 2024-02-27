@@ -182,10 +182,6 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.95,
                     child: CustomDescriptionExpandableText(description: content, maxLines: 6, expandedText: ' read the rest.'),
-                    // child: Text(
-                    //   content,
-                    //   style: Theme.of(context).textTheme.headlineMedium,
-                    // ),
                   ),
                 ),
               ],
