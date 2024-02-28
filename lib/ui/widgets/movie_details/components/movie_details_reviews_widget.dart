@@ -155,21 +155,24 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
                     const SizedBox(width: 5.0),
                     Column(
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Written by $author on $createdAt',
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                            // Text(
-                            //   author,
-                            //   style: TextStyle(
-                            //     color: textColor,
-                            //     fontWeight: FontWeight.w500,
-                            //   ),
-                            // ),
-                            // Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Written by $author on $createdAt',
+                                style: Theme.of(context).textTheme.headlineMedium,
+                              ),
+                              // Text(
+                              //   author,
+                              //   style: TextStyle(
+                              //     color: textColor,
+                              //     fontWeight: FontWeight.w500,
+                              //   ),
+                              // ),
+                              // Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
+                            ],
+                          ),
                         )
                       ],
                     ),
