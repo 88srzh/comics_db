@@ -2,6 +2,7 @@
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
+import 'package:comics_db_app/ui/components/no_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,9 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
     var index = cubit.state.id;
     var reviewsData = context.read<MovieDetailsCubit>().data.reviewsData;
     // TODO add widget if there are no reviews
-    if (reviewsData.isEmpty) return const SizedBox.shrink();
+    if (reviewsData.isEmpty) return const NoReviewsWidget();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [

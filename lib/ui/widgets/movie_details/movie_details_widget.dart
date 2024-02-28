@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
+import 'package:comics_db_app/ui/components/no_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_widget.dart';
 import 'package:flutter/material.dart';
 
