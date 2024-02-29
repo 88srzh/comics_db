@@ -67,6 +67,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           twitterId: '',
           homepage: '',
           reviews: [],
+          originalLanguage: '',
+          budget: 0,
+          revenue: 0,
+          status: '',
           // similar: [],
           // collection: [],
         )) {
@@ -100,6 +104,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       twitterId: state.twitterId,
       homepage: state.homepage,
       reviews: state.reviews,
+      originalLanguage: state.originalLanguage,
+      budget: state.budget,
+      revenue: state.revenue,
+      status: state.status,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -162,6 +170,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
+    final String originalLanguage = data.originalLanguage = details.originalLanguage;
+    final int budget = data.budget = details.budget;
+    final int revenue = data.revenue = details.revenue;
+    final String status = data.status = details.status;
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
@@ -248,6 +260,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       facebookId: facebookId,
       homepage: homepage,
       reviews: reviews,
+      originalLanguage: originalLanguage,
+      budget: budget,
+      revenue: revenue,
+      status: status,
+
       // similar: similar,
       // collection: collection,
     );

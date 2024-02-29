@@ -31,6 +31,10 @@ class MovieDetailsData {
   String? instagramId = '';
   String? twitterId = '';
   String? homepage = '';
+  String originalLanguage = '';
+  int budget = 0;
+  int revenue = 0;
+  String status = '';
 
   MovieFavoriteData favoriteData = MovieFavoriteData();
   MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();

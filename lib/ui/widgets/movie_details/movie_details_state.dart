@@ -32,6 +32,10 @@ class MovieDetailsCubitState {
   final String? twitterId;
   final String? homepage;
   final List<MovieDetailsReviewsData> reviews;
+  final String originalLanguage;
+  final int budget;
+  final int revenue;
+  final String status;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
 
@@ -65,6 +69,10 @@ class MovieDetailsCubitState {
     required this.twitterId,
     required this.homepage,
     required this.reviews,
+    required this.originalLanguage,
+    required this.budget,
+    required this.revenue,
+    required this.status,
     // required this.similar,
     // required this.collection,
   });
@@ -103,7 +111,11 @@ class MovieDetailsCubitState {
           reviews == other.reviews &&
           // similar == other.similar;
           videos == other.videos &&
-          allVideos == other.allVideos;
+          allVideos == other.allVideos &&
+          originalLanguage == other.originalLanguage &&
+          budget == other.budget &&
+          revenue == other.revenue &&
+          status == other.status;
           // collection == other.collection;
 
   @override
@@ -137,7 +149,11 @@ class MovieDetailsCubitState {
       instagramId.hashCode ^
       twitterId.hashCode ^
       videos.hashCode ^
-      allVideos.hashCode;
+      allVideos.hashCode ^
+      originalLanguage.hashCode ^
+      budget.hashCode ^
+      revenue.hashCode ^
+      status.hashCode;
       // collection.hashCode;
 
   MovieDetailsCubitState copyWith({
@@ -171,6 +187,10 @@ class MovieDetailsCubitState {
     String? twitterId,
     String? homepage,
     List<MovieDetailsReviewsData>? reviews,
+    String? originalLanguage,
+    int? budget,
+    int? revenue,
+    String? status,
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
   }) {
@@ -205,6 +225,10 @@ class MovieDetailsCubitState {
       twitterId: twitterId ?? this.twitterId,
       homepage: homepage ?? this.homepage,
       reviews: reviews ?? this.reviews,
+      originalLanguage: originalLanguage ?? this.originalLanguage,
+      budget: budget ?? this.budget,
+      revenue: revenue ?? this.revenue,
+      status: status ?? this.status,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,
     );
