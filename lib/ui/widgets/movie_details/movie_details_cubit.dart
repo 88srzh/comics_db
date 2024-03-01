@@ -71,6 +71,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           budget: 0,
           revenue: 0,
           status: '',
+
           // similar: [],
           // collection: [],
         )) {

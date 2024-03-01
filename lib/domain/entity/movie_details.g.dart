@@ -53,6 +53,7 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
           json['external_ids'] as Map<String, dynamic>),
       reviews:
           MovieDetailsReviews.fromJson(json['reviews'] as Map<String, dynamic>),
+      keywords: json['keywords'] as String,
     );
 
 Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
@@ -87,6 +88,7 @@ Map<String, dynamic> _$MovieDetailsToJson(MovieDetails instance) =>
       'credits': instance.credits.toJson(),
       'videos': instance.videos.toJson(),
       'recommendations': instance.recommendations.toJson(),
+      'keywords': instance.keywords,
       'similar': instance.similar?.toJson(),
       'external_ids': instance.externalIds.toJson(),
       'reviews': instance.reviews.toJson(),
