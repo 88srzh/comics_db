@@ -2,7 +2,9 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:flutter/material.dart';
 
@@ -71,6 +73,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           budget: 0,
           revenue: 0,
           status: '',
+          keywords: [],
 
           // similar: [],
           // collection: [],
@@ -109,6 +112,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       budget: state.budget,
       revenue: state.revenue,
       status: state.status,
+      keywords: state.keywords,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -198,6 +202,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsAllVideosData(
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
+    final List keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: makeKeywords(details))).toList();
 
     var reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
@@ -265,6 +270,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       budget: budget,
       revenue: revenue,
       status: status,
+      keywords: keywords,
 
       // similar: similar,
       // collection: collection,
@@ -322,6 +328,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         genresNames.add(genr.name);
       }
       texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
+
+  String makeKeywords(MovieDetails details) {
+    var texts = <String>[];
+    if (details.keywords.isNotEmpty) {
+      var keywordsNames = <String>[];
+      for (var keyword in details.keywords) {
+        keywordsNames.add(keyword.name);
+      }
+      texts.add(keywordsNames.join(', '));
     }
     return texts.join(' ');
   }

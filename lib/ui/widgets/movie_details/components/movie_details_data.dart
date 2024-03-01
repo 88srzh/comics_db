@@ -1,7 +1,9 @@
 // Project imports:
+import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_similar_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
@@ -38,6 +40,7 @@ class MovieDetailsData {
 
   MovieFavoriteData favoriteData = MovieFavoriteData();
   MovieDetailsWatchlistData watchlistData = MovieDetailsWatchlistData();
+  MovieDetailsExternalIdsData externalIds = MovieDetailsExternalIdsData();
 
   List<List<MovieDetailsMoviePeopleData>> peopleData = const <List<MovieDetailsMoviePeopleData>>[];
   List<MovieDetailsMovieActorData> actorsData = const <MovieDetailsMovieActorData>[];
@@ -46,6 +49,6 @@ class MovieDetailsData {
   List<MovieDetailsAllVideosData> allVideosData = const <MovieDetailsAllVideosData>[];
   List<MovieDetailsReviewsData> reviewsData = const <MovieDetailsReviewsData>[];
   List<MovieDetailsSimilarData> similarData = const <MovieDetailsSimilarData>[];
-  MovieDetailsExternalIdsData externalIds = MovieDetailsExternalIdsData();
   List<BelongsToCollectionData> collectionData = const <BelongsToCollectionData>[];
+  List<MovieDetailsKeywordsData> keywordsData = const <MovieDetailsKeywordsData>[];
 }

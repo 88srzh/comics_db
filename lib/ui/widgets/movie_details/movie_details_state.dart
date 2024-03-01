@@ -36,6 +36,7 @@ class MovieDetailsCubitState {
   final int budget;
   final int revenue;
   final String status;
+  final List<MovieDetailsKeywords> keywords;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
 
@@ -73,6 +74,7 @@ class MovieDetailsCubitState {
     required this.budget,
     required this.revenue,
     required this.status,
+    required this.keywords,
     // required this.similar,
     // required this.collection,
   });
@@ -115,7 +117,8 @@ class MovieDetailsCubitState {
           originalLanguage == other.originalLanguage &&
           budget == other.budget &&
           revenue == other.revenue &&
-          status == other.status;
+          status == other.status &&
+          keywords == other.keywords;
           // collection == other.collection;
 
   @override
@@ -153,7 +156,8 @@ class MovieDetailsCubitState {
       originalLanguage.hashCode ^
       budget.hashCode ^
       revenue.hashCode ^
-      status.hashCode;
+      status.hashCode ^
+      keywords.hashCode;
       // collection.hashCode;
 
   MovieDetailsCubitState copyWith({
@@ -191,6 +195,8 @@ class MovieDetailsCubitState {
     int? budget,
     int? revenue,
     String? status,
+    List<MovieDetailsKeywords>? keywords,
+
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
   }) {
@@ -229,6 +235,7 @@ class MovieDetailsCubitState {
       budget: budget ?? this.budget,
       revenue: revenue ?? this.revenue,
       status: status ?? this.status,
+      keywords: keywords ?? this.keywords,
       // similar: similar ?? this.similar,
       // collection: collection ?? this.collection,
     );
