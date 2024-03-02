@@ -46,7 +46,7 @@ class MovieDetails {
   final MovieDetailsVideos videos;
   final MovieDetailsRecommendations recommendations;
   // @JsonKey(name: 'keywords')
-  final List<MovieDetailsKeywords> keywords;
+  final MovieDetailsKeywords keywords;
 
   // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;

@@ -202,7 +202,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsAllVideosData(
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
-    final List keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: makeKeywords(details))).toList();
+    var keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: makeKeywords(details))).toList();
+    // var keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     var reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
@@ -334,9 +335,9 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
 
   String makeKeywords(MovieDetails details) {
     var texts = <String>[];
-    if (details.keywords.isNotEmpty) {
+    if (details.keywords.keywords.isNotEmpty) {
       var keywordsNames = <String>[];
-      for (var keyword in details.keywords) {
+      for (var keyword in details.keywords.keywords) {
         keywordsNames.add(keyword.name);
       }
       texts.add(keywordsNames.join(', '));
