@@ -46,7 +46,7 @@ class MovieAndTvApiClient {
       '/person/$personId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits, video',
+        'append_to_response': 'credits,video',
         'api_key': Configuration.apiKey,
         'language': locale,
       },
@@ -390,7 +390,7 @@ class MovieAndTvApiClient {
       '/movie/$movieId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits,videos,recommendations,external_ids,reviews',
+        'append_to_response': 'credits,videos,recommendations,external_ids,reviews,keywords',
         'api_key': Configuration.apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),

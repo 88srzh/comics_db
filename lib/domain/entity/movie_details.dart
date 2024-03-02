@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
+import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/domain/entity/movie_details_reviews.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -44,6 +45,8 @@ class MovieDetails {
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
   final MovieDetailsRecommendations recommendations;
+  // @JsonKey(name: 'keywords')
+  final MovieDetailsKeywords keywords;
 
   // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;
@@ -83,6 +86,7 @@ class MovieDetails {
     required this.similar,
     required this.externalIds,
     required this.reviews,
+    required this.keywords,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) => _$MovieDetailsFromJson(json);

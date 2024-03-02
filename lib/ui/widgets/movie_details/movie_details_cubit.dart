@@ -2,7 +2,9 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:flutter/material.dart';
 
@@ -67,6 +69,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           twitterId: '',
           homepage: '',
           reviews: [],
+          originalLanguage: '',
+          budget: 0,
+          revenue: 0,
+          status: '',
+          keywords: [],
+
           // similar: [],
           // collection: [],
         )) {
@@ -100,6 +108,11 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       twitterId: state.twitterId,
       homepage: state.homepage,
       reviews: state.reviews,
+      originalLanguage: state.originalLanguage,
+      budget: state.budget,
+      revenue: state.revenue,
+      status: state.status,
+      keywords: state.keywords,
       // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
@@ -162,6 +175,10 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     data.posterPath = details.posterPath;
     data.backdropPath = details.backdropPath;
     data.videosData = makeTrailerKey(details);
+    final String originalLanguage = data.originalLanguage = details.originalLanguage;
+    final int budget = data.budget = details.budget;
+    final int revenue = data.revenue = details.revenue;
+    final String status = data.status = details.status;
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
@@ -185,6 +202,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsAllVideosData(
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
+    var keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: makeKeywords(details))).toList();
+    // var keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     var reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
@@ -248,6 +267,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       facebookId: facebookId,
       homepage: homepage,
       reviews: reviews,
+      originalLanguage: originalLanguage,
+      budget: budget,
+      revenue: revenue,
+      status: status,
+      keywords: keywords,
+
       // similar: similar,
       // collection: collection,
     );
@@ -304,6 +329,18 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         genresNames.add(genr.name);
       }
       texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
+
+  String makeKeywords(MovieDetails details) {
+    var texts = <String>[];
+    if (details.keywords.keywords.isNotEmpty) {
+      var keywordsNames = <String>[];
+      for (var keyword in details.keywords.keywords) {
+        keywordsNames.add(keyword.name);
+      }
+      texts.add(keywordsNames.join(', '));
     }
     return texts.join(' ');
   }
