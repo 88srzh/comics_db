@@ -7,12 +7,6 @@ import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'movie_keywords_list_bloc.freezed.dart';
-
-part 'movie_list_event.dart';
-
-part 'movie_list_state.dart';
-
 class MovieKeywordsListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
 
