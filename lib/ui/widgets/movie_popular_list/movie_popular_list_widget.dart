@@ -14,7 +14,7 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:provider/provider.dart';
 
 class MoviePopularListWidget extends StatefulWidget {
-  const MoviePopularListWidget({Key? key}) : super(key: key);
+  const MoviePopularListWidget({super.key});
 
   @override
   State<MoviePopularListWidget> createState() => _MoviePopularListWidgetState();

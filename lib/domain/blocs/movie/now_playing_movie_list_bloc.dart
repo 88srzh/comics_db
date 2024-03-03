@@ -17,7 +17,7 @@ class NowPlayingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   // TODO duplicate in other places
 
-  NowPlayingMovieListBloc(MovieListState initialState) : super(initialState) {
+  NowPlayingMovieListBloc(super.initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onNowPlayingMovieListEventLoadNextPage(event, emit);
