@@ -7,6 +7,7 @@ import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/network_client.dart';
 import 'package:comics_db_app/domain/entity/account_details.dart';
 import 'package:comics_db_app/domain/entity/movie_details.dart';
+import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
 import 'package:comics_db_app/domain/entity/people_response.dart';
@@ -394,6 +395,24 @@ class MovieAndTvApiClient {
         'api_key': Configuration.apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<MovieDetailsKeywords> keywordDetails(int keywordId, String locale) async {
+    MovieDetailsKeywords parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieDetailsKeywords.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      'keyword/$keywordId',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'language': locale,
       },
     );
     return result;
