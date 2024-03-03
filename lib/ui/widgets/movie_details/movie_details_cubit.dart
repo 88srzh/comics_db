@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
@@ -202,7 +201,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsAllVideosData(
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
-    var keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: makeKeywords(details))).toList();
+    var keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
     // var keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     var reviews = data.reviewsData = details.reviews.result

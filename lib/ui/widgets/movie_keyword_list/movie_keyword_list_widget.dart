@@ -30,7 +30,8 @@ class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<MoviePopularListCubit>();
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Now Playing Movies'),
+      // TODO fix to keyword name
+      appBar: const CustomDetailsAppBar(title: 'Keyword name'),
       body: Stack(
         children: [
           ListView.builder(
@@ -47,10 +48,6 @@ class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
                 child: _MovieKeywordListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
               );
             },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
           ),
         ],
       ),
@@ -85,17 +82,15 @@ class _MovieKeywordListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: context.read<ThemeBloc>().isDarkTheme
-                ? customMovieListBoxDecorationForDarkTheme
-                : customMovieListBoxDecorationForLightTheme,
+            decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
                 posterPath != null
                     ? Image.network(
-                  ImageDownloader.imageUrl(posterPath!),
-                  width: 95,
-                )
+                        ImageDownloader.imageUrl(posterPath!),
+                        width: 95,
+                      )
                     : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(

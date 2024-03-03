@@ -106,6 +106,31 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<MovieResponse> discoverKeywordMovies(
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+  ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/discover/movie',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'include_adult': includeAdult.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<MovieResponse> discoverNowPlayingMovie(
     // TODO need to add with_release_type= 2 or 3, now result = 0
     int page,

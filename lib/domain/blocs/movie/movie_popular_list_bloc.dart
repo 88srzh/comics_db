@@ -20,7 +20,7 @@ part 'movie_list_state.dart';
 class MoviePopularListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
 
-  MoviePopularListBloc(MovieListState initialState) : super(initialState) {
+  MoviePopularListBloc(super.initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);
