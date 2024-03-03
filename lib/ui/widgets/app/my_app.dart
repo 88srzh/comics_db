@@ -2,9 +2,11 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/movie/movie_keywords_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/watchlist_movie_bloc.dart';
 import 'package:comics_db_app/domain/blocs/tv/watchlist_tv_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/account/guest_account/guest_account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_keyword_list/movie_keyword_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_cubit.dart';
@@ -86,6 +88,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => NowPlayingMovieListCubit(
             nowPlayingMovieListBloc: NowPlayingMovieListBloc(
+              const MovieListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => MovieKeywordsListCubit(
+            movieKeywordsListBloc: MovieKeywordsListBloc(
               const MovieListState.initial(),
             ),
           ),

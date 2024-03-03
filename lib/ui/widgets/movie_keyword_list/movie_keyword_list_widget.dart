@@ -4,10 +4,9 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
-import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_keyword_list/movie_keyword_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,12 +22,12 @@ class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final locale = Localizations.localeOf(context);
-    context.read<MoviePopularListCubit>().setupPopularMovieLocale(locale.languageCode);
+    context.read<MovieKeywordsListCubit>().setupMovieKeywordLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<MoviePopularListCubit>();
+    var cubit = context.watch<MovieKeywordsListCubit>();
     return Scaffold(
       // TODO fix to keyword name
       appBar: const CustomDetailsAppBar(title: 'Keyword name'),
@@ -40,7 +39,7 @@ class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
             itemCount: cubit.state.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              cubit.showedPopularMovieAtIndex(index);
+              cubit.showedMovieKeywordMovieAtIndex(index);
               final movie = cubit.state.movies[index];
               final posterPath = movie.posterPath;
               return InkWell(
@@ -55,7 +54,7 @@ class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
   }
 
   void onMovieTap(BuildContext context, int index) {
-    final cubit = context.read<MoviePopularListCubit>();
+    final cubit = context.read<MovieKeywordsListCubit>();
     final movieId = cubit.state.movies[index].id;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
   }
@@ -73,7 +72,7 @@ class _MovieKeywordListRowWidget extends StatelessWidget {
 
   final String? posterPath;
   final MovieListData movie;
-  final MoviePopularListCubit cubit;
+  final MovieKeywordsListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
