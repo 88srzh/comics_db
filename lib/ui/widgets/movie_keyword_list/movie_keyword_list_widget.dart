@@ -35,7 +35,6 @@ class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
         children: [
           ListView.builder(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: const EdgeInsets.only(top: 70.0),
             itemCount: cubit.state.movies.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
