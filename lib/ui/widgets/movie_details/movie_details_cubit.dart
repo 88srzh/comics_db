@@ -34,7 +34,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   final _movieService = MovieService();
 
   // TODO may be delete isLoading, because it's unnecessary
-  bool isLoading = true;
+  final bool isLoading = true;
 
   MovieDetailsCubit(this.movieId)
       // TODO should fix
@@ -73,7 +73,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           revenue: 0,
           status: '',
           keywords: [],
-
           // similar: [],
           // collection: [],
         )) {
@@ -112,7 +111,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       revenue: state.revenue,
       status: state.status,
       keywords: state.keywords,
-      // reviews: state.reviews,
       // similar: state.similar,
       // collection: state.collection,
     ));
@@ -183,7 +181,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
     final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
     final bool isLoading = data.isLoading;
-    final List<MovieDetailsAllVideosData> allVideos = data.allVideosData;
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
@@ -197,13 +194,13 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final List<MovieDetailsRecommendationsData> recommendations = data.recommendationsData =
         details.recommendations.recommendationsResults.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
-    data.allVideosData = details.videos.results
+    final List<MovieDetailsAllVideosData> allVideos = data.allVideosData = details.videos.results
         .map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
     final List<MovieDetailsKeywordsData> keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
     // var keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
-    var reviews = data.reviewsData = details.reviews.result
+    final List<MovieDetailsReviewsData> reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
             author: e.author,
             // authorDetails:
@@ -280,7 +277,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     var texts = <String>[];
     final createdAt = details.reviews.result.first.createdAt;
     texts.add(_dateFormat.format(createdAt));
-      return texts.join(' ');
+    return texts.join(' ');
   }
 
   String makeSummary(MovieDetails details) {
