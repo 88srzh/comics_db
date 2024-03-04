@@ -160,48 +160,47 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     if (details == null) {
       return;
     }
-    data.id = details.id;
-    data.overview = details.overview ?? 'Loading description...';
-    data.title = details.title;
-    data.tagline = details.tagline ?? 'Loading tagline..';
-    data.voteAverage = details.voteAverage;
-    data.voteCount = details.voteCount;
-    data.popularity = details.popularity;
-    data.releaseDate = makeReleaseDate(details);
-    data.runtime = makeSummary(details);
-    data.genres = makeGenres(details);
-    data.peopleData = makePeopleData(details);
-    data.posterPath = details.posterPath;
-    data.backdropPath = details.backdropPath;
-    data.videosData = makeTrailerKey(details);
+    final int id = data.id = details.id;
+    final String overview = data.overview = details.overview ?? 'Loading description...';
+    final String title = data.title = details.title;
+    final String tagline = data.tagline = details.tagline ?? 'Loading tagline..';
+    final double voteAverage = data.voteAverage = details.voteAverage;
+    final int voteCount = data.voteCount = details.voteCount;
+    final double popularity = data.popularity = details.popularity;
+    final String releaseDate = data.releaseDate = makeReleaseDate(details);
+    final String runtime = data.runtime = makeSummary(details);
+    final String genres = data.genres = makeGenres(details);
+    final List<List<MovieDetailsMoviePeopleData>> peopleData = data.peopleData = makePeopleData(details);
+    final String? posterPath = data.posterPath = details.posterPath;
+    final String? backdropPath = data.backdropPath = details.backdropPath;
+    final List<MovieDetailsVideosData>? videosData = data.videosData = makeTrailerKey(details);
     final String originalLanguage = data.originalLanguage = details.originalLanguage;
     final int budget = data.budget = details.budget;
     final int revenue = data.revenue = details.revenue;
     final String status = data.status = details.status;
+    final String? homepage = data.homepage = details.homepage;
+    final String? facebookId = data.facebookId = details.externalIds.facebookId;
+    final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
+    final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
+    final bool isLoading = data.isLoading;
+    final List<MovieDetailsAllVideosData> allVideos = data.allVideosData;
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
     // }
 
-    data.actorsData =
-        details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
+    final List<MovieDetailsMovieActorData> actorsData =
+        data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
-    data.favoriteData.isFavorite = isFavorite;
-    data.watchlistData.isWatchlist = isWatchlist;
-
-    data.recommendationsData = details.recommendations.recommendationsResults
-        .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
-        .toList();
-
-    var facebookId = data.facebookId = details.externalIds.facebookId;
+    final List<MovieDetailsRecommendationsData> recommendations = data.recommendationsData =
+        details.recommendations.recommendationsResults.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
     data.allVideosData = details.videos.results
-        .map((e) => MovieDetailsAllVideosData(
-            name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
+        .map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
-    var keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
+    final List<MovieDetailsKeywordsData> keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
     // var keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     var reviews = data.reviewsData = details.reviews.result
@@ -216,28 +215,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
             url: e.url))
         .toList();
 
-    var id = data.id;
-    var title = data.title;
-    var tagline = data.tagline;
-    var overview = data.overview;
-    var voteAverage = data.voteAverage;
-    var voteCount = data.voteCount;
-    var popularity = data.popularity;
-    var releaseDate = data.releaseDate;
-    var runtime = data.runtime;
-    var genres = data.genres;
-    var peopleData = data.peopleData;
-    var actorsData = data.actorsData;
-    var isLoading = data.isLoading;
-    var posterPath = data.posterPath;
-    var backdropPath = data.backdropPath;
-    var recommendations = data.recommendationsData;
-    var videos = data.videosData;
-    var allVideos = data.allVideosData;
     // var similar = data.similarData;
-    var isFavoriteData = data.favoriteData.isFavorite;
-    var isWatchlistData = data.watchlistData.isWatchlist;
-    final String? homepage = data.homepage = details.homepage;
     // var collection = data.collectionData;
 
     final newState = state.copyWith(
@@ -259,7 +237,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       isFavorite: isFavoriteData,
       isWatchlist: isWatchlistData,
       recommendations: recommendations,
-      videos: videos,
+      videos: videosData,
       allVideos: allVideos,
       // facebook: facebook,
       externalIds: MovieDetailsExternalIdsData(),
@@ -301,10 +279,8 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   String makeCreatedAtReviews(MovieDetails details) {
     var texts = <String>[];
     final createdAt = details.reviews.result.first.createdAt;
-    if (createdAt != null) {
-      texts.add(_dateFormat.format(createdAt));
-    }
-    return texts.join(' ');
+    texts.add(_dateFormat.format(createdAt));
+      return texts.join(' ');
   }
 
   String makeSummary(MovieDetails details) {
