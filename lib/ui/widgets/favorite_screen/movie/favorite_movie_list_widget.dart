@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_li
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 
 class FavoriteMovieListWidget extends StatefulWidget {
-  const FavoriteMovieListWidget({Key? key}) : super(key: key);
+  const FavoriteMovieListWidget({super.key});
 
   @override
   State<FavoriteMovieListWidget> createState() => _FavoriteMovieListWidgetState();
@@ -80,12 +80,11 @@ class _FavoriteMovieListRowWidget extends StatelessWidget {
   final int index;
 
   const _FavoriteMovieListRowWidget({
-    Key? key,
     required this.posterPath,
     required this.movie,
     required this.cubit,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String? posterPath;
   final MovieListData movie;

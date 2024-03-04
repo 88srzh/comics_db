@@ -1,11 +1,14 @@
+// Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieKeywordsListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
@@ -22,7 +25,7 @@ class MovieKeywordsListBloc extends Bloc<MovieListEvent, MovieListState> {
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     // TODO надо получить keywordId
-    final int keywordId;
+    // final int keywordId;
     final container = await loadNextPage(state.movieContainer, (nextPage) async {
       final result = await _movieApiClient.discoverKeywordMovies(nextPage, event.locale, Configuration.apiKey, false, 1523);
       return result;

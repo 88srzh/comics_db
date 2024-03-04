@@ -10,7 +10,7 @@ import 'package:comics_db_app/ui/widgets/tv_airing_today/tv_airing_today_cubit.d
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 
 class AiringTodayTvsWidget extends StatefulWidget {
-  const AiringTodayTvsWidget({Key? key}) : super(key: key);
+  const AiringTodayTvsWidget({super.key});
 
   @override
   State<AiringTodayTvsWidget> createState() => _AiringTodayTvsWidgetState();
@@ -50,12 +50,11 @@ class _AiringTodayTvsWidgetState extends State<AiringTodayTvsWidget> {
 
 class _AiringTodayTvsListItemWidget extends StatelessWidget {
   const _AiringTodayTvsListItemWidget({
-    Key? key,
     required this.index,
     required this.posterPath,
     required this.tv,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   final int index;
   final String? posterPath;

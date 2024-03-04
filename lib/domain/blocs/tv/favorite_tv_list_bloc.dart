@@ -8,14 +8,14 @@ import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
-import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 
 class FavoriteTvListBloc extends Bloc<TvListEvent, TvListState> {
   final _movieApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
 
-  FavoriteTvListBloc(TvListState initialState) : super(initialState) {
+  FavoriteTvListBloc(super.initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
         await onFavoriteTvsListEventLoadNextPage(event, emit);

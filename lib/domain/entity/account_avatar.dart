@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/entity/account_details.dart';
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'account_avatar.g.dart';

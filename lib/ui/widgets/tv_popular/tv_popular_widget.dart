@@ -11,7 +11,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 
 class PopularTvWidget extends StatefulWidget {
-  const PopularTvWidget({Key? key}) : super(key: key);
+  const PopularTvWidget({super.key});
 
   @override
   State<PopularTvWidget> createState() => _PopularTvWidgetState();

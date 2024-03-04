@@ -1,3 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
@@ -5,8 +12,6 @@ import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsSimilarWidget extends StatelessWidget {
   const MovieDetailsSimilarWidget({super.key});
@@ -52,7 +57,7 @@ class MovieDetailsSimilarWidget extends StatelessWidget {
 }
 
 class _MovieActorListWidget extends StatelessWidget {
-  const _MovieActorListWidget({Key? key}) : super(key: key);
+  const _MovieActorListWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,7 @@ class _MovieActorListWidget extends StatelessWidget {
 class _MovieActorListItemWidget extends StatelessWidget {
   final int index;
 
-  const _MovieActorListItemWidget({Key? key, required this.index}) : super(key: key);
+  const _MovieActorListItemWidget({required this.index});
 
   @override
   Widget build(BuildContext context) {

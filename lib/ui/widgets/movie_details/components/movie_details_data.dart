@@ -1,17 +1,16 @@
 // Project imports:
-import 'package:comics_db_app/domain/entity/movie_details_keywords.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/actor_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_all_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_similar_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/collection_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_watchlist_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_people_data.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/recommendations_data.dart';
 
 class MovieDetailsData {
   int id = 0;

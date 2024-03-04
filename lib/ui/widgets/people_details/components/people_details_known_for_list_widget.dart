@@ -1,4 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
@@ -7,11 +14,9 @@ import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PeopleDetailsKnownForListWidget extends StatefulWidget {
-  const PeopleDetailsKnownForListWidget({Key? key}) : super(key: key);
+  const PeopleDetailsKnownForListWidget({super.key});
 
   @override
   State<PeopleDetailsKnownForListWidget> createState() => _PeopleDetailsKnownForListWidgetState();
@@ -58,9 +63,8 @@ class _KnownForAllListWidget extends StatelessWidget {
   final int characterIndex;
 
   const _KnownForAllListWidget({
-    Key? key,
     required this.characterIndex,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,17 +1,19 @@
 // Flutter imports:
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
-import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit.dart';
-import 'package:provider/provider.dart';
 
 class MoviePopularListWidget extends StatefulWidget {
   const MoviePopularListWidget({super.key});
@@ -70,12 +72,11 @@ class _MoviePopularListRowWidget extends StatelessWidget {
   final int index;
 
   const _MoviePopularListRowWidget({
-    Key? key,
     required this.posterPath,
     required this.movie,
     required this.cubit,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String? posterPath;
   final MovieListData movie;

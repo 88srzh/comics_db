@@ -13,7 +13,7 @@ import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_on_the_air/tv_on_the_air_cubit.dart';
 
 class OnTheAirTvsWidget extends StatefulWidget {
-  const OnTheAirTvsWidget({Key? key}) : super(key: key);
+  const OnTheAirTvsWidget({super.key});
 
   @override
   State<OnTheAirTvsWidget> createState() => _OnTheAirTvsWidgetState();
@@ -53,12 +53,11 @@ class _OnTheAirTvsWidgetState extends State<OnTheAirTvsWidget> {
 
 class _AiringTodayTvsListItemWidget extends StatelessWidget {
   const _AiringTodayTvsListItemWidget({
-    Key? key,
     required this.index,
     required this.posterPath,
     required this.tv,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   final int index;
   final String? posterPath;

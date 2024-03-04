@@ -13,14 +13,14 @@ class RadialPercentWidget extends StatelessWidget {
   final double lineWidth;
 
   const RadialPercentWidget({
-    Key? key,
+    super.key,
     required this.child,
     required this.percent,
     required this.fillColor,
     required this.lineColor,
     required this.freeColor,
     required this.lineWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

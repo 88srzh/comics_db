@@ -1,7 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class AnimationFab extends StatefulWidget {
-  const AnimationFab({Key? key}) : super(key: key);
+  const AnimationFab({super.key});
 
   @override
   State<AnimationFab> createState() => _AnimationFabState();

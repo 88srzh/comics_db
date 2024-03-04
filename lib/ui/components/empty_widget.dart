@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 enum EmptyWidgetType { cart, favorite }
@@ -9,12 +10,12 @@ class EmptyWidget extends StatelessWidget {
   final Widget child;
 
   const EmptyWidget({
-    Key? key,
+    super.key,
     this.type = EmptyWidgetType.cart,
     required this.title,
     this.condition = false,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,12 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
 import 'package:comics_db_app/domain/data_providers/session_data_provider.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/domain/entity/movie_response.dart';
@@ -15,7 +15,7 @@ class WatchlistMovieBloc extends Bloc<MovieListEvent, MovieListState> {
   final _watchListApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
 
-  WatchlistMovieBloc(MovieListState initialState) : super(initialState) {
+  WatchlistMovieBloc(super.initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onWatchlistEventLoadMovies(event, emit);

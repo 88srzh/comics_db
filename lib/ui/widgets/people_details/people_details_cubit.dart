@@ -1,15 +1,15 @@
 // Flutter imports:
-import 'package:comics_db_app/domain/entity/people.dart';
-import 'package:comics_db_app/domain/services/people_service.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
+import 'package:comics_db_app/domain/entity/people.dart';
 import 'package:comics_db_app/domain/entity/people_details.dart';
+import 'package:comics_db_app/domain/services/people_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_data.dart';
 

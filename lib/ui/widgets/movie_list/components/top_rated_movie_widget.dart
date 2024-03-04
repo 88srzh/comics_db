@@ -10,7 +10,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_top_rated/top_rated_movie_list_cubit.dart';
 
 class TopRatedMovieWidget extends StatefulWidget {
-  const TopRatedMovieWidget({Key? key}) : super(key: key);
+  const TopRatedMovieWidget({super.key});
 
   @override
   State<TopRatedMovieWidget> createState() => _TopRatedMovieWidgetState();

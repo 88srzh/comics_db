@@ -13,7 +13,7 @@ import 'package:comics_db_app/domain/entity/movie_response.dart';
 class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
 
-  TopRatedMovieListBloc(MovieListState initialState) : super(initialState) {
+  TopRatedMovieListBloc(super.initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onTopRatedMovieListEventLoadNextPage(event, emit);

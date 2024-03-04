@@ -2,7 +2,7 @@
 import 'dart:async';
 
 // Package imports:
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/blocs/auth/auth_bloc.dart';
@@ -13,8 +13,7 @@ class LoaderViewCubit extends Cubit<LoaderViewCubitState> {
   final AuthBloc authBloc;
   late final StreamSubscription<AuthState> authBlocSubscription;
 
-  LoaderViewCubit(LoaderViewCubitState initialState, this.authBloc)
-      : super(initialState) {
+  LoaderViewCubit(super.initialState, this.authBloc) {
     Future.microtask(
       () {
         _onState(authBloc.state);

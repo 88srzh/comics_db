@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/widgets/favorite_screen/tv/favorite_tv_list_cub
 import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 
 class FavoriteTvListWidget extends StatefulWidget {
-  const FavoriteTvListWidget({Key? key}) : super(key: key);
+  const FavoriteTvListWidget({super.key});
 
   @override
   State<FavoriteTvListWidget> createState() => _FavoriteTvListWidgetState();
@@ -80,12 +80,11 @@ class _FavoriteTvListRowWidget extends StatelessWidget {
   final int index;
 
   const _FavoriteTvListRowWidget({
-    Key? key,
     required this.posterPath,
     required this.tv,
     required this.cubit,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String? posterPath;
   final TvListData tv;

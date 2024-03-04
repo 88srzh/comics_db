@@ -6,7 +6,7 @@ import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 
 class SettingsWidget extends StatefulWidget {
-  const SettingsWidget({Key? key}) : super(key: key);
+  const SettingsWidget({super.key});
 
   @override
   State<SettingsWidget> createState() => _SettingsWidgetState();
@@ -28,7 +28,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 }
 
 class BodySettingsWidget extends StatelessWidget {
-  const BodySettingsWidget({Key? key}) : super(key: key);
+  const BodySettingsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class BodySettingsWidget extends StatelessWidget {
 }
 
 class GeneralCard extends StatelessWidget {
-  const GeneralCard({Key? key}) : super(key: key);
+  const GeneralCard({super.key});
 
   @override
   Widget build(BuildContext context) {

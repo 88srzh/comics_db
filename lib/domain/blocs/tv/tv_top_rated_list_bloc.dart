@@ -7,13 +7,13 @@ import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 
 class TvTopRatedListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
 
-  TvTopRatedListBloc(TvListState initialState) : super(initialState) {
+  TvTopRatedListBloc(super.initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
         await onTvListEventLoadNextPage(event, emit);

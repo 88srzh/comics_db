@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
 
 class TvPopularListWidget extends StatefulWidget {
-  const TvPopularListWidget({Key? key}) : super(key: key);
+  const TvPopularListWidget({super.key});
 
   @override
   State<TvPopularListWidget> createState() => _TvPopularListWidgetState();
@@ -66,12 +66,11 @@ class _TvPopularListRowWidget extends StatelessWidget {
   final int index;
 
   const _TvPopularListRowWidget({
-    Key? key,
     required this.posterPath,
     required this.tv,
     required this.cubit,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String? posterPath;
   final TvListData tv;

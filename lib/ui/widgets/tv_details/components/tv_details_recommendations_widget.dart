@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDetailsRecommendationsWidget extends StatelessWidget {
-  const TvDetailsRecommendationsWidget({Key? key}) : super(key: key);
+  const TvDetailsRecommendationsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class TvDetailsRecommendationsWidget extends StatelessWidget {
 }
 
 class _TvDetailsRecommendationsListWidget extends StatelessWidget {
-  const _TvDetailsRecommendationsListWidget({Key? key}) : super(key: key);
+  const _TvDetailsRecommendationsListWidget();
 
   @override
   Widget build(BuildContext context) {

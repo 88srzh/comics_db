@@ -1,20 +1,20 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
-import 'package:comics_db_app/domain/entity/movie.dart';
-import 'package:comics_db_app/domain/entity/movie_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/domain/blocs/movie/movie_list_container.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
+import 'package:comics_db_app/domain/entity/movie.dart';
+import 'package:comics_db_app/domain/entity/movie_response.dart';
 
 class UpcomingMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final _movieApiClient = MovieAndTvApiClient();
   // final String minimumDateTime = '1970-01-01';
 
-  UpcomingMovieListBloc(MovieListState initialState) : super(initialState) {
+  UpcomingMovieListBloc(super.initialState) {
     on<MovieListEvent>(((event, emit) async {
       if (event is MovieListEventLoadNextPage) {
         await onUpcomingMovieListEventLoadNextPage(event, emit);

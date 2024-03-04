@@ -17,7 +17,7 @@ class AccountDetailsCubitState extends Equatable {
   });
 
   @override
-  List<Object> get props => [id, name, username!, includeAdult, avatarPath];
+  List<Object> get props => [id, name, username, includeAdult, avatarPath];
 
   AccountDetailsCubitState copyWith({
     int? id,
