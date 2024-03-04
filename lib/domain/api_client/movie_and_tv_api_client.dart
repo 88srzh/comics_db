@@ -111,6 +111,7 @@ class MovieAndTvApiClient {
     String locale,
     String apiKey,
     bool includeAdult,
+    int keywordId,
   ) async {
     MovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
@@ -119,13 +120,14 @@ class MovieAndTvApiClient {
     }
 
     final result = _networkClient.get(
-      '/discover/movie',
+      '/keyword/$keywordId/movies',
       parser,
       <String, dynamic>{
         'api_key': apiKey,
         'page': page.toString(),
         'language': locale,
         'include_adult': includeAdult.toString(),
+        'keyword_id': keywordId.toString(),
       },
     );
     return result;

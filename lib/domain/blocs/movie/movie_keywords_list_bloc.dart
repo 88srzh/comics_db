@@ -21,8 +21,10 @@ class MovieKeywordsListBloc extends Bloc<MovieListEvent, MovieListState> {
   }
 
   Future<void> onMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
+    // TODO надо получить keywordId
+    final int keywordId;
     final container = await loadNextPage(state.movieContainer, (nextPage) async {
-      final result = await _movieApiClient.discoverKeywordMovies(nextPage, event.locale, Configuration.apiKey, false);
+      final result = await _movieApiClient.discoverKeywordMovies(nextPage, event.locale, Configuration.apiKey, false, 1523);
       return result;
     });
     if (container != null) {

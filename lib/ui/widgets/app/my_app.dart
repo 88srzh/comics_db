@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int keywordId;
     return MultiProvider(
       providers: [
         BlocProvider<ThemeBloc>(
@@ -96,7 +97,7 @@ class MyApp extends StatelessWidget {
           create: (_) => MovieKeywordsListCubit(
             movieKeywordsListBloc: MovieKeywordsListBloc(
               const MovieListState.initial(),
-            ),
+            ), keywordId: 0,
           ),
         ),
         BlocProvider(

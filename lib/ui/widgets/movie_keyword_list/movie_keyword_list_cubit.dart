@@ -15,8 +15,9 @@ class MovieKeywordsListCubit extends Cubit<MovieListCubitState> {
   late final StreamSubscription<MovieListState> movieKeywordsListBlocSubscription;
   late DateFormat _dateFormat;
   var movie = <Movie>[];
+  final int keywordId;
 
-  MovieKeywordsListCubit({required this.movieKeywordsListBloc}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
+  MovieKeywordsListCubit({required this.movieKeywordsListBloc,required this.keywordId}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
         _onState(movieKeywordsListBloc.state);

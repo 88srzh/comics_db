@@ -66,8 +66,9 @@ class _MovieKeywordTextWidget extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-            onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieKeyword, arguments: id),
-            child: Text(keyword, style: Theme.of(context).textTheme.labelSmall)),
+          onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieKeyword, arguments: id),
+          child: Text(keyword, style: Theme.of(context).textTheme.labelSmall),
+        ),
       ],
     );
   }

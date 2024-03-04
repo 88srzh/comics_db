@@ -1,6 +1,8 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/movie/movie_keywords_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_full_cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_full_reviews_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_keyword_list/movie_keyword_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_keyword_list/movie_keyword_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/people_details_known_for_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/watchlist/movie/watchlist_movie_list_widget.dart';
@@ -101,7 +103,10 @@ class ScreenFactory {
 
   Widget makeMovieKeywordList(int keywordId) {
     return BlocProvider(
-      create: (_) => MovieDetailsCubit(keywordId),
+      create: (_) => MovieKeywordsListCubit(
+        movieKeywordsListBloc: MovieKeywordsListBloc(const MovieListState.initial()),
+        keywordId: keywordId,
+      ),
       child: const MovieKeywordListWidget(),
     );
   }
