@@ -113,7 +113,8 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    FittedBox(
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
                         'A review by $author',
                         style: TextStyle(
