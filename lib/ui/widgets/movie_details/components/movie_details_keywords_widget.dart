@@ -39,6 +39,7 @@ class _MovieKeywordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200.0,
+      width: 300.0,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: keywordData.length,
