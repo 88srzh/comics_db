@@ -38,8 +38,8 @@ class _MovieKeywordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.0,
-      width: 300.0,
+      height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: keywordData.length,
@@ -64,7 +64,7 @@ class _MovieKeywordTextWidget extends StatelessWidget {
     final keywordData = cubit.data.keywordsData[index];
     final String keyword = keywordData.name;
     final int id = keywordData.id;
-    return Column(
+    return Row(
       children: [
         InkWell(
           onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.movieKeyword, arguments: id),

@@ -153,7 +153,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
   }
 
   void updateData(MovieDetails? details, bool isFavorite, bool isWatchlist) {
-    // may be i need await somewhere here
+    // TODO may be i need await somewhere here
     data.isLoading = details == null;
     if (details == null) {
       return;
@@ -198,7 +198,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
     final List<MovieDetailsKeywordsData> keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
-    // var keywords = data.keywordsData = details.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     final List<MovieDetailsReviewsData> reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
@@ -236,7 +235,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       recommendations: recommendations,
       videos: videosData,
       allVideos: allVideos,
-      // facebook: facebook,
       externalIds: MovieDetailsExternalIdsData(),
       facebookId: facebookId,
       homepage: homepage,
@@ -314,7 +312,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       }
       texts.add(keywordsNames.join(', '));
     }
-    return texts.join(' ');
+    return texts.join(', ');
   }
 
   List<List<MovieDetailsMoviePeopleData>> makePeopleData(MovieDetails details) {
