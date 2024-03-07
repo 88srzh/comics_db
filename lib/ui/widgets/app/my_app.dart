@@ -98,7 +98,8 @@ class MyApp extends StatelessWidget {
           create: (_) => MovieKeywordsListCubit(
             movieKeywordsListBloc: MovieKeywordsListBloc(
               const MovieListState.initial(),
-            ), keywordId: 0,
+            ),
+            keywordId: 0,
           ),
         ),
         BlocProvider(
@@ -187,11 +188,7 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
-              Locale('ru', 'RU'),
-              Locale('en', ''),
-              // S.delegate.supportedLocales,
-            ],
+            supportedLocales: S.delegate.supportedLocales,
             routes: mainNavigation.routes,
             initialRoute: MainNavigationRouteNames.loaderWidget,
             onGenerateRoute: mainNavigation.onGenerateRoute,
