@@ -12,6 +12,7 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
     final int budget = cubit.state.budget;
     final String status = cubit.state.status;
     final int revenue = cubit.state.revenue;
+    const String s = "\$";
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Row(
@@ -25,7 +26,7 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
                 Text(status, style: Theme.of(context).textTheme.labelSmall),
                 const SizedBox(height: 10.0),
                 Text('Revenue', style: Theme.of(context).textTheme.labelMedium),
-                Text(revenue.toString(), style: Theme.of(context).textTheme.labelSmall),
+                Text(s + revenue.toString(), style: Theme.of(context).textTheme.labelSmall),
                 // Text(),
               ],
             ),
@@ -38,7 +39,7 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
                 Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
                 const SizedBox(height: 10.0),
                 Text('Budget', style: Theme.of(context).textTheme.labelMedium),
-                Text(budget.toString(), style: Theme.of(context).textTheme.labelSmall),
+                Text(s + budget.toString(), style: Theme.of(context).textTheme.labelSmall),
               ],
             ),
           )
