@@ -13,11 +13,15 @@ class MovieDetailsKeywordsWidget extends StatelessWidget {
     var keywordData = cubit.data.keywordsData;
     // final String keywords = cubit.state.keywords.first.name;
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 20.0, right: 10.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Keywords', style: Theme.of(context).textTheme.titleMedium),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('Keywords', style: Theme.of(context).textTheme.titleMedium),
+            ],
+          ),
           _MovieKeywordWidget(cubit: cubit, keywordData: keywordData),
         ],
       ),
@@ -38,8 +42,9 @@ class _MovieKeywordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.5,
-      width: MediaQuery.of(context).size.width * 0.8,
+      // height: MediaQuery.of(context).size.height * 0.5,
+      height: 100.0,
+      width: 200.0,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: keywordData.length,

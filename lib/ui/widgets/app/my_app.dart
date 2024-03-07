@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -181,6 +182,7 @@ class MyApp extends StatelessWidget {
             }),
             theme: state.theme,
             localizationsDelegates: const [
+              S.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -188,6 +190,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: const [
               Locale('ru', 'RU'),
               Locale('en', ''),
+              // S.delegate.supportedLocales,
             ],
             routes: mainNavigation.routes,
             initialRoute: MainNavigationRouteNames.loaderWidget,

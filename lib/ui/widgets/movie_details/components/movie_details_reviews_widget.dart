@@ -6,6 +6,7 @@ import 'package:comics_db_app/ui/components/no_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
+// import 'generated/l10n.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
