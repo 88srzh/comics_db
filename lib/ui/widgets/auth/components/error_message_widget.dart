@@ -9,7 +9,7 @@ import 'package:comics_db_app/domain/blocs/auth/auth_view_cubit_state.dart';
 import 'package:comics_db_app/ui/widgets/auth/auth_view_cubit.dart';
 
 class ErrorMessageWidget extends StatelessWidget {
-  const ErrorMessageWidget({Key? key}) : super(key: key);
+  const ErrorMessageWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

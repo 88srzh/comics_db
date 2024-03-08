@@ -106,6 +106,33 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<MovieResponse> discoverKeywordMovies(
+    int page,
+    String locale,
+    String apiKey,
+    bool includeAdult,
+    int keywordId,
+  ) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/keyword/$keywordId/movies',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'include_adult': includeAdult.toString(),
+        'keyword_id': keywordId.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<MovieResponse> discoverNowPlayingMovie(
     // TODO need to add with_release_type= 2 or 3, now result = 0
     int page,
@@ -394,6 +421,24 @@ class MovieAndTvApiClient {
         'api_key': Configuration.apiKey,
         'language': locale,
         // 'movieId': movieId.toString(),
+      },
+    );
+    return result;
+  }
+
+  Future<MovieResponse> keywordDetails(int keywordId, String locale) async {
+    MovieResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = MovieResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      'keyword/$keywordId',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'language': locale,
       },
     );
     return result;

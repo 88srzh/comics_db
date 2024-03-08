@@ -10,7 +10,7 @@ import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 
 class CustomAuthTextWidget extends StatelessWidget {
   final String text;
-  const CustomAuthTextWidget({Key? key, required this.text}) : super(key: key);
+  const CustomAuthTextWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

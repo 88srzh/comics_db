@@ -5,7 +5,7 @@ class TvDetailsCubitState {
   final String? backdropPath;
   final List<List<TvDetailsCreatedByData>> createdBy;
   final List<int> episodeRunTime;
-  final String firstAirDate;
+  final String? firstAirDate;
   final String genres;
   final String homepage;
   final int id;

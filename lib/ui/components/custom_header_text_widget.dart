@@ -1,10 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class CustomHeaderTextWidget extends StatelessWidget {
   final String text;
 
-  const CustomHeaderTextWidget({Key? key, required this.text})
-      : super(key: key);
+  const CustomHeaderTextWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

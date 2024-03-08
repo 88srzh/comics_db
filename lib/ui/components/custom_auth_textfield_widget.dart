@@ -9,7 +9,7 @@ class CustomAuthTextFieldWidget extends StatefulWidget {
   final Function(String)? onChanged;
   final bool obscureText;
 
-  const CustomAuthTextFieldWidget({Key? key, required this.onChanged, required this.obscureText}) : super(key: key);
+  const CustomAuthTextFieldWidget({super.key, required this.onChanged, required this.obscureText});
 
   @override
   State<CustomAuthTextFieldWidget> createState() => _CustomAuthTextFieldWidgetState();

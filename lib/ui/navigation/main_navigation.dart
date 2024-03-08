@@ -13,6 +13,7 @@ abstract class MainNavigationRouteNames {
   static const auth = '/auth';
   static const mainScreen = '/main_screen';
   static const movieDetails = '/main_screen/movie_details';
+  static const movieKeyword = '/main_screen/movie_keyword';
   static const popularMovie = '/main_screen/popularMovie';
   static const nowPlayingMovie = '/main_screen/nowPlayingMovie';
   static const topRatedMovie = '/main_screen/topRatedMovie';
@@ -53,6 +54,7 @@ class MainNavigation {
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
     MainNavigationRouteNames.watchlistMovie: (_) => _screenFactory.makeWatchlistMovie(),
     MainNavigationRouteNames.watchlistTV: (_) => _screenFactory.makeWatchlistTV(),
+    // MainNavigationRouteNames.movieKeyword: (_) => _screenFactory.makeMovieKeywordList(),
 
     // MainNavigationRouteNames.splashScreen: (_) =>
     //     ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
@@ -77,6 +79,12 @@ class MainNavigation {
         final movieId = arguments is int ? arguments : 0;
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeFullReviewsList(movieId),
+        );
+      case MainNavigationRouteNames.movieKeyword:
+        final arguments = settings.arguments;
+        final keywordId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.makeMovieKeywordList(keywordId),
         );
       case MainNavigationRouteNames.peopleDetailsKnownForList:
         final arguments = settings.arguments;

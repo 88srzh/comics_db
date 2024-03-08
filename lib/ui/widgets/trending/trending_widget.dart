@@ -17,7 +17,7 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
 
 class TrendingWidget extends StatefulWidget {
-  const TrendingWidget({Key? key}) : super(key: key);
+  const TrendingWidget({super.key});
 
   @override
   State<TrendingWidget> createState() => _TrendingWidgetState();

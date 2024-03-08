@@ -11,9 +11,9 @@ class TvTrailerYoutubeWidget extends StatefulWidget {
   final String? youtubeKey;
 
   const TvTrailerYoutubeWidget({
-    Key? key,
+    super.key,
     required this.youtubeKey,
-  }) : super(key: key);
+  });
 
   @override
   State<TvTrailerYoutubeWidget> createState() => _TvTrailerYoutubeWidgetState();

@@ -1,34 +1,27 @@
-// Dart imports:
 import 'dart:async';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-
-// Project imports:
+import 'package:comics_db_app/domain/blocs/movie/movie_keywords_list_bloc.dart';
 import 'package:comics_db_app/domain/blocs/movie/movie_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/blocs/movie/now_playing_movie_list_bloc.dart';
 import 'package:comics_db_app/domain/entity/movie.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_cubit_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
-class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
-  final NowPlayingMovieListBloc nowPlayingMovieListBloc;
-  late final StreamSubscription<MovieListState> nowPlayingMoveListBlocSubscription;
+class MovieKeywordsListCubit extends Cubit<MovieListCubitState> {
+  final MovieKeywordsListBloc movieKeywordsListBloc;
+  late final StreamSubscription<MovieListState> movieKeywordsListBlocSubscription;
   late DateFormat _dateFormat;
-  Timer? searchDebounce;
   var movie = <Movie>[];
+  final int keywordId;
 
-  NowPlayingMovieListCubit({required this.nowPlayingMovieListBloc})
-      : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
+  MovieKeywordsListCubit({required this.movieKeywordsListBloc,required this.keywordId}) : super(MovieListCubitState(movies: const <MovieListData>[], localeTag: '', totalResults: 0)) {
     Future.microtask(
       () {
-        _onState(nowPlayingMovieListBloc.state);
-        nowPlayingMoveListBlocSubscription = nowPlayingMovieListBloc.stream.listen(_onState);
+        _onState(movieKeywordsListBloc.state);
+        movieKeywordsListBlocSubscription = movieKeywordsListBloc.stream.listen(_onState);
       },
     );
   }
@@ -39,22 +32,22 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
     emit(newState);
   }
 
-  void setupNowPlayingMovieLocale(String localeTag) {
+  void setupMovieKeywordLocale(String localeTag) {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
-    nowPlayingMovieListBloc.add(const MovieListEventLoadReset());
-    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
+    movieKeywordsListBloc.add(const MovieListEventLoadReset());
+    movieKeywordsListBloc.add(MovieListEventLoadNextPage(locale: localeTag));
   }
 
   @override
   Future<void> close() {
-    nowPlayingMoveListBlocSubscription.cancel();
+    movieKeywordsListBlocSubscription.cancel();
     return super.close();
   }
 
-  // TODO may be unite in one class
+  // TODO add to separate file
   MovieListData _makeListData(Movie movie) {
     final releaseDate = movie.releaseDate;
     final releaseDateTitle = releaseDate != null ? _dateFormat.format(releaseDate) : '';
@@ -69,17 +62,9 @@ class NowPlayingMovieListCubit extends Cubit<MovieListCubitState> {
     );
   }
 
-  void showedNowPlayingMovieAtIndex(int index) {
+  void showedMovieKeywordMovieAtIndex(int index) {
     if (index < state.movies.length - 1) return;
-    nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
-  }
-
-  void searchNowPlayingMovie(String text) {
-    searchDebounce?.cancel();
-    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      nowPlayingMovieListBloc.add(MovieListEventSearchMovie(query: text));
-      nowPlayingMovieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
-    });
+    movieKeywordsListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));
   }
 
   void onMovieTap(BuildContext context, int index) {

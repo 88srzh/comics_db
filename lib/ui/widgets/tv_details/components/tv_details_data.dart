@@ -1,4 +1,4 @@
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
+// Project imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_content_ratings_data.dart';
@@ -17,7 +17,7 @@ class TvDetailsData {
   bool isLoading = false;
   String overview = '';
   String genres = '';
-  String firstAirDate = '';
+  String? firstAirDate = '';
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
   TvDetailsScoresData tvDetailsScoresData = TvDetailsScoresData(voteCount: 0, popularity: 0);
   List<List<TvDetailsPeopleData>> peopleData = const <List<TvDetailsPeopleData>>[];

@@ -181,7 +181,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.posterPath = details.posterPath ?? '';
     data.backdropPath = details.backdropPath ?? '';
     data.tagline = details.tagline;
-    var firstAirDate = data.firstAirDate = details.firstAirDate ?? '';
+    var firstAirDate = data.firstAirDate = details.firstAirDate ?? 'No first';
     var ratingsData = data.ratingsData = details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList();
 
 

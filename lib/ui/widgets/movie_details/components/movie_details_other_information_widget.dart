@@ -1,3 +1,4 @@
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
     final int budget = cubit.state.budget;
     final String status = cubit.state.status;
     final int revenue = cubit.state.revenue;
+    const String s = "\$";
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Row(
@@ -25,7 +27,7 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
                 Text(status, style: Theme.of(context).textTheme.labelSmall),
                 const SizedBox(height: 10.0),
                 Text('Revenue', style: Theme.of(context).textTheme.labelMedium),
-                Text(revenue.toString(), style: Theme.of(context).textTheme.labelSmall),
+                Text(S.of(context).totalAmount(revenue.toDouble()), style: Theme.of(context).textTheme.labelSmall),
                 // Text(),
               ],
             ),
@@ -38,7 +40,7 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
                 Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
                 const SizedBox(height: 10.0),
                 Text('Budget', style: Theme.of(context).textTheme.labelMedium),
-                Text(budget.toString(), style: Theme.of(context).textTheme.labelSmall),
+                Text(S.of(context).totalAmount(budget.toDouble()), style: Theme.of(context).textTheme.labelSmall),
               ],
             ),
           )

@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/resources/resources.dart';
-import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,10 +8,12 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/core/app_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/resources/resources.dart';
+import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/upcoming_movie_list/upcoming_movie_cubit.dart';
 
 class UpcomingMovieWidget extends StatefulWidget {
-  const UpcomingMovieWidget({Key? key}) : super(key: key);
+  const UpcomingMovieWidget({super.key});
 
   @override
   State<UpcomingMovieWidget> createState() => _UpcomingMovieWidgetState();

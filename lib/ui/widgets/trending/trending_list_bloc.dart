@@ -25,7 +25,7 @@ class TrendingListBloc extends Bloc<TrendingListEvent, TrendingListState> {
   final String tv = 'tv';
   final String all = 'all';
 
-  TrendingListBloc(TrendingListState initialState) : super(initialState) {
+  TrendingListBloc(super.initialState) {
     on<TrendingListEvent>(((event, emit) async {
       if (event is TrendingListEventLoadAllThisWeek) {
         await onTrendingListEventLoadAllThisWeek(event, emit);

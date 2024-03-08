@@ -10,7 +10,7 @@ import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/ui/widgets/tv_top_rated/tv_top_rated_list_cubit.dart';
 
 class TopRatedTvWidget extends StatefulWidget {
-  const TopRatedTvWidget({Key? key}) : super(key: key);
+  const TopRatedTvWidget({super.key});
 
   @override
   State<TopRatedTvWidget> createState() => _TopRatedTvWidgetState();

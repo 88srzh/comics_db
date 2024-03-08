@@ -1,80 +1,77 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:provider/provider.dart';
-
-// Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
-import 'package:comics_db_app/ui/components/custom_search_bar_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/components/tv_list_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_list/tv_popular_list_cubit.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
+import 'package:comics_db_app/ui/widgets/movie_keyword_list/movie_keyword_list_cubit.dart';
+import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TvPopularListWidget extends StatefulWidget {
-  const TvPopularListWidget({super.key});
+class MovieKeywordListWidget extends StatefulWidget {
+  const MovieKeywordListWidget({super.key});
 
   @override
-  State<TvPopularListWidget> createState() => _TvPopularListWidgetState();
+  State<MovieKeywordListWidget> createState() => _MovieKeywordListWidgetState();
 }
 
-class _TvPopularListWidgetState extends State<TvPopularListWidget> {
+class _MovieKeywordListWidgetState extends State<MovieKeywordListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final locale = Localizations.localeOf(context);
-    context.read<TvPopularListCubit>().setupPopularTvLocale(locale.languageCode);
+    context.read<MovieKeywordsListCubit>().setupMovieKeywordLocale(locale.languageCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.watch<TvPopularListCubit>();
+    var cubit = context.watch<MovieKeywordsListCubit>();
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Popular TV Shows'),
+      // TODO fix to keyword name
+      appBar: const CustomDetailsAppBar(title: 'Keyword name'),
       body: Stack(
         children: [
           ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.only(top: 70.0),
-              itemCount: cubit.state.tvs.length,
-              itemExtent: 165,
-              itemBuilder: (BuildContext context, int index) {
-                cubit.showedPopularTvAtIndex(index);
-                final tv = cubit.state.tvs[index];
-                final posterPath = tv.posterPath;
-                return InkWell(
-                  onTap: () => cubit.onTvTap(context, index),
-                  child: _TvPopularListRowWidget(posterPath: posterPath, tv: tv, cubit: cubit, index: index),
-                );
-              }),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: CustomSearchBar(onChanged: cubit.searchPopularTv),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            itemCount: cubit.state.movies.length,
+            itemExtent: 165,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedMovieKeywordMovieAtIndex(index);
+              final movie = cubit.state.movies[index];
+              final posterPath = movie.posterPath;
+              return InkWell(
+                onTap: () => onMovieTap(context, index),
+                child: _MovieKeywordListRowWidget(posterPath: posterPath, movie: movie, cubit: cubit, index: index),
+              );
+            },
           ),
         ],
       ),
     );
   }
+
+  void onMovieTap(BuildContext context, int index) {
+    final cubit = context.read<MovieKeywordsListCubit>();
+    final movieId = cubit.state.movies[index].id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetails, arguments: movieId);
+  }
 }
 
-class _TvPopularListRowWidget extends StatelessWidget {
+class _MovieKeywordListRowWidget extends StatelessWidget {
   final int index;
 
-  const _TvPopularListRowWidget({
+  const _MovieKeywordListRowWidget({
     required this.posterPath,
-    required this.tv,
+    required this.movie,
     required this.cubit,
     required this.index,
   });
 
   final String? posterPath;
-  final TvListData tv;
-  final TvPopularListCubit cubit;
+  final MovieListData movie;
+  final MovieKeywordsListCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +80,6 @@ class _TvPopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            // TODO refactoring custom movie list box decoration
             decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
@@ -101,23 +97,23 @@ class _TvPopularListRowWidget extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20.0),
                       CustomCastListTextWidget(
-                        text: tv.name,
+                        text: movie.originalTitle,
                         maxLines: 1,
                       ),
                       const SizedBox(height: 5.0),
                       CustomCastListTextWidget(
-                        text: tv.firstAirDate ?? 'No date',
+                        text: movie.releaseDate,
                         maxLines: 1,
                       ),
                       const SizedBox(height: 15.0),
                       CustomCastListTextWidget(
-                        text: tv.overview,
+                        text: movie.overview ?? '',
                         maxLines: 3,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 5.0),
               ],
             ),
           ),

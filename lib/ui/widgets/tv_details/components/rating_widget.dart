@@ -12,8 +12,8 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class RatingsRowWidget extends StatelessWidget {
   const RatingsRowWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

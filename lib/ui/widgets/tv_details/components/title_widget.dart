@@ -12,7 +12,7 @@ class TitleWidget extends StatelessWidget {
     final cubit = context.watch<TvDetailsCubit>();
     final String name = cubit.state.name;
     final String tagline = cubit.state.tagline;
-    final String firstAirDate = cubit.state.firstAirDate;
+    final String firstAirDate = cubit.state.firstAirDate ?? 'No first air data';
     return Column(
       children: [
         Row(

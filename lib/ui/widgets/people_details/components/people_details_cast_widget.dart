@@ -1,7 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,15 +6,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/people_details/components/character_data.dart';
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
 class PeopleDetailsCastWidget extends StatelessWidget {
-  const PeopleDetailsCastWidget({Key? key}) : super(key: key);
+  const PeopleDetailsCastWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class PeopleDetailsCastWidget extends StatelessWidget {
 class _PeopleActorListWidget extends StatelessWidget {
   final List<PeopleDetailsCharacterData> charactersData;
 
-  const _PeopleActorListWidget({Key? key, required this.charactersData}) : super(key: key);
+  const _PeopleActorListWidget({required this.charactersData});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class _PeopleActorListWidget extends StatelessWidget {
 class _PeopleActorListItemWidget extends StatelessWidget {
   final int characterIndex;
 
-  const _PeopleActorListItemWidget({Key? key, required this.characterIndex}) : super(key: key);
+  const _PeopleActorListItemWidget({required this.characterIndex});
 
   @override
   Widget build(BuildContext context) {

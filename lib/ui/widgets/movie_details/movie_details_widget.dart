@@ -32,7 +32,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     Future<String> loadingDelay() {
-      Duration duration = const Duration(seconds: 1);
+      Duration duration = const Duration(seconds: 2);
 
       return Future.delayed(duration, () => 'It took ${duration.inSeconds}');
     }

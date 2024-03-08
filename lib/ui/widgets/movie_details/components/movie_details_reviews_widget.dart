@@ -6,6 +6,7 @@ import 'package:comics_db_app/ui/components/no_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
+// import 'generated/l10n.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -113,12 +114,15 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      'A review by $author',
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: Text(
+                        'A review by $author',
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -142,9 +146,7 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
                                 Icon(MdiIcons.star, size: 14, color: reverseTextColor),
                                 Text(
                                   '6.0',
-                                  style: TextStyle(
-                                    color: reverseTextColor,
-                                  ),
+                                  style: TextStyle(color: reverseTextColor),
                                 ),
                               ],
                             ),
@@ -153,28 +155,15 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(width: 5.0),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Written by $author on $createdAt',
-                                style: Theme.of(context).textTheme.headlineMedium,
-                              ),
-                              // Text(
-                              //   author,
-                              //   style: TextStyle(
-                              //     color: textColor,
-                              //     fontWeight: FontWeight.w500,
-                              //   ),
-                              // ),
-                              // Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
-                            ],
-                          ),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                          'Written by $author on $createdAt',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ),
                     ),
                   ],
                 ),

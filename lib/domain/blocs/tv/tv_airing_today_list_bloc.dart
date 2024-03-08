@@ -1,21 +1,21 @@
 // Package imports:
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 // Project imports:
 import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_list_container.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_popular_list_bloc.dart';
-import 'package:comics_db_app/domain/entity/tv_response.dart';
 import 'package:comics_db_app/domain/entity/tv.dart';
-import 'package:intl/intl.dart';
-import 'package:jiffy/jiffy.dart';
+import 'package:comics_db_app/domain/entity/tv_response.dart';
 
 class TvAiringTodayListBloc extends Bloc<TvListEvent, TvListState> {
   final _tvApiClient = MovieAndTvApiClient();
 
-  TvAiringTodayListBloc(TvListState initialState) : super(initialState) {
+  TvAiringTodayListBloc(super.initialState) {
     on<TvListEvent>(((event, emit) async {
       if (event is TvListEventLoadNextPage) {
         await onTvAiringTodayListEventLoadNextPage(event, emit);

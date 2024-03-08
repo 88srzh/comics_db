@@ -1,16 +1,18 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:flutter/material.dart';
 
-// Project imports:
-import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/ui/components/custom_search_input_decoration_widget.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final Function(String)? onChanged;
 
-  const CustomSearchBar({Key? key, required this.onChanged}) : super(key: key);
+  const CustomSearchBar({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
