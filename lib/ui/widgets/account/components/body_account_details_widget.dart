@@ -12,6 +12,7 @@ import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
@@ -24,6 +25,23 @@ class BodyPersonalWidget extends StatefulWidget {
 }
 
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
+  late Future<String> lazyValue;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Future<String> loadingDelay() {
+      Duration duration = const Duration(seconds: 2);
+
+      return Future.delayed(duration, () => 'It took ${duration.inSeconds}');
+    }
+
+    lazyValue = loadingDelay();
+
+    final locale = Localizations.localeOf(context);
+    context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
@@ -35,7 +53,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const HeadAccountCardWidget(),
+            const HeadAccountCardWidget(),
             const CustomSettingDivider(height: 3.0),
             const HeadingAccountCardWidget(headingText: 'Watchlist'),
             const CustomSettingDivider(height: 0.8),
