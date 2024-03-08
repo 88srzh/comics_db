@@ -1,7 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsOtherInformationWidget extends StatelessWidget {
   const MovieDetailsOtherInformationWidget({super.key});
@@ -13,7 +18,6 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
     final int budget = cubit.state.budget;
     final String status = cubit.state.status;
     final int revenue = cubit.state.revenue;
-    const String s = "\$";
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Row(

@@ -19,13 +19,14 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final movieAndTvApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
 
-  AccountDetailsCubit() : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '')) {
+  AccountDetailsCubit() : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '', localeTag: '')) {
     emit(AccountDetailsCubitState(
       id: state.id,
       name: state.name,
       username: state.username,
       includeAdult: state.includeAdult,
       avatarPath: state.avatarPath,
+      localeTag: state.localeTag,
     ));
   }
 
@@ -35,7 +36,10 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
     updateData(details);
   }
 
-  Future<void> setupAccountDetails(BuildContext context) async {
+  Future<void> setupAccountDetails(BuildContext context, String localeTag) async {
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
     updateData(null);
     await loadAccountDetails(context);
   }

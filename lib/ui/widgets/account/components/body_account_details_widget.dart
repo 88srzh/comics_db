@@ -1,16 +1,20 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BodyPersonalWidget extends StatefulWidget {
   const BodyPersonalWidget({super.key});
@@ -31,7 +35,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HeadAccountCardWidget(),
+            // const HeadAccountCardWidget(),
             const CustomSettingDivider(height: 3.0),
             const HeadingAccountCardWidget(headingText: 'Watchlist'),
             const CustomSettingDivider(height: 0.8),

@@ -3,5 +3,5 @@ class AccountDetailsData {
   String name = '';
   String userName = '';
   bool includeAdult = false;
-  String avatarPath = '';
+  String? avatarPath = '';
 }
