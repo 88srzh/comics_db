@@ -12,6 +12,7 @@ import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/components/change_language_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
@@ -70,6 +71,8 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const HeadingAccountCardWidget(headingText: 'Settings'),
             const CustomSettingDivider(height: 0.8),
             const SettingsCardWidget(),
+            const CustomSettingDivider(height: 0.8),
+            const AccountChangeLanguageWidget(),
             const CustomSettingDivider(height: 0.8),
             const NotificationsCardWidget(),
             const CustomSettingDivider(height: 0.8),

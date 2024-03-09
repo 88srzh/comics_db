@@ -1,6 +1,11 @@
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 
 class SettingsCardWidget extends StatefulWidget {
   const SettingsCardWidget({super.key});
@@ -15,8 +20,6 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
       value: change,
       onChanged: (bool value) {
         setState(

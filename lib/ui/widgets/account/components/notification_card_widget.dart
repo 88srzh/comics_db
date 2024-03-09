@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class NotificationsCardWidget extends StatefulWidget {
@@ -13,8 +14,6 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
       value: notifications,
       onChanged: (bool value) {
         setState(
