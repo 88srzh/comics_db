@@ -44,10 +44,11 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
     context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
   }
 
+  bool change = false;
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
-    bool change = false;
     // final Color titleColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white;
     // TODO name don't work
     // final name = cubit.state.name;
@@ -74,36 +75,24 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             const SettingsCardWidget(),
             const CustomSettingDivider(height: 0.8),
-            SwitchListTile(
-              value: change,
-              onChanged: (bool value) {
-                setState(
-                  () {
-                    S.load(const Locale('ru'));
-                    change = value;
-                  },
-                );
-              },
-              title: Text(
-                'Change language (RU/EN)',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
             const AccountChangeLanguageWidget(),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () => setState(() {
                     S.load(const Locale('ru'));
-                  });
-                },
-                child: const Text('Ru')),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
+                  }),
+                  child: const Text('RU'),
+                ),
+                ElevatedButton(
+                  onPressed: () => setState(() {
                     S.load(const Locale('en'));
-                  });
-                },
-                child: const Text('EN')),
+                  }),
+                  child: const Text('EN'),
+                ),
+              ],
+            ),
+
             const CustomSettingDivider(height: 0.8),
             const NotificationsCardWidget(),
             const CustomSettingDivider(height: 0.8),
