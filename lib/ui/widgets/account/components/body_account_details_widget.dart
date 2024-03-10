@@ -27,23 +27,6 @@ class BodyPersonalWidget extends StatefulWidget {
 }
 
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
-  late Future<String> lazyValue;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Future<String> loadingDelay() {
-      Duration duration = const Duration(seconds: 2);
-
-      return Future.delayed(duration, () => 'It took ${duration.inSeconds}');
-    }
-
-    lazyValue = loadingDelay();
-
-    final locale = Localizations.localeOf(context);
-    context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
-  }
-
   bool change = false;
 
   @override
