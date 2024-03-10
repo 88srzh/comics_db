@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
@@ -14,6 +14,9 @@ import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_wid
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/favorite_screen/movie/favorite_movie_list_cubit.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.dart';
+
+// Package imports:
+
 
 class FavoriteMovieListWidget extends StatefulWidget {
   const FavoriteMovieListWidget({super.key});
