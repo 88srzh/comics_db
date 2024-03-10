@@ -57,12 +57,12 @@ class S {
   }
 
   /// `Watchlist`
-  String watchlist(String watchlist) {
+  String get watchlist {
     return Intl.message(
       'Watchlist',
       name: 'watchlist',
       desc: '',
-      args: [watchlist],
+      args: [],
     );
   }
 

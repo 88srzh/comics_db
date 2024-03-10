@@ -28,13 +28,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(total) => "Total: ${total}";
 
-  static String m3(watchlist) => "Watchlist";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "pageHomeSampleCurrentDateTime": m0,
         "pageHomeSamplePlural": m1,
         "totalAmount": m2,
-        "watchlist": m3
+        "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist")
       };
 }

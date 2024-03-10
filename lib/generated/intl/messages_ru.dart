@@ -21,9 +21,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m3(watchlist) => "Список желаний";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"watchlist": m3};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "watchlist": MessageLookupByLibrary.simpleMessage("Список желаний")
+      };
 }

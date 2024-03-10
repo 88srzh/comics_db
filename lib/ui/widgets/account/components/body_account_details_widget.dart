@@ -47,6 +47,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
+    bool change = false;
     // final Color titleColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white;
     // TODO name don't work
     // final name = cubit.state.name;
@@ -57,7 +58,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           children: [
             const HeadAccountCardWidget(),
             const CustomSettingDivider(height: 3.0),
-            HeadingAccountCardWidget(headingText: S.of(context).watchlist('Watchlist')),
+            HeadingAccountCardWidget(headingText: S.of(context).watchlist),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(text: 'Movie', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
             const CustomSettingDivider(height: 0.8),
@@ -73,7 +74,36 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             const SettingsCardWidget(),
             const CustomSettingDivider(height: 0.8),
+            SwitchListTile(
+              value: change,
+              onChanged: (bool value) {
+                setState(
+                  () {
+                    S.load(const Locale('ru'));
+                    change = value;
+                  },
+                );
+              },
+              title: Text(
+                'Change language (RU/EN)',
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            ),
             const AccountChangeLanguageWidget(),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    S.load(const Locale('ru'));
+                  });
+                },
+                child: const Text('Ru')),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    S.load(const Locale('en'));
+                  });
+                },
+                child: const Text('EN')),
             const CustomSettingDivider(height: 0.8),
             const NotificationsCardWidget(),
             const CustomSettingDivider(height: 0.8),
