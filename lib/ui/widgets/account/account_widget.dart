@@ -15,8 +15,6 @@ class AccountWidget extends StatefulWidget {
 }
 
 class _AccountWidgetState extends State<AccountWidget> {
-  late Future<String> lazyValue;
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

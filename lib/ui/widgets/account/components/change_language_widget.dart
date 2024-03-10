@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import 'package:comics_db_app/generated/l10n.dart';
+
 class AccountChangeLanguageWidget extends StatefulWidget {
   const AccountChangeLanguageWidget({super.key});
 
@@ -18,6 +21,7 @@ class _AccountChangeLanguageWidgetState extends State<AccountChangeLanguageWidge
       onChanged: (bool value) {
         setState(
           () {
+            S.load(const Locale('ru'));
             _change = value;
           },
         );

@@ -8,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
@@ -56,7 +57,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           children: [
             const HeadAccountCardWidget(),
             const CustomSettingDivider(height: 3.0),
-            const HeadingAccountCardWidget(headingText: 'Watchlist'),
+            HeadingAccountCardWidget(headingText: S.of(context).watchlist('Watchlist')),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(text: 'Movie', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
             const CustomSettingDivider(height: 0.8),

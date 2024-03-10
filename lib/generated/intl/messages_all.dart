@@ -22,16 +22,20 @@ import 'package:intl/src/intl_helpers.dart';
 
 // Project imports:
 import 'package:comics_db_app/generated/intl/messages_en.dart' as messages_en;
+import 'package:comics_db_app/generated/intl/messages_ru.dart' as messages_ru;
 
 typedef Future<dynamic> LibraryLoader();
 Map<String, LibraryLoader> _deferredLibraries = {
   'en': () => new SynchronousFuture(null),
+  'ru': () => new SynchronousFuture(null),
 };
 
 MessageLookupByLibrary? _findExact(String localeName) {
   switch (localeName) {
     case 'en':
       return messages_en.messages;
+    case 'ru':
+      return messages_ru.messages;
     default:
       return null;
   }

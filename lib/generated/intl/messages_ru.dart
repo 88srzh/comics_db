@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a ru locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -19,22 +19,11 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'ru';
 
-  static String m0(date, time) => "Date: ${date} Time: ${time}";
-
-  static String m1(howMany) =>
-      "${Intl.plural(howMany, one: 'You have 1 message', other: 'You have ${howMany} messages')}";
-
-  static String m2(total) => "Total: ${total}";
-
-  static String m3(watchlist) => "Watchlist";
+  static String m3(watchlist) => "Список желаний";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "pageHomeSampleCurrentDateTime": m0,
-        "pageHomeSamplePlural": m1,
-        "totalAmount": m2,
-        "watchlist": m3
-      };
+  static Map<String, Function> _notInlinedMessages(_) =>
+      <String, Function>{"watchlist": m3};
 }

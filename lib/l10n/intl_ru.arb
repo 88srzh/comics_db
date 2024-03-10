@@ -1,0 +1,11 @@
+{
+  "@@locale": "ru",
+  "watchlist": "Список желаний",
+  "@watchlist": {
+    "placeholders": {
+      "watchlist": {
+        "type": "String"
+      }
+    }
+  }
+}

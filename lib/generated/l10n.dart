@@ -1,6 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:comics_db_app/generated/intl/messages_all.dart';
 
 // **************************************************************************
@@ -19,7 +25,7 @@ class S {
 
   static S get current {
     assert(_current != null,
-    'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
@@ -42,7 +48,7 @@ class S {
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
     assert(instance != null,
-    'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
 
@@ -50,17 +56,55 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Watchlist`
+  String watchlist(String watchlist) {
+    return Intl.message(
+      'Watchlist',
+      name: 'watchlist',
+      desc: '',
+      args: [watchlist],
+    );
+  }
+
+  /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
+  String pageHomeSamplePlural(int howMany) {
+    return Intl.plural(
+      howMany,
+      one: 'You have 1 message',
+      other: 'You have $howMany messages',
+      name: 'pageHomeSamplePlural',
+      desc: '',
+      args: [howMany],
+    );
+  }
+
   /// `Total: {total}`
   String totalAmount(double total) {
     final NumberFormat totalNumberFormat = NumberFormat.currency(
-        locale: Intl.getCurrentLocale(), symbol: '\$', decimalDigits: 2);
+        locale: Intl.getCurrentLocale(), symbol: '€', decimalDigits: 2);
     final String totalString = totalNumberFormat.format(total);
 
     return Intl.message(
-      totalString,
-      name: 'pageHomeSampleTotalAmount',
+      'Total: $totalString',
+      name: 'totalAmount',
       desc: '',
       args: [totalString],
+    );
+  }
+
+  /// `Date: {date} Time: {time}`
+  String pageHomeSampleCurrentDateTime(DateTime date, DateTime time) {
+    final DateFormat dateDateFormat = DateFormat.yMd(Intl.getCurrentLocale());
+    final String dateString = dateDateFormat.format(date);
+
+    final DateFormat timeDateFormat = DateFormat.Hm(Intl.getCurrentLocale());
+    final String timeString = timeDateFormat.format(time);
+
+    return Intl.message(
+      'Date: $dateString Time: $timeString',
+      name: 'pageHomeSampleCurrentDateTime',
+      desc: '',
+      args: [dateString, timeString],
     );
   }
 }
@@ -71,6 +115,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ru'),
     ];
   }
 
