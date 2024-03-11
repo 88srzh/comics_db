@@ -7,14 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 
-class SettingsCardWidget extends StatefulWidget {
-  const SettingsCardWidget({super.key});
+class AccountSettingsThemeCardWidget extends StatefulWidget {
+  const AccountSettingsThemeCardWidget({super.key});
 
   @override
-  State<SettingsCardWidget> createState() => _SettingsCardWidgetState();
+  State<AccountSettingsThemeCardWidget> createState() => _AccountSettingsThemeCardWidgetState();
 }
 
-class _SettingsCardWidgetState extends State<SettingsCardWidget> {
+class _AccountSettingsThemeCardWidgetState extends State<AccountSettingsThemeCardWidget> {
   bool change = false;
 
   @override
@@ -30,7 +30,7 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
         );
       },
       title: Text(
-        'Change color theme',
+        'Theme',
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

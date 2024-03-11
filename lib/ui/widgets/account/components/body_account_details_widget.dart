@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/settings_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/account)settings_theme_card_widget.dart';
 
 class BodyPersonalWidget extends StatefulWidget {
   const BodyPersonalWidget({super.key});
@@ -55,7 +55,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 10.0),
             const HeadingAccountCardWidget(headingText: 'Settings'),
             const CustomSettingDivider(height: 0.8),
-            const SettingsCardWidget(),
+            const AccountSettingsThemeCardWidget(),
             const CustomSettingDivider(height: 0.8),
             Row(
               children: [
