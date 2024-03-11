@@ -16,7 +16,7 @@ import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/account)settings_theme_card_widget.dart';
+import 'package:comics_db_app/ui/widgets/account/components/account_settings_theme_card_widget.dart';
 
 class BodyPersonalWidget extends StatefulWidget {
   const BodyPersonalWidget({super.key});
@@ -26,8 +26,6 @@ class BodyPersonalWidget extends StatefulWidget {
 }
 
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
-  bool change = false;
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();

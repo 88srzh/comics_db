@@ -39,9 +39,17 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
+    rebuildAllChildren(context);
     return const Scaffold(
       appBar: CustomAppBar(title: 'Account'),
       body: BodyPersonalWidget(),
     );
+  }
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el.markNeedsBuild();
+      el.visitChildren(rebuild);
+    }
+    (context as Element).visitChildren(rebuild);
   }
 }

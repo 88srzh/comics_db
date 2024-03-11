@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -24,6 +25,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<AccountDetailsCubit>();
+    final locale = Localizations.localeOf(context);
     return AppBar(
       title: Text(
         widget.title,
@@ -36,6 +39,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
           onTap: () => setState(
             () {
               S.load(const Locale('ru'));
+              cubit.updateAccountWidget(locale.languageCode);
+              // context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
             },
           ),
           text: 'RU',

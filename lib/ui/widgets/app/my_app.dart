@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,11 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeBloc(),
         ),
         BlocProvider(
-          create: (_) => AccountDetailsCubit(),
+          create: (_) => AccountDetailsCubit(
+            accountBloc: AccountBloc(
+              const AccountDetailsState.initial(),
+            ),
+          ),
         ),
         BlocProvider(
           create: (_) => GuestAccountDetailsCubit(),
