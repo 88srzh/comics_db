@@ -55,7 +55,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 10.0),
             HeadingAccountCardWidget(headingText: S.of(context).settings),
             const CustomSettingDivider(height: 0.8),
-            const AccountSettingsThemeCardWidget(),
+            AccountSettingsThemeCardWidget(),
             const CustomSettingDivider(height: 0.8),
             Row(
               children: [
@@ -75,7 +75,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             ),
 
             const CustomSettingDivider(height: 0.8),
-            const NotificationsCardWidget(),
+            NotificationsCardWidget(),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(
               text: S.of(context).logout,

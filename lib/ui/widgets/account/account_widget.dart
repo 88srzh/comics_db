@@ -11,7 +11,6 @@ import 'package:comics_db_app/ui/widgets/account/components/body_account_details
 
 // Package imports:
 
-
 class AccountWidget extends StatefulWidget {
   const AccountWidget({super.key});
 
@@ -39,17 +38,9 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    rebuildAllChildren(context);
     return const Scaffold(
       appBar: CustomAppBar(title: 'Account'),
       body: BodyPersonalWidget(),
     );
-  }
-  void rebuildAllChildren(BuildContext context) {
-    void rebuild(Element el) {
-      el.markNeedsBuild();
-      el.visitChildren(rebuild);
-    }
-    (context as Element).visitChildren(rebuild);
   }
 }
