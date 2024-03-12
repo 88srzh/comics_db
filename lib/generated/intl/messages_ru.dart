@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Аккаунт"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),

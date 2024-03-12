@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/body_account_details_widget.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 // Package imports:
 
@@ -38,9 +39,9 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: 'Account'),
-      body: BodyPersonalWidget(),
+    return Scaffold(
+      appBar: CustomAppBar(title: S.of(context).account),
+      body: const BodyPersonalWidget(),
     );
   }
 }

@@ -88,7 +88,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
                       backgroundColor: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.bottomBarBackgroundColor : Colors.white,
                       title: Center(
                         child: Text(
-                          'Logout',
+                          S.of(context).logout,
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ),

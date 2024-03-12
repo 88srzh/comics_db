@@ -9,5 +9,6 @@
   "notifications": "Уведомления",
   "logout": "Выйти",
   "doYouReallyWantToLogout": "Вы правда хотите выйти?",
-  "cancel": "Отмена"
+  "cancel": "Отмена",
+  "account": "Аккаунт"
 }
