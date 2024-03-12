@@ -8,6 +8,8 @@
   "theme": "Theme",
   "notifications": "Notifications",
   "logout": "Logout",
+  "doYouReallyWantToLogout": "Do you really want to logout?",
+  "cancel": "Cancel",
   "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
   "@pageHomeSamplePlural": {
     "placeholders": {

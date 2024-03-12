@@ -130,6 +130,26 @@ class S {
     );
   }
 
+  /// `Do you really want to logout?`
+  String get doYouReallyWantToLogout {
+    return Intl.message(
+      'Do you really want to logout?',
+      name: 'doYouReallyWantToLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

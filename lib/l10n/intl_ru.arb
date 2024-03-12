@@ -7,5 +7,7 @@
   "settings": "Настройки",
   "theme": "Тема",
   "notifications": "Уведомления",
-  "logout": "Выйти"
+  "logout": "Выйти",
+  "doYouReallyWantToLogout": "Вы правда хотите выйти?",
+  "cancel": "Отмена"
 }

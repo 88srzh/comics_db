@@ -98,7 +98,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
                         child: Column(
                           children: [
                             Text(
-                              'Do you really want to logout?',
+                              S.of(context).doYouReallyWantToLogout,
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             const SizedBox(height: 10.0),
@@ -106,11 +106,11 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 ElevatedButton(
-                                  child: const Text('Cancel'),
+                                  child: Text(S.of(context).cancel),
                                   onPressed: () => Navigator.pop(context),
                                 ),
                                 ElevatedButton(
-                                  child: const Text('Logout'),
+                                  child:  Text(S.of(context).logout),
                                   onPressed: () {
                                     cubit.logout().whenComplete(() => Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false));
                                   },
