@@ -40,7 +40,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             () {
               S.load(const Locale('ru'));
               cubit.updateAccountWidget(locale.languageCode);
-              // context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
+              context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
             },
           ),
           text: 'RU',

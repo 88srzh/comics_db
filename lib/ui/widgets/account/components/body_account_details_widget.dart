@@ -41,17 +41,19 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 3.0),
             HeadingAccountCardWidget(headingText: S.of(context).watchlist),
             const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: 'Movie', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
+            CustomAccountListTile(
+                text: S.of(context).movie, icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
             const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
+            CustomAccountListTile(text: S.of(context).tv, icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
             const CustomSettingDivider(height: 3.0),
-            const HeadingAccountCardWidget(headingText: 'Favorites'),
+            HeadingAccountCardWidget(headingText: S.of(context).favorites),
             const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: 'Movies', icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
+            CustomAccountListTile(
+                text: S.of(context).movie, icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
             const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: 'TV', icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
+            CustomAccountListTile(text: S.of(context).tv, icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
             const CustomSettingDivider(height: 10.0),
-            const HeadingAccountCardWidget(headingText: 'Settings'),
+            HeadingAccountCardWidget(headingText: S.of(context).settings),
             const CustomSettingDivider(height: 0.8),
             const AccountSettingsThemeCardWidget(),
             const CustomSettingDivider(height: 0.8),
@@ -76,7 +78,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const NotificationsCardWidget(),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(
-              text: 'Logout',
+              text: S.of(context).logout,
               icon: MdiIcons.logout,
               onTap: () {
                 showDialog(

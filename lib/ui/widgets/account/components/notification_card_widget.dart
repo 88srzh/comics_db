@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({super.key});
@@ -23,7 +24,7 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
         );
       },
       title: Text(
-        'Push notifications',
+        S.of(context).notifications,
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

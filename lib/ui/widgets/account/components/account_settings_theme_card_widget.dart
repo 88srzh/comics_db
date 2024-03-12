@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class AccountSettingsThemeCardWidget extends StatefulWidget {
   const AccountSettingsThemeCardWidget({super.key});
@@ -30,7 +31,7 @@ class _AccountSettingsThemeCardWidgetState extends State<AccountSettingsThemeCar
         );
       },
       title: Text(
-        'Theme',
+        S.of(context).theme,
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

@@ -60,6 +60,76 @@ class S {
     );
   }
 
+  /// `Favorites`
+  String get favorites {
+    return Intl.message(
+      'Favorites',
+      name: 'favorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Movie`
+  String get movie {
+    return Intl.message(
+      'Movie',
+      name: 'movie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TV`
+  String get tv {
+    return Intl.message(
+      'TV',
+      name: 'tv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

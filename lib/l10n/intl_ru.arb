@@ -1,4 +1,11 @@
 {
   "@@locale": "ru",
-  "watchlist": "Список желаний"
+  "watchlist": "Список отслеживания",
+  "favorites": "Избранное",
+  "movie": "Фильмы",
+  "tv": "Сериалы",
+  "settings": "Настройки",
+  "theme": "Тема",
+  "notifications": "Уведомления",
+  "logout": "Выйти"
 }
