@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:comics_db_app/generated/intl/messages_all.dart';
+import 'intl/messages_all.dart';
 
 // **************************************************************************
 // Generator: Flutter Intl IDE plugin
@@ -19,7 +19,7 @@ class S {
 
   static S get current {
     assert(_current != null,
-    'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
@@ -42,7 +42,7 @@ class S {
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
     assert(instance != null,
-    'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
 
@@ -50,17 +50,155 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Watchlist`
+  String get watchlist {
+    return Intl.message(
+      'Watchlist',
+      name: 'watchlist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites`
+  String get favorites {
+    return Intl.message(
+      'Favorites',
+      name: 'favorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Movie`
+  String get movie {
+    return Intl.message(
+      'Movie',
+      name: 'movie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TV`
+  String get tv {
+    return Intl.message(
+      'TV',
+      name: 'tv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you really want to logout?`
+  String get doYouReallyWantToLogout {
+    return Intl.message(
+      'Do you really want to logout?',
+      name: 'doYouReallyWantToLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
+  String pageHomeSamplePlural(int howMany) {
+    return Intl.plural(
+      howMany,
+      one: 'You have 1 message',
+      other: 'You have $howMany messages',
+      name: 'pageHomeSamplePlural',
+      desc: '',
+      args: [howMany],
+    );
+  }
+
   /// `Total: {total}`
   String totalAmount(double total) {
     final NumberFormat totalNumberFormat = NumberFormat.currency(
-        locale: Intl.getCurrentLocale(), symbol: '\$', decimalDigits: 2);
+        locale: Intl.getCurrentLocale(), symbol: '€', decimalDigits: 2);
     final String totalString = totalNumberFormat.format(total);
 
     return Intl.message(
-      totalString,
-      name: 'pageHomeSampleTotalAmount',
+      'Total: $totalString',
+      name: 'totalAmount',
       desc: '',
       args: [totalString],
+    );
+  }
+
+  /// `Date: {date} Time: {time}`
+  String pageHomeSampleCurrentDateTime(DateTime date, DateTime time) {
+    final DateFormat dateDateFormat = DateFormat.yMd(Intl.getCurrentLocale());
+    final String dateString = dateDateFormat.format(date);
+
+    final DateFormat timeDateFormat = DateFormat.Hm(Intl.getCurrentLocale());
+    final String timeString = timeDateFormat.format(time);
+
+    return Intl.message(
+      'Date: $dateString Time: $timeString',
+      name: 'pageHomeSampleCurrentDateTime',
+      desc: '',
+      args: [dateString, timeString],
     );
   }
 }
@@ -71,6 +209,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ru'),
     ];
   }
 

@@ -1,7 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class NotificationsCardWidget extends StatefulWidget {
-  const NotificationsCardWidget({super.key});
+  const NotificationsCardWidget({super.key, required this.headingText});
+  final String headingText;
 
   @override
   State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
@@ -13,8 +16,6 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
       value: notifications,
       onChanged: (bool value) {
         setState(
@@ -24,7 +25,7 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
         );
       },
       title: Text(
-        'Push notifications',
+        widget.headingText,
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

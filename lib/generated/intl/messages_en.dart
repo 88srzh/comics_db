@@ -20,6 +20,29 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(date, time) => "Date: ${date} Time: ${time}";
+
+  static String m1(howMany) =>
+      "${Intl.plural(howMany, one: 'You have 1 message', other: 'You have ${howMany} messages')}";
+
+  static String m2(total) => "Total: ${total}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
+            "Do you really want to logout?"),
+        "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "movie": MessageLookupByLibrary.simpleMessage("Movie"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "pageHomeSampleCurrentDateTime": m0,
+        "pageHomeSamplePlural": m1,
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "totalAmount": m2,
+        "tv": MessageLookupByLibrary.simpleMessage("TV"),
+        "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist")
+      };
 }

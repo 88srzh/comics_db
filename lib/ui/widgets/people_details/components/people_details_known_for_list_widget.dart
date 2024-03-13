@@ -36,7 +36,11 @@ class _PeopleDetailsKnownForListWidgetState extends State<PeopleDetailsKnownForL
     var characterData = cubit.data.charactersData;
     if (characterData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Known For'),
+      appBar: CustomAppBar(
+        title: 'Known For',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
         child: GridView.builder(

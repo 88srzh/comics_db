@@ -33,7 +33,7 @@ class Gravatar {
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Tmdb {
-  final String avatarPath;
+  final String? avatarPath;
 
   Tmdb({
     required this.avatarPath,

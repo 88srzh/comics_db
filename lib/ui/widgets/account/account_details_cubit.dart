@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -15,17 +16,19 @@ import 'package:comics_db_app/ui/widgets/account/account_details_cubit_state.dar
 import 'package:comics_db_app/ui/widgets/account/components/account_details_data.dart';
 
 class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
+  final AccountBloc accountBloc;
   final accountDetailsData = AccountDetailsData();
   final movieAndTvApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
 
-  AccountDetailsCubit() : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '')) {
+  AccountDetailsCubit({required this.accountBloc}) : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '', localeTag: '')) {
     emit(AccountDetailsCubitState(
       id: state.id,
       name: state.name,
       username: state.username,
       includeAdult: state.includeAdult,
       avatarPath: state.avatarPath,
+      localeTag: state.localeTag,
     ));
   }
 
@@ -35,7 +38,10 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
     updateData(details);
   }
 
-  Future<void> setupAccountDetails(BuildContext context) async {
+  Future<void> setupAccountDetails(BuildContext context, String localeTag) async {
+    if (state.localeTag == localeTag) return;
+    final newState = state.copyWith(localeTag: localeTag);
+    emit(newState);
     updateData(null);
     await loadAccountDetails(context);
   }
@@ -61,5 +67,10 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   Future<void> logout() async {
     await _sessionDataProvider.deleteSessionId();
     await _sessionDataProvider.deleteAccountId();
+  }
+
+  void updateAccountWidget(String localeTag) {
+    accountBloc.add(AccountDetailsEventLoadReset());
+    accountBloc.add(AccountDetailsEventLoadDetails(locale: localeTag));
   }
 }

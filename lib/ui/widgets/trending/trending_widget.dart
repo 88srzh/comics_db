@@ -36,7 +36,11 @@ class _TrendingWidgetState extends State<TrendingWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<TrendingListCubit>();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Trending'),
+      appBar: CustomAppBar(
+        title: 'Trending',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       body: Stack(
         children: [
           TrendingPageListWidget(cubit: cubit),

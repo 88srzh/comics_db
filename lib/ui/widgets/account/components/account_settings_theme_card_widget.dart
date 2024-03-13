@@ -1,22 +1,26 @@
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SettingsCardWidget extends StatefulWidget {
-  const SettingsCardWidget({super.key});
+// Project imports:
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+
+class AccountSettingsThemeCardWidget extends StatefulWidget {
+  const AccountSettingsThemeCardWidget({super.key, required this.headingText});
+  final String headingText;
 
   @override
-  State<SettingsCardWidget> createState() => _SettingsCardWidgetState();
+  State<AccountSettingsThemeCardWidget> createState() => _AccountSettingsThemeCardWidgetState();
 }
 
-class _SettingsCardWidgetState extends State<SettingsCardWidget> {
+class _AccountSettingsThemeCardWidgetState extends State<AccountSettingsThemeCardWidget> {
   bool change = false;
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      activeColor: Colors.pinkAccent,
-      inactiveThumbColor: Colors.grey,
       value: change,
       onChanged: (bool value) {
         setState(
@@ -27,7 +31,7 @@ class _SettingsCardWidgetState extends State<SettingsCardWidget> {
         );
       },
       title: Text(
-        'Change color theme',
+        widget.headingText,
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

@@ -1,0 +1,14 @@
+{
+  "@@locale": "ru",
+  "watchlist": "Список отслеживания",
+  "favorites": "Избранное",
+  "movie": "Фильмы",
+  "tv": "Сериалы",
+  "settings": "Настройки",
+  "theme": "Тема",
+  "notifications": "Уведомления",
+  "logout": "Выйти",
+  "doYouReallyWantToLogout": "Вы правда хотите выйти?",
+  "cancel": "Отмена",
+  "account": "Аккаунт"
+}

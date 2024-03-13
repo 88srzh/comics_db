@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class GenresWidget extends StatelessWidget {
   const GenresWidget({super.key});
@@ -30,7 +35,6 @@ class GenresWidget extends StatelessWidget {
                 fontSize: 13,
                 color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
               ),
-              // style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
         ),
