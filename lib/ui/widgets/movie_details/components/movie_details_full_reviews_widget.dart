@@ -38,7 +38,11 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
     var reviewsData = context.watch<MovieDetailsCubit>().data.reviewsData;
     if (reviewsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Reviews'),
+      appBar: CustomAppBar(
+        title: 'Reviews',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       body: _MovieDetailsFullReviewsColumnWidget(reviewsData: reviewsData),
     );
   }

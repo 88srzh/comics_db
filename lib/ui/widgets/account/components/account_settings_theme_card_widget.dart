@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class AccountSettingsThemeCardWidget extends StatefulWidget {
-  const AccountSettingsThemeCardWidget({super.key});
+  const AccountSettingsThemeCardWidget({super.key, required this.headingText});
+  final String headingText;
 
   @override
   State<AccountSettingsThemeCardWidget> createState() => _AccountSettingsThemeCardWidgetState();
@@ -31,7 +31,7 @@ class _AccountSettingsThemeCardWidgetState extends State<AccountSettingsThemeCar
         );
       },
       title: Text(
-        S.of(context).theme,
+        widget.headingText,
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

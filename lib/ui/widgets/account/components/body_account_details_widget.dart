@@ -55,7 +55,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 10.0),
             HeadingAccountCardWidget(headingText: S.of(context).settings),
             const CustomSettingDivider(height: 0.8),
-            AccountSettingsThemeCardWidget(),
+            AccountSettingsThemeCardWidget(headingText: S.of(context).theme),
             const CustomSettingDivider(height: 0.8),
             Row(
               children: [
@@ -75,7 +75,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             ),
 
             const CustomSettingDivider(height: 0.8),
-            NotificationsCardWidget(),
+            NotificationsCardWidget(headingText: S.of(context).notifications),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(
               text: S.of(context).logout,
@@ -110,7 +110,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
                                   onPressed: () => Navigator.pop(context),
                                 ),
                                 ElevatedButton(
-                                  child:  Text(S.of(context).logout),
+                                  child: Text(S.of(context).logout),
                                   onPressed: () {
                                     cubit.logout().whenComplete(() => Navigator.pushNamedAndRemoveUntil(context, '/auth', (_) => false));
                                   },

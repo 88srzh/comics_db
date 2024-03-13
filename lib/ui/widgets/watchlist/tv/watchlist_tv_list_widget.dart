@@ -29,7 +29,11 @@ class _WatchlistTVWidgetState extends State<WatchlistTVWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<WatchlistTVCubit>();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Watchlist'),
+      appBar: CustomAppBar(
+        title: 'Watchlist',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       body: Stack(
         children: [
           WatchlistPageWidget(cubit: cubit),
@@ -50,53 +54,54 @@ class WatchlistPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        itemExtent: 165,
-        itemCount: cubit.state.tvs.length,
-        itemBuilder: (BuildContext context, int index) {
-          cubit.showedWatchlistTVAtIndex(index);
-          final tv = cubit.state.tvs[index];
-          final posterPath = tv.posterPath;
-          return InkWell(
-            onTap: () {},
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                  child: Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
-                    child: Row(
-                      children: [
-                        posterPath != null
-                            ? CachedNetworkImage(
-                                imageUrl: ImageDownloader.imageUrl(posterPath),
-                                placeholder: (context, url) => const LoadingIndicatorWidget(),
-                                errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                              )
-                            : Image.asset(AppImages.noImageAvailable),
-                        const SizedBox(width: 15.0),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 10.0),
-                              CustomCastListTextWidget(text: tv.name, maxLines: 2),
-                              const SizedBox(height: 5.0),
-                              CustomCastListTextWidget(text: tv.firstAirDate, maxLines: 1),
-                              const SizedBox(height: 15.0),
-                              CustomCastListTextWidget(text: tv.overview, maxLines: 4),
-                              const SizedBox(height: 5.0),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      itemExtent: 165,
+      itemCount: cubit.state.tvs.length,
+      itemBuilder: (BuildContext context, int index) {
+        cubit.showedWatchlistTVAtIndex(index);
+        final tv = cubit.state.tvs[index];
+        final posterPath = tv.posterPath;
+        return InkWell(
+          onTap: () {},
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: context.read<ThemeBloc>().isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
+                  child: Row(
+                    children: [
+                      posterPath != null
+                          ? CachedNetworkImage(
+                              imageUrl: ImageDownloader.imageUrl(posterPath),
+                              placeholder: (context, url) => const LoadingIndicatorWidget(),
+                              errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                            )
+                          : Image.asset(AppImages.noImageAvailable),
+                      const SizedBox(width: 15.0),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10.0),
+                            CustomCastListTextWidget(text: tv.name, maxLines: 2),
+                            const SizedBox(height: 5.0),
+                            CustomCastListTextWidget(text: tv.firstAirDate, maxLines: 1),
+                            const SizedBox(height: 15.0),
+                            CustomCastListTextWidget(text: tv.overview, maxLines: 4),
+                            const SizedBox(height: 5.0),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
-          );
-        },);
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

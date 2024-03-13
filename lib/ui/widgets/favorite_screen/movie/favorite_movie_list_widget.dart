@@ -17,7 +17,6 @@ import 'package:comics_db_app/ui/widgets/movie_list/components/movie_list_data.d
 
 // Package imports:
 
-
 class FavoriteMovieListWidget extends StatefulWidget {
   const FavoriteMovieListWidget({super.key});
 
@@ -46,7 +45,11 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
           cubit.updateFavoriteMovies(locale.languageCode);
         }),
       ),
-      appBar: const CustomAppBar(title: 'Favorite Movies'),
+      appBar: CustomAppBar(
+        title: 'Favorite Movies',
+        onTapRu: () {},
+        onTapEn: () => setState(() {}),
+      ),
       body: Stack(
         children: [
           ListView.builder(

@@ -35,7 +35,11 @@ class _WatchlistMovieWidgetState extends State<WatchlistMovieWidget> {
     var cubit = context.watch<WatchlistMovieCubit>();
     final locale = Localizations.localeOf(context);
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Watchlist'),
+      appBar: CustomAppBar(
+        title: 'Watchlist',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       floatingActionButton: FloatingActionButton(
         elevation: 0.0,
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),

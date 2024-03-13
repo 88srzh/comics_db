@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 
 class NotificationsCardWidget extends StatefulWidget {
-  const NotificationsCardWidget({super.key});
+  const NotificationsCardWidget({super.key, required this.headingText});
+  final String headingText;
 
   @override
   State<NotificationsCardWidget> createState() => _NotificationsCardWidgetState();
@@ -24,7 +25,7 @@ class _NotificationsCardWidgetState extends State<NotificationsCardWidget> {
         );
       },
       title: Text(
-        S.of(context).notifications,
+        widget.headingText,
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

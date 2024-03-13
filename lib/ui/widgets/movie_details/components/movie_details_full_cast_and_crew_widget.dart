@@ -32,7 +32,11 @@ class _MovieDetailsFullCastAndCrewWidgetState extends State<MovieDetailsFullCast
     var actorsData = cubit.data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Full Cast'),
+      appBar: CustomAppBar(
+        title: 'Full Cast',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
         child: GridView.builder(

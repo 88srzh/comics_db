@@ -36,7 +36,11 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
   Widget build(BuildContext context) {
     var cubit = context.watch<PeopleListCubit>();
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Popular People'),
+      appBar: CustomAppBar(
+        title: 'Popular People',
+        onTapRu: () {},
+        onTapEn: () {},
+      ),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
         child: GridView.builder(

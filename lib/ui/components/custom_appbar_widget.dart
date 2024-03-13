@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,8 +11,10 @@ import 'package:comics_db_app/generated/l10n.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
+  final GestureTapCallback onTapRu;
+  final GestureTapCallback onTapEn;
 
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({super.key, required this.title, required this.onTapRu, required this.onTapEn});
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -29,29 +30,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
     // final locale = Localizations.localeOf(context);
     return AppBar(
       title: Text(
-        widget.title,
+        S.of(context).account,
         style: TextStyle(
           color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
         ),
       ),
       actions: [
         CustomAppBarLanguageContainerWidget(
-          onTap: () => setState(
-            () {
-              S.load(const Locale('ru'));
-              // cubit.updateAccountWidget(locale.languageCode);
-              // context.read<AccountDetailsCubit>().setupAccountDetails(context, locale.languageCode);
-            },
-          ),
+          onTap: widget.onTapRu,
           text: 'RU',
         ),
         const SizedBox(width: 4.0),
         CustomAppBarLanguageContainerWidget(
-          onTap: () => setState(
-            () {
-              S.load(const Locale('en'));
-            },
-          ),
+          onTap: widget.onTapEn,
           text: 'EN',
         ),
         const SizedBox(width: 8.0),
