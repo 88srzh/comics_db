@@ -10,5 +10,7 @@
   "logout": "Выйти",
   "doYouReallyWantToLogout": "Вы правда хотите выйти?",
   "cancel": "Отмена",
-  "account": "Аккаунт"
+  "account": "Аккаунт",
+  "people": "Люди",
+  "trending": "Тренды"
 }

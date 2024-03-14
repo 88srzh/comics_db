@@ -11,6 +11,8 @@
   "doYouReallyWantToLogout": "Do you really want to logout?",
   "cancel": "Cancel",
   "account": "Account",
+  "people": "People",
+  "trending": "Trending",
   "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
   "@pageHomeSamplePlural": {
     "placeholders": {

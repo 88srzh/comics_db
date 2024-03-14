@@ -57,23 +57,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             AccountSettingsThemeCardWidget(headingText: S.of(context).theme),
             const CustomSettingDivider(height: 0.8),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () => setState(() {
-                    S.load(const Locale('ru'));
-                  }),
-                  child: const Text('RU'),
-                ),
-                ElevatedButton(
-                  onPressed: () => setState(() {
-                    S.load(const Locale('en'));
-                  }),
-                  child: const Text('EN'),
-                ),
-              ],
-            ),
-
             const CustomSettingDivider(height: 0.8),
             NotificationsCardWidget(headingText: S.of(context).notifications),
             const CustomSettingDivider(height: 0.8),

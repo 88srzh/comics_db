@@ -30,8 +30,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "movie": MessageLookupByLibrary.simpleMessage("Фильмы"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "people": MessageLookupByLibrary.simpleMessage("Люди"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
+        "trending": MessageLookupByLibrary.simpleMessage("Тренды"),
         "tv": MessageLookupByLibrary.simpleMessage("Сериалы"),
         "watchlist": MessageLookupByLibrary.simpleMessage("Список отслеживания")
       };
