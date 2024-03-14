@@ -160,6 +160,26 @@ class S {
     );
   }
 
+  /// `People`
+  String get people {
+    return Intl.message(
+      'People',
+      name: 'people',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trending`
+  String get trending {
+    return Intl.message(
+      'Trending',
+      name: 'trending',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

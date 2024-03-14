@@ -39,9 +39,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "pageHomeSampleCurrentDateTime": m0,
         "pageHomeSamplePlural": m1,
+        "people": MessageLookupByLibrary.simpleMessage("People"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "totalAmount": m2,
+        "trending": MessageLookupByLibrary.simpleMessage("Trending"),
         "tv": MessageLookupByLibrary.simpleMessage("TV"),
         "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist")
       };
