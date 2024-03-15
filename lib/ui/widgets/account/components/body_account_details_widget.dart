@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -32,6 +33,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
     // final Color titleColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white;
     // TODO name don't work
     // final name = cubit.state.name;
+    bool change = false;
     return ListView(
       children: [
         Column(
@@ -60,6 +62,21 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             NotificationsCardWidget(headingText: S.of(context).notifications),
             const CustomSettingDivider(height: 0.8),
+            SwitchListTile(
+              value: change,
+              onChanged: (bool value) {
+                setState(
+                  () {
+                    context.read<LocaleBloc>().add(const LocaleEvent());
+                    change = value;
+                  },
+                );
+              },
+              title: Text(
+                'Язык смени',
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            ),
             CustomAccountListTile(
               text: S.of(context).logout,
               icon: MdiIcons.logout,

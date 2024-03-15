@@ -21,7 +21,8 @@ class AccountDetailsCubit extends Cubit<AccountDetailsCubitState> {
   final movieAndTvApiClient = MovieAndTvApiClient();
   final _sessionDataProvider = SessionDataProvider();
 
-  AccountDetailsCubit({required this.accountBloc}) : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '', localeTag: '')) {
+  AccountDetailsCubit({required this.accountBloc})
+      : super(const AccountDetailsCubitState(id: 0, name: '', username: '', includeAdult: true, avatarPath: '', localeTag: '')) {
     emit(AccountDetailsCubitState(
       id: state.id,
       name: state.name,
