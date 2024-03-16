@@ -19,34 +19,30 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
     final String status = cubit.state.status;
     final int revenue = cubit.state.revenue;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      padding: const EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 80.0),
-            child: Column(
-              children: [
-                Text('Status', style: Theme.of(context).textTheme.labelMedium),
-                Text(status, style: Theme.of(context).textTheme.labelSmall),
-                const SizedBox(height: 10.0),
-                Text('Revenue', style: Theme.of(context).textTheme.labelMedium),
-                Text(S.of(context).totalAmount(revenue.toDouble()), style: Theme.of(context).textTheme.labelSmall),
-                // Text(),
-              ],
-            ),
+          Column(
+            children: [
+              Text('Status', style: Theme.of(context).textTheme.labelMedium),
+              Text(status, style: Theme.of(context).textTheme.labelSmall),
+              const SizedBox(height: 10.0),
+              Text('Revenue', style: Theme.of(context).textTheme.labelMedium),
+              Text(S.of(context).totalAmount(revenue.toDouble()), style: Theme.of(context).textTheme.labelSmall),
+              // Text(),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 80.0),
-            child: Column(
-              children: [
-                Text('Original Language', style: Theme.of(context).textTheme.labelMedium),
-                Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
-                const SizedBox(height: 10.0),
-                Text('Budget', style: Theme.of(context).textTheme.labelMedium),
-                Text(S.of(context).totalAmount(budget.toDouble()), style: Theme.of(context).textTheme.labelSmall),
-              ],
-            ),
+          const SizedBox(width: 50.0),
+          Column(
+            children: [
+              Text('Original Language', style: Theme.of(context).textTheme.labelMedium),
+              Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
+              const SizedBox(height: 10.0),
+              Text('Budget', style: Theme.of(context).textTheme.labelMedium),
+              Text(S.of(context).totalAmount(budget.toDouble()), style: Theme.of(context).textTheme.labelSmall),
+            ],
           )
         ],
       ),
