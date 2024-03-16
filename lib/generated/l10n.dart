@@ -1,7 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
-import 'intl/messages_all.dart';
+
+// Project imports:
+import 'package:comics_db_app/generated/intl/messages_all.dart';
 
 // **************************************************************************
 // Generator: Flutter Intl IDE plugin

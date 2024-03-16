@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
 import 'package:comics_db_app/ui/widgets/account/components/body_account_details_widget.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 // Package imports:
 
@@ -49,7 +49,7 @@ class _AccountWidgetState extends State<AccountWidget> {
           S.load(const Locale('en'));
         }),
       ),
-      body: BodyPersonalWidget(),
+      body: const BodyPersonalWidget(),
     );
   }
 }

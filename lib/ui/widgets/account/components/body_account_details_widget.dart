@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,16 +7,17 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/components/account_settings_theme_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/account_settings_theme_card_widget.dart';
 
 class BodyPersonalWidget extends StatefulWidget {
   const BodyPersonalWidget({super.key});
@@ -27,13 +27,13 @@ class BodyPersonalWidget extends StatefulWidget {
 }
 
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
+  bool change = false;
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
     // final Color titleColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white;
     // TODO name don't work
     // final name = cubit.state.name;
-    bool change = false;
     return ListView(
       children: [
         Column(

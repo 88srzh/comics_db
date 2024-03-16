@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class NotificationsCardWidget extends StatefulWidget {
   const NotificationsCardWidget({super.key, required this.headingText});

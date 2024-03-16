@@ -1,6 +1,11 @@
-import 'package:equatable/equatable.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/generated/l10n.dart';
 
 part 'locale_event.dart';
@@ -19,4 +24,6 @@ class LocaleBloc extends Bloc<LocaleEvent, LocaleState> {
       emit(state.copyWith(locale: S.load(const Locale('ru'))));
     }
   }
+
+  bool get isEnLocale => state.locale == S.load(const Locale('en')) ? true : false;
 }
