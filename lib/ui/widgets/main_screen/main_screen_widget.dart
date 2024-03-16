@@ -8,14 +8,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/page_transition.dart';
 import 'package:comics_db_app/ui/widgets/account/account_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class MainScreenWidget extends HookWidget {
   MainScreenWidget({super.key});
@@ -34,6 +35,7 @@ class MainScreenWidget extends HookWidget {
   Widget build(BuildContext context) {
     final selectedIndex = useState(1);
     bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
+    bool isEnLocale = context.read<LocaleBloc>().isEnLocale;
     return Scaffold(
       body: PageTransition(child: screen[selectedIndex.value]),
       bottomNavigationBar: ConvexAppBar(
@@ -44,7 +46,7 @@ class MainScreenWidget extends HookWidget {
         initialActiveIndex: selectedIndex.value,
         items: [
           // TODO may be change icons to mdi.icons
-          TabItem<dynamic>(icon: Icons.people, title: S.of(context).people),
+          TabItem<dynamic>(icon: Icons.people, title: isEnLocale ? 'People' : 'Люди'),
           TabItem<dynamic>(icon: Icons.trending_up, title: S.of(context).trending),
           TabItem<dynamic>(icon: Icons.movie, title: S.of(context).movie),
           TabItem<dynamic>(icon: Icons.tv, title: S.of(context).tv),

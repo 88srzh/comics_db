@@ -7,16 +7,17 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
 import 'package:comics_db_app/ui/components/custom_setting_divider_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/account/account_details_cubit.dart';
+import 'package:comics_db_app/ui/widgets/account/components/account_settings_theme_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/head_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/heading_account_card_widget.dart';
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
-import 'package:comics_db_app/ui/widgets/account/components/account_settings_theme_card_widget.dart';
 
 class BodyPersonalWidget extends StatefulWidget {
   const BodyPersonalWidget({super.key});
@@ -26,6 +27,7 @@ class BodyPersonalWidget extends StatefulWidget {
 }
 
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
+  bool change = false;
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
@@ -60,6 +62,21 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             NotificationsCardWidget(headingText: S.of(context).notifications),
             const CustomSettingDivider(height: 0.8),
+            SwitchListTile(
+              value: change,
+              onChanged: (bool value) {
+                setState(
+                  () {
+                    context.read<LocaleBloc>().add(const LocaleEvent());
+                    change = value;
+                  },
+                );
+              },
+              title: Text(
+                'Язык смени',
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            ),
             CustomAccountListTile(
               text: S.of(context).logout,
               icon: MdiIcons.logout,
