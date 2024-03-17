@@ -49,7 +49,7 @@ class _AccountWidgetState extends State<AccountWidget> {
           S.load(const Locale('en'));
         }),
       ),
-      body: const BodyPersonalWidget(),
+      body: BodyPersonalWidget(watchlist: S.of(context).watchlist),
     );
   }
 }
