@@ -7,7 +7,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
@@ -61,21 +60,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             NotificationsCardWidget(headingText: S.of(context).notifications),
             const CustomSettingDivider(height: 0.8),
-            SwitchListTile(
-              value: change,
-              onChanged: (bool value) {
-                setState(
-                  () {
-                    context.read<LocaleBloc>().add(const LocaleEvent());
-                    change = value;
-                  },
-                );
-              },
-              title: Text(
-                'Язык смени',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
             CustomAccountListTile(
               text: S.of(context).logout,
               icon: MdiIcons.logout,
