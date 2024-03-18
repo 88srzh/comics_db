@@ -3,7 +3,6 @@ import 'dart:ui';
 
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
-import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -177,9 +176,6 @@ class MyApp extends StatelessWidget {
               const TvListState.initial(),
             ),
           ),
-        ),
-        BlocProvider(
-          create: (_) => LocaleBloc(),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
