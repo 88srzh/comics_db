@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsDescriptionWidget extends StatelessWidget {
   const MovieDetailsDescriptionWidget({
@@ -22,7 +23,7 @@ class MovieDetailsDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Description',
+            S.of(context).description,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8.0),

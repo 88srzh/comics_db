@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
@@ -40,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pageHomeSampleCurrentDateTime": m0,
         "pageHomeSamplePlural": m1,
         "people": MessageLookupByLibrary.simpleMessage("People"),
+        "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "totalAmount": m2,

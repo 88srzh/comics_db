@@ -12,5 +12,7 @@
   "cancel": "Отмена",
   "account": "Аккаунт",
   "people": "Люди",
-  "trending": "Тренды"
+  "trending": "Тренды",
+  "personal": "Настройки",
+  "description": "Описание"
 }
