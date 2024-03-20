@@ -15,6 +15,7 @@ import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_list_cubit.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class TrendingWidget extends StatefulWidget {
   const TrendingWidget({super.key});
@@ -37,9 +38,13 @@ class _TrendingWidgetState extends State<TrendingWidget> {
     var cubit = context.watch<TrendingListCubit>();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Trending',
-        onTapRu: () {},
-        onTapEn: () {},
+        title: S.of(context).trending,
+        onTapRu: () => setState(() {
+          S.load(const Locale('ru'));
+        }),
+        onTapEn: () => setState(() {
+          S.load(const Locale('en'));
+        }),
       ),
       body: Stack(
         children: [
@@ -66,7 +71,7 @@ class TrendingAnimatedButtonBarWidget extends StatelessWidget {
       children: [
         SizedBox(
           height: 50.0,
-          width: 200.0,
+          width: 220.0,
           child: AnimatedButtonBar(
             radius: 8.0,
             backgroundColor: Colors.white,
@@ -77,23 +82,29 @@ class TrendingAnimatedButtonBarWidget extends StatelessWidget {
             animationDuration: const Duration(milliseconds: 400),
             children: [
               ButtonBarEntry(
-                child: const Text(
-                  'All',
-                  style: TextStyle(color: Colors.black),
+                child: Text(
+                  S.of(context).all,
+                  style: const TextStyle(color: Colors.black),
                 ),
                 onTap: () => cubit.showedTrendingAllThisWeek(),
               ),
               ButtonBarEntry(
-                child: const Text(
-                  'Movies',
-                  style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    S.of(context).movie,
+                    style: const TextStyle(color: Colors.black),
+                  ),
                 ),
                 onTap: () => cubit.showedTrendingMoviesThisWeek(),
               ),
               ButtonBarEntry(
-                child: const Text(
-                  'TV',
-                  style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    S.of(context).tv,
+                    style: const TextStyle(color: Colors.black),
+                  ),
                 ),
                 onTap: () => cubit.showedTrendingTvThisWeek(),
               ),

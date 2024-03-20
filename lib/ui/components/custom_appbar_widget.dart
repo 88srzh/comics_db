@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -30,7 +29,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     // final locale = Localizations.localeOf(context);
     return AppBar(
       title: Text(
-        S.of(context).account,
+        widget.title,
         style: TextStyle(
           color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
         ),
