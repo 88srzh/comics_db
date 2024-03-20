@@ -16,6 +16,7 @@ import 'package:comics_db_app/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_widget.dart';
 import 'package:comics_db_app/ui/widgets/trending/trending_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_list/tv_list_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MainScreenWidget extends HookWidget {
   MainScreenWidget({super.key});
@@ -43,12 +44,11 @@ class MainScreenWidget extends HookWidget {
         activeColor: isDarkTheme ? Colors.white : Colors.black.withOpacity(0.8),
         initialActiveIndex: selectedIndex.value,
         items: [
-          // TODO may be change icons to mdi.icons
-          TabItem<dynamic>(icon: Icons.people, title: S.of(context).people),
-          TabItem<dynamic>(icon: Icons.trending_up, title: S.of(context).trending),
-          TabItem<dynamic>(icon: Icons.movie, title: S.of(context).movie),
-          TabItem<dynamic>(icon: Icons.tv, title: S.of(context).tv),
-          TabItem<dynamic>(icon: Icons.settings, title: S.of(context).personal),
+          TabItem<dynamic>(icon: MdiIcons.accountMultiple, title: S.of(context).people),
+          TabItem<dynamic>(icon: MdiIcons.trendingUp, title: S.of(context).trending),
+          TabItem<dynamic>(icon: MdiIcons.movie, title: S.of(context).movie),
+          TabItem<dynamic>(icon: MdiIcons.television, title: S.of(context).tv),
+          TabItem<dynamic>(icon: MdiIcons.cog, title: S.of(context).personal),
         ],
         onTap: (int index) => selectedIndex.value = index,
       ),
