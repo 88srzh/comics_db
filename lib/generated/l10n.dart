@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `Popular People`
+  String get popularPeople {
+    return Intl.message(
+      'Popular People',
+      name: 'popularPeople',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pageHomeSamplePlural": m1,
         "people": MessageLookupByLibrary.simpleMessage("People"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
+        "popularPeople": MessageLookupByLibrary.simpleMessage("Popular People"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "totalAmount": m2,

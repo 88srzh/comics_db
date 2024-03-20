@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "people": MessageLookupByLibrary.simpleMessage("Люди"),
         "personal": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "popularPeople":
+            MessageLookupByLibrary.simpleMessage("Популярные люди"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "trending": MessageLookupByLibrary.simpleMessage("Тренды"),
