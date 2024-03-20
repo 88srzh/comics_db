@@ -220,6 +220,76 @@ class S {
     );
   }
 
+  /// `Top Billed Cast`
+  String get topBilledCast {
+    return Intl.message(
+      'Top Billed Cast',
+      name: 'topBilledCast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keywords`
+  String get keywords {
+    return Intl.message(
+      'Keywords',
+      name: 'keywords',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All`
+  String get seeAll {
+    return Intl.message(
+      'See All',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `read the rest`
+  String get readTheRest {
+    return Intl.message(
+      'read the rest',
+      name: 'readTheRest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A review by`
+  String reviewBy(String author) {
+    return Intl.message(
+      'A review by',
+      name: 'reviewBy',
+      desc: '',
+      args: [author],
+    );
+  }
+
+  /// `We do not have any reviews for {title}. Would you like to write one?`
+  String ifNowReviews(Object title) {
+    return Intl.message(
+      'We do not have any reviews for $title. Would you like to write one?',
+      name: 'ifNowReviews',
+      desc: '',
+      args: [title],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

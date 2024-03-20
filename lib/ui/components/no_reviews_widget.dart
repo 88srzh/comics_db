@@ -2,7 +2,8 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:comics_db_app/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoReviewsWidget extends StatelessWidget {
   const NoReviewsWidget({super.key});
@@ -17,7 +18,7 @@ class NoReviewsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('Reviews', style: Theme.of(context).textTheme.titleMedium),
+              Text(S.of(context).reviews, style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
           NowReviewsTextWidget(title: title),
@@ -52,7 +53,7 @@ class NowReviewsTextWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('We do not have any reviews for $title. Would you like to write one?', style: Theme.of(context).textTheme.headlineMedium),
+        child: Text(S.of(context).ifNowReviews(title), style: Theme.of(context).textTheme.headlineMedium),
       ),
     );
   }

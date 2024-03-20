@@ -20,12 +20,17 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(date, time) => "Date: ${date} Time: ${time}";
+  static String m0(title) =>
+      "We do not have any reviews for ${title}. Would you like to write one?";
 
-  static String m1(howMany) =>
+  static String m1(date, time) => "Date: ${date} Time: ${time}";
+
+  static String m2(howMany) =>
       "${Intl.plural(howMany, one: 'You have 1 message', other: 'You have ${howMany} messages')}";
 
-  static String m2(total) => "Total: ${total}";
+  static String m3(author) => "A review by";
+
+  static String m4(total) => "Total: ${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -36,17 +41,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
+        "ifNowReviews": m0,
+        "keywords": MessageLookupByLibrary.simpleMessage("Keywords"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "movie": MessageLookupByLibrary.simpleMessage("Movie"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
-        "pageHomeSampleCurrentDateTime": m0,
-        "pageHomeSamplePlural": m1,
+        "pageHomeSampleCurrentDateTime": m1,
+        "pageHomeSamplePlural": m2,
         "people": MessageLookupByLibrary.simpleMessage("People"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "popularPeople": MessageLookupByLibrary.simpleMessage("Popular People"),
+        "readTheRest": MessageLookupByLibrary.simpleMessage("read the rest"),
+        "reviewBy": m3,
+        "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
-        "totalAmount": m2,
+        "topBilledCast":
+            MessageLookupByLibrary.simpleMessage("Top Billed Cast"),
+        "totalAmount": m4,
         "trending": MessageLookupByLibrary.simpleMessage("Trending"),
         "tv": MessageLookupByLibrary.simpleMessage("TV"),
         "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist")

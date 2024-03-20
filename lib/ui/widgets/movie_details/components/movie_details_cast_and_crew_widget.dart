@@ -10,6 +10,7 @@ import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsCastWidget extends StatelessWidget {
   const MovieDetailsCastWidget({super.key});
@@ -29,13 +30,13 @@ class MovieDetailsCastWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Top Billed Cast',
+                S.of(context).topBilledCast,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               InkWell(
                 onTap: () => cubit.tapToSeeFullCastAndCrewList(context, index),
                 child: Text(
-                  'See all',
+                  S.of(context).seeAll,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               )

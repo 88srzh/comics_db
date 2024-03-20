@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
+  static String m3(author) => "Обзор от";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Аккаунт"),
@@ -29,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Избранное"),
+        "keywords": MessageLookupByLibrary.simpleMessage("Ключевые слова"),
         "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "movie": MessageLookupByLibrary.simpleMessage("Фильмы"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
@@ -36,8 +39,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Настройки"),
         "popularPeople":
             MessageLookupByLibrary.simpleMessage("Популярные люди"),
+        "readTheRest": MessageLookupByLibrary.simpleMessage("далее"),
+        "reviewBy": m3,
+        "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
+        "topBilledCast":
+            MessageLookupByLibrary.simpleMessage("В главных ролях"),
         "trending": MessageLookupByLibrary.simpleMessage("Тренды"),
         "tv": MessageLookupByLibrary.simpleMessage("Сериалы"),
         "watchlist": MessageLookupByLibrary.simpleMessage("Список отслеживания")

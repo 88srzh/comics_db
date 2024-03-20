@@ -3,6 +3,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsKeywordsWidget extends StatelessWidget {
   const MovieDetailsKeywordsWidget({super.key});
@@ -19,7 +20,7 @@ class MovieDetailsKeywordsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('Keywords', style: Theme.of(context).textTheme.titleMedium),
+              Text(S.of(context).keywords, style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
           _MovieKeywordWidget(cubit: cubit, keywordData: keywordData),

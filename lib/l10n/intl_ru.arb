@@ -16,5 +16,12 @@
   "personal": "Настройки",
   "description": "Описание",
   "all": "Все",
-  "popularPeople": "Популярные люди"
+  "popularPeople": "Популярные люди",
+  "topBilledCast": "В главных ролях",
+  "reviews": "Рецензии",
+  "keywords": "Ключевые слова",
+  "seeAll": "Все",
+  "readTheRest": "далее",
+  "ifNoReviews": "Нету рецензий для {title}. Хотите написать?",
+  "reviewBy": "Обзор от"
 }

@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsReviewsWidget extends StatelessWidget {
   const MovieDetailsReviewsWidget({super.key});
@@ -34,13 +35,13 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Reviews',
+                S.of(context).reviews,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               InkWell(
                 onTap: () => cubit.tapToSeeFullListOfReviews(context, index),
                 child: Text(
-                  'See all',
+                  S.of(context).seeAll,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
@@ -117,7 +118,7 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
-                        'A review by $author',
+                        S.of(context).reviewBy(author),
                         style: TextStyle(
                           color: textColor,
                           fontSize: 17,

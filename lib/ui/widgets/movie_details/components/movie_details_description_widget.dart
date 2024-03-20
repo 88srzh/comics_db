@@ -9,8 +9,11 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart'
 import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsDescriptionWidget extends StatelessWidget {
+  final String description;
+
   const MovieDetailsDescriptionWidget({
     super.key,
+    required this.description,
   });
 
   @override
@@ -23,7 +26,7 @@ class MovieDetailsDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            S.of(context).description,
+            description,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8.0),
@@ -31,7 +34,7 @@ class MovieDetailsDescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: ' read the rest.'),
+                child: CustomDescriptionExpandableText(description: overview, maxLines: 5, expandedText: S.of(context).readTheRest),
               ),
             ],
           ),
