@@ -23,5 +23,6 @@
   "seeAll": "Все",
   "readTheRest": "далее",
   "ifNoReviews": "Нету рецензий для {title}. Хотите написать?",
-  "reviewBy": "Обзор от"
+  "reviewBy": "Обзор от",
+  "writtenBy": "Написано"
 }

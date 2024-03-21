@@ -20,8 +20,6 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m3(author) => "Обзор от";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Аккаунт"),
@@ -40,7 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularPeople":
             MessageLookupByLibrary.simpleMessage("Популярные люди"),
         "readTheRest": MessageLookupByLibrary.simpleMessage("далее"),
-        "reviewBy": m3,
+        "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
@@ -49,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("В главных ролях"),
         "trending": MessageLookupByLibrary.simpleMessage("Тренды"),
         "tv": MessageLookupByLibrary.simpleMessage("Сериалы"),
-        "watchlist": MessageLookupByLibrary.simpleMessage("Список отслеживания")
+        "watchlist":
+            MessageLookupByLibrary.simpleMessage("Список отслеживания"),
+        "writtenBy": MessageLookupByLibrary.simpleMessage("Написано")
       };
 }

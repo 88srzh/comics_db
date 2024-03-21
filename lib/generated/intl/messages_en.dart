@@ -28,9 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(howMany) =>
       "${Intl.plural(howMany, one: 'You have 1 message', other: 'You have ${howMany} messages')}";
 
-  static String m3(author) => "A review by";
-
-  static String m4(total) => "Total: ${total}";
+  static String m3(total) => "Total: ${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -52,16 +50,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "popularPeople": MessageLookupByLibrary.simpleMessage("Popular People"),
         "readTheRest": MessageLookupByLibrary.simpleMessage("read the rest"),
-        "reviewBy": m3,
+        "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("Top Billed Cast"),
-        "totalAmount": m4,
+        "totalAmount": m3,
         "trending": MessageLookupByLibrary.simpleMessage("Trending"),
         "tv": MessageLookupByLibrary.simpleMessage("TV"),
-        "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist")
+        "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
+        "writtenBy": MessageLookupByLibrary.simpleMessage("Written by")
       };
 }

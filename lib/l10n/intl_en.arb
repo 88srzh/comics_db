@@ -23,13 +23,7 @@
   "seeAll": "See All",
   "readTheRest": "read the rest",
   "reviewBy": "A review by",
-  "@reviewBy": {
-    "placeholders": {
-      "author": {
-        "type": "String"
-      }
-    }
-  },
+  "writtenBy": "Written by",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {

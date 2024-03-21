@@ -23,7 +23,7 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<MovieDetailsCubit>();
     var index = cubit.state.id;
-    var reviewsData = context.read<MovieDetailsCubit>().data.reviewsData;
+    var reviewsData = cubit.data.reviewsData;
     // TODO add widget if there are no reviews
     if (reviewsData.isEmpty) return const NoReviewsWidget();
     return Padding(
@@ -61,6 +61,7 @@ class _MovieDetailsReviewsColumnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String reviewBy = S.of(context).reviewBy;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Container(
@@ -76,14 +77,15 @@ class _MovieDetailsReviewsColumnWidget extends StatelessWidget {
           ],
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         ),
-        child: const _MovieDetailsReviewsItemWidget(),
+        child: _MovieDetailsReviewsItemWidget(reviewBy: reviewBy),
       ),
     );
   }
 }
 
 class _MovieDetailsReviewsItemWidget extends StatelessWidget {
-  const _MovieDetailsReviewsItemWidget();
+  final String reviewBy;
+  const _MovieDetailsReviewsItemWidget({required this.reviewBy});
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +93,7 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
     final String author = reviewsData.first.author;
     final String content = reviewsData.first.content;
     final String createdAt = reviewsData.first.createdAt;
+    final String writtenBy = S.of(context).writtenBy;
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Column(
@@ -118,7 +121,7 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
-                        S.of(context).reviewBy(author),
+                        '$reviewBy $author',
                         style: TextStyle(
                           color: textColor,
                           fontSize: 17,
@@ -161,7 +164,7 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.6,
                         child: Text(
-                          'Written by $author on $createdAt',
+                          '$writtenBy $author on $createdAt',
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
@@ -178,7 +181,7 @@ class _MovieDetailsReviewsItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: content, maxLines: 5, expandedText: ' read the rest.'),
+                child: CustomDescriptionExpandableText(description: content, maxLines: 5, expandedText: S.of(context).readTheRest),
               ),
             ],
           ),

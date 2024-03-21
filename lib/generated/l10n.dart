@@ -271,12 +271,22 @@ class S {
   }
 
   /// `A review by`
-  String reviewBy(String author) {
+  String get reviewBy {
     return Intl.message(
       'A review by',
       name: 'reviewBy',
       desc: '',
-      args: [author],
+      args: [],
+    );
+  }
+
+  /// `Written by`
+  String get writtenBy {
+    return Intl.message(
+      'Written by',
+      name: 'writtenBy',
+      desc: '',
+      args: [],
     );
   }
 
