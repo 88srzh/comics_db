@@ -186,18 +186,21 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
     // }
 
-    final List<MovieDetailsMovieActorData> actorsData =
-        data.actorsData = details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
+    final List<MovieDetailsMovieActorData> actorsData = data.actorsData =
+        details.credits.cast.map((e) => MovieDetailsMovieActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     // data.similarData = details.similar.similar.map((e) => MovieDetailsSimilarData(id: e.id, title: e.title, posterPath: e.posterPath, genreIds: e.genreIds)).toList();
 
-    final List<MovieDetailsRecommendationsData> recommendations = data.recommendationsData =
-        details.recommendations.recommendationsResults.map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    final List<MovieDetailsRecommendationsData> recommendations = data.recommendationsData = details.recommendations.recommendationsResults
+        .map((e) => MovieDetailsRecommendationsData(id: e.id, title: e.title, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
 
     final List<MovieDetailsAllVideosData> allVideos = data.allVideosData = details.videos.results
-        .map((e) => MovieDetailsAllVideosData(name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
+        .map((e) => MovieDetailsAllVideosData(
+            name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
-    final List<MovieDetailsKeywordsData> keywords = data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
+    final List<MovieDetailsKeywordsData> keywords =
+        data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     final List<MovieDetailsReviewsData> reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
