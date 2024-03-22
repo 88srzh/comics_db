@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final int keywordId;
     return MultiProvider(
       providers: [
         BlocProvider<ThemeBloc>(
