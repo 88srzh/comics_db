@@ -10,6 +10,7 @@
 // ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
 // ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
 
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
@@ -20,31 +21,54 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(date, time) => "Date: ${date} Time: ${time}";
+  static String m0(title) =>
+      "We do not have any reviews for ${title}. Would you like to write one?";
 
-  static String m1(howMany) =>
+  static String m1(date, time) => "Date: ${date} Time: ${time}";
+
+  static String m2(howMany) =>
       "${Intl.plural(howMany, one: 'You have 1 message', other: 'You have ${howMany} messages')}";
 
-  static String m2(total) => "Total: ${total}";
+  static String m3(total) => "Total: ${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
+        "budget": MessageLookupByLibrary.simpleMessage("Budget"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
+        "ifNowReviews": m0,
+        "keywords": MessageLookupByLibrary.simpleMessage("Keywords"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "movie": MessageLookupByLibrary.simpleMessage("Movie"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
-        "pageHomeSampleCurrentDateTime": m0,
-        "pageHomeSamplePlural": m1,
+        "originalLanguage":
+            MessageLookupByLibrary.simpleMessage("Original Language"),
+        "pageHomeSampleCurrentDateTime": m1,
+        "pageHomeSamplePlural": m2,
         "people": MessageLookupByLibrary.simpleMessage("People"),
+        "personal": MessageLookupByLibrary.simpleMessage("Personal"),
+        "popularPeople": MessageLookupByLibrary.simpleMessage("Popular People"),
+        "readTheRest": MessageLookupByLibrary.simpleMessage("read the rest"),
+        "recommendations":
+            MessageLookupByLibrary.simpleMessage("Recommendations"),
+        "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
+        "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
+        "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "status": MessageLookupByLibrary.simpleMessage("Status"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
-        "totalAmount": m2,
+        "topBilledCast":
+            MessageLookupByLibrary.simpleMessage("Top Billed Cast"),
+        "totalAmount": m3,
         "trending": MessageLookupByLibrary.simpleMessage("Trending"),
         "tv": MessageLookupByLibrary.simpleMessage("TV"),
-        "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist")
+        "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
+        "writtenBy": MessageLookupByLibrary.simpleMessage("Written by")
       };
 }

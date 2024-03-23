@@ -176,6 +176,16 @@ class S {
     );
   }
 
+  /// `Personal`
+  String get personal {
+    return Intl.message(
+      'Personal',
+      name: 'personal',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Trending`
   String get trending {
     return Intl.message(
@@ -183,6 +193,166 @@ class S {
       name: 'trending',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Popular People`
+  String get popularPeople {
+    return Intl.message(
+      'Popular People',
+      name: 'popularPeople',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Billed Cast`
+  String get topBilledCast {
+    return Intl.message(
+      'Top Billed Cast',
+      name: 'topBilledCast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keywords`
+  String get keywords {
+    return Intl.message(
+      'Keywords',
+      name: 'keywords',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All`
+  String get seeAll {
+    return Intl.message(
+      'See All',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `read the rest`
+  String get readTheRest {
+    return Intl.message(
+      'read the rest',
+      name: 'readTheRest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A review by`
+  String get reviewBy {
+    return Intl.message(
+      'A review by',
+      name: 'reviewBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Written by`
+  String get writtenBy {
+    return Intl.message(
+      'Written by',
+      name: 'writtenBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Original Language`
+  String get originalLanguage {
+    return Intl.message(
+      'Original Language',
+      name: 'originalLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Revenue`
+  String get revenue {
+    return Intl.message(
+      'Revenue',
+      name: 'revenue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Budget`
+  String get budget {
+    return Intl.message(
+      'Budget',
+      name: 'budget',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommendations`
+  String get recommendations {
+    return Intl.message(
+      'Recommendations',
+      name: 'recommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not have any reviews for {title}. Would you like to write one?`
+  String ifNowReviews(Object title) {
+    return Intl.message(
+      'We do not have any reviews for $title. Would you like to write one?',
+      name: 'ifNowReviews',
+      desc: '',
+      args: [title],
     );
   }
 

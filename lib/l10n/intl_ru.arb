@@ -12,5 +12,22 @@
   "cancel": "Отмена",
   "account": "Аккаунт",
   "people": "Люди",
-  "trending": "Тренды"
+  "trending": "Тренды",
+  "personal": "Настройки",
+  "description": "Описание",
+  "all": "Все",
+  "popularPeople": "Популярные люди",
+  "topBilledCast": "В главных ролях",
+  "reviews": "Рецензии",
+  "keywords": "Ключевые слова",
+  "seeAll": "Все",
+  "readTheRest": "далее",
+  "ifNoReviews": "Нету рецензий для {title}. Хотите написать?",
+  "reviewBy": "Обзор от",
+  "writtenBy": "Написано",
+  "status": "Статус",
+  "originalLanguage": "Исходный язык",
+  "revenue": "Сборы",
+  "budget": "Бюджет",
+  "recommendations": "Рекоммендации"
 }

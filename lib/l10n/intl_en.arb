@@ -12,7 +12,31 @@
   "cancel": "Cancel",
   "account": "Account",
   "people": "People",
+  "personal": "Personal",
   "trending": "Trending",
+  "description": "Description",
+  "all": "All",
+  "popularPeople": "Popular People",
+  "topBilledCast": "Top Billed Cast",
+  "reviews": "Reviews",
+  "keywords": "Keywords",
+  "seeAll": "See All",
+  "readTheRest": "read the rest",
+  "reviewBy": "A review by",
+  "writtenBy": "Written by",
+  "status": "Status",
+  "originalLanguage": "Original Language",
+  "revenue": "Revenue",
+  "budget": "Budget",
+  "recommendations": "Recommendations",
+  "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
+  "@ifNoReviews": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
   "@pageHomeSamplePlural": {
     "placeholders": {

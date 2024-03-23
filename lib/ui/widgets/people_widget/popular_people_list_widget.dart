@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
@@ -15,6 +14,8 @@ import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/components/people_list_data.dart';
 import 'package:comics_db_app/ui/widgets/people_widget/popular_people_list_cubit.dart';
+import 'package:comics_db_app/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularPeopleListWidget extends StatefulWidget {
   const PopularPeopleListWidget({super.key});
@@ -37,9 +38,13 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
     var cubit = context.watch<PeopleListCubit>();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Popular People',
-        onTapRu: () {},
-        onTapEn: () {},
+        title: S.of(context).popularPeople,
+        onTapRu: () => setState(() {
+          S.load(const Locale('ru'));
+        }),
+        onTapEn: () => setState(() {
+          S.load(const Locale('en'));
+        }),
       ),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,

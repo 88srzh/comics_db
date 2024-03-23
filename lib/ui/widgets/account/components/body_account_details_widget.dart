@@ -7,7 +7,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/domain/blocs/locale/locale_bloc.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_account_list_tile.dart';
@@ -20,7 +19,8 @@ import 'package:comics_db_app/ui/widgets/account/components/heading_account_card
 import 'package:comics_db_app/ui/widgets/account/components/notification_card_widget.dart';
 
 class BodyPersonalWidget extends StatefulWidget {
-  const BodyPersonalWidget({super.key});
+  final String watchlist;
+  const BodyPersonalWidget({super.key, required this.watchlist});
 
   @override
   State<BodyPersonalWidget> createState() => _BodyPersonalWidgetState();
@@ -31,7 +31,6 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
-    // final Color titleColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.titleColor : Colors.white;
     // TODO name don't work
     // final name = cubit.state.name;
     return ListView(
@@ -41,7 +40,7 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           children: [
             const HeadAccountCardWidget(),
             const CustomSettingDivider(height: 3.0),
-            HeadingAccountCardWidget(headingText: S.of(context).watchlist),
+            HeadingAccountCardWidget(headingText: widget.watchlist),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(
                 text: S.of(context).movie, icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
@@ -59,24 +58,8 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
             const CustomSettingDivider(height: 0.8),
             AccountSettingsThemeCardWidget(headingText: S.of(context).theme),
             const CustomSettingDivider(height: 0.8),
-            const CustomSettingDivider(height: 0.8),
             NotificationsCardWidget(headingText: S.of(context).notifications),
             const CustomSettingDivider(height: 0.8),
-            SwitchListTile(
-              value: change,
-              onChanged: (bool value) {
-                setState(
-                  () {
-                    context.read<LocaleBloc>().add(const LocaleEvent());
-                    change = value;
-                  },
-                );
-              },
-              title: Text(
-                'Язык смени',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
             CustomAccountListTile(
               text: S.of(context).logout,
               icon: MdiIcons.logout,

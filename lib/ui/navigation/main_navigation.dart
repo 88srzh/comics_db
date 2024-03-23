@@ -54,10 +54,6 @@ class MainNavigation {
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
     MainNavigationRouteNames.watchlistMovie: (_) => _screenFactory.makeWatchlistMovie(),
     MainNavigationRouteNames.watchlistTV: (_) => _screenFactory.makeWatchlistTV(),
-    // MainNavigationRouteNames.movieKeyword: (_) => _screenFactory.makeMovieKeywordList(),
-
-    // MainNavigationRouteNames.splashScreen: (_) =>
-    //     ChangeNotifierProvider(create: (_) => SplashscreenModel(), child: const SplashscreenWidget()),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {

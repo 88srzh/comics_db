@@ -1,20 +1,21 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_other_information_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
+import 'package:comics_db_app/generated/l10n.dart';
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_favorite_floating_action_button.dart';
+import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_cast_and_crew_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_description_widget.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_other_information_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_recommendations_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_widget.dart';
+import 'package:comics_db_app/ui/widgets/movie_details/components/peoples_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/top_poster_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
@@ -54,7 +55,16 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
-            appBar: const CustomDetailsAppBar(title: ''),
+            appBar: CustomAppBar(
+              title: S.of(context).movie,
+              onTapRu: () => setState(() {
+                S.load(const Locale('ru'));
+              }),
+              onTapEn: () => setState(() {
+                S.load(const Locale('en'));
+              }),
+            ),
+            // appBar: const CustomDetailsAppBar(title: ''),
             floatingActionButton: Wrap(
               direction: Axis.horizontal,
               children: [
@@ -64,18 +74,18 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
               ],
             ),
             body: ListView(
-              children: const [
+              children: [
                 Column(
                   children: [
-                    MovieTopPosterWidget(),
-                    PeoplesWidget(),
-                    MovieDetailsDescriptionWidget(),
-                    MovieDetailsCastWidget(),
+                    const MovieTopPosterWidget(),
+                    const PeoplesWidget(),
+                    MovieDetailsDescriptionWidget(description: S.of(context).description),
+                    MovieDetailsCastWidget(topBilledCast: S.of(context).topBilledCast),
                     // MovieDetailsAllVideosWidget(),
-                    MovieDetailsReviewsWidget(),
-                    MovieDetailsRecommendations(),
-                    MovieDetailsOtherInformationWidget(),
-                    MovieDetailsKeywordsWidget(),
+                    MovieDetailsReviewsWidget(reviews: S.of(context).reviews),
+                    MovieDetailsRecommendations(recommendations: S.of(context).recommendations),
+                    MovieDetailsOtherInformationWidget(statusText: S.of(context).status),
+                    MovieDetailsKeywordsWidget(keywords: S.of(context).keywords),
                     // const MovieDetailsSimilarWidget(),
                     // const MovieSimilarWidget(),
                   ],
