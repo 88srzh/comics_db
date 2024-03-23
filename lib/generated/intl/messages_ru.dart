@@ -10,6 +10,7 @@
 // ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
 // ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
 
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
@@ -24,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Аккаунт"),
         "all": MessageLookupByLibrary.simpleMessage("Все"),
+        "budget": MessageLookupByLibrary.simpleMessage("Бюджет"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "description": MessageLookupByLibrary.simpleMessage("Описание"),
         "doYouReallyWantToLogout":
@@ -33,15 +35,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "movie": MessageLookupByLibrary.simpleMessage("Фильмы"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "originalLanguage":
+            MessageLookupByLibrary.simpleMessage("Исходный язык"),
         "people": MessageLookupByLibrary.simpleMessage("Люди"),
         "personal": MessageLookupByLibrary.simpleMessage("Настройки"),
         "popularPeople":
             MessageLookupByLibrary.simpleMessage("Популярные люди"),
         "readTheRest": MessageLookupByLibrary.simpleMessage("далее"),
+        "recommendations":
+            MessageLookupByLibrary.simpleMessage("Рекоммендации"),
+        "revenue": MessageLookupByLibrary.simpleMessage("Сборы"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "status": MessageLookupByLibrary.simpleMessage("Статус"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("В главных ролях"),

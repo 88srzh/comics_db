@@ -10,6 +10,7 @@
 // ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
 // ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
 
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
@@ -34,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "budget": MessageLookupByLibrary.simpleMessage("Budget"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
@@ -44,16 +46,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "movie": MessageLookupByLibrary.simpleMessage("Movie"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "originalLanguage":
+            MessageLookupByLibrary.simpleMessage("Original Language"),
         "pageHomeSampleCurrentDateTime": m1,
         "pageHomeSamplePlural": m2,
         "people": MessageLookupByLibrary.simpleMessage("People"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "popularPeople": MessageLookupByLibrary.simpleMessage("Popular People"),
         "readTheRest": MessageLookupByLibrary.simpleMessage("read the rest"),
+        "recommendations":
+            MessageLookupByLibrary.simpleMessage("Recommendations"),
+        "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "status": MessageLookupByLibrary.simpleMessage("Status"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("Top Billed Cast"),

@@ -24,6 +24,11 @@
   "readTheRest": "read the rest",
   "reviewBy": "A review by",
   "writtenBy": "Written by",
+  "status": "Status",
+  "originalLanguage": "Original Language",
+  "revenue": "Revenue",
+  "budget": "Budget",
+  "recommendations": "Recommendations",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {

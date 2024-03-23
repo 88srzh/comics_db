@@ -24,5 +24,10 @@
   "readTheRest": "далее",
   "ifNoReviews": "Нету рецензий для {title}. Хотите написать?",
   "reviewBy": "Обзор от",
-  "writtenBy": "Написано"
+  "writtenBy": "Написано",
+  "status": "Статус",
+  "originalLanguage": "Исходный язык",
+  "revenue": "Сборы",
+  "budget": "Бюджет",
+  "recommendations": "Рекоммендации"
 }

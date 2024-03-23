@@ -1,7 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
-import 'intl/messages_all.dart';
+
+// Project imports:
+import 'package:comics_db_app/generated/intl/messages_all.dart';
 
 // **************************************************************************
 // Generator: Flutter Intl IDE plugin
@@ -285,6 +291,56 @@ class S {
     return Intl.message(
       'Written by',
       name: 'writtenBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Original Language`
+  String get originalLanguage {
+    return Intl.message(
+      'Original Language',
+      name: 'originalLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Revenue`
+  String get revenue {
+    return Intl.message(
+      'Revenue',
+      name: 'revenue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Budget`
+  String get budget {
+    return Intl.message(
+      'Budget',
+      name: 'budget',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommendations`
+  String get recommendations {
+    return Intl.message(
+      'Recommendations',
+      name: 'recommendations',
       desc: '',
       args: [],
     );

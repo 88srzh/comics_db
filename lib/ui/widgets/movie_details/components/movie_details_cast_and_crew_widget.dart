@@ -1,19 +1,22 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 // Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsCastWidget extends StatelessWidget {
-  const MovieDetailsCastWidget({super.key});
+  final String topBilledCast;
+  const MovieDetailsCastWidget({super.key, required this.topBilledCast});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class MovieDetailsCastWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                S.of(context).topBilledCast,
+                topBilledCast,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               InkWell(

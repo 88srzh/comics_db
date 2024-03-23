@@ -1,3 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:comics_db_app/domain/entity/movie_details.dart';
 import 'package:comics_db_app/domain/entity/movie_details_credits.dart';
 import 'package:comics_db_app/domain/entity/movie_details_external_ids.dart';
@@ -8,12 +15,10 @@ import 'package:comics_db_app/domain/entity/movie_details_similar.dart';
 import 'package:comics_db_app/domain/entity/movie_details_videos.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsKeywordsWidget extends StatelessWidget {
-  const MovieDetailsKeywordsWidget({super.key});
+  final String keywords;
+  const MovieDetailsKeywordsWidget({super.key, required this.keywords});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,7 @@ class MovieDetailsKeywordsWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(S.of(context).keywords, style: Theme.of(context).textTheme.titleMedium),
+                Text(keywords, style: Theme.of(context).textTheme.titleMedium),
               ],
             ),
             _MovieKeywordWidget(cubit: cubit, keywordData: keywordData),

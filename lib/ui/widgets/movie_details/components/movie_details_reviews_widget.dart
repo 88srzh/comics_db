@@ -1,23 +1,27 @@
 // Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_description_expandable_text_widget.dart';
 import 'package:comics_db_app/ui/components/no_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
-import 'package:flutter/material.dart';
+
 // import 'generated/l10n.dart';
 
-// Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-// Project imports:
-import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsReviewsWidget extends StatelessWidget {
-  const MovieDetailsReviewsWidget({super.key});
+  final String reviews;
+  const MovieDetailsReviewsWidget({super.key, required this.reviews});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                S.of(context).reviews,
+                reviews,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               InkWell(

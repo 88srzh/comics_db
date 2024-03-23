@@ -9,7 +9,8 @@ import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
 class MovieDetailsOtherInformationWidget extends StatelessWidget {
-  const MovieDetailsOtherInformationWidget({super.key});
+  final String statusText;
+  const MovieDetailsOtherInformationWidget({super.key, required this.statusText});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,10 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text('Status', style: Theme.of(context).textTheme.labelMedium),
+              Text(statusText, style: Theme.of(context).textTheme.labelMedium),
               Text(status, style: Theme.of(context).textTheme.labelSmall),
               const SizedBox(height: 10.0),
-              Text('Revenue', style: Theme.of(context).textTheme.labelMedium),
+              Text(S.of(context).revenue, style: Theme.of(context).textTheme.labelMedium),
               Text(S.of(context).totalAmount(revenue.toDouble()), style: Theme.of(context).textTheme.labelSmall),
               // Text(),
             ],
@@ -37,10 +38,10 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
           const SizedBox(width: 50.0),
           Column(
             children: [
-              Text('Original Language', style: Theme.of(context).textTheme.labelMedium),
+              Text(S.of(context).originalLanguage, style: Theme.of(context).textTheme.labelMedium),
               Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
               const SizedBox(height: 10.0),
-              Text('Budget', style: Theme.of(context).textTheme.labelMedium),
+              Text(S.of(context).budget, style: Theme.of(context).textTheme.labelMedium),
               Text(S.of(context).totalAmount(budget.toDouble()), style: Theme.of(context).textTheme.labelSmall),
             ],
           )
