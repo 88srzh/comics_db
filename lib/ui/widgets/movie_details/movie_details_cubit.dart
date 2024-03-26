@@ -3,7 +3,6 @@ import 'dart:async';
 
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/external_ids_data.dart';
-import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_keywords_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +71,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
           budget: 0,
           revenue: 0,
           status: '',
-          keywords: [],
+          keywords: '',
           // similar: [],
           // collection: [],
         )) {
@@ -181,6 +180,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
     final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
     final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
     final bool isLoading = data.isLoading;
+    final String keywordString = makeKeywords(details);
 
     // if (details.belongsToCollection != null) {
     //   data.collectionData = details.belongsToCollection!.map((e) => BelongsToCollectionData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
@@ -199,8 +199,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
         .map((e) => MovieDetailsAllVideosData(
             name: e.name, key: e.key, site: e.site, size: e.size, type: e.type, official: e.official, publishedAt: e.publishedAt, id: e.id))
         .toList();
-    final List<MovieDetailsKeywordsData> keywords =
-        data.keywordsData = details.keywords.keywords.map((e) => MovieDetailsKeywordsData(id: e.id, name: e.name)).toList();
 
     final List<MovieDetailsReviewsData> reviews = data.reviewsData = details.reviews.result
         .map((e) => MovieDetailsReviewsData(
@@ -246,7 +244,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsCubitState> {
       budget: budget,
       revenue: revenue,
       status: status,
-      keywords: keywords,
+      keywords: keywordString,
 
       // similar: similar,
       // collection: collection,

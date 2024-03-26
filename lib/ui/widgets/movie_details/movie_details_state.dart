@@ -36,7 +36,8 @@ class MovieDetailsCubitState {
   final int budget;
   final int revenue;
   final String status;
-  final List<MovieDetailsKeywordsData> keywords;
+  // final List<MovieDetailsKeywordsData> keywords;
+  final String keywords;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;
 
@@ -195,7 +196,8 @@ class MovieDetailsCubitState {
     int? budget,
     int? revenue,
     String? status,
-    List<MovieDetailsKeywordsData>? keywords,
+    // List<MovieDetailsKeywordsData>? keywords,
+    String? keywords,
 
     // List<MovieDetailsSimilarData>? similar,
     // List<BelongsToCollectionData>? collection,
