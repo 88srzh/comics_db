@@ -25,7 +25,7 @@ class MovieDetailsKeywordsWidget extends StatelessWidget {
               Text(keywords, style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
-          Text(keywordsList, style: Theme.of(context).textTheme.labelSmall)
+          Text(keywordsList, style: Theme.of(context).textTheme.labelSmall),
         ],
       ),
     );
