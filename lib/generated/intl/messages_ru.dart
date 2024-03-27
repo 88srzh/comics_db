@@ -41,8 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularPeople":
             MessageLookupByLibrary.simpleMessage("Популярные люди"),
         "readTheRest": MessageLookupByLibrary.simpleMessage("далее"),
-        "recommendations":
-            MessageLookupByLibrary.simpleMessage("Рекоммендации"),
+        "recommendations": MessageLookupByLibrary.simpleMessage("Рекомендации"),
         "revenue": MessageLookupByLibrary.simpleMessage("Сборы"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),

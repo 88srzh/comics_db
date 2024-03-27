@@ -8,6 +8,7 @@ import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsFullReviewsListWidget extends StatefulWidget {
   const MovieDetailsFullReviewsListWidget({super.key});
@@ -22,8 +23,6 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final locale = Localizations.localeOf(context);
-    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
     Future<String> loadingDelay() {
       Duration duration = const Duration(seconds: 1);
 
@@ -31,6 +30,8 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
     }
 
     lazyValue = loadingDelay();
+    final locale = Localizations.localeOf(context);
+    context.read<MovieDetailsCubit>().setupMovieDetailsLocale(context, locale.languageCode);
   }
 
   @override
@@ -39,9 +40,13 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
     if (reviewsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Reviews',
-        onTapRu: () {},
-        onTapEn: () {},
+        title: S.of(context).reviews,
+        onTapRu: () => setState(() {
+          S.load(const Locale('ru'));
+        }),
+        onTapEn: () => setState(() {
+          S.load(const Locale('en'));
+        }),
       ),
       body: _MovieDetailsFullReviewsColumnWidget(reviewsData: reviewsData),
     );
@@ -92,6 +97,8 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String reviewBy = S.of(context).reviewBy;
+    final String writtenBy = S.of(context).writtenBy;
     final cubit = context.read<MovieDetailsCubit>();
     final reviewsDataIndex = cubit.data.reviewsData[index];
     final String author = reviewsDataIndex.author;
@@ -122,7 +129,7 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'A review by $author',
+                      '$reviewBy $author',
                       style: TextStyle(
                         color: textColor,
                         fontSize: 17,
@@ -159,7 +166,7 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
                     const SizedBox(width: 5.0),
                     Row(
                       children: [
-                        Text('Written by ', style: Theme.of(context).textTheme.headlineMedium),
+                        Text('$writtenBy ', style: Theme.of(context).textTheme.headlineMedium),
                         Text(
                           author,
                           style: TextStyle(
@@ -185,7 +192,7 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.95,
-                    child: CustomDescriptionExpandableText(description: content, maxLines: 6, expandedText: ' read the rest.'),
+                    child: CustomDescriptionExpandableText(description: content, maxLines: 6, expandedText: S.of(context).readTheRest),
                   ),
                 ),
               ],
