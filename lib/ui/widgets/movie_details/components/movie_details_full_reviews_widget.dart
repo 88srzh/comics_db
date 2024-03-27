@@ -99,6 +99,7 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final String reviewBy = S.of(context).reviewBy;
     final String writtenBy = S.of(context).writtenBy;
+    final String on = S.of(context).on;
     final cubit = context.read<MovieDetailsCubit>();
     final reviewsDataIndex = cubit.data.reviewsData[index];
     final String author = reviewsDataIndex.author;
@@ -174,7 +175,7 @@ class _MovieDetailsFullReviewsItemWidget extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Text(' on $createdAt', style: Theme.of(context).textTheme.headlineMedium),
+                        Text(' $on  $createdAt', style: Theme.of(context).textTheme.headlineMedium),
                       ],
                     ),
                   ],

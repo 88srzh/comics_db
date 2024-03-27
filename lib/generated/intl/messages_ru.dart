@@ -30,10 +30,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Избранное"),
+        "fullCast": MessageLookupByLibrary.simpleMessage("Актерский состав"),
         "keywords": MessageLookupByLibrary.simpleMessage("Ключевые слова"),
         "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "movie": MessageLookupByLibrary.simpleMessage("Фильмы"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "on": MessageLookupByLibrary.simpleMessage(" "),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Исходный язык"),
         "people": MessageLookupByLibrary.simpleMessage("Люди"),

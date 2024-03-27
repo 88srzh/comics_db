@@ -10,6 +10,7 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 
 class MovieDetailsFullCastAndCrewWidget extends StatefulWidget {
   const MovieDetailsFullCastAndCrewWidget({super.key});
@@ -33,9 +34,14 @@ class _MovieDetailsFullCastAndCrewWidgetState extends State<MovieDetailsFullCast
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Full Cast',
-        onTapRu: () {},
-        onTapEn: () {},
+        title: S.of(context).fullCast,
+        // TODO may be change only to customAppBarWidget
+        onTapRu: () => setState(() {
+          S.load(const Locale('ru'));
+        }),
+        onTapEn: () => setState(() {
+          S.load(const Locale('en'));
+        }),
       ),
       body: ColoredBox(
         color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,

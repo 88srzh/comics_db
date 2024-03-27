@@ -340,6 +340,26 @@ class S {
     );
   }
 
+  /// `on`
+  String get on {
+    return Intl.message(
+      'on',
+      name: 'on',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full cast`
+  String get fullCast {
+    return Intl.message(
+      'Full cast',
+      name: 'fullCast',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We do not have any reviews for {title}. Would you like to write one?`
   String ifNowReviews(Object title) {
     return Intl.message(
