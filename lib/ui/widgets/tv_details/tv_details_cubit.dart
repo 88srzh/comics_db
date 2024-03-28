@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -82,7 +81,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           peopleData: [],
           recommendationsData: [],
           videosData: [],
-          // ratingsData: [],
           rating: '',
         )) {
     emit(TvDetailsCubitState(
@@ -125,7 +123,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       peopleData: state.peopleData,
       recommendationsData: state.recommendationsData,
       videosData: state.videosData,
-      // ratingsData: state.ratingsData,
       rating: state.rating,
     ));
   }
@@ -177,18 +174,22 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     if (details == null) {
       return;
     }
-    // TODO add all to var
-    data.name = details.name;
-    data.overview = details.overview;
-    data.posterPath = details.posterPath ?? '';
-    data.backdropPath = details.backdropPath ?? '';
-    data.tagline = details.tagline;
-    final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
-    // var ratingsData = data.ratingsData =
-    //     details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList() ?? null;
-    final String? rating = makeRating(details);
 
-    data.actorsData = details.credits.cast
+    final String name = data.name = details.name;
+    final String overview = data.overview = details.overview;
+    final String posterPath = data.posterPath = details.posterPath ?? '';
+    final String backdropPath = data.backdropPath = details.backdropPath ?? '';
+    final String tagline = data.tagline = details.tagline;
+    final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
+    final String? rating = makeRating(details);
+    final String genres = data.genres = makeGenres(details);
+    final List<List<TvDetailsPeopleData>> peopleData = data.peopleData = makePeopleData(details);
+    final List<TvDetailsVideosData>? videosData = data.videosData = makeTrailerKey(details);
+    final List<List<TvDetailsCreatedByData>> createdByData = data.createdByData = makeCreatedByData(details);
+    final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
+    final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
+
+    var actorsData = data.actorsData = details.credits.cast
         .map((e) => TvDetailsActorData(
               name: e.name,
               character: e.character,
@@ -196,8 +197,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
               id: e.id,
             ))
         .toList();
-    data.peopleData = makePeopleData(details);
-    data.genres = makeGenres(details);
 
     data.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
@@ -205,37 +204,21 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       voteAverage: details.voteAverage,
     );
 
-    data.favoriteData.isFavorite = isFavorite;
-    data.watchlistData.isWatchlist = isWatchlist;
-
-    data.recommendationsData = details.recommendations.recommendationsList
+    var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
-    data.videosData = makeTrailerKey(details);
-    data.createdByData = makeCreatedByData(details);
-
-    var isFavoriteData = data.favoriteData.isFavorite;
-    var isWatchlistData = data.watchlistData.isWatchlist;
-    var actorsData = data.actorsData;
-    var peopleData = data.peopleData;
-    var createdByData = data.createdByData;
-
-    var recommendationsData = data.recommendationsData;
-    var videosData = data.videosData;
-
-    // var createdBy = makeCreatedBy(details);
 
     final newState = state.copyWith(
-      posterPath: data.posterPath,
-      backdropPath: data.backdropPath,
-      overview: data.overview,
-      name: data.name,
-      tagline: data.tagline,
+      posterPath: posterPath,
+      backdropPath: backdropPath,
+      overview: overview,
+      name: name,
+      tagline: tagline,
       firstAirDate: firstAirDate,
       voteCount: data.tvDetailsScoresData.voteCount,
       popularity: data.tvDetailsScoresData.popularity,
       voteAverage: data.tvDetailsScoresData.voteAverage,
-      genres: data.genres,
+      genres: genres,
       peopleData: peopleData,
       actorsData: actorsData,
       isFavorite: isFavoriteData,
@@ -243,9 +226,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       recommendationsData: recommendationsData,
       videosData: videosData,
       createdBy: createdByData,
-      // ratingsData: ratingsData,
       rating: rating,
-
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);
