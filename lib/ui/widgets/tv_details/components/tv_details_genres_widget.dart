@@ -9,8 +9,8 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
-class GenresWidget extends StatelessWidget {
-  const GenresWidget({super.key});
+class TvDetailsGenresWidget extends StatelessWidget {
+  const TvDetailsGenresWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
