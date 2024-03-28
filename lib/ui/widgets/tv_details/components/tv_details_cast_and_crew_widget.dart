@@ -16,8 +16,8 @@ import 'package:comics_db_app/ui/components/loading_indicator_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
-class TVCastWidget extends StatelessWidget {
-  const TVCastWidget({super.key});
+class TvDetailsCastWidget extends StatelessWidget {
+  const TvDetailsCastWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

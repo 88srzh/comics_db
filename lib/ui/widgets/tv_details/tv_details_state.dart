@@ -41,7 +41,9 @@ class TvDetailsCubitState {
   final List<List<TvDetailsPeopleData>> peopleData;
   final List<TvDetailsRecommendationsData> recommendationsData;
   final List<TvDetailsVideosData> videosData;
-  final List<TvDetailsContentRatingsData> ratingsData;
+
+  // final List<TvDetailsContentRatingsData> ratingsData;
+  final String? rating;
 
   const TvDetailsCubitState({
     required this.posterPath,
@@ -84,7 +86,8 @@ class TvDetailsCubitState {
     required this.peopleData,
     required this.recommendationsData,
     required this.videosData,
-    required this.ratingsData,
+    // required this.ratingsData,
+    required this.rating,
   });
 
   @override
@@ -132,7 +135,9 @@ class TvDetailsCubitState {
           peopleData == other.peopleData &&
           recommendationsData == other.recommendationsData &&
           videosData == other.videosData &&
-          ratingsData == other.ratingsData;
+          rating == other.rating;
+
+  // ratingsData == other.ratingsData;
 
   @override
   int get hashCode =>
@@ -176,7 +181,8 @@ class TvDetailsCubitState {
       peopleData.hashCode ^
       recommendationsData.hashCode ^
       videosData.hashCode ^
-      ratingsData.hashCode;
+      rating.hashCode;
+      // ratingsData.hashCode;
 
   TvDetailsCubitState copyWith({
     String? posterPath,
@@ -219,7 +225,8 @@ class TvDetailsCubitState {
     List<List<TvDetailsPeopleData>>? peopleData,
     List<TvDetailsRecommendationsData>? recommendationsData,
     List<TvDetailsVideosData>? videosData,
-    List<TvDetailsContentRatingsData>? ratingsData,
+    // List<TvDetailsContentRatingsData>? ratingsData,
+    String? rating,
   }) {
     return TvDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -262,7 +269,8 @@ class TvDetailsCubitState {
       peopleData: peopleData ?? this.peopleData,
       recommendationsData: recommendationsData ?? this.recommendationsData,
       videosData: videosData ?? this.videosData,
-      ratingsData: ratingsData ?? this.ratingsData,
+      // ratingsData: ratingsData ?? this.ratingsData,
+      rating: rating ?? this.rating,
     );
   }
 }

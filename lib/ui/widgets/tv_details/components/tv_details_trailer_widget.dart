@@ -1,41 +1,75 @@
-import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
-import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
-import 'package:comics_db_app/ui/widgets/tv_trailer/tv_trailer_widget.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class TvTrailerListWidget extends StatelessWidget {
-  const TvTrailerListWidget({
+// Package imports:
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+// Project imports:
+import 'package:comics_db_app/resources/resources.dart';
+
+class TvTrailerYoutubeWidget extends StatefulWidget {
+  final String? youtubeKey;
+
+  const TvTrailerYoutubeWidget({
     super.key,
+    required this.youtubeKey,
   });
 
   @override
+  State<TvTrailerYoutubeWidget> createState() => _TvTrailerYoutubeWidgetState();
+}
+
+class _TvTrailerYoutubeWidgetState extends State<TvTrailerYoutubeWidget> {
+  late final YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.youtubeKey ?? '',
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<TvDetailsCubit>();
-    late String youtubeKey = cubit.state.videosData.first.key;
-    if (cubit.state.videosData.isEmpty) return const SizedBox.shrink();
-    return InkWell(
-      onTap: () {
-        showDialog<Widget>(
-          context: context,
-          builder: (context) => Stack(
-            children: [
-              Positioned(
-                top: 250.0,
-                child: TvDetailsTrailerWidget(tvYoutubeKey: youtubeKey),
-              ),
-            ],
-          ),
-        );
-      },
-      child:  Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    // var tvTrailerData =
+    //     context.select((TvDetailsModel model) => model.tvData.tvTrailedData);
+    // final tvTrailerKey = tvTrailerData.trailerKey;
+    // var cubit = context.watch<TvDetailsCubit>();
+    const tvTrailerKey = '';
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomTvDetailsIconWidget(icon: MdiIcons.youtube),
-          const SizedBox(width: 4),
-          const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: 'Play Trailer'),
+          Text(
+            'Trailer',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 8.0),
+          tvTrailerKey.isNotEmpty
+              ? YoutubePlayerBuilder(
+                  player: YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                  ),
+                  builder: (context, player) {
+                    return Column(
+                      children: [
+                        player,
+                      ],
+                    );
+                  },
+                )
+              : Image.asset(
+                  AppImages.noVideoAvailable,
+                  width: double.infinity,
+                ),
         ],
       ),
     );

@@ -1,6 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/movie_details/components/director_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/top_poster_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_top_poster_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_favorite_floating_action_button.dart';
 import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/cast_and_crew_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/description_widget.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/title_genres_rating_vote_average_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_cast_and_crew_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_description_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
@@ -65,11 +65,11 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               children: const [
                 Column(
                   children: [
-                    TvTopPosterWidget(),
-                    TvTitleGenresRatingVoteAverageWidget(),
-                    TvDirectorWidget(),
-                    TvDescriptionWidget(),
-                    TVCastWidget(),
+                    TvDetailsTopPosterWidget(),
+                    TvDetailsTitleGenresRatingVoteAverageWidget(),
+                    TvDetailsDirectorWidget(),
+                    TvDetailsDescriptionWidget(),
+                    TvDetailsCastWidget(),
                     TvDetailsRecommendationsWidget(),
                   ],
                 ),

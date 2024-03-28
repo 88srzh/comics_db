@@ -16,10 +16,11 @@ class GenresWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
     final genres = cubit.state.genres;
-    final rating = cubit.state.ratingsData.first.rating;
+    final rating = cubit.state.rating;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        rating != null ?
         Container(
           decoration: BoxDecoration(
             border: Border.all(
@@ -37,7 +38,7 @@ class GenresWidget extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ) : const SizedBox.shrink(),
         const SizedBox(width: 5.0),
         Text(
           genres,

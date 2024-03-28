@@ -1,6 +1,5 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_content_ratings_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +82,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           peopleData: [],
           recommendationsData: [],
           videosData: [],
-          ratingsData: [],
+          // ratingsData: [],
+          rating: '',
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -125,7 +125,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       peopleData: state.peopleData,
       recommendationsData: state.recommendationsData,
       videosData: state.videosData,
-      ratingsData: state.ratingsData,
+      // ratingsData: state.ratingsData,
+      rating: state.rating,
     ));
   }
 
@@ -183,8 +184,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.backdropPath = details.backdropPath ?? '';
     data.tagline = details.tagline;
     final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
-    var ratingsData = data.ratingsData =
-        details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList();
+    // var ratingsData = data.ratingsData =
+    //     details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList() ?? null;
+    final String? rating = makeRating(details);
 
     data.actorsData = details.credits.cast
         .map((e) => TvDetailsActorData(
@@ -241,7 +243,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       recommendationsData: recommendationsData,
       videosData: videosData,
       createdBy: createdByData,
-      ratingsData: ratingsData,
+      // ratingsData: ratingsData,
+      rating: rating,
 
       // videos: data.tvTrailedData.trailerKey,
     );
@@ -269,6 +272,18 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       texts.add(genresNames.join(', '));
     }
     return texts.join(' ');
+  }
+
+  String? makeRating(TVDetails details) {
+    var texts = <String>[];
+    if (details.contentRatings.results.isNotEmpty) {
+      var ratings = <String>[];
+      for (var rating in details.contentRatings.results) {
+        ratings.add(rating.rating);
+      }
+      texts.add(ratings.first);
+    }
+    return texts.join();
   }
 
   List<List<TvDetailsPeopleData>> makePeopleData(TVDetails details) {
@@ -320,7 +335,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var texts = <String>[];
     final firstAirDate = details.firstAirDate;
     if (firstAirDate != null) {
-      // texts.add(_dateFormat.format(firstAirDate));
       texts.add(DateFormat.y().format(firstAirDate));
     }
     return texts.join(' ');

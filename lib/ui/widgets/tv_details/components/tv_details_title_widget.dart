@@ -2,8 +2,8 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TitleWidget extends StatelessWidget {
-  const TitleWidget({
+class TvDetailsTitleWidget extends StatelessWidget {
+  const TvDetailsTitleWidget({
     super.key,
   });
 
