@@ -23,7 +23,6 @@ class MovieDetailsCubitState {
   final List<MovieDetailsRecommendationsData> recommendations;
   final List<MovieDetailsVideosData> videos;
   final List<MovieDetailsAllVideosData> allVideos;
-  // final String? facebook;
   final MovieDetailsExternalIdsData externalIds;
   final String? facebookId;
   final String? imdbId;
@@ -36,7 +35,6 @@ class MovieDetailsCubitState {
   final int budget;
   final int revenue;
   final String status;
-  // final List<MovieDetailsKeywordsData> keywords;
   final String keywords;
   // final List<MovieDetailsSimilarData> similar;
   // final List<BelongsToCollectionData>? collection;

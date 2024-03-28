@@ -14,7 +14,9 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
       episodeRunTime: (json['episode_run_time'] as List<dynamic>)
           .map((e) => e as int)
           .toList(),
-      firstAirDate: json['first_air_date'] as String?,
+      firstAirDate: json['first_air_date'] == null
+          ? null
+          : DateTime.parse(json['first_air_date'] as String),
       genres: (json['genres'] as List<dynamic>)
           .map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -76,7 +78,7 @@ Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
       'backdrop_path': instance.backdropPath,
       'created_by': instance.createdBy.map((e) => e.toJson()).toList(),
       'episode_run_time': instance.episodeRunTime,
-      'first_air_date': instance.firstAirDate,
+      'first_air_date': instance.firstAirDate?.toIso8601String(),
       'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
       'id': instance.id,

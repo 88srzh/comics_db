@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_content_ratings_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -24,7 +25,7 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos
 part 'tv_details_state.dart';
 
 class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
-  late DateFormat dateFormat;
+  late DateFormat _dateFormat;
   final data = TvDetailsData();
   final movieAndTvClient = MovieAndTvApiClient();
   final int tvId;
@@ -128,13 +129,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     ));
   }
 
-  String stringFromDate(DateTime? date) => date != null ? dateFormat.format(date) : '';
+  String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupLocale(BuildContext context, String localeTag) async {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
-    dateFormat = DateFormat.yMMMd(localeTag);
+    _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null, false, false);
     await loadTvDetails(context);
   }
@@ -166,7 +167,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
-    dateFormat = DateFormat.yMMMd(localeTag);
+    _dateFormat = DateFormat.yMMMd(localeTag);
     updateData(null, false, false);
     await loadTvDetails(context);
   }
@@ -181,9 +182,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     data.posterPath = details.posterPath ?? '';
     data.backdropPath = details.backdropPath ?? '';
     data.tagline = details.tagline;
-    var firstAirDate = data.firstAirDate = details.firstAirDate ?? 'No first';
-    var ratingsData = data.ratingsData = details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList();
-
+    final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
+    var ratingsData = data.ratingsData =
+        details.contentRatings.results.map((e) => TvDetailsContentRatingsData(descriptors: e.descriptors, iso: e.iso, rating: e.rating)).toList();
 
     data.actorsData = details.credits.cast
         .map((e) => TvDetailsActorData(
@@ -313,5 +314,15 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     } on ApiClientException catch (e) {
       _handleApiClientException(e);
     }
+  }
+
+  String makeFirstAirDate(TVDetails details) {
+    var texts = <String>[];
+    final firstAirDate = details.firstAirDate;
+    if (firstAirDate != null) {
+      // texts.add(_dateFormat.format(firstAirDate));
+      texts.add(DateFormat.y().format(firstAirDate));
+    }
+    return texts.join(' ');
   }
 }
