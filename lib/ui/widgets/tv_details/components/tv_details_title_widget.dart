@@ -2,8 +2,8 @@ import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TitleWidget extends StatelessWidget {
-  const TitleWidget({
+class TvDetailsTitleWidget extends StatelessWidget {
+  const TvDetailsTitleWidget({
     super.key,
   });
 
@@ -22,7 +22,8 @@ class TitleWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(right: 2.0),
                 child: Text(
-                  '$name (${firstAirDate.substring(0, 4)})',
+                  '$name ($firstAirDate)',
+                  // '$name (${firstAirDate.substring(0, 4)})',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

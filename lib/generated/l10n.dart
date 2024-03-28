@@ -1,13 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:intl/intl.dart';
-
-// Project imports:
-import 'package:comics_db_app/generated/intl/messages_all.dart';
+import 'intl/messages_all.dart';
 
 // **************************************************************************
 // Generator: Flutter Intl IDE plugin
@@ -341,6 +335,26 @@ class S {
     return Intl.message(
       'Recommendations',
       name: 'recommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `on`
+  String get on {
+    return Intl.message(
+      'on',
+      name: 'on',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full cast`
+  String get fullCast {
+    return Intl.message(
+      'Full cast',
+      name: 'fullCast',
       desc: '',
       args: [],
     );

@@ -30,10 +30,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Избранное"),
+        "fullCast": MessageLookupByLibrary.simpleMessage("Актерский состав"),
         "keywords": MessageLookupByLibrary.simpleMessage("Ключевые слова"),
         "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "movie": MessageLookupByLibrary.simpleMessage("Фильмы"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "on": MessageLookupByLibrary.simpleMessage(" "),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Исходный язык"),
         "people": MessageLookupByLibrary.simpleMessage("Люди"),
@@ -41,8 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularPeople":
             MessageLookupByLibrary.simpleMessage("Популярные люди"),
         "readTheRest": MessageLookupByLibrary.simpleMessage("далее"),
-        "recommendations":
-            MessageLookupByLibrary.simpleMessage("Рекоммендации"),
+        "recommendations": MessageLookupByLibrary.simpleMessage("Рекомендации"),
         "revenue": MessageLookupByLibrary.simpleMessage("Сборы"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),

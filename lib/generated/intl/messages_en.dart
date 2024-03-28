@@ -40,11 +40,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
+        "fullCast": MessageLookupByLibrary.simpleMessage("Full cast"),
         "ifNowReviews": m0,
         "keywords": MessageLookupByLibrary.simpleMessage("Keywords"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "movie": MessageLookupByLibrary.simpleMessage("Movie"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "on": MessageLookupByLibrary.simpleMessage("on"),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Original Language"),
         "pageHomeSampleCurrentDateTime": m1,

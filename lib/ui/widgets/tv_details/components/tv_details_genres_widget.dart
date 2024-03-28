@@ -9,17 +9,18 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
-class GenresWidget extends StatelessWidget {
-  const GenresWidget({super.key});
+class TvDetailsGenresWidget extends StatelessWidget {
+  const TvDetailsGenresWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
     final genres = cubit.state.genres;
-    final rating = cubit.state.ratingsData.first.rating;
+    final rating = cubit.state.rating;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        rating != null ?
         Container(
           decoration: BoxDecoration(
             border: Border.all(
@@ -37,7 +38,7 @@ class GenresWidget extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ) : const SizedBox.shrink(),
         const SizedBox(width: 5.0),
         Text(
           genres,

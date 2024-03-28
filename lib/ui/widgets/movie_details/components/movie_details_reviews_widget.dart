@@ -15,10 +15,6 @@ import 'package:comics_db_app/ui/components/no_reviews_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_reviews_data.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/movie_details_cubit.dart';
 
-// import 'generated/l10n.dart';
-
-
-
 class MovieDetailsReviewsWidget extends StatelessWidget {
   final String reviews;
   const MovieDetailsReviewsWidget({super.key, required this.reviews});

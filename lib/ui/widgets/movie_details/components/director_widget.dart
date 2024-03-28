@@ -1,12 +1,12 @@
-import 'package:comics_db_app/ui/widgets/tv_details/components/created_by_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
-class TvDirectorWidget extends StatelessWidget {
-  const TvDirectorWidget({super.key});
+class TvDetailsDirectorWidget extends StatelessWidget {
+  const TvDetailsDirectorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

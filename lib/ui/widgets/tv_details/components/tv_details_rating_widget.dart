@@ -10,8 +10,8 @@ import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
-class RatingsRowWidget extends StatelessWidget {
-  const RatingsRowWidget({
+class TvDetailsRatingsRowWidget extends StatelessWidget {
+  const TvDetailsRatingsRowWidget({
     super.key,
   });
 

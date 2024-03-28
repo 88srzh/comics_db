@@ -29,6 +29,8 @@
   "revenue": "Revenue",
   "budget": "Budget",
   "recommendations": "Recommendations",
+  "on": "on",
+  "fullCast": "Full cast",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {
