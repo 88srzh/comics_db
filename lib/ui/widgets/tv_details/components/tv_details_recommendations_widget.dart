@@ -16,7 +16,8 @@ import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDetailsRecommendationsWidget extends StatelessWidget {
-  const TvDetailsRecommendationsWidget({super.key});
+  final String recommendations;
+  const TvDetailsRecommendationsWidget({super.key, required this.recommendations});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class TvDetailsRecommendationsWidget extends StatelessWidget {
         children: [
           // TODO move to separate custom widget.
           Text(
-            'Recommendations',
+            recommendations,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const _TvDetailsRecommendationsListWidget(),

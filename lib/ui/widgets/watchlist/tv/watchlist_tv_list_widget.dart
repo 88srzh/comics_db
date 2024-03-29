@@ -30,7 +30,6 @@ class _WatchlistTVWidgetState extends State<WatchlistTVWidget> {
     var cubit = context.watch<WatchlistTVCubit>();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Watchlist',
         onTapRu: () {},
         onTapEn: () {},
       ),

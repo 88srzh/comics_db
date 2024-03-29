@@ -38,7 +38,6 @@ class _TrendingWidgetState extends State<TrendingWidget> {
     var cubit = context.watch<TrendingListCubit>();
     return Scaffold(
       appBar: CustomAppBar(
-        title: S.of(context).trending,
         onTapRu: () => setState(() {
           S.load(const Locale('ru'));
         }),

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,8 +10,11 @@ import 'package:comics_db_app/ui/components/custom_description_expandable_text_w
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
 class DescriptionWidget extends StatelessWidget {
+  final String biographyTitle;
+
   const DescriptionWidget({
     super.key,
+    required this.biographyTitle,
   });
 
   @override
@@ -24,7 +28,7 @@ class DescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Biography',
+            biographyTitle,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           // if i have empty biography i will have extra SizedBox
@@ -33,7 +37,7 @@ class DescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: CustomDescriptionExpandableText(description: biography, maxLines: 5, expandedText: '',),
+                child: CustomDescriptionExpandableText(description: biography, maxLines: 5, expandedText: S.of(context).readTheRest),
               ),
             ],
           ),

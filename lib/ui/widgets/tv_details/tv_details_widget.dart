@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/generated/l10n.dart';
+import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/director_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_top_poster_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_favorite_floating_action_button.dart';
 import 'package:comics_db_app/ui/components/custom_rate_floating_action_button.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_cast_and_crew_widget.dart';
@@ -52,7 +53,14 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
-            appBar: const CustomDetailsAppBar(title: ''),
+            appBar: CustomAppBar(
+              onTapRu: () => setState(() {
+                S.load(const Locale('ru'));
+              }),
+              onTapEn: () => setState(() {
+                S.load(const Locale('en'));
+              }),
+            ),
             floatingActionButton: Wrap(
               direction: Axis.horizontal,
               children: [
@@ -62,15 +70,15 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
               ],
             ),
             body: ListView(
-              children: const [
+              children: [
                 Column(
                   children: [
-                    TvDetailsTopPosterWidget(),
-                    TvDetailsTitleGenresRatingVoteAverageWidget(),
-                    TvDetailsDirectorWidget(),
-                    TvDetailsDescriptionWidget(),
-                    TvDetailsCastWidget(),
-                    TvDetailsRecommendationsWidget(),
+                    const TvDetailsTopPosterWidget(),
+                    const TvDetailsTitleGenresRatingVoteAverageWidget(),
+                    TvDetailsDirectorWidget(creator: S.of(context).creator),
+                    TvDetailsDescriptionWidget(overviewTitle: S.of(context).overview),
+                    TvDetailsCastWidget(seriesCast: S.of(context).seriesCast),
+                    TvDetailsRecommendationsWidget(recommendations: S.of(context).recommendations),
                   ],
                 ),
               ],

@@ -24,20 +24,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Аккаунт"),
         "all": MessageLookupByLibrary.simpleMessage("Все"),
+        "biography": MessageLookupByLibrary.simpleMessage("Биография"),
         "budget": MessageLookupByLibrary.simpleMessage("Бюджет"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "creator": MessageLookupByLibrary.simpleMessage("Создатель"),
         "description": MessageLookupByLibrary.simpleMessage("Описание"),
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
         "favorites": MessageLookupByLibrary.simpleMessage("Избранное"),
         "fullCast": MessageLookupByLibrary.simpleMessage("Актерский состав"),
         "keywords": MessageLookupByLibrary.simpleMessage("Ключевые слова"),
+        "knownFor": MessageLookupByLibrary.simpleMessage("Известность за"),
         "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "movie": MessageLookupByLibrary.simpleMessage("Фильмы"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "on": MessageLookupByLibrary.simpleMessage(" "),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Исходный язык"),
+        "overview": MessageLookupByLibrary.simpleMessage("Обзор"),
         "people": MessageLookupByLibrary.simpleMessage("Люди"),
         "personal": MessageLookupByLibrary.simpleMessage("Настройки"),
         "popularPeople":
@@ -48,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
+        "seriesCast":
+            MessageLookupByLibrary.simpleMessage("Актерский состав сериала"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "status": MessageLookupByLibrary.simpleMessage("Статус"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),

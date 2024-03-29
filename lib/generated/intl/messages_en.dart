@@ -34,8 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "biography": MessageLookupByLibrary.simpleMessage("Biography"),
         "budget": MessageLookupByLibrary.simpleMessage("Budget"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "creator": MessageLookupByLibrary.simpleMessage("Creator"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
@@ -43,12 +45,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullCast": MessageLookupByLibrary.simpleMessage("Full cast"),
         "ifNowReviews": m0,
         "keywords": MessageLookupByLibrary.simpleMessage("Keywords"),
+        "knownFor": MessageLookupByLibrary.simpleMessage("Known For"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "movie": MessageLookupByLibrary.simpleMessage("Movie"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "on": MessageLookupByLibrary.simpleMessage("on"),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Original Language"),
+        "overview": MessageLookupByLibrary.simpleMessage("Overview"),
         "pageHomeSampleCurrentDateTime": m1,
         "pageHomeSamplePlural": m2,
         "people": MessageLookupByLibrary.simpleMessage("People"),
@@ -61,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
+        "seriesCast": MessageLookupByLibrary.simpleMessage("Series Cast"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),

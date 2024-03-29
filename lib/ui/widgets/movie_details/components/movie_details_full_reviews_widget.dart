@@ -40,7 +40,6 @@ class _MovieDetailsFullReviewsListWidgetState extends State<MovieDetailsFullRevi
     if (reviewsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: CustomAppBar(
-        title: S.of(context).reviews,
         onTapRu: () => setState(() {
           S.load(const Locale('ru'));
         }),

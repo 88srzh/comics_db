@@ -9,11 +9,10 @@ import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final String title;
   final GestureTapCallback onTapRu;
   final GestureTapCallback onTapEn;
 
-  const CustomAppBar({super.key, required this.title, required this.onTapRu, required this.onTapEn});
+  const CustomAppBar({super.key, required this.onTapRu, required this.onTapEn});
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -28,12 +27,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
     // var cubit = context.read<AccountDetailsCubit>();
     // final locale = Localizations.localeOf(context);
     return AppBar(
-      title: Text(
-        widget.title,
-        style: TextStyle(
-          color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
-        ),
-      ),
       actions: [
         CustomAppBarLanguageContainerWidget(
           onTap: widget.onTapRu,
