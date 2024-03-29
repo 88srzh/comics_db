@@ -41,7 +41,6 @@ class _AccountWidgetState extends State<AccountWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: S.of(context).account,
         onTapRu: () => setState(() {
           S.load(const Locale('ru'));
         }),

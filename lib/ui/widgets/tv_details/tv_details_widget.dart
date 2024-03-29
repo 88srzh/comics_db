@@ -54,7 +54,6 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: CustomAppBar(
-              title: '',
               onTapRu: () => setState(() {
                 S.load(const Locale('ru'));
               }),

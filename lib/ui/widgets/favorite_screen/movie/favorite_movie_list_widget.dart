@@ -46,7 +46,6 @@ class _FavoriteMovieListWidgetState extends State<FavoriteMovieListWidget> {
         }),
       ),
       appBar: CustomAppBar(
-        title: 'Favorite Movies',
         onTapRu: () {},
         onTapEn: () => setState(() {}),
       ),

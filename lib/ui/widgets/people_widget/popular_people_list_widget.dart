@@ -38,7 +38,6 @@ class _PopularPeopleListWidgetState extends State<PopularPeopleListWidget> {
     var cubit = context.watch<PeopleListCubit>();
     return Scaffold(
       appBar: CustomAppBar(
-        title: S.of(context).popularPeople,
         onTapRu: () => setState(() {
           S.load(const Locale('ru'));
         }),

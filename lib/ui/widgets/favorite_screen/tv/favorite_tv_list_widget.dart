@@ -44,7 +44,6 @@ class _FavoriteTvListWidgetState extends State<FavoriteTvListWidget> {
         }),
       ),
       appBar: CustomAppBar(
-        title: 'Favorite TV Shows',
         onTapRu: () {},
         onTapEn: () {},
       ),

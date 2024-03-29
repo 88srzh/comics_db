@@ -36,7 +36,6 @@ class _WatchlistMovieWidgetState extends State<WatchlistMovieWidget> {
     final locale = Localizations.localeOf(context);
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Watchlist',
         onTapRu: () {},
         onTapEn: () {},
       ),

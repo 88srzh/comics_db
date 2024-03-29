@@ -34,7 +34,6 @@ class _MovieDetailsFullCastAndCrewWidgetState extends State<MovieDetailsFullCast
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: CustomAppBar(
-        title: S.of(context).fullCast,
         // TODO may be change only to customAppBarWidget
         onTapRu: () => setState(() {
           S.load(const Locale('ru'));

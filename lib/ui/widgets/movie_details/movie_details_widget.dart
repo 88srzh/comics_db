@@ -56,7 +56,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: CustomAppBar(
-              title: S.of(context).movie,
               onTapRu: () => setState(() {
                 S.load(const Locale('ru'));
               }),

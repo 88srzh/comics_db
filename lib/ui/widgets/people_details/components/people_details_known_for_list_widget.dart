@@ -37,7 +37,6 @@ class _PeopleDetailsKnownForListWidgetState extends State<PeopleDetailsKnownForL
     if (characterData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Known For',
         onTapRu: () {},
         onTapEn: () {},
       ),
