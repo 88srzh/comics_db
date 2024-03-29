@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "all": MessageLookupByLibrary.simpleMessage("Все"),
         "budget": MessageLookupByLibrary.simpleMessage("Бюджет"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "creator": MessageLookupByLibrary.simpleMessage("Создатель"),
         "description": MessageLookupByLibrary.simpleMessage("Описание"),
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
@@ -38,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "on": MessageLookupByLibrary.simpleMessage(" "),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Исходный язык"),
+        "overview": MessageLookupByLibrary.simpleMessage("Обзор"),
         "people": MessageLookupByLibrary.simpleMessage("Люди"),
         "personal": MessageLookupByLibrary.simpleMessage("Настройки"),
         "popularPeople":
@@ -48,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
+        "seriesCast":
+            MessageLookupByLibrary.simpleMessage("Актерский состав сериала"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "status": MessageLookupByLibrary.simpleMessage("Статус"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),

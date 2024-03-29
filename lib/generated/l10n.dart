@@ -360,6 +360,36 @@ class S {
     );
   }
 
+  /// `Overview`
+  String get overview {
+    return Intl.message(
+      'Overview',
+      name: 'overview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Series Cast`
+  String get seriesCast {
+    return Intl.message(
+      'Series Cast',
+      name: 'seriesCast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Creator`
+  String get creator {
+    return Intl.message(
+      'Creator',
+      name: 'creator',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We do not have any reviews for {title}. Would you like to write one?`
   String ifNowReviews(Object title) {
     return Intl.message(

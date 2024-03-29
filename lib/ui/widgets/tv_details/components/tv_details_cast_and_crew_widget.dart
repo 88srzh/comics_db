@@ -17,18 +17,13 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 
 class TvDetailsCastWidget extends StatelessWidget {
-  const TvDetailsCastWidget({super.key});
+  final String seriesCast;
+  const TvDetailsCastWidget({super.key, required this.seriesCast});
 
   @override
   Widget build(BuildContext context) {
     var actorsData = context.watch<TvDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
-    // Future.delayed(
-    //   const Duration(milliseconds: 1000),
-    //   () {
-    //     if (actorsData.isNotEmpty) return const SizedBox.shrink();
-    //   },
-    // );
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
       child: Column(
@@ -37,7 +32,7 @@ class TvDetailsCastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Series Cast',
+              seriesCast,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),

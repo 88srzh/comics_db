@@ -1,12 +1,14 @@
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:comics_db_app/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Package imports:
-import 'package:provider/provider.dart';
 
 class TvDetailsDirectorWidget extends StatelessWidget {
-  const TvDetailsDirectorWidget({super.key});
+  final String creator;
+  const TvDetailsDirectorWidget({super.key, required this.creator});
 
   @override
   Widget build(BuildContext context) {
@@ -14,29 +16,31 @@ class TvDetailsDirectorWidget extends StatelessWidget {
     var crew = cubit.state.createdBy;
     if (crew.isEmpty) return const SizedBox.shrink();
     return Column(
-      children: crew.map((chunk) => _TvPeoplesWidgetRow(employes: chunk)).toList(),
+      children: crew.map((chunk) => _TvPeoplesWidgetRow(employes: chunk, creator: creator)).toList(),
     );
   }
 }
 
 class _TvPeoplesWidgetRow extends StatelessWidget {
+  final String creator;
   final List<TvDetailsCreatedByData> employes;
 
-  const _TvPeoplesWidgetRow({required this.employes});
+  const _TvPeoplesWidgetRow({required this.employes, required this.creator});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      children: employes.map((employee) => _TvPeoplesWidgetRowItem(employee: employee)).toList(),
+      children: employes.map((employee) => _TvPeoplesWidgetRowItem(employee: employee, creator: creator)).toList(),
     );
   }
 }
 
 class _TvPeoplesWidgetRowItem extends StatelessWidget {
+  final String creator;
   final TvDetailsCreatedByData employee;
 
-  const _TvPeoplesWidgetRowItem({required this.employee});
+  const _TvPeoplesWidgetRowItem({required this.employee, required this.creator});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,7 @@ class _TvPeoplesWidgetRowItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(employee.name, style: Theme.of(context).textTheme.labelMedium),
-            Text('Creator ', style: Theme.of(context).textTheme.labelMedium),
+            Text(creator, style: Theme.of(context).textTheme.labelMedium),
           ],
         ),
       ),

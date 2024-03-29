@@ -31,6 +31,9 @@
   "recommendations": "Recommendations",
   "on": "on",
   "fullCast": "Full cast",
+  "overview": "Overview",
+  "seriesCast": "Series Cast",
+  "creator": "Creator",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {

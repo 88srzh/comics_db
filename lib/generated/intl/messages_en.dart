@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "budget": MessageLookupByLibrary.simpleMessage("Budget"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "creator": MessageLookupByLibrary.simpleMessage("Creator"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
@@ -49,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "on": MessageLookupByLibrary.simpleMessage("on"),
         "originalLanguage":
             MessageLookupByLibrary.simpleMessage("Original Language"),
+        "overview": MessageLookupByLibrary.simpleMessage("Overview"),
         "pageHomeSampleCurrentDateTime": m1,
         "pageHomeSamplePlural": m2,
         "people": MessageLookupByLibrary.simpleMessage("People"),
@@ -61,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
+        "seriesCast": MessageLookupByLibrary.simpleMessage("Series Cast"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
