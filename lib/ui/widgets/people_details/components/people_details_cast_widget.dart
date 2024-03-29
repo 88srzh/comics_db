@@ -17,7 +17,8 @@ import 'package:comics_db_app/ui/widgets/people_details/components/character_dat
 import 'package:comics_db_app/ui/widgets/people_details/people_details_cubit.dart';
 
 class PeopleDetailsCastWidget extends StatelessWidget {
-  const PeopleDetailsCastWidget({super.key});
+  final String knownFor;
+  const PeopleDetailsCastWidget({super.key, required this.knownFor});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class PeopleDetailsCastWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Known For',
+                  knownFor,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 // TODO disable "See all", because it doesn't work and it's not on the original site

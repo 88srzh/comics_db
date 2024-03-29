@@ -34,6 +34,8 @@
   "overview": "Overview",
   "seriesCast": "Series Cast",
   "creator": "Creator",
+  "biography": "Biography",
+  "knownFor": "Known For",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {
