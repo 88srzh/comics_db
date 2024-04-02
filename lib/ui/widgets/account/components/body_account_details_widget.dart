@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -20,6 +21,7 @@ import 'package:comics_db_app/ui/widgets/account/components/notification_card_wi
 
 class BodyPersonalWidget extends StatefulWidget {
   final String watchlist;
+
   const BodyPersonalWidget({super.key, required this.watchlist});
 
   @override
@@ -28,6 +30,7 @@ class BodyPersonalWidget extends StatefulWidget {
 
 class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
   bool change = false;
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AccountDetailsCubit>();
@@ -40,6 +43,74 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           children: [
             const HeadAccountCardWidget(),
             const CustomSettingDivider(height: 3.0),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 2.0,
+                              color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                            ),
+                            color: Colors.green,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                      height: 50.0,
+                                      width: MediaQuery.of(context).size.width * 0.4,
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              width: 2.0,
+                                              color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor),
+                                        ),
+                                        color: Colors.grey,
+                                      ),
+                                      child: Text(S.of(context).movie, style: const TextStyle(color: Colors.white))),
+                                ],
+                              ),
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('111', style: TextStyle(color: Colors.white)),
+                                  Text('333', style: TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          decoration: const BoxDecoration(color: Colors.pink),
+                          child: const Column(
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(height: 100.0, child: Text('444', style: TextStyle(color: Colors.white))),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('444', style: TextStyle(color: Colors.white)),
+                                  Text('555', style: TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
             HeadingAccountCardWidget(headingText: widget.watchlist),
             const CustomSettingDivider(height: 0.8),
             CustomAccountListTile(
