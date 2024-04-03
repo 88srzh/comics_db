@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -42,69 +41,14 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const HeadAccountCardWidget(),
-            const CustomSettingDivider(height: 3.0),
             Row(
               children: [
                 Column(
                   children: [
                     Row(
                       children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 2.0,
-                              color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
-                            ),
-                            color: Colors.green,
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                      height: 50.0,
-                                      width: MediaQuery.of(context).size.width * 0.4,
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                              width: 2.0,
-                                              color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor),
-                                        ),
-                                        color: Colors.grey,
-                                      ),
-                                      child: Text(S.of(context).movie, style: const TextStyle(color: Colors.white))),
-                                ],
-                              ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('111', style: TextStyle(color: Colors.white)),
-                                  Text('333', style: TextStyle(color: Colors.white)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: const BoxDecoration(color: Colors.pink),
-                          child: const Column(
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(height: 100.0, child: Text('444', style: TextStyle(color: Colors.white))),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text('444', style: TextStyle(color: Colors.white)),
-                                  Text('555', style: TextStyle(color: Colors.white)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        WatchlistAndFavoritesContainersWidget(title: S.of(context).watchlist),
+                        WatchlistAndFavoritesContainersWidget(title: S.of(context).favorites),
                       ],
                     ),
                   ],
@@ -184,6 +128,90 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
           ],
         ),
       ],
+    );
+  }
+}
+
+class WatchlistAndFavoritesContainersWidget extends StatelessWidget {
+  final GestureTapCallback? onTapMovieWatchlist;
+  final GestureTapCallback? onTapMovieFavorites;
+  final GestureTapCallback? onTapTvWatchlist;
+  final GestureTapCallback? onTapTvFavorite;
+  final String title;
+  const WatchlistAndFavoritesContainersWidget({
+    super.key, required this.title, this.onTapMovieWatchlist, this.onTapMovieFavorites, this.onTapTvWatchlist, this.onTapTvFavorite,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.15,
+      width: MediaQuery.of(context).size.width * 0.5,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 2.0,
+          color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
+        ),
+        color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.48,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 2.0,
+                        color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
+                      ),
+                    ),
+                    color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white,
+                  ),
+                  child: Center(child: Text(title, style: Theme.of(context).textTheme.displayMedium)),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: onTapMovieFavorites,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            width: 2.0,
+                            color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                      // TODO add to separate widget
+                      child: Center(
+                        child: Icon(MdiIcons.movie, color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: onTapTvWatchlist,
+                    child: Center(
+                      child: Icon(MdiIcons.television, color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
