@@ -47,28 +47,21 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
                   children: [
                     Row(
                       children: [
-                        WatchlistAndFavoritesContainersWidget(title: S.of(context).watchlist),
-                        WatchlistAndFavoritesContainersWidget(title: S.of(context).favorites),
+                        WatchlistAndFavoritesContainersWidget(
+                          title: S.of(context).watchlist,
+                          onTapMovie: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie),
+                          onTapTv: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV),
+                        ),
+                        WatchlistAndFavoritesContainersWidget(
+                            title: S.of(context).favorites,
+                            onTapMovie: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies),
+                            onTapTv: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
                       ],
                     ),
                   ],
                 ),
               ],
             ),
-            HeadingAccountCardWidget(headingText: widget.watchlist),
-            const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(
-                text: S.of(context).movie, icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistMovie)),
-            const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: S.of(context).tv, icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.watchlistTV)),
-            const CustomSettingDivider(height: 3.0),
-            HeadingAccountCardWidget(headingText: S.of(context).favorites),
-            const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(
-                text: S.of(context).movie, icon: MdiIcons.movie, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteMovies)),
-            const CustomSettingDivider(height: 0.8),
-            CustomAccountListTile(text: S.of(context).tv, icon: Icons.tv, onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.favoriteTvs)),
-            const CustomSettingDivider(height: 10.0),
             HeadingAccountCardWidget(headingText: S.of(context).settings),
             const CustomSettingDivider(height: 0.8),
             AccountSettingsThemeCardWidget(headingText: S.of(context).theme),
@@ -133,13 +126,15 @@ class _BodyPersonalWidgetState extends State<BodyPersonalWidget> {
 }
 
 class WatchlistAndFavoritesContainersWidget extends StatelessWidget {
-  final GestureTapCallback? onTapMovieWatchlist;
-  final GestureTapCallback? onTapMovieFavorites;
-  final GestureTapCallback? onTapTvWatchlist;
-  final GestureTapCallback? onTapTvFavorite;
+  final GestureTapCallback? onTapMovie;
+  final GestureTapCallback? onTapTv;
   final String title;
+
   const WatchlistAndFavoritesContainersWidget({
-    super.key, required this.title, this.onTapMovieWatchlist, this.onTapMovieFavorites, this.onTapTvWatchlist, this.onTapTvFavorite,
+    super.key,
+    required this.title,
+    this.onTapMovie,
+    this.onTapTv,
   });
 
   @override
@@ -182,7 +177,7 @@ class WatchlistAndFavoritesContainersWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: onTapMovieFavorites,
+                    onTap: onTapMovie,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border(
@@ -201,7 +196,7 @@ class WatchlistAndFavoritesContainersWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: onTapTvWatchlist,
+                    onTap: onTapTv,
                     child: Center(
                       child: Icon(MdiIcons.television, color: context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor),
                     ),
