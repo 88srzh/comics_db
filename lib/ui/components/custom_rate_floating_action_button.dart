@@ -1,3 +1,4 @@
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:flutter/material.dart';
 
 FloatingActionButton fabWatchlist(VoidCallback onPressed, bool rate) {
@@ -5,7 +6,7 @@ FloatingActionButton fabWatchlist(VoidCallback onPressed, bool rate) {
     heroTag: 'watchlist',
     elevation: 0.0,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35.0))),
-    backgroundColor: Colors.pinkAccent,
+    backgroundColor: DarkThemeColors.titleColor,
     onPressed: onPressed,
     child: rate ? const Icon(Icons.bookmark) : const Icon(Icons.bookmark_outline),
   );
