@@ -66,7 +66,7 @@ class _MovieActorListWidget extends StatelessWidget {
     var actorsData = context.watch<MovieDetailsCubit>().data.actorsData;
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: 8,
+      itemCount: actorsData.length,
       itemExtent: 120,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
