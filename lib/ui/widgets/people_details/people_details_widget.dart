@@ -39,27 +39,37 @@ class _PeopleDetailsWidgetState extends State<PeopleDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-          onTapRu: () => setState(() {
+    return FutureBuilder(
+      future: lazyValue,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: CustomAppBar(
+              onTapRu: () => setState(() {
                 S.load(const Locale('ru'));
               }),
-          onTapEn: () => setState(() {
+              onTapEn: () => setState(() {
                 S.load(const Locale('en'));
-              })),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              const PeopleTopPosterWidget(),
-              DescriptionWidget(biographyTitle: S.of(context).biography),
-              PeopleDetailsCastWidget(knownFor: S.of(context).knownFor),
-              // KnowForWidget(),
-              // const DescriptionWidget(),
-            ],
-          ),
-        ],
-      ),
+              }),
+            ),
+            body: ListView(
+              children: [
+                Column(
+                  children: [
+                    const PeopleTopPosterWidget(),
+                    DescriptionWidget(biographyTitle: S.of(context).biography),
+                    PeopleDetailsCastWidget(knownFor: S.of(context).knownFor),
+                    // KnowForWidget(),
+                    // const DescriptionWidget(),
+                  ],
+                ),
+              ],
+            ),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
