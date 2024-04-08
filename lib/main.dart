@@ -16,8 +16,14 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
-  FlutterError.onError = (details) {
+void main() async {
+  FlutterError.onError = (FlutterErrorDetails details) {
+    if (details.library == 'image resource service' && details.exception.toString().contains('404')) {
+      if (kDebugMode) {
+        print('Suppressed cachedNetworkImage exception');
+        return;
+      }
+    }
     FlutterError.presentError(details);
     if (kReleaseMode) exit(1);
   };
