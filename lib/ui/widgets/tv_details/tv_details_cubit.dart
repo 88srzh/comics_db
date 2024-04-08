@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -189,14 +190,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
     final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
 
-    var actorsData = data.actorsData = details.credits.cast
-        .map((e) => TvDetailsActorData(
-              name: e.name,
-              character: e.character,
-              profilePath: e.profilePath,
-              id: e.id,
-            ))
-        .toList();
+    var actorsData = data.actorsData =
+        details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
@@ -207,6 +202,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
+
+    var networkData = data.networkData =
+        details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
     final newState = state.copyWith(
       posterPath: posterPath,
@@ -227,6 +225,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       videosData: videosData,
       createdBy: createdByData,
       rating: rating,
+      networks: networkData,
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);
