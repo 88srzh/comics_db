@@ -5,7 +5,7 @@ part 'tv_details_content_ratings.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TvDetailsContentRatings {
   @JsonKey(name: 'results')
-  final List<TvDetailsContentRatingsResult> results;
+  final List<TvDetailsContentRatingsResult>? results;
 
   const TvDetailsContentRatings({
     required this.results,

@@ -262,14 +262,16 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   String? makeRating(TVDetails details) {
     var texts = <String>[];
-    if (details.contentRatings.results.isNotEmpty) {
+    if (details.contentRatings.results!.isNotEmpty) {
       var ratings = <String>[];
-      for (var rating in details.contentRatings.results) {
+      for (var rating in details.contentRatings.results!) {
         ratings.add(rating.rating);
       }
       texts.add(ratings.first);
+      return texts.join();
+    } else {
+      return null;
     }
-    return texts.join();
   }
 
   List<List<TvDetailsPeopleData>> makePeopleData(TVDetails details) {
