@@ -80,7 +80,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
                     TvDetailsDescriptionWidget(overviewTitle: S.of(context).overview),
                     TvDetailsCastWidget(seriesCast: S.of(context).seriesCast),
                     TvDetailsRecommendationsWidget(recommendations: S.of(context).recommendations),
-                    const TvDetailsOtherInformationWidget(),
+                    TvDetailsOtherInformationWidget(statusText: S.of(context).status),
                   ],
                 ),
               ],

@@ -189,6 +189,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final List<List<TvDetailsCreatedByData>> createdByData = data.createdByData = makeCreatedByData(details);
     final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
     final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
+    final String status = data.status = details.status;
+    final String originalLanguage = data.originalLanguage = details.originalLanguage;
+    final String type = data.type = details.type;
 
     var actorsData = data.actorsData =
         details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
@@ -226,6 +229,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       createdBy: createdByData,
       rating: rating,
       networks: networkData,
+      status: status,
+      type: type,
+      originalLanguage: originalLanguage,
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);

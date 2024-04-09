@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("В главных ролях"),
         "trending": MessageLookupByLibrary.simpleMessage("Тренды"),
         "tv": MessageLookupByLibrary.simpleMessage("Сериалы"),
+        "type": MessageLookupByLibrary.simpleMessage("Тип"),
         "watchlist":
             MessageLookupByLibrary.simpleMessage("Список отслеживания"),
         "writtenBy": MessageLookupByLibrary.simpleMessage("Написано")

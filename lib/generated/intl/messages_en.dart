@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalAmount": m3,
         "trending": MessageLookupByLibrary.simpleMessage("Trending"),
         "tv": MessageLookupByLibrary.simpleMessage("TV"),
+        "type": MessageLookupByLibrary.simpleMessage("Type"),
         "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
         "writtenBy": MessageLookupByLibrary.simpleMessage("Written by")
       };
