@@ -32,7 +32,6 @@ class MovieDetailsOtherInformationWidget extends StatelessWidget {
               const SizedBox(height: 10.0),
               Text(S.of(context).revenue, style: Theme.of(context).textTheme.labelMedium),
               Text(S.of(context).totalAmount(revenue.toDouble()), style: Theme.of(context).textTheme.labelSmall),
-              // Text(),
             ],
           ),
           const SizedBox(width: 50.0),

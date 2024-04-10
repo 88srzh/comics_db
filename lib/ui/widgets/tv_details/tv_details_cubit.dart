@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -188,15 +189,12 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final List<List<TvDetailsCreatedByData>> createdByData = data.createdByData = makeCreatedByData(details);
     final bool isFavoriteData = data.favoriteData.isFavorite = isFavorite;
     final bool isWatchlistData = data.watchlistData.isWatchlist = isWatchlist;
+    final String status = data.status = details.status;
+    final String originalLanguage = data.originalLanguage = details.originalLanguage;
+    final String type = data.type = details.type;
 
-    var actorsData = data.actorsData = details.credits.cast
-        .map((e) => TvDetailsActorData(
-              name: e.name,
-              character: e.character,
-              profilePath: e.profilePath,
-              id: e.id,
-            ))
-        .toList();
+    var actorsData = data.actorsData =
+        details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.tvDetailsScoresData = TvDetailsScoresData(
       voteCount: details.voteCount,
@@ -207,6 +205,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
         .toList();
+
+    var networkData = data.networkData =
+        details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
     final newState = state.copyWith(
       posterPath: posterPath,
@@ -227,6 +228,10 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       videosData: videosData,
       createdBy: createdByData,
       rating: rating,
+      networks: networkData,
+      status: status,
+      type: type,
+      originalLanguage: originalLanguage,
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);
@@ -257,14 +262,16 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   String? makeRating(TVDetails details) {
     var texts = <String>[];
-    if (details.contentRatings.results.isNotEmpty) {
+    if (details.contentRatings.results!.isNotEmpty) {
       var ratings = <String>[];
-      for (var rating in details.contentRatings.results) {
+      for (var rating in details.contentRatings.results!) {
         ratings.add(rating.rating);
       }
       texts.add(ratings.first);
+      return texts.join();
+    } else {
+      return null;
     }
-    return texts.join();
   }
 
   List<List<TvDetailsPeopleData>> makePeopleData(TVDetails details) {

@@ -9,8 +9,8 @@ part of 'tv_details_content_ratings.dart';
 TvDetailsContentRatings _$TvDetailsContentRatingsFromJson(
         Map<String, dynamic> json) =>
     TvDetailsContentRatings(
-      results: (json['results'] as List<dynamic>)
-          .map((e) =>
+      results: (json['results'] as List<dynamic>?)
+          ?.map((e) =>
               TvDetailsContentRatingsResult.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -18,7 +18,7 @@ TvDetailsContentRatings _$TvDetailsContentRatingsFromJson(
 Map<String, dynamic> _$TvDetailsContentRatingsToJson(
         TvDetailsContentRatings instance) =>
     <String, dynamic>{
-      'results': instance.results.map((e) => e.toJson()).toList(),
+      'results': instance.results?.map((e) => e.toJson()).toList(),
     };
 
 TvDetailsContentRatingsResult _$TvDetailsContentRatingsResultFromJson(

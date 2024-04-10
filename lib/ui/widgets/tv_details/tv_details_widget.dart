@@ -2,6 +2,7 @@
 import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/ui/components/custom_appbar_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/director_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_other_information_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_top_poster_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -79,6 +80,7 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
                     TvDetailsDescriptionWidget(overviewTitle: S.of(context).overview),
                     TvDetailsCastWidget(seriesCast: S.of(context).seriesCast),
                     TvDetailsRecommendationsWidget(recommendations: S.of(context).recommendations),
+                    TvDetailsOtherInformationWidget(statusText: S.of(context).status),
                   ],
                 ),
               ],

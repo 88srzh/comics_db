@@ -15,7 +15,7 @@ class TvDetailsCubitState {
   final LastEpisodeToAir lastEpisodeToAir;
   final String name;
   final NextEpisodeToAir? nextEpisodeToAir;
-  final List<Network> networks;
+  final List<TvDetailsNetworkData> networks;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final List<String> originalCountry;
@@ -199,7 +199,7 @@ class TvDetailsCubitState {
     LastEpisodeToAir? lastEpisodeToAir,
     String? name,
     NextEpisodeToAir? nextEpisodeToAir,
-    List<Network>? networks,
+    List<TvDetailsNetworkData>? networks,
     int? numberOfEpisodes,
     int? numberOfSeasons,
     List<String>? originalCountry,

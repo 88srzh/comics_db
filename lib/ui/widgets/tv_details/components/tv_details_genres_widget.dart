@@ -20,7 +20,7 @@ class TvDetailsGenresWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        rating != null ?
+        rating!.isNotEmpty ?
         Container(
           decoration: BoxDecoration(
             border: Border.all(
