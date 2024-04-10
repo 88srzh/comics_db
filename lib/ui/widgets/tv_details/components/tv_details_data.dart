@@ -22,6 +22,7 @@ class TvDetailsData {
   String status = '';
   String type = '';
   String originalLanguage = '';
+  String keywords = '';
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
   TvDetailsScoresData tvDetailsScoresData = TvDetailsScoresData(voteCount: 0, popularity: 0);
   List<List<TvDetailsPeopleData>> peopleData = const <List<TvDetailsPeopleData>>[];

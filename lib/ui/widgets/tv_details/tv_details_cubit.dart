@@ -83,6 +83,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           recommendationsData: [],
           videosData: [],
           rating: '',
+          keywords: '',
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -125,6 +126,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       recommendationsData: state.recommendationsData,
       videosData: state.videosData,
       rating: state.rating,
+      keywords: state.keywords,
     ));
   }
 
@@ -192,6 +194,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String status = data.status = details.status;
     final String originalLanguage = data.originalLanguage = details.originalLanguage;
     final String type = data.type = details.type;
+    final String keywords = data.keywords = makeKeywords(details);
 
     var actorsData = data.actorsData =
         details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
@@ -232,6 +235,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       status: status,
       type: type,
       originalLanguage: originalLanguage,
+      keywords: keywords,
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);
@@ -256,6 +260,18 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
         genresNames.add(genr.name);
       }
       texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
+
+  String makeKeywords(TVDetails details) {
+    var texts = <String>[];
+    if (details.keywords.results!.isNotEmpty) {
+      var keywordsNames = <String>[];
+      for (var keyword in details.keywords.results!) {
+        keywordsNames.add(keyword.name);
+      }
+      texts.add(keywordsNames.join(', '));
     }
     return texts.join(' ');
   }
