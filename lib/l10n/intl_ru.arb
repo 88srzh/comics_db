@@ -37,5 +37,6 @@
   "creator": "Создатель",
   "biography": "Биография",
   "knownFor": "Известность за",
-  "type": "Тип"
+  "type": "Тип",
+  "currentSeason": "Текущий сезон"
 }

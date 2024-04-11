@@ -45,6 +45,7 @@
     }
   },
   "type": "Type",
+  "currentSeason": "Current Season",
   "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
   "@pageHomeSamplePlural": {
     "placeholders": {

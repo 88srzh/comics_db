@@ -25,7 +25,7 @@ class TvDetailsCubitState {
   final double popularity;
   final List<ProductionCompany> productionCompanies;
   final List<ProductionCountry> productionCountries;
-  final List<Season> seasons;
+  final List<TvDetailsSeasonData> seasons;
   final List<SpokenLanguage> spokenLanguages;
   final String status;
   final String tagline;
@@ -85,7 +85,6 @@ class TvDetailsCubitState {
     required this.peopleData,
     required this.recommendationsData,
     required this.videosData,
-    // required this.ratingsData,
     required this.rating,
     required this.keywords,
   });
@@ -211,7 +210,7 @@ class TvDetailsCubitState {
     double? popularity,
     List<ProductionCompany>? productionCompanies,
     List<ProductionCountry>? productionCountries,
-    List<Season>? seasons,
+    List<TvDetailsSeasonData>? seasons,
     List<SpokenLanguage>? spokenLanguages,
     String? status,
     String? tagline,

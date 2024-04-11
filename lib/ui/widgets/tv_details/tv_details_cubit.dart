@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -212,6 +213,18 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var networkData = data.networkData =
         details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
+    var seasonData = data.seasonData = details.seasons
+        .map((e) => TvDetailsSeasonData(
+            airDate: e.airDate,
+            episodeCount: e.episodeCount,
+            id: e.id,
+            name: e.name,
+            overview: e.overview,
+            posterPath: e.posterPath,
+            seasonNumber: e.seasonNumber,
+            voteAverage: e.voteAverage))
+        .toList();
+
     final newState = state.copyWith(
       posterPath: posterPath,
       backdropPath: backdropPath,
@@ -236,6 +249,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       type: type,
       originalLanguage: originalLanguage,
       keywords: keywords,
+      seasons: seasonData,
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);

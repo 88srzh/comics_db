@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "budget": MessageLookupByLibrary.simpleMessage("Budget"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "creator": MessageLookupByLibrary.simpleMessage("Creator"),
+        "currentSeason": MessageLookupByLibrary.simpleMessage("Current Season"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),

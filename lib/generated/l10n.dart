@@ -430,6 +430,16 @@ class S {
     );
   }
 
+  /// `Current Season`
+  String get currentSeason {
+    return Intl.message(
+      'Current Season',
+      name: 'currentSeason',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

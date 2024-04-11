@@ -24,7 +24,6 @@ class TVDetails {
   final String? lastAirDate;
   final LastEpisodeToAir? lastEpisodeToAir;
   final String name;
-
   // TODO возможно DateFormat
   final NextEpisodeToAir? nextEpisodeToAir;
   final List<Network> networks;
@@ -234,6 +233,7 @@ class Season {
   final String overview;
   final String? posterPath;
   final int seasonNumber;
+  final double voteAverage;
 
   Season({
     required this.airDate,
@@ -243,6 +243,7 @@ class Season {
     required this.overview,
     required this.posterPath,
     required this.seasonNumber,
+    required this.voteAverage,
   });
 
   factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);

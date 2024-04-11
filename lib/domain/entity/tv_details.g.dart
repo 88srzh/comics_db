@@ -228,6 +228,7 @@ Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
       overview: json['overview'] as String,
       posterPath: json['poster_path'] as String?,
       seasonNumber: json['season_number'] as int,
+      voteAverage: (json['vote_average'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$SeasonToJson(Season instance) => <String, dynamic>{
@@ -238,6 +239,7 @@ Map<String, dynamic> _$SeasonToJson(Season instance) => <String, dynamic>{
       'overview': instance.overview,
       'poster_path': instance.posterPath,
       'season_number': instance.seasonNumber,
+      'vote_average': instance.voteAverage,
     };
 
 SpokenLanguage _$SpokenLanguageFromJson(Map<String, dynamic> json) =>
