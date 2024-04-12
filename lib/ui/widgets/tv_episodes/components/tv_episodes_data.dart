@@ -15,20 +15,4 @@ class TvEpisodesData {
   String? stillPath = '';
   double voteAverage = 0.0;
   int voteCount = 0;
-
-  TvEpisodesData({
-    required this.airDate,
-    required this.tvEpisodesCrewData,
-    required this.episodeNumber,
-    required this.tvEpisodesGuestStarsData,
-    required this.name,
-    required this.overview,
-    required this.id,
-    required this.productionCode,
-    required this.runtime,
-    required this.seasonNumber,
-    this.stillPath,
-    required this.voteAverage,
-    required this.voteCount,
-  });
 }

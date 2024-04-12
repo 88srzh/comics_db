@@ -131,6 +131,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     ));
   }
 
+  // may be add to separate file
   String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupLocale(BuildContext context, String localeTag) async {
