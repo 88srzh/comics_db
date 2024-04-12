@@ -513,6 +513,26 @@ class MovieAndTvApiClient {
     return result;
   }
 
+  Future<TVDetails> tvEpisodeDetails(int tvId, String locale, int seasonNumber, int episodeNumber) async {
+    TVDetails parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVDetails.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/tv/$tvId/season/$seasonNumber/episode/$episodeNumber',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'language': locale,
+        'season_number': seasonNumber.toString(),
+        'episode_number': episodeNumber.toString(),
+      },
+    );
+    return result;
+  }
+
   Future<TVResponse> discoverPopularTV(
     int page,
     String locale,
