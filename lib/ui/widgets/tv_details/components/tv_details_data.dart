@@ -13,9 +13,9 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_favorite_data.
 
 class TvDetailsData {
   String name = '';
-  String posterPath = '';
-  String backdropPath = '';
-  String tagline = '';
+  String? posterPath = '';
+  String? backdropPath = '';
+  String? tagline = '';
   bool isLoading = false;
   String overview = '';
   String genres = '';

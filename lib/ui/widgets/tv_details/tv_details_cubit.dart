@@ -181,9 +181,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     final String name = data.name = details.name;
     final String overview = data.overview = details.overview;
-    final String posterPath = data.posterPath = details.posterPath ?? '';
-    final String backdropPath = data.backdropPath = details.backdropPath ?? '';
-    final String tagline = data.tagline = details.tagline;
+    final String? posterPath = data.posterPath = details.posterPath;
+    final String? backdropPath = data.backdropPath = details.backdropPath;
+    final String? tagline = data.tagline = details.tagline;
     final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
     final String? rating = makeRating(details);
     final String genres = data.genres = makeGenres(details);

@@ -64,14 +64,14 @@ class _TvDetailsWidgetState extends State<TvDetailsWidget> {
                 S.load(const Locale('en'));
               }),
             ),
-            floatingActionButton: Wrap(
-              direction: Axis.horizontal,
-              children: [
-                fabWatchlist(() => cubit.toggleWatchlistTV(context), watchlist),
-                const SizedBox(width: 10.0),
-                fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
-              ],
-            ),
+            // floatingActionButton: Wrap(
+            //   direction: Axis.horizontal,
+            //   children: [
+            //     fabWatchlist(() => cubit.toggleWatchlistTV(context), watchlist),
+            //     const SizedBox(width: 10.0),
+            //     fabFavorite(() => cubit.toggleFavoriteTv(context), favorite),
+            //   ],
+            // ),
             body: ListView(
               children: [
                 Column(

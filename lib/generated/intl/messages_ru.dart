@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "revenue": MessageLookupByLibrary.simpleMessage("Сборы"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
+        "season": MessageLookupByLibrary.simpleMessage("Сезон"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
         "seriesCast":
             MessageLookupByLibrary.simpleMessage("Актерский состав сериала"),

@@ -440,6 +440,16 @@ class S {
     );
   }
 
+  /// `Season`
+  String get season {
+    return Intl.message(
+      'Season',
+      name: 'season',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}`
   String pageHomeSamplePlural(int howMany) {
     return Intl.plural(

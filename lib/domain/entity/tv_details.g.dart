@@ -61,7 +61,7 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
           .map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as String,
-      tagline: json['tagline'] as String,
+      tagline: json['tagline'] as String?,
       type: json['type'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,

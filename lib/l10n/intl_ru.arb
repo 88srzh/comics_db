@@ -38,5 +38,6 @@
   "biography": "Биография",
   "knownFor": "Известность за",
   "type": "Тип",
-  "currentSeason": "Текущий сезон"
+  "currentSeason": "Текущий сезон",
+  "season": "Сезон"
 }

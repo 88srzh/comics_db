@@ -40,7 +40,7 @@ class TVDetails {
   final List<Season> seasons;
   final List<SpokenLanguage> spokenLanguages;
   final String status;
-  final String tagline;
+  final String? tagline;
   final String type;
   final double voteAverage;
   final int voteCount;

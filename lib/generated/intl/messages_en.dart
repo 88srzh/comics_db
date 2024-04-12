@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
+        "season": MessageLookupByLibrary.simpleMessage("Season"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "seriesCast": MessageLookupByLibrary.simpleMessage("Series Cast"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
