@@ -524,6 +524,7 @@ class MovieAndTvApiClient {
       '/tv/$tvId/season/$seasonNumber/episode/$episodeNumber',
       parser,
       <String, dynamic>{
+        'append_to_response': 'credits',
         'api_key': Configuration.apiKey,
         'language': locale,
         'season_number': seasonNumber.toString(),
