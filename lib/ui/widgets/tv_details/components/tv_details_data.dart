@@ -2,6 +2,7 @@
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_content_ratings_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_last_episode_to_air_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
@@ -20,6 +21,7 @@ class TvDetailsData {
   String overview = '';
   String genres = '';
   String? firstAirDate = '';
+  String? lastAirDateOfSeason = '';
   String status = '';
   String type = '';
   String originalLanguage = '';
@@ -34,6 +36,7 @@ class TvDetailsData {
   List<TvDetailsContentRatingsData> ratingsData = const <TvDetailsContentRatingsData>[];
   List<TvDetailsNetworkData> networkData = const <TvDetailsNetworkData>[];
   List<TvDetailsSeasonData> seasonData = const<TvDetailsSeasonData>[];
+  TvDetailsLastEpisodeToAirData lastEpisodeToAirData = TvDetailsLastEpisodeToAirData();
 
   TvFavoriteData favoriteData = TvFavoriteData();
   TvDetailsWatchlistData watchlistData = TvDetailsWatchlistData();

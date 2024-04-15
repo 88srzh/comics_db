@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
+        "episodes": MessageLookupByLibrary.simpleMessage("episodes"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
         "fullCast": MessageLookupByLibrary.simpleMessage("Full cast"),
         "ifNowReviews": m0,

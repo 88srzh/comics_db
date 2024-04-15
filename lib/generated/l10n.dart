@@ -410,6 +410,16 @@ class S {
     );
   }
 
+  /// `episodes`
+  String get episodes {
+    return Intl.message(
+      'episodes',
+      name: 'episodes',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We do not have any reviews for {title}. Would you like to write one?`
   String ifNowReviews(Object title) {
     return Intl.message(

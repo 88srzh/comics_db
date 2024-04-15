@@ -55,6 +55,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
             stillPath: '',
             voteAverage: 0,
             voteCount: 0,
+            episodeType: '',
           ),
           name: '',
           networks: [],
@@ -85,6 +86,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           videosData: [],
           rating: '',
           keywords: '',
+          lastEpisodeToAirName: '',
+          lastEpisodeToAirType: '',
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -128,6 +131,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       videosData: state.videosData,
       rating: state.rating,
       keywords: state.keywords,
+      lastEpisodeToAirName: state.lastEpisodeToAirName,
+      lastEpisodeToAirType: state.lastEpisodeToAirType,
     ));
   }
 
@@ -186,6 +191,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String? backdropPath = data.backdropPath = details.backdropPath;
     final String? tagline = data.tagline = details.tagline;
     final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
+    final String? lastAirDateOfSeason = data.lastAirDateOfSeason = makeLastAirDateOfSeason(details);
     final String? rating = makeRating(details);
     final String genres = data.genres = makeGenres(details);
     final List<List<TvDetailsPeopleData>> peopleData = data.peopleData = makePeopleData(details);
@@ -197,6 +203,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String originalLanguage = data.originalLanguage = details.originalLanguage;
     final String type = data.type = details.type;
     final String keywords = data.keywords = makeKeywords(details);
+    final String lastEpisodeToAirName = data.lastEpisodeToAirData.name = details.lastEpisodeToAir!.name;
+    final String lastEpisodeToAitType = data.lastEpisodeToAirData.episodeType = details.lastEpisodeToAir!.episodeType;
 
     var actorsData = data.actorsData =
         details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
@@ -216,7 +224,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     var seasonData = data.seasonData = details.seasons
         .map((e) => TvDetailsSeasonData(
-            airDate: e.airDate,
+            airDate: lastAirDateOfSeason,
             episodeCount: e.episodeCount,
             id: e.id,
             name: e.name,
@@ -251,6 +259,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       originalLanguage: originalLanguage,
       keywords: keywords,
       seasons: seasonData,
+      lastEpisodeToAirName: lastEpisodeToAirName,
+      lastEpisodeToAirType: lastEpisodeToAitType,
       // videos: data.tvTrailedData.trailerKey,
     );
     emit(newState);
@@ -355,6 +365,15 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final firstAirDate = details.firstAirDate;
     if (firstAirDate != null) {
       texts.add(DateFormat.y().format(firstAirDate));
+    }
+    return texts.join(' ');
+  }
+
+  String? makeLastAirDateOfSeason(TVDetails details) {
+    var texts = <String>[];
+    final lastAirDate = details.seasons.last.airDate;
+    if (lastAirDate != null) {
+      texts.add(DateFormat.y().format(lastAirDate));
     }
     return texts.join(' ');
   }

@@ -16,9 +16,9 @@ class TvEpisodesCubit extends Cubit<TvEpisodesCubitState> {
   TvEpisodesCubit(this.tvId)
       : super(const TvEpisodesCubitState(
           airDate: '',
-          crew: [],
+          // crew: [],
           episodeNumber: 0,
-          guestStars: [],
+          // guestStars: [],
           name: '',
           overview: '',
           id: 0,
@@ -30,9 +30,9 @@ class TvEpisodesCubit extends Cubit<TvEpisodesCubitState> {
         )) {
     emit(TvEpisodesCubitState(
       airDate: state.airDate,
-      crew: state.crew,
+      // crew: state.crew,
       episodeNumber: state.episodeNumber,
-      guestStars: state.guestStars,
+      // guestStars: state.guestStars,
       name: state.name,
       overview: state.overview,
       id: state.id,

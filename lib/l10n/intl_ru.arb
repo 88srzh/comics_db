@@ -39,5 +39,6 @@
   "knownFor": "Известность за",
   "type": "Тип",
   "currentSeason": "Текущий сезон",
-  "season": "Сезон"
+  "season": "Сезон",
+  "episodes": "эпизодов"
 }

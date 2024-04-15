@@ -142,6 +142,7 @@ class LastEpisodeToAir {
   final String? stillPath;
   final double voteAverage;
   final int voteCount;
+  final String episodeType;
 
   LastEpisodeToAir({
     required this.airDate,
@@ -154,6 +155,7 @@ class LastEpisodeToAir {
     required this.stillPath,
     required this.voteAverage,
     required this.voteCount,
+    required this.episodeType,
   });
 
   factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => _$LastEpisodeToAirFromJson(json);
@@ -226,7 +228,7 @@ class ProductionCountry {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Season {
-  final String? airDate;
+  final DateTime? airDate;
   final int episodeCount;
   final int id;
   final String name;

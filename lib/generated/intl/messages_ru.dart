@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Описание"),
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
+        "episodes": MessageLookupByLibrary.simpleMessage("эпизодов"),
         "favorites": MessageLookupByLibrary.simpleMessage("Избранное"),
         "fullCast": MessageLookupByLibrary.simpleMessage("Актерский состав"),
         "keywords": MessageLookupByLibrary.simpleMessage("Ключевые слова"),

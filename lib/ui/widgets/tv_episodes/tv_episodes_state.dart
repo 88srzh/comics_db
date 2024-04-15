@@ -2,9 +2,9 @@ part of 'tv_episodes_cubit.dart';
 
 class TvEpisodesCubitState {
   final String airDate;
-  final List<TvEpisodesCrewData> crew;
+  // final List<TvEpisodesCrewData> crew;
   final int episodeNumber;
-  final List<TvEpisodesGuestStarsData> guestStars;
+  // final List<TvEpisodesGuestStarsData> guestStars;
   final String name;
   final String overview;
   final int id;
@@ -17,9 +17,9 @@ class TvEpisodesCubitState {
 
   const TvEpisodesCubitState({
     required this.airDate,
-    required this.crew,
+    // required this.crew,
     required this.episodeNumber,
-    required this.guestStars,
+    // required this.guestStars,
     required this.name,
     required this.overview,
     required this.id,
@@ -40,9 +40,9 @@ class TvEpisodesCubitState {
 
   TvEpisodesCubitState copyWith({
     String? airDate,
-    List<TvEpisodesCrewData>? crew,
+    // List<TvEpisodesCrewData>? crew,
     int? episodeNumber,
-    List<TvEpisodesGuestStarsData>? guestStars,
+    // List<TvEpisodesGuestStarsData>? guestStars,
     String? name,
     String? overview,
     int? id,
@@ -55,9 +55,9 @@ class TvEpisodesCubitState {
   }) {
     return TvEpisodesCubitState(
       airDate: airDate ?? this.airDate,
-      crew: crew ?? this.crew,
+      // crew: crew ?? this.crew,
       episodeNumber: episodeNumber ?? this.episodeNumber,
-      guestStars: guestStars ?? this.guestStars,
+      // guestStars: guestStars ?? this.guestStars,
       name: name ?? this.name,
       overview: overview ?? this.overview,
       id: id ?? this.id,

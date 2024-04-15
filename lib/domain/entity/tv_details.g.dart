@@ -156,6 +156,7 @@ LastEpisodeToAir _$LastEpisodeToAirFromJson(Map<String, dynamic> json) =>
       stillPath: json['still_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
+      episodeType: json['episode_type'] as String,
     );
 
 Map<String, dynamic> _$LastEpisodeToAirToJson(LastEpisodeToAir instance) =>
@@ -170,6 +171,7 @@ Map<String, dynamic> _$LastEpisodeToAirToJson(LastEpisodeToAir instance) =>
       'still_path': instance.stillPath,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'episode_type': instance.episodeType,
     };
 
 NextEpisodeToAir _$NextEpisodeToAirFromJson(Map<String, dynamic> json) =>
@@ -221,7 +223,9 @@ Map<String, dynamic> _$ProductionCountryToJson(ProductionCountry instance) =>
     };
 
 Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
-      airDate: json['air_date'] as String?,
+      airDate: json['air_date'] == null
+          ? null
+          : DateTime.parse(json['air_date'] as String),
       episodeCount: json['episode_count'] as int,
       id: json['id'] as int,
       name: json['name'] as String,
@@ -232,7 +236,7 @@ Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
     );
 
 Map<String, dynamic> _$SeasonToJson(Season instance) => <String, dynamic>{
-      'air_date': instance.airDate,
+      'air_date': instance.airDate?.toIso8601String(),
       'episode_count': instance.episodeCount,
       'id': instance.id,
       'name': instance.name,

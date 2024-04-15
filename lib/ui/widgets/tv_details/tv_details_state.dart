@@ -43,6 +43,8 @@ class TvDetailsCubitState {
   final List<TvDetailsVideosData> videosData;
   final String? rating;
   final String keywords;
+  final String lastEpisodeToAirName;
+  final String lastEpisodeToAirType;
 
   const TvDetailsCubitState({
     required this.posterPath,
@@ -87,6 +89,8 @@ class TvDetailsCubitState {
     required this.videosData,
     required this.rating,
     required this.keywords,
+    required this.lastEpisodeToAirName,
+    required this.lastEpisodeToAirType,
   });
 
   @override
@@ -135,7 +139,9 @@ class TvDetailsCubitState {
           recommendationsData == other.recommendationsData &&
           videosData == other.videosData &&
           rating == other.rating &&
-          keywords == other.keywords;
+          keywords == other.keywords &&
+          lastEpisodeToAirName == other.lastEpisodeToAirName &&
+          lastEpisodeToAirType == other.lastEpisodeToAirType;
 
   // ratingsData == other.ratingsData;
 
@@ -182,8 +188,11 @@ class TvDetailsCubitState {
       recommendationsData.hashCode ^
       videosData.hashCode ^
       rating.hashCode ^
-      keywords.hashCode;
-      // ratingsData.hashCode;
+      keywords.hashCode ^
+      lastEpisodeToAirName.hashCode ^
+      lastEpisodeToAirType.hashCode;
+
+  // ratingsData.hashCode;
 
   TvDetailsCubitState copyWith({
     String? posterPath,
@@ -229,6 +238,8 @@ class TvDetailsCubitState {
     // List<TvDetailsContentRatingsData>? ratingsData,
     String? rating,
     String? keywords,
+    String? lastEpisodeToAirName,
+    String? lastEpisodeToAirType,
   }) {
     return TvDetailsCubitState(
       posterPath: posterPath ?? this.posterPath,
@@ -274,6 +285,8 @@ class TvDetailsCubitState {
       // ratingsData: ratingsData ?? this.ratingsData,
       rating: rating ?? this.rating,
       keywords: keywords ?? this.keywords,
+      lastEpisodeToAirName: lastEpisodeToAirName ?? this.lastEpisodeToAirName,
+      lastEpisodeToAirType: lastEpisodeToAirType ?? this.lastEpisodeToAirType,
     );
   }
 }

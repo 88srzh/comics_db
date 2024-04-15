@@ -36,6 +36,7 @@
   "creator": "Creator",
   "biography": "Biography",
   "knownFor": "Known For",
+  "episodes": "episodes",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {
