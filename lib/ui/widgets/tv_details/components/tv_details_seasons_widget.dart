@@ -24,9 +24,9 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
     final String? lastAirDateOfSeason = cubit.state.seasons.last.airDate;
     final int episodeCount = cubit.state.seasons.last.episodeCount;
     final int seasonNumber = cubit.state.seasons.last.seasonNumber;
-    final String name = cubit.state.name;
     final String lastEpisodeToAirName = cubit.state.lastEpisodeToAirName;
     final String lastEpisodeToAirType = cubit.state.lastEpisodeToAirType;
+    final String name = cubit.state.name;
     // TODO add to separate file
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;

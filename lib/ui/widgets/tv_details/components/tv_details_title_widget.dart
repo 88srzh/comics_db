@@ -23,7 +23,6 @@ class TvDetailsTitleWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 2.0),
                 child: Text(
                   '$name ($firstAirDate)',
-                  // '$name (${firstAirDate.substring(0, 4)})',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
