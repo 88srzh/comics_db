@@ -71,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "seriesCast": MessageLookupByLibrary.simpleMessage("Series Cast"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "televisionNetwork":
+            MessageLookupByLibrary.simpleMessage("Television network"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("Top Billed Cast"),

@@ -40,5 +40,6 @@
   "type": "Тип",
   "currentSeason": "Текущий сезон",
   "season": "Сезон",
-  "episodes": "эпизодов"
+  "episodes": "эпизодов",
+  "televisionNetwork": "Телесеть"
 }

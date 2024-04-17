@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Актерский состав сериала"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "status": MessageLookupByLibrary.simpleMessage("Статус"),
+        "televisionNetwork": MessageLookupByLibrary.simpleMessage("Телесеть"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("В главных ролях"),

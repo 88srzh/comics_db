@@ -420,6 +420,16 @@ class S {
     );
   }
 
+  /// `Television network`
+  String get televisionNetwork {
+    return Intl.message(
+      'Television network',
+      name: 'televisionNetwork',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We do not have any reviews for {title}. Would you like to write one?`
   String ifNowReviews(Object title) {
     return Intl.message(

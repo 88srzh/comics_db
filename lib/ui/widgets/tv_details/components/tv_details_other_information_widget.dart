@@ -20,48 +20,36 @@ class TvDetailsOtherInformationWidget extends StatelessWidget {
     final String type = cubit.state.type;
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          Column(
-            children: [
-              Text(statusText, style: Theme.of(context).textTheme.labelMedium),
-              Text(status, style: Theme.of(context).textTheme.labelSmall),
-              const SizedBox(height: 10.0),
-              // logoPath != null ? Text('TV network', style: Theme.of(context).textTheme.labelMedium) : const SizedBox.shrink(),
-              // logoPath != null
-              SizedBox(
-                height: 100.0,
-                width: 100.0,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: cubit.state.networks.length,
-                  itemBuilder: (context, index) {
-                    final String? logoPath = cubit.state.networks[index].logoPath;
-                    return CachedNetworkImage(
-                      imageUrl: ImageDownloader.imageUrl(logoPath!),
-                      placeholder: (context, url) => const LoadingIndicatorWidget(),
-                      errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
-                    );
-                  },
-                ),
-              )
-              // : const SizedBox.shrink(),
-            ],
+          Text(statusText, style: Theme.of(context).textTheme.labelMedium),
+          Text(status, style: Theme.of(context).textTheme.labelSmall),
+          const SizedBox(height: 10.0),
+          Text(S.of(context).televisionNetwork, style: Theme.of(context).textTheme.labelMedium),
+          SizedBox(
+            height: 40.0,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: const ScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: cubit.state.networks.length,
+              itemBuilder: (context, index) {
+                final String? logoPath = cubit.state.networks[index].logoPath;
+                return CachedNetworkImage(
+                  width: 100.0,
+                  imageUrl: ImageDownloader.imageUrl(logoPath!),
+                  placeholder: (context, url) => const LoadingIndicatorWidget(),
+                  errorWidget: (context, url, dynamic error) => Image.asset(AppImages.noImageAvailable),
+                );
+              },
+            ),
           ),
-          const SizedBox(width: 10.0),
-          Column(
-            children: [
-              Text(S.of(context).type, style: Theme.of(context).textTheme.labelMedium),
-              Text(type, style: Theme.of(context).textTheme.labelSmall),
-              const SizedBox(height: 10.0),
-              Text(S.of(context).originalLanguage, style: Theme.of(context).textTheme.labelMedium),
-              Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
-            ],
-          ),
+          const SizedBox(height: 10.0),
+          Text(S.of(context).type, style: Theme.of(context).textTheme.labelMedium),
+          Text(type, style: Theme.of(context).textTheme.labelSmall),
+          const SizedBox(height: 10.0),
+          Text(S.of(context).originalLanguage, style: Theme.of(context).textTheme.labelMedium),
+          Text(originalLanguage, style: Theme.of(context).textTheme.labelSmall),
         ],
       ),
     );
