@@ -1,3 +1,5 @@
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_icon_widget.dart';
 import 'package:comics_db_app/ui/components/custom_tv_details_title_genres_rating_vote_average_widget.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
@@ -15,6 +17,7 @@ class TvDetailsTrailerListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
     late String youtubeKey = cubit.state.videosData.first.key;
+    final rating = cubit.state.rating;
     if (cubit.state.videosData.isEmpty) return const SizedBox.shrink();
     return InkWell(
       onTap: () {
@@ -33,8 +36,27 @@ class TvDetailsTrailerListWidget extends StatelessWidget {
       child:  Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          rating!.isNotEmpty ? Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1.0,
+                color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Text(
+                rating,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.ratingThumb : DarkThemeColors.kPrimaryColor,
+                ),
+              ),
+            ),
+          ) : const SizedBox.shrink(),
+          const SizedBox(width: 5.0),
           CustomTvDetailsIconWidget(icon: MdiIcons.youtube),
-          const SizedBox(width: 4),
+          const SizedBox(width: 4.0),
           const CustomTvDetailsTitleGenresRatingVoteAverageWidget(text: 'Play Trailer'),
         ],
       ),
