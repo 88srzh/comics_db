@@ -38,12 +38,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           createdBy: [],
           episodeRunTime: [],
           firstAirDate: '',
+          lastAirDate: '',
           genres: '',
           homepage: '',
           id: 0,
           inProduction: false,
           languages: [],
-          lastAirDate: '',
+          airDateOfSeason: '',
           lastEpisodeToAir: LastEpisodeToAir(
             airDate: '',
             episodeNumber: 0,
@@ -95,12 +96,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       createdBy: state.createdBy,
       episodeRunTime: state.episodeRunTime,
       firstAirDate: state.firstAirDate,
+      lastAirDate: state.lastAirDate,
       genres: state.genres,
       homepage: state.homepage,
       id: state.id,
       inProduction: state.inProduction,
       languages: state.languages,
-      lastAirDate: state.lastAirDate,
+      airDateOfSeason: state.airDateOfSeason,
       lastEpisodeToAir: state.lastEpisodeToAir,
       name: state.name,
       networks: state.networks,
@@ -191,7 +193,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String? backdropPath = data.backdropPath = details.backdropPath;
     final String? tagline = data.tagline = details.tagline;
     final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
-    final String? lastAirDateOfSeason = data.lastAirDateOfSeason = makeLastAirDateOfSeason(details);
+    final String? lastAirDate = data.lastAirDate = makeFullFirstAirDateOfSeason(details);
+    final String? airDateOfSeason = data.airDateOfSeason = makeAirDateOfSeason(details);
     final String? rating = makeRating(details);
     final String genres = data.genres = makeGenres(details);
     final List<List<TvDetailsPeopleData>> peopleData = data.peopleData = makePeopleData(details);
@@ -209,11 +212,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var actorsData = data.actorsData =
         details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
-    data.tvDetailsScoresData = TvDetailsScoresData(
-      voteCount: details.voteCount,
-      popularity: details.voteAverage,
-      voteAverage: details.voteAverage,
-    );
+    data.tvDetailsScoresData = TvDetailsScoresData(voteCount: details.voteCount, popularity: details.voteAverage, voteAverage: details.voteAverage);
 
     var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
@@ -224,7 +223,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     var seasonData = data.seasonData = details.seasons
         .map((e) => TvDetailsSeasonData(
-            airDate: lastAirDateOfSeason,
+            airDate: airDateOfSeason,
             episodeCount: e.episodeCount,
             id: e.id,
             name: e.name,
@@ -261,7 +260,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       seasons: seasonData,
       lastEpisodeToAirName: lastEpisodeToAirName,
       lastEpisodeToAirType: lastEpisodeToAitType,
-      // videos: data.tvTrailedData.trailerKey,
+      lastAirDate: lastAirDate,
+      airDateOfSeason: airDateOfSeason,
+
     );
     emit(newState);
   }
@@ -369,11 +370,20 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     return texts.join(' ');
   }
 
-  String? makeLastAirDateOfSeason(TVDetails details) {
+  String? makeAirDateOfSeason(TVDetails details) {
     var texts = <String>[];
     final lastAirDate = details.seasons.last.airDate;
     if (lastAirDate != null) {
       texts.add(DateFormat.y().format(lastAirDate));
+    }
+    return texts.join(' ');
+  }
+
+  String? makeFullFirstAirDateOfSeason(TVDetails details) {
+    var texts = <String>[];
+    final lastAirDate = details.lastAirDate;
+    if (lastAirDate != null) {
+      texts.add(_dateFormat.format(lastAirDate));
     }
     return texts.join(' ');
   }

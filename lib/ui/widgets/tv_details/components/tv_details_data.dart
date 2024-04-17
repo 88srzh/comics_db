@@ -21,7 +21,8 @@ class TvDetailsData {
   String overview = '';
   String genres = '';
   String? firstAirDate = '';
-  String? lastAirDateOfSeason = '';
+  String? lastAirDate = '';
+  String? airDateOfSeason = '';
   String status = '';
   String type = '';
   String originalLanguage = '';

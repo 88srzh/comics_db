@@ -21,7 +21,9 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
     final String? posterPath = cubit.state.seasons.first.posterPath;
     final String lastSeasonName = cubit.state.seasons.last.name;
     final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
-    final String? lastAirDateOfSeason = cubit.state.seasons.last.airDate;
+    final String? airDateByYear = cubit.state.airDateOfSeason;
+    final String? airDateOfSeason = cubit.state.seasons.last.airDate;
+    final String? lastAirDate = cubit.state.lastAirDate;
     final int episodeCount = cubit.state.seasons.last.episodeCount;
     final int seasonNumber = cubit.state.seasons.last.seasonNumber;
     final String lastEpisodeToAirName = cubit.state.lastEpisodeToAirName;
@@ -84,7 +86,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: Text(
-                                '$lastAirDateOfSeason • $episodeCount ${S.of(context).episodes}',
+                                '$airDateByYear • $episodeCount ${S.of(context).episodes}',
                                 style: Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
@@ -92,7 +94,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 5.0),
-                      CustomCastListTextWidget(text: 'Сезон 1 сериала $name, вышел 18 января 2024.', maxLines: 3),
+                      CustomCastListTextWidget(text: 'Сезон 1 сериала $name, вышел $lastAirDate.', maxLines: 3),
                       const SizedBox(height: 5.0),
                       Row(
                         children: [

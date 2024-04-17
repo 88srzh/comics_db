@@ -21,7 +21,7 @@ class TVDetails {
   final int id;
   final bool inProduction;
   final List<String> languages;
-  final String? lastAirDate;
+  final DateTime? lastAirDate;
   final LastEpisodeToAir? lastEpisodeToAir;
   final String name;
   // TODO возможно DateFormat

@@ -6,12 +6,13 @@ class TvDetailsCubitState {
   final List<List<TvDetailsCreatedByData>> createdBy;
   final List<int> episodeRunTime;
   final String? firstAirDate;
+  final String? lastAirDate;
   final String genres;
   final String homepage;
   final int id;
   final bool inProduction;
   final List<String> languages;
-  final String? lastAirDate;
+  final String? airDateOfSeason;
   final LastEpisodeToAir lastEpisodeToAir;
   final String name;
   final NextEpisodeToAir? nextEpisodeToAir;
@@ -52,12 +53,13 @@ class TvDetailsCubitState {
     required this.createdBy,
     required this.episodeRunTime,
     required this.firstAirDate,
+    required this.lastAirDate,
     required this.genres,
     required this.homepage,
     required this.id,
     required this.inProduction,
     required this.languages,
-    required this.lastAirDate,
+    required this.airDateOfSeason,
     required this.lastEpisodeToAir,
     required this.name,
     this.nextEpisodeToAir,
@@ -103,12 +105,13 @@ class TvDetailsCubitState {
           createdBy == other.createdBy &&
           episodeRunTime == other.episodeRunTime &&
           firstAirDate == other.firstAirDate &&
+          lastAirDate == other.lastAirDate &&
           genres == other.genres &&
           homepage == other.homepage &&
           id == other.id &&
           inProduction == other.inProduction &&
           languages == other.languages &&
-          lastAirDate == other.lastAirDate &&
+          airDateOfSeason == other.airDateOfSeason &&
           lastEpisodeToAir == other.lastEpisodeToAir &&
           name == other.name &&
           nextEpisodeToAir == other.nextEpisodeToAir &&
@@ -152,12 +155,13 @@ class TvDetailsCubitState {
       createdBy.hashCode ^
       episodeRunTime.hashCode ^
       firstAirDate.hashCode ^
+      lastAirDate.hashCode ^
       genres.hashCode ^
       homepage.hashCode ^
       id.hashCode ^
       inProduction.hashCode ^
       languages.hashCode ^
-      lastAirDate.hashCode ^
+      airDateOfSeason.hashCode ^
       lastEpisodeToAir.hashCode ^
       name.hashCode ^
       nextEpisodeToAir.hashCode ^
@@ -200,12 +204,13 @@ class TvDetailsCubitState {
     List<List<TvDetailsCreatedByData>>? createdBy,
     List<int>? episodeRunTime,
     String? firstAirDate,
+    String? lastAirDate,
     String? genres,
     String? homepage,
     int? id,
     bool? inProduction,
     List<String>? languages,
-    String? lastAirDate,
+    String? airDateOfSeason,
     LastEpisodeToAir? lastEpisodeToAir,
     String? name,
     NextEpisodeToAir? nextEpisodeToAir,
@@ -247,12 +252,13 @@ class TvDetailsCubitState {
       createdBy: createdBy ?? this.createdBy,
       episodeRunTime: episodeRunTime ?? this.episodeRunTime,
       firstAirDate: firstAirDate ?? this.firstAirDate,
+      lastAirDate: lastAirDate ?? this.lastAirDate,
       genres: genres ?? this.genres,
       homepage: homepage ?? this.homepage,
       id: id ?? this.id,
       inProduction: inProduction ?? this.inProduction,
       languages: languages ?? this.languages,
-      lastAirDate: lastAirDate ?? this.lastAirDate,
+      airDateOfSeason: airDateOfSeason ?? this.airDateOfSeason,
       lastEpisodeToAir: lastEpisodeToAir ?? this.lastEpisodeToAir,
       name: name ?? this.name,
       nextEpisodeToAir: nextEpisodeToAir ?? this.nextEpisodeToAir,

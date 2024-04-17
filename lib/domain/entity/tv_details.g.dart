@@ -25,7 +25,9 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
       inProduction: json['in_production'] as bool,
       languages:
           (json['languages'] as List<dynamic>).map((e) => e as String).toList(),
-      lastAirDate: json['last_air_date'] as String?,
+      lastAirDate: json['last_air_date'] == null
+          ? null
+          : DateTime.parse(json['last_air_date'] as String),
       lastEpisodeToAir: json['last_episode_to_air'] == null
           ? null
           : LastEpisodeToAir.fromJson(
@@ -86,7 +88,7 @@ Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
       'id': instance.id,
       'in_production': instance.inProduction,
       'languages': instance.languages,
-      'last_air_date': instance.lastAirDate,
+      'last_air_date': instance.lastAirDate?.toIso8601String(),
       'last_episode_to_air': instance.lastEpisodeToAir?.toJson(),
       'name': instance.name,
       'next_episode_to_air': instance.nextEpisodeToAir?.toJson(),
