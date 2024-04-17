@@ -11,7 +11,7 @@ class TvDetailsKeywordsWidget extends StatelessWidget {
     var keywordsList = context.read<TvDetailsCubit>().state.keywords;
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
+      child: keywordsList != null ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -22,7 +22,7 @@ class TvDetailsKeywordsWidget extends StatelessWidget {
           ),
           Text(keywordsList, style: Theme.of(context).textTheme.labelSmall),
         ],
-      ),
+      ) : const SizedBox.shrink(),
     );
   }
 }

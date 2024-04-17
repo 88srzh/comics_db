@@ -42,7 +42,7 @@ class TvDetailsCubitState {
   final List<TvDetailsRecommendationsData> recommendationsData;
   final List<TvDetailsVideosData> videosData;
   final String? rating;
-  final String keywords;
+  final String? keywords;
   final String lastEpisodeToAirName;
   final String lastEpisodeToAirType;
 
