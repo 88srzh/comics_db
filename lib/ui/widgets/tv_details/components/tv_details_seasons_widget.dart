@@ -142,10 +142,11 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 20.0),
               ],
             ),
           ),
+          Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
         ],
       ),
     );
