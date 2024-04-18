@@ -24,8 +24,8 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
     final String? airDateByYear = cubit.state.airDateOfSeason;
     late final String? airDateOfSeason = cubit.state.seasons.last.airDate;
     final String? lastAirDate = cubit.state.lastAirDate;
-    final int episodeCount = cubit.state.seasons.last.episodeCount;
-    final int seasonNumber = cubit.state.seasons.last.seasonNumber;
+    late final int episodeCount = cubit.state.seasons.last.episodeCount;
+    late final int seasonNumber = cubit.state.seasons.last.seasonNumber;
     final String lastEpisodeToAirName = cubit.state.lastEpisodeToAirName;
     final String lastEpisodeToAirType = cubit.state.lastEpisodeToAirType;
     final String name = cubit.state.name;
@@ -135,7 +135,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Text(
                                 // TODO первая буква должна быть заглавная
-                                '${S.of(context).season} $lastEpisodeToAirType',
+                                '${S.of(context).season} ${lastEpisodeToAirType[0].toUpperCase()}${lastEpisodeToAirType.substring(1)}',
                                 style: TextStyle(color: reverseTextColor, fontSize: 11),
                               ),
                             ),
