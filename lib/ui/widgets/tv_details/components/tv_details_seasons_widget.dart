@@ -22,7 +22,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
     late final String lastSeasonName = cubit.state.seasons.last.name;
     late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
     final String? airDateByYear = cubit.state.airDateOfSeason;
-    late final String? airDateOfSeason = cubit.state.seasons.last.airDate;
+    // late final String? airDateOfSeason = cubit.state.seasons.last.airDate;
     final String? lastAirDate = cubit.state.lastAirDate;
     late final int episodeCount = cubit.state.seasons.last.episodeCount;
     late final int seasonNumber = cubit.state.seasons.last.seasonNumber;
@@ -104,14 +104,12 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Text(
-                                  // TODO underline not working
                                   lastEpisodeToAirName,
                                   style: Theme.of(context).textTheme.displaySmall,
                                 ),
                                 Positioned.fill(
-                                  bottom: 3,
                                   child: Container(
-                                    decoration: const BoxDecoration(border: Border(bottom: BorderSide())),
+                                    decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white))),
                                   ),
                                 ),
                               ],
@@ -134,7 +132,6 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Text(
-                                // TODO первая буква должна быть заглавная
                                 '${S.of(context).season} ${lastEpisodeToAirType[0].toUpperCase()}${lastEpisodeToAirType.substring(1)}',
                                 style: TextStyle(color: reverseTextColor, fontSize: 11),
                               ),
