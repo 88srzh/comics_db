@@ -36,6 +36,8 @@
   "creator": "Creator",
   "biography": "Biography",
   "knownFor": "Known For",
+  "episodes": "episodes",
+  "televisionNetwork": "Television network",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {
@@ -45,6 +47,8 @@
     }
   },
   "type": "Type",
+  "currentSeason": "Current Season",
+  "season": "Season",
   "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
   "@pageHomeSamplePlural": {
     "placeholders": {

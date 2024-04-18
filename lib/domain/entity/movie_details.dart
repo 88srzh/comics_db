@@ -45,7 +45,6 @@ class MovieDetails {
   final MovieDetailsCredits credits;
   final MovieDetailsVideos videos;
   final MovieDetailsRecommendations recommendations;
-  // @JsonKey(name: 'keywords')
   final MovieDetailsKeywords keywords;
 
   // final MovieDetailsReviews reviews;

@@ -11,7 +11,7 @@ class TvDetailsTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.watch<TvDetailsCubit>();
     final String name = cubit.state.name;
-    final String tagline = cubit.state.tagline;
+    final String? tagline = cubit.state.tagline;
     final String firstAirDate = cubit.state.firstAirDate ?? 'No first air data';
     return Column(
       children: [
@@ -23,7 +23,6 @@ class TvDetailsTitleWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 2.0),
                 child: Text(
                   '$name ($firstAirDate)',
-                  // '$name (${firstAirDate.substring(0, 4)})',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -39,6 +38,7 @@ class TvDetailsTitleWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              tagline != null ?
               Flexible(
                 child: Text(
                   textAlign: TextAlign.center,
@@ -47,7 +47,7 @@ class TvDetailsTitleWidget extends StatelessWidget {
                   maxLines: 3,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-              ),
+              ) : const SizedBox.shrink(),
             ],
           ),
         ),

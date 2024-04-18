@@ -28,9 +28,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "budget": MessageLookupByLibrary.simpleMessage("Бюджет"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "creator": MessageLookupByLibrary.simpleMessage("Создатель"),
+        "currentSeason": MessageLookupByLibrary.simpleMessage("Текущий сезон"),
         "description": MessageLookupByLibrary.simpleMessage("Описание"),
         "doYouReallyWantToLogout":
             MessageLookupByLibrary.simpleMessage("Вы правда хотите выйти?"),
+        "episodes": MessageLookupByLibrary.simpleMessage("эпизодов"),
         "favorites": MessageLookupByLibrary.simpleMessage("Избранное"),
         "fullCast": MessageLookupByLibrary.simpleMessage("Актерский состав"),
         "keywords": MessageLookupByLibrary.simpleMessage("Ключевые слова"),
@@ -51,11 +53,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "revenue": MessageLookupByLibrary.simpleMessage("Сборы"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("Обзор от"),
         "reviews": MessageLookupByLibrary.simpleMessage("Рецензии"),
+        "season": MessageLookupByLibrary.simpleMessage("Сезон"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Все"),
         "seriesCast":
             MessageLookupByLibrary.simpleMessage("Актерский состав сериала"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "status": MessageLookupByLibrary.simpleMessage("Статус"),
+        "televisionNetwork": MessageLookupByLibrary.simpleMessage("Телесеть"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("В главных ролях"),

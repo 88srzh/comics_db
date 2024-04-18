@@ -25,7 +25,9 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
       inProduction: json['in_production'] as bool,
       languages:
           (json['languages'] as List<dynamic>).map((e) => e as String).toList(),
-      lastAirDate: json['last_air_date'] as String?,
+      lastAirDate: json['last_air_date'] == null
+          ? null
+          : DateTime.parse(json['last_air_date'] as String),
       lastEpisodeToAir: json['last_episode_to_air'] == null
           ? null
           : LastEpisodeToAir.fromJson(
@@ -61,7 +63,7 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
           .map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as String,
-      tagline: json['tagline'] as String,
+      tagline: json['tagline'] as String?,
       type: json['type'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
@@ -72,6 +74,8 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
           json['recommendations'] as Map<String, dynamic>),
       contentRatings: TvDetailsContentRatings.fromJson(
           json['content_ratings'] as Map<String, dynamic>),
+      keywords:
+          TvDetailsKeywords.fromJson(json['keywords'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
@@ -84,7 +88,7 @@ Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
       'id': instance.id,
       'in_production': instance.inProduction,
       'languages': instance.languages,
-      'last_air_date': instance.lastAirDate,
+      'last_air_date': instance.lastAirDate?.toIso8601String(),
       'last_episode_to_air': instance.lastEpisodeToAir?.toJson(),
       'name': instance.name,
       'next_episode_to_air': instance.nextEpisodeToAir?.toJson(),
@@ -113,6 +117,7 @@ Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
       'videos': instance.videos.toJson(),
       'recommendations': instance.recommendations.toJson(),
       'content_ratings': instance.contentRatings.toJson(),
+      'keywords': instance.keywords.toJson(),
     };
 
 CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) => CreatedBy(
@@ -153,6 +158,7 @@ LastEpisodeToAir _$LastEpisodeToAirFromJson(Map<String, dynamic> json) =>
       stillPath: json['still_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
+      episodeType: json['episode_type'] as String,
     );
 
 Map<String, dynamic> _$LastEpisodeToAirToJson(LastEpisodeToAir instance) =>
@@ -167,6 +173,7 @@ Map<String, dynamic> _$LastEpisodeToAirToJson(LastEpisodeToAir instance) =>
       'still_path': instance.stillPath,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'episode_type': instance.episodeType,
     };
 
 NextEpisodeToAir _$NextEpisodeToAirFromJson(Map<String, dynamic> json) =>
@@ -218,23 +225,27 @@ Map<String, dynamic> _$ProductionCountryToJson(ProductionCountry instance) =>
     };
 
 Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
-      airDate: json['air_date'] as String?,
+      airDate: json['air_date'] == null
+          ? null
+          : DateTime.parse(json['air_date'] as String),
       episodeCount: json['episode_count'] as int,
       id: json['id'] as int,
       name: json['name'] as String,
       overview: json['overview'] as String,
       posterPath: json['poster_path'] as String?,
       seasonNumber: json['season_number'] as int,
+      voteAverage: (json['vote_average'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$SeasonToJson(Season instance) => <String, dynamic>{
-      'air_date': instance.airDate,
+      'air_date': instance.airDate?.toIso8601String(),
       'episode_count': instance.episodeCount,
       'id': instance.id,
       'name': instance.name,
       'overview': instance.overview,
       'poster_path': instance.posterPath,
       'season_number': instance.seasonNumber,
+      'vote_average': instance.voteAverage,
     };
 
 SpokenLanguage _$SpokenLanguageFromJson(Map<String, dynamic> json) =>

@@ -38,9 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "budget": MessageLookupByLibrary.simpleMessage("Budget"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "creator": MessageLookupByLibrary.simpleMessage("Creator"),
+        "currentSeason": MessageLookupByLibrary.simpleMessage("Current Season"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doYouReallyWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Do you really want to logout?"),
+        "episodes": MessageLookupByLibrary.simpleMessage("episodes"),
         "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
         "fullCast": MessageLookupByLibrary.simpleMessage("Full cast"),
         "ifNowReviews": m0,
@@ -64,10 +66,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
         "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
+        "season": MessageLookupByLibrary.simpleMessage("Season"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "seriesCast": MessageLookupByLibrary.simpleMessage("Series Cast"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "televisionNetwork":
+            MessageLookupByLibrary.simpleMessage("Television network"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "topBilledCast":
             MessageLookupByLibrary.simpleMessage("Top Billed Cast"),

@@ -24,7 +24,6 @@ class MovieDetailsReviewsWidget extends StatelessWidget {
     final cubit = context.watch<MovieDetailsCubit>();
     var index = cubit.state.id;
     var reviewsData = cubit.data.reviewsData;
-    // TODO add widget if there are no reviews
     if (reviewsData.isEmpty) return const NoReviewsWidget();
     return Padding(
       padding: const EdgeInsets.all(16.0),

@@ -410,6 +410,26 @@ class S {
     );
   }
 
+  /// `episodes`
+  String get episodes {
+    return Intl.message(
+      'episodes',
+      name: 'episodes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Television network`
+  String get televisionNetwork {
+    return Intl.message(
+      'Television network',
+      name: 'televisionNetwork',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We do not have any reviews for {title}. Would you like to write one?`
   String ifNowReviews(Object title) {
     return Intl.message(
@@ -425,6 +445,26 @@ class S {
     return Intl.message(
       'Type',
       name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Season`
+  String get currentSeason {
+    return Intl.message(
+      'Current Season',
+      name: 'currentSeason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Season`
+  String get season {
+    return Intl.message(
+      'Season',
+      name: 'season',
       desc: '',
       args: [],
     );

@@ -2,9 +2,11 @@
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_content_ratings_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_last_episode_to_air_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_watchlist_data.dart';
@@ -12,16 +14,19 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_favorite_data.
 
 class TvDetailsData {
   String name = '';
-  String posterPath = '';
-  String backdropPath = '';
-  String tagline = '';
+  String? posterPath = '';
+  String? backdropPath = '';
+  String? tagline = '';
   bool isLoading = false;
   String overview = '';
   String genres = '';
   String? firstAirDate = '';
+  String? lastAirDate = '';
+  String? airDateOfSeason = '';
   String status = '';
   String type = '';
   String originalLanguage = '';
+  String keywords = '';
   TvDetailsTrailerData tvTrailedData = TvDetailsTrailerData();
   TvDetailsScoresData tvDetailsScoresData = TvDetailsScoresData(voteCount: 0, popularity: 0);
   List<List<TvDetailsPeopleData>> peopleData = const <List<TvDetailsPeopleData>>[];
@@ -31,6 +36,8 @@ class TvDetailsData {
   List<List<TvDetailsCreatedByData>> createdByData = const <List<TvDetailsCreatedByData>>[];
   List<TvDetailsContentRatingsData> ratingsData = const <TvDetailsContentRatingsData>[];
   List<TvDetailsNetworkData> networkData = const <TvDetailsNetworkData>[];
+  List<TvDetailsSeasonData> seasonData = const<TvDetailsSeasonData>[];
+  TvDetailsLastEpisodeToAirData lastEpisodeToAirData = TvDetailsLastEpisodeToAirData();
 
   TvFavoriteData favoriteData = TvFavoriteData();
   TvDetailsWatchlistData watchlistData = TvDetailsWatchlistData();

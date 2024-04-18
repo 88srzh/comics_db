@@ -505,9 +505,30 @@ class MovieAndTvApiClient {
       '/tv/$tvId',
       parser,
       <String, dynamic>{
-        'append_to_response': 'credits,videos,recommendations,content_ratings',
+        'append_to_response': 'credits,videos,recommendations,content_ratings,keywords',
         'api_key': Configuration.apiKey,
         'language': locale,
+      },
+    );
+    return result;
+  }
+
+  Future<TVDetails> tvEpisodeDetails(int tvId, String locale, int seasonNumber, int episodeNumber) async {
+    TVDetails parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = TVDetails.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/tv/$tvId/season/$seasonNumber/episode/$episodeNumber',
+      parser,
+      <String, dynamic>{
+        'append_to_response': 'credits',
+        'api_key': Configuration.apiKey,
+        'language': locale,
+        'season_number': seasonNumber.toString(),
+        'episode_number': episodeNumber.toString(),
       },
     );
     return result;

@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -37,12 +38,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           createdBy: [],
           episodeRunTime: [],
           firstAirDate: '',
+          lastAirDate: '',
           genres: '',
           homepage: '',
           id: 0,
           inProduction: false,
           languages: [],
-          lastAirDate: '',
+          airDateOfSeason: '',
           lastEpisodeToAir: LastEpisodeToAir(
             airDate: '',
             episodeNumber: 0,
@@ -54,6 +56,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
             stillPath: '',
             voteAverage: 0,
             voteCount: 0,
+            episodeType: '',
           ),
           name: '',
           networks: [],
@@ -83,6 +86,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
           recommendationsData: [],
           videosData: [],
           rating: '',
+          keywords: '',
+          lastEpisodeToAirName: '',
+          lastEpisodeToAirType: '',
         )) {
     emit(TvDetailsCubitState(
       posterPath: state.posterPath,
@@ -90,12 +96,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       createdBy: state.createdBy,
       episodeRunTime: state.episodeRunTime,
       firstAirDate: state.firstAirDate,
+      lastAirDate: state.lastAirDate,
       genres: state.genres,
       homepage: state.homepage,
       id: state.id,
       inProduction: state.inProduction,
       languages: state.languages,
-      lastAirDate: state.lastAirDate,
+      airDateOfSeason: state.airDateOfSeason,
       lastEpisodeToAir: state.lastEpisodeToAir,
       name: state.name,
       networks: state.networks,
@@ -125,9 +132,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       recommendationsData: state.recommendationsData,
       videosData: state.videosData,
       rating: state.rating,
+      keywords: state.keywords,
+      lastEpisodeToAirName: state.lastEpisodeToAirName,
+      lastEpisodeToAirType: state.lastEpisodeToAirType,
     ));
   }
 
+  // may be add to separate file
   String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
 
   Future<void> setupLocale(BuildContext context, String localeTag) async {
@@ -178,10 +189,12 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     final String name = data.name = details.name;
     final String overview = data.overview = details.overview;
-    final String posterPath = data.posterPath = details.posterPath ?? '';
-    final String backdropPath = data.backdropPath = details.backdropPath ?? '';
-    final String tagline = data.tagline = details.tagline;
+    final String? posterPath = data.posterPath = details.posterPath;
+    final String? backdropPath = data.backdropPath = details.backdropPath;
+    final String? tagline = data.tagline = details.tagline;
     final String firstAirDate = data.firstAirDate = makeFirstAirDate(details);
+    final String? lastAirDate = data.lastAirDate = makeFullFirstAirDateOfSeason(details);
+    final String? airDateOfSeason = data.airDateOfSeason = makeAirDateOfSeason(details);
     final String? rating = makeRating(details);
     final String genres = data.genres = makeGenres(details);
     final List<List<TvDetailsPeopleData>> peopleData = data.peopleData = makePeopleData(details);
@@ -192,15 +205,14 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String status = data.status = details.status;
     final String originalLanguage = data.originalLanguage = details.originalLanguage;
     final String type = data.type = details.type;
+    final String keywords = data.keywords = makeKeywords(details);
+    final String lastEpisodeToAirName = data.lastEpisodeToAirData.name = details.lastEpisodeToAir!.name;
+    final String lastEpisodeToAitType = data.lastEpisodeToAirData.episodeType = details.lastEpisodeToAir!.episodeType;
 
     var actorsData = data.actorsData =
         details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
-    data.tvDetailsScoresData = TvDetailsScoresData(
-      voteCount: details.voteCount,
-      popularity: details.voteAverage,
-      voteAverage: details.voteAverage,
-    );
+    data.tvDetailsScoresData = TvDetailsScoresData(voteCount: details.voteCount, popularity: details.voteAverage, voteAverage: details.voteAverage);
 
     var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
         .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
@@ -208,6 +220,18 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     var networkData = data.networkData =
         details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
+
+    var seasonData = data.seasonData = details.seasons
+        .map((e) => TvDetailsSeasonData(
+            airDate: airDateOfSeason,
+            episodeCount: e.episodeCount,
+            id: e.id,
+            name: e.name,
+            overview: e.overview,
+            posterPath: e.posterPath,
+            seasonNumber: e.seasonNumber,
+            voteAverage: e.voteAverage))
+        .toList();
 
     final newState = state.copyWith(
       posterPath: posterPath,
@@ -232,7 +256,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       status: status,
       type: type,
       originalLanguage: originalLanguage,
-      // videos: data.tvTrailedData.trailerKey,
+      keywords: keywords,
+      seasons: seasonData,
+      lastEpisodeToAirName: lastEpisodeToAirName,
+      lastEpisodeToAirType: lastEpisodeToAitType,
+      lastAirDate: lastAirDate,
+      airDateOfSeason: airDateOfSeason,
+
     );
     emit(newState);
   }
@@ -256,6 +286,18 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
         genresNames.add(genr.name);
       }
       texts.add(genresNames.join(', '));
+    }
+    return texts.join(' ');
+  }
+
+  String makeKeywords(TVDetails details) {
+    var texts = <String>[];
+    if (details.keywords.results!.isNotEmpty) {
+      var keywordsNames = <String>[];
+      for (var keyword in details.keywords.results!) {
+        keywordsNames.add(keyword.name);
+      }
+      texts.add(keywordsNames.join(', '));
     }
     return texts.join(' ');
   }
@@ -324,6 +366,24 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final firstAirDate = details.firstAirDate;
     if (firstAirDate != null) {
       texts.add(DateFormat.y().format(firstAirDate));
+    }
+    return texts.join(' ');
+  }
+
+  String? makeAirDateOfSeason(TVDetails details) {
+    var texts = <String>[];
+    final lastAirDate = details.seasons.last.airDate;
+    if (lastAirDate != null) {
+      texts.add(DateFormat.y().format(lastAirDate));
+    }
+    return texts.join(' ');
+  }
+
+  String? makeFullFirstAirDateOfSeason(TVDetails details) {
+    var texts = <String>[];
+    final lastAirDate = details.lastAirDate;
+    if (lastAirDate != null) {
+      texts.add(DateFormat.yMMMMd().format(lastAirDate));
     }
     return texts.join(' ');
   }

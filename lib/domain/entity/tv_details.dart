@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:comics_db_app/domain/entity/tv_details_content_ratings.dart';
+import 'package:comics_db_app/domain/entity/tv_details_keywords.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -20,10 +21,9 @@ class TVDetails {
   final int id;
   final bool inProduction;
   final List<String> languages;
-  final String? lastAirDate;
+  final DateTime? lastAirDate;
   final LastEpisodeToAir? lastEpisodeToAir;
   final String name;
-
   // TODO возможно DateFormat
   final NextEpisodeToAir? nextEpisodeToAir;
   final List<Network> networks;
@@ -40,7 +40,7 @@ class TVDetails {
   final List<Season> seasons;
   final List<SpokenLanguage> spokenLanguages;
   final String status;
-  final String tagline;
+  final String? tagline;
   final String type;
   final double voteAverage;
   final int voteCount;
@@ -48,6 +48,7 @@ class TVDetails {
   final TvDetailsVideos videos;
   final TvDetailsRecommendations recommendations;
   final TvDetailsContentRatings contentRatings;
+  final TvDetailsKeywords keywords;
 
   TVDetails({
     required this.backdropPath,
@@ -85,6 +86,7 @@ class TVDetails {
     required this.credits,
     required this.recommendations,
     required this.contentRatings,
+    required this.keywords,
   });
 
   factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);
@@ -140,6 +142,7 @@ class LastEpisodeToAir {
   final String? stillPath;
   final double voteAverage;
   final int voteCount;
+  final String episodeType;
 
   LastEpisodeToAir({
     required this.airDate,
@@ -152,6 +155,7 @@ class LastEpisodeToAir {
     required this.stillPath,
     required this.voteAverage,
     required this.voteCount,
+    required this.episodeType,
   });
 
   factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => _$LastEpisodeToAirFromJson(json);
@@ -224,13 +228,14 @@ class ProductionCountry {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Season {
-  final String? airDate;
+  final DateTime? airDate;
   final int episodeCount;
   final int id;
   final String name;
   final String overview;
   final String? posterPath;
   final int seasonNumber;
+  final double voteAverage;
 
   Season({
     required this.airDate,
@@ -240,6 +245,7 @@ class Season {
     required this.overview,
     required this.posterPath,
     required this.seasonNumber,
+    required this.voteAverage,
   });
 
   factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
