@@ -1,17 +1,18 @@
-import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
-import 'package:comics_db_app/domain/services/tv_service.dart';
-import 'package:comics_db_app/ui/widgets/tv_episodes/components/tv_episodes_data.dart';
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+
+// Project imports:
+import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
+import 'package:comics_db_app/ui/widgets/tv_episodes/components/tv_episodes_data.dart';
 
 part 'tv_episodes_state.dart';
 
 class TvEpisodesCubit extends Cubit<TvEpisodesCubitState> {
-  late DateFormat _dateFormat;
+  // late DateFormat _dateFormat;
   final data = TvEpisodesData();
   final movieAndTvClient = MovieAndTvApiClient();
   final int tvId;
-  final _tvService = TvService();
+  // final _tvService = TvService();
 
   TvEpisodesCubit(this.tvId)
       : super(const TvEpisodesCubitState(

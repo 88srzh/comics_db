@@ -1,7 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,10 +12,14 @@ import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 import 'package:comics_db_app/domain/services/tv_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 
@@ -209,28 +210,18 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String lastEpisodeToAirName = data.lastEpisodeToAirData.name = details.lastEpisodeToAir!.name;
     final String lastEpisodeToAitType = data.lastEpisodeToAirData.episodeType = details.lastEpisodeToAir!.episodeType;
 
-    var actorsData = data.actorsData =
-        details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
+    var actorsData = data.actorsData = details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.tvDetailsScoresData = TvDetailsScoresData(voteCount: details.voteCount, popularity: details.voteAverage, voteAverage: details.voteAverage);
 
-    var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
-        .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
-        .toList();
+    var recommendationsData = data.recommendationsData =
+        details.recommendations.recommendationsList.map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
 
-    var networkData = data.networkData =
-        details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
+    var networkData = data.networkData = details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
     var seasonData = data.seasonData = details.seasons
         .map((e) => TvDetailsSeasonData(
-            airDate: airDateOfSeason,
-            episodeCount: e.episodeCount,
-            id: e.id,
-            name: e.name,
-            overview: e.overview,
-            posterPath: e.posterPath,
-            seasonNumber: e.seasonNumber,
-            voteAverage: e.voteAverage))
+            airDate: airDateOfSeason, episodeCount: e.episodeCount, id: e.id, name: e.name, overview: e.overview, posterPath: e.posterPath, seasonNumber: e.seasonNumber, voteAverage: e.voteAverage))
         .toList();
 
     final newState = state.copyWith(
@@ -262,7 +253,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       lastEpisodeToAirType: lastEpisodeToAitType,
       lastAirDate: lastAirDate,
       airDateOfSeason: airDateOfSeason,
-
     );
     emit(newState);
   }
@@ -327,9 +317,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   }
 
   List<List<TvDetailsCreatedByData>> makeCreatedByData(TVDetails details) {
-    var creators = details.createdBy
-        .map((e) => TvDetailsCreatedByData(id: e.id, createdId: e.creditId, name: e.name, gender: e.gender, profilePath: e.profilePath.toString()))
-        .toList();
+    var creators = details.createdBy.map((e) => TvDetailsCreatedByData(id: e.id, createdId: e.creditId, name: e.name, gender: e.gender, profilePath: e.profilePath.toString())).toList();
     creators = creators.length > 4 ? creators.sublist(0, 4) : creators;
     var creatorsChunks = <List<TvDetailsCreatedByData>>[];
     for (var i = 0; i < creators.length; i += 2) {
@@ -386,5 +374,10 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       texts.add(DateFormat.yMMMMd().format(lastAirDate));
     }
     return texts.join(' ');
+  }
+
+  void tapToSeeFullListOfSeasons(BuildContext context, int index) {
+    final id = state.id;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetailsFullReviewsList, arguments: id);
   }
 }

@@ -1,14 +1,19 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class TvDetailsSeasonsWidget extends StatelessWidget {
   final String currentSeason;
@@ -146,7 +151,9 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
               ],
             ),
           ),
-          Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
+          InkWell(
+            onTap: () {},
+              child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium)),
         ],
       ),
     );

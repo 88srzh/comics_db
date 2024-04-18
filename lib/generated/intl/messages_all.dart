@@ -9,15 +9,20 @@
 // ignore_for_file:prefer_single_quotes, prefer_generic_function_type_aliases
 // ignore_for_file:comment_references
 
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 import 'package:intl/src/intl_helpers.dart';
 
-import 'messages_en.dart' as messages_en;
-import 'messages_ru.dart' as messages_ru;
+// Project imports:
+import 'package:comics_db_app/generated/intl/messages_en.dart' as messages_en;
+import 'package:comics_db_app/generated/intl/messages_ru.dart' as messages_ru;
 
 typedef Future<dynamic> LibraryLoader();
 Map<String, LibraryLoader> _deferredLibraries = {
