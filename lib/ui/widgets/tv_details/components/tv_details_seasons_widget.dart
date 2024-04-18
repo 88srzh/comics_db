@@ -18,11 +18,11 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TvDetailsCubit>();
-    final String? posterPath = cubit.state.seasons.first.posterPath;
-    final String lastSeasonName = cubit.state.seasons.last.name;
-    final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
+    late final String? posterPath = cubit.state.seasons.first.posterPath;
+    late final String lastSeasonName = cubit.state.seasons.last.name;
+    late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
     final String? airDateByYear = cubit.state.airDateOfSeason;
-    final String? airDateOfSeason = cubit.state.seasons.last.airDate;
+    late final String? airDateOfSeason = cubit.state.seasons.last.airDate;
     final String? lastAirDate = cubit.state.lastAirDate;
     final int episodeCount = cubit.state.seasons.last.episodeCount;
     final int seasonNumber = cubit.state.seasons.last.seasonNumber;
@@ -94,7 +94,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 5.0),
-                      CustomCastListTextWidget(text: 'Сезон 1 сериала $name, вышел $lastAirDate.', maxLines: 3),
+                      CustomCastListTextWidget(text: 'Сезон 1 сериала "$name", вышел $lastAirDate.', maxLines: 3),
                       const SizedBox(height: 5.0),
                       Row(
                         children: [
