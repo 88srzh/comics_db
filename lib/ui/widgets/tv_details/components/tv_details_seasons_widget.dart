@@ -121,7 +121,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomCastListTextWidget(text: '(${seasonNumber}x$episodeCount, 1 february 2024)', maxLines: 1),
+                          CustomCastListTextWidget(text: '(${seasonNumber}x$episodeCount, $lastAirDate)', maxLines: 1),
                           const SizedBox(width: 5.0),
                           Container(
                             decoration: BoxDecoration(

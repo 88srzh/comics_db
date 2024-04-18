@@ -383,7 +383,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     var texts = <String>[];
     final lastAirDate = details.lastAirDate;
     if (lastAirDate != null) {
-      texts.add(_dateFormat.format(lastAirDate));
+      texts.add(DateFormat.yMMMMd().format(lastAirDate));
     }
     return texts.join(' ');
   }
