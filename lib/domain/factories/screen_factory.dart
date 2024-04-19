@@ -148,6 +148,13 @@ class ScreenFactory {
     );
   }
 
+  Widget makeTvSeasons(int tvId) {
+    return BlocProvider(
+      create: (_) => TvDetailsCubit(tvId),
+      child: const TvSeasonsListWidget(),
+    );
+  }
+
   // TODO should fix, may be create tv list season cubit
   Widget tvDetailsFullListOfSeasons(int tvId) {
     return BlocProvider(

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -152,8 +153,9 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
-              child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium)),
+            onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),
+            child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
+          ),
         ],
       ),
     );

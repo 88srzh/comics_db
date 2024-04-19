@@ -31,25 +31,27 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TvDetailsCubit>();
+    var seasonsData = cubit.data.seasonData;
+    final String name = cubit.state.name;
+    // final String name = cubit.state.name;
     return Scaffold(
-      appBar: const CustomDetailsAppBar(title: 'Popular Movies'),
+      appBar: CustomDetailsAppBar(title: name),
       body: Stack(
         children: [
           ListView.builder(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.only(top: 70.0),
-            itemCount: cubit.state.seasons.length,
+            itemCount: seasonsData.length,
             itemExtent: 165,
             itemBuilder: (BuildContext context, int index) {
-              cubit.state.seasons[index];
-              final tv = cubit.state.seasons[index];
+              // cubit.state.seasons.length;
+              final tv = seasonsData[index];
               final posterPath = tv.posterPath;
               return InkWell(
                 // onTap: () => cubit.onMovieTap(context, index),
                 child: _TvDetailsSeasonsListRowWidget(
                   posterPath: posterPath,
                   tvData: tv,
-                  cubit: cubit,
                   index: index,
                 ),
               );
@@ -64,19 +66,18 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
     );
   }
 }
+
 class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
   final int index;
 
   const _TvDetailsSeasonsListRowWidget({
     required this.posterPath,
     required this.tvData,
-    required this.cubit,
     required this.index,
   });
 
   final String? posterPath;
   final TvDetailsSeasonData tvData;
-  final TvDetailsCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -86,16 +87,15 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration:
-            isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
+            decoration: isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
                 posterPath != null
                     ? Image.network(
-                  ImageDownloader.imageUrl(posterPath!),
-                  width: 95,
-                )
+                        ImageDownloader.imageUrl(posterPath!),
+                        width: 95,
+                      )
                     : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(

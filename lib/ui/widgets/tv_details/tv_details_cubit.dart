@@ -378,6 +378,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   void tapToSeeFullListOfSeasons(BuildContext context, int index) {
     final id = state.id;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.movieDetailsFullReviewsList, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons, arguments: id);
   }
 }
