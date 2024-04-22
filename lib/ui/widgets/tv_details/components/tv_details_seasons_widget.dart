@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -28,14 +27,14 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
     late final String lastSeasonName = cubit.state.seasons.last.name;
     late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
     final String? airDateByYear = cubit.state.airDateOfSeason;
-    // late final String? airDateOfSeason = cubit.state.seasons.last.airDate;
     final String? lastAirDate = cubit.state.lastAirDate;
     late final int episodeCount = cubit.state.seasons.last.episodeCount;
     late final int seasonNumber = cubit.state.seasons.last.seasonNumber;
     final String lastEpisodeToAirName = cubit.state.lastEpisodeToAirName;
     final String lastEpisodeToAirType = cubit.state.lastEpisodeToAirType;
     final String name = cubit.state.name;
-    // TODO add to separate file
+    final int id = cubit.state.id;
+
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Padding(
@@ -153,7 +152,8 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),
+            onTap: () => cubit.tapToSeeFullListOfSeasons(context, id),
+            // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),
             child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
           ),
         ],
