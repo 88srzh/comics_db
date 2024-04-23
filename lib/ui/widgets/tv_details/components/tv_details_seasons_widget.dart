@@ -23,7 +23,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TvDetailsCubit>();
-    late final String? posterPath = cubit.state.seasons.first.posterPath;
+    late final String? posterPath = cubit.state.seasons.last.posterPath;
     late final String lastSeasonName = cubit.state.seasons.last.name;
     late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
     final String? airDateByYear = cubit.state.airDateOfSeason;
