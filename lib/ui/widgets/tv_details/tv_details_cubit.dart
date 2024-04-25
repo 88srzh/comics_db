@@ -142,15 +142,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   // may be add to separate file
   String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
 
-  Future<void> setupLocale(BuildContext context, String localeTag) async {
-    if (state.localeTag == localeTag) return;
-    final newState = state.copyWith(localeTag: localeTag);
-    emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
-    updateData(null, false, false);
-    await loadTvDetails(context);
-  }
-
   Future<void> loadTvDetails(BuildContext context) async {
     try {
       final details = await _tvService.loadTvDetails(tvId: tvId, locale: state.localeTag);
@@ -389,7 +380,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   }
 
   void tapToSeeFullListOfSeasons(BuildContext context, int index) {
-    final id = state.id;
+    final id = tvId;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons, arguments: id);
   }
 }

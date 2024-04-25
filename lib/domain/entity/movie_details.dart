@@ -17,7 +17,6 @@ part 'movie_details.g.dart';
 class MovieDetails {
   final bool adult;
   final String? backdropPath;
-
   // final List<BelongsToCollection>? belongsToCollection;
   final int budget;
   final List<Genre> genres;
@@ -46,8 +45,6 @@ class MovieDetails {
   final MovieDetailsVideos videos;
   final MovieDetailsRecommendations recommendations;
   final MovieDetailsKeywords keywords;
-
-  // final MovieDetailsReviews reviews;
   final MovieDetailsSimilar? similar;
   final MovieDetailsExternalIDs externalIds;
   final MovieDetailsReviews reviews;

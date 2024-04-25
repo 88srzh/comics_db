@@ -18,15 +18,9 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     return TextField(
-      style: TextStyle(
-        color: isDarkTheme
-            ? DarkThemeColors.genresText
-            : DarkThemeColors.kPrimaryColor,
-      ),
+      style: TextStyle(color: isDarkTheme ? DarkThemeColors.genresText : DarkThemeColors.kPrimaryColor),
       onChanged: onChanged,
-      decoration: isDarkTheme
-          ? customSearchInputDecoration(text: 'Search')
-          : customSearchInputDecorationForLightTheme(text: 'Search'),
+      decoration: isDarkTheme ? customSearchInputDecoration(text: 'Search') : customSearchInputDecorationForLightTheme(text: 'Search'),
     );
   }
 }

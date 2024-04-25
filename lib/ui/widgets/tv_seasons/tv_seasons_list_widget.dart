@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,6 +14,7 @@ import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TvSeasonsListWidget extends StatefulWidget {
   const TvSeasonsListWidget({super.key});
@@ -54,10 +57,11 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
                 shrinkWrap: true,
                 physics: const ScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                padding: const EdgeInsets.only(top: 70.0),
+                // padding: const EdgeInsets.only(top: 70.0),
                 itemCount: seasonsData.length,
                 itemExtent: 165,
                 itemBuilder: (BuildContext context, int index) {
+                  // final seasonId = seasonsData[index].id;
                   return InkWell(
                     // onTap: () => cubit.onMovieTap(context, index),
                     child: _TvDetailsSeasonsListRowWidget(
@@ -68,7 +72,6 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                // child: CustomSearchBar(onChanged: cubit.searchPopularMovie),
               ),
             ],
           ),
@@ -92,8 +95,13 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
     final seasonData = cubit.data.seasonData[index];
     final posterPath = seasonData.posterPath;
     final name = seasonData.name;
-    final String? airDate = seasonData.airDate;
-    final String overview = seasonData.overview;
+    late final String lastSeasonName = cubit.state.seasons.last.name;
+    late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
+    final String? airDateByYear = cubit.state.airDateOfSeason;
+    late final int episodeCount = cubit.state.seasons.last.episodeCount;
+    final String? lastAirDate = cubit.state.lastAirDate;
+    Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
+    Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
       child: Stack(
@@ -112,24 +120,58 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
                 const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20.0),
-                      CustomCastListTextWidget(
-                        text: name,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(height: 5.0),
-                      CustomCastListTextWidget(
-                        text: airDate.toString(),
-                        maxLines: 1,
-                      ),
-                      const SizedBox(height: 15.0),
-                      CustomCastListTextWidget(
-                        text: overview,
-                        maxLines: 3,
-                      ),
-                    ],
+                        Row(
+                          children: [Text(lastSeasonName, style: Theme.of(context).textTheme.displaySmall)],
+                        ),
+                        const SizedBox(height: 5.0),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                // may be delete picture
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: textColor,
+                                    border: Border.all(
+                                      color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(MdiIcons.star, size: 12, color: reverseTextColor),
+                                        Text(
+                                          '${voteAverage.toStringAsFixed(0)}%',
+                                          style: TextStyle(color: reverseTextColor, fontSize: 11),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 10.0),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                child: Text(
+                                  '$airDateByYear • $episodeCount ${S.of(context).episodes}',
+                                  style: Theme.of(context).textTheme.headlineMedium,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20.0),
+                        CustomCastListTextWidget(text: 'Сезон 1 сериала "$name", вышел $lastAirDate.', maxLines: 3),
+                        const SizedBox(height: 5.0),
+                      ],
                   ),
                 ),
                 const SizedBox(width: 5.0),

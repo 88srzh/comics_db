@@ -151,10 +151,13 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            onTap: () => cubit.tapToSeeFullListOfSeasons(context, id),
-            // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),
-            child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: InkWell(
+              onTap: () => cubit.tapToSeeFullListOfSeasons(context, id),
+              // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),
+              child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
+            ),
           ),
         ],
       ),
