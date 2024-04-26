@@ -97,7 +97,8 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
     final posterPath = seasonData.posterPath;
     final name = seasonData.name;
     final String lastSeasonName = seasonData.name;
-    double? voteAverage = seasonData.voteAverage! * 10;
+    double? voteAverage = seasonData.voteAverage;
+    final double? voteAveragePercent = voteAverage != null ? voteAverage * 10 : null;
     final String? airDateByYear = seasonData.airDate;
     late final int episodeCount = seasonData.episodeCount;
     final String? fullAirDate = seasonData.fullAirDate;
@@ -132,7 +133,6 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              // TODO need to fix
                               voteAverage != null ?
                               Container(
                                 decoration: BoxDecoration(
@@ -148,7 +148,7 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
                                     children: [
                                       Icon(MdiIcons.star, size: 12, color: reverseTextColor),
                                       Text(
-                                        '${voteAverage.toStringAsFixed(0)}%',
+                                        '${voteAveragePercent!.toStringAsFixed(0)}%',
                                         style: TextStyle(color: reverseTextColor, fontSize: 11),
                                       ),
                                     ],
