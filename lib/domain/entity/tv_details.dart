@@ -235,7 +235,7 @@ class Season {
   final String overview;
   final String? posterPath;
   final int seasonNumber;
-  final double voteAverage;
+  final double? voteAverage;
 
   Season({
     required this.airDate,

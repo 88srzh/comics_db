@@ -215,7 +215,8 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
     var seasonData = data.seasonData = details.seasons
         .map((e) => TvDetailsSeasonData(
-            airDate: airDateOfSeason,
+            airDate: DateFormat.y().format(e.airDate!),
+            fullAirDate: DateFormat.yMMMMd().format(e.airDate!),
             episodeCount: e.episodeCount,
             id: e.id,
             name: e.name,
@@ -363,7 +364,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   String? makeAirDateOfSeason(TVDetails details) {
     var texts = <String>[];
-    final lastAirDate = details.seasons.last.airDate;
+    final lastAirDate = details.seasons.first.airDate;
     if (lastAirDate != null) {
       texts.add(DateFormat.y().format(lastAirDate));
     }

@@ -234,7 +234,7 @@ Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
       overview: json['overview'] as String,
       posterPath: json['poster_path'] as String?,
       seasonNumber: json['season_number'] as int,
-      voteAverage: (json['vote_average'] as num).toDouble(),
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$SeasonToJson(Season instance) => <String, dynamic>{

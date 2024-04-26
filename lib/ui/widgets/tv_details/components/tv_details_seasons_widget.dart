@@ -25,7 +25,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
     var cubit = context.watch<TvDetailsCubit>();
     late final String? posterPath = cubit.state.seasons.last.posterPath;
     late final String lastSeasonName = cubit.state.seasons.last.name;
-    late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
+    late final double voteAverage = cubit.state.seasons.last.voteAverage! * 10;
     final String? airDateByYear = cubit.state.airDateOfSeason;
     final String? lastAirDate = cubit.state.lastAirDate;
     late final int episodeCount = cubit.state.seasons.last.episodeCount;
@@ -151,7 +151,7 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: InkWell(
               onTap: () => cubit.tapToSeeFullListOfSeasons(context, id),
               // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),

@@ -25,6 +25,7 @@ class TvSeasonsListWidget extends StatefulWidget {
 
 class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
   late Future<String> lazyValue;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -95,11 +96,11 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
     final seasonData = cubit.data.seasonData[index];
     final posterPath = seasonData.posterPath;
     final name = seasonData.name;
-    late final String lastSeasonName = cubit.state.seasons.last.name;
-    late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
-    final String? airDateByYear = cubit.state.airDateOfSeason;
-    late final int episodeCount = cubit.state.seasons.last.episodeCount;
-    final String? lastAirDate = cubit.state.lastAirDate;
+    final String lastSeasonName = seasonData.name;
+    double? voteAverage = seasonData.voteAverage! * 10;
+    final String? airDateByYear = seasonData.airDate;
+    late final int episodeCount = seasonData.episodeCount;
+    final String? fullAirDate = seasonData.fullAirDate;
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Padding(
@@ -123,58 +124,58 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        Row(
-                          children: [Text(lastSeasonName, style: Theme.of(context).textTheme.displaySmall)],
-                        ),
-                        const SizedBox(height: 5.0),
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                // may be delete picture
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: textColor,
-                                    border: Border.all(
-                                      color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
-                                    ),
-                                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                      Row(
+                        children: [Text(lastSeasonName, style: Theme.of(context).textTheme.displaySmall)],
+                      ),
+                      const SizedBox(height: 5.0),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              // TODO need to fix
+                              voteAverage != null ?
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  border: Border.all(
+                                    color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                    child: Row(
-                                      children: [
-                                        Icon(MdiIcons.star, size: 12, color: reverseTextColor),
-                                        Text(
-                                          '${voteAverage.toStringAsFixed(0)}%',
-                                          style: TextStyle(color: reverseTextColor, fontSize: 11),
-                                        ),
-                                      ],
-                                    ),
+                                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(MdiIcons.star, size: 12, color: reverseTextColor),
+                                      Text(
+                                        '${voteAverage.toStringAsFixed(0)}%',
+                                        style: TextStyle(color: reverseTextColor, fontSize: 11),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(width: 10.0),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                child: Text(
-                                  '$airDateByYear • $episodeCount ${S.of(context).episodes}',
-                                  style: Theme.of(context).textTheme.headlineMedium,
-                                ),
+                              ): const SizedBox.shrink(),
+                            ],
+                          ),
+                          const SizedBox(width: 10.0),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                '$airDateByYear • $episodeCount ${S.of(context).episodes}',
+                                style: Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 20.0),
-                        CustomCastListTextWidget(text: 'Сезон 1 сериала "$name", вышел $lastAirDate.', maxLines: 3),
-                        const SizedBox(height: 5.0),
-                      ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      CustomCastListTextWidget(text: 'Сезон 1 сериала "$name", вышел $fullAirDate.', maxLines: 3),
+                      const SizedBox(height: 5.0),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 5.0),
               ],
             ),
           ),
