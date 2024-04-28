@@ -436,6 +436,16 @@ class S {
     );
   }
 
+  /// `We don't have an overview translated in English. Help us expand our database by adding one.`
+  String get seasonOverview {
+    return Intl.message(
+      'We don\'t have an overview translated in English. Help us expand our database by adding one.',
+      name: 'seasonOverview',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We do not have any reviews for {title}. Would you like to write one?`
   String ifNowReviews(Object title) {
     return Intl.message(

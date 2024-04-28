@@ -38,6 +38,7 @@
   "knownFor": "Known For",
   "episodes": "episodes",
   "televisionNetwork": "Television network",
+  "seasonOverview": "We don't have an overview translated in English. Help us expand our database by adding one.",
   "ifNowReviews": "We do not have any reviews for {title}. Would you like to write one?",
   "@ifNoReviews": {
     "placeholders": {

@@ -10,6 +10,7 @@
 // ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
 // ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
 
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
@@ -67,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewBy": MessageLookupByLibrary.simpleMessage("A review by"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "season": MessageLookupByLibrary.simpleMessage("Season"),
+        "seasonOverview": MessageLookupByLibrary.simpleMessage(
+            "We don\'t have an overview translated in English. Help us expand our database by adding one."),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "seriesCast": MessageLookupByLibrary.simpleMessage("Series Cast"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
