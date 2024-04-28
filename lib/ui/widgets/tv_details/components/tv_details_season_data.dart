@@ -1,6 +1,6 @@
 class TvDetailsSeasonData {
-  final String? airDate;
-  final String? fullAirDate;
+  final DateTime? airDate;
+  final DateTime? fullAirDate;
   final int episodeCount;
   final int id;
   final String name;

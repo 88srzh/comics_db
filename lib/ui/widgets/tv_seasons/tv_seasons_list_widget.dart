@@ -1,20 +1,21 @@
 // Flutter imports:
-import 'package:comics_db_app/core/dark_theme_colors.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 // Project imports:
+import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TvSeasonsListWidget extends StatefulWidget {
   const TvSeasonsListWidget({super.key});
@@ -99,9 +100,9 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
     final String lastSeasonName = seasonData.name;
     double? voteAverage = seasonData.voteAverage;
     final double? voteAveragePercent = voteAverage != null ? voteAverage * 10 : null;
-    final String? airDateByYear = seasonData.airDate;
+    final String? airDateByYear = seasonData.airDate != null ? DateFormat.y().format(seasonData.airDate!) : null;
     late final int episodeCount = seasonData.episodeCount;
-    final String? fullAirDate = seasonData.fullAirDate;
+    final String? fullAirDate = seasonData.fullAirDate != null ? DateFormat.yMMMMd().format(seasonData.fullAirDate!) : null;
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Padding(
