@@ -63,9 +63,10 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
                 itemCount: seasonsData.length,
                 itemExtent: 165,
                 itemBuilder: (BuildContext context, int index) {
-                  // final seasonId = seasonsData[index].id;
+                  // final int  seasonId = seasonsData[index].id;
+                  // final int seasonNumber = seasonsData[index].seasonNumber;
                   return InkWell(
-                    // onTap: () => cubit.onMovieTap(context, index),
+                    // onTap: () => cubit.on(context, index),
                     child: _TvDetailsSeasonsListRowWidget(
                       index: index,
                     ),
