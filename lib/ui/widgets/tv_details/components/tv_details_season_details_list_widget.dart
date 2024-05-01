@@ -1,12 +1,3 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
@@ -16,15 +7,19 @@ import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class TvSeasonsListWidget extends StatefulWidget {
-  const TvSeasonsListWidget({super.key});
+class TvDetailsSeasonDetailsListWidget extends StatefulWidget {
+  const TvDetailsSeasonDetailsListWidget({super.key});
 
   @override
-  State<TvSeasonsListWidget> createState() => _TvSeasonsListWidgetState();
+  State<TvDetailsSeasonDetailsListWidget> createState() => _TvDetailsSeasonDetailsListWidgetState();
 }
 
-class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
+class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetailsListWidget> {
   late Future<String> lazyValue;
 
   @override
@@ -41,17 +36,17 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
     context.read<TvDetailsCubit>().setupTvDetailsLocale(context, locale.languageCode);
   }
 
+
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TvDetailsCubit>();
-    var seasonsData = cubit.data.seasonData;
-    if (seasonsData.isEmpty) return const SizedBox.shrink();
-    final String name = cubit.state.name;
+    var seasonDetailsData = cubit.data.seasonDetailsData;
+    if (seasonDetailsData.isEmpty) return const SizedBox.shrink();
     return FutureBuilder(
       future: lazyValue,
       builder: (context, snapshot) {
         return Scaffold(
-          appBar: CustomDetailsAppBar(title: name),
+          appBar: const CustomDetailsAppBar(title: '123'),
           body: Stack(
             children: [
               ListView.builder(
@@ -60,14 +55,14 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
                 physics: const ScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 // padding: const EdgeInsets.only(top: 70.0),
-                itemCount: seasonsData.length,
+                itemCount: seasonDetailsData.length,
                 itemExtent: 165,
                 itemBuilder: (BuildContext context, int index) {
-                  final int  seasonId = seasonsData[index].id;
-                  final int seasonNumber = seasonsData[index].seasonNumber;
+                  // final int  seasonId = seasonsData[index].id;
+                  // final int seasonNumber = seasonsData[index].seasonNumber;
                   return InkWell(
-                    onTap: () => cubit.tapToSeeListOfEpisodes(context, index, seasonNumber),
-                    child: _TvDetailsSeasonsListRowWidget(
+                    // onTap: () => cubit.on(context, index),
+                    child: _TvDetailsSeasonDetailsListRowWidget(
                       index: index,
                     ),
                   );
@@ -84,10 +79,10 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
   }
 }
 
-class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
+class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
   final int index;
 
-  const _TvDetailsSeasonsListRowWidget({
+  const _TvDetailsSeasonDetailsListRowWidget({
     required this.index,
   });
 
@@ -118,9 +113,9 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
               children: [
                 posterPath != null
                     ? Image.network(
-                        ImageDownloader.imageUrl(posterPath),
-                        width: 95,
-                      )
+                  ImageDownloader.imageUrl(posterPath),
+                  width: 95,
+                )
                     : Image.asset(AppImages.noImageAvailable),
                 const SizedBox(width: 15.0),
                 Expanded(
@@ -140,26 +135,26 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
                               children: [
                                 voteAverage != null
                                     ? Container(
-                                        decoration: BoxDecoration(
-                                          color: textColor,
-                                          border: Border.all(
-                                            color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
-                                          ),
-                                          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                  decoration: BoxDecoration(
+                                    color: textColor,
+                                    border: Border.all(
+                                      color: context.read<ThemeBloc>().isDarkTheme ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(MdiIcons.star, size: 12, color: reverseTextColor),
+                                        Text(
+                                          '${voteAveragePercent!.toStringAsFixed(0)}%',
+                                          style: TextStyle(color: reverseTextColor, fontSize: 11),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                          child: Row(
-                                            children: [
-                                              Icon(MdiIcons.star, size: 12, color: reverseTextColor),
-                                              Text(
-                                                '${voteAveragePercent!.toStringAsFixed(0)}%',
-                                                style: TextStyle(color: reverseTextColor, fontSize: 11),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
+                                      ],
+                                    ),
+                                  ),
+                                )
                                     : const SizedBox.shrink(),
                               ],
                             ),

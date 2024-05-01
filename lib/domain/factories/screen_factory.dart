@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_details_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -152,6 +153,13 @@ class ScreenFactory {
     return BlocProvider(
       create: (_) => TvDetailsCubit(tvId),
       child: const TvSeasonsListWidget(),
+    );
+  }
+
+  Widget tvDetailsListOfEpisodes(int tvId) {
+    return BlocProvider(
+      create: (_) => TvDetailsCubit(tvId),
+      child: const TvDetailsSeasonDetailsListWidget(),
     );
   }
 

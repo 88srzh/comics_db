@@ -76,9 +76,8 @@ TVDetails _$TVDetailsFromJson(Map<String, dynamic> json) => TVDetails(
           json['content_ratings'] as Map<String, dynamic>),
       keywords:
           TvDetailsKeywords.fromJson(json['keywords'] as Map<String, dynamic>),
-      episodes: (json['episodes'] as List<dynamic>)
-          .map((e) => TvDetailsSeasons.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      episodes:
+          TvDetailsSeasons.fromJson(json['episodes'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
@@ -121,7 +120,7 @@ Map<String, dynamic> _$TVDetailsToJson(TVDetails instance) => <String, dynamic>{
       'recommendations': instance.recommendations.toJson(),
       'content_ratings': instance.contentRatings.toJson(),
       'keywords': instance.keywords.toJson(),
-      'episodes': instance.episodes.map((e) => e.toJson()).toList(),
+      'episodes': instance.episodes.toJson(),
     };
 
 CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) => CreatedBy(

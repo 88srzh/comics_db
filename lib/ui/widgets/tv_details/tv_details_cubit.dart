@@ -201,14 +201,17 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     final String lastEpisodeToAirName = data.lastEpisodeToAirData.name = details.lastEpisodeToAir!.name;
     final String lastEpisodeToAitType = data.lastEpisodeToAirData.episodeType = details.lastEpisodeToAir!.episodeType;
 
-    var actorsData = data.actorsData = details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
+    var actorsData = data.actorsData =
+        details.credits.cast.map((e) => TvDetailsActorData(name: e.name, character: e.character, profilePath: e.profilePath, id: e.id)).toList();
 
     data.tvDetailsScoresData = TvDetailsScoresData(voteCount: details.voteCount, popularity: details.voteAverage, voteAverage: details.voteAverage);
 
-    var recommendationsData = data.recommendationsData =
-        details.recommendations.recommendationsList.map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath)).toList();
+    var recommendationsData = data.recommendationsData = details.recommendations.recommendationsList
+        .map((e) => TvDetailsRecommendationsData(id: e.id, name: e.name, posterPath: e.posterPath, backdropPath: e.backdropPath))
+        .toList();
 
-    var networkData = data.networkData = details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
+    var networkData = data.networkData =
+        details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
     var seasonData = data.seasonData = details.seasons
         .map((e) => TvDetailsSeasonData(
@@ -316,7 +319,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   }
 
   List<List<TvDetailsCreatedByData>> makeCreatedByData(TVDetails details) {
-    var creators = details.createdBy.map((e) => TvDetailsCreatedByData(id: e.id, createdId: e.creditId, name: e.name, gender: e.gender, profilePath: e.profilePath.toString())).toList();
+    var creators = details.createdBy
+        .map((e) => TvDetailsCreatedByData(id: e.id, createdId: e.creditId, name: e.name, gender: e.gender, profilePath: e.profilePath.toString()))
+        .toList();
     creators = creators.length > 4 ? creators.sublist(0, 4) : creators;
     var creatorsChunks = <List<TvDetailsCreatedByData>>[];
     for (var i = 0; i < creators.length; i += 2) {
@@ -376,7 +381,13 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   }
 
   void tapToSeeFullListOfSeasons(BuildContext context, int index) {
-    final id = tvId;
+    final int id = tvId;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons, arguments: id);
+  }
+
+  void tapToSeeListOfEpisodes(BuildContext context, int index, int seasonNumber) {
+    final int id = tvId;
+    // final int seasonId = seasonNumber;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsListOfEpisodes, arguments: id);
   }
 }

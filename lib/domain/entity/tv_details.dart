@@ -50,7 +50,7 @@ class TVDetails {
   final TvDetailsRecommendations recommendations;
   final TvDetailsContentRatings contentRatings;
   final TvDetailsKeywords keywords;
-  final List<TvDetailsSeasons> episodes;
+  final TvDetailsSeasons episodes;
 
   TVDetails({
     required this.backdropPath,
