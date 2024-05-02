@@ -534,10 +534,10 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVDetails> tvSeasonsDetails(int tvId, String locale, int seasonNumber) async {
-    TVDetails parser(dynamic json) {
+  Future<TVResponse> tvSeasonsDetails(int tvId, String locale, int seasonNumber) async {
+    TVResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = TVDetails.fromJson(jsonMap);
+      final response = TVResponse.fromJson(jsonMap);
       return response;
     }
 
@@ -545,6 +545,7 @@ class MovieAndTvApiClient {
       '/tv/$tvId/season/$seasonNumber',
       parser,
       <String, dynamic>{
+        'append_to_response': 'season',
         'api_key': Configuration.apiKey,
         'language': locale,
         'season_number': seasonNumber.toString(),
