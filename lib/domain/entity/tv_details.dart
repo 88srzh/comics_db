@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:comics_db_app/domain/entity/tv_season_details.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
@@ -6,7 +7,6 @@ import 'package:comics_db_app/domain/entity/tv_details_content_ratings.dart';
 import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_keywords.dart';
 import 'package:comics_db_app/domain/entity/tv_details_recommendations.dart';
-import 'package:comics_db_app/domain/entity/tv_details_seasons.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 
 part 'tv_details.g.dart';
@@ -50,7 +50,7 @@ class TVDetails {
   final TvDetailsRecommendations recommendations;
   final TvDetailsContentRatings contentRatings;
   final TvDetailsKeywords keywords;
-  final TvDetailsSeasons episodes;
+  final TvSeasonDetails seasonDetails;
 
   TVDetails({
     required this.backdropPath,
@@ -89,7 +89,7 @@ class TVDetails {
     required this.recommendations,
     required this.contentRatings,
     required this.keywords,
-    required this.episodes,
+    required this.seasonDetails,
   });
 
   factory TVDetails.fromJson(Map<String, dynamic> json) => _$TVDetailsFromJson(json);

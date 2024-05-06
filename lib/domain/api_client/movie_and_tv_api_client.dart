@@ -13,6 +13,7 @@ import 'package:comics_db_app/domain/entity/people_response.dart';
 import 'package:comics_db_app/domain/entity/trending_all_response.dart';
 import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/domain/entity/tv_response.dart';
+import 'package:comics_db_app/domain/entity/tv_season_response.dart';
 
 // const String sixHor = '6h';
 
@@ -534,10 +535,10 @@ class MovieAndTvApiClient {
     return result;
   }
 
-  Future<TVResponse> tvSeasonsDetails(int tvId, String locale, int seasonNumber) async {
-    TVResponse parser(dynamic json) {
+  Future<TvSeasonResponse> tvSeasonsDetails(int tvId, String locale, int seasonNumber) async {
+    TvSeasonResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
-      final response = TVResponse.fromJson(jsonMap);
+      final response = TvSeasonResponse.fromJson(jsonMap);
       return response;
     }
 
