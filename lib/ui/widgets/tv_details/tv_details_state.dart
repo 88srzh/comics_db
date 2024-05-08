@@ -26,7 +26,7 @@ class TvDetailsCubitState {
   final double popularity;
   final List<ProductionCompany> productionCompanies;
   final List<ProductionCountry> productionCountries;
-  final List<TvDetailsSeasonData> seasons;
+  final List<TvsSeasonData> seasons;
   final List<SpokenLanguage> spokenLanguages;
   final String status;
   final String? tagline;
@@ -224,7 +224,7 @@ class TvDetailsCubitState {
     double? popularity,
     List<ProductionCompany>? productionCompanies,
     List<ProductionCountry>? productionCountries,
-    List<TvDetailsSeasonData>? seasons,
+    List<TvsSeasonData>? seasons,
     List<SpokenLanguage>? spokenLanguages,
     String? status,
     String? tagline,

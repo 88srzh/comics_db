@@ -1,7 +1,7 @@
 import 'package:comics_db_app/ui/widgets/tv_seasons/components/tv_season_data.dart';
 
 class TvSeasonCubitState {
-  final List<TvSeasonData> seasonData;
+  final List<TvSeasonDetailsData> seasonData;
   final String localeTag;
 
   const TvSeasonCubitState({
@@ -22,7 +22,7 @@ class TvSeasonCubitState {
   int get hashCode => seasonData.hashCode ^ localeTag.hashCode;
 
   TvSeasonCubitState copyWith({
-    List<TvSeasonData>? seasonData,
+    List<TvSeasonDetailsData>? seasonData,
     String? localeTag,
   }) {
     return TvSeasonCubitState(

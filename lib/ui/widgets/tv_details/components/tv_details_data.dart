@@ -37,9 +37,9 @@ class TvDetailsData {
   List<List<TvDetailsCreatedByData>> createdByData = const <List<TvDetailsCreatedByData>>[];
   List<TvDetailsContentRatingsData> ratingsData = const <TvDetailsContentRatingsData>[];
   List<TvDetailsNetworkData> networkData = const <TvDetailsNetworkData>[];
-  List<TvDetailsSeasonData> seasonData = const<TvDetailsSeasonData>[];
   TvDetailsLastEpisodeToAirData lastEpisodeToAirData = TvDetailsLastEpisodeToAirData();
-  List<TvDetailsSeasonDetailsData> seasonDetailsData = const <TvDetailsSeasonDetailsData>[];
+  List<TvsSeasonData> seasonData = const<TvsSeasonData>[];
+  List<TvSeasonDetailsData> seasonDetailsData = const <TvSeasonDetailsData>[];
 
   TvFavoriteData favoriteData = TvFavoriteData();
   TvDetailsWatchlistData watchlistData = TvDetailsWatchlistData();

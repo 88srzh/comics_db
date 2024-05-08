@@ -214,7 +214,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
         details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
     var seasonData = data.seasonData = details.seasons
-        .map((e) => TvDetailsSeasonData(
+        .map((e) => TvsSeasonData(
             airDate: e.airDate,
             fullAirDate: e.airDate,
             episodeCount: e.episodeCount,

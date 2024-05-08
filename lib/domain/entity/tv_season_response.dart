@@ -1,4 +1,4 @@
-import 'package:comics_db_app/domain/entity/tv_seasons.dart';
+import 'package:comics_db_app/domain/entity/tv_season_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tv_season_response.g.dart';
@@ -7,7 +7,7 @@ part 'tv_season_response.g.dart';
 class TvSeasonResponse {
   final int page;
   @JsonKey(name: 'episodes')
-  List<TvSeasons> seasons;
+  List<TvSeasonDetails> seasonDetails;
   final String airDate;
   final String name;
   final String overview;
@@ -18,7 +18,7 @@ class TvSeasonResponse {
 
   TvSeasonResponse({
     required this.page,
-    required this.seasons,
+    required this.seasonDetails,
     required this.airDate,
     required this.name,
     required this.overview,

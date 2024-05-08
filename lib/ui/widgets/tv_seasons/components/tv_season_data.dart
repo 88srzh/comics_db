@@ -1,7 +1,7 @@
 import 'package:comics_db_app/ui/widgets/tv_seasons/components/tv_season_crew_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_seasons/components/tv_season_guest_stars_data.dart';
 
-class TvSeasonData {
+class TvSeasonDetailsData {
   final String airDate;
   final int episodeNumber;
   final String episodeType;
@@ -15,10 +15,10 @@ class TvSeasonData {
   final String? stillPath;
   final double voteAverage;
   final int voteCount;
-  final List<TvSeasonCrewData> crew;
-  final List<TvSeasonGuestStarsData> guestStars;
+  final List<TvSeasonCrewData>? crew;
+  final List<TvSeasonGuestStarsData>? guestStars;
 
-  const TvSeasonData({
+  const TvSeasonDetailsData({
     required this.airDate,
     required this.episodeNumber,
     required this.episodeType,
@@ -32,7 +32,7 @@ class TvSeasonData {
     this.stillPath,
     required this.voteAverage,
     required this.voteCount,
-    required this.crew,
-    required this.guestStars,
+    this.crew,
+    this.guestStars,
   });
 }

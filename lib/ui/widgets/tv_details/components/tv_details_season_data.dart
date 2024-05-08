@@ -1,4 +1,4 @@
-class TvDetailsSeasonData {
+class TvsSeasonData {
   final DateTime? airDate;
   final DateTime? fullAirDate;
   final int episodeCount;
@@ -9,7 +9,7 @@ class TvDetailsSeasonData {
   final int seasonNumber;
   final double? voteAverage;
 
-  const TvDetailsSeasonData({
+  const TvsSeasonData({
     required this.airDate,
     required this.fullAirDate,
     required this.episodeCount,
