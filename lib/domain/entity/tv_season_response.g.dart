@@ -9,7 +9,7 @@ part of 'tv_season_response.dart';
 TvSeasonResponse _$TvSeasonResponseFromJson(Map<String, dynamic> json) =>
     TvSeasonResponse(
       page: json['page'] as int,
-      seasons: (json['episodes'] as List<dynamic>)
+      seasonDetails: (json['episodes'] as List<dynamic>)
           .map((e) => TvSeasonDetails.fromJson(e as Map<String, dynamic>))
           .toList(),
       airDate: json['air_date'] as String,
@@ -24,7 +24,7 @@ TvSeasonResponse _$TvSeasonResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$TvSeasonResponseToJson(TvSeasonResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
-      'episodes': instance.seasons.map((e) => e.toJson()).toList(),
+      'episodes': instance.seasonDetails.map((e) => e.toJson()).toList(),
       'air_date': instance.airDate,
       'name': instance.name,
       'overview': instance.overview,

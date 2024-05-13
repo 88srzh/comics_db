@@ -53,4 +53,12 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
     tvSeasonListBloc.add(const TvSeasonEventLoadReset());
     tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: localeTag));
   }
+
+  @override
+  Future<void> close() {
+    tvSeasonsListBlocSubscription.cancel();
+    return super.close();
+  }
+
+  // void showedAllSeason
 }
