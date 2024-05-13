@@ -1,7 +1,6 @@
 // Flutter imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/ui/components/social_link_button_widget.dart';
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_trailer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -43,11 +42,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
     final backdropPath = cubit.state.backdropPath;
     late String trailerKey = cubit.state.videos.first.key;
     if (cubit.state.videos.isEmpty) return const SizedBox.shrink();
-    final String? facebookId = cubit.state.facebookId;
-    final String? instagramId = cubit.state.instagramId;
-    final String? twitterId = cubit.state.twitterId;
-    final String? homepage = cubit.state.homepage;
-
     return Stack(
       children: [
         Positioned(
@@ -169,18 +163,6 @@ class _MovieTopPosterWidgetState extends State<MovieTopPosterWidget> {
                       },
                       child: const CustomPosterTopLeftAlignText(text: 'Play Trailer', maxLines: 1),
                     ),
-                  ],
-                ),
-                // so far don't work
-                Row(
-                  children: [
-                    facebookId != null ? SocialLinkButton(icon: MdiIcons.facebook, url: 'https://www.facebook.com/$facebookId') : const SizedBox.shrink(),
-                    const SizedBox(width: 4.0),
-                    twitterId != null ? SocialLinkButton(icon: MdiIcons.twitter, url: 'https://twitter.com/$twitterId') : const SizedBox.shrink(),
-                    const SizedBox(width: 4.0),
-                    instagramId != null ? SocialLinkButton(icon: MdiIcons.instagram, url: 'https://www.instagram.com/$instagramId') : const SizedBox.shrink(),
-                    const SizedBox(width: 4.0),
-                    homepage != null ? SocialLinkButton(icon: MdiIcons.link, url: homepage) : const SizedBox.shrink(),
                   ],
                 ),
               ],

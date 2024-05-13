@@ -34,7 +34,6 @@ class _MovieDetailsFullCastAndCrewWidgetState extends State<MovieDetailsFullCast
     if (actorsData.isEmpty) return const SizedBox.shrink();
     return Scaffold(
       appBar: CustomAppBar(
-        // TODO may be change only to customAppBarWidget
         onTapRu: () => setState(() {
           S.load(const Locale('ru'));
         }),
@@ -52,7 +51,7 @@ class _MovieDetailsFullCastAndCrewWidgetState extends State<MovieDetailsFullCast
             childAspectRatio: 1 / 1.8,
           ),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          itemCount: cubit.data.actorsData.length,
+          itemCount: actorsData.length,
           itemBuilder: (BuildContext context, int index) {
             final actorId = actorsData[index].id;
             return InkWell(

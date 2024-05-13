@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/movie_details/components/movie_details_socials_widget.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -83,6 +84,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
                     // MovieDetailsAllVideosWidget(),
                     MovieDetailsReviewsWidget(reviews: S.of(context).reviews),
                     MovieDetailsRecommendations(recommendations: S.of(context).recommendations),
+                    const MovieDetailsSocialsWidget(),
                     MovieDetailsOtherInformationWidget(statusText: S.of(context).status),
                     MovieDetailsKeywordsWidget(keywords: S.of(context).keywords),
                     // const MovieDetailsSimilarWidget(),

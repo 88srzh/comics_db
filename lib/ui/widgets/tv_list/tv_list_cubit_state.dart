@@ -16,11 +16,7 @@ class TvListCubitState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TvListCubitState &&
-          runtimeType == other.runtimeType &&
-          tvs == other.tvs &&
-          localeTag == other.localeTag &&
-          totalResults == other.totalResults;
+      other is TvListCubitState && runtimeType == other.runtimeType && tvs == other.tvs && localeTag == other.localeTag && totalResults == other.totalResults;
 
   @override
   int get hashCode => tvs.hashCode ^ localeTag.hashCode ^ totalResults.hashCode;

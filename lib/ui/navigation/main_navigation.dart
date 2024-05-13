@@ -27,6 +27,8 @@ abstract class MainNavigationRouteNames {
   static const watchlistTV = '/main_screen/watchlistTV';
   static const tvDetails = '/main_screen/tv_details';
   static const tvTrailer = '/main_screen/tv_details/trailer';
+  static const tvDetailsFullListOfSeasons = '/main_screen/tv_details/full_list_of_seasons';
+  static const tvDetailsListOfEpisodes = '/main_screen/tv_details/list_of_episodes';
   static const tvTopRated = '/main_screen/tv_top_rated';
   static const tvPopularList = '/main_screen/tvPopular';
   static const tvAiringToday = '/main_screen/tvAiringToday';
@@ -107,6 +109,21 @@ class MainNavigation {
         return MaterialPageRoute(
           builder: (_) => _screenFactory.makeTvDetails(tvId),
         );
+      case MainNavigationRouteNames.tvDetailsFullListOfSeasons:
+        final arguments = settings.arguments;
+        final tvId = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.tvDetailsFullListOfSeasons(tvId),
+        );
+
+      case MainNavigationRouteNames.tvDetailsListOfEpisodes:
+        final arguments = settings.arguments;
+        final tvId = arguments is int ? arguments : 0;
+        // may be need season number
+        return MaterialPageRoute(
+          builder: (_) => _screenFactory.tvDetailsListOfEpisodes(tvId),
+        );
+
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';

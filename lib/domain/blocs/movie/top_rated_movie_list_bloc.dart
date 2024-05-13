@@ -25,14 +25,12 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }), transformer: sequential());
   }
 
-  Future<void> onTopRatedMovieListEventLoadNextPage(
-      MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
+  Future<void> onTopRatedMovieListEventLoadNextPage(MovieListEventLoadNextPage event, Emitter<MovieListState> emit) async {
     if (state.isSearchMode) {
       final container = await loadNextPage(
         state.searchMovieContainer,
         (nextPage) async {
-          final result =
-              await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
+          final result = await _movieApiClient.searchMovie(nextPage, event.locale, state.searchQuery, Configuration.apiKey);
           return result;
         },
       );
@@ -52,8 +50,7 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     }
   }
 
-  Future<MovieListContainer?> loadNextPage(
-      MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
+  Future<MovieListContainer?> loadNextPage(MovieListContainer container, Future<MovieResponse> Function(int) loader) async {
     if (container.isComplete) return null;
     final nextPage = state.movieContainer.currentPage + 1;
     final result = await loader(nextPage);
@@ -72,8 +69,7 @@ class TopRatedMovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     // add(const MovieListEventLoadReset());
   }
 
-  Future<void> onTopRatedMovieListEventLoadSearchMovie(
-      MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
+  Future<void> onTopRatedMovieListEventLoadSearchMovie(MovieListEventSearchMovie event, Emitter<MovieListState> emit) async {
     if (state.searchQuery == event.query) return;
     final newState = state.copyWith(searchQuery: event.query, searchMovieContainer: const MovieListContainer.initial());
     emit(newState);

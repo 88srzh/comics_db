@@ -1,15 +1,17 @@
-class TvDetailsSeasonData {
-  final String? airDate;
+class TvsSeasonData {
+  final DateTime? airDate;
+  final DateTime? fullAirDate;
   final int episodeCount;
   final int id;
   final String name;
   final String overview;
   final String? posterPath;
   final int seasonNumber;
-  final double voteAverage;
+  final double? voteAverage;
 
-  const TvDetailsSeasonData({
+  const TvsSeasonData({
     required this.airDate,
+    required this.fullAirDate,
     required this.episodeCount,
     required this.id,
     required this.name,

@@ -1,7 +1,4 @@
 // Flutter imports:
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,10 +12,14 @@ import 'package:comics_db_app/domain/entity/tv_details.dart';
 import 'package:comics_db_app/domain/entity/tv_details_credits.dart';
 import 'package:comics_db_app/domain/entity/tv_details_videos.dart';
 import 'package:comics_db_app/domain/services/tv_service.dart';
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_actor_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_created_by_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_network_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 
@@ -141,15 +142,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   // may be add to separate file
   String stringFromDate(DateTime? date) => date != null ? _dateFormat.format(date) : '';
 
-  Future<void> setupLocale(BuildContext context, String localeTag) async {
-    if (state.localeTag == localeTag) return;
-    final newState = state.copyWith(localeTag: localeTag);
-    emit(newState);
-    _dateFormat = DateFormat.yMMMd(localeTag);
-    updateData(null, false, false);
-    await loadTvDetails(context);
-  }
-
   Future<void> loadTvDetails(BuildContext context) async {
     try {
       final details = await _tvService.loadTvDetails(tvId: tvId, locale: state.localeTag);
@@ -182,7 +174,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
     await loadTvDetails(context);
   }
 
-  Future<void> updateData(TVDetails? details, bool isFavorite, bool isWatchlist) async {
+  void updateData(TVDetails? details, bool isFavorite, bool isWatchlist) {
     if (details == null) {
       return;
     }
@@ -222,8 +214,9 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
         details.networks.map((e) => TvDetailsNetworkData(name: e.name, id: e.id, logoPath: e.logoPath, originCountry: e.originCountry)).toList();
 
     var seasonData = data.seasonData = details.seasons
-        .map((e) => TvDetailsSeasonData(
-            airDate: airDateOfSeason,
+        .map((e) => TvsSeasonData(
+            airDate: e.airDate,
+            fullAirDate: e.airDate,
             episodeCount: e.episodeCount,
             id: e.id,
             name: e.name,
@@ -262,7 +255,6 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       lastEpisodeToAirType: lastEpisodeToAitType,
       lastAirDate: lastAirDate,
       airDateOfSeason: airDateOfSeason,
-
     );
     emit(newState);
   }
@@ -372,7 +364,7 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
 
   String? makeAirDateOfSeason(TVDetails details) {
     var texts = <String>[];
-    final lastAirDate = details.seasons.last.airDate;
+    final lastAirDate = details.seasons.first.airDate;
     if (lastAirDate != null) {
       texts.add(DateFormat.y().format(lastAirDate));
     }
@@ -386,5 +378,16 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
       texts.add(DateFormat.yMMMMd().format(lastAirDate));
     }
     return texts.join(' ');
+  }
+
+  void tapToSeeFullListOfSeasons(BuildContext context, int index) {
+    final int id = tvId;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons, arguments: id);
+  }
+
+  void tapToSeeListOfEpisodes(BuildContext context, int index, int seasonNumber) {
+    final int id = tvId;
+    // final int seasonId = seasonNumber;
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsListOfEpisodes, arguments: id);
   }
 }

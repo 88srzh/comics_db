@@ -75,7 +75,7 @@ class MoviePopularListCubit extends Cubit<MovieListCubitState> {
   void searchPopularMovie(String text) {
     searchDebounce?.cancel();
     searchDebounce = Timer(
-      const Duration(milliseconds: 300),
+      const Duration(milliseconds: 500),
       () async {
         movieListBloc.add(MovieListEventSearchMovie(query: text));
         movieListBloc.add(MovieListEventLoadNextPage(locale: state.localeTag));

@@ -1,14 +1,19 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+// Project imports:
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
+import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_movie_list_box_decoration_widgets.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/tv_details_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 
 class TvDetailsSeasonsWidget extends StatelessWidget {
   final String currentSeason;
@@ -18,18 +23,18 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.watch<TvDetailsCubit>();
-    late final String? posterPath = cubit.state.seasons.first.posterPath;
+    late final String? posterPath = cubit.state.seasons.last.posterPath;
     late final String lastSeasonName = cubit.state.seasons.last.name;
-    late final double voteAverage = cubit.state.seasons.last.voteAverage * 10;
+    late final double voteAverage = cubit.state.seasons.last.voteAverage! * 10;
     final String? airDateByYear = cubit.state.airDateOfSeason;
-    // late final String? airDateOfSeason = cubit.state.seasons.last.airDate;
     final String? lastAirDate = cubit.state.lastAirDate;
     late final int episodeCount = cubit.state.seasons.last.episodeCount;
     late final int seasonNumber = cubit.state.seasons.last.seasonNumber;
     final String lastEpisodeToAirName = cubit.state.lastEpisodeToAirName;
     final String lastEpisodeToAirType = cubit.state.lastEpisodeToAirType;
     final String name = cubit.state.name;
-    // TODO add to separate file
+    final int id = cubit.state.id;
+
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Padding(
@@ -142,8 +147,15 @@ class TvDetailsSeasonsWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 15.0),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: InkWell(
+              onTap: () => cubit.tapToSeeFullListOfSeasons(context, id),
+              // onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons),
+              child: Text('Смотреть все сезоны', style: Theme.of(context).textTheme.displayMedium),
             ),
           ),
         ],
