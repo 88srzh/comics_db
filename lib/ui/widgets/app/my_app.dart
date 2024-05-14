@@ -3,7 +3,9 @@ import 'dart:ui';
 
 // Flutter imports:
 import 'package:comics_db_app/domain/blocs/account/account_bloc.dart';
+import 'package:comics_db_app/domain/blocs/tv/tv_season_list_bloc.dart';
 import 'package:comics_db_app/generated/l10n.dart';
+import 'package:comics_db_app/ui/widgets/tv_seasons/tv_season_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -173,6 +175,13 @@ class MyApp extends StatelessWidget {
           create: (_) => WatchlistTVCubit(
             watchlistBloc: WatchlistTVBloc(
               const TvListState.initial(),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => TvSeasonCubit(
+            tvSeasonListBloc: TvSeasonListBloc(
+              const TvSeasonState.initial(),
             ),
           ),
         ),

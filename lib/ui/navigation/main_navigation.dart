@@ -56,6 +56,7 @@ class MainNavigation {
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
     MainNavigationRouteNames.watchlistMovie: (_) => _screenFactory.makeWatchlistMovie(),
     MainNavigationRouteNames.watchlistTV: (_) => _screenFactory.makeWatchlistTV(),
+    MainNavigationRouteNames.tvDetailsListOfEpisodes: (_) => _screenFactory.tvDetailsListOfEpisodes(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -115,15 +116,6 @@ class MainNavigation {
         return MaterialPageRoute(
           builder: (_) => _screenFactory.tvDetailsFullListOfSeasons(tvId),
         );
-
-      case MainNavigationRouteNames.tvDetailsListOfEpisodes:
-        final arguments = settings.arguments;
-        final tvId = arguments is int ? arguments : 0;
-        // may be need season number
-        return MaterialPageRoute(
-          builder: (_) => _screenFactory.tvDetailsListOfEpisodes(tvId),
-        );
-
       case MainNavigationRouteNames.tvTrailer:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';

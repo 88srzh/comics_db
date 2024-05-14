@@ -59,7 +59,6 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
                 shrinkWrap: true,
                 physics: const ScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                // padding: const EdgeInsets.only(top: 70.0),
                 itemCount: seasonsData.length,
                 itemExtent: 165,
                 itemBuilder: (BuildContext context, int index) {

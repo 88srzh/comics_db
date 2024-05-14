@@ -29,7 +29,7 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
 
   TvSeasonDetailsData _makeListData(TvSeasonDetails tvSeasonDetails) {
     final firstAirDate = tvSeasonDetails.airDate;
-    final airDate = firstAirDate != null ? _dateFormat.format(firstAirDate) : '';
+    final String airDate = firstAirDate != null ? _dateFormat.format(firstAirDate) : '';
     return TvSeasonDetailsData(
       airDate: airDate,
       id: tvSeasonDetails.id,
@@ -60,5 +60,8 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
     return super.close();
   }
 
-  // void showedAllSeason
+  void showedAllEpisodesAtIndex(int index) {
+    if (index < state.seasonData.length -1) return;
+    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: state.localeTag));
+  }
 }

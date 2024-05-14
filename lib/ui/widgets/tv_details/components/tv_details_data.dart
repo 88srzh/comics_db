@@ -7,7 +7,6 @@ import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_networ
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_people_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_recommendations_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_data.dart';
-import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_details_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_trailer_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_videos_data.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_watchlist_data.dart';
@@ -39,7 +38,6 @@ class TvDetailsData {
   List<TvDetailsNetworkData> networkData = const <TvDetailsNetworkData>[];
   TvDetailsLastEpisodeToAirData lastEpisodeToAirData = TvDetailsLastEpisodeToAirData();
   List<TvsSeasonData> seasonData = const<TvsSeasonData>[];
-  List<TvSeasonDetailsData> seasonDetailsData = const <TvSeasonDetailsData>[];
 
   TvFavoriteData favoriteData = TvFavoriteData();
   TvDetailsWatchlistData watchlistData = TvDetailsWatchlistData();

@@ -90,8 +90,7 @@ class _MoviePopularListRowWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration:
-                isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
+            decoration: isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
