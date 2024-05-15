@@ -5,7 +5,6 @@ part 'tv_season_response.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class TvSeasonResponse {
-  final int page;
   @JsonKey(name: 'episodes')
   List<TvSeasonDetails> seasonDetails;
   final String airDate;
@@ -17,7 +16,6 @@ class TvSeasonResponse {
   final double voteAverage;
 
   TvSeasonResponse({
-    required this.page,
     required this.seasonDetails,
     required this.airDate,
     required this.name,

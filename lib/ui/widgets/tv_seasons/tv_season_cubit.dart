@@ -12,7 +12,7 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
   late final StreamSubscription<TvSeasonState> tvSeasonsListBlocSubscription;
   late DateFormat _dateFormat;
 
-  TvSeasonCubit({required this.tvSeasonListBloc}) : super(const TvSeasonCubitState(seasonData: <TvSeasonDetailsData>[], localeTag: '')) {
+  TvSeasonCubit({required this.tvSeasonListBloc}) : super(const TvSeasonCubitState(seasons: <TvSeasonDetailsData>[], localeTag: '')) {
     Future.microtask(
       () {
         _onState(tvSeasonListBloc.state);
@@ -23,7 +23,7 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
 
   void _onState(TvSeasonState state) {
     final tvSeasons = state.tvSeasons.map(_makeListData).toList();
-    final newState = this.state.copyWith(seasonData: tvSeasons);
+    final newState = this.state.copyWith(seasons: tvSeasons);
     emit(newState);
   }
 
@@ -45,13 +45,13 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
       voteCount: tvSeasonDetails.voteCount,
     );
   }
-  void setupTvSeasonLocale(String localeTag) {
+  void setupTvSeasonLocale(String localeTag, int seasonNumber) {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
     tvSeasonListBloc.add(const TvSeasonEventLoadReset());
-    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: localeTag));
+    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: localeTag, seasonNumber: seasonNumber));
   }
 
   @override
@@ -61,7 +61,7 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
   }
 
   void showedAllEpisodesAtIndex(int index) {
-    if (index < state.seasonData.length -1) return;
-    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: state.localeTag));
+    if (index < state.seasons.length -1) return;
+    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: state.localeTag, seasonNumber: state.seasons[index].seasonNumber));
   }
 }

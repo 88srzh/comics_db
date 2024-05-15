@@ -34,7 +34,7 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
 
     lazyValue = loadingDelay();
     final locale = Localizations.localeOf(context);
-    context.read<TvSeasonCubit>().setupTvSeasonLocale(locale.languageCode);
+    context.read<TvSeasonCubit>().setupTvSeasonLocale(locale.languageCode,1);
   }
 
   @override
@@ -53,11 +53,11 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
                 physics: const ScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 // padding: const EdgeInsets.only(top: 70.0),
-                itemCount: cubit.state.seasonData.length,
+                itemCount: cubit.state.seasons.length,
                 itemExtent: 165,
                 itemBuilder: (BuildContext context, int index) {
                   cubit.showedAllEpisodesAtIndex(index);
-                  final episode = cubit.state.seasonData[index];
+                  final episode = cubit.state.seasons[index];
                   final String? stillPath = episode.stillPath;
                   // final int  seasonId = seasonsData[index].id;
                   // final int seasonNumber = seasonsData[index].seasonNumber;
@@ -101,8 +101,8 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     final cubit = context.read<TvSeasonCubit>();
-    final seasonData = cubit.state.seasonData[index];
-    final posterPath = seasonData.stillPath;
+    final seasonData = cubit.state.seasons[index];
+    final stillPath = seasonData.stillPath;
     final String name = seasonData.name;
     final String overview = seasonData.overview;
     final String originalName = seasonData.name;
@@ -122,9 +122,9 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
-                posterPath != null
+                stillPath != null
                     ? Image.network(
-                        ImageDownloader.imageUrl(posterPath),
+                        ImageDownloader.imageUrl(stillPath),
                         width: 95,
                       )
                     : Image.asset(AppImages.noImageAvailable),
@@ -175,8 +175,8 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 // child: Text(
-                                  // '$airDateByYear • $episodeNumber ${S.of(context).episodes}',
-                                  // style: Theme.of(context).textTheme.headlineMedium,
+                                // '$airDateByYear • $episodeNumber ${S.of(context).episodes}',
+                                // style: Theme.of(context).textTheme.headlineMedium,
                                 // ),
                               ),
                             ),

@@ -6,6 +6,7 @@ class TvSeasonState extends Equatable {
   final String searchQuery;
 
   bool get isSearchMode => searchQuery.isNotEmpty;
+  bool get isNotSearchMode => searchQuery.isEmpty;
 
   List<TvSeasonDetails> get tvSeasons => isSearchMode ? searchTvContainer.tvSeason : tvSeasonContainer.tvSeason;
 
