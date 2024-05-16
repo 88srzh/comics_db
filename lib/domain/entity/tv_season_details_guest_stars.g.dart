@@ -12,12 +12,12 @@ _$TvSeasonDetailsGuestStarsImpl _$$TvSeasonDetailsGuestStarsImplFromJson(
       character: json['character'] as String,
       creditId: json['credit_id'] as String,
       order: json['order'] as int,
-      adult: json['adult'] as bool,
-      gender: json['gender'] as int,
-      id: json['id'] as int,
-      knownForDepartment: json['known_for_department'] as String,
-      name: json['name'] as String,
-      originalName: json['original_name'] as String,
+      adult: json['adult'] as bool?,
+      gender: json['gender'] as int?,
+      id: json['id'] as int?,
+      knownForDepartment: json['known_for_department'] as String?,
+      name: json['name'] as String?,
+      originalName: json['original_name'] as String?,
       profilePath: json['profile_path'] as String?,
     );
 

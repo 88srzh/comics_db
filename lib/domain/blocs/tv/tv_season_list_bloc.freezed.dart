@@ -18,19 +18,20 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TvSeasonEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale, int seasonNumber) loadNextPage,
+    required TResult Function(String locale, int seasonNumber, int tvId)
+        loadNextPage,
     required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale, int seasonNumber)? loadNextPage,
+    TResult? Function(String locale, int seasonNumber, int tvId)? loadNextPage,
     TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale, int seasonNumber)? loadNextPage,
+    TResult Function(String locale, int seasonNumber, int tvId)? loadNextPage,
     TResult Function()? reset,
     required TResult orElse(),
   }) =>
@@ -81,7 +82,7 @@ abstract class _$$TvSeasonEventLoadNextPageImplCopyWith<$Res> {
           $Res Function(_$TvSeasonEventLoadNextPageImpl) then) =
       __$$TvSeasonEventLoadNextPageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String locale, int seasonNumber});
+  $Res call({String locale, int seasonNumber, int tvId});
 }
 
 /// @nodoc
@@ -98,6 +99,7 @@ class __$$TvSeasonEventLoadNextPageImplCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
     Object? seasonNumber = null,
+    Object? tvId = null,
   }) {
     return _then(_$TvSeasonEventLoadNextPageImpl(
       locale: null == locale
@@ -108,6 +110,10 @@ class __$$TvSeasonEventLoadNextPageImplCopyWithImpl<$Res>
           ? _value.seasonNumber
           : seasonNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      tvId: null == tvId
+          ? _value.tvId
+          : tvId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -116,16 +122,18 @@ class __$$TvSeasonEventLoadNextPageImplCopyWithImpl<$Res>
 
 class _$TvSeasonEventLoadNextPageImpl implements TvSeasonEventLoadNextPage {
   const _$TvSeasonEventLoadNextPageImpl(
-      {required this.locale, required this.seasonNumber});
+      {required this.locale, required this.seasonNumber, required this.tvId});
 
   @override
   final String locale;
   @override
   final int seasonNumber;
+  @override
+  final int tvId;
 
   @override
   String toString() {
-    return 'TvSeasonEvent.loadNextPage(locale: $locale, seasonNumber: $seasonNumber)';
+    return 'TvSeasonEvent.loadNextPage(locale: $locale, seasonNumber: $seasonNumber, tvId: $tvId)';
   }
 
   @override
@@ -135,11 +143,12 @@ class _$TvSeasonEventLoadNextPageImpl implements TvSeasonEventLoadNextPage {
             other is _$TvSeasonEventLoadNextPageImpl &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.seasonNumber, seasonNumber) ||
-                other.seasonNumber == seasonNumber));
+                other.seasonNumber == seasonNumber) &&
+            (identical(other.tvId, tvId) || other.tvId == tvId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale, seasonNumber);
+  int get hashCode => Object.hash(runtimeType, locale, seasonNumber, tvId);
 
   @JsonKey(ignore: true)
   @override
@@ -151,30 +160,31 @@ class _$TvSeasonEventLoadNextPageImpl implements TvSeasonEventLoadNextPage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale, int seasonNumber) loadNextPage,
+    required TResult Function(String locale, int seasonNumber, int tvId)
+        loadNextPage,
     required TResult Function() reset,
   }) {
-    return loadNextPage(locale, seasonNumber);
+    return loadNextPage(locale, seasonNumber, tvId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale, int seasonNumber)? loadNextPage,
+    TResult? Function(String locale, int seasonNumber, int tvId)? loadNextPage,
     TResult? Function()? reset,
   }) {
-    return loadNextPage?.call(locale, seasonNumber);
+    return loadNextPage?.call(locale, seasonNumber, tvId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale, int seasonNumber)? loadNextPage,
+    TResult Function(String locale, int seasonNumber, int tvId)? loadNextPage,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (loadNextPage != null) {
-      return loadNextPage(locale, seasonNumber);
+      return loadNextPage(locale, seasonNumber, tvId);
     }
     return orElse();
   }
@@ -214,10 +224,12 @@ class _$TvSeasonEventLoadNextPageImpl implements TvSeasonEventLoadNextPage {
 abstract class TvSeasonEventLoadNextPage implements TvSeasonEvent {
   const factory TvSeasonEventLoadNextPage(
       {required final String locale,
-      required final int seasonNumber}) = _$TvSeasonEventLoadNextPageImpl;
+      required final int seasonNumber,
+      required final int tvId}) = _$TvSeasonEventLoadNextPageImpl;
 
   String get locale;
   int get seasonNumber;
+  int get tvId;
   @JsonKey(ignore: true)
   _$$TvSeasonEventLoadNextPageImplCopyWith<_$TvSeasonEventLoadNextPageImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -264,7 +276,8 @@ class _$TvSeasonEventLoadResetImpl implements TvSeasonEventLoadReset {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String locale, int seasonNumber) loadNextPage,
+    required TResult Function(String locale, int seasonNumber, int tvId)
+        loadNextPage,
     required TResult Function() reset,
   }) {
     return reset();
@@ -273,7 +286,7 @@ class _$TvSeasonEventLoadResetImpl implements TvSeasonEventLoadReset {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String locale, int seasonNumber)? loadNextPage,
+    TResult? Function(String locale, int seasonNumber, int tvId)? loadNextPage,
     TResult? Function()? reset,
   }) {
     return reset?.call();
@@ -282,7 +295,7 @@ class _$TvSeasonEventLoadResetImpl implements TvSeasonEventLoadReset {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String locale, int seasonNumber)? loadNextPage,
+    TResult Function(String locale, int seasonNumber, int tvId)? loadNextPage,
     TResult Function()? reset,
     required TResult orElse(),
   }) {

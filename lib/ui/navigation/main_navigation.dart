@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_details_list_widget.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -56,7 +57,6 @@ class MainNavigation {
     MainNavigationRouteNames.favoriteMovies: (_) => _screenFactory.makeFavoriteMovieList(),
     MainNavigationRouteNames.watchlistMovie: (_) => _screenFactory.makeWatchlistMovie(),
     MainNavigationRouteNames.watchlistTV: (_) => _screenFactory.makeWatchlistTV(),
-    MainNavigationRouteNames.tvDetailsListOfEpisodes: (_) => _screenFactory.tvDetailsListOfEpisodes(),
   };
 
   Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -121,6 +121,13 @@ class MainNavigation {
         final youtubeKey = arguments is String ? arguments : '';
         return MaterialPageRoute(
           builder: (context) => TvDetailsTrailerWidget(tvYoutubeKey: youtubeKey),
+        );
+      case MainNavigationRouteNames.tvDetailsListOfEpisodes:
+        final arguments = settings.arguments;
+        final tvId = arguments is int ? arguments : 0;
+        final seasonNumber = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (context) => TvDetailsSeasonDetailsListWidget(tvId: tvId, seasonNumber: seasonNumber),
         );
       default:
         const widget = Text('Navigation error ');

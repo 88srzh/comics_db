@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_season_container.dart';
 import 'package:comics_db_app/domain/entity/tv_season_details.dart';
@@ -29,7 +30,7 @@ class TvSeasonListBloc extends Bloc<TvSeasonEvent, TvSeasonState> {
   Future<void> onTvSeasonsListEventLoadNextPage(TvSeasonEventLoadNextPage event, Emitter<TvSeasonState> emit) async {
     if (state.isNotSearchMode) {
       final container = await _loadNextPage(state.tvSeasonContainer, (nextPage) async {
-        final result = await _tvApiClient.tvSeasonsDetails(nextPage, event.locale, event.seasonNumber);
+        final result = await _tvApiClient.tvSeasonsDetails(event.tvId, event.locale, event.seasonNumber);
         return result;
       });
       if (container != null) {

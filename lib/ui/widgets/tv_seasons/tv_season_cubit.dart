@@ -45,13 +45,13 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
       voteCount: tvSeasonDetails.voteCount,
     );
   }
-  void setupTvSeasonLocale(String localeTag, int seasonNumber) {
+  void setupTvSeasonLocale(String localeTag, int seasonNumber, int tvId) {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
     _dateFormat = DateFormat.yMMMd(localeTag);
     tvSeasonListBloc.add(const TvSeasonEventLoadReset());
-    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: localeTag, seasonNumber: seasonNumber));
+    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: localeTag, seasonNumber: seasonNumber, tvId: tvId));
   }
 
   @override
@@ -60,8 +60,8 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
     return super.close();
   }
 
-  void showedAllEpisodesAtIndex(int index) {
+  void showedAllEpisodesAtIndex(int index, int tvId) {
     if (index < state.seasons.length -1) return;
-    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: state.localeTag, seasonNumber: state.seasons[index].seasonNumber));
+    tvSeasonListBloc.add(TvSeasonEventLoadNextPage(locale: state.localeTag, seasonNumber: state.seasons[index].seasonNumber, tvId: tvId));
   }
 }
