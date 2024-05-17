@@ -43,6 +43,7 @@ class TvSeasonCubit extends Cubit<TvSeasonCubitState> {
       runtime: tvSeasonDetails.runtime,
       showId: tvSeasonDetails.showId,
       voteCount: tvSeasonDetails.voteCount,
+      stillPath: tvSeasonDetails.stillPath,
     );
   }
   void setupTvSeasonLocale(String localeTag, int seasonNumber, int tvId) {

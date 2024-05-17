@@ -1,7 +1,6 @@
 import 'package:comics_db_app/core/dark_theme_colors.dart';
 import 'package:comics_db_app/domain/api_client/image_downloader.dart';
 import 'package:comics_db_app/domain/blocs/theme/theme_bloc.dart';
-import 'package:comics_db_app/generated/l10n.dart';
 import 'package:comics_db_app/resources/resources.dart';
 import 'package:comics_db_app/ui/components/custom_cast_list_text_widget.dart';
 import 'package:comics_db_app/ui/components/custom_details_appbar_widget.dart';
@@ -10,14 +9,12 @@ import 'package:comics_db_app/ui/widgets/tv_seasons/components/tv_season_data.da
 import 'package:comics_db_app/ui/widgets/tv_seasons/tv_season_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TvDetailsSeasonDetailsListWidget extends StatefulWidget {
   final int tvId;
-  final int seasonNumber;
 
-  const TvDetailsSeasonDetailsListWidget({super.key, required this.tvId, required this.seasonNumber});
+  const TvDetailsSeasonDetailsListWidget({super.key, required this.tvId});
 
   @override
   State<TvDetailsSeasonDetailsListWidget> createState() => _TvDetailsSeasonDetailsListWidgetState();
@@ -37,6 +34,7 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
 
     lazyValue = loadingDelay();
     final locale = Localizations.localeOf(context);
+    // TODO fix seasonNumber and tvId
     context.read<TvSeasonCubit>().setupTvSeasonLocale(locale.languageCode, 1, 1622);
   }
 
@@ -57,7 +55,7 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
                 scrollDirection: Axis.vertical,
                 // padding: const EdgeInsets.only(top: 70.0),
                 itemCount: cubit.state.seasons.length,
-                itemExtent: 165,
+                itemExtent: 465,
                 itemBuilder: (BuildContext context, int index) {
                   cubit.showedAllEpisodesAtIndex(index, cubit.state.seasons[index].id);
                   final episode = cubit.state.seasons[index];
@@ -67,16 +65,12 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
                   return InkWell(
                     // onTap: () => cubit.on(context, index),
                     child: _TvDetailsSeasonDetailsListRowWidget(
-                      stillPath: stillPath,
                       index: index,
                       episode: episode,
                       cubit: cubit,
                     ),
                   );
                 },
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
               ),
             ],
           ),
@@ -91,12 +85,10 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
 
   const _TvDetailsSeasonDetailsListRowWidget({
     required this.index,
-    required this.stillPath,
     required this.episode,
     required this.cubit,
   });
 
-  final String? stillPath;
   final TvSeasonDetailsData episode;
   final TvSeasonCubit cubit;
 
@@ -105,7 +97,7 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
     final bool isDarkTheme = context.read<ThemeBloc>().isDarkTheme;
     final cubit = context.read<TvSeasonCubit>();
     final seasonData = cubit.state.seasons[index];
-    final stillPath = seasonData.stillPath;
+    final String stillPath = seasonData.stillPath ?? '';
     final String name = seasonData.name;
     final String overview = seasonData.overview;
     final String originalName = seasonData.name;
@@ -117,24 +109,23 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Stack(
         children: [
           Container(
             decoration: isDarkTheme ? customMovieListBoxDecorationForDarkTheme : customMovieListBoxDecorationForLightTheme,
             clipBehavior: Clip.hardEdge,
-            child: Row(
+            child: Column(
               children: [
                 stillPath != null
                     ? Image.network(
                         ImageDownloader.imageUrl(stillPath),
-                        width: 95,
+                        width: MediaQuery.of(context).size.width,
                       )
                     : Image.asset(AppImages.noImageAvailable),
-                const SizedBox(width: 15.0),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +180,7 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
                         // CustomCastListTextWidget(text: '$name сериала "$originalName", вышел $airDateByYear.', maxLines: 3),
                         // : CustomCastListTextWidget(text: S.of(context).seasonOverview, maxLines: 4),
                         const SizedBox(height: 5.0),
-                        CustomCastListTextWidget(text: overview, maxLines: 2),
+                        CustomCastListTextWidget(text: overview, maxLines: 10),
                         const SizedBox(height: 5.0),
                       ],
                     ),
