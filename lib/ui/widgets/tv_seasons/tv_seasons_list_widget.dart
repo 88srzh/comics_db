@@ -179,7 +179,7 @@ class _TvDetailsSeasonsListRowWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 10.0),
                         fullAirDate != null
-                            ? CustomCastListTextWidget(text: '$name сериала "$originalName", вышел $fullAirDate.', maxLines: 3)
+                            ? CustomCastListTextWidget(text: '$name сезон "$originalName", вышел $fullAirDate.', maxLines: 3)
                             : CustomCastListTextWidget(text: S.of(context).seasonOverview, maxLines: 4),
                         const SizedBox(height: 5.0),
                         CustomCastListTextWidget(text: overview, maxLines: 2),
