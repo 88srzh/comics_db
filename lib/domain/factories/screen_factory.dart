@@ -158,14 +158,14 @@ class ScreenFactory {
     );
   }
 
-  Widget tvDetailsListOfEpisodes(int tvId) {
+  Widget tvDetailsListOfEpisodes(int tvId, int seasonNumber) {
     return BlocProvider(
       create: (_) => TvSeasonCubit(
         tvSeasonListBloc: TvSeasonListBloc(
           const TvSeasonState.initial(),
         ),
       ),
-      child: TvDetailsSeasonDetailsListWidget(tvId: tvId),
+      child: TvDetailsSeasonDetailsListWidget(tvId: tvId, seasonNumber: seasonNumber),
     );
   }
 

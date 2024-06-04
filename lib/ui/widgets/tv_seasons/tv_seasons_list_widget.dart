@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:comics_db_app/ui/navigation/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -65,7 +66,8 @@ class _TvSeasonsListWidgetState extends State<TvSeasonsListWidget> {
                   final int  seasonId = seasonsData[index].id;
                   final int seasonNumber = seasonsData[index].seasonNumber;
                   return InkWell(
-                    onTap: () => cubit.tapToSeeListOfEpisodes(context, index, seasonNumber),
+                    // onTap: () => cubit.tapToSeeListOfEpisodes(context, index, seasonNumber),
+                    onTap: () => Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsListOfEpisodes),
                     child: _TvDetailsSeasonsListRowWidget(
                       index: index,
                     ),

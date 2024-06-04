@@ -13,8 +13,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class TvDetailsSeasonDetailsListWidget extends StatefulWidget {
   final int tvId;
+  final int seasonNumber;
 
-  const TvDetailsSeasonDetailsListWidget({super.key, required this.tvId});
+  const TvDetailsSeasonDetailsListWidget({super.key, required this.tvId, required this.seasonNumber});
 
   @override
   State<TvDetailsSeasonDetailsListWidget> createState() => _TvDetailsSeasonDetailsListWidgetState();
@@ -22,6 +23,8 @@ class TvDetailsSeasonDetailsListWidget extends StatefulWidget {
 
 class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetailsListWidget> {
   late Future<String> lazyValue;
+  late final int season;
+  late final int id;
 
   @override
   void didChangeDependencies() {
@@ -35,7 +38,7 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
     lazyValue = loadingDelay();
     final locale = Localizations.localeOf(context);
     // TODO fix seasonNumber and tvId
-    context.read<TvSeasonCubit>().setupTvSeasonLocale(locale.languageCode, 1, 1622);
+    context.read<TvSeasonCubit>().setupTvSeasonLocale(locale.languageCode, widget.seasonNumber, widget.tvId);
   }
 
   @override

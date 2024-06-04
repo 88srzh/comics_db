@@ -125,9 +125,9 @@ class MainNavigation {
       case MainNavigationRouteNames.tvDetailsListOfEpisodes:
         final arguments = settings.arguments;
         final tvId = arguments is int ? arguments : 0;
-        // final seasonNumber = arguments is int ? arguments : 0;
+        final seasonNumber = arguments is int ? arguments : 0;
         return MaterialPageRoute(
-          builder: (context) => TvDetailsSeasonDetailsListWidget(tvId: tvId),
+          builder: (context) => TvDetailsSeasonDetailsListWidget(tvId: tvId, seasonNumber: seasonNumber),
         );
       default:
         const widget = Text('Navigation error ');
