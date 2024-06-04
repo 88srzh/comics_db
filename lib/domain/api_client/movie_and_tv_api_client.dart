@@ -542,16 +542,13 @@ class MovieAndTvApiClient {
       return response;
     }
 
-    final result = _networkClient.get(
-      '/tv/$tvId/season/$seasonNumber',
-      parser,
-      <String, dynamic>{
-        'append_to_response': 'season',
-        'api_key': Configuration.apiKey,
-        'language': locale,
-        'season_number': seasonNumber.toString(),
-      }
-    );
+    final result = _networkClient.get('/tv/$tvId/season/$seasonNumber', parser, <String, dynamic>{
+      'api_key': Configuration.apiKey,
+      'series_id': tvId.toString(),
+      'append_to_response': 'season',
+      'language': locale,
+      'season_number': seasonNumber.toString(),
+    });
     return result;
   }
 

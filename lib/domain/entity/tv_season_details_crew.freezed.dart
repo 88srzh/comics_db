@@ -30,7 +30,7 @@ mixin _$TvSeasonDetailsCrew {
   String get name => throw _privateConstructorUsedError;
   String get originalName => throw _privateConstructorUsedError;
   double get popularity => throw _privateConstructorUsedError;
-  String get profilePath => throw _privateConstructorUsedError;
+  String? get profilePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +55,7 @@ abstract class $TvSeasonDetailsCrewCopyWith<$Res> {
       String name,
       String originalName,
       double popularity,
-      String profilePath});
+      String? profilePath});
 }
 
 /// @nodoc
@@ -81,7 +81,7 @@ class _$TvSeasonDetailsCrewCopyWithImpl<$Res, $Val extends TvSeasonDetailsCrew>
     Object? name = null,
     Object? originalName = null,
     Object? popularity = null,
-    Object? profilePath = null,
+    Object? profilePath = freezed,
   }) {
     return _then(_value.copyWith(
       department: null == department
@@ -124,10 +124,10 @@ class _$TvSeasonDetailsCrewCopyWithImpl<$Res, $Val extends TvSeasonDetailsCrew>
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double,
-      profilePath: null == profilePath
+      profilePath: freezed == profilePath
           ? _value.profilePath
           : profilePath // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -151,7 +151,7 @@ abstract class _$$TvSeasonDetailsCrewImplCopyWith<$Res>
       String name,
       String originalName,
       double popularity,
-      String profilePath});
+      String? profilePath});
 }
 
 /// @nodoc
@@ -175,7 +175,7 @@ class __$$TvSeasonDetailsCrewImplCopyWithImpl<$Res>
     Object? name = null,
     Object? originalName = null,
     Object? popularity = null,
-    Object? profilePath = null,
+    Object? profilePath = freezed,
   }) {
     return _then(_$TvSeasonDetailsCrewImpl(
       department: null == department
@@ -218,10 +218,10 @@ class __$$TvSeasonDetailsCrewImplCopyWithImpl<$Res>
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double,
-      profilePath: null == profilePath
+      profilePath: freezed == profilePath
           ? _value.profilePath
           : profilePath // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -267,7 +267,7 @@ class _$TvSeasonDetailsCrewImpl implements _TvSeasonDetailsCrew {
   @override
   final double popularity;
   @override
-  final String profilePath;
+  final String? profilePath;
 
   @override
   String toString() {
@@ -341,7 +341,7 @@ abstract class _TvSeasonDetailsCrew implements TvSeasonDetailsCrew {
       required final String name,
       required final String originalName,
       required final double popularity,
-      required final String profilePath}) = _$TvSeasonDetailsCrewImpl;
+      required final String? profilePath}) = _$TvSeasonDetailsCrewImpl;
 
   factory _TvSeasonDetailsCrew.fromJson(Map<String, dynamic> json) =
       _$TvSeasonDetailsCrewImpl.fromJson;
@@ -367,7 +367,7 @@ abstract class _TvSeasonDetailsCrew implements TvSeasonDetailsCrew {
   @override
   double get popularity;
   @override
-  String get profilePath;
+  String? get profilePath;
   @override
   @JsonKey(ignore: true)
   _$$TvSeasonDetailsCrewImplCopyWith<_$TvSeasonDetailsCrewImpl> get copyWith =>

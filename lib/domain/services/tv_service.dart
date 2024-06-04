@@ -20,6 +20,11 @@ class TvService {
     }
     return TvDetailsLocal(details: tvDetails, isFavorite: isFavorite, isWatchlist: isWatchlist);
   }
+  
+  // Future<TvSeasonLocal> loadTvSeasonDetails({required int tvId, required String locale, required int seasonNumber}) async {
+  //   final seasonDetails = await _tvApiClient.tvSeasonsDetails(tvId, locale, seasonNumber);
+  //   return TvSeasonLocal(seasons: seasonDetails);
+  // }
 
   Future<void> updateFavoriteTvs({required int tvId, required bool isFavorite}) async {
     final sessionId = await _sessionDataProvider.getSessionId();

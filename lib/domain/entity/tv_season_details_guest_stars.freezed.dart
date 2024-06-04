@@ -24,12 +24,12 @@ mixin _$TvSeasonDetailsGuestStars {
   String get character => throw _privateConstructorUsedError;
   String get creditId => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
-  bool get adult => throw _privateConstructorUsedError;
-  int get gender => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
-  String get knownForDepartment => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get originalName => throw _privateConstructorUsedError;
+  bool? get adult => throw _privateConstructorUsedError;
+  int? get gender => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get knownForDepartment => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get originalName => throw _privateConstructorUsedError;
   String? get profilePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,12 +48,12 @@ abstract class $TvSeasonDetailsGuestStarsCopyWith<$Res> {
       {String character,
       String creditId,
       int order,
-      bool adult,
-      int gender,
-      int id,
-      String knownForDepartment,
-      String name,
-      String originalName,
+      bool? adult,
+      int? gender,
+      int? id,
+      String? knownForDepartment,
+      String? name,
+      String? originalName,
       String? profilePath});
 }
 
@@ -74,12 +74,12 @@ class _$TvSeasonDetailsGuestStarsCopyWithImpl<$Res,
     Object? character = null,
     Object? creditId = null,
     Object? order = null,
-    Object? adult = null,
-    Object? gender = null,
-    Object? id = null,
-    Object? knownForDepartment = null,
-    Object? name = null,
-    Object? originalName = null,
+    Object? adult = freezed,
+    Object? gender = freezed,
+    Object? id = freezed,
+    Object? knownForDepartment = freezed,
+    Object? name = freezed,
+    Object? originalName = freezed,
     Object? profilePath = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,30 +95,30 @@ class _$TvSeasonDetailsGuestStarsCopyWithImpl<$Res,
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      adult: null == adult
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool,
-      gender: null == gender
+              as bool?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
+              as int?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      knownForDepartment: null == knownForDepartment
+              as int?,
+      knownForDepartment: freezed == knownForDepartment
           ? _value.knownForDepartment
           : knownForDepartment // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalName: null == originalName
+              as String?,
+      originalName: freezed == originalName
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       profilePath: freezed == profilePath
           ? _value.profilePath
           : profilePath // ignore: cast_nullable_to_non_nullable
@@ -140,12 +140,12 @@ abstract class _$$TvSeasonDetailsGuestStarsImplCopyWith<$Res>
       {String character,
       String creditId,
       int order,
-      bool adult,
-      int gender,
-      int id,
-      String knownForDepartment,
-      String name,
-      String originalName,
+      bool? adult,
+      int? gender,
+      int? id,
+      String? knownForDepartment,
+      String? name,
+      String? originalName,
       String? profilePath});
 }
 
@@ -165,12 +165,12 @@ class __$$TvSeasonDetailsGuestStarsImplCopyWithImpl<$Res>
     Object? character = null,
     Object? creditId = null,
     Object? order = null,
-    Object? adult = null,
-    Object? gender = null,
-    Object? id = null,
-    Object? knownForDepartment = null,
-    Object? name = null,
-    Object? originalName = null,
+    Object? adult = freezed,
+    Object? gender = freezed,
+    Object? id = freezed,
+    Object? knownForDepartment = freezed,
+    Object? name = freezed,
+    Object? originalName = freezed,
     Object? profilePath = freezed,
   }) {
     return _then(_$TvSeasonDetailsGuestStarsImpl(
@@ -186,30 +186,30 @@ class __$$TvSeasonDetailsGuestStarsImplCopyWithImpl<$Res>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      adult: null == adult
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool,
-      gender: null == gender
+              as bool?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
+              as int?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      knownForDepartment: null == knownForDepartment
+              as int?,
+      knownForDepartment: freezed == knownForDepartment
           ? _value.knownForDepartment
           : knownForDepartment // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalName: null == originalName
+              as String?,
+      originalName: freezed == originalName
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       profilePath: freezed == profilePath
           ? _value.profilePath
           : profilePath // ignore: cast_nullable_to_non_nullable
@@ -244,17 +244,17 @@ class _$TvSeasonDetailsGuestStarsImpl implements _TvSeasonDetailsGuestStars {
   @override
   final int order;
   @override
-  final bool adult;
+  final bool? adult;
   @override
-  final int gender;
+  final int? gender;
   @override
-  final int id;
+  final int? id;
   @override
-  final String knownForDepartment;
+  final String? knownForDepartment;
   @override
-  final String name;
+  final String? name;
   @override
-  final String originalName;
+  final String? originalName;
   @override
   final String? profilePath;
 
@@ -310,12 +310,12 @@ abstract class _TvSeasonDetailsGuestStars implements TvSeasonDetailsGuestStars {
       {required final String character,
       required final String creditId,
       required final int order,
-      required final bool adult,
-      required final int gender,
-      required final int id,
-      required final String knownForDepartment,
-      required final String name,
-      required final String originalName,
+      required final bool? adult,
+      required final int? gender,
+      required final int? id,
+      required final String? knownForDepartment,
+      required final String? name,
+      required final String? originalName,
       required final String? profilePath}) = _$TvSeasonDetailsGuestStarsImpl;
 
   factory _TvSeasonDetailsGuestStars.fromJson(Map<String, dynamic> json) =
@@ -328,17 +328,17 @@ abstract class _TvSeasonDetailsGuestStars implements TvSeasonDetailsGuestStars {
   @override
   int get order;
   @override
-  bool get adult;
+  bool? get adult;
   @override
-  int get gender;
+  int? get gender;
   @override
-  int get id;
+  int? get id;
   @override
-  String get knownForDepartment;
+  String? get knownForDepartment;
   @override
-  String get name;
+  String? get name;
   @override
-  String get originalName;
+  String? get originalName;
   @override
   String? get profilePath;
   @override

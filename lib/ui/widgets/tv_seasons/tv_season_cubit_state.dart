@@ -1,32 +1,32 @@
 import 'package:comics_db_app/ui/widgets/tv_seasons/components/tv_season_data.dart';
 
 class TvSeasonCubitState {
-  final List<TvSeasonDetailsData> seasonData;
+  final List<TvSeasonDetailsData> seasons;
   final String localeTag;
 
   const TvSeasonCubitState({
-    required this.seasonData,
+    required this.seasons,
     required this.localeTag,
   });
 
   @override
   String toString() {
-    return 'TvSeasonState{seasonData: $seasonData, localeTag: $localeTag}';
+    return 'TvSeasonState{seasonData: $seasons, localeTag: $localeTag}';
   }
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is TvSeasonCubitState && runtimeType == other.runtimeType && seasonData == other.seasonData && localeTag == other.localeTag;
+      identical(this, other) || other is TvSeasonCubitState && runtimeType == other.runtimeType && seasons == other.seasons && localeTag == other.localeTag;
 
   @override
-  int get hashCode => seasonData.hashCode ^ localeTag.hashCode;
+  int get hashCode => seasons.hashCode ^ localeTag.hashCode;
 
   TvSeasonCubitState copyWith({
-    List<TvSeasonDetailsData>? seasonData,
+    List<TvSeasonDetailsData>? seasons,
     String? localeTag,
   }) {
     return TvSeasonCubitState(
-      seasonData: seasonData ?? this.seasonData,
+      seasons: seasons ?? this.seasons,
       localeTag: localeTag ?? this.localeTag,
     );
   }

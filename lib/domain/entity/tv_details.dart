@@ -1,5 +1,4 @@
 // Package imports:
-import 'package:comics_db_app/domain/entity/tv_season_details.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:

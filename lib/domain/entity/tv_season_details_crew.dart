@@ -18,7 +18,7 @@ class TvSeasonDetailsCrew with _$TvSeasonDetailsCrew {
     required String name,
     required String originalName,
     required double popularity,
-    required String profilePath,
+    required String? profilePath,
 }) = _TvSeasonDetailsCrew;
 
   factory TvSeasonDetailsCrew.fromJson(Map<String, dynamic> json) => _$TvSeasonDetailsCrewFromJson(json);

@@ -19,7 +19,7 @@ _$TvSeasonDetailsCrewImpl _$$TvSeasonDetailsCrewImplFromJson(
       name: json['name'] as String,
       originalName: json['original_name'] as String,
       popularity: (json['popularity'] as num).toDouble(),
-      profilePath: json['profile_path'] as String,
+      profilePath: json['profile_path'] as String?,
     );
 
 Map<String, dynamic> _$$TvSeasonDetailsCrewImplToJson(

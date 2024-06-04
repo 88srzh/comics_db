@@ -1,5 +1,7 @@
 // Flutter imports:
+import 'package:comics_db_app/domain/blocs/tv/tv_season_list_bloc.dart';
 import 'package:comics_db_app/ui/widgets/tv_details/components/tv_details_season_details_list_widget.dart';
+import 'package:comics_db_app/ui/widgets/tv_seasons/tv_season_cubit.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -156,10 +158,14 @@ class ScreenFactory {
     );
   }
 
-  Widget tvDetailsListOfEpisodes(int tvId) {
+  Widget tvDetailsListOfEpisodes(int tvId, int seasonNumber) {
     return BlocProvider(
-      create: (_) => TvDetailsCubit(tvId),
-      child: const TvDetailsSeasonDetailsListWidget(),
+      create: (_) => TvSeasonCubit(
+        tvSeasonListBloc: TvSeasonListBloc(
+          const TvSeasonState.initial(),
+        ),
+      ),
+      child: TvDetailsSeasonDetailsListWidget(tvId: tvId, seasonNumber: seasonNumber),
     );
   }
 

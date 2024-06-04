@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:comics_db_app/configuration/configuration.dart';
 import 'package:comics_db_app/domain/api_client/movie_and_tv_api_client.dart';
 import 'package:comics_db_app/domain/blocs/tv/tv_season_container.dart';
 import 'package:comics_db_app/domain/entity/tv_season_details.dart';
@@ -27,10 +28,9 @@ class TvSeasonListBloc extends Bloc<TvSeasonEvent, TvSeasonState> {
   }
 
   Future<void> onTvSeasonsListEventLoadNextPage(TvSeasonEventLoadNextPage event, Emitter<TvSeasonState> emit) async {
-    if (state.isSearchMode) {
+    if (state.isNotSearchMode) {
       final container = await _loadNextPage(state.tvSeasonContainer, (nextPage) async {
-        final int id = state.tvSeasonContainer.tvSeason.first.id;
-        final result = await _tvApiClient.tvSeasonsDetails(id, event.locale, 1);
+        final result = await _tvApiClient.tvSeasonsDetails(event.tvId, event.locale, event.seasonNumber);
         return result;
       });
       if (container != null) {
@@ -45,8 +45,7 @@ class TvSeasonListBloc extends Bloc<TvSeasonEvent, TvSeasonState> {
     final nextPage = state.tvSeasonContainer.seasonNumber + 1;
     final result = await loader(nextPage);
     final tvs = List<TvSeasonDetails>.from(container.tvSeason)..addAll(result.seasonDetails);
-    final newContainer = container.copyWith(tvSeason: tvs, seasonNumber: result.page);
-
+    final newContainer = container.copyWith(tvSeason: tvs);
     return newContainer;
   }
 }
