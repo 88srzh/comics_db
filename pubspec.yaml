@@ -29,7 +29,7 @@ dependencies:
   material_design_icons_flutter: ^7.0.7296
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.1
+  intl: ^0.19.0
   convex_bottom_bar: ^3.2.0
   youtube_player_flutter: ^9.0.0
   loading_indicator: ^3.1.1
