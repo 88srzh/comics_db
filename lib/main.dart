@@ -12,7 +12,11 @@ import 'package:comics_db_app/ui/widgets/app/my_app.dart';
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) {
+        return true;
+      }
+      ..findProxy = (uri) => HttpClient.findProxyFromEnvironment(uri);
   }
 }
 

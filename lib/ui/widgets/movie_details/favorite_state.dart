@@ -1,6 +1,6 @@
 import 'package:comics_db_app/ui/widgets/movie_details/components/movie_favorite_data.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 @immutable
 
