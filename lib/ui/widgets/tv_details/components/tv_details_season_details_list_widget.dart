@@ -23,8 +23,7 @@ class TvDetailsSeasonDetailsListWidget extends StatefulWidget {
 
 class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetailsListWidget> {
   late Future<String> lazyValue;
-  late final int season;
-  late final int id;
+  
 
   @override
   void didChangeDependencies() {
@@ -62,7 +61,6 @@ class _TvDetailsSeasonDetailsListWidgetState extends State<TvDetailsSeasonDetail
                 itemBuilder: (BuildContext context, int index) {
                   cubit.showedAllEpisodesAtIndex(index, cubit.state.seasons[index].id);
                   final episode = cubit.state.seasons[index];
-                  final String? stillPath = episode.stillPath;
                   // final int  seasonId = seasonsData[index].id;
                   // final int seasonNumber = seasonsData[index].seasonNumber;
                   return InkWell(
@@ -103,11 +101,9 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
     final String stillPath = seasonData.stillPath ?? '';
     final String name = seasonData.name;
     final String overview = seasonData.overview;
-    final String originalName = seasonData.name;
     final double voteAverage = seasonData.voteAverage;
-    final double? voteAveragePercent = voteAverage != null ? voteAverage * 10 : null;
+    final double voteAveragePercent = voteAverage * 10;
     // final String airDateByYear = seasonData.airDate != null ? DateFormat.y().format(seasonData.airDate) : '-';
-    late final int episodeNumber = seasonData.episodeNumber;
     // final String? fullAirDate = seasonData.fullAirDate != null ? DateFormat.yMMMMd().format(seasonData.airDate) : null;
     Color textColor = context.read<ThemeBloc>().isDarkTheme ? Colors.white : DarkThemeColors.kPrimaryColor;
     Color reverseTextColor = context.read<ThemeBloc>().isDarkTheme ? DarkThemeColors.kPrimaryColor : Colors.white;
@@ -120,7 +116,7 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: Column(
               children: [
-                stillPath != null
+                stillPath.isNotEmpty
                     ? Image.network(
                         ImageDownloader.imageUrl(stillPath),
                         width: MediaQuery.of(context).size.width,
@@ -141,8 +137,8 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                voteAverage != null
-                                    ? Container(
+                                voteAverage > 0
+                                  ? Container(
                                         decoration: BoxDecoration(
                                           color: textColor,
                                           border: Border.all(
@@ -156,7 +152,7 @@ class _TvDetailsSeasonDetailsListRowWidget extends StatelessWidget {
                                             children: [
                                               Icon(MdiIcons.star, size: 12, color: reverseTextColor),
                                               Text(
-                                                '${voteAveragePercent!.toStringAsFixed(0)}%',
+                                                '${voteAveragePercent.toStringAsFixed(0)}%',
                                                 style: TextStyle(color: reverseTextColor, fontSize: 11),
                                               ),
                                             ],

@@ -381,13 +381,10 @@ class TvDetailsCubit extends Cubit<TvDetailsCubitState> {
   }
 
   void tapToSeeFullListOfSeasons(BuildContext context, int index) {
-    final int id = tvId;
-    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons, arguments: id);
+    Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsFullListOfSeasons, arguments: tvId);
   }
 
   void tapToSeeListOfEpisodes(BuildContext context, int index, int seasonNumber) {
-    final int id = tvId;
-    final int seasonNum = seasonNumber;
     Navigator.of(context).pushNamed(MainNavigationRouteNames.tvDetailsListOfEpisodes, arguments: [tvId, seasonNumber]);
   }
 }
