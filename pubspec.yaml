@@ -24,7 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^10.0.0
   json_annotation: ^4.8.1
   material_design_icons_flutter: ^7.0.7296
   flutter_localizations:
