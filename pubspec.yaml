@@ -37,7 +37,7 @@ dependencies:
   provider: ^6.1.1
   flutter_bloc: ^9.0.0
   bloc_concurrency: ^0.3.0
-  cached_network_image: ^3.3.0
+  cached_network_image: ^4.0.0
   expandable_text: 2.3.0
   freezed: ^3.0.0
   freezed_annotation: ^3.1.0
