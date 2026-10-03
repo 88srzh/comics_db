@@ -60,6 +60,12 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
 dependency_overrides:
+  # 7.0.7296 (last release) subclasses the now-final IconData; patched copy uses plain IconData
+  material_design_icons_flutter:
+    path: packages/material_design_icons_flutter
+  # 8.1.2 passes Uri where flutter_inappwebview 6.x wants WebUri; 10.x is an API rewrite
+  youtube_player_flutter:
+    path: packages/youtube_player_flutter
   flutter_inappwebview: ^6.1.5
   path_provider_android: ^2.3.1
   path_provider: ^2.1.6
