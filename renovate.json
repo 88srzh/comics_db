@@ -2,5 +2,26 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "ignorePaths": [
+    "packages/**"
+  ],
+  "packageRules": [
+    {
+      "description": "Pinned to the vendored, patched 8.1.2 in packages/ (10.x is an API rewrite)",
+      "matchPackageNames": ["youtube_player_flutter"],
+      "enabled": false
+    },
+    {
+      "description": "Ships with the Flutter SDK, not published to Maven",
+      "matchPackageNames": ["dev.flutter.flutter-plugin-loader"],
+      "enabled": false
+    },
+    {
+      "description": "Major AGP bumps need Flutter support first",
+      "matchPackageNames": ["com.android.application"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
   ]
 }
