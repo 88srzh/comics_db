@@ -681,10 +681,10 @@ packages:
     dependency: "direct main"
     description:
       name: loading_indicator
-      sha256: a101ffb2aa3e646137d7810bfa90b50525dd3f72c01235b6df7491cf6af6f284
+      sha256: "2307a5160ddb888a09afbdb923a34d68b0d77c81f28cf3e54c4d6da593bd0c28"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
+    version: "4.0.2"
   logging:
     dependency: transitive
     description:
