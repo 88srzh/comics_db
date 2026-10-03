@@ -66,7 +66,8 @@ dependency_overrides:
   # 8.1.2 passes Uri where flutter_inappwebview 6.x wants WebUri; 10.x is an API rewrite
   youtube_player_flutter:
     path: packages/youtube_player_flutter
-  flutter_inappwebview: ^6.1.5
+  # 6.1.5 (last stable) uses proguard-android.txt, rejected by AGP 9
+  flutter_inappwebview: 6.2.0-beta.3
   path_provider_android: ^2.3.1
   path_provider: ^2.1.6
 
