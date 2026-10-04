@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Only the root: packages/ holds vendored, patched copies that must not be bumped
+  - package-ecosystem: pub
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: gradle
+    directory: "/android"
+    schedule:
+      interval: monthly
