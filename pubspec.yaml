@@ -33,13 +33,13 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   youtube_player_flutter: ^8.1.0
   loading_indicator: ^4.0.0
-  flutter_native_splash: ^2.3.7
+  flutter_native_splash: ^2.4.8
   provider: ^6.1.1
   flutter_bloc: ^9.0.0
   bloc_concurrency: ^0.3.0
   cached_network_image: ^4.0.0
   expandable_text: 2.3.0
-  freezed: ^4.0.0
+  freezed: ^4.0.2
   freezed_annotation: ^3.1.0
   equatable: ^3.0.0
   import_sorter: ^4.6.0
@@ -55,7 +55,7 @@ dev_dependencies:
     sdk: flutter
 
   json_serializable: ^6.7.1
-  build_runner: ^2.4.8
+  build_runner: ^2.16.1
   dependency_validator: ^5.0.0
   flutter_lints: ^6.0.0
 
