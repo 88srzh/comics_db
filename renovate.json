@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "ignoreDeps": [
+    "dev.flutter.flutter-plugin-loader"
+  ],
   "ignorePaths": [
     "packages/**"
   ],
